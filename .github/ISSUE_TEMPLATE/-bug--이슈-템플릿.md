@@ -7,10 +7,11 @@ assignees: ''
 
 ---
 
-### Bug Issues
+## Bug Issues
 - 
 -
----
-### To Do
+
+
+## To Do
 - [ ]
 - [ ]
