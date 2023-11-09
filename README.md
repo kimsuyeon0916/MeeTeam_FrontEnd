@@ -26,6 +26,11 @@
 - 삭제 delete #이슈번호 :
 - 문서관련 docs #이슈번호 :
 - 테스트 test #이슈번호 :
+- 리팩토링 refactor #이슈번호 :
+- 자잘한 수정 chore #이슈번호 :
+- 빌드 build #이슈번호 :
+- CI 설정 파일 수정 ci #이슈번호 :
+- 성능개선 perf #이슈번호 :
 
 ## git branch 전략
 
