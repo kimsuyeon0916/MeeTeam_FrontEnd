@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { MainPage } from './pages/index.ts';
+import { MainPage, RecruitPage, GalaryPage, InformationUsePage } from './pages/index.ts';
 import './globalStyle.css';
 
 const router = createBrowserRouter([
@@ -13,6 +13,18 @@ const router = createBrowserRouter([
 			{
 				path: '',
 				element: <MainPage />,
+			},
+			{
+				path: 'recruit',
+				element: <RecruitPage />,
+			},
+			{
+				path: 'galary',
+				element: <GalaryPage />,
+			},
+			{
+				path: 'information',
+				element: <InformationUsePage />,
 			},
 		],
 	},
