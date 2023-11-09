@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SHeader from './SHeader';
+import SHeader from './sHeader';
 import { BiSearch, BiBell, BiUser } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 
