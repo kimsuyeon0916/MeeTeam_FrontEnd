@@ -1,6 +1,4 @@
-import React from 'react';
-import styled from 'styled-components';
-import SHeader from './Header.styled';
+import S from './Header.styled';
 import { BiSearch, BiBell, BiUser } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,7 +20,7 @@ const Header = () => {
 		navigate('/information');
 	};
 	return (
-		<SHeader>
+		<S.Header>
 			<div className='header'>
 				<div className='header__logo' onClick={goHome}>
 					LOGO
@@ -53,7 +51,7 @@ const Header = () => {
 					</div>
 				</div>
 			</div>
-		</SHeader>
+		</S.Header>
 	);
 };
 
