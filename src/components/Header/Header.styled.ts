@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const SHeader = styled.div`
+const Header = styled.div`
 	.header {
 		display: flex;
 		height: 90px;
@@ -77,4 +77,6 @@ const SHeader = styled.div`
 	}
 `;
 
-export default SHeader;
+const S = { Header };
+
+export default S;
