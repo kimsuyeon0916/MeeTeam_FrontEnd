@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { ProgressBar, Menu, Main } from '../components';
 
 const ManagementPage = () => {
-	return <div>밋팀 관리 페이지입니다.</div>;
+	const [content, setContent] = useState('📁 정보');
+	const clickedHandler: React.MouseEventHandler<HTMLButtonElement> = e => {
+		const button = e.target as HTMLButtonElement;
+		if (!button.textContent) {
+			throw new Error('No Content');
+		}
+		setContent(button.textContent);
+	};
+
+	return (
+		<>
+			<ProgressBar />
+			<Menu menu={content} clickedHandler={clickedHandler} />
+			<Main content={content} />
+		</>
+	);
 };
 
 export default ManagementPage;
