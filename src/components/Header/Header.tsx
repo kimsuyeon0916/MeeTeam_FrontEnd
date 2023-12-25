@@ -63,16 +63,6 @@ const Header = () => {
 							fill='black'
 						/>
 					</svg>
-					<svg
-						xmlns='http://www.w3.org/2000/svg'
-						width='25'
-						height='11'
-						viewBox='0 0 25 11'
-						fill='none'
-						className='header__logo--bridge'
-					>
-						<path d='M3 2C6.02469 6.52774 14.2593 12.8666 23 2' stroke='#9400EF' strokeWidth='5' />
-					</svg>
 				</div>
 				<div className='header__navigation'>
 					<div className='header__navigation--navi-text' onClick={goRecruit}>

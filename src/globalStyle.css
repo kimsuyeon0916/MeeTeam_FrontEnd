@@ -1,4 +1,6 @@
-html,
+html {
+	font-size: 75%;
+}
 body,
 div,
 span,

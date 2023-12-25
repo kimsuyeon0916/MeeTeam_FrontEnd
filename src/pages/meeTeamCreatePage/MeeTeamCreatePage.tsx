@@ -91,7 +91,7 @@ const MeeTeamCreatePage = () => {
 							{memberList.map((memberItem, index) => {
 								return (
 									<>
-										<div className='controll'>
+										<div className='controll' key={index}>
 											{memberItem}
 											<button>초대하기</button>
 											<button onClick={onClickDelete} value={index}>
