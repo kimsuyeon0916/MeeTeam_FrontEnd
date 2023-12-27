@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ProgressBar, Menu, Main } from '../components';
 
 const ManagementPage = () => {
-	const [content, setContent] = useState('📁 정보');
+	const [content, setContent] = useState('대시보드');
 	const clickedHandler: React.MouseEventHandler<HTMLButtonElement> = e => {
 		const button = e.target as HTMLButtonElement;
 		if (!button.textContent) {

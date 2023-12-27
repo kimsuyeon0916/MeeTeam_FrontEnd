@@ -1,6 +1,6 @@
 import React from 'react';
 import S from './Main.sytled';
-import { Information, Member, WorkRegistration, Setting } from '../..';
+import { Information, Member, Setting, DashBoard, Recruitment } from '../..';
 
 const Main = (props: { content: string }) => {
 	type ComponentProps = {
@@ -8,10 +8,11 @@ const Main = (props: { content: string }) => {
 	};
 
 	const selectComponent: ComponentProps = {
-		'📁 정보': <Information />,
-		'👥 멤버': <Member />,
-		'📁 작업물 등록': <WorkRegistration />,
-		'⚙️ 설정': <Setting />,
+		대시보드: <DashBoard />,
+		밋팀: <Information />,
+		멤버: <Member />,
+		'구인 현황': <Recruitment />,
+		설정: <Setting />,
 	};
 
 	return <S.MainLayout>{props.content && selectComponent[props.content]}</S.MainLayout>;

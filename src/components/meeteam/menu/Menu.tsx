@@ -5,7 +5,7 @@ const Menu = (props: {
 	menu: string;
 	clickedHandler: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
-	const menuList = ['📁 정보', '👥 멤버', '📁 작업물 등록', '⚙️ 설정', ''] as const;
+	const menuList = ['대시보드', '밋팀', '멤버', '구인 현황', '설정'] as const;
 	type menuType = (typeof menuList)[number];
 
 	const checkColorChange = (currentMenu: menuType) => currentMenu === props.menu;
