@@ -12,7 +12,7 @@ const Tag = () => {
 
 	const submitTagItem = () => {
 		let updatedTagList = [...tagList];
-		updatedTagList.push(tagItem);
+		updatedTagList.push('#' + tagItem);
 		setTagList(updatedTagList);
 		setTagItem('');
 	};

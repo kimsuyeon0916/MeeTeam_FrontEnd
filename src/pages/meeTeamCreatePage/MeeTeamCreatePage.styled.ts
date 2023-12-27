@@ -102,7 +102,7 @@ const MeeTeamCreatePage = styled.div`
 			margin-top: 70px;
 
 			div:nth-child(2) {
-				padding: 10px 20px;
+				/* padding: 10px 20px; */
 				.editor {
 					background-color: #fff;
 					border-radius: 10px;
