@@ -17,6 +17,7 @@ const DateSelect = () => {
 				}}
 				isClearable={true}
 				className='date-picker'
+				// value='hi'
 			/>
 		</S.DateSelect>
 	);
