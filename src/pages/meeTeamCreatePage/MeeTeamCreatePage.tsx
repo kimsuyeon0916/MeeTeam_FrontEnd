@@ -34,7 +34,7 @@ const MeeTeamCreatePage = () => {
 			<div className='procedure'>
 				<div className='procedure__subtitle'>새 밋팀 생성</div>
 				<div className='procedure__intro'>
-					<p>📝 밋팀에 대한 정보를 입력하시고 소개해주세요.</p>
+					<p>밋팀에 대한 정보를 입력하시고 소개해주세요.</p>
 				</div>
 			</div>
 			<div className='wrapper'>
@@ -49,9 +49,9 @@ const MeeTeamCreatePage = () => {
 						</div>
 					</div>
 					<div className='container__info'>
-						<div>
+						{/* <div>
 							<Subtitle>{'밋팀 정보'}</Subtitle>
-						</div>
+						</div> */}
 						<div className='info-wrapper'>
 							<div className='container__info-select'>
 								<InfoItem isDot='true' title='범위' optionData={['교내', '교외']} />

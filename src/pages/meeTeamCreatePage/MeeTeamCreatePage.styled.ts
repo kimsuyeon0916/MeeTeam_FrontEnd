@@ -1,31 +1,31 @@
 import styled from 'styled-components';
 
 const MeeTeamCreatePage = styled.div`
-	width: 80%;
+	width: clamp(45%, 108rem, 75%);
 	margin: 0 auto;
 	margin-bottom: 30px;
 
 	.procedure {
 		height: 80px;
-		border-bottom: 3px solid #ababab;
 		display: flex;
-		justify-content: space-between;
-		align-items: flex-end;
-		padding: 0 5rem 0 10rem;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
 		box-sizing: border-box;
+		margin-top: 2.81rem;
 
 		.procedure__subtitle {
-			color: var(--light-black, #373f41);
-			font-family: Pretendard;
-			font-size: 1.3rem;
+			color: #373f41;
+			font-family: Apple SD Gothic Neo;
+			font-size: 2.4rem;
 			font-style: normal;
-			font-weight: 600;
-			line-height: 3.5rem;
-			letter-spacing: 0.0125rem;
+			font-weight: 400;
+			line-height: 4.2rem; /* 175% */
+			letter-spacing: 0.015rem;
 		}
 
 		.procedure__intro {
-			width: 25rem;
+			width: 30rem;
 			height: 2.25rem;
 			display: flex;
 			justify-content: flex-start;
@@ -34,21 +34,24 @@ const MeeTeamCreatePage = styled.div`
 			letter-spacing: 0.0125rem;
 
 			p {
-				font-family: Inter;
-				font-size: 1.1rem;
-				color: var(--light-black, #576574bb);
-				font-weight: 600;
+				color: #8e8e8e;
+				font-family: Apple SD Gothic Neo;
+				font-size: 1.65rem;
 				font-style: normal;
+				font-weight: 400;
+				line-height: 1.65rem; /* 100% */
+				letter-spacing: -0.033rem;
 			}
 		}
 	}
 
 	.wrapper {
-		background-color: #dcdde1;
-		margin-top: 50px;
-		border-radius: 15px;
+		margin-top: 2rem;
 		margin-bottom: 50px;
 		padding-bottom: 50px;
+		border-radius: 0.5rem;
+		border: 2px solid #bcd7ff;
+		background: #f7faff;
 
 		.container {
 			width: 80%;
@@ -59,15 +62,17 @@ const MeeTeamCreatePage = styled.div`
 			height: 100px;
 
 			.container__teamname-input {
-				padding: 10px 20px;
+				padding: 10px 0px;
 
 				input {
-					width: 20rem;
-					height: 2.5rem;
-					border-radius: 8px;
-					border: none;
+					width: 40.125rem;
+					height: 4.875rem;
+					flex-shrink: 0;
+					border-radius: 0.75rem;
+					border: 0.75px solid #e3e3e3;
+					background: #fff;
 					outline: none;
-					padding-left: 7px;
+					padding-left: 2.1rem;
 					box-sizing: border-box;
 				}
 			}
@@ -77,14 +82,14 @@ const MeeTeamCreatePage = styled.div`
 			margin-top: 70px;
 
 			.info-wrapper {
-				padding: 10px 20px;
+				padding: 10px 0px;
 			}
 
 			.container__info-select {
 				display: flex;
 				justify-content: flex-start;
 				align-items: center;
-				gap: 15rem;
+				gap: 30.82rem;
 				margin-top: 15px;
 			}
 		}
