@@ -46,6 +46,7 @@ const MeeTeamCreatePage = styled.div`
 	}
 
 	.wrapper {
+		width: 100%;
 		margin-top: 2rem;
 		margin-bottom: 50px;
 		padding-bottom: 50px;
@@ -85,10 +86,11 @@ const MeeTeamCreatePage = styled.div`
 			margin-top: 70px;
 
 			.info-wrapper {
-				padding: 10px 0px;
+				margin: 0 auto;
 			}
 
 			.container__info-select {
+				width: 100%;
 				display: flex;
 				justify-content: flex-start;
 				align-items: center;
@@ -102,7 +104,6 @@ const MeeTeamCreatePage = styled.div`
 		}
 
 		.container__intro {
-			position: relative;
 			margin-top: 7rem;
 
 			div:nth-child(2) {

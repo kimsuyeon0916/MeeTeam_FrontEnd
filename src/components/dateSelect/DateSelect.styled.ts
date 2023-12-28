@@ -51,6 +51,45 @@ const DateSelect = styled.div`
 			font-size: 2.1rem;
 		}
 	}
+
+	.react-datepicker__month-container {
+		width: 30rem;
+	}
+	.react-datepicker-popper {
+		z-index: 105;
+	}
+	.react-datepicker {
+		font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
+		font-size: 1.2rem;
+		background-color: #f7fafe;
+		color: #000;
+		border: 1px solid #bcd7fe;
+		border-radius: 0.3rem;
+		display: inline-block;
+		position: relative;
+	}
+	.react-datepicker__header {
+		text-align: center;
+		background-color: #74b9ff;
+		border-bottom: 1px solid #bcd7fe;
+		/* border-top-left-radius: 0.75rem; */
+		padding: 8px 0;
+		position: relative;
+	}
+	.react-datepicker__year-read-view--down-arrow,
+	.react-datepicker__month-read-view--down-arrow,
+	.react-datepicker__month-year-read-view--down-arrow,
+	.react-datepicker__navigation-icon::before {
+		border-color: #fff;
+		border-style: solid;
+		border-width: 3px 3px 0 0;
+		content: '';
+		display: block;
+		height: 9px;
+		position: absolute;
+		top: 6px;
+		width: 9px;
+	}
 `;
 
 const S = { DateSelect };
