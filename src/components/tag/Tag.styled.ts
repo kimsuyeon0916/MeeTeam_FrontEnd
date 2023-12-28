@@ -1,19 +1,22 @@
 import styled from 'styled-components';
 
 const Tag = styled.div`
-	height: 70px;
+	height: auto;
 
 	.tag__box {
+		position: relative;
 		display: flex;
 		align-items: center;
 		flex-wrap: wrap;
-		min-height: 50px;
+		min-height: 4.875rem;
 		width: 100%;
-		padding: 0 10px;
+		height: auto;
+		padding: 0.9rem 1.3rem;
 		border-radius: 0.75rem;
 		border: 0.75px solid #e3e3e3;
 		background-color: #fff;
 		box-sizing: border-box;
+		z-index: 101;
 
 		&:focus-within {
 			border-color: #00a8ff;
@@ -58,15 +61,6 @@ const Tag = styled.div`
 				border: none;
 			}
 		}
-	}
-
-	.tag__container {
-		width: 100%;
-		margin-top: 0.5rem;
-		border-radius: 0.75rem;
-		border: 0.75px solid #e3e3e3;
-		background-color: #fff;
-		min-height: 0rem;
 	}
 `;
 

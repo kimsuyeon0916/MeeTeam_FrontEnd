@@ -102,6 +102,7 @@ const MeeTeamCreatePage = styled.div`
 		}
 
 		.container__intro {
+			position: relative;
 			margin-top: 7rem;
 
 			div:nth-child(2) {
