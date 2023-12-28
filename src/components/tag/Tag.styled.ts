@@ -8,7 +8,7 @@ const Tag = styled.div`
 		align-items: center;
 		flex-wrap: wrap;
 		min-height: 50px;
-		width: 97.5%;
+		width: 100%;
 		padding: 0 10px;
 		border-radius: 0.75rem;
 		border: 0.75px solid #e3e3e3;
@@ -19,10 +19,15 @@ const Tag = styled.div`
 			border-color: #00a8ff;
 		}
 
+		input {
+			display: inline-flex;
+			min-width: 200px;
+			background: transparent;
+			border: none;
+			outline: none;
+			cursor: text;
+		}
 		.tag__item {
-			/* display: flex;
-			align-items: center;
-			justify-content: space-between; */
 			display: inline-flex;
 			height: 3.15rem;
 			padding: 0.75rem 1.125rem;
@@ -33,8 +38,12 @@ const Tag = styled.div`
 			margin: 5px;
 			border-radius: 7.5rem;
 			background: #e0e6ff;
-			color: #000;
-			font-size: 13px;
+			color: #373f41;
+			font-size: 1.5rem;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 1.8rem; /* 90% */
+			letter-spacing: 0.02rem;
 
 			button {
 				display: flex;
@@ -49,15 +58,15 @@ const Tag = styled.div`
 				border: none;
 			}
 		}
+	}
 
-		input {
-			display: inline-flex;
-			min-width: 200px;
-			background: transparent;
-			border: none;
-			outline: none;
-			cursor: text;
-		}
+	.tag__container {
+		width: 100%;
+		margin-top: 0.5rem;
+		border-radius: 0.75rem;
+		border: 0.75px solid #e3e3e3;
+		background-color: #fff;
+		min-height: 0rem;
 	}
 `;
 

@@ -57,6 +57,9 @@ const MeeTeamCreatePage = styled.div`
 			width: 80%;
 			margin: 0 auto;
 			padding-top: 50px;
+			display: flex;
+			flex-direction: column;
+			gap: 5rem;
 		}
 		.container__teamname {
 			height: 100px;
@@ -99,7 +102,7 @@ const MeeTeamCreatePage = styled.div`
 		}
 
 		.container__intro {
-			margin-top: 70px;
+			margin-top: 7rem;
 
 			div:nth-child(2) {
 				/* padding: 10px 20px; */
