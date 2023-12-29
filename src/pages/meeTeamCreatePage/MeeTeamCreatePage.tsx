@@ -93,9 +93,9 @@ const MeeTeamCreatePage = () => {
 									<>
 										<div className='controll' key={index}>
 											{memberItem}
-											<button>초대하기</button>
+											<button>초대</button>
 											<button onClick={onClickDelete} value={index}>
-												삭제하기
+												삭제
 											</button>
 										</div>
 									</>

@@ -113,6 +113,20 @@ const MeeTeamCreatePage = styled.div`
 					border-radius: 10px;
 				}
 			}
+
+			.ql-container.ql-snow {
+				border: 0.75px solid #e3e3e3;
+				border-radius: 0.75rem;
+				height: 30.825rem;
+			}
+
+			.ql-toolbar.ql-snow {
+				border: 0.75px solid #e3e3e3;
+				border-radius: 0.75rem;
+				box-sizing: border-box;
+				font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+				padding: 8px;
+			}
 		}
 
 		.container__member {
@@ -133,13 +147,11 @@ const MeeTeamCreatePage = styled.div`
 				}
 
 				button:nth-child(2) {
-					margin-left: 20px;
 					background-color: #00b894;
 					color: #fff;
 				}
 
 				button:nth-child(3) {
-					margin-left: 5px;
 					background-color: #e17055;
 					color: #fff;
 				}

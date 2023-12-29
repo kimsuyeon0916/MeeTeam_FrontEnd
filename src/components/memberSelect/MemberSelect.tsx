@@ -7,26 +7,26 @@ const MemberSelect = () => {
 		<S.MemberSelect>
 			<div className='area-profile'>
 				<div>
-					<div className='subtitle'>프로필</div>
-					<div className='profile-info'>
+					<div className='subtitle'>인원</div>
+					{/* <div className='profile-info'>
 						<div className='profile-info--icon'>
 							<BiUser />
 						</div>
 						<div className='profile-info--name'>김민지</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 			<div className='area-role'>
 				<div>
 					<div className='subtitle'>역할</div>
 					<div className='role-info'>
-						<CustomSelect
+						{/* <CustomSelect
 							optionData={['프론트엔드 개발자', '백엔드 개발자', '디자이너', '기획자']}
-						/>
+						/> */}
 					</div>
 				</div>
 			</div>
-			<div className='area-task'>
+			{/* <div className='area-task'>
 				<div>
 					<div className='subtitle'>담당 업무</div>
 				</div>
@@ -55,13 +55,13 @@ const MemberSelect = () => {
 						]}
 					/>
 				</div>
-			</div>
+			</div> */}
 			<div className='area-qualification'>
 				<div>
-					<div className='subtitle'>담당 업무</div>
+					<div className='subtitle'>기술</div>
 				</div>
 				<div className='qualification-info'>
-					<CustomSelect
+					{/* <CustomSelect
 						optionData={[
 							'IOS',
 							'안드로이드',
@@ -83,7 +83,7 @@ const MemberSelect = () => {
 							'3D 디자인',
 							'그래픽 디자인',
 						]}
-					/>
+					/> */}
 				</div>
 			</div>
 		</S.MemberSelect>

@@ -1,31 +1,36 @@
 import styled from 'styled-components';
 
 const MemberSelect = styled.div`
-	margin: 20px 20px 10px 20px;
+	margin: 0 0 10px 0;
 	display: flex;
-	min-height: 80px;
+	min-height: 9.975rem;
 
 	.subtitle {
 		display: flex;
-		width: 4rem;
-		height: 1.0125rem;
+		width: 4.575rem;
+		height: 1.2rem;
 		flex-direction: column;
 		justify-content: center;
 		flex-shrink: 0;
-		color: var(--light-black, #373f41);
-		font-family: Pretendard;
-		font-size: 0.91rem;
+		color: var(--Light-Black, #373f41);
+		font-family: Apple SD Gothic Neo;
+		font-size: 1.5rem;
 		font-style: normal;
-		font-weight: 600;
-		line-height: 1.125rem; /* 112.5% */
-		letter-spacing: 0.0125rem;
+		font-weight: 400;
+		line-height: 1.35rem; /* 90% */
+		letter-spacing: 0.015rem;
+		margin-top: 1.5rem;
+		margin-left: 1.58rem;
 	}
 
 	.area-profile {
-		width: 20%;
-		background-color: #b2bec3;
+		width: 25%;
 		padding: 0.55rem 0.55rem;
 		box-sizing: border-box;
+		border-top-left-radius: 0.75rem;
+		border-bottom-left-radius: 0.75rem;
+		border: 0.75px solid #b0b0b0;
+		background: #f9f9f9;
 
 		.profile-info {
 			display: flex;
@@ -50,10 +55,12 @@ const MemberSelect = styled.div`
 	}
 
 	.area-role {
-		width: 20%;
-		background-color: #ababab;
+		width: 25%;
 		padding: 0.55rem 0.55rem;
 		box-sizing: border-box;
+		border-top: 0.75px solid #b0b0b0;
+		border-bottom: 0.75px solid #b0b0b0;
+		background: #eaf7ff;
 
 		.role-info {
 			margin-top: 10px;
@@ -74,10 +81,13 @@ const MemberSelect = styled.div`
 	}
 
 	.area-qualification {
-		width: 40%;
-		background-color: #c7ecee;
+		width: 50%;
 		padding: 0.55rem 0.55rem;
 		box-sizing: border-box;
+		border-top-right-radius: 0.75rem;
+		border-bottom-right-radius: 0.75rem;
+		border: 0.75px solid #b0b0b0;
+		background: #e0e6ff;
 
 		.qualification-info {
 			margin-top: 10px;
