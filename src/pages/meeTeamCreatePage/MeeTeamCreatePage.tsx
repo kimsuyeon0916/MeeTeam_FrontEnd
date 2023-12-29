@@ -9,25 +9,21 @@ import 'react-quill/dist/quill.snow.css';
 const MeeTeamCreatePage = () => {
 	const navigate = useNavigate();
 	const quillRef = useRef<ReactQuill | null>(null);
-	const [memberList, setMemberList] = useState([<MemberSelect id={0} />]);
+	const [memberList, setMemberList] = useState([<MemberSelect />]);
 	const copyMemberList = [...memberList];
 
 	const onClickMember = (event: any) => {
-		// console.log(memberList.length);
 		let updatedMemberList = [...memberList];
-		updatedMemberList.push(<MemberSelect id={memberList.length} />);
+		updatedMemberList.push(<MemberSelect />);
 		setMemberList(updatedMemberList);
 	};
 
-	const onClickDelete = (event: any) => {
-		console.log(event);
+	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
 		const deletedIndex = Number(event.target.id);
 		copyMemberList.splice(deletedIndex, 1);
-		// console.log(deletedIndex);
 		setMemberList(copyMemberList);
 	};
-	console.log(copyMemberList);
-	console.log(memberList);
+
 	const onClickCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
 		// 모달창 띄워서 한 번 더 확인시키고 이동하기
 		navigate('/');
@@ -89,12 +85,12 @@ const MeeTeamCreatePage = () => {
 							<Subtitle>{'멤버'}</Subtitle>
 						</div>
 						<div>
-							{copyMemberList.map((memberItem, index) => {
+							{memberList.map((memberItem, index) => {
 								return (
 									<div className='controll' key={index}>
-										{memberItem}
-										<button id={'' + index}>초대</button>
-										<button onClick={onClickDelete} id={'' + index}>
+										{React.cloneElement(memberItem, { key: index })}
+										<button id={index.toString()}>초대</button>
+										<button onClick={onClickDelete} id={index.toString()}>
 											삭제
 										</button>
 									</div>

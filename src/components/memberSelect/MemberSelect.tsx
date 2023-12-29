@@ -3,7 +3,7 @@ import { CustomSelect } from '..';
 import S from './MemberSelect.styled';
 
 interface IMemberSelect {
-	id: number;
+	id?: number;
 }
 
 const MemberSelect = (id: IMemberSelect) => {

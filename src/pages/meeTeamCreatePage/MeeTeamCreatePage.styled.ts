@@ -116,13 +116,15 @@ const MeeTeamCreatePage = styled.div`
 
 			.ql-container.ql-snow {
 				border: 0.75px solid #e3e3e3;
-				border-radius: 0.75rem;
+				border-bottom-right-radius: 0.75rem;
+				border-bottom-left-radius: 0.75rem;
 				height: 30.825rem;
 			}
 
 			.ql-toolbar.ql-snow {
 				border: 0.75px solid #e3e3e3;
-				border-radius: 0.75rem;
+				border-top-right-radius: 0.75rem;
+				border-top-left-radius: 0.75rem;
 				box-sizing: border-box;
 				font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 				padding: 8px;

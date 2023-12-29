@@ -16,8 +16,8 @@ const CustomSelect = ({ optionData, isMember }: ICustomSelect) => {
 	};
 	return (
 		<S.CustomSelect onClick={() => setShowOptions(prev => !prev)} isMember={isMember}>
-			<S.Label>{currentValue}</S.Label>
-			<S.SelectOptions show={showOptions}>
+			<S.Label $isSelected={currentValue}>{currentValue}</S.Label>
+			<S.SelectOptions $show={showOptions}>
 				{optionData.map((data: any, index: number) => (
 					<S.Option key={index} value={data} onClick={handleOnChangeSelectValue}>
 						{data}

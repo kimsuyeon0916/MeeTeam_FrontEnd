@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components';
 
 interface ISelectOptionsProps {
-	show: boolean;
+	$show: boolean;
+	$isSelected: string;
 }
 
 const CustomSelect = styled.div<{ isMember?: boolean }>`
@@ -26,13 +27,13 @@ const CustomSelect = styled.div<{ isMember?: boolean }>`
 	}
 `;
 
-const Label = styled.label`
+const Label = styled.label<ISelectOptionsProps>`
 	display: flex;
 	align-items: center;
 	height: 100%;
 	margin-left: 2.1rem;
 	text-align: center;
-	color: #a7a7a7;
+	color: ${props => (props.$isSelected === '선택' ? '#a7a7a7' : '#000')};
 	font-family: Apple SD Gothic Neo;
 	font-size: 1.5rem;
 	font-style: normal;
@@ -49,7 +50,7 @@ const SelectOptions = styled.ul<ISelectOptionsProps>`
 	width: 100%;
 	overflow: hidden;
 	/* height: 90px; */
-	max-height: ${props => (props.show ? 'none' : '0')};
+	max-height: ${props => (props.$show ? 'none' : '0')};
 	padding: 0;
 	border-radius: 0.75rem;
 	background-color: #fff;
