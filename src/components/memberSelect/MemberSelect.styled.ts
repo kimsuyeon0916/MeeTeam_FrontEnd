@@ -19,8 +19,8 @@ const MemberSelect = styled.div`
 		font-weight: 400;
 		line-height: 1.35rem; /* 90% */
 		letter-spacing: 0.015rem;
-		margin-top: 1.5rem;
-		margin-left: 1.58rem;
+		margin-top: 1.3rem;
+		margin-left: 1.38rem;
 	}
 
 	.area-profile {
@@ -64,6 +64,7 @@ const MemberSelect = styled.div`
 
 		.role-info {
 			margin-top: 10px;
+			margin-left: 1.2rem;
 			width: 90%;
 		}
 	}
@@ -91,6 +92,7 @@ const MemberSelect = styled.div`
 
 		.qualification-info {
 			margin-top: 10px;
+			margin-left: 1.2rem;
 			width: 90%;
 		}
 	}

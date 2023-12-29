@@ -3,9 +3,10 @@ import S from './CustomSelect.styled';
 
 interface ICustomSelect {
 	optionData: string[];
+	isMember?: boolean;
 }
 
-const CustomSelect = ({ optionData }: ICustomSelect) => {
+const CustomSelect = ({ optionData, isMember }: ICustomSelect) => {
 	const [currentValue, setCurrentValue] = useState('선택');
 	const [showOptions, setShowOptions] = useState(false);
 
@@ -13,9 +14,9 @@ const CustomSelect = ({ optionData }: ICustomSelect) => {
 		const { innerText } = e.target as HTMLElement;
 		setCurrentValue(innerText);
 	};
-
+	console.log(isMember);
 	return (
-		<S.CustomSelect onClick={() => setShowOptions(prev => !prev)}>
+		<S.CustomSelect onClick={() => setShowOptions(prev => !prev)} isMember={isMember}>
 			<S.Label>{currentValue}</S.Label>
 			<S.SelectOptions show={showOptions}>
 				{optionData.map((data: any, index: number) => (

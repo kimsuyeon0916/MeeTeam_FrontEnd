@@ -20,17 +20,18 @@ const MemberSelect = () => {
 				<div>
 					<div className='subtitle'>역할</div>
 					<div className='role-info'>
-						{/* <CustomSelect
+						<CustomSelect
 							optionData={['프론트엔드 개발자', '백엔드 개발자', '디자이너', '기획자']}
-						/> */}
+							isMember={true}
+						/>
 					</div>
 				</div>
 			</div>
-			{/* <div className='area-task'>
+			<div className='area-qualification'>
 				<div>
-					<div className='subtitle'>담당 업무</div>
+					<div className='subtitle'>기술</div>
 				</div>
-				<div className='task-info'>
+				<div className='qualification-info'>
 					<CustomSelect
 						optionData={[
 							'IOS',
@@ -54,36 +55,6 @@ const MemberSelect = () => {
 							'그래픽 디자인',
 						]}
 					/>
-				</div>
-			</div> */}
-			<div className='area-qualification'>
-				<div>
-					<div className='subtitle'>기술</div>
-				</div>
-				<div className='qualification-info'>
-					{/* <CustomSelect
-						optionData={[
-							'IOS',
-							'안드로이드',
-							'웹프론트엔드',
-							'게임클라이언트',
-							'임베디드SW',
-							'웹서버',
-							'블록체인',
-							'AI',
-							'DB/DS',
-							'게임서버',
-							'프롬프트 엔지니어',
-							'시스템 개발',
-							'네트워크',
-							'보안',
-							'DevOps',
-							'그래픽스',
-							'UI/UX 디자인',
-							'3D 디자인',
-							'그래픽 디자인',
-						]}
-					/> */}
 				</div>
 			</div>
 		</S.MemberSelect>
