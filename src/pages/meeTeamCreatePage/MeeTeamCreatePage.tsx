@@ -12,7 +12,7 @@ const MeeTeamCreatePage = () => {
 	const [memberList, setMemberList] = useState([<MemberSelect />]);
 	const copyMemberList = [...memberList];
 
-	const onClickMember = (event: any) => {
+	const onClickMember = (event: React.MouseEvent<HTMLButtonElement>) => {
 		let updatedMemberList = [...memberList];
 		updatedMemberList.push(<MemberSelect />);
 		setMemberList(updatedMemberList);

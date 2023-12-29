@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import S from './CustomSelect.styled';
 
 interface ICustomSelect {
@@ -14,6 +14,13 @@ const CustomSelect = ({ optionData, isMember }: ICustomSelect) => {
 		const { innerText } = e.target as HTMLElement;
 		setCurrentValue(innerText);
 	};
+
+	useEffect(() => {
+		// isMember 값이 변경될 때마다 초기화
+		setCurrentValue('선택');
+		setShowOptions(false);
+	}, [isMember]);
+
 	return (
 		<S.CustomSelect onClick={() => setShowOptions(prev => !prev)} isMember={isMember}>
 			<S.Label $isSelected={currentValue}>{currentValue}</S.Label>

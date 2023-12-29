@@ -1,8 +1,8 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 interface ISelectOptionsProps {
-	$show: boolean;
-	$isSelected: string;
+	$show?: boolean;
+	$isSelected?: string;
 }
 
 const CustomSelect = styled.div<{ isMember?: boolean }>`
