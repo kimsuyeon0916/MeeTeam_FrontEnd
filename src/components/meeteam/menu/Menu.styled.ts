@@ -3,29 +3,25 @@ import styled from 'styled-components';
 const MenuRow = styled.div`
 	display: flex;
 	align-items: center;
-	margin-left: 15.052vw;
-	margin-right: 15.052vw;
+	width: clamp(50%, 108rem, 70%);
+	margin: 0 auto;
 `;
 
 const MenuBox = styled.button<{ $color?: boolean }>`
 	display: flex;
+	flex: 1;
 	justify-content: center;
 	align-items: center;
-	width: 14.063vw;
-	height: 3.646vw;
-	border-radius: 0.5rem 0.5rem 0rem 0rem;
-	border-top: ${props => (props.$color ? `solid #EEECFF` : `0.052vw solid #cbcbcb`)};
-	border-right: ${props => (props.$color ? `solid #EEECFF` : `0.052vw solid #cbcbcb`)};
-	border-left: ${props => (props.$color ? `solid #EEECFF` : `0.052vw solid #cbcbcb`)};
-	border-bottom: ${props => (props.$color ? `0` : `solid #EEECFF`)};
-	background: ${props => (props.$color ? '#FFF' : '#F6F6F6')};
-	color: var(--light-black, ${props => (props.$color ? '#5877FC' : '#373f41')});
+	height: 5.025rem;
+	border-radius: 0.6rem 0.6rem 0rem 0rem;
+	border: ${props => (props.$color ? `0.15rem solid #BCD7FF` : `0.075rem solid #cbcbcb`)};
+	border-bottom: ${props => (props.$color ? `0` : `0.15rem solid #BCD7FF`)};
+	background: ${props => (props.$color ? '#F7FAFF' : '#FFF')};
+	color: var(--light-black, ${props => (props.$color ? '#151515' : '#373F41')});
 	font-family: Pretendard;
-	font-size: 1.1rem;
+	font-size: 1.5rem;
 	font-style: normal;
-	font-weight: 500;
-	line-height: 1.125rem; /* 75% */
-	letter-spacing: 0.0125rem;
+	font-weight: ${props => (props.$color ? `600` : `400`)};
 	cursor: pointer;
 `;
 
