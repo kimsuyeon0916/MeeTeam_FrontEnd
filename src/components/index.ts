@@ -5,5 +5,6 @@ import InfoItem from './infoItem/InfoItem';
 import CustomSelect from './customSelect/CustomSelect';
 import Tag from './tag/Tag';
 import MemberSelect from './memberSelect/MemberSelect';
+import AddButton from './addButton/AddButton';
 
-export { Header, Subtitle, Dot, InfoItem, CustomSelect, Tag, MemberSelect };
+export { Header, Subtitle, Dot, InfoItem, CustomSelect, Tag, MemberSelect, AddButton };

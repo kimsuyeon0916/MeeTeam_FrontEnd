@@ -14,7 +14,6 @@ const CustomSelect = ({ optionData, isMember }: ICustomSelect) => {
 		const { innerText } = e.target as HTMLElement;
 		setCurrentValue(innerText);
 	};
-	console.log(isMember);
 	return (
 		<S.CustomSelect onClick={() => setShowOptions(prev => !prev)} isMember={isMember}>
 			<S.Label>{currentValue}</S.Label>

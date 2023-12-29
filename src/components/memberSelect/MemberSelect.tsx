@@ -2,7 +2,12 @@ import { BiUser } from 'react-icons/bi';
 import { CustomSelect } from '..';
 import S from './MemberSelect.styled';
 
-const MemberSelect = () => {
+interface IMemberSelect {
+	id: number;
+}
+
+const MemberSelect = (id: IMemberSelect) => {
+	// console.log(id);
 	return (
 		<S.MemberSelect>
 			<div className='area-profile'>

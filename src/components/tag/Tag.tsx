@@ -5,6 +5,7 @@ const Tag = () => {
 	const [tagItem, setTagItem] = useState<string>('');
 	const [tagList, setTagList] = useState<string[]>([]);
 	const copyTagList = [...tagList];
+
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.target.value.length !== 0 && event.key === 'Enter') {
 			submitTagItem();
@@ -20,8 +21,7 @@ const Tag = () => {
 
 	const deleteTagItem = (event: any) => {
 		const deletedIndex = Number(event.target.id);
-		const filteredTagList = copyTagList.splice(deletedIndex, 1);
-		console.log(copyTagList);
+		copyTagList.splice(deletedIndex, 1);
 		setTagList(copyTagList);
 	};
 

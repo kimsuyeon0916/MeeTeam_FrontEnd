@@ -64,7 +64,7 @@ const MemberSelect = styled.div`
 
 		.role-info {
 			margin-top: 10px;
-			margin-left: 1.2rem;
+			margin-left: 1rem;
 			width: 90%;
 		}
 	}
@@ -92,7 +92,7 @@ const MemberSelect = styled.div`
 
 		.qualification-info {
 			margin-top: 10px;
-			margin-left: 1.2rem;
+			margin-left: 0.7rem;
 			width: 90%;
 		}
 	}

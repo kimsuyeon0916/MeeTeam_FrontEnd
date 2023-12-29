@@ -163,15 +163,20 @@ const MeeTeamCreatePage = styled.div`
 				align-items: center;
 
 				.addition {
-					width: 2.7rem;
-					height: 2.7rem;
+					width: 7rem;
+					height: 7rem;
+					flex-shrink: 0;
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					font-size: 3rem;
 					border-radius: 50%;
 					color: #000;
 					cursor: pointer;
+					opacity: 0.8;
+					filter: drop-shadow(0px 3px 18.75px rgba(0, 0, 0, 0.11));
+
+					.addition-container {
+					}
 				}
 			}
 		}

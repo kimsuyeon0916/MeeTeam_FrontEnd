@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Subtitle, Dot, InfoItem, Tag, MemberSelect } from '../../components';
-import { MdOutlineAddCircleOutline } from 'react-icons/md';
+import { Subtitle, Dot, InfoItem, Tag, MemberSelect, AddButton } from '../../components';
 import { modules } from '../../utils/index';
 import { useNavigate } from 'react-router-dom';
 import S from './MeeTeamCreatePage.styled';
@@ -10,20 +9,25 @@ import 'react-quill/dist/quill.snow.css';
 const MeeTeamCreatePage = () => {
 	const navigate = useNavigate();
 	const quillRef = useRef<ReactQuill | null>(null);
-	const [memberList, setMemberList] = useState([<MemberSelect />]);
+	const [memberList, setMemberList] = useState([<MemberSelect id={0} />]);
+	const copyMemberList = [...memberList];
 
-	const onClickMember = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const onClickMember = (event: any) => {
+		// console.log(memberList.length);
 		let updatedMemberList = [...memberList];
-		updatedMemberList.push(<MemberSelect />);
+		updatedMemberList.push(<MemberSelect id={memberList.length} />);
 		setMemberList(updatedMemberList);
 	};
 
-	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
-		const deletedMember = memberList[+event.target.value];
-		const filteredMemberList = memberList.filter(member => member !== deletedMember);
-		setMemberList(filteredMemberList);
+	const onClickDelete = (event: any) => {
+		console.log(event);
+		const deletedIndex = Number(event.target.id);
+		copyMemberList.splice(deletedIndex, 1);
+		// console.log(deletedIndex);
+		setMemberList(copyMemberList);
 	};
-
+	console.log(copyMemberList);
+	console.log(memberList);
 	const onClickCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
 		// 모달창 띄워서 한 번 더 확인시키고 이동하기
 		navigate('/');
@@ -49,9 +53,6 @@ const MeeTeamCreatePage = () => {
 						</div>
 					</div>
 					<div className='container__info'>
-						{/* <div>
-							<Subtitle>{'밋팀 정보'}</Subtitle>
-						</div> */}
 						<div className='info-wrapper'>
 							<div className='container__info-select'>
 								<InfoItem isDot='true' title='범위' optionData={['교내', '교외']} />
@@ -88,24 +89,22 @@ const MeeTeamCreatePage = () => {
 							<Subtitle>{'멤버'}</Subtitle>
 						</div>
 						<div>
-							{memberList.map((memberItem, index) => {
+							{copyMemberList.map((memberItem, index) => {
 								return (
-									<>
-										<div className='controll' key={index}>
-											{memberItem}
-											<button>초대</button>
-											<button onClick={onClickDelete} value={index}>
-												삭제
-											</button>
-										</div>
-									</>
+									<div className='controll' key={index}>
+										{memberItem}
+										<button id={'' + index}>초대</button>
+										<button onClick={onClickDelete} id={'' + index}>
+											삭제
+										</button>
+									</div>
 								);
 							})}
 
 							<div className='container__member-add'>
 								{memberList.length !== 6 && (
 									<div className='addition' onClick={onClickMember}>
-										<MdOutlineAddCircleOutline />
+										<AddButton />
 									</div>
 								)}
 							</div>
