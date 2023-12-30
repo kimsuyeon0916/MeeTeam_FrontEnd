@@ -3,11 +3,10 @@ import { CustomSelect } from '..';
 import S from './MemberSelect.styled';
 
 interface IMemberSelect {
-	id?: number;
+	id: number;
 }
 
 const MemberSelect = (id: IMemberSelect) => {
-	// console.log(id);
 	return (
 		<S.MemberSelect>
 			<div className='area-profile'>
@@ -28,6 +27,7 @@ const MemberSelect = (id: IMemberSelect) => {
 						<CustomSelect
 							optionData={['프론트엔드 개발자', '백엔드 개발자', '디자이너', '기획자']}
 							isMember={true}
+							key={id as any}
 						/>
 					</div>
 				</div>

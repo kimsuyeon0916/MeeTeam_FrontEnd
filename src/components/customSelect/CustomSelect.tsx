@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import S from './CustomSelect.styled';
 
-interface ICustomSelect {
+export interface ICustomSelect {
 	optionData: string[];
 	isMember?: boolean;
+	key?: number;
 }
 
-const CustomSelect = ({ optionData, isMember }: ICustomSelect) => {
+const CustomSelect = ({ optionData, isMember, key }: ICustomSelect) => {
 	const [currentValue, setCurrentValue] = useState('선택');
 	const [showOptions, setShowOptions] = useState(false);
 
@@ -22,7 +23,7 @@ const CustomSelect = ({ optionData, isMember }: ICustomSelect) => {
 	}, [isMember]);
 
 	return (
-		<S.CustomSelect onClick={() => setShowOptions(prev => !prev)} isMember={isMember}>
+		<S.CustomSelect onClick={() => setShowOptions(prev => !prev)} isMember={isMember} key={key}>
 			<S.Label $isSelected={currentValue}>{currentValue}</S.Label>
 			<S.SelectOptions $show={showOptions}>
 				{optionData.map((data: any, index: number) => (

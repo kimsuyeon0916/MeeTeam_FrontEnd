@@ -9,13 +9,14 @@ import 'react-quill/dist/quill.snow.css';
 const MeeTeamCreatePage = () => {
 	const navigate = useNavigate();
 	const quillRef = useRef<ReactQuill | null>(null);
-	const [memberList, setMemberList] = useState([<MemberSelect />]);
+	const [memberList, setMemberList] = useState([<MemberSelect id={0} />]);
 	const copyMemberList = [...memberList];
 
-	const onClickMember = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const onClickMember = () => {
 		let updatedMemberList = [...memberList];
-		updatedMemberList.push(<MemberSelect />);
+		updatedMemberList.push(<MemberSelect id={memberList.length} />);
 		setMemberList(updatedMemberList);
+		console.log(updatedMemberList);
 	};
 
 	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -23,7 +24,7 @@ const MeeTeamCreatePage = () => {
 		copyMemberList.splice(deletedIndex, 1);
 		setMemberList(copyMemberList);
 	};
-
+	console.log(memberList);
 	const onClickCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
 		// 모달창 띄워서 한 번 더 확인시키고 이동하기
 		navigate('/');
