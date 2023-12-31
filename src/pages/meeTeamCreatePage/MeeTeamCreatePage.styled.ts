@@ -107,6 +107,13 @@ const MeeTeamCreatePage = styled.div`
 				align-items: center;
 				gap: 30.82rem;
 				margin-top: 15px;
+
+				p {
+					color: red;
+					font-size: 1.2rem;
+					padding-top: 1rem;
+					box-sizing: border-box;
+				}
 			}
 		}
 

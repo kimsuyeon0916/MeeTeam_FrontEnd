@@ -1,30 +1,43 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import S from './CustomSelect.styled';
+import { useRecoilState } from 'recoil';
+import { areaState, categoryState, fieldState } from '../../atom';
 
 export interface ICustomSelect {
 	optionData: string[];
 	isMember?: boolean;
 	key?: number;
-	value?: string;
+	type?: string;
 }
 
-const CustomSelect = ({ optionData, isMember, key }: ICustomSelect) => {
+const CustomSelect = ({ optionData, isMember, key, type }: ICustomSelect) => {
 	const [currentValue, setCurrentValue] = useState('선택');
 	const [showOptions, setShowOptions] = useState(false);
+	const [area, setArea] = useRecoilState(areaState);
+	const [field, setField] = useRecoilState(fieldState);
+	const [category, setCategory] = useRecoilState(categoryState);
 
-	const handleOnChangeSelectValue = (e: React.MouseEvent<HTMLElement>) => {
-		const { innerText } = e.target as HTMLElement;
+	const handleOnChangeSelectValue = (event: React.MouseEvent<HTMLElement>) => {
+		const { innerText } = event.target as HTMLElement;
 		setCurrentValue(innerText);
+
+		if (type === '범위') {
+			setArea(innerText);
+		}
+		if (type === '유형') {
+			setField(innerText);
+		}
+		if (type === '분야') {
+			setCategory(innerText);
+		}
 	};
 
-	useEffect(() => {
-		// isMember 값이 변경될 때마다 초기화
-		setCurrentValue('선택');
-		setShowOptions(false);
-	}, [isMember]);
+	const onClickhandler = () => {
+		setShowOptions(prev => !prev);
+	};
 
 	return (
-		<S.CustomSelect onClick={() => setShowOptions(prev => !prev)} isMember={isMember} key={key}>
+		<S.CustomSelect onClick={onClickhandler} isMember={isMember} key={key}>
 			<S.Label $isSelected={currentValue}>{currentValue}</S.Label>
 			<S.SelectOptions $show={showOptions}>
 				{optionData.map((data: any, index: number) => (

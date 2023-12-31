@@ -6,6 +6,7 @@ interface IInfoItem {
 	isDot: string;
 	title: string;
 	optionData: string[];
+	type?: string;
 }
 
 const InfoItem = (props: IInfoItem) => {
@@ -16,7 +17,7 @@ const InfoItem = (props: IInfoItem) => {
 			{props.title === '밋팀 기간' ? (
 				<DateSelect />
 			) : (
-				<CustomSelect optionData={props.optionData} />
+				<CustomSelect optionData={props.optionData} type={props.type} />
 			)}
 		</S.InfoItem>
 	);
