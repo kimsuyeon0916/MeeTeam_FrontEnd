@@ -16,6 +16,11 @@ const MeeTeamCreatePage = () => {
 		validName: false,
 		validMessage: '',
 	});
+	const [area, setArea] = useState<string>('');
+	const [isValidArea, setIsValidArea] = useState({
+		validArea: false,
+		validMessage: '',
+	});
 
 	const onClickMember = () => {
 		let updatedMemberList = [...memberList];

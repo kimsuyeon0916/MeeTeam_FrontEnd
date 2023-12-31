@@ -5,6 +5,7 @@ export interface ICustomSelect {
 	optionData: string[];
 	isMember?: boolean;
 	key?: number;
+	value?: string;
 }
 
 const CustomSelect = ({ optionData, isMember, key }: ICustomSelect) => {
