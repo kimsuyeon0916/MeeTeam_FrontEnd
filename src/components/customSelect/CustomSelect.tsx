@@ -24,10 +24,10 @@ const CustomSelect = ({ optionData, isMember, key, type }: ICustomSelect) => {
 		if (type === '범위') {
 			setArea(innerText);
 		}
-		if (type === '유형') {
+		if (type === '분야') {
 			setField(innerText);
 		}
-		if (type === '분야') {
+		if (type === '유형') {
 			setCategory(innerText);
 		}
 	};

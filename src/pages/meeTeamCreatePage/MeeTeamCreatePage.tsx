@@ -6,13 +6,14 @@ import S from './MeeTeamCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useRecoilValue } from 'recoil';
-import { areaState, categoryState, fieldState } from '../../atom';
+import { areaState, categoryState, dateState, fieldState } from '../../atom';
 
 const MeeTeamCreatePage = () => {
 	const navigate = useNavigate();
 	const area = useRecoilValue(areaState);
 	const field = useRecoilValue(fieldState);
 	const category = useRecoilValue(categoryState);
+	const [startDate, endDate] = useRecoilValue(dateState);
 	const quillRef = useRef<ReactQuill | null>(null);
 	const [memberList, setMemberList] = useState([<MemberSelect id={0} />]);
 	const copyMemberList = [...memberList];
@@ -32,6 +33,10 @@ const MeeTeamCreatePage = () => {
 	});
 	const [isValidCategory, setIsValidCategory] = useState({
 		validCategory: false,
+		validMessage: '',
+	});
+	const [isValidDate, setIsValidDate] = useState({
+		validDate: false,
 		validMessage: '',
 	});
 
@@ -64,20 +69,46 @@ const MeeTeamCreatePage = () => {
 		if (teamName.length === 0) {
 			setIsValidName({ validName: false, validMessage: '* 팀명을 입력해주세요.' });
 		}
+		if (teamName.length !== 0) {
+			setIsValidName({ validName: true, validMessage: '' });
+		}
 
 		// 밋팀 범위 검사
 		if (area === '') {
 			setIsValidArea({ validArea: false, validMessage: '* 범위를 선택해주세요.' });
+		}
+		if (area !== '') {
+			setIsValidArea({ validArea: true, validMessage: '' });
 		}
 
 		// 밋팀 분야 검사
 		if (field === '') {
 			setIsValidField({ validField: false, validMessage: '* 분야를 선택해주세요.' });
 		}
+		if (field !== '') {
+			setIsValidField({ validField: true, validMessage: '' });
+		}
 
 		// 밋팀 유형 검사
 		if (category === '') {
 			setIsValidCategory({ validCategory: false, validMessage: '* 유형을 선택해주세요.' });
+		}
+		if (category !== '') {
+			setIsValidCategory({ validCategory: true, validMessage: '' });
+		}
+
+		// 밋팀 기간 검사
+		if (endDate < new Date()) {
+			setIsValidDate({
+				validDate: false,
+				validMessage: '* 오늘보다 날짜를 늦게 설정할 수 없습니다.',
+			});
+		}
+		if (endDate > new Date()) {
+			setIsValidDate({
+				validDate: true,
+				validMessage: '',
+			});
 		}
 	};
 
@@ -132,11 +163,13 @@ const MeeTeamCreatePage = () => {
 										/>
 										{!isValidCategory.validCategory && <p>{isValidCategory.validMessage}</p>}
 									</div>
-
 									<InfoItem isDot='false' title='진행 방식' optionData={['온라인', '오프라인']} />
 								</div>
 								<div className='container__info-select'>
-									<InfoItem isDot='true' title='밋팀 기간' optionData={[]} />
+									<div>
+										<InfoItem isDot='true' title='밋팀 기간' optionData={[]} type='기간' />
+										{!isValidDate.validDate && <p>{isValidDate.validMessage}</p>}
+									</div>
 									<InfoItem isDot='false' title='공개 여부' optionData={['공개', '비공개']} />
 								</div>
 							</div>

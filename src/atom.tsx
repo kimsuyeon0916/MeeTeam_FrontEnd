@@ -14,3 +14,8 @@ export const categoryState = atom({
 	key: 'categoryState',
 	default: '',
 });
+
+export const dateState = atom({
+	key: 'dateState',
+	default: [new Date(), new Date()],
+});
