@@ -80,6 +80,12 @@ const MeeTeamCreatePage = styled.div`
 					box-sizing: border-box;
 				}
 			}
+
+			.teamname-length {
+				width: 40rem;
+				display: flex;
+				justify-content: flex-end;
+			}
 		}
 
 		.container__info {

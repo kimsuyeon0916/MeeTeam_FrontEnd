@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import { Subtitle, Dot, InfoItem, Tag, MemberSelect, AddButton } from '../../components';
 import { modules } from '../../utils/index';
 import { useNavigate } from 'react-router-dom';
@@ -11,12 +11,16 @@ const MeeTeamCreatePage = () => {
 	const quillRef = useRef<ReactQuill | null>(null);
 	const [memberList, setMemberList] = useState([<MemberSelect id={0} />]);
 	const copyMemberList = [...memberList];
+	const [teamName, setTeamName] = useState<string>('');
+	const [isValidName, setIsValidName] = useState({
+		validName: false,
+		validMessage: '',
+	});
 
 	const onClickMember = () => {
 		let updatedMemberList = [...memberList];
 		updatedMemberList.push(<MemberSelect id={memberList.length} />);
 		setMemberList(updatedMemberList);
-		console.log(updatedMemberList);
 	};
 
 	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -24,11 +28,16 @@ const MeeTeamCreatePage = () => {
 		copyMemberList.splice(deletedIndex, 1);
 		setMemberList(copyMemberList);
 	};
-	console.log(memberList);
+
 	const onClickCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
 		// 모달창 띄워서 한 번 더 확인시키고 이동하기
 		navigate('/');
 	};
+
+	const onChangeTeamName = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+		setTeamName(event.target.value);
+		setIsValidName({ validName: true, validMessage: '' });
+	}, []);
 
 	return (
 		<S.MeeTeamCreatePage>
@@ -46,8 +55,17 @@ const MeeTeamCreatePage = () => {
 							<Dot />
 						</div>
 						<div className='container__teamname-input'>
-							<input placeholder='밋팀 팀명을 입력해주세요.' type='text' />
+							<input
+								placeholder='밋팀 팀명을 입력해주세요.'
+								type='text'
+								onChange={onChangeTeamName}
+								maxLength={20}
+							/>
 						</div>
+						<span className='teamname-length'>
+							{teamName.length > 20 ? 20 : teamName.length} / 20
+						</span>
+						{isValidName.validName && <p>* 팀명을 입력해주세요.</p>}
 					</div>
 					<div className='container__info'>
 						<div className='info-wrapper'>
