@@ -39,6 +39,15 @@ const MeeTeamCreatePage = () => {
 		setIsValidName({ validName: true, validMessage: '' });
 	}, []);
 
+	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
+
+		// 밋팀 팀명 글자수 검사
+		if (teamName.length === 0) {
+			setIsValidName({ validName: false, validMessage: '* 팀명을 입력해주세요.' });
+		}
+	};
+
 	return (
 		<S.MeeTeamCreatePage>
 			<div className='procedure'>
@@ -48,88 +57,90 @@ const MeeTeamCreatePage = () => {
 				</div>
 			</div>
 			<div className='wrapper'>
-				<div className='container'>
-					<div className='container__teamname'>
-						<div className='container__teamname-subtitle'>
-							<Subtitle>{'밋팀 팀명'}</Subtitle>
-							<Dot />
-						</div>
-						<div className='container__teamname-input'>
-							<input
-								placeholder='밋팀 팀명을 입력해주세요.'
-								type='text'
-								onChange={onChangeTeamName}
-								maxLength={20}
-							/>
-						</div>
-						<span className='teamname-length'>
-							{teamName.length > 20 ? 20 : teamName.length} / 20
-						</span>
-						{isValidName.validName && <p>* 팀명을 입력해주세요.</p>}
-					</div>
-					<div className='container__info'>
-						<div className='info-wrapper'>
-							<div className='container__info-select'>
-								<InfoItem isDot='true' title='범위' optionData={['교내', '교외']} />
-								<InfoItem isDot='true' title='밋팀 분야' optionData={['개발']} />
+				<form onSubmit={handleSubmit}>
+					<div className='container'>
+						<div className='container__teamname'>
+							<div className='container__teamname-subtitle'>
+								<Subtitle>{'밋팀 팀명'}</Subtitle>
+								<Dot />
 							</div>
-							<div className='container__info-select'>
-								<InfoItem isDot='true' title='밋팀 유형' optionData={['프로젝트', '스터디']} />
-								<InfoItem isDot='false' title='진행 방식' optionData={['온라인', '오프라인']} />
+							<div className='container__teamname-input'>
+								<input
+									placeholder='밋팀 팀명을 입력해주세요.'
+									type='text'
+									onChange={onChangeTeamName}
+									maxLength={20}
+								/>
 							</div>
-							<div className='container__info-select'>
-								<InfoItem isDot='true' title='밋팀 기간' optionData={[]} />
-								<InfoItem isDot='false' title='공개 여부' optionData={['공개', '비공개']} />
+							<span className='teamname-length'>
+								{teamName.length > 20 ? 20 : teamName.length} / 20
+							</span>
+							{!isValidName.validName && <p>{isValidName.validMessage}</p>}
+						</div>
+						<div className='container__info'>
+							<div className='info-wrapper'>
+								<div className='container__info-select'>
+									<InfoItem isDot='true' title='범위' optionData={['교내', '교외']} />
+									<InfoItem isDot='true' title='밋팀 분야' optionData={['개발']} />
+								</div>
+								<div className='container__info-select'>
+									<InfoItem isDot='true' title='밋팀 유형' optionData={['프로젝트', '스터디']} />
+									<InfoItem isDot='false' title='진행 방식' optionData={['온라인', '오프라인']} />
+								</div>
+								<div className='container__info-select'>
+									<InfoItem isDot='true' title='밋팀 기간' optionData={[]} />
+									<InfoItem isDot='false' title='공개 여부' optionData={['공개', '비공개']} />
+								</div>
 							</div>
 						</div>
-					</div>
-					<div className='container__tag'>
-						<div>
-							<Subtitle>{'밋팀 태그'}</Subtitle>
+						<div className='container__tag'>
+							<div>
+								<Subtitle>{'밋팀 태그'}</Subtitle>
+							</div>
+							<div>
+								<Tag />
+							</div>
 						</div>
-						<div>
-							<Tag />
+						<div className='container__intro'>
+							<div>
+								<Subtitle>{'밋팀 소개'}</Subtitle>
+							</div>
+							<div>
+								<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
+							</div>
 						</div>
-					</div>
-					<div className='container__intro'>
-						<div>
-							<Subtitle>{'밋팀 소개'}</Subtitle>
-						</div>
-						<div>
-							<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
-						</div>
-					</div>
-					<div className='container__member'>
-						<div>
-							<Subtitle>{'멤버'}</Subtitle>
-						</div>
-						<div>
-							{memberList.map((memberItem, index) => {
-								return (
-									<div className='controll' key={index}>
-										{React.cloneElement(memberItem, { key: index })}
-										<button id={index.toString()}>초대</button>
-										<button onClick={onClickDelete} id={index.toString()}>
-											삭제
-										</button>
-									</div>
-								);
-							})}
+						<div className='container__member'>
+							<div>
+								<Subtitle>{'멤버'}</Subtitle>
+							</div>
+							<div>
+								{memberList.map((memberItem, index) => {
+									return (
+										<div className='controll' key={index}>
+											{React.cloneElement(memberItem, { key: index })}
+											<button id={index.toString()}>초대</button>
+											<button onClick={onClickDelete} id={index.toString()}>
+												삭제
+											</button>
+										</div>
+									);
+								})}
 
-							<div className='container__member-add'>
-								{memberList.length !== 6 && (
-									<div className='addition' onClick={onClickMember}>
-										<AddButton />
-									</div>
-								)}
+								<div className='container__member-add'>
+									{memberList.length !== 6 && (
+										<div className='addition' onClick={onClickMember}>
+											<AddButton />
+										</div>
+									)}
+								</div>
 							</div>
 						</div>
+						<div className='container__controller'>
+							<button onClick={onClickCancel}>취소</button>
+							<button type='submit'>등록하기</button>
+						</div>
 					</div>
-					<div className='container__controller'>
-						<button onClick={onClickCancel}>취소</button>
-						<button>등록하기</button>
-					</div>
-				</div>
+				</form>
 			</div>
 		</S.MeeTeamCreatePage>
 	);

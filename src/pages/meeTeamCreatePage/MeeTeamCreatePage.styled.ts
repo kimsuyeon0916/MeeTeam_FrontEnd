@@ -86,6 +86,11 @@ const MeeTeamCreatePage = styled.div`
 				display: flex;
 				justify-content: flex-end;
 			}
+
+			p {
+				color: red;
+				font-size: 1.2rem;
+			}
 		}
 
 		.container__info {

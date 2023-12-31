@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Header = styled.div`
 	.header {
 		display: flex;
-		height: 5.625rem;
+		height: 6.75rem;
 		justify-content: space-between;
 		align-items: center;
 		flex-shrink: 0;
