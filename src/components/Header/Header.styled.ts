@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Header = styled.div`
 	.header {
 		display: flex;
-		height: 90px;
+		height: 6.75rem;
 		justify-content: space-between;
 		align-items: center;
 		flex-shrink: 0;
@@ -17,11 +17,10 @@ const Header = styled.div`
 		justify-content: flex-end;
 		align-items: center;
 		flex-shrink: 0;
-		margin-left: 11%;
+		margin-left: 14.88rem;
 		cursor: pointer;
 
 		.header__logo--bridge {
-			position: absolute;
 			left: 14.5rem;
 			top: 2.6rem;
 		}
@@ -32,12 +31,12 @@ const Header = styled.div`
 		width: 40%;
 		justify-content: flex-start;
 		align-items: center;
-		gap: 10%;
+		gap: 4.5rem;
 
 		.header__navigation--navi-text {
 			color: #515565;
 			font-family: Inter;
-			font-size: 20px;
+			font-size: 1.25rem;
 			font-style: normal;
 			font-weight: 600;
 			line-height: normal;
@@ -58,7 +57,7 @@ const Header = styled.div`
 			justify-content: center;
 			align-items: center;
 			color: #121212;
-			font-size: 26px;
+			font-size: 2rem;
 			cursor: pointer;
 		}
 
@@ -67,16 +66,16 @@ const Header = styled.div`
 			justify-content: center;
 			align-items: center;
 			color: #121212;
-			font-size: 26px;
+			font-size: 2rem;
 			cursor: pointer;
 		}
 
 		.header__menu--my {
-			width: 26px;
-			height: 26px;
+			width: 2rem;
+			height: 2rem;
 			border: 2px solid #000;
 			border-radius: 50%;
-			font-size: 26px;
+			font-size: 2rem;
 			cursor: pointer;
 		}
 	}
