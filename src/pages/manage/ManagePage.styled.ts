@@ -6,7 +6,6 @@ const ManagePage = styled.div`
 	display: flex;
 	main {
 		width: 100%;
-		border: 1px solid #000;
 	}
 `;
 
