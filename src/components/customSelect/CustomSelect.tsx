@@ -37,7 +37,7 @@ const CustomSelect = ({ optionData, isMember, type }: ICustomSelect) => {
 	};
 
 	return (
-		<S.CustomSelect onClick={onClickhandler} isMember={isMember}>
+		<S.CustomSelect onClick={onClickhandler} $isMember={isMember} $show={showOptions}>
 			<S.Label $isSelected={currentValue}>{currentValue}</S.Label>
 			<S.SelectOptions $show={showOptions}>
 				{optionData.map((data: any, index: number) => (

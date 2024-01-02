@@ -3,11 +3,12 @@ import styled from 'styled-components';
 interface ISelectOptionsProps {
 	$show?: boolean;
 	$isSelected?: string;
+	$isMember?: boolean;
 }
 
-const CustomSelect = styled.div<{ isMember?: boolean }>`
+const CustomSelect = styled.div<ISelectOptionsProps>`
 	position: relative;
-	width: ${props => (props.isMember ? '18.15rem' : '40.125rem')};
+	width: ${props => (props.$isMember ? '18.15rem' : '40.125rem')};
 	height: 4.875rem;
 	border-radius: 0.75rem;
 	border: 0.75px solid #e3e3e3;
@@ -17,6 +18,7 @@ const CustomSelect = styled.div<{ isMember?: boolean }>`
 	cursor: pointer;
 	box-sizing: border-box;
 	&::before {
+		/* ${props => (props.$show ? `content: '⌃';` : `content: '⌵';`)} */
 		content: '⌵';
 		position: absolute;
 		top: 1rem;
