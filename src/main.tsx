@@ -50,7 +50,20 @@ const router = createBrowserRouter([
 			{
 				path: 'manage',
 				element: <ManagePage />,
-				children: [],
+				children: [
+					{
+						path: '',
+						element: <>전체 밋팀 관리</>,
+					},
+					{
+						path: 'recruit',
+						element: <>구인글</>,
+					},
+					{
+						path: 'portpolio',
+						element: <>포트폴리오</>,
+					},
+				],
 			},
 		],
 	},
