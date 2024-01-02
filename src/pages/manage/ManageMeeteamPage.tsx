@@ -19,7 +19,12 @@ const ManageMeeteamPage = () => {
 					<div className='menu filter'> 카테고리</div>
 				</div>
 			</div>
-			<div></div>
+			<div className='container-contents'>
+				<div className='content'></div>
+				<div className='content'></div>
+				<div className='content'></div>
+				<div className='content'></div>
+			</div>
 		</S.ManageMeeTeamPage>
 	);
 };

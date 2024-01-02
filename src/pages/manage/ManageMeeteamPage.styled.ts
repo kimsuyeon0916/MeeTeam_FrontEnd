@@ -84,6 +84,21 @@ const ManageMeeTeamPage = styled.div`
 			}
 		}
 	}
+
+	.container-contents {
+		display: grid;
+		margin-top: 1.65rem;
+		grid-template-columns: repeat(3, 1fr);
+		row-gap: 2rem;
+
+		.content {
+			width: 25.65rem;
+			height: 13.5rem;
+			flex-shrink: 0;
+			border-radius: 0.75rem;
+			background: rgba(0, 0, 0, 0.15);
+		}
+	}
 `;
 
 const S = { ManageMeeTeamPage };
