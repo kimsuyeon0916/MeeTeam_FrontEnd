@@ -8,7 +8,7 @@ const ManagePage = () => {
 		<S.ManagePage>
 			<Sidebar />
 			<main>
-				{/* <ScrollToTop /> */}
+				<ScrollToTop />
 				<Outlet />
 			</main>
 		</S.ManagePage>

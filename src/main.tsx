@@ -55,7 +55,7 @@ const router = createBrowserRouter([
 				element: <ManagePage />,
 				children: [
 					{
-						path: '',
+						path: 'meeteam',
 						element: <ManageMeeteamPage />,
 					},
 					{

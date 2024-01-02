@@ -1,27 +1,50 @@
 import styled from 'styled-components';
 
 const Sidebar = styled.div`
-	.sidebar {
+	.sidebar-container {
 		width: 23rem;
-		height: 100vh;
-		border: 1px solid pink;
 
-		.sidebar-li {
+		.sidebar-container_title {
+			margin-top: 7.05rem;
+			margin-left: 3.07rem;
+
+			h1 {
+				color: #373f41;
+				font-family: Apple SD Gothic Neo;
+				font-size: 2.1rem;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 4.2rem; /* 200% */
+				letter-spacing: 0.015rem;
+			}
+		}
+
+		.sidebar-container_list {
 			display: flex;
 			flex-direction: column;
+			gap: 1.8rem;
+			margin-top: 4.12rem;
+			margin-left: 3.07rem;
 
-			.link {
-				color: 'gray';
+			.normal {
+				color: #7c7c7c;
+				font-family: Apple SD Gothic Neo;
+				font-size: 1.5rem;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 120%; /* 1.8rem */
+				letter-spacing: 0.015rem;
 				text-decoration: none;
 			}
 
-			a:visited {
-				color: #000;
-				text-decoration: none;
-			}
-
-			a.active {
-				color: red;
+			.active {
+				color: #373f41;
+				font-family: Apple SD Gothic Neo;
+				font-size: 1.5rem;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 120%; /* 1.8rem */
+				letter-spacing: 0.015rem;
 				text-decoration: none;
 			}
 		}
