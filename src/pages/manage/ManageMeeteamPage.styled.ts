@@ -24,6 +24,7 @@ const ManageMeeTeamPage = styled.div`
 			font-weight: 400;
 			line-height: 1.35rem; /* 75% */
 			letter-spacing: 0.015rem;
+			cursor: pointer;
 		}
 		.no {
 			background-color: #fff;
@@ -57,6 +58,7 @@ const ManageMeeTeamPage = styled.div`
 				font-weight: 400;
 				line-height: 2.1rem; /* 100% */
 				letter-spacing: 0.015rem;
+				cursor: pointer;
 			}
 
 			.no {
@@ -78,6 +80,7 @@ const ManageMeeTeamPage = styled.div`
 				font-weight: 400;
 				line-height: 2.1rem; /* 233.333% */
 				letter-spacing: 0.015rem;
+				cursor: pointer;
 			}
 			.filter {
 				content: '⌵';
@@ -97,6 +100,7 @@ const ManageMeeTeamPage = styled.div`
 			flex-shrink: 0;
 			border-radius: 0.75rem;
 			background: rgba(0, 0, 0, 0.15);
+			cursor: pointer;
 		}
 	}
 `;
