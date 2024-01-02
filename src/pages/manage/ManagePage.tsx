@@ -1,16 +1,17 @@
 import { Outlet } from 'react-router-dom';
-import Sidebar from '../../components/sidebar/Sidebar';
+import { Sidebar } from '../../components';
 import { ScrollToTop } from '../../utils';
+import S from './ManagePage.styled';
 
 const ManagePage = () => {
 	return (
-		<div>
+		<S.ManagePage>
 			<Sidebar />
 			<main>
-				<ScrollToTop />
+				{/* <ScrollToTop /> */}
 				<Outlet />
 			</main>
-		</div>
+		</S.ManagePage>
 	);
 };
 

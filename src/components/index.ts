@@ -15,6 +15,7 @@ import MemberProfile from './meeteam/main/member/MemberProfile';
 import MemberRadioBox from './meeteam/main/member/MemberRadioBox';
 import WorkRegistration from './meeteam/main/workRegistration/WorkRegistration';
 import Setting from './meeteam/main/setting/Setting';
+import Sidebar from './sidebar/Sidebar';
 
 export {
 	Header,
@@ -34,4 +35,5 @@ export {
 	WorkRegistration,
 	Setting,
 	AddButton,
+	Sidebar,
 };
