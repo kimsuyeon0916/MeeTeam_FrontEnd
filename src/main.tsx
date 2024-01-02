@@ -11,6 +11,9 @@ import {
 	MeeTeamCreatePage,
 	ManagementPage,
 	ManagePage,
+	ManageMeeteamPage,
+	ManageRecruitPage,
+	ManagePortpolioPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -53,15 +56,15 @@ const router = createBrowserRouter([
 				children: [
 					{
 						path: '',
-						element: <>전체 밋팀 관리</>,
+						element: <ManageMeeteamPage />,
 					},
 					{
 						path: 'recruit',
-						element: <>구인글</>,
+						element: <ManageRecruitPage />,
 					},
 					{
 						path: 'portpolio',
-						element: <>포트폴리오</>,
+						element: <ManagePortpolioPage />,
 					},
 				],
 			},
