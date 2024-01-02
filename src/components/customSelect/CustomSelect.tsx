@@ -10,7 +10,7 @@ export interface ICustomSelect {
 	type?: string;
 }
 
-const CustomSelect = ({ optionData, isMember, key, type }: ICustomSelect) => {
+const CustomSelect = ({ optionData, isMember, type }: ICustomSelect) => {
 	const [currentValue, setCurrentValue] = useState('선택');
 	const [showOptions, setShowOptions] = useState(false);
 	const [area, setArea] = useRecoilState(areaState);
@@ -37,7 +37,7 @@ const CustomSelect = ({ optionData, isMember, key, type }: ICustomSelect) => {
 	};
 
 	return (
-		<S.CustomSelect onClick={onClickhandler} isMember={isMember} key={key}>
+		<S.CustomSelect onClick={onClickhandler} isMember={isMember}>
 			<S.Label $isSelected={currentValue}>{currentValue}</S.Label>
 			<S.SelectOptions $show={showOptions}>
 				{optionData.map((data: any, index: number) => (
