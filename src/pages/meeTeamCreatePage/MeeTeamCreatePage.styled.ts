@@ -94,8 +94,6 @@ const MeeTeamCreatePage = styled.div`
 		}
 
 		.container__info {
-			margin-top: 70px;
-
 			.info-wrapper {
 				margin: 0 auto;
 			}
