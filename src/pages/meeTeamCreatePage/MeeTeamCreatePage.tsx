@@ -101,7 +101,7 @@ const MeeTeamCreatePage = () => {
 		if (endDate < new Date()) {
 			setIsValidDate({
 				validDate: false,
-				validMessage: '* 오늘보다 날짜를 늦게 설정할 수 없습니다.',
+				validMessage: '* 날짜를 다시 설정해주세요.',
 			});
 		}
 		if (endDate > new Date()) {

@@ -95,6 +95,9 @@ const MeeTeamCreatePage = styled.div`
 
 		.container__info {
 			.info-wrapper {
+				display: flex;
+				flex-direction: column;
+				gap: 2rem;
 				margin: 0 auto;
 			}
 
@@ -107,6 +110,7 @@ const MeeTeamCreatePage = styled.div`
 				margin-top: 15px;
 
 				p {
+					position: absolute;
 					color: red;
 					font-size: 1.2rem;
 					padding-top: 1rem;
