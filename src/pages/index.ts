@@ -5,6 +5,7 @@ import MemberPage from './MemberPage';
 import InformationUsePage from './InformationUsePage';
 import MeeTeamCreatePage from './meeTeamCreatePage/MeeTeamCreatePage';
 import ManagementPage from './ManagementPage';
+import ManagePage from './ManagePage';
 
 export {
 	MainPage,
@@ -14,4 +15,5 @@ export {
 	InformationUsePage,
 	MeeTeamCreatePage,
 	ManagementPage,
+	ManagePage,
 };
