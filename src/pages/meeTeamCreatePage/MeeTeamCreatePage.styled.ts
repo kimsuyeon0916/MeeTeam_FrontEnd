@@ -80,12 +80,24 @@ const MeeTeamCreatePage = styled.div`
 					box-sizing: border-box;
 				}
 			}
+
+			.teamname-length {
+				width: 40rem;
+				display: flex;
+				justify-content: flex-end;
+			}
+
+			p {
+				color: red;
+				font-size: 1.2rem;
+			}
 		}
 
 		.container__info {
-			margin-top: 70px;
-
 			.info-wrapper {
+				display: flex;
+				flex-direction: column;
+				gap: 2rem;
 				margin: 0 auto;
 			}
 
@@ -96,6 +108,14 @@ const MeeTeamCreatePage = styled.div`
 				align-items: center;
 				gap: 30.82rem;
 				margin-top: 15px;
+
+				p {
+					position: absolute;
+					color: red;
+					font-size: 1.2rem;
+					padding-top: 1rem;
+					box-sizing: border-box;
+				}
 			}
 		}
 
