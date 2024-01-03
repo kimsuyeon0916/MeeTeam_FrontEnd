@@ -11,7 +11,10 @@ const ProgressStatus = () => {
 		<S.ProgressStatusLayout>
 			<div className='main__row'>
 				<h2 className='main--big-text'>{currentStatus.content}</h2>
-				<S.ProgressStatusButton>연락 수단 등록하기{statusRightArrowIcon}</S.ProgressStatusButton>
+				<S.ProgressStatusButton>
+					{currentStatus.buttonName}
+					{statusRightArrowIcon}
+				</S.ProgressStatusButton>
 				{statusCloseIcon}
 			</div>
 			<div className='progress-status__row'>
