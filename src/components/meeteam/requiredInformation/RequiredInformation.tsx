@@ -30,7 +30,7 @@ const RequiredInformation = () => {
 		},
 		{
 			title: '태그',
-			content: '응소실, Spring, C#, Window Form',
+			content: '응소실,Spring,C#,Window Form',
 		},
 	];
 
@@ -49,7 +49,7 @@ const RequiredInformation = () => {
 				<S.RequiredInformationItem key={index}>
 					<S.RequiredInformationHead>{information.title}</S.RequiredInformationHead>
 					<div className='required-information__row'>
-						{information.content.split(', ').map((content, index) => (
+						{information.content.split(',').map((content, index) => (
 							<S.RequiredInformationSpan
 								$isRound={isRound(information.title)}
 								$color={ColorMatching(content)}
