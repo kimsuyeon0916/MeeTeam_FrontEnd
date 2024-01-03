@@ -3,7 +3,7 @@ import Subtitle from './subtitle/Subtitle';
 import Dot from './dot/Dot';
 import InfoItem from './infoItem/InfoItem';
 import CustomSelect from './customSelect/CustomSelect';
-import Tag from './tag/Tag';
+import MeeteamTag from './tag/MeeteamTag';
 import MemberSelect from './memberSelect/MemberSelect';
 import AddButton from './addButton/AddButton';
 import ProgressBar from './meeteam/progressBar/ProgressBar';
@@ -24,7 +24,7 @@ export {
 	Dot,
 	InfoItem,
 	CustomSelect,
-	Tag,
+	MeeteamTag,
 	MemberSelect,
 	ProgressBar,
 	Menu,

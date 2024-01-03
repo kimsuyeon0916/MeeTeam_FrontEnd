@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import S from './Tag.styled';
+import S from './MeeteamTag.styled';
 
-const Tag = () => {
+const MeeteamTag = () => {
 	const [tagItem, setTagItem] = useState<string>('');
 	const [tagList, setTagList] = useState<string[]>([]);
 	const copyTagList = [...tagList];
@@ -27,7 +27,7 @@ const Tag = () => {
 	};
 
 	return (
-		<S.Tag>
+		<S.MeeteamTag>
 			<div className='tag__box'>
 				{copyTagList.map((tagItem, index) => {
 					return (
@@ -48,8 +48,8 @@ const Tag = () => {
 					onKeyPress={onKeyPress}
 				/>
 			</div>
-		</S.Tag>
+		</S.MeeteamTag>
 	);
 };
 
-export default Tag;
+export default MeeteamTag;
