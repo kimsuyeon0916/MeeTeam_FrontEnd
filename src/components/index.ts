@@ -17,6 +17,7 @@ import WorkRegistration from './meeteam/main/workRegistration/WorkRegistration';
 import Setting from './meeteam/main/setting/Setting';
 import Sidebar from './sidebar/Sidebar';
 import Card from './meeteam/card/Card';
+import Tag from './meeteam/tag/Tag';
 
 export {
 	Header,
@@ -38,4 +39,5 @@ export {
 	AddButton,
 	Sidebar,
 	Card,
+	Tag,
 };
