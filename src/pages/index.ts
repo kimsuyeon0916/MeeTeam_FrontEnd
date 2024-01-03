@@ -8,7 +8,7 @@ import ManagementPage from './ManagementPage';
 import ManagePage from './manage/ManagePage';
 import ManageMeeteamPage from './manage/meeteam/ManageMeeteamPage';
 import ManageRecruitPage from './manage/recruit/ManageRecruitPage';
-import ManagePortpolioPage from './manage/ManagePortpolioPage';
+import ManagePortpolioPage from './manage/portpolio/ManagePortpolioPage';
 
 export {
 	MainPage,
