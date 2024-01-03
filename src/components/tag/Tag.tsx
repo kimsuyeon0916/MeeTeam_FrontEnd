@@ -8,6 +8,7 @@ const Tag = () => {
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.target.value.length !== 0 && event.key === 'Enter') {
+			event.preventDefault();
 			submitTagItem();
 		}
 	};
@@ -17,10 +18,6 @@ const Tag = () => {
 		updatedTagList.push('#' + tagItem);
 		setTagList(updatedTagList);
 		setTagItem('');
-
-		// 이렇게 줄일 수도 있음.
-		// setTagList(prev => [...prev, '#' + tagItem]);
-		// setTagItem('');
 	};
 
 	const deleteTagItem = (event: any) => {
