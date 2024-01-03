@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Tag } from '../../../components';
 import S from './ManageRecruitPage.styled';
 
 const ManageRecruitPage = () => {
@@ -12,8 +13,8 @@ const ManageRecruitPage = () => {
 				<div className='container-recruits'>
 					<div className='container-recruits_info'>
 						<div className='container-tags'>
-							<div className='tag'>프로젝트</div>
-							<div className='tag recruit'>구인중</div>
+							<Tag type='프로젝트' $recruit={false} />
+							<Tag type='구인중' $recruit={true} />
 						</div>
 						<div className='container-title'>
 							<h1>[커뮤니티 웹 서비스 프로젝트]디자이너 모집</h1>
@@ -53,8 +54,8 @@ const ManageRecruitPage = () => {
 				<div className='container-recruits'>
 					<div className='container-recruits_info'>
 						<div className='container-tags'>
-							<div className='tag'>프로젝트</div>
-							<div className='tag recruit'>구인중</div>
+							<Tag type='프로젝트' $recruit={false} />
+							<Tag type='구인중' $recruit={true} />
 						</div>
 						<div className='container-title'>
 							<h1>[커뮤니티 웹 서비스 프로젝트]디자이너 모집</h1>
