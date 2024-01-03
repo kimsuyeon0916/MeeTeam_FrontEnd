@@ -18,6 +18,7 @@ import Setting from './meeteam/main/setting/Setting';
 import Sidebar from './sidebar/Sidebar';
 import Card from './meeteam/card/Card';
 import Tag from './meeteam/tag/Tag';
+import Alarm from './alarm/Alarm';
 
 export {
 	Header,
@@ -40,4 +41,5 @@ export {
 	Sidebar,
 	Card,
 	Tag,
+	Alarm,
 };
