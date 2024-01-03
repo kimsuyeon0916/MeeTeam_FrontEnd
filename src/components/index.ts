@@ -12,8 +12,20 @@ import Information from './meeteam/main/information/Information';
 import Member from './meeteam/main/member/Member';
 import MemberProfile from './meeteam/main/member/MemberProfile';
 import MemberRadioBox from './meeteam/main/member/MemberRadioBox';
-import WorkRegistration from './meeteam/main/workRegistration/WorkRegistration';
 import Setting from './meeteam/main/setting/Setting';
+import DashBoard from './meeteam/main/dashBoard/DashBorad';
+import Recruitment from './meeteam/main/recruitment/Recruitment';
+import RequiredInformation from './meeteam/requiredInformation/RequiredInformation';
+import ProgressStatus from './meeteam/progressStatus/ProgressStatus';
+import Title from './meeteam/title/Title';
+import Issue from './meeteam/main/issue/Issue';
+import Content from './meeteam/Content';
+import {
+	statusList,
+	statusDoneIcon,
+	statusRightArrowIcon,
+	statusCloseIcon,
+} from './meeteam/progressStatus/StatusIcon';
 
 export {
 	Header,
@@ -30,6 +42,16 @@ export {
 	Member,
 	MemberProfile,
 	MemberRadioBox,
-	WorkRegistration,
 	Setting,
+	DashBoard,
+	Recruitment,
+	RequiredInformation,
+	ProgressStatus,
+	Title,
+	Issue,
+	Content,
+	statusList,
+	statusDoneIcon,
+	statusRightArrowIcon,
+	statusCloseIcon,
 };
