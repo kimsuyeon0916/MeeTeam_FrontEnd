@@ -101,7 +101,7 @@ const MeeTeamCreatePage = () => {
 		if (endDate < new Date()) {
 			setIsValidDate({
 				validDate: false,
-				validMessage: '* 오늘보다 날짜를 늦게 설정할 수 없습니다.',
+				validMessage: '* 날짜를 다시 설정해주세요.',
 			});
 		}
 		if (endDate > new Date()) {
@@ -163,14 +163,18 @@ const MeeTeamCreatePage = () => {
 										/>
 										{!isValidCategory.validCategory && <p>{isValidCategory.validMessage}</p>}
 									</div>
-									<InfoItem isDot='false' title='진행 방식' optionData={['온라인', '오프라인']} />
+									<div>
+										<InfoItem isDot='false' title='진행 방식' optionData={['온라인', '오프라인']} />
+									</div>
 								</div>
 								<div className='container__info-select'>
 									<div>
 										<InfoItem isDot='true' title='밋팀 기간' optionData={[]} type='기간' />
 										{!isValidDate.validDate && <p>{isValidDate.validMessage}</p>}
 									</div>
-									<InfoItem isDot='false' title='공개 여부' optionData={['공개', '비공개']} />
+									<div className='fix'>
+										<InfoItem isDot='false' title='공개 여부' optionData={['공개', '비공개']} />
+									</div>
 								</div>
 							</div>
 						</div>
