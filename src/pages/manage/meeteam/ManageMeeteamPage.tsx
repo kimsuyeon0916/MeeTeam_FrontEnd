@@ -1,3 +1,4 @@
+import { Card } from '../../../components';
 import S from './ManageMeeteamPage.styled';
 
 const ManageMeeteamPage = () => {
@@ -20,10 +21,10 @@ const ManageMeeteamPage = () => {
 				</div>
 			</div>
 			<div className='container-contents'>
-				<div className='content'></div>
-				<div className='content'></div>
-				<div className='content'></div>
-				<div className='content'></div>
+				<Card />
+				<Card />
+				<Card />
+				<Card />
 			</div>
 		</S.ManageMeeTeamPage>
 	);

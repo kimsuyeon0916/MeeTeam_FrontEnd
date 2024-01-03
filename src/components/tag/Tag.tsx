@@ -13,14 +13,14 @@ const Tag = () => {
 	};
 
 	const submitTagItem = () => {
-		// let updatedTagList = [...tagList];
-		// updatedTagList.push('#' + tagItem);
-		// setTagList(updatedTagList);
-		// setTagItem('');
+		let updatedTagList = [...tagList];
+		updatedTagList.push('#' + tagItem);
+		setTagList(updatedTagList);
+		setTagItem('');
 
 		// 이렇게 줄일 수도 있음.
-		setTagList(prev => [...prev, '#' + tagItem]);
-		setTagItem('');
+		// setTagList(prev => [...prev, '#' + tagItem]);
+		// setTagItem('');
 	};
 
 	const deleteTagItem = (event: any) => {
