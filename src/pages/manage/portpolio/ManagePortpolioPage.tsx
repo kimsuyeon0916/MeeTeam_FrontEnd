@@ -1,3 +1,4 @@
+import { Card } from '../../../components';
 import S from './ManagePortpolio.styled';
 
 const ManagePortpolioPage = () => {
@@ -16,10 +17,10 @@ const ManagePortpolioPage = () => {
 			</div>
 			<h1>📁 완성된 포트폴리오</h1>
 			<div className='container-contents'>
-				<div className='content'></div>
-				<div className='content'></div>
-				<div className='content'></div>
-				<div className='content'></div>
+				<Card />
+				<Card />
+				<Card />
+				<Card />
 			</div>
 		</S.ManagePortpolioPage>
 	);
