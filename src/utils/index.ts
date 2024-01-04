@@ -4,5 +4,6 @@ import Toggle from './toggle/Toggle';
 import RandomColor from './RandomColor';
 import ColorMatching from './ColorMatching';
 import GoBack from './goBack/GoBack';
+import OptionIcon from './icon/OptionIcon';
 
-export { modules, ScrollToTop, Toggle, RandomColor, ColorMatching, GoBack };
+export { modules, ScrollToTop, Toggle, RandomColor, ColorMatching, GoBack, OptionIcon };
