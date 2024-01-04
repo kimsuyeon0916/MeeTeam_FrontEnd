@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
+interface IFilter {
+	$checked: boolean;
+}
+
 const Filter = styled.div`
 	display: flex;
 	margin-top: 4.65rem;
 	.container-filter_area {
 		display: flex;
-
+		margin-right: 2.6rem;
 		.area {
 			display: flex;
 			width: 6.675rem;

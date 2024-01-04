@@ -9,11 +9,6 @@ const ManageMeeteamPage = () => {
 		isDone: false,
 	});
 
-	const [isFiltered, setIsFiltered] = useState({
-		isInside: true,
-		isOutside: false,
-	});
-
 	const onClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		if (event.target.innerText === '구인중') {
 			setIsClicked({ isRecruit: true, isProceed: false, isDone: false });
