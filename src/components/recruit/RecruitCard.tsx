@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { Tag, Alarm } from '..';
 import S from './RecruitCard.styled';
 
-interface IRecruitCard {
+export interface IRecruitCard {
 	title: string;
 	type: string;
 	$recruit?: boolean;
+	$proceed?: boolean;
 }
 
-const RecruitCard = ({ title, type, $recruit }: IRecruitCard) => {
+const RecruitCard = ({ title, type, $recruit, $proceed }: IRecruitCard) => {
 	const [isOn, setIsOn] = useState<boolean>(false);
 	const toggleHandler = () => {
 		setIsOn(prev => !prev);
@@ -17,8 +18,8 @@ const RecruitCard = ({ title, type, $recruit }: IRecruitCard) => {
 		<S.RecruitCard>
 			<div className='container-recruits_info'>
 				<div className='container-tags'>
-					<Tag type={type} $recruit={$recruit} />
-					<Tag type={type} $recruit={$recruit} />
+					<Tag type={type} />
+					<Tag type={type} $recruit={$recruit} $proceed={$proceed} />
 				</div>
 				<div className='container-title'>
 					<h1>{title}</h1>

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface ITag {
 	$recruit?: boolean;
+	$proceed?: boolean;
 }
 
 const Tag = styled.div<ITag>`
@@ -16,8 +17,10 @@ const Tag = styled.div<ITag>`
 	background: ${props =>
 		props.$recruit
 			? 'linear-gradient(270deg, rgba(95, 92, 236, 0.76) -6.3%, #d85cec 101.52%)'
+			: props.$proceed
+			? 'linear-gradient(90deg, #4E99EF -6.72%, #723DFF 107.8%)'
 			: '#eeecff'};
-	color: ${props => (props.$recruit ? '#fff' : '#373f41;')};
+	color: ${props => (props.$recruit ? '#fff' : props.$proceed ? '#fff' : '#373f41;')};
 	font-family: Apple SD Gothic Neo;
 	font-size: 1.1rem;
 	font-style: normal;
