@@ -1,9 +1,9 @@
 import React from 'react';
 import S from './OptionIcon.styled';
 
-const OptionIcon = () => {
+const OptionIcon = (props: { onClick: React.MouseEventHandler<HTMLButtonElement> }) => {
 	return (
-		<S.OptionIconLayout type='button'>
+		<S.OptionIconLayout type='button' onClick={props.onClick}>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
 				width='23'
