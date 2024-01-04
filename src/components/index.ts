@@ -21,6 +21,7 @@ import Tag from './meeteam/tag/Tag';
 import Alarm from './alarm/Alarm';
 import RecruitCard from './recruit/RecruitCard';
 import Status from './meeteam/status/Status';
+import Filter from './meeteam/filter/Filter';
 
 export {
 	Header,
@@ -46,4 +47,5 @@ export {
 	Alarm,
 	RecruitCard,
 	Status,
+	Filter,
 };
