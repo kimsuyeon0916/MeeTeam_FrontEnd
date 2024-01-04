@@ -26,6 +26,8 @@ import {
 	statusRightArrowIcon,
 	statusCloseIcon,
 } from './meeteam/progressStatus/StatusIcon';
+import Link from './meeteam/main/link/Link';
+import DashBoardLink from './meeteam/main/link/DashBoardLink';
 
 export {
 	Header,
@@ -54,4 +56,6 @@ export {
 	statusDoneIcon,
 	statusRightArrowIcon,
 	statusCloseIcon,
+	Link,
+	DashBoardLink,
 };
