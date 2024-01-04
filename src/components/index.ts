@@ -19,6 +19,7 @@ import Sidebar from './sidebar/Sidebar';
 import Card from './meeteam/card/Card';
 import Tag from './meeteam/tag/Tag';
 import Alarm from './alarm/Alarm';
+import RecruitCard from './recruit/RecruitCard';
 
 export {
 	Header,
@@ -42,4 +43,5 @@ export {
 	Card,
 	Tag,
 	Alarm,
+	RecruitCard,
 };

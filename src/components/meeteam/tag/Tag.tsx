@@ -2,7 +2,7 @@ import S from './Tag.styled';
 
 interface ITag {
 	type: string;
-	$recruit?: boolean | undefined;
+	$recruit?: boolean;
 }
 
 const Tag = ({ type, $recruit }: ITag) => {
