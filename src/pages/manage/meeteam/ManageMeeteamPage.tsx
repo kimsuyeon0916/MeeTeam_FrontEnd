@@ -1,13 +1,13 @@
-import { Card } from '../../../components';
+import { Card, Status } from '../../../components';
 import S from './ManageMeeteamPage.styled';
 
 const ManageMeeteamPage = () => {
 	return (
 		<S.ManageMeeTeamPage>
 			<div className='container-status'>
-				<div className='status'>구인중</div>
-				<div className='status no'>진행중</div>
-				<div className='status no'>진행 완료</div>
+				<Status status='구인중' $check={true} />
+				<Status status='진행중' $check={false} />
+				<Status status='진행 완료' $check={false} />
 			</div>
 			<div className='container-filter'>
 				<div className='container-filter_area'>

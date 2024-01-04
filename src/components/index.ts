@@ -20,6 +20,7 @@ import Card from './meeteam/card/Card';
 import Tag from './meeteam/tag/Tag';
 import Alarm from './alarm/Alarm';
 import RecruitCard from './recruit/RecruitCard';
+import Status from './meeteam/status/Status';
 
 export {
 	Header,
@@ -44,4 +45,5 @@ export {
 	Tag,
 	Alarm,
 	RecruitCard,
+	Status,
 };
