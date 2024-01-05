@@ -42,6 +42,10 @@ const Header = styled.div`
 			line-height: normal;
 			cursor: pointer;
 		}
+		.here {
+			color: #5f5cec;
+			transition: 0.2s;
+		}
 	}
 
 	.header__menu {
@@ -73,6 +77,8 @@ const Header = styled.div`
 		}
 
 		.header__menu--my {
+			display: flex;
+			justify-content: center;
 			width: 3rem;
 			height: 3rem;
 			border: 2px solid #000;

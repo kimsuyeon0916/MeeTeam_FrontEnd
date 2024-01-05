@@ -28,9 +28,13 @@ const Filter = () => {
 				</div>
 			</div>
 			<div className='container-filter_menu'>
-				<Dropdown data={['프로젝트', '스터디', '동아리', '공모전']} initialData='프로젝트' />
+				<Dropdown
+					data={['프로젝트', '스터디', '동아리', '공모전']}
+					initialData='프로젝트'
+					allowNeed={true}
+				/>
 				<div className='sep'></div>
-				<Dropdown data={['개발']} initialData='카테고리' />
+				<Dropdown data={['개발']} initialData='카테고리' allowNeed={true} />
 			</div>
 		</S.Filter>
 	);

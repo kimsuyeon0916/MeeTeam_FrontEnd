@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+// allowNeed 매개변수로 받아서 false면 백그라운드 투명하게 하기
 const Dropdown = styled.div`
 	position: relative;
 	display: flex;
@@ -47,7 +48,6 @@ const Dropdown = styled.div`
 			&:hover {
 				color: #5f5cec;
 				transition: 0.2s;
-				font-size: 1.7rem;
 			}
 		}
 	}

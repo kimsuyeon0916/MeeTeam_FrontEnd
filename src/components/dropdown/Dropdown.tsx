@@ -4,9 +4,11 @@ import S from './Dropdown.styled';
 interface IDropdown {
 	data: string[];
 	initialData?: string;
+	allowNeed?: boolean;
+	children?: any;
 }
 
-const Dropdown = ({ data, initialData }: IDropdown) => {
+const Dropdown = ({ data, initialData, allowNeed, children }: IDropdown) => {
 	const [currentValue, setCurrentValue] = useState(`${initialData}`);
 	const [showDropdown, setShowDropdown] = useState(false);
 	const dropdownRef = useRef();
@@ -39,7 +41,6 @@ const Dropdown = ({ data, initialData }: IDropdown) => {
 				<label>
 					{currentValue} {showDropdown ? '▲' : '▼'}
 				</label>
-
 				{showDropdown && (
 					<div className='dropdown'>
 						<ul className='menu-container'>

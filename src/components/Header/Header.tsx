@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import S from './Header.styled';
 import { BiSearch, BiBell, BiUser } from 'react-icons/bi';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Dropdown } from '..';
 
 const Header = () => {
 	const navigate = useNavigate();
+	const location = useLocation();
+	const [isHere, setIsHere] = useState({
+		recruit: false,
+		galary: false,
+		member: false,
+		inform: false,
+	});
+
 	const goHome = () => {
 		navigate('/');
 	};
@@ -21,6 +29,22 @@ const Header = () => {
 	const goInformationUse = () => {
 		navigate('/information');
 	};
+
+	useEffect(() => {
+		if (location.pathname == '/recruit') {
+			setIsHere({ recruit: true, galary: false, member: false, inform: false });
+		}
+		if (location.pathname === '/galary') {
+			setIsHere({ recruit: false, galary: true, member: false, inform: false });
+		}
+		if (location.pathname === '/member') {
+			setIsHere({ recruit: false, galary: false, member: true, inform: false });
+		}
+		if (location.pathname === '/information') {
+			setIsHere({ recruit: false, galary: false, member: false, inform: true });
+		}
+	}, [location]);
+
 	return (
 		<S.Header>
 			<div className='header'>
@@ -67,16 +91,28 @@ const Header = () => {
 					</svg>
 				</div>
 				<div className='header__navigation'>
-					<div className='header__navigation--navi-text' onClick={goRecruit}>
+					<div
+						className={`header__navigation--navi-text ${isHere.recruit ? 'here' : ''}`}
+						onClick={goRecruit}
+					>
 						구인 밋팀
 					</div>
-					<div className='header__navigation--navi-text' onClick={goGalary}>
+					<div
+						className={`header__navigation--navi-text ${isHere.galary ? 'here' : ''}`}
+						onClick={goGalary}
+					>
 						밋팀 갤러리
 					</div>
-					<div className='header__navigation--navi-text' onClick={goMember}>
+					<div
+						className={`header__navigation--navi-text ${isHere.member ? 'here' : ''}`}
+						onClick={goMember}
+					>
 						멤버
 					</div>
-					<div className='header__navigation--navi-text' onClick={goInformationUse}>
+					<div
+						className={`header__navigation--navi-text ${isHere.inform ? 'here' : ''}`}
+						onClick={goInformationUse}
+					>
 						이용안내
 					</div>
 				</div>
@@ -89,6 +125,11 @@ const Header = () => {
 					</div>
 					<div className='header__menu--my'>
 						<BiUser />
+						<Dropdown
+							data={['프로필 설정', '새 밋팀 생성', '밋팀 관리', '계정 관리', '로그아웃']}
+							initialData=''
+							allowNeed={false}
+						/>
 					</div>
 				</div>
 			</div>
