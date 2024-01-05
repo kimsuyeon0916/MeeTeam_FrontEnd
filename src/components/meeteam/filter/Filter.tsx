@@ -1,4 +1,5 @@
-import { useRef, useState, useEffect } from 'react';
+import { useState } from 'react';
+import { Dropdown } from '../..';
 import S from './Filter.styled';
 
 const Filter = () => {
@@ -6,9 +7,6 @@ const Filter = () => {
 		isInside: true,
 		isOutside: false,
 	});
-
-	const [showDropdown, setShowDropdown] = useState(false);
-	const dropdownRef = useRef();
 
 	const onClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		if (event.target.innerText === '교내') {
@@ -18,23 +16,6 @@ const Filter = () => {
 			setIsFiltered({ isInside: false, isOutside: true });
 		}
 	};
-
-	const onClickDropdown = () => {
-		setShowDropdown(prev => !prev);
-	};
-
-	useEffect(() => {
-		const outsideClick = (event: any) => {
-			const { target } = event;
-			if (showDropdown && dropdownRef.current && !dropdownRef.current.contains(target)) {
-				setShowDropdown(false);
-			}
-		};
-		document.addEventListener('mousedown', outsideClick);
-		return () => {
-			document.removeEventListener('mousedown', outsideClick);
-		};
-	}, [dropdownRef.current, showDropdown]);
 
 	return (
 		<S.Filter>
@@ -47,21 +28,7 @@ const Filter = () => {
 				</div>
 			</div>
 			<div className='container-filter_menu'>
-				<div className='menu' onClick={onClickDropdown} ref={dropdownRef}>
-					{showDropdown && (
-						<div className='dropdown'>
-							<ul className='menu-container'>
-								<li>프로젝트</li>
-								<li>스터디</li>
-								<li>공모전</li>
-								<li>동아리</li>
-							</ul>
-						</div>
-					)}
-					프로젝트
-				</div>
-				{/* <div className='menu'> | </div>
-				<div className='menu'>카테고리</div> */}
+				<Dropdown data={['프로젝트', '스터디', '동아리', '공모전']} />
 			</div>
 		</S.Filter>
 	);

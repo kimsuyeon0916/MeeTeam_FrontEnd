@@ -22,6 +22,7 @@ import Alarm from './alarm/Alarm';
 import RecruitCard from './recruit/RecruitCard';
 import Status from './meeteam/status/Status';
 import Filter from './meeteam/filter/Filter';
+import Dropdown from './dropdown/Dropdown';
 
 export {
 	Header,
@@ -48,4 +49,5 @@ export {
 	RecruitCard,
 	Status,
 	Filter,
+	Dropdown,
 };

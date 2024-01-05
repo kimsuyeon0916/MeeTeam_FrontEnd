@@ -54,6 +54,10 @@ const Filter = styled.div`
 			letter-spacing: 0.015rem;
 			cursor: pointer;
 			width: 10rem;
+
+			label {
+				cursor: pointer;
+			}
 		}
 		.dropdown {
 			position: absolute;
