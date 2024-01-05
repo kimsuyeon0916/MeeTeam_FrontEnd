@@ -4,7 +4,7 @@ import GalaryPage from './GalaryPage';
 import MemberPage from './MemberPage';
 import InformationUsePage from './InformationUsePage';
 import MeeTeamCreatePage from './meeTeamCreatePage/MeeTeamCreatePage';
-import ManagementPage from './ManagementPage';
+import ManagementPage from './managementPage/ManagementPage';
 
 export {
 	MainPage,
