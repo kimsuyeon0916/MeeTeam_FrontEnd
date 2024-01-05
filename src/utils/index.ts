@@ -1,4 +1,4 @@
-import modules from './editorModule';
+import { modules, formats } from './editorModule';
 import ScrollToTop from './ScrollToTop';
 import Toggle from './toggle/Toggle';
 import RandomColor from './RandomColor';
@@ -10,6 +10,7 @@ import Option from './option/Option';
 
 export {
 	modules,
+	formats,
 	ScrollToTop,
 	Toggle,
 	RandomColor,
