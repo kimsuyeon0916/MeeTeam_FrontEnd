@@ -10,6 +10,12 @@ const DashBoardLinkLayout = styled(Main.MainArticle)`
 	height: 26.25rem;
 	background: #fff;
 
+  .dash-board-link__row {
+		display: flex;
+		align-items: center;
+		column-gap: 1.8rem;
+	}
+
 	.dash-board-link__box {
 		display: flex;
 		flex-direction: column;

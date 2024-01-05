@@ -10,9 +10,9 @@ const DashBoardLink = () => {
 
 	const checkRegistration = () => {
 		if (linkList.find(element => element.link !== ``) === undefined) {
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	};
 
 	return (
@@ -42,7 +42,7 @@ const DashBoardLink = () => {
 				linkList
 					.filter(element => element.link !== ``)
 					.map((element, index) => (
-						<div className='link__row' key={index}>
+						<div className='dash-board-link__row' key={index}>
 							<S.DashBoardLinkImageIcon src={element.icon} />
 							<a href={element.link} target='_blank' rel='noreferrer noopener'>
 								{element.title}
