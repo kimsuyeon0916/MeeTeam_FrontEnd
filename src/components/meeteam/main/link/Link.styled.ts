@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import Main from '../Main.sytled';
-import { OptionIcon } from '../../../../utils';
 
 const LinkLayout = styled(Main.MainArticle)`
 	display: flex;
@@ -40,7 +39,7 @@ const LinkCopyIcon = styled.img`
 	cursor: pointer;
 `;
 
-const LinkButton = styled.button`
+const LinkSaveButton = styled.button`
 	all: unset;
 	display: flex;
 	justify-content: center;
@@ -59,7 +58,7 @@ const S = {
 	LinkInput,
 	LinkImageIcon,
 	LinkCopyIcon,
-	LinkButton,
+	LinkSaveButton,
 };
 
 export default S;
