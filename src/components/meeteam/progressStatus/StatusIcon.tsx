@@ -3,6 +3,7 @@ import React from 'react';
 interface statusProps {
 	title: string;
 	icon: JSX.Element;
+	message: string;
 	content: string;
 	buttonName: string;
 	done: boolean;
@@ -27,7 +28,8 @@ export const statusList: statusProps[] = [
 				/>
 			</svg>
 		),
-		content: `밋팀 정보를 입력해주세요!`,
+		message: `밋팀 정보를 입력해주세요!`,
+		content: '밋팀',
 		buttonName: `밋팀 정보 입력하기`,
 		done: true,
 	},
@@ -49,9 +51,10 @@ export const statusList: statusProps[] = [
 				/>
 			</svg>
 		),
-		content: `아직 연락 수단이 설정되어 있지 않아요!`,
+		message: `아직 연락 수단이 설정되어 있지 않아요!`,
+		content: '밋팀',
 		buttonName: `연락 수단 등록하기`,
-		done: false,
+		done: true,
 	},
 	{
 		title: '멤버 제의/구인',
@@ -71,7 +74,8 @@ export const statusList: statusProps[] = [
 				/>
 			</svg>
 		),
-		content: `멤버 제의/ 구인으로 멤버을 만날 수 있어요!`,
+		message: `멤버 제의/ 구인으로 멤버을 만날 수 있어요!`,
+		content: '구인 현황',
 		buttonName: `멤버 제의/구인하기`,
 		done: false,
 	},
@@ -93,7 +97,8 @@ export const statusList: statusProps[] = [
 				/>
 			</svg>
 		),
-		content: `산출물 등록으로 레벨을 올릴 수 있어요!`,
+		message: `산출물 등록으로 레벨을 올릴 수 있어요!`,
+		content: '',
 		buttonName: `산출물 등록하기`,
 		done: false,
 	},

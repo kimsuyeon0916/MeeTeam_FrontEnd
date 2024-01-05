@@ -1,7 +1,11 @@
 import React from 'react';
 import S from './Issue.styled';
+import { useRecoilState } from 'recoil';
+import { contentState } from '../../../../atom';
 
 const Issue = (props: { type: string }) => {
+	const [content, setContent] = useRecoilState(contentState);
+
 	interface statusProps {
 		title: string;
 		timeStamp: string;
@@ -40,7 +44,11 @@ const Issue = (props: { type: string }) => {
 		<S.IssueLayout $type={props.type}>
 			<S.IssueHeader>
 				<h2 className='main--big-text'>이슈</h2>
-				{props.type === '대시보드' && <S.IssueButton>더보기</S.IssueButton>}
+				{props.type === '대시보드' && (
+					<S.IssueButton type='button' onClick={() => setContent('밋팀')}>
+						더보기
+					</S.IssueButton>
+				)}
 			</S.IssueHeader>
 			<ul className='issue__list'>
 				{issueList.map((issue, index) => (

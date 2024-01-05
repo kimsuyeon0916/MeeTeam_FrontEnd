@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Menu, Main } from '..';
+import { useRecoilState } from 'recoil';
+import { contentState } from '../../atom';
 
 const Content = () => {
-	const [content, setContent] = useState('대시보드');
+	const [content, setContent] = useRecoilState(contentState);
 	const clickedHandler: React.MouseEventHandler<HTMLButtonElement> = e => {
 		const button = e.target as HTMLButtonElement;
 		if (!button.textContent) {

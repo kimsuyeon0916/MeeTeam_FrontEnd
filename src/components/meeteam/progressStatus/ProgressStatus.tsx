@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import S from './ProgressStatus.styled';
 import { statusList, statusDoneIcon, statusRightArrowIcon, statusCloseIcon } from './StatusIcon';
+import { useRecoilState } from 'recoil';
+import { contentState } from '../../../atom';
 
 const ProgressStatus = () => {
+	const [content, setContent] = useRecoilState(contentState);
+
 	const [currentStatus, setCurrentStatus] = useState(
 		statusList.find(status => status.done === false)
 	);
@@ -10,11 +14,15 @@ const ProgressStatus = () => {
 	return (
 		<S.ProgressStatusLayout>
 			<div className='main__row'>
-				<h2 className='main--big-text'>{currentStatus.content}</h2>
-				<S.ProgressStatusButton>
-					{currentStatus.buttonName}
-					{statusRightArrowIcon}
-				</S.ProgressStatusButton>
+				{currentStatus && (
+					<>
+						<h2 className='main--big-text'>{currentStatus.message}</h2>
+						<S.ProgressStatusButton type='button' onClick={() => setContent(currentStatus.content)}>
+							{currentStatus.buttonName}
+							{statusRightArrowIcon}
+						</S.ProgressStatusButton>
+					</>
+				)}
 				{statusCloseIcon}
 			</div>
 			<div className='progress-status__row'>
