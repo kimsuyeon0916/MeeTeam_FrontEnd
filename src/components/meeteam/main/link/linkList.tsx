@@ -13,21 +13,38 @@ export const linkList: linkProps[] = [
 		link: `https://open.kakao.com/o/g349or1f`,
 	},
 	{
-		title: '슬랙',
+		title: 'Slack',
 		icon: `https://s3-alpha-sig.figma.com/img/7033/8bde/4a4fec71f547e9967b41ac18328ded94?Expires=1705276800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=EmOewUY5Eb46s3xMgW3n3RYO7m64t973nl5~51k7fgzufwmHdCl8JnU5cOyTUX~EpywUHGi9velOeHwE7U3gYCg-MBic-UaH-gi8dgGz9b2sAhqSc0glH7Wkf3cgoMXCvHEXFZxN0psZNVkDSGFJIwip51ty6CnjW6llEuckpHTlKEXNTH6h8a4j-tp6FnYN7e1~66mmeGJD016-eo4zqSQtPlhX8ks14~acKEI5OBXmb8r7HbvDeznIxufbVbQSRFRNXtV5hlOZ7JeEuHNw~ZtB9OdUfa1Fy6FD6mMoI~wcaunOVrWQWaGVhAfLsg9KMTwNI1r22MIAsVpfn5ajRw__`,
 		link: ``,
 	},
 	{
-		title: '노션',
+		title: 'Notion',
 		icon: `https://s3-alpha-sig.figma.com/img/53bb/da8a/633c9e04581128ab07988700dd401cb4?Expires=1705276800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=lBT9wQbXhLGAKD6Li-OsddDhIH9U4aI4WgT-g6IfMv9NmXEe7mTDQwZIevaLY3oHRgw9pwwAnfgnk6vwb-KC8yIbb7BhnNrjdpPFHR41GKegzs675wtA7O08QQLZnkbTSwIolBeRLQ33mAm3AYVztRiVl-A3SQsVmcA2IfvbAWdrf9ctkoDc~NJ64Rb-HAvijT~WTSAGQrKby9Fx~aZcSDzRWbZF9AGm~IewoR-Z3zuHUKAvnccn5THaDFAvV3YS1hQP35ysBQuYqeZ-TU4AUv7ol3XneiKxnwZcZ1OcqxYy16TilZHjMUMYkQXqIALcALruxCMCsaI10CRTX0Y3Rg__`,
 		link: ``,
 	},
 	{
-		title: '디스코드',
+		title: 'Discord',
 		icon: `https://s3-alpha-sig.figma.com/img/08d1/5f74/0ebbce5b2c2ff503ec24e82ef6831351?Expires=1705276800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RW~uGWgoIIeCWcG~MQ1gYETtl8A7Qef1ejY9l1Xr7iUytToSuFNn7QeOQvxPXPCag3gf2PYH70sYawiS4oTR8~-wcW1TdZ57EIORljxlz~6wT8~DxasUBgSV7gVa~dTid80zDhNP4rvwyxZgILFj9AOU8oRYyhvWqdnDotGBmfGuvCbGBpjAX2Q0kOqtY175-GEVEzzFMH1bvOzU18wpu8yyJUm1aH8hgoiycIf4WFWczz7kwkZzre-USRW3Vu2Qwq6l1BdZ981LmTQ1EnZF~Kh7QEDblpJZqTTDef4IhVOKCEr7ELSsi~vHBVxb~wzaFxq3eY6Pu0K~ShUaL8l~sg__`,
 		link: ``,
 	},
 ];
+
+export const linkPlusIcon = (
+	<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'>
+		<g opacity='0.8'>
+			<rect x='0.25' y='7.49609' width='15' height='1.5' rx='0.75' fill='#373F41' />
+			<rect
+				x='8.49219'
+				y='0.75'
+				width='15'
+				height='1.5'
+				rx='0.75'
+				transform='rotate(90 8.49219 0.75)'
+				fill='#373F41'
+			/>
+		</g>
+	</svg>
+);
 
 export const linkBottomArrowIcon = (
 	<svg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8' fill='none'>
