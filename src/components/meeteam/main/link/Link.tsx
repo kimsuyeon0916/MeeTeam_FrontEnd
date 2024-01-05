@@ -26,45 +26,45 @@ const Link = () => {
 	};
 
 	return (
-		<S.LinkLayout>
-			<form className='link__column'>
+		<form>
+			<S.LinkLayout>
 				<div className='main__row'>
 					<h2 className='main--big-text'>링크</h2>
 					{editMode ? (
-						<S.LinkButton type='submit'>저장하기</S.LinkButton>
+						<S.LinkButton type='submit' onClick={() => setEditMode(false)}>
+							저장하기
+						</S.LinkButton>
 					) : (
 						<Option options={optionList} />
 					)}
 				</div>
-				<div className='link__column'>
-					{(editMode ? linkList : linkList.filter(element => element.link !== ``)).map(
-						(element, index) => (
-							<div className='link__row' key={index}>
-								<S.LinkImageIcon src={element.icon} />
-								{editMode && linkBottomArrowIcon}
-								{editMode ? (
-									<S.LinkInput type='url' defaultValue={element.link} />
-								) : (
-									<a href={element.link} target='_blank' rel='noreferrer noopener'>
-										{element.link}
-									</a>
-								)}
-								{editMode ? (
-									<S.LinkCopyIcon
-										src={copyLinkIcon}
-										onClick={() => copyClipBoardHandler(element.link)}
-									/>
-								) : (
-									<a href={element.link} target='_blank' rel='noreferrer noopener'>
-										{linkShortCutsButton}
-									</a>
-								)}
-							</div>
-						)
-					)}
-				</div>
-			</form>
-		</S.LinkLayout>
+				{(editMode ? linkList : linkList.filter(element => element.link !== ``)).map(
+					(element, index) => (
+						<div className='link__row' key={index}>
+							<S.LinkImageIcon src={element.icon} />
+							{editMode && linkBottomArrowIcon}
+							{editMode ? (
+								<S.LinkInput type='url' defaultValue={element.link} />
+							) : (
+								<a href={element.link} target='_blank' rel='noreferrer noopener'>
+									{element.link}
+								</a>
+							)}
+							{editMode ? (
+								<S.LinkCopyIcon
+									src={copyLinkIcon}
+									onClick={() => copyClipBoardHandler(element.link)}
+								/>
+							) : (
+								<a href={element.link} target='_blank' rel='noreferrer noopener'>
+									{linkShortCutsButton}
+								</a>
+							)}
+						</div>
+					)
+				)}
+			</S.LinkLayout>
+		</form>
 	);
 };
 

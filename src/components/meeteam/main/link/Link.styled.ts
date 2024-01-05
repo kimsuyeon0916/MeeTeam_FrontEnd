@@ -6,6 +6,7 @@ const LinkLayout = styled(Main.MainArticle)`
 	display: flex;
 	flex: 1;
 	flex-direction: column;
+	row-gap: 1.35rem;
 	padding: 1.65rem 2.55rem;
 	height: 26.25rem;
 	background: #fff;
@@ -15,19 +16,13 @@ const LinkLayout = styled(Main.MainArticle)`
 		align-items: center;
 		column-gap: 1.8rem;
 	}
-
-	.link__column {
-		display: flex;
-		flex-direction: column;
-		row-gap: 1.35rem;
-	}
 `;
 
 const LinkInput = styled.input`
 	all: unset;
 	padding: 0 1rem;
-	width: 28.125rem;
-	height: 3.6rem;
+	width: 26.125rem;
+	height: 3.45rem;
 	border-radius: 0.75rem;
 	border: 0.075rem solid #e3e3e3;
 	background: #fff;
