@@ -31,9 +31,9 @@ const Link = () => {
 				<div className='main__row'>
 					<h2 className='main--big-text'>링크</h2>
 					{editMode ? (
-						<S.LinkButton type='submit' onClick={() => setEditMode(false)}>
+						<S.LinkSaveButton type='submit' onClick={() => setEditMode(false)}>
 							저장하기
-						</S.LinkButton>
+						</S.LinkSaveButton>
 					) : (
 						<Option options={optionList} />
 					)}
