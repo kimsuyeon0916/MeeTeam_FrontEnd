@@ -3,6 +3,7 @@ import Main from '../Main.sytled';
 
 const IssueLayout = styled(Main.MainArticle)<{ $type?: string }>`
 	display: flex;
+	flex: 1;
 	flex-direction: column;
 	background: #fff;
 	height: 26.25rem;
@@ -20,7 +21,7 @@ const IssueLayout = styled(Main.MainArticle)<{ $type?: string }>`
 	}
 
 	.issue__list {
-    border-radius: 0rem 0rem 0.75rem 0.75rem;
+		border-radius: 0rem 0rem 0.75rem 0.75rem;
 		overflow: ${props => (props.$type === '대시보드' ? 'hidden' : 'auto')};
 		&::-webkit-scrollbar {
 			width: 1.94rem; /* Chrome, Safari, Opera */
@@ -51,8 +52,11 @@ const IssueItem = styled.li`
 	padding: 1.8rem 2.63rem;
 	border-bottom: 0.075rem solid #c9c9c9;
 	height: 7.05rem;
-	background-color: #fbfbfb;;
+	background-color: #fbfbfb;
 	cursor: pointer;
+	&:hover {
+		background: rgba(141, 141, 141, 0.4);
+	}
 `;
 
 const IssueButton = styled.button`
