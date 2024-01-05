@@ -27,6 +27,13 @@ const LinkInput = styled.input`
 	background: #fff;
 `;
 
+const LinkAnchor = styled.a`
+	width: 26.125rem;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+`;
+
 const LinkImageIcon = styled.img`
 	width: 3.6rem;
 	height: 3.6rem;
@@ -56,6 +63,7 @@ const LinkSaveButton = styled.button`
 const S = {
 	LinkLayout,
 	LinkInput,
+	LinkAnchor,
 	LinkImageIcon,
 	LinkCopyIcon,
 	LinkSaveButton,

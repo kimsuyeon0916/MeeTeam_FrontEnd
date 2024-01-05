@@ -46,9 +46,9 @@ const Link = () => {
 							{editMode ? (
 								<S.LinkInput type='url' defaultValue={element.link} />
 							) : (
-								<a href={element.link} target='_blank' rel='noreferrer noopener'>
+								<S.LinkAnchor href={element.link} target='_blank' rel='noreferrer noopener'>
 									{element.link}
-								</a>
+								</S.LinkAnchor>
 							)}
 							{editMode ? (
 								<S.LinkCopyIcon
