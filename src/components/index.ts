@@ -27,7 +27,7 @@ import {
 	statusCloseIcon,
 } from './meeteam/progressStatus/StatusIcon';
 import Link from './meeteam/main/link/Link';
-import DashBoardLink from './meeteam/main/link/DashBoardLink';
+import DashBoardLink from './meeteam/main/dashBoard/dashBoardLink/DashBoardLink';
 
 export {
 	Header,
