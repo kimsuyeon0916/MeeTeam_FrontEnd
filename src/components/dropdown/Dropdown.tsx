@@ -3,10 +3,11 @@ import S from './Dropdown.styled';
 
 interface IDropdown {
 	data: string[];
+	initialData?: string;
 }
 
-const Dropdown = ({ data }: IDropdown) => {
-	const [currentValue, setCurrentValue] = useState('프로젝트');
+const Dropdown = ({ data, initialData }: IDropdown) => {
+	const [currentValue, setCurrentValue] = useState(`${initialData}`);
 	const [showDropdown, setShowDropdown] = useState(false);
 	const dropdownRef = useRef();
 
@@ -35,7 +36,10 @@ const Dropdown = ({ data }: IDropdown) => {
 	return (
 		<S.Dropdown>
 			<div className='menu' onClick={onClickDropdown} ref={dropdownRef}>
-				<label>{currentValue}</label>
+				<label>
+					{currentValue} {showDropdown ? '▲' : '▼'}
+				</label>
+
 				{showDropdown && (
 					<div className='dropdown'>
 						<ul className='menu-container'>
