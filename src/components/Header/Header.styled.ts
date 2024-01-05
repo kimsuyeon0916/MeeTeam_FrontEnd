@@ -77,6 +77,7 @@ const Header = styled.div`
 		}
 
 		.header__menu--my {
+			position: relative;
 			display: flex;
 			justify-content: center;
 			width: 3rem;
@@ -85,6 +86,10 @@ const Header = styled.div`
 			border-radius: 50%;
 			font-size: 2.6rem;
 			cursor: pointer;
+
+			div {
+				position: absolute;
+			}
 		}
 	}
 `;

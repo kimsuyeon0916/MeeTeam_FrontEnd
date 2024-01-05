@@ -124,7 +124,9 @@ const Header = () => {
 						<BiBell />
 					</div>
 					<div className='header__menu--my'>
-						<BiUser />
+						<div>
+							<BiUser />
+						</div>
 						<Dropdown
 							data={['프로필 설정', '새 밋팀 생성', '밋팀 관리', '계정 관리', '로그아웃']}
 							initialData=''

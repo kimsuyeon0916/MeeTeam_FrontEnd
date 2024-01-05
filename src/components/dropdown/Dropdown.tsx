@@ -5,10 +5,9 @@ interface IDropdown {
 	data: string[];
 	initialData?: string;
 	allowNeed?: boolean;
-	children?: any;
 }
 
-const Dropdown = ({ data, initialData, allowNeed, children }: IDropdown) => {
+const Dropdown = ({ data, initialData, allowNeed }: IDropdown) => {
 	const [currentValue, setCurrentValue] = useState(`${initialData}`);
 	const [showDropdown, setShowDropdown] = useState(false);
 	const dropdownRef = useRef();
@@ -36,7 +35,7 @@ const Dropdown = ({ data, initialData, allowNeed, children }: IDropdown) => {
 	}, [dropdownRef.current, showDropdown]);
 
 	return (
-		<S.Dropdown>
+		<S.Dropdown allowNeed={allowNeed}>
 			<div className='menu' onClick={onClickDropdown} ref={dropdownRef}>
 				<label>
 					{currentValue} {showDropdown ? '▲' : '▼'}
