@@ -36,7 +36,7 @@ const Header = styled.div`
 		.header__navigation--navi-text {
 			color: #515565;
 			font-family: Inter;
-			font-size: 1.25rem;
+			font-size: 1.5rem;
 			font-style: normal;
 			font-weight: 600;
 			line-height: normal;
@@ -57,7 +57,8 @@ const Header = styled.div`
 			justify-content: center;
 			align-items: center;
 			color: #121212;
-			font-size: 2rem;
+			font-size: 2.6rem;
+			font-weight: 200;
 			cursor: pointer;
 		}
 
@@ -66,16 +67,17 @@ const Header = styled.div`
 			justify-content: center;
 			align-items: center;
 			color: #121212;
-			font-size: 2rem;
+			font-size: 2.6rem;
+			font-weight: 300;
 			cursor: pointer;
 		}
 
 		.header__menu--my {
-			width: 2rem;
-			height: 2rem;
+			width: 3rem;
+			height: 3rem;
 			border: 2px solid #000;
 			border-radius: 50%;
-			font-size: 2rem;
+			font-size: 2.6rem;
 			cursor: pointer;
 		}
 	}

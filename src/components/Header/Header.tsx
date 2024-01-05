@@ -2,6 +2,7 @@ import React from 'react';
 import S from './Header.styled';
 import { BiSearch, BiBell, BiUser } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
+import { Dropdown } from '..';
 
 const Header = () => {
 	const navigate = useNavigate();
