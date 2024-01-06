@@ -67,6 +67,7 @@ const Header = styled.div`
 		}
 
 		.header__menu--alarm {
+			position: relative;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -74,6 +75,74 @@ const Header = styled.div`
 			font-size: 2.6rem;
 			font-weight: 300;
 			cursor: pointer;
+
+			.icon {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.dot {
+				position: absolute;
+				width: 0.8rem;
+				height: 0.8rem;
+				background-color: #614bf7;
+				border-radius: 50%;
+				top: -0.5rem;
+				left: -0.5rem;
+			}
+
+			.alarm-dropdown {
+				position: absolute;
+				width: 35.6rem;
+				flex-shrink: 0;
+				border-radius: 0.8rem;
+				background: #fff;
+				top: 4rem;
+				right: -2rem;
+
+				box-sizing: border-box;
+				/* box */
+				box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.1);
+
+				.message {
+					padding: 0 3.9rem 0 3.9rem;
+					color: #373f41;
+					font-family: Apple SD Gothic Neo;
+					font-size: 1.5rem;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 120%; /* 1.92rem */
+					letter-spacing: 0.02rem;
+				}
+
+				.apply {
+					margin-top: 2rem;
+					display: flex;
+					justify-content: space-between;
+				}
+
+				.dot2 {
+					position: absolute;
+					width: 0.8rem;
+					height: 0.8rem;
+					background-color: #614bf7;
+					border-radius: 50%;
+					top: 1.6rem;
+					left: 2rem;
+				}
+
+				.issue {
+					display: flex;
+					flex-direction: column;
+					gap: 1rem;
+					margin-bottom: 2rem;
+				}
+
+				hr {
+					width: 90%;
+				}
+			}
 		}
 
 		.header__menu--my {

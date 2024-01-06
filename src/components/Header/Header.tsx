@@ -7,7 +7,10 @@ const Header = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const dropdownRef = useRef();
+	const alarmRef = useRef();
 	const [openDrop, setOpenDrop] = useState<boolean>(false);
+	const [openDropAlarm, setOpenDropAlarm] = useState<boolean>(false);
+	const [newAlarm, setNewAlarm] = useState<boolean>(true);
 	const [isHere, setIsHere] = useState({
 		recruit: false,
 		galary: false,
@@ -134,15 +137,40 @@ const Header = () => {
 					<div className='header__menu--search'>
 						<BiSearch />
 					</div>
-					<div className='header__menu--alarm'>
-						<BiBell />
+					<div className='header__menu--alarm' ref={alarmRef}>
+						<div
+							className='icon'
+							onClick={() => {
+								setOpenDropAlarm(prev => !prev);
+								setNewAlarm(false);
+							}}
+						>
+							<BiBell />
+						</div>
+						{newAlarm && <div className='dot'></div>}
+						{openDropAlarm && (
+							<div className='alarm-dropdown'>
+								<div className='message apply'>
+									<span>
+										팀 신청이 도착했어요.
+										<div className='dot2'></div>
+									</span>
+									<span>{'>'}</span>
+								</div>
+								<hr />
+								<div className='message issue'>
+									<span>1일 전</span>
+									<span>00님이 민지님을 팔로우 하기 시작했습니다.</span>
+								</div>
+							</div>
+						)}
 					</div>
-					<div className='header__menu--my'>
+					<div className='header__menu--my' ref={dropdownRef}>
 						<div className='icon' onClick={() => setOpenDrop(prev => !prev)}>
 							<BiUser />
 						</div>
 						{openDrop && (
-							<div className='dropdown' ref={dropdownRef}>
+							<div className='dropdown'>
 								<div
 									className='menu'
 									onClick={() => {
