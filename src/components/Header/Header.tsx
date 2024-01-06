@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import S from './Header.styled';
 import { BiSearch, BiBell, BiUser } from 'react-icons/bi';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Dropdown } from '..';
 
 const Header = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
+	const dropdownRef = useRef();
+	const [openDrop, setOpenDrop] = useState<boolean>(false);
 	const [isHere, setIsHere] = useState({
 		recruit: false,
 		galary: false,
@@ -44,6 +45,19 @@ const Header = () => {
 			setIsHere({ recruit: false, galary: false, member: false, inform: true });
 		}
 	}, [location]);
+
+	useEffect(() => {
+		const outsideClick = (event: any) => {
+			const { target } = event;
+			if (openDrop && dropdownRef.current && !dropdownRef.current.contains(target)) {
+				setOpenDrop(false);
+			}
+		};
+		document.addEventListener('mousedown', outsideClick);
+		return () => {
+			document.removeEventListener('mousedown', outsideClick);
+		};
+	}, [dropdownRef.current, openDrop]);
 
 	return (
 		<S.Header>
@@ -124,14 +138,50 @@ const Header = () => {
 						<BiBell />
 					</div>
 					<div className='header__menu--my'>
-						<div>
+						<div className='icon' onClick={() => setOpenDrop(prev => !prev)}>
 							<BiUser />
 						</div>
-						<Dropdown
-							data={['프로필 설정', '새 밋팀 생성', '밋팀 관리', '계정 관리', '로그아웃']}
-							initialData=''
-							allowNeed={false}
-						/>
+						{openDrop && (
+							<div className='dropdown' ref={dropdownRef}>
+								<div
+									className='menu'
+									onClick={() => {
+										setOpenDrop(false);
+										navigate('/profile');
+									}}
+								>
+									프로필 설정
+								</div>
+								<div
+									className='menu'
+									onClick={() => {
+										setOpenDrop(false);
+										navigate('/create');
+									}}
+								>
+									새 밋팀 생성
+								</div>
+								<div
+									className='menu'
+									onClick={() => {
+										setOpenDrop(false);
+										navigate('/manage/meeteam');
+									}}
+								>
+									밋팀 관리
+								</div>
+								<div
+									className='menu'
+									onClick={() => {
+										setOpenDrop(false);
+										navigate('/account');
+									}}
+								>
+									계정 관리
+								</div>
+								<div className='menu'>로그아웃</div>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

@@ -87,8 +87,36 @@ const Header = styled.div`
 			font-size: 2.6rem;
 			cursor: pointer;
 
-			div {
+			.icon {
 				position: absolute;
+			}
+
+			.dropdown {
+				position: absolute;
+				top: 3rem;
+				right: -3rem;
+				width: 15rem;
+				background-color: #f0f0f0;
+				border-radius: 0.8rem;
+				display: flex;
+				flex-direction: column;
+				gap: 2rem;
+				padding: 2rem 2.8rem;
+			}
+
+			.menu {
+				color: var(--Light-Black, var(--text-color-2, #373f41));
+				font-family: Apple SD Gothic Neo;
+				font-size: 1.6rem;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 120%; /* 1.92rem */
+				letter-spacing: 0.02rem;
+
+				&:hover {
+					color: #614bf7;
+					transition: 0.1s;
+				}
 			}
 		}
 	}
