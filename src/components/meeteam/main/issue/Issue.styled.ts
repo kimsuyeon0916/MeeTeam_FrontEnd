@@ -62,10 +62,14 @@ const IssueItem = styled.li`
 const IssueButton = styled.button`
 	all: unset;
 	display: flex;
+	column-gap: 0.75rem;
+	align-items: center;
 	margin-left: auto;
 	font-size: 1.2rem;
 	font-weight: 400;
 	cursor: pointer;
+	stroke: #373f41;
+	stroke-width: 1.125;
 `;
 
 const S = { IssueLayout, IssueHeader, IssueItem, IssueButton };

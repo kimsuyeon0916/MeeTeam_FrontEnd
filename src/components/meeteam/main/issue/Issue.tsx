@@ -1,44 +1,11 @@
 import React from 'react';
 import S from './Issue.styled';
+import { issueList, ISSUE_RIGHT_ARROW_ICON } from '../../../index';
 import { useRecoilState } from 'recoil';
 import { contentState } from '../../../../atom';
 
 const Issue = (props: { type: string }) => {
 	const [content, setContent] = useRecoilState(contentState);
-
-	interface statusProps {
-		title: string;
-		timeStamp: string;
-		content: string;
-	}
-
-	const issueList: issueProps[] = [
-		{
-			title: '알림',
-			timeStamp: '23.12.25',
-			content: '수연님이 구인글을 수정했습니다.',
-		},
-		{
-			title: '알림',
-			timeStamp: '23.12.25',
-			content: '승준님이 구인글을 수정했습니다.',
-		},
-		{
-			title: '알림',
-			timeStamp: '23.12.25',
-			content: '부겸님이 밋팀 정보를 수정했습니다.',
-		},
-		{
-			title: '알림',
-			timeStamp: '23.12.25',
-			content: '민규님이 밋팀 정보를 수정했습니다.',
-		},
-		{
-			title: '알림',
-			timeStamp: '23.12.25',
-			content: '지원님이 밋팀 정보를 수정했습니다.',
-		},
-	];
 
 	return (
 		<S.IssueLayout $type={props.type}>
@@ -47,6 +14,7 @@ const Issue = (props: { type: string }) => {
 				{props.type === '대시보드' && (
 					<S.IssueButton type='button' onClick={() => setContent('밋팀')}>
 						더보기
+						{ISSUE_RIGHT_ARROW_ICON}
 					</S.IssueButton>
 				)}
 			</S.IssueHeader>
