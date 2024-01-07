@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import S from './ProgressStatus.styled';
-import { statusList, statusDoneIcon, statusRightArrowIcon, statusCloseIcon } from './StatusIcon';
+import { statusList, statusDoneIcon, statusRightArrowIcon } from './StatusIcon';
 import { useRecoilState } from 'recoil';
 import { contentState } from '../../../atom';
 
@@ -23,7 +23,6 @@ const ProgressStatus = () => {
 						</S.ProgressStatusButton>
 					</>
 				)}
-				{statusCloseIcon}
 			</div>
 			<div className='progress-status__row'>
 				{statusList.map((status, index) => (
