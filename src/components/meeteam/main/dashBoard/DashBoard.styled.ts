@@ -67,7 +67,7 @@ const DashBoardBlueButton = styled.button<{ $done?: boolean }>`
 	height: 3.45rem;
 	border-radius: 0.6rem;
 	color: #fff;
-	background: ${props => (props.$done ? '#FF6A6A' : '#4F7EF5;')};
+	background: ${props => (props.$done ? '#FF6A6A' : '#5877FC;')};
 	font-size: 1.5rem;
 	font-style: normal;
 	font-weight: 400;
@@ -76,7 +76,9 @@ const DashBoardBlueButton = styled.button<{ $done?: boolean }>`
 
 const DashBoardGradationButton = styled(DashBoardBlueButton)<{ $done?: boolean }>`
 	background: ${props =>
-		props.$done ? '#FF6A6A' : 'linear-gradient(90deg, #4ed2ef -11.45%, #723dff 139.25%)'};
+		props.$done
+			? '#FF6A6A'
+			: 'linear-gradient(270deg, rgba(95, 92, 236, 0.80) -6.3%, #D85CEC 101.52%)'};
 `;
 
 const S = {
