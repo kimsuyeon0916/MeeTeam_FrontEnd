@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import S from './ProgressStatus.styled';
-import { statusList, statusDoneIcon, statusRightArrowIcon } from './StatusIcon';
+import { statusList, STATUS_DONE_ICON, STATUS_RIGHT_ARROW_ICON } from './StatusData';
 import { useRecoilState } from 'recoil';
 import { contentState } from '../../../atom';
 
@@ -19,7 +19,7 @@ const ProgressStatus = () => {
 						<h2 className='main--big-text'>{currentStatus.message}</h2>
 						<S.ProgressStatusButton type='button' onClick={() => setContent(currentStatus.content)}>
 							{currentStatus.buttonName}
-							{statusRightArrowIcon}
+							{STATUS_RIGHT_ARROW_ICON}
 						</S.ProgressStatusButton>
 					</>
 				)}
@@ -30,9 +30,9 @@ const ProgressStatus = () => {
 						<S.ProgressStatusColumn $isCurrent={status === currentStatus}>
 							<span>{status.icon}</span>
 							<h3>{status.title}</h3>
-							<S.ProgressStatusIcon>{status.done && statusDoneIcon}</S.ProgressStatusIcon>
+							<S.ProgressStatusIcon>{status.done && STATUS_DONE_ICON}</S.ProgressStatusIcon>
 						</S.ProgressStatusColumn>
-						{index !== 3 && statusRightArrowIcon}
+						{index !== 3 && STATUS_RIGHT_ARROW_ICON}
 					</div>
 				))}
 			</div>

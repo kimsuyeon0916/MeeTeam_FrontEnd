@@ -1,9 +1,9 @@
 import React from 'react';
 import S from './DashBoardLink.styled';
-import { linkList, linkPlusIcon, linkShortCutsButton } from '../../link/linkList';
+import { linkList, LINK_PLUS_ICON, LINK_SHORTCUTS_BUTTON } from '../../link/LinkData';
 import { useRecoilState } from 'recoil';
 import { contentState } from '../../../../../atom';
-import { statusRightArrowIcon } from '../../../..';
+import { STATUS_RIGHT_ARROW_ICON } from '../../../..';
 
 const DashBoardLink = () => {
 	const [content, setContent] = useRecoilState(contentState);
@@ -17,14 +17,14 @@ const DashBoardLink = () => {
 
 	return (
 		<S.DashBoardLinkLayout>
-			<div className='main__row'>
+			<header className='main__row'>
 				<h2 className='main--big-text'>링크</h2>
 				{checkRegistration() && (
 					<S.DashBoardLinkPlusButton type='button' onClick={() => setContent('밋팀')}>
-						{linkPlusIcon}
+						{LINK_PLUS_ICON}
 					</S.DashBoardLinkPlusButton>
 				)}
-			</div>
+			</header>
 			{checkRegistration() ? (
 				<>
 					<div className='dash-board-link__box'>
@@ -35,7 +35,7 @@ const DashBoardLink = () => {
 					</div>
 					<S.DashBoardLinkRegisterButton type='button' onClick={() => setContent('밋팀')}>
 						연락수단 등록하기
-						{statusRightArrowIcon}
+						{STATUS_RIGHT_ARROW_ICON}
 					</S.DashBoardLinkRegisterButton>
 				</>
 			) : (
@@ -48,7 +48,7 @@ const DashBoardLink = () => {
 								{element.title}
 							</a>
 							<a href={element.link} target='_blank' rel='noreferrer noopener'>
-								{linkShortCutsButton}
+								{LINK_SHORTCUTS_BUTTON}
 							</a>
 						</div>
 					))

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import S from './Link.styled';
-import { linkList, linkBottomArrowIcon, linkShortCutsButton } from './linkList';
+import { linkList, LINK_BOTTOM_ARROW_ICON, LINK_SHORTCUTS_BUTTON } from './LinkData';
 import { Option } from '../../../../utils';
 
 const Link = () => {
@@ -28,7 +28,7 @@ const Link = () => {
 	return (
 		<form>
 			<S.LinkLayout>
-				<div className='main__row'>
+				<header className='main__row'>
 					<h2 className='main--big-text'>링크</h2>
 					{editMode ? (
 						<S.LinkSaveButton type='submit' onClick={() => setEditMode(false)}>
@@ -37,12 +37,12 @@ const Link = () => {
 					) : (
 						<Option options={optionList} />
 					)}
-				</div>
+				</header>
 				{(editMode ? linkList : linkList.filter(element => element.link !== ``)).map(
 					(element, index) => (
 						<div className='link__row' key={index}>
 							<S.LinkImageIcon src={element.icon} />
-							{editMode && linkBottomArrowIcon}
+							{editMode && LINK_BOTTOM_ARROW_ICON}
 							{editMode ? (
 								<S.LinkInput type='url' defaultValue={element.link} />
 							) : (
@@ -57,7 +57,7 @@ const Link = () => {
 								/>
 							) : (
 								<a href={element.link} target='_blank' rel='noreferrer noopener'>
-									{linkShortCutsButton}
+									{LINK_SHORTCUTS_BUTTON}
 								</a>
 							)}
 						</div>
