@@ -39,7 +39,6 @@ const ProgressStatusIcon = styled.span`
 const ProgressStatusButton = styled.button`
 	display: flex;
 	margin-left: auto;
-	margin-right: 1.8rem;
 	padding: 0.75rem 1.5rem;
 	justify-content: center;
 	align-items: center;
