@@ -19,7 +19,9 @@ const DashBoardLink = () => {
 		<S.DashBoardLinkLayout>
 			<header className='main__row'>
 				<h2 className='main--big-text'>링크</h2>
-				{checkRegistration() && (
+				{checkRegistration() ? (
+					''
+				) : (
 					<S.DashBoardLinkPlusButton type='button' onClick={() => setContent('밋팀')}>
 						{LINK_PLUS_ICON}
 					</S.DashBoardLinkPlusButton>
