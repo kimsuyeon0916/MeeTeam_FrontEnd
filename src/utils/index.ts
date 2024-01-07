@@ -7,6 +7,7 @@ import GoBack from './goBack/GoBack';
 import OptionIcon from './option/icon/OptionIcon';
 import OptionModal from './option/optionModal/OptionModal';
 import Option from './option/Option';
+import RadiusProfile from './profile/RadiusProfile';
 
 export {
 	modules,
@@ -19,4 +20,5 @@ export {
 	OptionIcon,
 	OptionModal,
 	Option,
+	RadiusProfile,
 };
