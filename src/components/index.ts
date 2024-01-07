@@ -35,6 +35,11 @@ import {
 	MEMBER_PLUS_ICON,
 } from './meeteam/main/member/MemberData';
 import type { memberProps } from './meeteam/main/member/MemberData';
+import {
+	meeteamInformation,
+	BOTTOM_ARROW_ICON,
+	TOP_ARROW_BUTTON,
+} from './meeteam/main/information/InformationData';
 
 export {
 	Header,
@@ -71,4 +76,7 @@ export {
 	memberProps,
 	MEMBER_PROFILE_DEFAULT_ICON,
 	MEMBER_PLUS_ICON,
+	meeteamInformation,
+	BOTTOM_ARROW_ICON,
+	TOP_ARROW_BUTTON,
 };
