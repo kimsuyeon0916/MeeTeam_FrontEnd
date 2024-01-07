@@ -19,15 +19,22 @@ import RequiredInformation from './meeteam/requiredInformation/RequiredInformati
 import ProgressStatus from './meeteam/progressStatus/ProgressStatus';
 import Title from './meeteam/title/Title';
 import Issue from './meeteam/main/issue/Issue';
+import { issueList, ISSUE_RIGHT_ARROW_ICON } from './meeteam/main/issue/IssueData';
 import Content from './meeteam/Content';
 import {
 	statusList,
-	statusDoneIcon,
-	statusRightArrowIcon,
-	statusCloseIcon,
-} from './meeteam/progressStatus/StatusIcon';
+	STATUS_DONE_ICON,
+	STATUS_CLOSE_ICON,
+	STATUS_RIGHT_ARROW_ICON,
+} from './meeteam/progressStatus/StatusData';
 import Link from './meeteam/main/link/Link';
 import DashBoardLink from './meeteam/main/dashBoard/dashBoardLink/DashBoardLink';
+import {
+	memberList,
+	MEMBER_PROFILE_DEFAULT_ICON,
+	MEMBER_PLUS_ICON,
+} from './meeteam/main/member/MemberData';
+import type { memberProps } from './meeteam/main/member/MemberData';
 
 export {
 	Header,
@@ -51,11 +58,17 @@ export {
 	ProgressStatus,
 	Title,
 	Issue,
+	issueList,
+	ISSUE_RIGHT_ARROW_ICON,
 	Content,
 	statusList,
-	statusDoneIcon,
-	statusRightArrowIcon,
-	statusCloseIcon,
+	STATUS_DONE_ICON,
+	STATUS_RIGHT_ARROW_ICON,
+	STATUS_CLOSE_ICON,
 	Link,
 	DashBoardLink,
+	memberList,
+	memberProps,
+	MEMBER_PROFILE_DEFAULT_ICON,
+	MEMBER_PLUS_ICON,
 };

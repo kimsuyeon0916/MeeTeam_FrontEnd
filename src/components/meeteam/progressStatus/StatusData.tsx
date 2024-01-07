@@ -9,7 +9,7 @@ interface statusProps {
 	done: boolean;
 }
 
-export const statusList: statusProps[] = [
+const statusList: statusProps[] = [
 	{
 		title: '밋팀 정보/소개 입력',
 		icon: (
@@ -104,7 +104,7 @@ export const statusList: statusProps[] = [
 	},
 ];
 
-export const statusDoneIcon = (
+const STATUS_DONE_ICON = (
 	<svg xmlns='http://www.w3.org/2000/svg' width='31' height='31' viewBox='0 0 31 31' fill='none'>
 		<path
 			d='M15.75 28.375C22.6536 28.375 28.25 22.7786 28.25 15.875C28.25 8.97144 22.6536 3.375 15.75 3.375C8.84644 3.375 3.25 8.97144 3.25 15.875C3.25 22.7786 8.84644 28.375 15.75 28.375Z'
@@ -117,7 +117,7 @@ export const statusDoneIcon = (
 	</svg>
 );
 
-export const statusRightArrowIcon = (
+const STATUS_RIGHT_ARROW_ICON = (
 	<svg xmlns='http://www.w3.org/2000/svg' width='8' height='13' viewBox='0 0 8 13' fill='none'>
 		<path
 			d='M0.875001 11.6113L6.2353 6.8291C6.57393 6.52698 6.56877 5.99569 6.22432 5.70021L0.875 1.11133'
@@ -126,7 +126,7 @@ export const statusRightArrowIcon = (
 	</svg>
 );
 
-export const statusCloseIcon = (
+const STATUS_CLOSE_ICON = (
 	<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22' fill='none'>
 		<g opacity='0.8'>
 			<rect
@@ -150,3 +150,5 @@ export const statusCloseIcon = (
 		</g>
 	</svg>
 );
+
+export { statusList, STATUS_DONE_ICON, STATUS_RIGHT_ARROW_ICON, STATUS_CLOSE_ICON };
