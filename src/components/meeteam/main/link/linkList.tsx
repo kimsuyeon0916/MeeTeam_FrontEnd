@@ -20,12 +20,12 @@ export const linkList: linkProps[] = [
 	{
 		title: 'Notion',
 		icon: `https://s3-alpha-sig.figma.com/img/53bb/da8a/633c9e04581128ab07988700dd401cb4?Expires=1705276800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=lBT9wQbXhLGAKD6Li-OsddDhIH9U4aI4WgT-g6IfMv9NmXEe7mTDQwZIevaLY3oHRgw9pwwAnfgnk6vwb-KC8yIbb7BhnNrjdpPFHR41GKegzs675wtA7O08QQLZnkbTSwIolBeRLQ33mAm3AYVztRiVl-A3SQsVmcA2IfvbAWdrf9ctkoDc~NJ64Rb-HAvijT~WTSAGQrKby9Fx~aZcSDzRWbZF9AGm~IewoR-Z3zuHUKAvnccn5THaDFAvV3YS1hQP35ysBQuYqeZ-TU4AUv7ol3XneiKxnwZcZ1OcqxYy16TilZHjMUMYkQXqIALcALruxCMCsaI10CRTX0Y3Rg__`,
-		link: ``,
+		link: `https://www.notion.so/516c7acc904846a98e76bf968a80e24e?pvs=4`,
 	},
 	{
 		title: 'Discord',
 		icon: `https://s3-alpha-sig.figma.com/img/08d1/5f74/0ebbce5b2c2ff503ec24e82ef6831351?Expires=1705276800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RW~uGWgoIIeCWcG~MQ1gYETtl8A7Qef1ejY9l1Xr7iUytToSuFNn7QeOQvxPXPCag3gf2PYH70sYawiS4oTR8~-wcW1TdZ57EIORljxlz~6wT8~DxasUBgSV7gVa~dTid80zDhNP4rvwyxZgILFj9AOU8oRYyhvWqdnDotGBmfGuvCbGBpjAX2Q0kOqtY175-GEVEzzFMH1bvOzU18wpu8yyJUm1aH8hgoiycIf4WFWczz7kwkZzre-USRW3Vu2Qwq6l1BdZ981LmTQ1EnZF~Kh7QEDblpJZqTTDef4IhVOKCEr7ELSsi~vHBVxb~wzaFxq3eY6Pu0K~ShUaL8l~sg__`,
-		link: ``,
+		link: `https://discord.gg/uF63YG9R`,
 	},
 ];
 
