@@ -15,6 +15,13 @@ const LinkLayout = styled(Main.MainArticle)`
 		align-items: center;
 		column-gap: 1.8rem;
 	}
+
+	.link__button-row {
+		display: flex;
+		flex-direction: row;
+		column-gap: 0.4rem;
+		margin-left: auto;
+	}
 `;
 
 const LinkInput = styled.input`
@@ -51,13 +58,17 @@ const LinkSaveButton = styled.button`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin-left: auto;
 	padding: 0.5rem;
 	font-size: 0.8rem;
 	border-radius: 0.6rem;
-	background: var(--main-color, #4f7ef5);
+	background: var(--main-color, #5877fc);
 	color: #fff;
 	cursor: pointer;
+`;
+
+const LinkCancelButton = styled(LinkSaveButton)`
+	background: #ededed;
+	color: #000;
 `;
 
 const S = {
@@ -67,6 +78,7 @@ const S = {
 	LinkImageIcon,
 	LinkCopyIcon,
 	LinkSaveButton,
+	LinkCancelButton,
 };
 
 export default S;

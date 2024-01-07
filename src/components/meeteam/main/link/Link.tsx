@@ -31,9 +31,14 @@ const Link = () => {
 				<header className='main__row'>
 					<h2 className='main--big-text'>링크</h2>
 					{editMode ? (
-						<S.LinkSaveButton type='submit' onClick={() => setEditMode(false)}>
-							저장하기
-						</S.LinkSaveButton>
+						<div className='link__button-row'>
+							<S.LinkCancelButton type='button' onClick={() => setEditMode(false)}>
+								취소
+							</S.LinkCancelButton>
+							<S.LinkSaveButton type='submit' onClick={() => setEditMode(false)}>
+								저장하기
+							</S.LinkSaveButton>
+						</div>
 					) : (
 						<Option options={optionList} />
 					)}
