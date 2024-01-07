@@ -13,6 +13,7 @@ const OptionModalLayout = styled.ul`
 	border-radius: 0.6rem;
 	background: #fff;
 	box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
 `;
 
 const OptionModalItem = styled.li`
