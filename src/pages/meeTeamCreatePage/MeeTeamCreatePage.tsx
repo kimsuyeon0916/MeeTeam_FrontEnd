@@ -15,7 +15,7 @@ const MeeTeamCreatePage = () => {
 	const category = useRecoilValue(categoryState);
 	const [startDate, endDate] = useRecoilValue(dateState);
 	const quillRef = useRef<ReactQuill | null>(null);
-	const [memberList, setMemberList] = useState([<MemberSelect id={0} />]);
+	const [memberList, setMemberList] = useState([]);
 	const copyMemberList = [...memberList];
 	const [teamName, setTeamName] = useState<string>('');
 
@@ -41,9 +41,9 @@ const MeeTeamCreatePage = () => {
 	});
 
 	const onClickMember = () => {
-		let updatedMemberList = [...memberList];
-		updatedMemberList.push(<MemberSelect id={memberList.length} />);
-		setMemberList(updatedMemberList);
+		// let updatedMemberList = [...memberList];
+		// updatedMemberList.push(<MemberSelect id={memberList.length} />);
+		// setMemberList(updatedMemberList);
 	};
 
 	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -198,8 +198,8 @@ const MeeTeamCreatePage = () => {
 							<div>
 								<Subtitle>{'멤버'}</Subtitle>
 							</div>
-							<div>
-								{memberList.map((memberItem, index) => {
+							<div className='container__member-area'>
+								{/* {memberList.map((memberItem, index) => {
 									return (
 										<div className='controll' key={index}>
 											{React.cloneElement(memberItem, { key: index })}
@@ -209,15 +209,14 @@ const MeeTeamCreatePage = () => {
 											</button>
 										</div>
 									);
-								})}
-
-								<div className='container__member-add'>
-									{memberList.length !== 6 && (
-										<div className='addition' onClick={onClickMember}>
-											<AddButton />
-										</div>
-									)}
-								</div>
+								})} */}
+							</div>
+							<div className='container__member-add'>
+								{memberList.length !== 6 && (
+									<div className='addition' onClick={onClickMember}>
+										<AddButton />
+									</div>
+								)}
 							</div>
 						</div>
 						<div className='container__controller'>

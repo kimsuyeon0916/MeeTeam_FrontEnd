@@ -155,6 +155,14 @@ const MeeTeamCreatePage = styled.div`
 			margin-top: 70px;
 			width: 100%;
 
+			.container__member-area {
+				min-height: 24rem;
+				width: 100%;
+				background-color: #fff;
+				border: 1px solid #dcdcdc;
+				border-radius: 1rem;
+			}
+
 			.controll {
 				/* display: flex; */
 				gap: 0.5rem;
