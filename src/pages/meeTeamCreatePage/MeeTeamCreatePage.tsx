@@ -1,5 +1,5 @@
 import React, { useRef, useState, useCallback } from 'react';
-import { Subtitle, Dot, InfoItem, MeeteamTag, MemberSelect, AddButton } from '../../components';
+import { Subtitle, Dot, InfoItem, MeeteamTag, AddButton } from '../../components';
 import { modules } from '../../utils/index';
 import { useNavigate } from 'react-router-dom';
 import S from './MeeTeamCreatePage.styled';
@@ -9,15 +9,17 @@ import { useRecoilValue } from 'recoil';
 import { areaState, categoryState, dateState, fieldState } from '../../atom';
 
 const MeeTeamCreatePage = () => {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	const area = useRecoilValue(areaState);
 	const field = useRecoilValue(fieldState);
 	const category = useRecoilValue(categoryState);
-	const [startDate, endDate] = useRecoilValue(dateState);
 	const quillRef = useRef<ReactQuill | null>(null);
 	const [memberList, setMemberList] = useState([]);
 	const copyMemberList = [...memberList];
 	const [teamName, setTeamName] = useState<string>('');
+	const [startDate, endDate] = useRecoilValue(dateState);
+	const [file, setFile] = useState<string>('');
+	const [fileName, setFileName] = useState<string>('');
 
 	const [isValidName, setIsValidName] = useState({
 		validName: false,
@@ -54,12 +56,20 @@ const MeeTeamCreatePage = () => {
 
 	const onClickCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
 		// 모달창 띄워서 한 번 더 확인시키고 이동하기
-		navigate('/');
+		// navigate('/');
 	};
 
 	const onChangeTeamName = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
 		setTeamName(event.target.value);
 		setIsValidName({ validName: true, validMessage: '' });
+	}, []);
+
+	const onChangeImg = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+		if (event.target.files !== null) {
+			setFileName(event.target.files[0].name);
+			const selectedFiles = event.target.files as FileList;
+			setFile(URL.createObjectURL(selectedFiles?.[0]));
+		}
 	}, []);
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -192,6 +202,23 @@ const MeeTeamCreatePage = () => {
 							</div>
 							<div>
 								<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
+							</div>
+						</div>
+						<div className='container__img'>
+							<div>
+								<Subtitle>{'밋팀 이미지'}</Subtitle>
+							</div>
+							<div className='container__img-input'>
+								<input
+									type='file'
+									accept='image/*'
+									id='meeteamImg'
+									placeholder='이미지를 업로드해주세요.'
+									onChange={onChangeImg}
+								/>
+								<label className={file ? 'haveFile' : ''} htmlFor='meeteamImg'>
+									{file ? `${fileName}` : '이미지를 업로드해주세요.'}
+								</label>
 							</div>
 						</div>
 						<div className='container__member'>
