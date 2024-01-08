@@ -145,6 +145,16 @@ const Header = styled.div`
 			}
 		}
 
+		.header__menu--create {
+			width: 3rem;
+			height: 3rem;
+			flex-shrink: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
+		}
+
 		.header__menu--my {
 			position: relative;
 			display: flex;
