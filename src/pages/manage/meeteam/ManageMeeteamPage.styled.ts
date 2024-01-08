@@ -11,7 +11,8 @@ const ManageMeeTeamPage = styled.div`
 		display: grid;
 		margin-top: 1.65rem;
 		grid-template-columns: repeat(3, 1fr);
-		row-gap: 2rem;
+		row-gap: 1.5rem;
+		column-gap: 1.5rem;
 
 		.content {
 			width: 25.65rem;
