@@ -6,8 +6,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const Header = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
-	const dropdownRef = useRef();
-	const alarmRef = useRef();
+	const dropdownRef = useRef<HTMLDivElement | null>(null);
+	const alarmRef = useRef<HTMLDivElement | null>(null);
 	const [openDrop, setOpenDrop] = useState<boolean>(false);
 	const [openDropAlarm, setOpenDropAlarm] = useState<boolean>(false);
 	const [newAlarm, setNewAlarm] = useState<boolean>(true);
@@ -50,12 +50,12 @@ const Header = () => {
 	}, [location]);
 
 	useEffect(() => {
-		const outsideClick = (event: any) => {
+		const outsideClick = (event: MouseEvent) => {
 			const { target } = event;
-			if (openDrop && dropdownRef.current && !dropdownRef.current.contains(target)) {
+			if (openDrop && dropdownRef.current && !dropdownRef.current.contains(target as Node)) {
 				setOpenDrop(false);
 			}
-			if (openDropAlarm && alarmRef.current && !alarmRef.current.contains(target)) {
+			if (openDropAlarm && alarmRef.current && !alarmRef.current.contains(target as Node)) {
 				setOpenDropAlarm(false);
 			}
 		};
@@ -63,7 +63,7 @@ const Header = () => {
 		return () => {
 			document.removeEventListener('mousedown', outsideClick);
 		};
-	}, [dropdownRef.current, openDrop, alarmRef.current, openDropAlarm]);
+	}, [openDrop, openDropAlarm]);
 
 	return (
 		<S.Header>
