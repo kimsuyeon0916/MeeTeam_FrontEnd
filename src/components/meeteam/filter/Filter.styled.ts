@@ -12,8 +12,8 @@ const Filter = styled.div`
 		margin-right: 2.6rem;
 		.area {
 			display: flex;
-			width: 6.675rem;
-			height: 3.6rem;
+			width: 8.5rem;
+			height: 3.5rem;
 			padding: 0.75rem;
 			flex-direction: column;
 			justify-content: center;
@@ -21,10 +21,10 @@ const Filter = styled.div`
 			gap: 0.75rem;
 			flex-shrink: 0;
 			border-radius: 7.5rem;
-			background-color: #5f5cec;
-			color: #fff;
+			background-color: #fcefaa;
+			color: #000;
 			font-family: Apple SD Gothic Neo;
-			font-size: 1.8rem;
+			font-size: 1.5rem;
 			font-style: normal;
 			font-weight: 400;
 			line-height: 2.1rem; /* 100% */
@@ -34,7 +34,6 @@ const Filter = styled.div`
 
 		.no {
 			background-color: #fff;
-			color: #000;
 		}
 	}
 	.container-filter_menu {
