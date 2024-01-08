@@ -55,12 +55,15 @@ const Header = () => {
 			if (openDrop && dropdownRef.current && !dropdownRef.current.contains(target)) {
 				setOpenDrop(false);
 			}
+			if (openDropAlarm && alarmRef.current && !alarmRef.current.contains(target)) {
+				setOpenDropAlarm(false);
+			}
 		};
 		document.addEventListener('mousedown', outsideClick);
 		return () => {
 			document.removeEventListener('mousedown', outsideClick);
 		};
-	}, [dropdownRef.current, openDrop]);
+	}, [dropdownRef.current, openDrop, alarmRef.current, openDropAlarm]);
 
 	return (
 		<S.Header>
