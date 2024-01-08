@@ -207,28 +207,33 @@ const MeeTeamCreatePage = styled.div`
 			margin-top: 70px;
 			display: flex;
 			justify-content: center;
-			gap: 1rem;
+			gap: 2rem;
 
 			button {
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				width: 12rem;
-				height: 3.5rem;
-				padding: 0.625rem;
-				gap: 0.625rem;
-				border-radius: 0.5rem;
-				border: 0.5px solid #ababab;
+				width: 15rem;
+				height: 5rem;
+				padding: 1rem 1rem;
+				border: none;
+				gap: 1rem;
+				border-radius: 0.8rem;
 				cursor: pointer;
-				font-size: 1rem;
+				color: #373f41;
+				font-size: 1.5rem;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 1.8rem; /* 75% */
+				letter-spacing: 0.02rem;
 			}
 
 			button:nth-child(1) {
-				background: #a9a9a9;
+				background: #e0e6ff;
 			}
 
 			button:nth-child(2) {
-				background: #00b894;
+				background: #5877fc;
 				color: #fff;
 			}
 		}

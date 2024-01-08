@@ -222,7 +222,7 @@ const MeeTeamCreatePage = () => {
 						</div>
 						<div className='container__controller'>
 							<button onClick={onClickCancel}>취소</button>
-							<button type='submit'>등록하기</button>
+							<button type='submit'>생성하기</button>
 						</div>
 					</div>
 				</form>
