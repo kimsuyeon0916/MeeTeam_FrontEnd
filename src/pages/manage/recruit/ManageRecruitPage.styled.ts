@@ -46,40 +46,6 @@ const ManageRecruitPage = styled.div<IManageRecruitPage>`
 				letter-spacing: 0.015rem;
 			}
 		}
-
-		.container-recruits_options {
-			display: flex;
-			gap: 5.48rem;
-			margin-right: 3.45rem;
-		}
-		.toggle {
-			position: relative;
-		}
-		.toggle-container {
-			width: 50px;
-			height: 24px;
-			border-radius: 30px;
-			/* background-color: rgb(255, 255, 255); */
-			border: 1px solid #d9d9d9;
-		}
-		.toggle-checked {
-			background-color: ${props => (props.isOn ? 'rgba(95, 92, 236, 0.76)' : 'rgb(255, 255, 255)')};
-			transition: 0.3s;
-		}
-		.toggle-circle {
-			position: absolute;
-			top: 1px;
-			left: 1px;
-			width: 22px;
-			height: 22px;
-			border-radius: 50%;
-			background-color: ${props => (props.isOn ? 'rgb(255, 255, 255)' : 'rgb(95, 92, 236)')};
-			transition: 0.5s;
-		}
-		.toggle-checked {
-			left: 27px;
-			transition: 0.3s;
-		}
 	}
 `;
 

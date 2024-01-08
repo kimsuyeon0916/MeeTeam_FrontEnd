@@ -26,6 +26,7 @@ const RecruitCard = ({ title, type, $recruit, $proceed }: IRecruitCard) => {
 				</div>
 			</div>
 			<div className='container-recruits_options'>
+				<div className='info'>{isOn ? '공개' : '비공개'}</div>
 				<div className='toggle' onClick={toggleHandler}>
 					<div className={`toggle-container ${isOn ? 'toggle-checked' : ''}`}></div>
 					<div className={`toggle-circle ${isOn ? 'toggle-checked' : ''}`}></div>

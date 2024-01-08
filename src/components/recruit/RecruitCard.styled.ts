@@ -40,8 +40,19 @@ const RecruitCard = styled.div<IManageRecruitPage>`
 
 	.container-recruits_options {
 		display: flex;
-		gap: 5.48rem;
 		margin-right: 3.45rem;
+	}
+	.info {
+		margin-right: 1.8rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #2a2a2a;
+		font-size: 1.2rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.8rem; /* 112.5% */
+		letter-spacing: 0.02rem;
 	}
 	.toggle {
 		position: relative;
@@ -70,6 +81,10 @@ const RecruitCard = styled.div<IManageRecruitPage>`
 	.toggle-checked {
 		left: 27px;
 		transition: 0.3s;
+	}
+
+	.alarm {
+		margin-left: 5.4rem;
 	}
 `;
 
