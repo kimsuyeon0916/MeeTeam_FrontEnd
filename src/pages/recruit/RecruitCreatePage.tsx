@@ -1,15 +1,13 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
-import { modules } from '../../utils/index';
-import { useNavigate } from 'react-router-dom';
-import { Subtitle, Dot, InfoItem, MeeteamTag, AddButton } from '../../components';
+import { Subtitle, Dot, InfoItem, MeeteamTag, AddButton } from '../../components/index';
 import { areaState, categoryState, dateState, fieldState } from '../../atom';
-import S from './MeeTeamCreatePage.styled';
+import { modules } from '../../utils/index';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import S from './recruitCreatePage.styled';
 
-const MeeTeamCreatePage = () => {
-	// const navigate = useNavigate();
+const RecruitCreatePage = () => {
 	const area = useRecoilValue(areaState);
 	const field = useRecoilValue(fieldState);
 	const category = useRecoilValue(categoryState);
@@ -121,13 +119,12 @@ const MeeTeamCreatePage = () => {
 			});
 		}
 	};
-
 	return (
-		<S.MeeTeamCreatePage>
+		<S.RecruitCreatePage>
 			<div className='procedure'>
-				<div className='procedure__subtitle'>새 밋팀 생성</div>
+				<div className='procedure__subtitle'>구인 글 작성</div>
 				<div className='procedure__intro'>
-					<p>밋팀에 대한 정보를 입력하시고 소개해주세요.</p>
+					<p>구인에 대한 정보를 입력하시고 소개해주세요.</p>
 				</div>
 			</div>
 			<div className='wrapper'>
@@ -135,7 +132,7 @@ const MeeTeamCreatePage = () => {
 					<div className='container'>
 						<div className='container__teamname'>
 							<div className='container__teamname-subtitle'>
-								<Subtitle>{'밋팀 팀명'}</Subtitle>
+								<Subtitle>{'구인 글 제목'}</Subtitle>
 								<Dot />
 							</div>
 							<div className='container__teamname-input'>
@@ -179,7 +176,7 @@ const MeeTeamCreatePage = () => {
 								</div>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem isDot='true' title='밋팀 기간' optionData={[]} type='기간' />
+										<InfoItem isDot='true' title='기간' optionData={[]} type='기간' />
 										{!isValidDate.validDate && <p>{isValidDate.validMessage}</p>}
 									</div>
 									<div className='fix'>
@@ -190,7 +187,7 @@ const MeeTeamCreatePage = () => {
 						</div>
 						<div className='container__tag'>
 							<div>
-								<Subtitle>{'밋팀 태그'}</Subtitle>
+								<Subtitle>{'구인 태그'}</Subtitle>
 							</div>
 							<div>
 								<MeeteamTag />
@@ -198,7 +195,7 @@ const MeeTeamCreatePage = () => {
 						</div>
 						<div className='container__intro'>
 							<div>
-								<Subtitle>{'밋팀 소개'}</Subtitle>
+								<Subtitle>{'구인 글'}</Subtitle>
 							</div>
 							<div>
 								<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
@@ -206,7 +203,7 @@ const MeeTeamCreatePage = () => {
 						</div>
 						<div className='container__img'>
 							<div>
-								<Subtitle>{'밋팀 이미지'}</Subtitle>
+								<Subtitle>{'구인 이미지'}</Subtitle>
 							</div>
 							<div className='container__img-input'>
 								<input
@@ -248,13 +245,13 @@ const MeeTeamCreatePage = () => {
 						</div>
 						<div className='container__controller'>
 							<button onClick={onClickCancel}>취소</button>
-							<button type='submit'>생성하기</button>
+							<button type='submit'>등록하기</button>
 						</div>
 					</div>
 				</form>
 			</div>
-		</S.MeeTeamCreatePage>
+		</S.RecruitCreatePage>
 	);
 };
 
-export default MeeTeamCreatePage;
+export default RecruitCreatePage;
