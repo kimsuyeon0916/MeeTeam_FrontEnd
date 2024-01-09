@@ -8,14 +8,15 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 const OutputCreatePage = () => {
+	const quillRef = useRef<ReactQuill | null>(null);
 	const area = useRecoilValue(areaState);
 	const field = useRecoilValue(fieldState);
 	const category = useRecoilValue(categoryState);
-	const quillRef = useRef<ReactQuill | null>(null);
-	const [memberList, setMemberList] = useState([]);
-	const copyMemberList = [...memberList];
-	const [teamName, setTeamName] = useState<string>('');
 	const [startDate, endDate] = useRecoilValue(dateState);
+
+	const [teamName, setTeamName] = useState<string>('');
+	const [imgFile, setImgFile] = useState<string>('');
+	const [imgFileName, setImgFileName] = useState<string>('');
 	const [file, setFile] = useState<string>('');
 	const [fileName, setFileName] = useState<string>('');
 
@@ -52,6 +53,15 @@ const OutputCreatePage = () => {
 
 	const onChangeImg = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files !== null) {
+			setImgFileName(event.target.files[0].name);
+			const selectedFiles = event.target.files as FileList;
+			setImgFile(URL.createObjectURL(selectedFiles?.[0]));
+		}
+	}, []);
+
+	const onChangeFile = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+		if (event.target.files !== null) {
+			console.log(event);
 			setFileName(event.target.files[0].name);
 			const selectedFiles = event.target.files as FileList;
 			setFile(URL.createObjectURL(selectedFiles?.[0]));
@@ -178,15 +188,23 @@ const OutputCreatePage = () => {
 								<Subtitle>{'밋팀 태그'}</Subtitle>
 							</div>
 							<div>
-								<MeeteamTag />
+								<MeeteamTag tags={['React', 'Node.js', 'Spring']} />
 							</div>
 						</div>
-						<div className='container__intro'>
+						<div className='container__file'>
 							<div>
-								<Subtitle>{'소개 글'}</Subtitle>
+								<Subtitle>{'첨부 파일'}</Subtitle>
 							</div>
-							<div>
-								<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
+							<div className='container__file-input'>
+								<input
+									type='file'
+									id='meeteamFile'
+									placeholder='첨부 파일을 업로드해주세요.'
+									onChange={onChangeFile}
+								/>
+								<label className={file ? 'haveFile' : ''} htmlFor='meeteamFile'>
+									{file ? `${fileName}` : '첨부 파일을 업로드해주세요.'}
+								</label>
 							</div>
 						</div>
 						<div className='container__img'>
@@ -201,9 +219,17 @@ const OutputCreatePage = () => {
 									placeholder='이미지를 업로드해주세요.'
 									onChange={onChangeImg}
 								/>
-								<label className={file ? 'haveFile' : ''} htmlFor='meeteamImg'>
-									{file ? `${fileName}` : '이미지를 업로드해주세요.'}
+								<label className={imgFile ? 'haveImgFile' : ''} htmlFor='meeteamImg'>
+									{imgFile ? `${imgFileName}` : '이미지를 업로드해주세요.'}
 								</label>
+							</div>
+						</div>
+						<div className='container__intro'>
+							<div>
+								<Subtitle>{'소개 글'}</Subtitle>
+							</div>
+							<div>
+								<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
 							</div>
 						</div>
 						<div className='container__controller'>

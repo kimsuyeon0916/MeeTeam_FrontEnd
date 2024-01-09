@@ -151,6 +151,43 @@ const OutputCreatePage = styled.div`
 			}
 		}
 
+		.container__file {
+			margin-top: 7rem;
+
+			.container__file-input {
+				padding: 10px 0px;
+
+				input {
+					display: none;
+				}
+
+				label {
+					display: block;
+					width: 100%;
+					height: 4.875rem;
+					flex-shrink: 0;
+					border-radius: 0.75rem;
+					border: 0.75px solid #e3e3e3;
+					background: #fff;
+					outline: none;
+					padding-left: 2.1rem;
+					box-sizing: border-box;
+					color: #a7a7a7;
+					font-size: 1.3rem;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 1.8rem; /* 90% */
+					letter-spacing: 0.02rem;
+					display: flex;
+					align-items: center;
+				}
+
+				.haveFile {
+					color: #000;
+				}
+			}
+		}
+
 		.container__img {
 			margin-top: 7rem;
 
@@ -182,7 +219,7 @@ const OutputCreatePage = styled.div`
 					align-items: center;
 				}
 
-				.haveFile {
+				.haveImgFile {
 					color: #000;
 				}
 			}

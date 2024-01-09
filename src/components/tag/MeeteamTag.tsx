@@ -1,7 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import S from './MeeteamTag.styled';
 
-const MeeteamTag = () => {
+interface IMeeteamTag {
+	tags?: string[];
+}
+
+const MeeteamTag = ({ tags }: IMeeteamTag) => {
 	const [tagItem, setTagItem] = useState<string>('');
 	const [tagList, setTagList] = useState<string[]>([]);
 	const copyTagList = [...tagList];
@@ -60,26 +64,38 @@ const MeeteamTag = () => {
 
 	return (
 		<S.MeeteamTag ref={dropdownRef}>
-			<div className='tag__box' onClick={onClickInput}>
-				{copyTagList.map((tagItem, index) => {
-					return (
-						<div className='tag__item' key={index}>
-							<span>{tagItem}</span>
-							<button onClick={deleteTagItem} id={'' + index}>
-								X
-							</button>
-						</div>
-					);
-				})}
-				<input
-					type='text'
-					placeholder='태그를 입력하고 엔터를 누르세요.'
-					tabIndex={2}
-					onChange={event => setTagItem(event.target.value)}
-					value={tagItem}
-					onKeyPress={onKeyPress}
-				/>
-			</div>
+			{!tags ? (
+				<div className='tag__box' onClick={onClickInput}>
+					{copyTagList.map((tagItem, index) => {
+						return (
+							<div className='tag__item' key={index}>
+								<span>{tagItem}</span>
+								<button onClick={deleteTagItem} id={'' + index}>
+									X
+								</button>
+							</div>
+						);
+					})}
+					<input
+						type='text'
+						placeholder='태그를 입력하고 엔터를 누르세요.'
+						tabIndex={2}
+						onChange={event => setTagItem(event.target.value)}
+						value={tagItem}
+						onKeyPress={onKeyPress}
+					/>
+				</div>
+			) : (
+				<div className='tag__box'>
+					{tags.map((tag, index) => {
+						return (
+							<div className='tag__item' key={index}>
+								<span>{tag}</span>
+							</div>
+						);
+					})}
+				</div>
+			)}
 			{isDropdownVisible && (
 				<div className='tag-dropdown'>
 					{options.map((tag, index) => (
