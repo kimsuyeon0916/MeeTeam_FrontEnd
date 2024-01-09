@@ -1,9 +1,9 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
-import { modules } from '../../utils/index';
+import { modules } from '../../../utils/index';
 import { useNavigate } from 'react-router-dom';
-import { Subtitle, Dot, InfoItem, MeeteamTag, AddButton } from '../../components';
-import { areaState, categoryState, dateState, fieldState } from '../../atom';
+import { Subtitle, Dot, InfoItem, MeeteamTag, AddButton } from '../../../components';
+import { areaState, categoryState, dateState, fieldState } from '../../../atom';
 import S from './MeeTeamCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';

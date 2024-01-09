@@ -1,14 +1,14 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
-import { Subtitle, Dot, InfoItem, MeeteamTag, AddButton } from '../../components/index';
+import { Subtitle, Dot, InfoItem, MeeteamTag, AddButton } from '../../../components/index';
 import {
 	areaRecruitState,
 	fieldRecruitState,
 	dateRecruitState,
 	deadlineState,
 	categoryRecruitState,
-} from '../../atom';
-import { modules } from '../../utils/index';
+} from '../../../atom';
+import { modules } from '../../../utils/index';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import S from './recruitCreatePage.styled';
