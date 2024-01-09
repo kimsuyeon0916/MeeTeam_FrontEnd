@@ -26,7 +26,7 @@ export const areaRecruitState = atom({
 });
 
 export const fieldRecruitState = atom({
-	key: 'fieldRecruitState',
+	key: 'fieldRecruitState1',
 	default: '',
 });
 
