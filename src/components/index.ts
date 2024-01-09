@@ -23,6 +23,7 @@ import RecruitCard from './recruit/RecruitCard';
 import Status from './meeteam/status/Status';
 import Filter from './meeteam/filter/Filter';
 import Dropdown from './dropdown/Dropdown';
+import DeadlineSelect from './dateSelect/DeadlineSelect';
 
 export {
 	Header,
@@ -50,4 +51,5 @@ export {
 	Status,
 	Filter,
 	Dropdown,
+	DeadlineSelect,
 };

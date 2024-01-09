@@ -20,6 +20,11 @@ export const dateState = atom({
 	default: [new Date(), new Date()],
 });
 
+export const deadlineState = atom({
+	key: 'deadlineState',
+	default: new Date(),
+});
+
 export const validNameState = atom({
 	key: 'validNameState',
 	default: {

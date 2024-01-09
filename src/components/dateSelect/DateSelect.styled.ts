@@ -53,9 +53,10 @@ const DateSelect = styled.div`
 	}
 
 	.react-datepicker__month-container {
-		width: 30rem;
+		width: 100%;
 	}
 	.react-datepicker-popper {
+		width: 40.125rem;
 		z-index: 105;
 	}
 	.react-datepicker {
@@ -67,6 +68,7 @@ const DateSelect = styled.div`
 		border-radius: 0.3rem;
 		display: inline-block;
 		position: relative;
+		width: 100%;
 	}
 	.react-datepicker__header {
 		text-align: center;

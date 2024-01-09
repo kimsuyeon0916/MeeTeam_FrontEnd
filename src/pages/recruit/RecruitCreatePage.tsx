@@ -1,7 +1,7 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Subtitle, Dot, InfoItem, MeeteamTag, AddButton } from '../../components/index';
-import { areaState, categoryState, dateState, fieldState } from '../../atom';
+import { areaState, categoryState, dateState, deadlineState, fieldState } from '../../atom';
 import { modules } from '../../utils/index';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -11,6 +11,7 @@ const RecruitCreatePage = () => {
 	const area = useRecoilValue(areaState);
 	const field = useRecoilValue(fieldState);
 	const category = useRecoilValue(categoryState);
+	const deadline = useRecoilValue(deadlineState);
 	const quillRef = useRef<ReactQuill | null>(null);
 	const [memberList, setMemberList] = useState([]);
 	const copyMemberList = [...memberList];
@@ -37,6 +38,10 @@ const RecruitCreatePage = () => {
 	});
 	const [isValidDate, setIsValidDate] = useState({
 		validDate: false,
+		validMessage: '',
+	});
+	const [isValidDeadline, setIsValidDeadline] = useState({
+		validDeadline: false,
 		validMessage: '',
 	});
 
@@ -105,7 +110,7 @@ const RecruitCreatePage = () => {
 			setIsValidCategory({ validCategory: true, validMessage: '' });
 		}
 
-		// 밋팀 기간 검사
+		// 기간 검사
 		if (endDate < new Date()) {
 			setIsValidDate({
 				validDate: false,
@@ -115,6 +120,20 @@ const RecruitCreatePage = () => {
 		if (endDate > new Date()) {
 			setIsValidDate({
 				validDate: true,
+				validMessage: '',
+			});
+		}
+
+		// 구인 마감일 검사
+		if (deadline < new Date()) {
+			setIsValidDeadline({
+				validDeadline: false,
+				validMessage: '* 날짜를 다시 설정해주세요.',
+			});
+		}
+		if (deadline > new Date()) {
+			setIsValidDeadline({
+				validDeadline: true,
 				validMessage: '',
 			});
 		}
@@ -181,6 +200,12 @@ const RecruitCreatePage = () => {
 									</div>
 									<div className='fix'>
 										<InfoItem isDot='false' title='공개 여부' optionData={['공개', '비공개']} />
+									</div>
+								</div>
+								<div className='container__info-select'>
+									<div>
+										<InfoItem isDot='true' title='구인 마감일' optionData={[]} type='구인 마감일' />
+										{!isValidDeadline.validDeadline && <p>{isValidDeadline.validMessage}</p>}
 									</div>
 								</div>
 							</div>

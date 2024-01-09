@@ -179,7 +179,7 @@ const MeeTeamCreatePage = () => {
 								</div>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem isDot='true' title='밋팀 기간' optionData={[]} type='기간' />
+										<InfoItem isDot='true' title='기간' optionData={[]} type='기간' />
 										{!isValidDate.validDate && <p>{isValidDate.validMessage}</p>}
 									</div>
 									<div className='fix'>
