@@ -20,6 +20,26 @@ export const dateState = atom({
 	default: [new Date(), new Date()],
 });
 
+export const areaRecruitState = atom({
+	key: 'areaRecruitState1',
+	default: '',
+});
+
+export const fieldRecruitState = atom({
+	key: 'fieldRecruitState',
+	default: '',
+});
+
+export const categoryRecruitState = atom({
+	key: 'categoryRecruitState',
+	default: '',
+});
+
+export const dateRecruitState = atom({
+	key: 'dateRecruitState',
+	default: [new Date(), new Date()],
+});
+
 export const deadlineState = atom({
 	key: 'deadlineState',
 	default: new Date(),

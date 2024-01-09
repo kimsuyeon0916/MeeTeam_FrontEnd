@@ -1,22 +1,28 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Subtitle, Dot, InfoItem, MeeteamTag, AddButton } from '../../components/index';
-import { areaState, categoryState, dateState, deadlineState, fieldState } from '../../atom';
+import {
+	areaRecruitState,
+	fieldRecruitState,
+	dateRecruitState,
+	deadlineState,
+	categoryRecruitState,
+} from '../../atom';
 import { modules } from '../../utils/index';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import S from './recruitCreatePage.styled';
 
 const RecruitCreatePage = () => {
-	const area = useRecoilValue(areaState);
-	const field = useRecoilValue(fieldState);
-	const category = useRecoilValue(categoryState);
+	const area = useRecoilValue(areaRecruitState);
+	const field = useRecoilValue(fieldRecruitState);
+	const category = useRecoilValue(categoryRecruitState);
 	const deadline = useRecoilValue(deadlineState);
 	const quillRef = useRef<ReactQuill | null>(null);
 	const [memberList, setMemberList] = useState([]);
 	const copyMemberList = [...memberList];
 	const [teamName, setTeamName] = useState<string>('');
-	const [startDate, endDate] = useRecoilValue(dateState);
+	const [startDate, endDate] = useRecoilValue(dateRecruitState);
 	const [file, setFile] = useState<string>('');
 	const [fileName, setFileName] = useState<string>('');
 
