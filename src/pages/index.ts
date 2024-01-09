@@ -10,6 +10,7 @@ import ManageMeeteamPage from './manage/meeteam/ManageMeeteamPage';
 import ManageRecruitPage from './manage/recruit/ManageRecruitPage';
 import ManagePortpolioPage from './manage/portpolio/ManagePortpolioPage';
 import RecruitCreatePage from './create/recruitCreatePage/RecruitCreatePage';
+import OutputCreatePage from './create/outputCreatePage/OutputCreatePage';
 
 export {
 	MainPage,
@@ -24,4 +25,5 @@ export {
 	ManageRecruitPage,
 	ManagePortpolioPage,
 	RecruitCreatePage,
+	OutputCreatePage,
 };

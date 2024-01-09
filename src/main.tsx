@@ -15,6 +15,7 @@ import {
 	ManageRecruitPage,
 	ManagePortpolioPage,
 	RecruitCreatePage,
+	OutputCreatePage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
 			{
 				path: 'create/recruit',
 				element: <RecruitCreatePage />,
+			},
+			{
+				path: 'create/output',
+				element: <OutputCreatePage />,
 			},
 			{
 				path: 'meeteam/:meeteamId?',
