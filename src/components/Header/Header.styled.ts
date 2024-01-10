@@ -172,10 +172,11 @@ const Header = styled.div`
 
 			.dropdown {
 				position: absolute;
-				top: 3rem;
-				right: -3rem;
+				top: 4rem;
+				right: 0rem;
 				width: 15rem;
-				background-color: #f0f0f0;
+				background: #fff;
+				box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.1);
 				border-radius: 0.8rem;
 				display: flex;
 				flex-direction: column;

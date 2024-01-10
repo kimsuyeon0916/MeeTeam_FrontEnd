@@ -36,8 +36,8 @@ const RecruitPage = () => {
 					<div className='sep'></div>
 					<Dropdown data={['개발']} initialData='카테고리' allowNeed={true} />
 					<div className='dropdown-spec'>
-						<Dropdown data={['개발']} initialData='🔗기술 스택' allowNeed={true} />
-						<Dropdown data={['개발']} initialData='👤포지션' allowNeed={true} />
+						<Dropdown data={['개발']} initialData='🔗 기술 스택' allowNeed={true} />
+						<Dropdown data={['개발']} initialData='👤 포지션' allowNeed={true} />
 					</div>
 				</div>
 			</div>
