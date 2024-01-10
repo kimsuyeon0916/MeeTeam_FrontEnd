@@ -24,7 +24,7 @@ const Dropdown = styled.div<IDropdown>`
 		line-height: 2.1rem; /* 233.333% */
 		letter-spacing: 0.015rem;
 		cursor: pointer;
-		width: 10rem;
+		/* width: 10rem; */
 
 		label {
 			cursor: pointer;
