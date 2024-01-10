@@ -51,6 +51,14 @@ const RecruitPage = styled.div`
 		margin-left: 3rem;
 		gap: 1.65rem;
 	}
+
+	hr {
+		margin-top: 2.32rem;
+		margin-bottom: 2.32rem;
+		background: #ababab;
+		height: 0.75px;
+		border: 0;
+	}
 `;
 
 const S = { RecruitPage };
