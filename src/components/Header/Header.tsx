@@ -168,7 +168,7 @@ const Header = () => {
 							</div>
 						)}
 					</div>
-					<div className='header__menu--create' onClick={() => navigate('/create')}>
+					<div className='header__menu--create' onClick={() => navigate('/create/meeteam')}>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							width='26'
