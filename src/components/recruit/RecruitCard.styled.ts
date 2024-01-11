@@ -17,7 +17,7 @@ const RecruitCard = styled.div<IManageRecruitPage>`
 	padding: 0 1.8rem;
 	box-sizing: border-box;
 
-	.container-recruits_info {
+	.container-recruits__info {
 		display: flex;
 		flex-direction: column;
 
@@ -38,7 +38,7 @@ const RecruitCard = styled.div<IManageRecruitPage>`
 		}
 	}
 
-	.container-recruits_options {
+	.container-recruits__options {
 		display: flex;
 		margin-right: 3.45rem;
 	}

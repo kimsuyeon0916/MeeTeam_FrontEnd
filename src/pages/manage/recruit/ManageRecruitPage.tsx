@@ -4,11 +4,6 @@ import S from './ManageRecruitPage.styled';
 import { IRecruitCard } from '../../../components/recruit/RecruitCard';
 
 const ManageRecruitPage = () => {
-	const [isOn, setIsOn] = useState<boolean>(false);
-	const toggleHandler = () => {
-		setIsOn(prev => !prev);
-	};
-
 	const data: IRecruitCard[] = [
 		{
 			title: '[커뮤니티 웹 서비스 프로젝트] 디자이너 모집',
