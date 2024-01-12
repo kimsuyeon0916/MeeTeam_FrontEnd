@@ -18,6 +18,9 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 			event.preventDefault();
 			submitTagItem();
 		}
+		if (event.key === 'Enter') {
+			event.preventDefault();
+		}
 	};
 
 	const submitTagItem = () => {
@@ -39,10 +42,12 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 	};
 
 	const onClickTagOptions = (selectedTag: string) => {
-		let updatedTagList = [...tagList];
-		updatedTagList.push(selectedTag);
-		setTagList(updatedTagList);
-		setIsDropdownVisible(false);
+		if (tagList.length < 20) {
+			let updatedTagList = [...tagList];
+			updatedTagList.push(selectedTag);
+			setTagList(updatedTagList);
+			setIsDropdownVisible(false);
+		}
 	};
 
 	useEffect(() => {
@@ -54,6 +59,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 				!dropdownRef.current.contains(target as Node)
 			) {
 				setIsDropdownVisible(false);
+				setTagItem('');
 			}
 		};
 		document.addEventListener('mousedown', outsideClick);
@@ -70,7 +76,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 						return (
 							<div className='tag__item' key={index}>
 								<span>{tagItem}</span>
-								<button onClick={deleteTagItem} id={'' + index}>
+								<button type='button' onClick={deleteTagItem} id={'' + index}>
 									X
 								</button>
 							</div>
@@ -78,8 +84,15 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 					})}
 					<input
 						type='text'
-						placeholder='태그를 입력하고 엔터를 누르세요.'
+						placeholder={
+							isDropdownVisible
+								? tagList.length < 20
+									? '태그를 입력하고 엔터를 누르세요.'
+									: '태그는 20개까지 선택할 수 있습니다.'
+								: ''
+						}
 						tabIndex={2}
+						disabled={tagList.length < 20 ? false : true}
 						onChange={event => setTagItem(event.target.value)}
 						value={tagItem}
 						onKeyPress={onKeyPress}
