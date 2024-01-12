@@ -35,7 +35,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 	};
 
 	const onClickInput = () => {
-		setIsDropdownVisible(prev => !prev);
+		setIsDropdownVisible(true);
 	};
 
 	const onClickTagOptions = (selectedTag: string) => {
@@ -84,6 +84,19 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 						value={tagItem}
 						onKeyPress={onKeyPress}
 					/>
+					{isDropdownVisible && (
+						<div className='tag-dropdown'>
+							{options.map((tag, index) => (
+								<div
+									className='tag__item option'
+									key={index}
+									onClick={() => onClickTagOptions(tag)}
+								>
+									{tag}
+								</div>
+							))}
+						</div>
+					)}
 				</div>
 			) : (
 				<div className='tag__box'>
@@ -94,15 +107,6 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 							</div>
 						);
 					})}
-				</div>
-			)}
-			{isDropdownVisible && (
-				<div className='tag-dropdown'>
-					{options.map((tag, index) => (
-						<div className='tag__item option' key={index} onClick={() => onClickTagOptions(tag)}>
-							{tag}
-						</div>
-					))}
 				</div>
 			)}
 		</S.MeeteamTag>
