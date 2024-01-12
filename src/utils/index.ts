@@ -8,6 +8,7 @@ import OptionIcon from './option/icon/OptionIcon';
 import OptionModal from './option/optionModal/OptionModal';
 import Option from './option/Option';
 import RadiusProfile from './profile/RadiusProfile';
+import CopyClipBoard from './CopyClipBoard';
 
 export {
 	modules,
@@ -21,4 +22,5 @@ export {
 	OptionModal,
 	Option,
 	RadiusProfile,
+	CopyClipBoard,
 };

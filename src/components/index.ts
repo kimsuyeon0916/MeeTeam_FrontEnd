@@ -33,6 +33,8 @@ import {
 	memberList,
 	MEMBER_PROFILE_DEFAULT_ICON,
 	MEMBER_PLUS_ICON,
+	MEMBER_PLUS_CARD,
+	MEMBER_BOTTOM_ARROW_ICON,
 } from './meeteam/main/member/MemberData';
 import type { memberProps } from './meeteam/main/member/MemberData';
 import {
@@ -40,6 +42,8 @@ import {
 	BOTTOM_ARROW_ICON,
 	TOP_ARROW_BUTTON,
 } from './meeteam/main/information/InformationData';
+import MemberCard from './meeteam/memberCard/MemberCard';
+import MemberContact from './meeteam/memberContact/memberContact';
 
 export {
 	Header,
@@ -76,7 +80,11 @@ export {
 	memberProps,
 	MEMBER_PROFILE_DEFAULT_ICON,
 	MEMBER_PLUS_ICON,
+	MEMBER_PLUS_CARD,
+	MEMBER_BOTTOM_ARROW_ICON,
 	meeteamInformation,
 	BOTTOM_ARROW_ICON,
 	TOP_ARROW_BUTTON,
+	MemberCard,
+	MemberContact,
 };
