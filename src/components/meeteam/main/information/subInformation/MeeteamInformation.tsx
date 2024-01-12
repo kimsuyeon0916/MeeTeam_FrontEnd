@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import S from './MeeteamInformation.styled';
+import S from './SubInformation.styled';
 import { Option, modules, formats } from '../../../../../utils';
 import { meeteamInformation, BOTTOM_ARROW_ICON, TOP_ARROW_BUTTON } from '../../../../index';
 
@@ -18,28 +18,28 @@ const MeeteamInformation = () => {
 
 	return (
 		<form>
-			<S.MeeteamInformationLayout $fold={fold} $editMode={editMode}>
-				<S.MeeteamInformationHeader>
+			<S.SubInformationLayout $fold={fold} $editMode={editMode}>
+				<S.SubInformationHeader>
 					<h2 className='main--big-text'>밋팀 정보</h2>
 					{editMode ? '' : <Option options={optionList} />}
-				</S.MeeteamInformationHeader>
-				<div className='meeteam-information__column'>
-					<label className='meeteam-information__row'>
-						<span className='meeteam-information__label'>제목</span>
+				</S.SubInformationHeader>
+				<div className='sub-information__column'>
+					<label className='sub-information__row'>
+						<span className='sub-information__label'>제목</span>
 						{editMode ? (
-							<S.MeeteamInformationInput
+							<S.SubInformationInput
 								type='text'
 								placeholder='밋팀 제목을 입력해주세요.'
 								defaultValue={meeteamInformation.title}
 							/>
 						) : (
-							<S.MeeteamInformationBox>{meeteamInformation.title}</S.MeeteamInformationBox>
+							<S.SubInformationBox>{meeteamInformation.title}</S.SubInformationBox>
 						)}
 					</label>
-					<label className='meeteam-information__row'>
-						<span className='meeteam-information__label'>소개</span>
+					<label className='sub-information__row'>
+						<span className='sub-information__label'>소개</span>
 						{editMode ? (
-							<S.MeeteamInformationEditor
+							<S.SubInformationEditor
 								ref={quillRef}
 								placeholder='밋팀 소개를 입력해주세요.'
 								value={meeteamInformation.content}
@@ -47,27 +47,25 @@ const MeeteamInformation = () => {
 								formats={formats}
 							/>
 						) : (
-							<S.MeeteamInformationBox $fold={fold}>
-								{meeteamInformation.content}
-							</S.MeeteamInformationBox>
+							<S.SubInformationBox $fold={fold}>{meeteamInformation.content}</S.SubInformationBox>
 						)}
 					</label>
 				</div>
 				{editMode ? (
-					<div className='meeteam-information__button-row'>
-						<S.MeeteamInformationCancelButton type='button' onClick={() => setEditMode(false)}>
+					<div className='sub-information__button-row'>
+						<S.SubInformationCancelButton type='button' onClick={() => setEditMode(false)}>
 							취소
-						</S.MeeteamInformationCancelButton>
-						<S.MeeteamInformationSaveButton type='submit' onClick={() => setEditMode(false)}>
+						</S.SubInformationCancelButton>
+						<S.SubInformationSaveButton type='submit' onClick={() => setEditMode(false)}>
 							저장하기
-						</S.MeeteamInformationSaveButton>
+						</S.SubInformationSaveButton>
 					</div>
 				) : (
-					<S.MeeteamInformationViewButton type='button' onClick={() => setFold(!fold)}>
+					<S.SubInformationViewButton type='button' onClick={() => setFold(!fold)}>
 						{fold ? BOTTOM_ARROW_ICON : TOP_ARROW_BUTTON}
-					</S.MeeteamInformationViewButton>
+					</S.SubInformationViewButton>
 				)}
-			</S.MeeteamInformationLayout>
+			</S.SubInformationLayout>
 		</form>
 	);
 };

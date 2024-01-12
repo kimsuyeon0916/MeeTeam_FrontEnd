@@ -6,7 +6,7 @@ interface Props {
 	$fold?: boolean;
 	$editMode?: boolean;
 }
-const MeeteamInformationLayout = styled(Main.MainArticle)<Props>`
+const SubInformationLayout = styled(Main.MainArticle)<Props>`
 	display: flex;
 	flex-direction: column;
 	font-size: 1.5rem;
@@ -14,13 +14,13 @@ const MeeteamInformationLayout = styled(Main.MainArticle)<Props>`
 	font-weight: 500;
 	height: ${props => (props.$editMode ? '100%' : props.$fold ? '24.6rem' : '')};
 
-	.meeteam-information__row {
+	.sub-information__row {
 		display: flex;
 		flex-direction: row;
 		column-gap: 2.7rem;
 	}
 
-	.meeteam-information__column {
+	.sub-information__column {
 		display: flex;
 		flex-direction: column;
 		row-gap: ${props => (props.$editMode ? '1.5rem' : '2.25rem')};
@@ -29,7 +29,7 @@ const MeeteamInformationLayout = styled(Main.MainArticle)<Props>`
 		padding-bottom: 1.63rem;
 	}
 
-	.meeteam-information__button-row {
+	.sub-information__button-row {
 		display: flex;
 		flex-direction: row;
 		column-gap: 0.9rem;
@@ -38,18 +38,18 @@ const MeeteamInformationLayout = styled(Main.MainArticle)<Props>`
 		margin-bottom: 2.55rem;
 	}
 
-	.meeteam-information__label {
+	.sub-information__label {
 		line-height: ${props => (props.$editMode ? '4.875rem' : '1.8rem')};
 	}
 `;
 
-const MeeteamInformationHeader = styled.header`
+const SubInformationHeader = styled.header`
 	display: flex;
 	align-items: center;
 	padding: 2.17rem 2.55rem;
 `;
 
-const MeeteamInformationEditor = styled(ReactQuill)`
+const SubInformationEditor = styled(ReactQuill)`
 	flex: 1 !important;
 	min-height: 23.625rem !important;
 	border-radius: 0.75rem !important;
@@ -75,7 +75,7 @@ const MeeteamInformationEditor = styled(ReactQuill)`
 	}
 `;
 
-const MeeteamInformationInput = styled.input`
+const SubInformationInput = styled.input`
 	all: unset;
 	display: flex;
 	flex: 1;
@@ -89,7 +89,7 @@ const MeeteamInformationInput = styled.input`
 	cursor: text;
 `;
 
-const MeeteamInformationBox = styled.div<{ $fold?: boolean }>`
+const SubInformationBox = styled.div<{ $fold?: boolean }>`
 	display: flex;
 	flex: 1;
 	font-weight: 400;
@@ -110,7 +110,7 @@ const MeeteamInformationBox = styled.div<{ $fold?: boolean }>`
 			: ``};
 `;
 
-const MeeteamInformationViewButton = styled.button`
+const SubInformationViewButton = styled.button`
 	all: unset;
 	display: flex;
 	align-items: center;
@@ -123,7 +123,7 @@ const MeeteamInformationViewButton = styled.button`
 	}
 `;
 
-const MeeteamInformationSaveButton = styled.button`
+const SubInformationSaveButton = styled.button`
 	all: unset;
 	display: flex;
 	align-items: center;
@@ -136,20 +136,20 @@ const MeeteamInformationSaveButton = styled.button`
 	cursor: pointer;
 `;
 
-const MeeteamInformationCancelButton = styled(MeeteamInformationSaveButton)`
+const SubInformationCancelButton = styled(SubInformationSaveButton)`
 	background: #ededed;
 	color: #000;
 `;
 
 const S = {
-	MeeteamInformationLayout,
-	MeeteamInformationHeader,
-	MeeteamInformationBox,
-	MeeteamInformationEditor,
-	MeeteamInformationInput,
-	MeeteamInformationViewButton,
-	MeeteamInformationSaveButton,
-	MeeteamInformationCancelButton,
+	SubInformationLayout: SubInformationLayout,
+	SubInformationHeader,
+	SubInformationBox,
+	SubInformationEditor,
+	SubInformationInput,
+	SubInformationViewButton,
+	SubInformationSaveButton,
+	SubInformationCancelButton,
 };
 
 export default S;
