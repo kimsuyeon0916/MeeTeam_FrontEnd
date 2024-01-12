@@ -88,6 +88,7 @@ const RecruitPage = styled.div`
 				font-weight: 400;
 				line-height: 1.35rem; /* 90% */
 				letter-spacing: 0.015rem;
+				cursor: pointer;
 			}
 
 			.bookmark {
