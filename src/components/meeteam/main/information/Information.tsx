@@ -1,6 +1,6 @@
 import React from 'react';
 import S from './Information.styled';
-import MeeteamInformation from './meeteamInformation/MeeteamInformation';
+import MeeteamInformation from './subInformation/MeeteamInformation';
 import { Issue, Link } from '../../..';
 
 const Information = () => {
