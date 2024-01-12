@@ -45,11 +45,21 @@ const DashBoardLink = () => {
 					.filter(element => element.link !== ``)
 					.map((element, index) => (
 						<div className='dash-board-link__row' key={index}>
-							<S.DashBoardLinkImageIcon src={element.icon} />
-							<a href={element.link} target='_blank' rel='noreferrer noopener'>
+							<S.DashBoardLinkImageIcon src={element.icon} alt={element.title + ` 아이콘`} />
+							<a
+								href={element.link}
+								target='_blank'
+								title={element.title}
+								rel='noreferrer noopener'
+							>
 								{element.title}
 							</a>
-							<a href={element.link} target='_blank' rel='noreferrer noopener'>
+							<a
+								href={element.link}
+								target='_blank'
+								title={element.title + `바로 가기`}
+								rel='noreferrer noopener'
+							>
 								{LINK_SHORTCUTS_BUTTON}
 							</a>
 						</div>
