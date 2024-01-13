@@ -1,5 +1,5 @@
 import MainPage from './MainPage';
-import RecruitPage from './RecruitPage';
+import RecruitPage from './recruit/RecruitPage';
 import GalaryPage from './GalaryPage';
 import MemberPage from './MemberPage';
 import InformationUsePage from './InformationUsePage';
@@ -11,6 +11,7 @@ import ManageRecruitPage from './manage/recruit/ManageRecruitPage';
 import ManagePortpolioPage from './manage/portpolio/ManagePortpolioPage';
 import RecruitCreatePage from './create/recruitCreatePage/RecruitCreatePage';
 import OutputCreatePage from './create/outputCreatePage/OutputCreatePage';
+import RecruitDetailPage from './recruit/RecruitDetailPage';
 
 export {
 	MainPage,
@@ -26,4 +27,5 @@ export {
 	ManagePortpolioPage,
 	RecruitCreatePage,
 	OutputCreatePage,
+	RecruitDetailPage,
 };

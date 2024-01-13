@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dropdown, Tag } from '../components';
+import { Dropdown, Tag } from '../../components';
 import S from './RecruitPage.styled';
 
 const RecruitPage = () => {
@@ -16,6 +16,8 @@ const RecruitPage = () => {
 			setIsFiltered({ isInside: false, isOutside: true });
 		}
 	};
+
+	const onClickContent = () => {};
 	return (
 		<S.RecruitPage>
 			<div>
@@ -74,7 +76,7 @@ const RecruitPage = () => {
 				<div className='container-contents'>
 					<div className='container-contents__row'>
 						<div className='subtitle'>👀 내가 관심 있을 만한 프로젝트</div>
-						<div className='contents'>
+						<div className='contents' onClick={onClickContent}>
 							<div className='content'>
 								<div className='content-tags'>
 									<div className='tags'>
