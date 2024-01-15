@@ -9,7 +9,6 @@ const ManageRecruitPage = styled.div<IManageRecruitPage>`
 
 	.container-status {
 		display: flex;
-		gap: 2.1rem;
 
 		.status {
 			width: 10.575rem;

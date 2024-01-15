@@ -16,6 +16,7 @@ import {
 	RecruitCreatePage,
 	OutputCreatePage,
 	IntegratedManagePage,
+	MyActivityManagePage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
 					{
 						path: 'portpolio',
 						element: <ManagePortpolioPage />,
+					},
+					{
+						path: 'activity',
+						element: <MyActivityManagePage />,
 					},
 				],
 			},
