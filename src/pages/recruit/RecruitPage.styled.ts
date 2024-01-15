@@ -154,7 +154,6 @@ const RecruitPage = styled.div`
 				display: flex;
 				margin: 0 auto;
 				gap: 1.8rem;
-				cursor: pointer;
 
 				.content {
 					display: flex;
@@ -166,6 +165,7 @@ const RecruitPage = styled.div`
 					border: 1.5px solid var(--main-color, #5877fc);
 					background: #f9f9f9;
 					padding: 1.35rem 1.5rem 1.8rem 1.5rem;
+					cursor: pointer;
 
 					.content-tags {
 						display: flex;

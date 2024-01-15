@@ -35,7 +35,7 @@ const Header = () => {
 	};
 
 	useEffect(() => {
-		if (location.pathname == '/recruit') {
+		if (location.pathname === '/recruit' || location.pathname === '/recruit/:id') {
 			setIsHere({ recruit: true, galary: false, member: false, inform: false });
 		}
 		if (location.pathname === '/galary') {

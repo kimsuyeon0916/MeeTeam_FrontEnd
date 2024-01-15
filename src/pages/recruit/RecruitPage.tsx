@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Dropdown, Tag } from '../../components';
 import S from './RecruitPage.styled';
+import { useNavigate } from 'react-router-dom';
 
 const RecruitPage = () => {
+	const navigate = useNavigate();
 	const [isFiltered, setIsFiltered] = useState({
 		isInside: true,
 		isOutside: false,
@@ -17,7 +19,9 @@ const RecruitPage = () => {
 		}
 	};
 
-	const onClickContent = () => {};
+	const onClickContent = () => {
+		navigate('/recruit/1');
+	};
 	return (
 		<S.RecruitPage>
 			<div>
@@ -76,8 +80,8 @@ const RecruitPage = () => {
 				<div className='container-contents'>
 					<div className='container-contents__row'>
 						<div className='subtitle'>👀 내가 관심 있을 만한 프로젝트</div>
-						<div className='contents' onClick={onClickContent}>
-							<div className='content'>
+						<div className='contents'>
+							<div className='content' onClick={onClickContent}>
 								<div className='content-tags'>
 									<div className='tags'>
 										<div>교외</div>

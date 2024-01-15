@@ -16,6 +16,7 @@ import {
 	ManagePortpolioPage,
 	RecruitCreatePage,
 	OutputCreatePage,
+	RecruitDetailPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
 			{
 				path: 'recruit',
 				element: <RecruitPage />,
+			},
+			{
+				path: 'recruit/:id',
+				element: <RecruitDetailPage />,
 			},
 			{
 				path: 'galary',
