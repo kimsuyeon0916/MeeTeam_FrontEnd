@@ -10,7 +10,7 @@ interface IDropdown {
 const Dropdown = ({ data, initialData, allowNeed }: IDropdown) => {
 	const [currentValue, setCurrentValue] = useState(`${initialData}`);
 	const [showDropdown, setShowDropdown] = useState(false);
-	const dropdownRef = useRef();
+	const dropdownRef = useRef<HTMLDivElement | null>(null);
 
 	const onClickDropdown = () => {
 		setShowDropdown(prev => !prev);
@@ -22,9 +22,9 @@ const Dropdown = ({ data, initialData, allowNeed }: IDropdown) => {
 	};
 
 	useEffect(() => {
-		const outsideClick = (event: any) => {
+		const outsideClick = (event: MouseEvent) => {
 			const { target } = event;
-			if (showDropdown && dropdownRef.current && !dropdownRef.current.contains(target)) {
+			if (showDropdown && dropdownRef.current && !dropdownRef.current.contains(target as Node)) {
 				setShowDropdown(false);
 			}
 		};
