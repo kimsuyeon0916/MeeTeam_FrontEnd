@@ -8,27 +8,27 @@ interface issueProps {
 
 const issueList: issueProps[] = [
 	{
-		title: '알림',
+		title: '구인 현황',
 		timeStamp: '23.12.25',
 		content: '수연님이 구인글을 수정했습니다.',
 	},
 	{
-		title: '알림',
+		title: '구인 현황',
 		timeStamp: '23.12.25',
 		content: '승준님이 구인글을 수정했습니다.',
 	},
 	{
-		title: '알림',
+		title: '밋팀',
 		timeStamp: '23.12.25',
 		content: '부겸님이 밋팀 정보를 수정했습니다.',
 	},
 	{
-		title: '알림',
+		title: '밋팀',
 		timeStamp: '23.12.25',
 		content: '민규님이 밋팀 정보를 수정했습니다.',
 	},
 	{
-		title: '알림',
+		title: '밋팀',
 		timeStamp: '23.12.25',
 		content: '지원님이 밋팀 정보를 수정했습니다.',
 	},
