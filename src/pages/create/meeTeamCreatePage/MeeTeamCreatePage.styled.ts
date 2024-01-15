@@ -47,7 +47,7 @@ const MeeTeamCreatePage = styled.div`
 
 	.wrapper {
 		width: 100%;
-		margin-top: 2rem;
+		margin-top: 2.5rem;
 		margin-bottom: 50px;
 		padding-bottom: 50px;
 		border-radius: 0.5rem;
@@ -60,11 +60,9 @@ const MeeTeamCreatePage = styled.div`
 			padding-top: 50px;
 			display: flex;
 			flex-direction: column;
-			gap: 5rem;
+			gap: 2rem;
 		}
 		.container__teamname {
-			height: 100px;
-
 			.container__teamname-input {
 				padding: 10px 0px;
 
@@ -97,7 +95,7 @@ const MeeTeamCreatePage = styled.div`
 			.info-wrapper {
 				display: flex;
 				flex-direction: column;
-				gap: 2rem;
+				gap: 2.5rem;
 				margin: 0 auto;
 			}
 
@@ -107,7 +105,7 @@ const MeeTeamCreatePage = styled.div`
 				justify-content: flex-start;
 				align-items: center;
 				gap: 30.82rem;
-				margin-top: 15px;
+				margin-top: 0.6rem;
 
 				p {
 					position: absolute;
@@ -120,11 +118,11 @@ const MeeTeamCreatePage = styled.div`
 		}
 
 		.container__tag {
-			margin-top: 70px;
+			margin-top: 2.55rem;
 		}
 
 		.container__intro {
-			margin-top: 7rem;
+			margin-top: 4.35rem;
 
 			div:nth-child(2) {
 				/* padding: 10px 20px; */
@@ -152,7 +150,7 @@ const MeeTeamCreatePage = styled.div`
 		}
 
 		.container__img {
-			margin-top: 7rem;
+			margin-top: 4.35rem;
 
 			.container__img-input {
 				padding: 10px 0px;
@@ -189,7 +187,7 @@ const MeeTeamCreatePage = styled.div`
 		}
 
 		.container__member {
-			margin-top: 70px;
+			margin-top: 4.35rem;
 			width: 100%;
 
 			.container__member-area {
