@@ -77,7 +77,7 @@ const statusList: statusProps[] = [
 		message: `멤버 제의/ 구인으로 멤버을 만날 수 있어요!`,
 		content: '구인 현황',
 		buttonName: `멤버 제의/구인하기`,
-		done: false,
+		done: true,
 	},
 	{
 		title: '산출물 등록',
