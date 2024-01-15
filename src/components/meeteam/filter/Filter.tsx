@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Dropdown } from '../..';
 import S from './Filter.styled';
 
@@ -8,14 +8,14 @@ const Filter = () => {
 		isOutside: false,
 	});
 
-	const onClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+	const onClickHandler = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		if (event.target.innerText === '교내') {
 			setIsFiltered({ isInside: true, isOutside: false });
 		}
 		if (event.target.innerText === '교외') {
 			setIsFiltered({ isInside: false, isOutside: true });
 		}
-	};
+	}, []);
 
 	return (
 		<S.Filter>
@@ -33,8 +33,11 @@ const Filter = () => {
 					initialData='프로젝트'
 					allowNeed={true}
 				/>
-				<div className='sep'></div>
 				<Dropdown data={['개발']} initialData='카테고리' allowNeed={true} />
+			</div>
+			<div className='container-checkbox'>
+				<input type='checkbox' id='recruit' />
+				<label id='recruit'>구인중인 밋팀 보기</label>
 			</div>
 		</S.Filter>
 	);

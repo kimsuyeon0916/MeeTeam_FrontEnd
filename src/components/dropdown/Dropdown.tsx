@@ -37,9 +37,10 @@ const Dropdown = ({ data, initialData, allowNeed }: IDropdown) => {
 	return (
 		<S.Dropdown allowNeed={allowNeed}>
 			<div className='menu' onClick={onClickDropdown} ref={dropdownRef}>
-				<label>
-					{currentValue} {showDropdown ? '▲' : '▼'}
-				</label>
+				<div className='temp'>
+					<div>{currentValue}</div>
+					<div>{showDropdown ? '▲' : '▼'}</div>
+				</div>
 				{showDropdown && (
 					<div className='dropdown'>
 						<ul className='menu-container'>
