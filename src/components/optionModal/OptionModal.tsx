@@ -1,6 +1,6 @@
 import React from 'react';
 import S from './OptionModal.styled';
-import { optionProps } from '../Option';
+import { optionProps } from '../option/Option';
 
 interface modalProps {
 	modalRef: React.ForwardedRef<HTMLDivElement>;

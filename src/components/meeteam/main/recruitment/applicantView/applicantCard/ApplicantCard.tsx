@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import S from './ApplicantCard.styled';
-import { applicantProps } from '../../../../..';
-import { RadiusProfile } from '../../../../../../utils';
+import { applicantProps, RadiusProfile } from '../../../../..';
 
 const ApplicantCard = (props: { applicant: applicantProps }) => {
 	const APPLICANT_PROFILE_ICON = (

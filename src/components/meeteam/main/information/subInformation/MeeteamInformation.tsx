@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import S from './SubInformation.styled';
-import { Option, modules, formats } from '../../../../../utils';
-import { meeteamInformation, BOTTOM_ARROW_ICON, TOP_ARROW_BUTTON } from '../../../../index';
+import { modules, formats } from '../../../../../utils';
+import { meeteamInformation, BOTTOM_ARROW_ICON, TOP_ARROW_BUTTON, Option } from '../../../../index';
 
 const MeeteamInformation = () => {
 	const optionList = [

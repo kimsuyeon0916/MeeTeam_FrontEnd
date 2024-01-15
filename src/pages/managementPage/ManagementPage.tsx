@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { RequiredInformation, Title, Content } from '../../components';
-import { GoBack } from '../../utils';
+import { GoBack } from '../../components';
 import S from './ManagementPage.styled';
 
 const ManagementPage = () => {

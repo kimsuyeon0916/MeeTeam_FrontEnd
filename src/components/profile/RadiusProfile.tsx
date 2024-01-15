@@ -1,6 +1,6 @@
 import React from 'react';
 import S from './RadiusProfile.styled';
-import { MEMBER_PROFILE_DEFAULT_ICON } from '../../components/index';
+import { MEMBER_PROFILE_DEFAULT_ICON } from '../index';
 
 const RadiusProfile = (props: { size?: string; url?: string }) => {
 	return (

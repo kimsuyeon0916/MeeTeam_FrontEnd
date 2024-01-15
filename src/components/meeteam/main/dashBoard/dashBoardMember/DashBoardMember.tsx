@@ -1,7 +1,6 @@
 import React from 'react';
 import S from './DashBoardMember.styled';
-import { memberList, memberProps, MEMBER_PLUS_ICON } from '../../../..';
-import { RadiusProfile } from '../../../../../utils';
+import { memberList, memberProps, MEMBER_PLUS_ICON, RadiusProfile } from '../../../..';
 import { useRecoilState } from 'recoil';
 import { contentState } from '../../../../../atom';
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import S from './Link.styled';
-import { linkList, LINK_BOTTOM_ARROW_ICON, LINK_SHORTCUTS_BUTTON } from './LinkData';
-import { Option, CopyClipBoard } from '../../../../utils';
+import { Option, linkList, LINK_BOTTOM_ARROW_ICON, LINK_SHORTCUTS_BUTTON } from '../../..';
+import { CopyClipBoard } from '../../../../utils';
 
 const Link = () => {
 	const optionList = [

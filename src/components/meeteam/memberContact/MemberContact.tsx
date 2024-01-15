@@ -1,7 +1,7 @@
 import React from 'react';
-import { RadiusProfile, CopyClipBoard } from '../../../utils';
+import { CopyClipBoard } from '../../../utils';
 import S from './MemberContact.styled';
-import { memberProps } from '../..';
+import { memberProps, RadiusProfile } from '../..';
 
 const MemberContact = (props: { member: memberProps }) => {
 	const copyLinkIcon: string =

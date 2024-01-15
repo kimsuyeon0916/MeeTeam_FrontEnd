@@ -1,7 +1,6 @@
 import React from 'react';
 import S from './MemberCard.styled';
-import { RadiusProfile } from '../../../utils';
-import { memberProps } from '../..';
+import { memberProps, RadiusProfile } from '../..';
 
 const MemberCard = (props: { member: memberProps }) => {
 	const countTags = (specification: string[][]) => {

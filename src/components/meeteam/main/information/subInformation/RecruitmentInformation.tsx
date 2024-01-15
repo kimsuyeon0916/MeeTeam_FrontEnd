@@ -1,7 +1,12 @@
 import React, { useState, useRef } from 'react';
 import S from './SubInformation.styled';
-import { Option, modules, formats } from '../../../../../utils';
-import { recruitmentInformation, BOTTOM_ARROW_ICON, TOP_ARROW_BUTTON } from '../../../../index';
+import { modules, formats } from '../../../../../utils';
+import {
+	recruitmentInformation,
+	BOTTOM_ARROW_ICON,
+	TOP_ARROW_BUTTON,
+	Option,
+} from '../../../../index';
 import { useRecoilState } from 'recoil';
 import { recruitmentInformationEditState } from '../../../../../atom';
 

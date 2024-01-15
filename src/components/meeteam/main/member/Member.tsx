@@ -7,8 +7,8 @@ import {
 	MEMBER_PLUS_CARD,
 	MEMBER_BOTTOM_ARROW_ICON,
 	MemberContact,
+	Option,
 } from '../../..';
-import { Option } from '../../../../utils';
 
 const Member = () => {
 	const leaderOptionList = [
