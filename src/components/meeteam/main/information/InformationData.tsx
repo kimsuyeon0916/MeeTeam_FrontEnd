@@ -3,6 +3,7 @@ import React from 'react';
 interface informationProps {
 	title: string;
 	content: string;
+	deadLine?: Date;
 }
 
 const meeteamInformation: informationProps = {
@@ -13,6 +14,7 @@ const meeteamInformation: informationProps = {
 const recruitmentInformation: informationProps = {
 	title: '[커뮤니티 웹 서비스 프로젝트] 디자이너 모집',
 	content: `밋팀(Meeteam)은 나 자신을 의미하는 Me, 팀을 의미하는 Team, 만남을 의미하는 Meet이 합쳐진 단어입니다.\n대학생들의 보다 원활한 팀프로젝트를 위해 기획하게 되었으며, 그 외에 포토폴리오로서의 기능까지 생각하고 있습니다!\n\n☑️궁극적인 목표\n익명이든, 익명이 아니든 오픈된 프로필을 통해서 서로에 대한 충분한 정보를 바탕으로 팀원을 구하는 문화를 만들어 보는 것입니다.\n\n이를 위해 함께 멋진 서비스를 완성할 웹 디자이너를 찾고 있어요!`,
+	deadLine: new Date('2024/02/14'),
 };
 
 const BOTTOM_ARROW_ICON: JSX.Element = (
