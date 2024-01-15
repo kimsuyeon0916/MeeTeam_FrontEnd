@@ -13,7 +13,7 @@ const ProgressStatus = () => {
 
 	return (
 		<S.ProgressStatusLayout>
-			<div className='main__row'>
+			<header className='main__row'>
 				{currentStatus && (
 					<>
 						<h2 className='main--big-text'>{currentStatus.message}</h2>
@@ -23,7 +23,7 @@ const ProgressStatus = () => {
 						</S.ProgressStatusButton>
 					</>
 				)}
-			</div>
+			</header>
 			<div className='progress-status__row'>
 				{statusList.map((status, index) => (
 					<div className='progress-status__row' key={index}>
