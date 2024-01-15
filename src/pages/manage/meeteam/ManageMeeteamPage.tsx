@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Card, Status, Filter } from '../../../components';
+import { Card, Filter } from '../../../components';
 import S from './ManageMeeteamPage.styled';
 
 const ManageMeeteamPage = () => {
@@ -9,10 +9,11 @@ const ManageMeeteamPage = () => {
 	});
 
 	const onClickHandler = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-		if (event.target.innerText === '진행중') {
+		const target = event.currentTarget;
+		if (target.innerText === '진행중') {
 			setIsClicked({ isProceed: true, isDone: false });
 		}
-		if (event.target.innerText === '진행 완료') {
+		if (target.innerText === '진행 완료') {
 			setIsClicked({ isProceed: false, isDone: true });
 		}
 	}, []);

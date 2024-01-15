@@ -9,10 +9,11 @@ const Filter = () => {
 	});
 
 	const onClickHandler = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-		if (event.target.innerText === '교내') {
+		const target = event.currentTarget;
+		if (target.innerText === '교내') {
 			setIsFiltered({ isInside: true, isOutside: false });
 		}
-		if (event.target.innerText === '교외') {
+		if (target.innerText === '교외') {
 			setIsFiltered({ isInside: false, isOutside: true });
 		}
 	}, []);
