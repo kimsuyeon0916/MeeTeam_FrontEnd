@@ -19,6 +19,7 @@ const MeeTeamCreatePage = () => {
 	const [startDate, endDate] = useRecoilValue(dateState);
 	const [file, setFile] = useState<string>('');
 	const [fileName, setFileName] = useState<string>('');
+	const [isHover, setIsHover] = useState<boolean>(false);
 
 	const [isValidName, setIsValidName] = useState({
 		validName: false,
@@ -70,6 +71,14 @@ const MeeTeamCreatePage = () => {
 			setFile(URL.createObjectURL(selectedFiles?.[0]));
 		}
 	}, []);
+
+	const handleMouseOver = () => {
+		setIsHover(true);
+	};
+
+	const handleMouseOut = () => {
+		setIsHover(false);
+	};
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -205,7 +214,7 @@ const MeeTeamCreatePage = () => {
 						</div>
 						<div className='container__img'>
 							<div>
-								<Subtitle>{'밋팀 이미지'}</Subtitle>
+								<Subtitle>{'커버 이미지'}</Subtitle>
 							</div>
 							<div className='container__img-input'>
 								<input
@@ -215,8 +224,33 @@ const MeeTeamCreatePage = () => {
 									placeholder='이미지를 업로드해주세요.'
 									onChange={onChangeImg}
 								/>
-								<label className={file ? 'haveFile' : ''} htmlFor='meeteamImg'>
-									{file ? `${fileName}` : '이미지를 업로드해주세요.'}
+								<label
+									className={`file-label ${file ? 'haveFile' : ''}`}
+									htmlFor='meeteamImg'
+									onMouseOver={handleMouseOver}
+									onMouseOut={handleMouseOut}
+								>
+									<img src='https://ifh.cc/g/YO5Z7z.jpg' />
+									{isHover && (
+										<div className='icon-upload'>
+											<svg
+												xmlns='http://www.w3.org/2000/svg'
+												width='99'
+												height='99'
+												viewBox='0 0 99 99'
+												fill='none'
+												className='icon'
+											>
+												<path
+													d='M66 49.5L49.5 33M49.5 33L33 49.5M49.5 33V66M90.75 49.5C90.75 72.2817 72.2817 90.75 49.5 90.75C26.7183 90.75 8.25 72.2817 8.25 49.5C8.25 26.7183 26.7183 8.25 49.5 8.25C72.2817 8.25 90.75 26.7183 90.75 49.5Z'
+													stroke='white'
+													stroke-width='5'
+													stroke-linecap='round'
+													stroke-linejoin='round'
+												/>
+											</svg>
+										</div>
+									)}
 								</label>
 							</div>
 						</div>
