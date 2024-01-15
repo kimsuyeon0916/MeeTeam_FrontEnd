@@ -24,7 +24,7 @@ const Filter = () => {
 				<div className={`area ${isFiltered.isInside ? '' : 'no'}`} onClick={onClickHandler}>
 					교내
 				</div>
-				<div className={`area ${isFiltered.isOutside ? '' : 'no'}`} onClick={onClickHandler}>
+				<div className={`area ${isFiltered.isOutside ? 'out' : 'no'}`} onClick={onClickHandler}>
 					교외
 				</div>
 			</div>

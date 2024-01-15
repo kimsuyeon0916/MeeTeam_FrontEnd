@@ -33,6 +33,10 @@ const Filter = styled.div`
 			cursor: pointer;
 		}
 
+		.out {
+			background-color: #f3f5ff;
+		}
+
 		.no {
 			background-color: #fff;
 		}
@@ -40,12 +44,6 @@ const Filter = styled.div`
 	.container-filter_menu {
 		display: flex;
 		gap: 1.5rem;
-	}
-	.sep {
-		width: 0.3rem;
-		height: 3.225rem;
-		flex-shrink: 0;
-		background-color: #d9d9d9;
 	}
 	.container-checkbox {
 		display: flex;
