@@ -46,6 +46,10 @@ const router = createBrowserRouter([
 				path: 'meeteam/:meeteamId?',
 				element: <ManagementPage />,
 			},
+			{
+				path: 'manage/meeteam/:meeteamId?',
+				element: <ManagementPage />,
+			},
 		],
 	},
 ]);
