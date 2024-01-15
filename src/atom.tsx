@@ -13,6 +13,7 @@ export const recruitmentState = atom({
 export const recruitmentInformationEditState = atom({
 	key: 'recruitmentInformationEditState',
 	default: false,
+});
 
 export const areaState = atom({
 	key: 'areaState1',
