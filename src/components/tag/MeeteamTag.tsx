@@ -8,13 +8,15 @@ interface IMeeteamTag {
 const MeeteamTag = ({ tags }: IMeeteamTag) => {
 	const [tagItem, setTagItem] = useState<string>('');
 	const [tagList, setTagList] = useState<string[]>([]);
+	const [isTouched, setIsTouched] = useState<boolean>(false);
 	const copyTagList = [...tagList];
 	const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
 	const options = ['#UI/UX', '#GUI', '#CX', '#BI', '#Figma'];
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		if (event.target.value.length !== 0 && event.key === 'Enter') {
+		const target = event.currentTarget;
+		if (target.value.length !== 0 && event.key === 'Enter') {
 			event.preventDefault();
 			submitTagItem();
 		}
@@ -39,6 +41,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 
 	const onClickInput = () => {
 		setIsDropdownVisible(true);
+		setIsTouched(true);
 	};
 
 	const onClickTagOptions = (selectedTag: string) => {
@@ -85,11 +88,13 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 					<input
 						type='text'
 						placeholder={
-							isDropdownVisible
-								? tagList.length < 20
-									? '태그를 입력하고 엔터를 누르세요.'
-									: '태그는 20개까지 선택할 수 있습니다.'
-								: ''
+							isTouched
+								? isDropdownVisible
+									? tagList.length < 20
+										? '태그를 입력하고 엔터를 누르세요.'
+										: '태그는 20개까지 선택할 수 있습니다.'
+									: ''
+								: '태그를 입력하고 엔터를 누르세요.'
 						}
 						tabIndex={2}
 						disabled={tagList.length < 20 ? false : true}

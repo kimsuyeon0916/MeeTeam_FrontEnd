@@ -1,7 +1,6 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { useRecoilValue } from 'recoil';
 import { modules } from '../../../utils/index';
-import { useNavigate } from 'react-router-dom';
 import { Subtitle, Dot, InfoItem, MeeteamTag, AddButton } from '../../../components';
 import { areaState, categoryState, dateState, fieldState } from '../../../atom';
 import S from './MeeTeamCreatePage.styled';
@@ -135,12 +134,12 @@ const MeeTeamCreatePage = () => {
 					<div className='container'>
 						<div className='container__teamname'>
 							<div className='container__teamname-subtitle'>
-								<Subtitle>{'밋팀명'}</Subtitle>
+								<Subtitle>{'밋팀 이름'}</Subtitle>
 								<Dot />
 							</div>
 							<div className='container__teamname-input'>
 								<input
-									placeholder='밋팀명을 입력해주세요.'
+									placeholder='밋팀 이름을 입력해주세요.'
 									type='text'
 									onChange={onChangeTeamName}
 									maxLength={20}
@@ -159,7 +158,7 @@ const MeeTeamCreatePage = () => {
 										{!isValidArea.validArea && <p>{isValidArea.validMessage}</p>}
 									</div>
 									<div>
-										<InfoItem isDot='true' title='밋팀 분야' optionData={['개발']} type='분야' />
+										<InfoItem isDot='true' title='분야' optionData={['개발']} type='분야' />
 										{!isValidField.validField && <p>{isValidField.validMessage}</p>}
 									</div>
 								</div>
@@ -167,7 +166,7 @@ const MeeTeamCreatePage = () => {
 									<div>
 										<InfoItem
 											isDot='true'
-											title='밋팀 유형'
+											title='유형'
 											optionData={['프로젝트', '스터디']}
 											type='유형'
 										/>
