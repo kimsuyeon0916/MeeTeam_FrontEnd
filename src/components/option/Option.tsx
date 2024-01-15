@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { OptionIcon, OptionModal } from '..';
 import S from './Option.styled';
 
@@ -13,26 +13,29 @@ const Option = (props: { options: optionProps[] }) => {
 
 	const modalRef = useRef<HTMLDivElement>(null);
 
-	const outSideClickHandler = (e: React.MouseEvent<HTMLElement>) => {
-		if (modalRef.current === e.target) {
-			setShowModal(false);
-		}
-	};
+	useEffect(() => {
+		const outSideClickHandler = (e: MouseEvent) => {
+			const target = e.target as HTMLDivElement;
+			console.log(target);
+			console.log(modalRef);
+
+			if (showModal && modalRef.current && !modalRef.current.contains(target)) {
+				setShowModal(false);
+			}
+		};
+
+		document.addEventListener('click', outSideClickHandler);
+		return () => document.removeEventListener('click', outSideClickHandler);
+	}, [showModal]);
 
 	const optionClickHandler = () => {
-		setShowModal(true);
+		setShowModal(prev => !prev);
 	};
 
 	return (
-		<S.OptionLayout>
+		<S.OptionLayout ref={modalRef}>
 			<OptionIcon onClick={optionClickHandler} />
-			{showModal && (
-				<OptionModal
-					modalRef={modalRef}
-					outSideClickHandler={outSideClickHandler}
-					options={props.options}
-				/>
-			)}
+			{showModal && <OptionModal options={props.options} />}
 		</S.OptionLayout>
 	);
 };

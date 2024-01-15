@@ -3,14 +3,13 @@ import S from './OptionModal.styled';
 import { optionProps } from '../option/Option';
 
 interface modalProps {
-	modalRef: React.ForwardedRef<HTMLDivElement>;
-	outSideClickHandler: (e: React.MouseEvent<HTMLElement>) => void;
+	modalRef?: React.ForwardedRef<HTMLDivElement>;
 	options: optionProps[];
 }
 
-const OptionModal = ({ modalRef, outSideClickHandler, options }: modalProps) => {
+const OptionModal = ({ modalRef, options }: modalProps) => {
 	return (
-		<div ref={modalRef} onClick={e => outSideClickHandler(e)}>
+		<div>
 			<S.OptionModalLayout>
 				{options.map((option, index) => (
 					<S.OptionModalItem key={index} onClick={option.optionClickHandler}>
