@@ -28,7 +28,7 @@ const DashBoardMember = () => {
 					type='button'
 					onClick={() => setContent('멤버')}
 				>
-					멤버 초대하기
+					멤버 초대
 					{MEMBER_PLUS_ICON}
 				</S.DashBoardMemberPlusButton>
 			</header>
