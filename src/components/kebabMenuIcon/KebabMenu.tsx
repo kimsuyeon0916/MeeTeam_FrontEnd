@@ -1,9 +1,9 @@
 import React from 'react';
-import S from './OptionIcon.styled';
+import S from './KebabMenuIcon.styled';
 
-const OptionIcon = (props: { onClick: React.MouseEventHandler<HTMLButtonElement> }) => {
+const KebabMenuIcon = (props: { onClick: React.MouseEventHandler<HTMLButtonElement> }) => {
 	return (
-		<S.OptionIconLayout type='button' onClick={props.onClick}>
+		<S.KebabMenuIconLayout type='button' onClick={props.onClick}>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
 				width='23'
@@ -45,8 +45,8 @@ const OptionIcon = (props: { onClick: React.MouseEventHandler<HTMLButtonElement>
 					strokeLinejoin='round'
 				/>
 			</svg>
-		</S.OptionIconLayout>
+		</S.KebabMenuIconLayout>
 	);
 };
 
-export default OptionIcon;
+export default KebabMenuIcon;

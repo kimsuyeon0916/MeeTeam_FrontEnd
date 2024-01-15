@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface applicantProps {
+interface Applicant {
 	nickName: string;
 	imageUrl: string;
 	name: string;
@@ -12,9 +12,9 @@ interface applicantProps {
 	comment: string;
 	isBookmark?: boolean;
 }
-export type { applicantProps };
+export type { Applicant };
 
-const applicantList: applicantProps[] = [
+const applicantList: Applicant[] = [
 	{
 		nickName: '지원투',
 		imageUrl:

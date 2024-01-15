@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface memberProps {
+interface MeeTeamMember {
 	nickName: string;
 	imageUrl: string;
 	email: string;
@@ -12,9 +12,9 @@ interface memberProps {
 	introduction: string;
 	specifications: string[][];
 }
-export type { memberProps };
+export type { MeeTeamMember };
 
-const memberList: memberProps[] = [
+const memberList: MeeTeamMember[] = [
 	{
 		nickName: '송지원',
 		imageUrl:

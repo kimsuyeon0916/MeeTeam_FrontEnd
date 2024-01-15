@@ -3,11 +3,11 @@ import S from './RequiredInformation.styled';
 import { ColorMatching } from '../../../utils';
 
 const RequiredInformation = () => {
-	interface informationProps {
+	interface RequiredInformation {
 		title: string;
 		content: string;
 	}
-	const informationList: informationProps[] = [
+	const informationList: RequiredInformation[] = [
 		{
 			title: '범위',
 			content: '교내',

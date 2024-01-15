@@ -1,12 +1,12 @@
 import React from 'react';
 
-interface issueProps {
+interface Issue {
 	title: string;
 	timeStamp: string;
 	content: string;
 }
 
-const issueList: issueProps[] = [
+const issueList: Issue[] = [
 	{
 		title: '구인 현황',
 		timeStamp: '23.12.25',

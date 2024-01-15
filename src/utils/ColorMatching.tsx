@@ -1,9 +1,9 @@
-interface colorProps {
+interface Color {
 	title: string;
 	color: string;
 }
 
-const colorChart: colorProps[] = [
+const colorChart: Color[] = [
 	{
 		title: '교내',
 		color: '#FCEFAA',

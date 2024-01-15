@@ -5,7 +5,7 @@ import {
 	recruitmentInformation,
 	BOTTOM_ARROW_ICON,
 	TOP_ARROW_BUTTON,
-	Option,
+	KebabMenu,
 } from '../../../../index';
 import { useRecoilState } from 'recoil';
 import { recruitmentInformationEditState } from '../../../../../atom';
@@ -30,7 +30,7 @@ const RecruitmentInformation = () => {
 			<S.SubInformationLayout $fold={fold} $editMode={recruitmentInformationEdit}>
 				<S.SubInformationHeader>
 					<h2 className='main--big-text'>구인 글</h2>
-					{recruitmentInformationEdit ? '' : <Option options={optionList} />}
+					{recruitmentInformationEdit ? '' : <KebabMenu options={optionList} />}
 				</S.SubInformationHeader>
 				<div className='sub-information__column'>
 					<label className='sub-information__row'>

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import S from './ApplicantCard.styled';
-import { applicantProps, RadiusProfile } from '../../../../..';
+import { Applicant, RadiusProfile } from '../../../../..';
 
-const ApplicantCard = (props: { applicant: applicantProps }) => {
+const ApplicantCard = (props: { applicant: Applicant }) => {
 	const APPLICANT_PROFILE_ICON = (
 		<svg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 11 11' fill='none'>
 			<path

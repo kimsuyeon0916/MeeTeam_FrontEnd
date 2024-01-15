@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import S from './Link.styled';
-import { Option, linkList, LINK_BOTTOM_ARROW_ICON, LINK_SHORTCUTS_BUTTON } from '../../..';
+import { KebabMenu, linkList, LINK_BOTTOM_ARROW_ICON, LINK_SHORTCUTS_BUTTON } from '../../..';
 import { CopyClipBoard } from '../../../../utils';
 
 const Link = () => {
@@ -31,7 +31,7 @@ const Link = () => {
 							</S.LinkSaveButton>
 						</div>
 					) : (
-						<Option options={optionList} />
+						<KebabMenu options={optionList} />
 					)}
 				</header>
 				{(editMode ? linkList : linkList.filter(element => element.link !== ``)).map(

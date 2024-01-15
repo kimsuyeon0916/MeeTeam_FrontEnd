@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { OptionIcon, OptionModal } from '..';
-import S from './Option.styled';
+import { KebabMenuIcon, OptionMenu } from '..';
+import S from './KebabMenu.styled';
 
-interface optionProps {
+interface Option {
 	title: string;
 	optionClickHandler: (e: React.MouseEvent<HTMLLIElement>) => void;
 }
-export type { optionProps };
+export type { Option };
 
-const Option = (props: { options: optionProps[] }) => {
+const KebabMenu = (props: { options: Option[] }) => {
 	const [showModal, setShowModal] = useState(false);
 
 	const modalRef = useRef<HTMLDivElement>(null);
@@ -33,11 +33,11 @@ const Option = (props: { options: optionProps[] }) => {
 	};
 
 	return (
-		<S.OptionLayout ref={modalRef}>
-			<OptionIcon onClick={optionClickHandler} />
-			{showModal && <OptionModal options={props.options} />}
-		</S.OptionLayout>
+		<S.KebabMenuLayout ref={modalRef}>
+			<KebabMenuIcon onClick={optionClickHandler} />
+			{showModal && <OptionMenu options={props.options} />}
+		</S.KebabMenuLayout>
 	);
 };
 
-export default Option;
+export default KebabMenu;

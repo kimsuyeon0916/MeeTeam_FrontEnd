@@ -1,8 +1,8 @@
 import React from 'react';
 import S from './MemberCard.styled';
-import { memberProps, RadiusProfile } from '../..';
+import { MeeTeamMember, RadiusProfile } from '../..';
 
-const MemberCard = (props: { member: memberProps }) => {
+const MemberCard = (props: { member: MeeTeamMember }) => {
 	const countTags = (specification: string[][]) => {
 		let totalLength: number = 0;
 		specification.forEach((tag, index) => {

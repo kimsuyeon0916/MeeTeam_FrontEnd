@@ -1,7 +1,12 @@
 import React, { useState, useRef } from 'react';
 import S from './SubInformation.styled';
 import { modules, formats } from '../../../../../utils';
-import { meeteamInformation, BOTTOM_ARROW_ICON, TOP_ARROW_BUTTON, Option } from '../../../../index';
+import {
+	meeteamInformation,
+	BOTTOM_ARROW_ICON,
+	TOP_ARROW_BUTTON,
+	KebabMenu,
+} from '../../../../index';
 
 const MeeteamInformation = () => {
 	const optionList = [
@@ -21,7 +26,7 @@ const MeeteamInformation = () => {
 			<S.SubInformationLayout $fold={fold} $editMode={editMode}>
 				<S.SubInformationHeader>
 					<h2 className='main--big-text'>밋팀 정보</h2>
-					{editMode ? '' : <Option options={optionList} />}
+					{editMode ? '' : <KebabMenu options={optionList} />}
 				</S.SubInformationHeader>
 				<div className='sub-information__column'>
 					<label className='sub-information__row'>

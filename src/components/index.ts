@@ -36,7 +36,7 @@ import {
 	MEMBER_PLUS_CARD,
 	MEMBER_BOTTOM_ARROW_ICON,
 } from './meeteam/main/member/MemberData';
-import type { memberProps } from './meeteam/main/member/MemberData';
+import type { MeeTeamMember } from './meeteam/main/member/MemberData';
 import {
 	meeteamInformation,
 	recruitmentInformation,
@@ -53,14 +53,14 @@ import {
 	SMALL_BOTTOM_ARROW_ICON,
 	SMALL_TOP_ARROW_BUTTON,
 } from './meeteam/main/recruitment/applicantView/ApplicantViewData';
-import type { applicantProps } from './meeteam/main/recruitment/applicantView/ApplicantViewData';
+import type { Applicant } from './meeteam/main/recruitment/applicantView/ApplicantViewData';
 import ApplicantCard from './meeteam/main/recruitment/applicantView/applicantCard/ApplicantCard';
 import RecruitmentDeadLine from './meeteam/main/recruitment/RecruitmentDeadLine';
 import Toggle from './toggle/Toggle';
 import GoBack from './goBack/GoBack';
-import Option from './option/Option';
-import OptionIcon from './optionIcon/OptionIcon';
-import OptionModal from './optionModal/OptionModal';
+import KebabMenu from './kebabMenu/KebabMenu';
+import KebabMenuIcon from './kebabMenuIcon/KebabMenu';
+import OptionMenu from './optionMenu/OptionMenu';
 import RadiusProfile from './profile/RadiusProfile';
 import {
 	linkList,
@@ -101,7 +101,7 @@ export {
 	Link,
 	DashBoardLink,
 	memberList,
-	memberProps,
+	MeeTeamMember,
 	MEMBER_PROFILE_DEFAULT_ICON,
 	MEMBER_PLUS_ICON,
 	MEMBER_PLUS_CARD,
@@ -118,14 +118,14 @@ export {
 	applicantList,
 	SMALL_BOTTOM_ARROW_ICON,
 	SMALL_TOP_ARROW_BUTTON,
-	applicantProps,
+	Applicant,
 	ApplicantCard,
 	RecruitmentDeadLine,
 	Toggle,
 	GoBack,
-	Option,
-	OptionIcon,
-	OptionModal,
+	KebabMenu,
+	KebabMenuIcon,
+	OptionMenu,
 	RadiusProfile,
 	linkList,
 	LINK_BOTTOM_ARROW_ICON,

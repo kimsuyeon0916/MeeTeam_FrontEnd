@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-const OptionIconLayout = styled.button`
+const KebabMenuIconLayout = styled.button`
 	all: unset;
 	display: flex;
 	cursor: pointer;
 `;
 
-const S = { OptionIconLayout };
+const S = { KebabMenuIconLayout };
 
 export default S;

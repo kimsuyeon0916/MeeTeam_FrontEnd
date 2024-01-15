@@ -1,12 +1,12 @@
 import React from 'react';
 
-interface linkProps {
+interface Link {
 	title: string;
 	icon: string;
 	link: string;
 }
 
-const linkList: linkProps[] = [
+const linkList: Link[] = [
 	{
 		title: '카카오톡',
 		icon: `https://s3-alpha-sig.figma.com/img/31e2/9bfd/f0a8dc85868b78e31449c2b4eab56063?Expires=1705276800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=qQs0DMIJZVhmScAgix~ExDCnWfCjM2pdywwgiALTsRDRey76ZnK0hKDLUTMRVT4fS-SCIidrn1a4LihccCeieOAt7m4gkClx0Sb1lyBCi67jKgi6em92rdedTP8M3PZPlv1wn~OrK-tha2RF2tUor-1zkvC3Yh8U4jRYM6OaCZu028cwoHLegn7dj0JgdBpMUqYgjhRDLQRUpMdaVhcxkImCEKkRGr06UmvqfkflMvustHJX~eeP2gO2f-chKXgcnn3uriH0P-k8~qQCKEj2TAcExeT675LnE8r7jMoOEPlT4G1ms7-O5uDEafeqe7FRK6Gb8xH7uQ2pjnXh2lEJKQ__`,

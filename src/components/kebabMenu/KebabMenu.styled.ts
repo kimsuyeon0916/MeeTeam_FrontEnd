@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-const OptionLayout = styled.div`
+const KebabMenuLayout = styled.div`
 	position: relative;
 	display: flex;
 	margin-left: auto;
 `;
 
-const S = { OptionLayout };
+const S = { KebabMenuLayout };
 
 export default S;

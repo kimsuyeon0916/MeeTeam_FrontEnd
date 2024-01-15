@@ -15,17 +15,17 @@ import DashBoardMember from './dashBoardMember/DashBoardMember';
 const DashBoard = () => {
 	const [content, setContent] = useRecoilState(contentState);
 
-	interface statusProps {
+	interface Status {
 		done: boolean;
 		information?: string;
 		content: string;
 	}
 
-	type dashBoardProps = {
-		[key: string]: statusProps;
+	type DashBoardStatus = {
+		[key: string]: Status;
 	};
 
-	const dashBoardList: dashBoardProps = {
+	const dashBoardList: DashBoardStatus = {
 		밋팀: {
 			done: true,
 			content: `나의 밋팀을 소개해 보는 건 어떨까요?\n나의 밋팀에 대해 작성해 보세요!`,

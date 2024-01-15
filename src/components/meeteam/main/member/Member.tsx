@@ -7,7 +7,7 @@ import {
 	MEMBER_PLUS_CARD,
 	MEMBER_BOTTOM_ARROW_ICON,
 	MemberContact,
-	Option,
+	KebabMenu,
 } from '../../..';
 
 const Member = () => {
@@ -74,7 +74,7 @@ const Member = () => {
 							<div className='member__card'>
 								<MemberCard member={member} />
 								<span className='member__option'>
-									<Option options={leaderOptionList} />
+									<KebabMenu options={leaderOptionList} />
 								</span>
 							</div>
 						</div>

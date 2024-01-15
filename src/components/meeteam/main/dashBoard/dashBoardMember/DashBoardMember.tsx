@@ -1,6 +1,6 @@
 import React from 'react';
 import S from './DashBoardMember.styled';
-import { memberList, memberProps, MEMBER_PLUS_ICON, RadiusProfile } from '../../../..';
+import { memberList, MeeTeamMember, MEMBER_PLUS_ICON, RadiusProfile } from '../../../..';
 import { useRecoilState } from 'recoil';
 import { contentState } from '../../../../../atom';
 
@@ -14,8 +14,8 @@ const DashBoardMember = () => {
 		return memberList.filter(member => member.authority === '멤버');
 	};
 
-	const leader: memberProps | void = checkLeader();
-	const members: memberProps[] = checkMember().slice(0, 3);
+	const leader: MeeTeamMember | void = checkLeader();
+	const members: MeeTeamMember[] = checkMember().slice(0, 3);
 	const remainderCount: number = memberList.length - 4;
 
 	return (

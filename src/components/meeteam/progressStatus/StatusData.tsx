@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface statusProps {
+interface Status {
 	title: string;
 	icon: JSX.Element;
 	message: string;
@@ -9,7 +9,7 @@ interface statusProps {
 	done: boolean;
 }
 
-const statusList: statusProps[] = [
+const statusList: Status[] = [
 	{
 		title: '밋팀 정보/소개 입력',
 		icon: (

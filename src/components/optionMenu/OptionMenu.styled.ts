@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const OptionModalLayout = styled.ul`
+const OptionMenuLayout = styled.ul`
 	position: absolute;
 	left: -5.5rem;
 	top: 2.85rem;
@@ -15,7 +15,7 @@ const OptionModalLayout = styled.ul`
 	cursor: pointer;
 `;
 
-const OptionModalItem = styled.li`
+const OptionMenuItem = styled.li`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -32,6 +32,6 @@ const OptionModalItem = styled.li`
 	}
 `;
 
-const S = { OptionModalLayout, OptionModalItem };
+const S = { OptionMenuLayout, OptionMenuItem };
 
 export default S;
