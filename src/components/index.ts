@@ -67,6 +67,7 @@ import {
 	LINK_BOTTOM_ARROW_ICON,
 	LINK_SHORTCUTS_BUTTON,
 } from './meeteam/main/link/LinkData';
+import EssentialInformation from './meeteam/main/information/subInformation/EssentialInformation';
 
 export {
 	Header,
@@ -129,4 +130,5 @@ export {
 	linkList,
 	LINK_BOTTOM_ARROW_ICON,
 	LINK_SHORTCUTS_BUTTON,
+	EssentialInformation,
 };
