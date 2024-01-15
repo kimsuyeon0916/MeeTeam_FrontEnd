@@ -2,31 +2,35 @@ import React, { useState, useRef } from 'react';
 import S from './SubInformation.styled';
 import { Option, modules, formats } from '../../../../../utils';
 import { recruitmentInformation, BOTTOM_ARROW_ICON, TOP_ARROW_BUTTON } from '../../../../index';
+import { useRecoilState } from 'recoil';
+import { recruitmentInformationEditState } from '../../../../../atom';
 
 const RecruitmentInformation = () => {
 	const optionList = [
 		{
 			title: '편집',
-			optionClickHandler: () => setEditMode(true),
+			optionClickHandler: () => setRecruitmentInformationEditMode(true),
 		},
 	];
 
 	const quillRef = useRef(null);
-	const [editMode, setEditMode] = useState(false);
+	const [recruitmentInformationEdit, setRecruitmentInformationEditMode] = useRecoilState(
+		recruitmentInformationEditState
+	);
 
 	const [fold, setFold] = useState(true);
 
 	return (
 		<form>
-			<S.SubInformationLayout $fold={fold} $editMode={editMode}>
+			<S.SubInformationLayout $fold={fold} $editMode={recruitmentInformationEdit}>
 				<S.SubInformationHeader>
 					<h2 className='main--big-text'>구인 글</h2>
-					{editMode ? '' : <Option options={optionList} />}
+					{recruitmentInformationEdit ? '' : <Option options={optionList} />}
 				</S.SubInformationHeader>
 				<div className='sub-information__column'>
 					<label className='sub-information__row'>
 						<span className='sub-information__label'>제목</span>
-						{editMode ? (
+						{recruitmentInformationEdit ? (
 							<S.SubInformationInput
 								type='text'
 								placeholder='구인 글 제목을 입력해주세요.'
@@ -38,7 +42,7 @@ const RecruitmentInformation = () => {
 					</label>
 					<label className='sub-information__row'>
 						<span className='sub-information__label'>소개</span>
-						{editMode ? (
+						{recruitmentInformationEdit ? (
 							<S.SubInformationEditor
 								ref={quillRef}
 								placeholder='구인 글 소개를 입력해주세요.'
@@ -53,12 +57,18 @@ const RecruitmentInformation = () => {
 						)}
 					</label>
 				</div>
-				{editMode ? (
+				{recruitmentInformationEdit ? (
 					<div className='sub-information__button-row'>
-						<S.SubInformationCancelButton type='button' onClick={() => setEditMode(false)}>
+						<S.SubInformationCancelButton
+							type='button'
+							onClick={() => setRecruitmentInformationEditMode(false)}
+						>
 							취소
 						</S.SubInformationCancelButton>
-						<S.SubInformationSaveButton type='submit' onClick={() => setEditMode(false)}>
+						<S.SubInformationSaveButton
+							type='submit'
+							onClick={() => setRecruitmentInformationEditMode(false)}
+						>
 							저장하기
 						</S.SubInformationSaveButton>
 					</div>
