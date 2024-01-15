@@ -13,7 +13,6 @@ const MemberContactLayout = styled.div`
 	font-style: normal;
 	font-weight: 400;
 	letter-spacing: 0.015rem;
-	cursor: pointer;
 
 	.member-contact__row {
 		display: flex;
