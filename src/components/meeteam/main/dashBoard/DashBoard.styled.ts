@@ -49,6 +49,7 @@ const DashBoardLayout = styled.div`
 const DashBoardMeeTeamButton = styled.button`
 	all: unset;
 	display: flex;
+	margin-top: auto;
 	justify-content: flex-start;
 	align-items: center;
 	margin-bottom: 0.67rem;
@@ -56,25 +57,30 @@ const DashBoardMeeTeamButton = styled.button`
 	cursor: pointer;
 `;
 
-const DashBoardBlueButton = styled.button<{ $done?: boolean }>`
+const DashBoardDefaultButton = styled.button<{ $done?: boolean }>`
 	all: unset;
 	font-family: Pretendard;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	column-gap: 0.75rem;
 	margin-left: auto;
 	padding: 0 1.5rem;
 	height: 3.45rem;
 	border-radius: 0.6rem;
-	color: #fff;
-	background: ${props => (props.$done ? '#FF6A6A' : '#5877FC;')};
+	color: ${props => (props.$done ? '#fff' : '#373f41')};
+	stroke: #373f41;
+	stroke-width: 1.125;
+	background: ${props =>
+		props.$done ? 'linear-gradient(270deg, #7A4FEB -8.33%, #386DD4 111.9%)' : '#F3F5FF'};
 	font-size: 1.5rem;
 	font-style: normal;
 	font-weight: 400;
 	cursor: pointer;
 `;
 
-const DashBoardGradationButton = styled(DashBoardBlueButton)<{ $done?: boolean }>`
+const DashBoardGradationButton = styled(DashBoardDefaultButton)<{ $done?: boolean }>`
+	color: #fff;
 	background: ${props =>
 		props.$done
 			? '#FF6A6A'
@@ -85,7 +91,7 @@ const S = {
 	DashBoardArticle,
 	DashBoardLayout,
 	DashBoardMeeTeamButton,
-	DashBoardBlueButton,
+	DashBoardDefaultButton,
 	DashBoardGradationButton,
 };
 
