@@ -14,7 +14,6 @@ const MemberCardLayout = styled.article`
 	font-weight: 400;
 	line-height: 1.08rem;
 	letter-spacing: 0.015rem;
-	cursor: pointer;
 
 	.member-card__title {
 		font-size: 1.2rem;
