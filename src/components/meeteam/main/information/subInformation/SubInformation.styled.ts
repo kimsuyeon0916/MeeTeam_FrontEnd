@@ -117,6 +117,8 @@ const SubInformationViewButton = styled.button`
 	justify-content: center;
 	height: 3.02rem;
 	border-top: 0.075rem solid #cdcdcd;
+	border-bottom-right-radius: 0.75rem;
+	border-bottom-left-radius: 0.75rem;
 	cursor: pointer;
 	&:hover {
 		background: #fbfbfb;
