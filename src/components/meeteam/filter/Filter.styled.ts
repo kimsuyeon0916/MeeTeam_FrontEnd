@@ -24,7 +24,7 @@ const Filter = styled.div`
 			background-color: #fcefaa;
 			color: #000;
 			font-family: Apple SD Gothic Neo;
-			font-size: 1.5rem;
+			font-size: 1.6rem;
 			font-style: normal;
 			font-weight: 400;
 			line-height: 2.1rem; /* 100% */

@@ -24,9 +24,8 @@ const ManageMeeteamPage = () => {
 	return (
 		<S.ManageMeeTeamPage>
 			<div className='container-status'>
-				<Status status='구인중' $check={isClicked.isRecruit} onClick={onClickHandler} />
-				<Status status='진행중' $check={isClicked.isProceed} onClick={onClickHandler} />
-				<Status status='진행 완료' $check={isClicked.isDone} onClick={onClickHandler} />
+				<div className='status current'>진행중</div>
+				<div className='status'>진행 완료</div>
 			</div>
 			<Filter />
 			<div className='container-contents'>

@@ -29,7 +29,7 @@ const Dropdown = styled.div<IDropdown>`
 		label {
 			cursor: pointer;
 			color: ${props => (props.allowNeed ? '#373f41' : 'transparent')};
-			font-size: ${props => (!props.allowNeed ? '5rem' : '')};
+			font-size: ${props => (!props.allowNeed ? '5rem' : '1.6rem')};
 		}
 
 		.dropdown {

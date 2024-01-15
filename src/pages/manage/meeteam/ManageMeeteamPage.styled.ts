@@ -5,6 +5,25 @@ const ManageMeeTeamPage = styled.div`
 		display: flex;
 		gap: 2.1rem;
 		margin-top: 3.83rem;
+
+		.status {
+			width: 10.575rem;
+			height: 5.3rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: var(--Light-Black, var(--text-color-2, #373f41));
+			font-family: Pretendard;
+			font-size: 1.8rem;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 1.35rem; /* 75% */
+			letter-spacing: 0.015rem;
+			cursor: pointer;
+		}
+		.current {
+			border-bottom: 0.3rem solid #5877fc;
+		}
 	}
 
 	.container-contents {
