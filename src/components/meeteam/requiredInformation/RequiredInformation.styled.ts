@@ -9,7 +9,7 @@ const RequiredInformationGrid = styled.ul`
 	font-size: 1.5rem;
 	font-style: normal;
 	width: clamp(50%, 108rem, 70%);
-	background-color: #fff;
+	// background-color: #fff;
 	margin: 3rem auto;
 	border: 0.75px solid #bcd7ff;
 	border-radius: 0.75rem;
