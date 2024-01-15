@@ -9,8 +9,12 @@ const DashBoardLinkLayout = styled(Main.MainArticle)`
 	padding: 1.65rem 2.55rem;
 	height: 26.25rem;
 	background: #fff;
+	color: var(--text-color, #151515);
+	font-size: 1.5rem;
+	font-style: normal;
+	font-weight: 400;
 
-  .dash-board-link__row {
+	.dash-board-link__row {
 		display: flex;
 		align-items: center;
 		column-gap: 1.8rem;
@@ -34,6 +38,17 @@ const DashBoardLinkLayout = styled(Main.MainArticle)`
 		font-size: 0.975rem;
 		font-weight: 400;
 	}
+
+	.dash-board-link__content {
+		display: flex;
+		flex: 2 1 0;
+		color: var(--text-color, #151515) !important;
+	}
+
+	.dash-board-link__icon {
+		display: flex;
+		flex: 1 1 0;
+	}
 `;
 
 const DashBoardLinkImageIcon = styled.img`
@@ -45,9 +60,10 @@ const DashBoardLinkImageIcon = styled.img`
 const DashBoardLinkPlusButton = styled.button`
 	all: unset;
 	display: flex;
-	justify-content: center;
+	column-gap: 0.45rem;
 	align-items: center;
 	margin-left: auto;
+	color: #373f41;
 	cursor: pointer;
 `;
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import S from './DashBoardLink.styled';
-import { linkList, LINK_PLUS_ICON, LINK_SHORTCUTS_BUTTON } from '../../link/LinkData';
+import { linkList, LINK_SHORTCUTS_BUTTON } from '../../link/LinkData';
 import { useRecoilState } from 'recoil';
 import { contentState } from '../../../../../atom';
-import { STATUS_RIGHT_ARROW_ICON } from '../../../..';
+import { STATUS_RIGHT_ARROW_ICON, MEMBER_PLUS_ICON } from '../../../..';
 
 const DashBoardLink = () => {
 	const [content, setContent] = useRecoilState(contentState);
@@ -22,8 +22,13 @@ const DashBoardLink = () => {
 				{checkRegistration() ? (
 					''
 				) : (
-					<S.DashBoardLinkPlusButton type='button' onClick={() => setContent('밋팀')}>
-						{LINK_PLUS_ICON}
+					<S.DashBoardLinkPlusButton
+						className='main--small-text'
+						type='button'
+						onClick={() => setContent('밋팀')}
+					>
+						연락 수단 추가
+						{MEMBER_PLUS_ICON}
 					</S.DashBoardLinkPlusButton>
 				)}
 			</header>
@@ -36,7 +41,7 @@ const DashBoardLink = () => {
 						</div>
 					</div>
 					<S.DashBoardLinkRegisterButton type='button' onClick={() => setContent('밋팀')}>
-						연락수단 등록하기
+						연락 수단 등록하기
 						{STATUS_RIGHT_ARROW_ICON}
 					</S.DashBoardLinkRegisterButton>
 				</>
@@ -47,6 +52,7 @@ const DashBoardLink = () => {
 						<div className='dash-board-link__row' key={index}>
 							<S.DashBoardLinkImageIcon src={element.icon} alt={element.title + ` 아이콘`} />
 							<a
+								className='dash-board-link__content'
 								href={element.link}
 								target='_blank'
 								title={element.title}
@@ -55,6 +61,7 @@ const DashBoardLink = () => {
 								{element.title}
 							</a>
 							<a
+								className='dash-board-link__icon'
 								href={element.link}
 								target='_blank'
 								title={element.title + `바로 가기`}
