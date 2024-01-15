@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Card, Status, Filter } from '../../../components';
 import S from './ManageMeeteamPage.styled';
 
@@ -8,14 +8,14 @@ const ManageMeeteamPage = () => {
 		isDone: false,
 	});
 
-	const onClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+	const onClickHandler = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		if (event.target.innerText === '진행중') {
 			setIsClicked({ isProceed: true, isDone: false });
 		}
 		if (event.target.innerText === '진행 완료') {
 			setIsClicked({ isProceed: false, isDone: true });
 		}
-	};
+	}, []);
 
 	return (
 		<S.ManageMeeTeamPage>
