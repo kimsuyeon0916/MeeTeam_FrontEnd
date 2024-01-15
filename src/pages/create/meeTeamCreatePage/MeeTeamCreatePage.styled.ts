@@ -177,6 +177,7 @@ const MeeTeamCreatePage = styled.div`
 					letter-spacing: 0.02rem;
 					display: flex;
 					align-items: center;
+					cursor: pointer;
 
 					img {
 						width: 100%;
