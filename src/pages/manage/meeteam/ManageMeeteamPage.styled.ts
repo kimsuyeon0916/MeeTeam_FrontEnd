@@ -8,7 +8,7 @@ const ManageMeeTeamPage = styled.div`
 
 		.status {
 			width: 10.575rem;
-			height: 5.3rem;
+			height: 4.95rem;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -23,6 +23,9 @@ const ManageMeeTeamPage = styled.div`
 		}
 		.current {
 			border-bottom: 0.3rem solid #5877fc;
+		}
+		.not_current {
+			border-bottom: 0.3rem solid transparent;
 		}
 	}
 
