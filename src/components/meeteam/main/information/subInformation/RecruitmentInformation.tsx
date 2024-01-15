@@ -29,7 +29,7 @@ const RecruitmentInformation = () => {
 						{editMode ? (
 							<S.SubInformationInput
 								type='text'
-								placeholder='밋팀 제목을 입력해주세요.'
+								placeholder='구인 글 제목을 입력해주세요.'
 								defaultValue={recruitmentInformation.title}
 							/>
 						) : (
@@ -41,7 +41,7 @@ const RecruitmentInformation = () => {
 						{editMode ? (
 							<S.SubInformationEditor
 								ref={quillRef}
-								placeholder='밋팀 소개를 입력해주세요.'
+								placeholder='구인 글 소개를 입력해주세요.'
 								value={recruitmentInformation.content}
 								modules={modules}
 								formats={formats}
