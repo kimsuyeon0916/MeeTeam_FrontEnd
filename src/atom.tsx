@@ -7,7 +7,7 @@ export const contentState = atom({
 
 export const recruitmentState = atom({
 	key: 'recruitmentState',
-	default: false,
+	default: true,
 });
 
 export const recruitmentInformationEditState = atom({
