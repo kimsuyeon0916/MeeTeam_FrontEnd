@@ -1,5 +1,5 @@
 import React from 'react';
-import S from './Main.sytled';
+import S from './Main.styled';
 import { Information, Member, Setting, DashBoard, Recruitment } from '../..';
 
 const Main = (props: { content: string }) => {

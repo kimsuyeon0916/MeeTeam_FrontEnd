@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Main from '../Main.sytled';
+import Main from '../Main.styled';
 
 const IssueLayout = styled(Main.MainArticle)<{ $type?: string }>`
 	display: flex;

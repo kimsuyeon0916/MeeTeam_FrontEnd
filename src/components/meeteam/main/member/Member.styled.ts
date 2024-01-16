@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Main from '../Main.sytled';
+import Main from '../Main.styled';
 
 const MemberLayout = styled(Main.MainArticle)`
 	display: flex;

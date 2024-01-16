@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Main from '../../Main.sytled';
+import Main from '../../Main.styled';
 import ReactQuill from 'react-quill';
 
 interface Props {
