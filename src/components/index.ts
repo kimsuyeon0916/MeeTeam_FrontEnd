@@ -24,6 +24,7 @@ import Status from './meeteam/status/Status';
 import Filter from './meeteam/filter/Filter';
 import Dropdown from './dropdown/Dropdown';
 import DeadlineSelect from './dateSelect/DeadlineSelect';
+import Icon from './meeteam/icon/Icon';
 
 export {
 	Header,
@@ -52,4 +53,5 @@ export {
 	Filter,
 	Dropdown,
 	DeadlineSelect,
+	Icon,
 };
