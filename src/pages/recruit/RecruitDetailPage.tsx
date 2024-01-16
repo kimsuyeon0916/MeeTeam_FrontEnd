@@ -223,6 +223,16 @@ const RecruitDetailPage = () => {
 			</div>
 			<div className='container-comments'>
 				<span className='container-comments__title'>댓글</span>
+				<div className='container-comments__wrapper'>
+					<div className='comments'></div>
+					<div className='user-input'>
+						<div className='user-input__icon'>
+							<Icon />
+						</div>
+						<input />
+						<button>댓글 등록</button>
+					</div>
+				</div>
 			</div>
 		</SRecruit.RecruitDetailPage>
 	);

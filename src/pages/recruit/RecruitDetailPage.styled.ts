@@ -489,6 +489,44 @@ const RecruitDetailPage = styled.div`
 			line-height: 3rem; /* 233.333% */
 			letter-spacing: 0.015rem;
 		}
+
+		.container-comments__wrapper {
+			.user-input {
+				display: flex;
+				gap: 2.1rem;
+
+				.user-input__icon {
+					width: 3.15rem;
+					height: 3.15rem;
+					flex-shrink: 0;
+				}
+
+				input {
+					width: 79.8rem;
+					height: 7.8rem;
+					flex-shrink: 0;
+					border-radius: 0.75rem;
+					border: 0.75px solid #bebebe;
+					background: #fff;
+				}
+
+				button {
+					display: flex;
+					width: 12.7rem;
+					height: 3.75rem;
+					padding: 0.75rem;
+					justify-content: center;
+					align-items: center;
+					gap: 0.75rem;
+					flex-shrink: 0;
+					border-radius: 0.6rem;
+					background: var(--main-color, #5877fc);
+					border: none;
+					outline: none;
+					color: #fff;
+				}
+			}
+		}
 	}
 `;
 
