@@ -8,12 +8,12 @@ import {
 	recruitmentInformation,
 	STATUS_RIGHT_ARROW_ICON,
 } from '../../..';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { contentState } from '../../../../atom';
 import DashBoardMember from './dashBoardMember/DashBoardMember';
 
 const DashBoard = () => {
-	const [content, setContent] = useRecoilState(contentState);
+	const setContent = useSetRecoilState(contentState);
 
 	interface Status {
 		done: boolean;

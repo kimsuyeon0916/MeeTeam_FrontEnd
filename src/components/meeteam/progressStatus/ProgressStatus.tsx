@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import S from './ProgressStatus.styled';
 import { statusList, STATUS_DONE_ICON, STATUS_RIGHT_ARROW_ICON } from './StatusData';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { contentState } from '../../../atom';
 
 const ProgressStatus = () => {
-	const [content, setContent] = useRecoilState(contentState);
+	const setContent = useSetRecoilState(contentState);
 
 	const [currentStatus, setCurrentStatus] = useState(
 		statusList.find(status => status.done === false)

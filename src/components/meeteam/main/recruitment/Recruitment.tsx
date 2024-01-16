@@ -6,11 +6,11 @@ import {
 	RecruitmentDeadLine,
 	recruitmentInformation,
 } from '../../..';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { recruitmentState } from '../../../../atom';
 
 const Recruitment = () => {
-	const [recruitment, setRecruitment] = useRecoilState(recruitmentState);
+	const recruitment = useRecoilValue(recruitmentState);
 
 	return (
 		<S.RecruitmentLayout>

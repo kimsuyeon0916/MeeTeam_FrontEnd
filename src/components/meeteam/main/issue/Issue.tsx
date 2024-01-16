@@ -1,11 +1,11 @@
 import React from 'react';
 import S from './Issue.styled';
 import { issueList, ISSUE_RIGHT_ARROW_ICON } from '../../../index';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { contentState } from '../../../../atom';
 
 const Issue = (props: { type: string }) => {
-	const [content, setContent] = useRecoilState(contentState);
+	const setContent = useSetRecoilState(contentState);
 
 	return (
 		<S.IssueLayout $type={props.type}>

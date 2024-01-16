@@ -1,12 +1,12 @@
 import React from 'react';
 import S from './DashBoardLink.styled';
 import { linkList, LINK_SHORTCUTS_BUTTON } from '../../link/LinkData';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { contentState } from '../../../../../atom';
 import { STATUS_RIGHT_ARROW_ICON, MEMBER_PLUS_ICON } from '../../../..';
 
 const DashBoardLink = () => {
-	const [content, setContent] = useRecoilState(contentState);
+	const setContent = useSetRecoilState(contentState);
 
 	const checkRegistration = () => {
 		if (linkList.find(element => element.link !== ``) === undefined) {

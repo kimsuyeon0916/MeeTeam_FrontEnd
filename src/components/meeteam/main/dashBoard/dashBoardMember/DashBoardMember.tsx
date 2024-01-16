@@ -1,11 +1,11 @@
 import React from 'react';
 import S from './DashBoardMember.styled';
 import { memberList, MeeTeamMember, MEMBER_PLUS_ICON, RadiusProfile } from '../../../..';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { contentState } from '../../../../../atom';
 
 const DashBoardMember = () => {
-	const [content, setContent] = useRecoilState(contentState);
+	const setContent = useSetRecoilState(contentState);
 	const checkLeader = () => {
 		return memberList.find(member => member.authority === '리더');
 	};

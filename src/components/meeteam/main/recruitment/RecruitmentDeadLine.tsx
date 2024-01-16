@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import S from './Recruitment.styeld';
 import { recruitmentInformation } from '../../..';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { recruitmentInformationEditState, recruitmentState } from '../../../../atom';
 
 const RecruitmentDeadLine = () => {
@@ -12,9 +12,7 @@ const RecruitmentDeadLine = () => {
 	const date = recruitmentInformation?.deadLine?.getDate().toString().padStart(2, '0');
 
 	const [recruitment, setRecruitment] = useRecoilState(recruitmentState);
-	const [recruitmentInformationEdit, setRecruitmentInformationEdit] = useRecoilState(
-		recruitmentInformationEditState
-	);
+	const setRecruitmentInformationEdit = useSetRecoilState(recruitmentInformationEditState);
 
 	const startRecruit = () => {
 		setRecruitment(true);
