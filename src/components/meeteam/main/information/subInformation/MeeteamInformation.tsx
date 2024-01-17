@@ -26,7 +26,7 @@ const MeeteamInformation = () => {
 			<S.SubInformationLayout $fold={fold} $editMode={editMode}>
 				<S.SubInformationHeader>
 					<h2 className='main--big-text'>밋팀 정보</h2>
-					{editMode ? '' : <KebabMenu options={optionList} />}
+					{!editMode && <KebabMenu options={optionList} />}
 				</S.SubInformationHeader>
 				<div className='sub-information__column'>
 					<label className='sub-information__row'>

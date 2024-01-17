@@ -47,9 +47,7 @@ const ApplicantView = () => {
 							{role?.[0] + ` (${countApplicants(role?.[0])}명)`}
 							{fold[index] ? SMALL_BOTTOM_ARROW_ICON : SMALL_TOP_ARROW_BUTTON}
 						</S.ApplicantViewRoleBox>
-						{fold[index] ? (
-							''
-						) : (
+						{!fold[index] && (
 							<div className='application-view__grid'>
 								{decideApplicants(role).map((applicant, index) => (
 									<ApplicantCard applicant={applicant} key={index} />

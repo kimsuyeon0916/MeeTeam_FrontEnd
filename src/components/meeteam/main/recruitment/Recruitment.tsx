@@ -20,10 +20,8 @@ const Recruitment = () => {
 					<RecruitmentInformation />
 					<ApplicantView />{' '}
 				</>
-			) : recruitment ? (
-				<RecruitmentInformation />
 			) : (
-				''
+				recruitment && <RecruitmentInformation />
 			)}
 		</S.RecruitmentLayout>
 	);

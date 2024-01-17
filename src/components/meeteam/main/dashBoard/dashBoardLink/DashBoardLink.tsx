@@ -19,9 +19,7 @@ const DashBoardLink = () => {
 		<S.DashBoardLinkLayout>
 			<header className='main__row'>
 				<h2 className='main--big-text'>링크</h2>
-				{checkRegistration() ? (
-					''
-				) : (
+				{!checkRegistration() && (
 					<S.DashBoardLinkPlusButton
 						className='main--small-text'
 						type='button'

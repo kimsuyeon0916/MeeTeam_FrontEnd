@@ -42,12 +42,10 @@ const DashBoardMember = () => {
 						<RadiusProfile key={index} size='small' url={member.imageUrl} />
 					</S.DashBoardMemberSpan>
 				))}
-				{remainderCount > 0 ? (
+				{remainderCount > 0 && (
 					<span className='dash-board-member__small-text'>
 						{MEMBER_PLUS_ICON} {remainderCount}명
 					</span>
-				) : (
-					''
 				)}
 			</div>
 		</S.DashBoardMemberLayout>

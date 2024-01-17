@@ -30,7 +30,7 @@ const RecruitmentInformation = () => {
 			<S.SubInformationLayout $fold={fold} $editMode={recruitmentInformationEdit}>
 				<S.SubInformationHeader>
 					<h2 className='main--big-text'>구인 글</h2>
-					{recruitmentInformationEdit ? '' : <KebabMenu options={optionList} />}
+					{!recruitmentInformationEdit && <KebabMenu options={optionList} />}
 				</S.SubInformationHeader>
 				<div className='sub-information__column'>
 					<label className='sub-information__row'>
