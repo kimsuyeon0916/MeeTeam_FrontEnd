@@ -21,6 +21,8 @@ const ProgressStatus = () => {
 		currentStatus && setContent(currentStatus?.content);
 	};
 
+	const rightArrowCount = statusList.length - 1;
+
 	return (
 		<S.ProgressStatusLayout>
 			<header className='main__row'>
@@ -42,7 +44,7 @@ const ProgressStatus = () => {
 							<h3>{status.title}</h3>
 							<S.ProgressStatusIcon>{status.done && STATUS_DONE_ICON}</S.ProgressStatusIcon>
 						</S.ProgressStatusColumn>
-						{index !== 3 && STATUS_RIGHT_ARROW_ICON}
+						{index !== rightArrowCount && STATUS_RIGHT_ARROW_ICON}
 					</div>
 				))}
 			</div>

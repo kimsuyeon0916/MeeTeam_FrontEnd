@@ -33,7 +33,7 @@ const DashBoardMember = () => {
 			</header>
 			<div className='dash-board-member__row'>
 				<h3>리더</h3>
-				<RadiusProfile index={0} size='small' url={leader?.imageUrl} />
+				<RadiusProfile size='small' url={leader?.imageUrl} />
 			</div>
 			<div className='dash-board-member__row'>
 				<h3>멤버</h3>
