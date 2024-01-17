@@ -16,9 +16,6 @@ const KebabMenu = (props: { options: Option[] }) => {
 	useEffect(() => {
 		const outSideClickHandler = (e: MouseEvent) => {
 			const target = e.target as HTMLDivElement;
-			console.log(target);
-			console.log(modalRef);
-
 			if (showModal && modalRef.current && !modalRef.current.contains(target)) {
 				setShowModal(false);
 			}
