@@ -18,7 +18,7 @@ const applicantList: Applicant[] = [
 	{
 		nickName: '지원투',
 		imageUrl:
-			'https://s3-alpha-sig.figma.com/img/3d31/266c/b4e2b4773a0682af9a42fabb250a9d02?Expires=1705276800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=qC5PZhbiAkagPfqIoP~LJjgNXrXUmiGKYu4BeXB3UqsGJrSaUHSjylp0AW9e5oePJFWkIcnLPVoMAepsA5gaqJ3Z~uMuA1EqbG2QzL3d-gv2IE1j5596L6nnqsZPSWA0p7L9mnh0O8AD5ZcE3t9Z8BUWEbFhrlCqTnDWyUG2tAn9MnvocmeLofGFfPumyYvTEFmgZXblig~dZ5zuioR4iTjbwkSJewkIPFUMOyClEjNmMDHFzl-gGZnqQOcPBkTMCzJw30MP6NaxQKPrBzLtgYIYikKyt2xSl3N0msk-l1yKrMHb2xN4Ib0D806GlCdibaulPgqXrIHKXU4SCzm94A__',
+			'https://s3-alpha-sig.figma.com/img/3d31/266c/b4e2b4773a0682af9a42fabb250a9d02?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=TktynfgbHdnilaMCkMMl5PICIApL8Bk1Vmhez9IYih8JfPbQ3akPmgpK8y0T9kBLNSx6mx6TuOd7d8WOCblUl1PIlrRlfvMPPb5GjFiP0l8321tgRCTQFfjnl8m1SM9Ux789Rv7q7SAFin9GdTWBcb6E1SgfdBY8oKAthbBKl2o0ekcXA5bmrEjdZAMUe1zVO289tyXCYJWBIEVM7NStSCYJW3vy1OQroHr7THPma8mow-8wj9bOR0prlQIPdazKjlBeDVxI2j4gxam1ifGFla~J8WhN3edDGbK4uyMqxiLX6R53PwZx1LhOPdsdL6LEGTk4TWrXqQlddaKGe0hxyA__',
 		name: '송지원',
 		email: 'jiwon@kw.ac.kr',
 		role: ['디자인', '#F7E8FB'],
@@ -31,7 +31,7 @@ const applicantList: Applicant[] = [
 	{
 		nickName: 'suyeonee',
 		imageUrl:
-			'https://s3-alpha-sig.figma.com/img/af42/75de/a21e2b04d7b7aaec5f28132b3d92997e?Expires=1705276800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=Wh~7CHTxJSGxEGT70Jwm6sAtY0br4uNK2bn0GoE9SXSBdYnIldlh~uZdkgIMxfOP2vsnbGWJLzwY3CZJ05Iv45xcS14cZ0JHszSshCJCAXXpS7zgIi07Ze8dMg~kuEfEk8PFJzUrFv~gxoS7q0YocLDawN~lzUVzt1vLywF3qvOE0SUNVC~4b83ZzeIlPXK-AyyulaXz2O8c6-LsOufMw0jyAgp~-DoxRUeqrVlQmtBzOtJtPPcD2X94diA4sggeLWmro63a0hOP0i9XbIMO8JR8hV8-Y7mcLuvp-PmcvPW7AFFWKLGaQZ8eeuupuQ7bHzD8H7TctLk4gEVyGDHQDA__',
+			'https://s3-alpha-sig.figma.com/img/af42/75de/a21e2b04d7b7aaec5f28132b3d92997e?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KKcq1JCXEgi8bfb8UA1EG-RhNzmdLtjuTTBeas4fgE8rQrIdTg4iIFXP4FvxqyGnIg7Ti2jJS0fiEt6E9KorpQzpi9QQqBvMYeOpGXcolWK~mlvkwupLZFB7kTr~sl7U-ag5m3NPfMg~klbBIwC7nEEZ9znKrRPLFKG5aYCztPT1bJFfGOThd~joRH7efYte6ee9sGVq983Yu6Voy3mt-koZEiGnNMdpnVuDRrlrN8JVgXF-uIBmq7G06pyTVG-fxMg-XKW~UDHOAYesyK93QFNw01HRDgy0DlTqAJIfQmXKA7IhdtrJ8KfNAkQHMcUgbDY40Uw6Baah0WEcF0dVaw__',
 		name: '김수연',
 		email: 'jiwon@kw.ac.kr',
 		role: ['프론트엔드', '#EAF7FF'],

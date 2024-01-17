@@ -14,7 +14,7 @@ const linkList: Link[] = [
 	},
 	{
 		title: 'Slack',
-		icon: `https://s3-alpha-sig.figma.com/img/7033/8bde/4a4fec71f547e9967b41ac18328ded94?Expires=1705276800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=EmOewUY5Eb46s3xMgW3n3RYO7m64t973nl5~51k7fgzufwmHdCl8JnU5cOyTUX~EpywUHGi9velOeHwE7U3gYCg-MBic-UaH-gi8dgGz9b2sAhqSc0glH7Wkf3cgoMXCvHEXFZxN0psZNVkDSGFJIwip51ty6CnjW6llEuckpHTlKEXNTH6h8a4j-tp6FnYN7e1~66mmeGJD016-eo4zqSQtPlhX8ks14~acKEI5OBXmb8r7HbvDeznIxufbVbQSRFRNXtV5hlOZ7JeEuHNw~ZtB9OdUfa1Fy6FD6mMoI~wcaunOVrWQWaGVhAfLsg9KMTwNI1r22MIAsVpfn5ajRw__`,
+		icon: `https://s3-alpha-sig.figma.com/img/7033/8bde/4a4fec71f547e9967b41ac18328ded94?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=eVlwWF-azVvjgH-1V1gHd3j95LQk4nnRgWMTc7bf9DzEPZFx-Bh4-zsmNO9Jgh2C-auDIGz5f8TGD~QKkhjaw0Oayv2D0l3WqZosUapQv1TPdn7LPcjvkghAugE8W0aLrBpGpvZ7ULQQNeF4eu4D-V8FX~jOBLL9eWqP7VUMi3CjAAbZFF1O66uM9qDk7bavMsoyGeq3qHkgO4DV73KMdzvtgCd5rtJ7zpg26805tmL5UxPNHf1eqDxm0cdMp~pMTHCJSV5KFMQIlMVv0CZt8tZyrYFMOfOcYLR7VUnTzX8lNKKmTWRDUzgJAcHQ6zUQwSCMjzaEtCtmgBZehK-zsQ__`,
 		link: ``,
 	},
 	{
