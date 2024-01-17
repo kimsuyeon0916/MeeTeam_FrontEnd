@@ -194,6 +194,20 @@ const MeeTeamCreatePage = () => {
 										<InfoItem isDot='false' title='공개 여부' optionData={['공개', '비공개']} />
 									</div>
 								</div>
+								<div className='container__info-select'>
+									<div>
+										<div className='title-info'>
+											<Subtitle>{'수업'}</Subtitle>
+											<span className='description'>수업인 경우에 체크해주세요.</span>
+											<span className='description-check'>수업 선택</span>
+											<input type='checkbox' />
+										</div>
+										<div className='container-course'>
+											<input type='text' placeholder='수업명' />
+											<input type='text' placeholder='교수명' />
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div className='container__tag'>

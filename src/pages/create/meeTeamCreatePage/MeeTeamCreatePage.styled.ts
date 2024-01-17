@@ -114,6 +114,61 @@ const MeeTeamCreatePage = styled.div`
 					padding-top: 1rem;
 					box-sizing: border-box;
 				}
+
+				.title-info {
+					position: relative;
+
+					input {
+						top: 1.25rem;
+						left: 32.3rem;
+						position: absolute;
+					}
+				}
+
+				.fix {
+					margin-top: 0.5rem;
+				}
+
+				.description {
+					color: #8e8e8e;
+					font-family: Pretendard;
+					font-size: 1.4rem;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 1.35rem; /* 90% */
+					letter-spacing: 0.015rem;
+					margin-left: 2rem;
+				}
+
+				.description-check {
+					position: absolute;
+					top: 1.6rem;
+					left: 34.5rem;
+					color: var(--text-color-2, #373f41);
+					font-family: Pretendard;
+					font-size: 1.35rem;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 1.35rem; /* 100% */
+					letter-spacing: 0.015rem;
+				}
+
+				.container-course {
+					display: flex;
+					gap: 5.8rem;
+
+					input {
+						width: 40.125rem;
+						height: 4.875rem;
+						flex-shrink: 0;
+						border-radius: 0.75rem;
+						border: 0.75px solid #e3e3e3;
+						background: #fff;
+						outline: none;
+						padding-left: 2.1rem;
+						box-sizing: border-box;
+					}
+				}
 			}
 		}
 
