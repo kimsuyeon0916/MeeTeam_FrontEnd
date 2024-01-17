@@ -38,7 +38,6 @@ const Link = () => {
 					(element, index) => (
 						<div className='link__row' key={index}>
 							<S.LinkImageIcon src={element.icon} alt={element.title + ` 아이콘`} />
-							{editMode && LINK_BOTTOM_ARROW_ICON}
 							{editMode ? (
 								<S.LinkInput type='url' defaultValue={element.link} />
 							) : (
