@@ -58,7 +58,7 @@ const router = createBrowserRouter([
 				element: <OutputCreatePage />,
 			},
 			{
-				path: 'meeteam/:meeteamId?',
+				path: 'manage/meeteam/:meeteamId?',
 				element: <ManagementPage />,
 			},
 			{
@@ -68,6 +68,12 @@ const router = createBrowserRouter([
 					{
 						path: 'meeteam',
 						element: <ManageMeeteamPage />,
+						children: [
+							{
+								path: ':meeteamId?',
+								element: <ManagementPage />,
+							},
+						],
 					},
 					{
 						path: 'recruit',

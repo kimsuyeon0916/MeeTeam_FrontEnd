@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import S from './CustomSelect.styled';
 import { useRecoilState } from 'recoil';
 import { areaState, categoryState, fieldState } from '../../atom';
@@ -40,7 +40,7 @@ const CustomSelect = ({ optionData, $isMember, type }: ICustomSelect) => {
 		<S.CustomSelect onClick={onClickhandler} $isMember={$isMember} $show={showOptions}>
 			<S.Label $isSelected={currentValue}>{currentValue}</S.Label>
 			<S.SelectOptions $show={showOptions}>
-				{optionData.map((data: any, index: number) => (
+				{optionData.map((data: string, index: number) => (
 					<S.Option key={index} value={data} onClick={handleOnChangeSelectValue}>
 						{data}
 					</S.Option>
