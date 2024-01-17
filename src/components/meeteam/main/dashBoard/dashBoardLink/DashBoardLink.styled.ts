@@ -41,9 +41,11 @@ const DashBoardLinkLayout = styled(Main.MainArticle)`
 	}
 
 	.dash-board-link__content {
-		display: flex;
 		flex: 2 1 0;
 		color: var(--text-color, #151515) !important;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
 	}
 
 	.dash-board-link__icon {
