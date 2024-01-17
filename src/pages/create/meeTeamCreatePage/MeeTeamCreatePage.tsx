@@ -49,9 +49,11 @@ const MeeTeamCreatePage = () => {
 	};
 
 	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
-		const deletedIndex = Number(event.target.id);
-		copyMemberList.splice(deletedIndex, 1);
-		setMemberList(copyMemberList);
+		if (event.target instanceof Element) {
+			const deletedIndex = Number(event.target.id);
+			copyMemberList.splice(deletedIndex, 1);
+			setMemberList(copyMemberList);
+		}
 	};
 
 	const onClickCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -269,8 +271,9 @@ const MeeTeamCreatePage = () => {
 							</div>
 						</div>
 						<div className='container__member'>
-							<div>
+							<div className='container__member-title'>
 								<Subtitle>{'멤버'}</Subtitle>
+								<button type='button'>멤버 초대 +</button>
 							</div>
 							<div className='container__member-area'>
 								{/* {memberList.map((memberItem, index) => {
@@ -284,14 +287,15 @@ const MeeTeamCreatePage = () => {
 										</div>
 									);
 								})} */}
+								<div className='container__member-area__element'></div>
 							</div>
-							<div className='container__member-add'>
+							{/* <div className='container__member-add'>
 								{memberList.length !== 6 && (
 									<div className='addition' onClick={onClickMember}>
 										<AddButton />
 									</div>
 								)}
-							</div>
+							</div> */}
 						</div>
 						<div className='container__controller'>
 							<button onClick={onClickCancel}>취소</button>

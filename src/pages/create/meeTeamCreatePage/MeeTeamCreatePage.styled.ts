@@ -267,12 +267,42 @@ const MeeTeamCreatePage = styled.div`
 			margin-top: 4.35rem;
 			width: 100%;
 
+			.container__member-title {
+				display: flex;
+				justify-content: space-between;
+
+				button {
+					display: flex;
+					width: 10rem;
+					height: 3.5rem;
+					padding: 1rem;
+					justify-content: center;
+					align-items: center;
+					gap: 1rem;
+					border: none;
+					outline: none;
+					border-radius: 0.4rem;
+					background: var(--main-color, #5877fc);
+					color: #fff;
+				}
+			}
+
 			.container__member-area {
 				min-height: 24rem;
 				width: 100%;
 				background-color: #fff;
 				border: 1px solid #dcdcdc;
 				border-radius: 1rem;
+				padding: 3rem 4rem;
+			}
+
+			.container__member-area__element {
+				width: 24rem;
+				height: 18rem;
+				flex-shrink: 0;
+				border-radius: 1rem;
+				border: 1px dashed #cdcdcd;
+				background: #fdfdfd;
 			}
 
 			.controll {
