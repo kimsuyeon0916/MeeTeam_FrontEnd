@@ -47,7 +47,7 @@ const memberList: MeeTeamMember[] = [
 	{
 		nickName: '염승준',
 		imageUrl:
-			'https://s3-alpha-sig.figma.com/img/ee6f/b8ee/ccb283f80561bee0a48bce0fd80eb82f?Expires=1705276800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=DqaRWlFp~vdpXFfivzPdz137DbYaNx6cUJsZASVSaAEifuNa5r2UthE42d3oGoUYQEjPqFGR0XwdMydHfyiYUZCpXPzW4HBf1cDP0uCPdzktfGE~nCknyO5kGZs9XK4X~34riyA2Qu3KjM6giZ5ANGqIkL7i1vAqFGfHFPHmXaYrYoA57zSLuMlOxAR4qMhgqDrGveOWTmMcgJ5YjpER7cfKNax1A4IPquoabeancCk4wO8VQIfqOHJYe6YOYeX3jPQ95mWpcrF97NyIrJYpKCQFLI~~cm2XZf2sW7SaDsIZoyRD6gIjZSPmoaNgBSRCX6In8Kd6b0wra82v~oWBog__',
+			'https://s3-alpha-sig.figma.com/img/ee6f/b8ee/ccb283f80561bee0a48bce0fd80eb82f?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=J8Pq6GETzgjxFhFqQ6bK6M9LJyxbg6JvlRwN7m2t5UsLhaJhteMJHP1RP9Fj6JiyNOeS4FBniM0BhM-dtcufUh53R0~69wlZVjUM7ptTZjI3MIgdweB3YXJQqU2Cc2XxNzJVy9Ck8b92YMRdFv80OJ-oYM0twD5gdAV7nOWEZbemjYmfSaQmFSiyBqwLvUIIQHeiZ0jY7384ipkln0XxbIjyl-XS95JbaNh5ijnPRY-BcBYPSZBAytTnuskFi7YeoAypX0rUgiiVmswA5MMWuh4YO5UE9nPb7SF~7Ubao9MHrcQYn6N3mHTNGV2VD6QEgqi9NZQ6fUH6fOF2RAHFig__',
 		email: 'jiwon@kw.ac.kr',
 		phone: '',
 		authority: '멤버',
