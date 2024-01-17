@@ -11,9 +11,11 @@ import {
 import { useSetRecoilState } from 'recoil';
 import { contentState } from '../../../../atom';
 import DashBoardMember from './dashBoardMember/DashBoardMember';
+import { useNavigate } from 'react-router-dom';
 
 const DashBoard = () => {
 	const setContent = useSetRecoilState(contentState);
+	const navigate = useNavigate();
 
 	interface Status {
 		done: boolean;
@@ -106,7 +108,10 @@ const DashBoard = () => {
 						? '완료된 산출물을 확인할 수 있어요!'
 						: dashBoardList['산출물'].content}
 				</div>
-				<S.DashBoardDefaultButton $done={dashBoardList['산출물'].done}>
+				<S.DashBoardDefaultButton
+					$done={dashBoardList['산출물'].done}
+					onClick={() => (dashBoardList['산출물'].done ? '' : navigate('/create/output'))}
+				>
 					{dashBoardList['산출물'].done ? '산출물 보러가기' : '산출물 등록하기'}
 				</S.DashBoardDefaultButton>
 			</S.DashBoardArticle>

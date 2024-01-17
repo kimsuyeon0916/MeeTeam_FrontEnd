@@ -98,7 +98,7 @@ const statusList: Status[] = [
 			</svg>
 		),
 		message: `산출물 등록으로 레벨을 올릴 수 있어요!`,
-		content: '',
+		content: '산출물',
 		buttonName: `산출물 등록하기`,
 		done: false,
 	},

@@ -3,13 +3,23 @@ import S from './ProgressStatus.styled';
 import { statusList, STATUS_DONE_ICON, STATUS_RIGHT_ARROW_ICON } from './StatusData';
 import { useSetRecoilState } from 'recoil';
 import { contentState } from '../../../atom';
+import { useNavigate } from 'react-router-dom';
 
 const ProgressStatus = () => {
 	const setContent = useSetRecoilState(contentState);
+	const navigate = useNavigate();
 
 	const [currentStatus, setCurrentStatus] = useState(
 		statusList.find(status => status.done === false)
 	);
+
+	const changeContent = () => {
+		if (currentStatus?.content === '산출물') {
+			navigate('/create/output');
+			return;
+		}
+		currentStatus && setContent(currentStatus?.content);
+	};
 
 	return (
 		<S.ProgressStatusLayout>
@@ -17,7 +27,7 @@ const ProgressStatus = () => {
 				{currentStatus && (
 					<>
 						<h2 className='main--big-text'>{currentStatus.message}</h2>
-						<S.ProgressStatusButton type='button' onClick={() => setContent(currentStatus.content)}>
+						<S.ProgressStatusButton type='button' onClick={changeContent}>
 							{currentStatus.buttonName}
 							{STATUS_RIGHT_ARROW_ICON}
 						</S.ProgressStatusButton>
