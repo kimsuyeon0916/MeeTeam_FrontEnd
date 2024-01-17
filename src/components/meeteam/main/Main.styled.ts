@@ -4,7 +4,7 @@ const MainLayout = styled.div`
 	display: flex;
 	font-size: 1.6rem;
 	flex-direction: column;
-	width: clamp(50%, 108rem, 70%);
+	width: clamp(45%, 108rem, 75%);
 	background-color: #f7faff;
 	margin: 0 auto;
 	margin-bottom: 10%;

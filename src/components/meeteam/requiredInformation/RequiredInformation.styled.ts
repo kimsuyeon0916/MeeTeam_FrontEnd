@@ -8,7 +8,7 @@ const RequiredInformationGrid = styled.ul`
 	font-family: Pretendard;
 	font-size: 1.5rem;
 	font-style: normal;
-	width: clamp(50%, 108rem, 70%);
+	width: clamp(45%, 108rem, 75%);
 	// background-color: #fff;
 	margin: 3rem auto;
 	border: 0.75px solid #bcd7ff;

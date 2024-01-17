@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const MenuRow = styled.div`
 	display: flex;
 	align-items: center;
-	width: clamp(50%, 108rem, 70%);
+	width: clamp(45%, 108rem, 75%);
 	margin: 0 auto;
 `;
 
