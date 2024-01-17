@@ -8,7 +8,7 @@ const Information = () => {
 		<S.InformationLayout>
 			<MeeteamInformation />
 			<div className='information__grid'>
-				<Issue type={`밋팀`} />
+				<Issue type='밋팀' />
 				<Link />
 			</div>
 		</S.InformationLayout>

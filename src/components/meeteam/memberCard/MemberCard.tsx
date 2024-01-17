@@ -2,7 +2,7 @@ import React from 'react';
 import S from './MemberCard.styled';
 import { MeeTeamMember, RadiusProfile } from '../..';
 
-const MemberCard = (props: { member: MeeTeamMember }) => {
+const MemberCard = ({ member }: { member: MeeTeamMember }) => {
 	const countTags = (specification: string[][]) => {
 		let totalLength: number = 0;
 		specification.forEach((tag, index) => {
@@ -53,27 +53,27 @@ const MemberCard = (props: { member: MeeTeamMember }) => {
 	return (
 		<S.MemberCardLayout>
 			<div className='member-card__row'>
-				<RadiusProfile size='middle' url={props.member.imageUrl} />
+				<RadiusProfile size='middle' url={member.imageUrl} />
 				<div className='member-card__column'>
-					<div className='member-card__title'>{props.member.nickName}</div>
+					<div className='member-card__title'>{member.nickName}</div>
 					<div className='member-card__row'>
 						<div className='member-card__column--small-text'>
 							<div className='member-card__row--small-text'>
 								{SCHOOL_ICON}
-								{props.member.school}
+								{member.school}
 							</div>
 							<div className='member-card__row--small-text'>
 								{BOOK_ICON}
-								{props.member.task}
+								{member.task}
 							</div>
 							<div className='member-card__row--small-text'>
 								{SPEECH_BUBBLE_ICON}
-								{props.member.introduction}
+								{member.introduction}
 							</div>
 						</div>
 					</div>
 					<div className='member-card__tag-column'>
-						{props.member.specifications.map((tag, index) => (
+						{member.specifications.map((tag, index) => (
 							<S.MemberCardTag key={index} $color={tag[1]}>
 								#{tag[0]}
 							</S.MemberCardTag>

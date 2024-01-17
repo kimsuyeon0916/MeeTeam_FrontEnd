@@ -1,9 +1,9 @@
 import React from 'react';
 import S from './KebabMenuIcon.styled';
 
-const KebabMenuIcon = (props: { onClick: React.MouseEventHandler<HTMLButtonElement> }) => {
+const KebabMenuIcon = ({ onClick }: { onClick: React.MouseEventHandler<HTMLButtonElement> }) => {
 	return (
-		<S.KebabMenuIconLayout type='button' onClick={props.onClick}>
+		<S.KebabMenuIconLayout type='button' onClick={onClick}>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
 				width='23'

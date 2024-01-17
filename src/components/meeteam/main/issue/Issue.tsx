@@ -4,14 +4,14 @@ import { issueList, ISSUE_RIGHT_ARROW_ICON } from '../../../index';
 import { useSetRecoilState } from 'recoil';
 import { contentState } from '../../../../atom';
 
-const Issue = (props: { type: string }) => {
+const Issue = ({ type }: { type: string }) => {
 	const setContent = useSetRecoilState(contentState);
 
 	return (
-		<S.IssueLayout $type={props.type}>
+		<S.IssueLayout $type={type}>
 			<S.IssueHeader>
 				<h2 className='main--big-text'>이슈</h2>
-				{props.type === '대시보드' && (
+				{type === '대시보드' && (
 					<S.IssueButton type='button' onClick={() => setContent('밋팀')}>
 						더보기
 						{ISSUE_RIGHT_ARROW_ICON}

@@ -1,4 +1,4 @@
-import Header from './header/Header';
+import Header from './Header/Header';
 import Subtitle from './subtitle/Subtitle';
 import Dot from './dot/Dot';
 import InfoItem from './infoItem/InfoItem';
@@ -11,8 +11,6 @@ import Menu from './meeteam/menu/Menu';
 import Main from './meeteam/main/Main';
 import Information from './meeteam/main/information/Information';
 import Member from './meeteam/main/member/Member';
-import MemberProfile from './meeteam/main/member/MemberProfile';
-import MemberRadioBox from './meeteam/main/member/MemberRadioBox';
 import Setting from './meeteam/main/setting/Setting';
 import DashBoard from './meeteam/main/dashBoard/DashBorad';
 import Recruitment from './meeteam/main/recruitment/Recruitment';
@@ -91,8 +89,6 @@ export {
 	Main,
 	Information,
 	Member,
-	MemberProfile,
-	MemberRadioBox,
 	Setting,
 	DashBoard,
 	Recruitment,

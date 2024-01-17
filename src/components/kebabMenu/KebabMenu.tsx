@@ -8,7 +8,7 @@ interface Option {
 }
 export type { Option };
 
-const KebabMenu = (props: { options: Option[] }) => {
+const KebabMenu = ({ options }: { options: Option[] }) => {
 	const [showModal, setShowModal] = useState(false);
 
 	const modalRef = useRef<HTMLDivElement>(null);
@@ -32,7 +32,7 @@ const KebabMenu = (props: { options: Option[] }) => {
 	return (
 		<S.KebabMenuLayout ref={modalRef}>
 			<KebabMenuIcon onClick={optionClickHandler} />
-			{showModal && <OptionMenu options={props.options} />}
+			{showModal && <OptionMenu options={options} />}
 		</S.KebabMenuLayout>
 	);
 };

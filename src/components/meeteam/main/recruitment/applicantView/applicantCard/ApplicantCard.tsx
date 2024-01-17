@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import S from './ApplicantCard.styled';
 import { Applicant, RadiusProfile } from '../../../../..';
 
-const ApplicantCard = (props: { applicant: Applicant }) => {
+const ApplicantCard = ({ applicant }: { applicant: Applicant }) => {
 	const APPLICANT_PROFILE_ICON = (
 		<svg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 11 11' fill='none'>
 			<path
@@ -100,15 +100,15 @@ const ApplicantCard = (props: { applicant: Applicant }) => {
 		</svg>
 	);
 
-	const [bookMark, setBookMark] = useState(props.applicant.isBookmark);
+	const [bookMark, setBookMark] = useState(applicant.isBookmark);
 
 	return (
 		<S.ApplicantCardLayout>
 			<div className='applicant-card__profile-column'>
-				<RadiusProfile size='middle' url={props.applicant.imageUrl} />
-				<div>{props.applicant.nickName}</div>
+				<RadiusProfile size='middle' url={applicant.imageUrl} />
+				<div>{applicant.nickName}</div>
 				<div className='applicant-card__small-text'>
-					{props.applicant.year}학번, {props.applicant.rate}
+					{applicant.year}학번, {applicant.rate}
 				</div>
 			</div>
 			<div className='applicant-card__information-column'>
@@ -117,28 +117,28 @@ const ApplicantCard = (props: { applicant: Applicant }) => {
 						<span>{APPLICANT_PROFILE_ICON}</span>
 						<div className='applicant-card__label-title'>이름</div>
 					</div>
-					<div className='applicant-card__informaion-content'>{props.applicant.name}</div>
+					<div className='applicant-card__informaion-content'>{applicant.name}</div>
 				</div>
 				<div className='applicant-card__information-row'>
 					<div className='applicant-card__label-row'>
 						<span>{APPLICANT_SCHOOL_ICON}</span>
 						<div className='applicant-card__label-title'>학교</div>
 					</div>
-					<div className='applicant-card__informaion-content'>{props.applicant.school}</div>
+					<div className='applicant-card__informaion-content'>{applicant.school}</div>
 				</div>
 				<div className='applicant-card__information-row'>
 					<div className='applicant-card__label-row'>
 						<span>{APPLICANT_EMAIL_ICON}</span>
 						<div className='applicant-card__label-title'>이메일</div>
 					</div>
-					<div className='applicant-card__informaion-content'>{props.applicant.email}</div>
+					<div className='applicant-card__informaion-content'>{applicant.email}</div>
 				</div>
 				<div className='applicant-card__information-row'>
 					<div className='applicant-card__label-row'>
 						<span>{APPLICANT_SPEECH_BUBBLE_ICON}</span>
 						<div className='applicant-card__label-title'>전할 말</div>
 					</div>
-					<div className='applicant-card__informaion-content'>{props.applicant.comment}</div>
+					<div className='applicant-card__informaion-content'>{applicant.comment}</div>
 				</div>
 			</div>
 			<div className='applicant-card__button-column'>

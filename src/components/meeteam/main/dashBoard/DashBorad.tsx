@@ -93,7 +93,7 @@ const DashBoard = () => {
 						</S.DashBoardGradationButton>
 					</div>
 				</S.DashBoardArticle>
-				<Issue type={`대시보드`} />
+				<Issue type='대시보드' />
 				<div className='dash-board__grid'>
 					<DashBoardLink />
 					<DashBoardMember />
