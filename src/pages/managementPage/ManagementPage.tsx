@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { RequiredInformation, Title, Content } from '../../components';
+import { RequiredInformation, Title, Menu, Main } from '../../components';
 import { GoBack } from '../../components';
 import S from './ManagementPage.styled';
 
@@ -17,7 +17,8 @@ const ManagementPage = () => {
 				<Title title={title} status={status} />
 			</S.ManagementPageRow>
 			<RequiredInformation />
-			<Content />
+			<Menu />
+			<Main />
 		</>
 	);
 };

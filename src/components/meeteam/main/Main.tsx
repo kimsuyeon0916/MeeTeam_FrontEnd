@@ -1,8 +1,12 @@
 import React from 'react';
 import S from './Main.styled';
 import { Information, Member, Setting, DashBoard, Recruitment } from '../..';
+import { useRecoilValue } from 'recoil';
+import { contentState } from '../../../atom';
 
-const Main = (props: { content: string }) => {
+const Main = () => {
+	const content = useRecoilValue(contentState);
+
 	type ComponentProps = {
 		[key: string]: JSX.Element;
 	};
@@ -15,7 +19,7 @@ const Main = (props: { content: string }) => {
 		설정: <Setting />,
 	};
 
-	return <S.MainLayout>{props.content && selectComponent[props.content]}</S.MainLayout>;
+	return <S.MainLayout>{content && selectComponent[content]}</S.MainLayout>;
 };
 
 export default Main;

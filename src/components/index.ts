@@ -21,7 +21,6 @@ import ProgressStatus from './meeteam/progressStatus/ProgressStatus';
 import Title from './meeteam/title/Title';
 import Issue from './meeteam/main/issue/Issue';
 import { issueList, ISSUE_RIGHT_ARROW_ICON } from './meeteam/main/issue/IssueData';
-import Content from './meeteam/Content';
 import {
 	statusList,
 	STATUS_DONE_ICON,
@@ -103,7 +102,6 @@ export {
 	Issue,
 	issueList,
 	ISSUE_RIGHT_ARROW_ICON,
-	Content,
 	statusList,
 	STATUS_DONE_ICON,
 	STATUS_RIGHT_ARROW_ICON,
