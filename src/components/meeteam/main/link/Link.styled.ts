@@ -36,6 +36,7 @@ const LinkInput = styled.input`
 
 const LinkAnchor = styled.a`
 	width: 26.125rem;
+	color: var(--text-color, #151515) !important;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
