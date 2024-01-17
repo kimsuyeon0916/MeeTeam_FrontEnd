@@ -1,14 +1,15 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { modules } from '../../../utils/index';
-import { Subtitle, Dot, InfoItem, MeeteamTag, AddButton } from '../../../components';
+import { Subtitle, Dot, InfoItem, MeeteamTag } from '../../../components';
 import { areaState, categoryState, dateState, fieldState } from '../../../atom';
 import S from './MeeTeamCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useNavigate } from 'react-router-dom';
 
 const MeeTeamCreatePage = () => {
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 	const area = useRecoilValue(areaState);
 	const field = useRecoilValue(fieldState);
 	const category = useRecoilValue(categoryState);
@@ -20,6 +21,12 @@ const MeeTeamCreatePage = () => {
 	const [file, setFile] = useState<string>('');
 	const [fileName, setFileName] = useState<string>('');
 	const [isHover, setIsHover] = useState<boolean>(false);
+	const [modalOpen, setModalOpen] = useState<boolean>(false);
+	const modalRef = useRef<HTMLDivElement | null>(null);
+	const [modalDropdown, setModalDropdown] = useState<boolean>(false);
+	const modalDropdownRef = useRef<HTMLDivElement | null>(null);
+	const roles: string[] = ['프론트엔드 개발자', '백엔드 개발자', '디자이너', '기획자'];
+	const [currentRole, setCurrentRole] = useState<string>('프론트엔드 개발자');
 
 	const [isValidName, setIsValidName] = useState({
 		validName: false,
@@ -130,7 +137,34 @@ const MeeTeamCreatePage = () => {
 				validMessage: '',
 			});
 		}
+		navigate('/manage/meeteam');
 	};
+
+	const onClickRole = (event: React.MouseEvent<HTMLElement>) => {
+		const { innerText } = event.target as HTMLElement;
+		setCurrentRole(innerText);
+	};
+
+	useEffect(() => {
+		const outsideClick = (event: MouseEvent) => {
+			const { target } = event;
+			if (
+				modalDropdown &&
+				modalDropdownRef.current &&
+				!modalDropdownRef.current.contains(target as Node)
+			) {
+				setModalDropdown(false);
+			}
+
+			if (modalOpen && modalRef.current && !modalRef.current.contains(target as Node)) {
+				setModalOpen(false);
+			}
+		};
+		document.addEventListener('mousedown', outsideClick);
+		return () => {
+			document.removeEventListener('mousedown', outsideClick);
+		};
+	}, [modalDropdownRef.current, modalDropdown, modalRef.current, modalOpen]);
 
 	return (
 		<S.MeeTeamCreatePage>
@@ -273,29 +307,73 @@ const MeeTeamCreatePage = () => {
 						<div className='container__member'>
 							<div className='container__member-title'>
 								<Subtitle>{'멤버'}</Subtitle>
-								<button type='button'>멤버 초대 +</button>
+								<button
+									type='button'
+									onClick={() => {
+										setModalOpen(prev => !prev);
+									}}
+								>
+									멤버 초대 +
+								</button>
 							</div>
-							<div className='container__member-area'>
-								{/* {memberList.map((memberItem, index) => {
-									return (
-										<div className='controll' key={index}>
-											{React.cloneElement(memberItem, { key: index })}
-											<button id={index.toString()}>초대</button>
-											<button onClick={onClickDelete} id={index.toString()}>
-												삭제
+							{modalOpen && (
+								<div
+									className='wrapper-modal'
+									ref={modalRef}
+									onClick={e => {
+										if (e.target === modalRef.current) {
+											setModalOpen(false);
+										}
+									}}
+								>
+									<div className='container-modal'>
+										<div className='container-modal__top'>
+											<Subtitle>{'멤버 초대'}</Subtitle>
+											<button
+												className='exit'
+												onClick={() => {
+													setModalOpen(prev => !prev);
+												}}
+											>
+												X
 											</button>
 										</div>
-									);
-								})} */}
+										<div className='container-modal__search'>
+											<span>멤버</span>
+											<input placeholder='유저를 검색해주세요.' />
+										</div>
+										<div className='container-modal__role'>
+											<span>역할</span>
+											<div
+												className='dropdown-header'
+												onClick={() => {
+													setModalDropdown(prev => !prev);
+												}}
+												ref={modalDropdownRef}
+											>
+												<label>{currentRole}</label>
+												{modalDropdown && (
+													<div className='dropdown'>
+														{roles.map((role, index) => (
+															<span key={index} onClick={onClickRole}>
+																{role}
+															</span>
+														))}
+													</div>
+												)}
+											</div>
+										</div>
+										<div className='container-modal__button'>
+											<button type='button' className='button-invite'>
+												초대하기
+											</button>
+										</div>
+									</div>
+								</div>
+							)}
+							<div className='container__member-area'>
 								<div className='container__member-area__element'></div>
 							</div>
-							{/* <div className='container__member-add'>
-								{memberList.length !== 6 && (
-									<div className='addition' onClick={onClickMember}>
-										<AddButton />
-									</div>
-								)}
-							</div> */}
 						</div>
 						<div className='container__controller'>
 							<button onClick={onClickCancel}>취소</button>
