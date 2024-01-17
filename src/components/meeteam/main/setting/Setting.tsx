@@ -8,12 +8,12 @@ const Setting = () => {
 			<EssentialInformation />
 			<S.SettingArticle>
 				<h2 className='main--big-text'>공개 범위</h2>
-				<div>아직까지 함께 할 사람들을 못찾았다면? 함께 할 사람들을 찾을 수 있습니다!</div>
+				<div>해당 밋팀의 공개 범위를 설정해주세요!</div>
 				<S.SettingButton>공개로 설정하기</S.SettingButton>
 			</S.SettingArticle>
 			<S.SettingArticle>
 				<h2 className='main--big-text'>밋팀 중단</h2>
-				<div>아직까지 함께 할 사람들을 못찾았다면? 함께 할 사람들을 찾을 수 있습니다!</div>
+				<div>해당 밋팀을 삭제하고 싶으시면 "밋팀 중단"을 눌러주세요.</div>
 				<S.SettingButton $color='#FF6A6A'>밋팀 중단</S.SettingButton>
 			</S.SettingArticle>
 		</S.SettingLayout>
