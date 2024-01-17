@@ -148,7 +148,7 @@ const ApplicantCard = (props: { applicant: Applicant }) => {
 					<S.ApplicantCardRefuseButton>거절</S.ApplicantCardRefuseButton>
 				</div>
 			</div>
-			<S.ApplicantCardBookMarkButton type='button' onClick={() => setBookMark(!bookMark)}>
+			<S.ApplicantCardBookMarkButton type='button' onClick={prev => setBookMark(!prev)}>
 				{bookMark ? APPLICANT_FULL_BOOK_MARK_ICON : APPLICANT_EMPTY_BOOK_MARK_ICON}
 			</S.ApplicantCardBookMarkButton>
 		</S.ApplicantCardLayout>

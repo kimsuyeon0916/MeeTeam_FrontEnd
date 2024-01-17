@@ -66,7 +66,7 @@ const MeeteamInformation = () => {
 						</S.SubInformationSaveButton>
 					</div>
 				) : (
-					<S.SubInformationViewButton type='button' onClick={() => setFold(!fold)}>
+					<S.SubInformationViewButton type='button' onClick={prev => setFold(!prev)}>
 						{fold ? BOTTOM_ARROW_ICON : TOP_ARROW_BUTTON}
 					</S.SubInformationViewButton>
 				)}

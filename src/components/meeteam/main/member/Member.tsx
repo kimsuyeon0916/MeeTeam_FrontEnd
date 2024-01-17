@@ -39,7 +39,7 @@ const Member = () => {
 	const [totalView, setTotalView] = useState(true);
 
 	const viewHandler = () => {
-		setTotalView(!totalView);
+		setTotalView(prev => !prev);
 	};
 
 	return (
