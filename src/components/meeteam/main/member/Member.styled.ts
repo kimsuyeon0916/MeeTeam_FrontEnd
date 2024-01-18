@@ -1,184 +1,117 @@
 import styled from 'styled-components';
-import { BsPersonCircle } from 'react-icons/bs';
+import Main from '../Main.styled';
 
-const MemberProfileIcon = styled(BsPersonCircle)`
-	width: 3.281vw;
-	height: 3.281vw;
-	color: #878787;
-`;
-
-const MemberRadioLabel = styled.label`
-	display: flex;
-	align-items: center;
-	padding: 0.781vw;
-	column-gap: 0.781vw;
-`;
-
-const MemberRadioButton = styled.button`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-left: 1.302vw;
-	margin-right: 1.302vw;
-	width: 3.646vw;
-	height: 1.823vw;
-	background-color: transparent;
-	border-radius: 0.417vw;
-	border: 0.072vw solid #f88;
-	cursor: pointer;
-`;
-
-const MemberColumn = styled.div`
+const MemberLayout = styled(Main.MainArticle)`
 	display: flex;
 	flex-direction: column;
-	gap: 0.3905vw;
-`;
+	row-gap: 3rem;
+	padding: 2.4rem 2.55rem;
+	font-size: 1.5rem;
+	font-weight: 500;
 
-const MemberLayout = styled(MemberColumn)`
-	row-gap: 2.604vw;
-
-	.member__space-between-row {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
+	.member__grid--total {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		column-gap: 1.8rem;
+		row-gap: 3rem;
 	}
 
-	.member__small-text {
-		color: var(--light-black, #373f41);
-		font-style: normal;
-		font-weight: 400;
-		letter-spacing: 0.0125rem;
-		font-size: 0.7rem;
-		text-overflow: ellipsis;
+	.member__grid--contact {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		column-gap: 1.8rem;
+		row-gap: 3rem;
 	}
 
-	.member__middle-text {
-		display: flex;
-		align-items: center;
-		color: var(--light-black, #373f41);
-		font-style: normal;
-		font-weight: 500;
-		letter-spacing: 0.0125rem;
-		font-size: 0.8rem;
-		text-overflow: ellipsis;
+	.member__card {
+		position: relative;
 	}
 
-	.member__follow-icon {
+	.member__option {
+		position: absolute;
+		right: 0.63rem;
+		top: 0.9rem;
+	}
+
+	.member__plus-card {
 		display: flex;
-		justify-content: center;
-		align-items: center;
-		padding: 0.521vw;
-		gap: 0.313vw;
-		border-radius: 0.417vw;
-		background: #e0e5ff;
-		color: var(--light-black, #373f41);
-		font-style: normal;
-		font-weight: 400;
-		letter-spacing: 0.0125rem;
-		font-size: 0.7rem;
+		flex-direction: column-reverse;
+	}
+
+	.member__button {
+		all: unset;
 		cursor: pointer;
 	}
+`;
 
-	.member__tag-icon {
+const MemberHeader = styled.header`
+	display: flex;
+	flex-direction: column;
+	row-gap: 1.65rem;
+
+	.member__header-row {
 		display: flex;
-		justify-content: center;
 		align-items: center;
-		padding: 0.521vw;
-		border-radius: 5.208vw;
-		border: 0.052vw solid #dcdcdc;
-		background: #fff;
-		color: var(--light-black, #373f41);
-		font-style: normal;
+		flex-direction: row;
+		column-gap: 0.75rem;
+	}
+
+	.member__header-space-row {
+		display: flex;
+		justify-content: space-between;
+		flex-direction: row;
+		column-gap: 0.75rem;
+		font-size: 1.2rem;
 		font-weight: 400;
-		letter-spacing: 0.0125rem;
-		font-size: 0.7rem;
 	}
 `;
 
-const MemberRow = styled.div`
-	display: flex;
-	align-items: center;
-	column-gap: 0.651vw;
-	font-weight: 500;
-	text-overflow: ellipsis;
-	overflow: auto;
-	white-space: nowrap;
-	color: var(--light-black, #373f41);
-`;
-
-const MemberHead = styled.h1`
-	color: #000;
-	font-size: 1.2rem;
-	font-style: normal;
-	font-weight: 500;
-	line-height: 1.5rem; /* 100% */
-	letter-spacing: -0.03rem;
-	margin-bottom: 0.521vw;
-`;
-
-const MemberBox = styled(MemberColumn)`
-	gap: 0.781vw;
-	width: 17.813vw;
-	height: 11.354vw;
-	border-radius: 0.521vw;
-	border: 0.052vw solid #dcdcdc;
-	background: #f9f9f9;
-	padding: 0.781vw;
-`;
-
-const MemberList = styled.ul`
-	display: flex;
-	flex-direction: column;
-	gap: 0.781vw;
-`;
-
-const MemberItem = styled.li`
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding-left: 0.781vw;
-	padding-right: 0.781vw;
-	width: 37.083vw;
-	height: 2.448vw;
-	border-radius: 0.521vw;
-	background: #f3f5ff;
-	font-size: 1rem;
-	font-style: normal;
-	font-weight: 400;
-	letter-spacing: 0.0125rem;
-	text-overflow: ellipsis;
-`;
-
-const MemberButton = styled.button<{ $clicked?: boolean }>`
+const MemberViewButton = styled.button<{ $clicked?: boolean }>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 7.448vw;
-	height: 2.188vw;
-	border-radius: 5.208vw;
+	width: 8.1rem;
+	height: 2.55rem;
+	border-radius: 7.5rem;
 	color: ${props => (props.$clicked ? '#FFFFFF' : '#373F41')};
 	background: ${props =>
-		props.$clicked ? 'linear-gradient(90deg, #4ed2ef -11.45%, #723dff 139.25%)' : '#FFFFFF'};
+		props.$clicked
+			? 'linear-gradient(270deg, rgba(95, 92, 236, 0.76) -6.3%, #D85CEC 101.52%)'
+			: '#FFFFFF'};
 	border: ${props => (props.$clicked ? 0 : 'solid #C5C5C5')};
-	font-size: 1rem;
-	font-style: normal;
+	font-size: 1.2rem;
 	font-weight: 400;
-	letter-spacing: 0.0125rem;
 	cursor: pointer;
+`;
+
+const MemberInviteButton = styled(MemberViewButton)`
+	column-gap: 0.45rem;
+	border: 0;
+	padding: 0.75rem;
+	border-radius: 0.6rem;
+	color: #fff;
+	background: var(--main-color, #5877fc);
+	fill: #fff;
+`;
+
+const MemberRoleTag = styled.div<{ $color?: string }>`
+	display: flex;
+	width: fit-content;
+	margin-left: 0.6rem;
+	border-radius: 0.3rem 0.3rem 0rem 0rem;
+	padding: 0.6rem 1.2rem;
+	font-size: 1.2rem;
+	font-weight: 400;
+	color: #000;
+	background: ${props => props.$color};
 `;
 
 const S = {
-	MemberProfileIcon,
-	MemberRadioLabel,
-	MemberRadioButton,
 	MemberLayout,
-	MemberRow,
-	MemberColumn,
-	MemberHead,
-	MemberBox,
-	MemberList,
-	MemberItem,
-	MemberButton,
+	MemberHeader,
+	MemberViewButton,
+	MemberInviteButton,
+	MemberRoleTag,
 };
 
 export default S;

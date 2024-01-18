@@ -1,120 +1,97 @@
 import React, { useState } from 'react';
 import S from './Member.styled';
-import { CgClose } from 'react-icons/cg';
-import { MemberProfile } from '../../..';
-
-export interface memberProps {
-	nickName: string;
-	authority: string;
-	role: string;
-	task: string;
-	school: string;
-	introduction: string;
-	specifications: string[];
-}
+import {
+	MemberCard,
+	memberList,
+	MEMBER_PLUS_ICON,
+	MEMBER_PLUS_CARD,
+	MEMBER_BOTTOM_ARROW_ICON,
+	MemberContact,
+	KebabMenu,
+} from '../../..';
 
 const Member = () => {
-	const memberList: memberProps[] = [
+	const leaderOptionList = [
 		{
-			nickName: '송지원',
-			authority: '리더',
-			role: '디자이너',
-			task: '디자인',
-			school: '세종대학교',
-			introduction: '열심히 하겠습니다!☺️',
-			specifications: ['Figma'],
+			title: '역할 변경',
+			optionClickHandler: () => setRole(true), // 해당 핸들러 대입
 		},
 		{
-			nickName: '김수연',
-			authority: '멤버',
-			role: '프론트엔드 개발자',
-			task: '프론트엔드 개발',
-			school: '광운대학교',
-			introduction: '열심히 하겠습니다!☺️',
-			specifications: ['React', 'TypeScript'],
+			title: '리더 위임',
+			optionClickHandler: () => setLeader(true), // 해당 핸들러 대입
 		},
 		{
-			nickName: '염승준',
-			authority: '멤버',
-			role: '프론트엔드 개발자',
-			task: '프론트엔드 개발',
-			school: '광운대학교',
-			introduction: '열심히 하겠습니다!☺️',
-			specifications: ['React', 'TypeScript'],
-		},
-		{
-			nickName: '송민규',
-			authority: '멤버',
-			role: '백엔드 개발자',
-			task: '백엔드 개발',
-			school: '광운대학교',
-			introduction: '열심히 하겠습니다!☺️',
-			specifications: ['Spring', 'Java'],
-		},
-		{
-			nickName: '나부겸',
-			authority: '멤버',
-			role: '백엔드 개발자',
-			task: '백엔드 개발',
-			school: '광운대학교',
-			introduction: '열심히 하겠습니다!☺️',
-			specifications: ['Spring', 'Java'],
+			title: '퇴출',
+			optionClickHandler: () => setOut(true), // 해당 핸들러 대입
 		},
 	];
 
-	const teamLogs = [
-		'1일 전, 00님이 정보를 업데이트하셨습니다.',
-		'4시간 전, 00님이 구인글을 수정하셨습니다.',
-	] as const;
-	const [clicked, setClicked] = useState(true);
+	const memberOptionList = [
+		{
+			title: '역할 변경', // 해당 옵션 이름 부여
+			optionClickHandler: () => setRole(true), // 해당 핸들러 대입
+		},
+	];
 
-	const clickedHandler = () => {
-		setClicked(!clicked);
+	const [role, setRole] = useState(false);
+	const [leader, setLeader] = useState(false);
+	const [out, setOut] = useState(false);
+	const [totalView, setTotalView] = useState(true);
+
+	const viewHandler = () => {
+		setTotalView(prev => !prev);
 	};
 
 	return (
 		<S.MemberLayout>
-			<div className='member__space-between-row'>
-				<S.MemberRow>
-					<S.MemberButton onClick={clickedHandler} $clicked={clicked}>
-						프로필로 보기
-					</S.MemberButton>
-					<S.MemberButton onClick={clickedHandler} $clicked={!clicked}>
-						역할만 보기
-					</S.MemberButton>
-				</S.MemberRow>
-				<div>총 ({memberList.length})명</div>
-			</div>
-			<S.MemberColumn>
-				{memberList.map((member, index) => (
-					<section key={index}>
-						<S.MemberHead>
-							{member.authority}({member.task})
-						</S.MemberHead>
-					</section>
-				))}
-			</S.MemberColumn>
-			<S.MemberRow>
-				{memberList.map((member, index) => (
-					<section key={index}>
-						<S.MemberHead>
-							{member.authority}({member.task})
-						</S.MemberHead>
-						<MemberProfile member={member} />
-					</section>
-				))}
-			</S.MemberRow>
-			<div>
-				<S.MemberHead>팀활동</S.MemberHead>
-				<S.MemberList>
-					{[...teamLogs].reverse().map((log, index) => (
-						<S.MemberItem key={index}>
-							{log}
-							<CgClose />
-						</S.MemberItem>
+			<S.MemberHeader>
+				<div className='member__header-row'>
+					<h2 className='main--big-text'>현황</h2>
+					<span className='main--middle-text'>총 {memberList.length}명</span>
+				</div>
+				<div className='member__header-space-row'>
+					<div className='member__header-row'>
+						<S.MemberViewButton type='button' onClick={viewHandler} $clicked={totalView}>
+							전체 보기
+						</S.MemberViewButton>
+						<S.MemberViewButton type='button' onClick={viewHandler} $clicked={!totalView}>
+							연락처 보기
+						</S.MemberViewButton>
+					</div>
+					<div className='member__header-row'>
+						<button className='member__button' type='button'>
+							역할 순 {MEMBER_BOTTOM_ARROW_ICON}
+						</button>
+						<S.MemberInviteButton>멤버 초대{MEMBER_PLUS_ICON}</S.MemberInviteButton>
+					</div>
+				</div>
+			</S.MemberHeader>
+			{totalView ? (
+				<div className='member__grid--total'>
+					{memberList.map((member, index) => (
+						<div className='main__column' key={index}>
+							<S.MemberRoleTag $color={member.role?.[1]}>{member.role?.[0]}</S.MemberRoleTag>
+							<div className='member__card'>
+								<MemberCard member={member} />
+								<span className='member__option'>
+									<KebabMenu options={leaderOptionList} />
+								</span>
+							</div>
+						</div>
 					))}
-				</S.MemberList>
-			</div>
+					<div className='member__plus-card'>
+						<button className='member__button' type='button'>
+							{MEMBER_PLUS_CARD}
+						</button>
+					</div>
+				</div>
+			) : (
+				<div className='member__grid--contact'>
+					{memberList.map((member, index) => (
+						<MemberContact member={member} key={index} />
+					))}
+				</div>
+			)}
 		</S.MemberLayout>
 	);
 };

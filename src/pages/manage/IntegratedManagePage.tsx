@@ -1,9 +1,9 @@
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from '../../components';
 import { ScrollToTop } from '../../utils';
-import S from './ManagePage.styled';
+import S from './IntegratedManagePage.styled';
 
-const ManagePage = () => {
+const IntegratedManagePage = () => {
 	return (
 		<S.ManagePage>
 			<Sidebar />
@@ -15,4 +15,4 @@ const ManagePage = () => {
 	);
 };
 
-export default ManagePage;
+export default IntegratedManagePage;

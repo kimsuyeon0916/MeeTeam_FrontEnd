@@ -1,5 +1,20 @@
 import { atom } from 'recoil';
 
+export const contentState = atom({
+	key: 'contentState',
+	default: '대시보드',
+});
+
+export const recruitmentState = atom({
+	key: 'recruitmentState',
+	default: true,
+});
+
+export const recruitmentInformationEditState = atom({
+	key: 'recruitmentInformationEditState',
+	default: false,
+});
+
 export const areaState = atom({
 	key: 'areaState1',
 	default: '',

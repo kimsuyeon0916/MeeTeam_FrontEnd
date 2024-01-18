@@ -1,29 +1,22 @@
 import React from 'react';
 import S from './Setting.styled';
-import { MemberRadioBox } from '../../..';
-import Toggle from '../../../../utils/toggle/Toggle';
+import { EssentialInformation } from '../../..';
 
 const Setting = () => {
 	return (
-		<>
-			<S.SettingGrid>
-				<section>
-					<S.SettingHead>팀원</S.SettingHead>
-					<MemberRadioBox />
-					<S.SettingRow>
-						<S.SettingChangeButton>멤버 퇴출</S.SettingChangeButton>
-						<S.SettingChangeButton>리더 위임</S.SettingChangeButton>
-					</S.SettingRow>
-				</section>
-				<section>
-					<S.SettingHead>공개 여부</S.SettingHead>
-					<S.SettingRow>
-						<Toggle />
-					</S.SettingRow>
-				</section>
-			</S.SettingGrid>
-			<S.SettingStopButton>프로젝트 중단</S.SettingStopButton>
-		</>
+		<S.SettingLayout>
+			<EssentialInformation />
+			<S.SettingArticle>
+				<h2 className='main--big-text'>공개 범위</h2>
+				<div>아직까지 함께 할 사람들을 못찾았다면? 함께 할 사람들을 찾을 수 있습니다!</div>
+				<S.SettingButton>공개로 설정하기</S.SettingButton>
+			</S.SettingArticle>
+			<S.SettingArticle>
+				<h2 className='main--big-text'>밋팀 중단</h2>
+				<div>아직까지 함께 할 사람들을 못찾았다면? 함께 할 사람들을 찾을 수 있습니다!</div>
+				<S.SettingButton $color='#FF6A6A'>밋팀 중단</S.SettingButton>
+			</S.SettingArticle>
+		</S.SettingLayout>
 	);
 };
 

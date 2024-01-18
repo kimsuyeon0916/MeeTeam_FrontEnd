@@ -10,13 +10,13 @@ import {
 	InformationUsePage,
 	MeeTeamCreatePage,
 	ManagementPage,
-	ManagePage,
 	ManageMeeteamPage,
 	ManageRecruitPage,
 	ManagePortpolioPage,
 	RecruitCreatePage,
 	OutputCreatePage,
 	RecruitDetailPage,
+	IntegratedManagePage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -62,16 +62,22 @@ const router = createBrowserRouter([
 				element: <OutputCreatePage />,
 			},
 			{
-				path: 'meeteam/:meeteamId?',
+				path: 'manage/meeteam/:meeteamId?',
 				element: <ManagementPage />,
 			},
 			{
 				path: 'manage',
-				element: <ManagePage />,
+				element: <IntegratedManagePage />,
 				children: [
 					{
 						path: 'meeteam',
 						element: <ManageMeeteamPage />,
+						children: [
+							{
+								path: ':meeteamId?',
+								element: <ManagementPage />,
+							},
+						],
 					},
 					{
 						path: 'recruit',

@@ -5,7 +5,7 @@ const Toggle = () => {
 	const [isActive, setIsActive] = useState(false);
 
 	const toggleHandler = () => {
-		setIsActive(!isActive);
+		setIsActive(prev => !prev);
 	};
 
 	return (
