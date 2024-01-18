@@ -21,6 +21,11 @@ const DeadlineSelect = styled.div`
 		letter-spacing: 0.015rem;
 	}
 
+	.date-picker__recruitment-deadline {
+		margin-top: 0;
+		height: 4.725rem;
+	}
+
 	.react-datepicker-popper {
 		width: 40.125rem;
 		z-index: 105;
