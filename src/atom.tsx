@@ -1,8 +1,15 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
+
+const { persistAtom } = recoilPersist({
+	key: 'contentState',
+	storage: sessionStorage,
+});
 
 export const contentState = atom({
 	key: 'contentState',
 	default: '대시보드',
+	effects_UNSTABLE: [persistAtom],
 });
 
 export const recruitmentState = atom({
