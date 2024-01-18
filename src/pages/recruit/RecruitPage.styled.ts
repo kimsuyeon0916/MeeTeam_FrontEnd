@@ -162,10 +162,15 @@ const RecruitPage = styled.div`
 					height: 18.375rem;
 					flex-shrink: 0;
 					border-radius: 0.75rem;
-					border: 1.5px solid var(--main-color, #5877fc);
+					border: 1.5px solid var(--main-color, #ababab);
 					background: #f9f9f9;
 					padding: 1.35rem 1.5rem 1.8rem 1.5rem;
 					cursor: pointer;
+
+					&:hover {
+						transition: 0.7s;
+						border: 1.5px solid var(--main-color, #5877fc);
+					}
 
 					.content-tags {
 						display: flex;
@@ -184,8 +189,8 @@ const RecruitPage = styled.div`
 								align-items: center;
 								gap: 0.75rem;
 								border-radius: 0.6rem;
-								background: var(--main-color, #5877fc);
-								color: #fff;
+								background: #e0e6ff;
+								color: #000;
 								font-family: Apple SD Gothic Neo;
 								font-size: 1.2rem;
 								font-style: normal;
@@ -203,7 +208,7 @@ const RecruitPage = styled.div`
 								align-items: center;
 								gap: 0.75rem;
 								border-radius: 0.6rem;
-								background: #e4e1ff;
+								background: #e3f5ff;
 								color: var(--Light-Black, var(--text-color-2, #373f41));
 								font-family: Apple SD Gothic Neo;
 								font-size: 1.1rem;
