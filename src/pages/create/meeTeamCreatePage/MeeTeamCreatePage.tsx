@@ -1,12 +1,20 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
 import { modules } from '../../../utils/index';
-import { Subtitle, Dot, InfoItem, MeeteamTag } from '../../../components';
+import {
+	Subtitle,
+	Dot,
+	InfoItem,
+	MeeteamTag,
+	MemberCard,
+	MeeTeamMember,
+} from '../../../components';
 import { areaState, categoryState, dateState, fieldState } from '../../../atom';
 import S from './MeeTeamCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from 'react-router-dom';
+import MemberTest from '../../../components/meeteam/main/member/MemberTest';
 
 const MeeTeamCreatePage = () => {
 	const navigate = useNavigate();
@@ -14,19 +22,34 @@ const MeeTeamCreatePage = () => {
 	const field = useRecoilValue(fieldState);
 	const category = useRecoilValue(categoryState);
 	const quillRef = useRef<ReactQuill | null>(null);
-	const [memberList, setMemberList] = useState([]);
+	const [memberList, setMemberList] = useState<MeeTeamMember[]>([]);
 	const copyMemberList = [...memberList];
 	const [teamName, setTeamName] = useState<string>('');
 	const [startDate, endDate] = useRecoilValue(dateState);
 	const [file, setFile] = useState<string>('');
 	const [fileName, setFileName] = useState<string>('');
 	const [isHover, setIsHover] = useState<boolean>(false);
+
 	const [modalOpen, setModalOpen] = useState<boolean>(false);
 	const modalRef = useRef<HTMLDivElement | null>(null);
 	const [modalDropdown, setModalDropdown] = useState<boolean>(false);
 	const modalDropdownRef = useRef<HTMLDivElement | null>(null);
+
 	const roles: string[] = ['프론트엔드 개발자', '백엔드 개발자', '디자이너', '기획자'];
 	const [currentRole, setCurrentRole] = useState<string>('프론트엔드 개발자');
+	const memberTemp: MeeTeamMember = {
+		nickName: '송지원',
+		imageUrl:
+			'https://s3-alpha-sig.figma.com/img/3d31/266c/b4e2b4773a0682af9a42fabb250a9d02?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=TktynfgbHdnilaMCkMMl5PICIApL8Bk1Vmhez9IYih8JfPbQ3akPmgpK8y0T9kBLNSx6mx6TuOd7d8WOCblUl1PIlrRlfvMPPb5GjFiP0l8321tgRCTQFfjnl8m1SM9Ux789Rv7q7SAFin9GdTWBcb6E1SgfdBY8oKAthbBKl2o0ekcXA5bmrEjdZAMUe1zVO289tyXCYJWBIEVM7NStSCYJW3vy1OQroHr7THPma8mow-8wj9bOR0prlQIPdazKjlBeDVxI2j4gxam1ifGFla~J8WhN3edDGbK4uyMqxiLX6R53PwZx1LhOPdsdL6LEGTk4TWrXqQlddaKGe0hxyA__',
+		email: 'jiwon@kw.ac.kr',
+		phone: '',
+		authority: '리더',
+		role: ['디자인', '#F7E8FB'],
+		task: '디자이너',
+		school: '세종대학교',
+		introduction: '열심히 하겠습니다!☺️',
+		specifications: [['Figma', `#E0E6FF`]],
+	};
 
 	const [isValidName, setIsValidName] = useState({
 		validName: false,
@@ -143,6 +166,12 @@ const MeeTeamCreatePage = () => {
 	const onClickRole = (event: React.MouseEvent<HTMLElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		setCurrentRole(innerText);
+	};
+
+	const onClickTestAdd = () => {
+		let temp = [...memberList];
+		temp.push((<MemberTest />) as any);
+		setMemberList(temp);
 	};
 
 	useEffect(() => {
@@ -335,7 +364,7 @@ const MeeTeamCreatePage = () => {
 													setModalOpen(prev => !prev);
 												}}
 											>
-												X
+												x
 											</button>
 										</div>
 										<div className='container-modal__search'>
@@ -372,8 +401,14 @@ const MeeTeamCreatePage = () => {
 								</div>
 							)}
 							<div className='container__member-area'>
-								<div className='container__member-area__element'></div>
+								{/* <div className='container__member-area__element'></div> */}
+								{memberList.map((e, index) => (
+									<MemberTest key={index} />
+								))}
 							</div>
+							<button type='button' onClick={onClickTestAdd}>
+								추가하기
+							</button>
 						</div>
 						<div className='container__controller'>
 							<button onClick={onClickCancel}>취소</button>

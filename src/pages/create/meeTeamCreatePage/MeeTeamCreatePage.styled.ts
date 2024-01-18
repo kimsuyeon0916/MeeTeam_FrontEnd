@@ -458,6 +458,19 @@ const MeeTeamCreatePage = styled.div`
 				background: #fdfdfd;
 			}
 
+			.member {
+				position: relative;
+				width: 24rem;
+
+				.delete {
+					position: absolute;
+					top: 1rem;
+					right: 1.2rem;
+					font-size: 1.5rem;
+					cursor: pointer;
+				}
+			}
+
 			.controll {
 				/* display: flex; */
 				gap: 0.5rem;
