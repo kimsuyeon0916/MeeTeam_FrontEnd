@@ -12,10 +12,15 @@ const RecruitCard = styled.div<IManageRecruitPage>`
 	height: 9rem;
 	flex-shrink: 0;
 	border-radius: 0.75rem;
-	border: 1.125px solid var(--main-2, #5f5cec);
+	border: 1px solid #dcdcdc;
 	background: #f9f9f9;
 	padding: 0 1.8rem;
 	box-sizing: border-box;
+
+	&:hover {
+		transition: 0.5s;
+		border: 1.125px solid var(--main-2, #5f5cec);
+	}
 
 	.container-recruits__info {
 		display: flex;
