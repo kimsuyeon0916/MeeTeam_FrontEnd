@@ -230,7 +230,7 @@ const RecruitDetailPage = () => {
 							<Icon />
 						</div>
 						<input />
-						<button>댓글 등록</button>
+						<button type='button'>댓글 등록</button>
 					</div>
 				</div>
 			</div>

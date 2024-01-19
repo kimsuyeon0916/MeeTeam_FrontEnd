@@ -503,11 +503,13 @@ const RecruitDetailPage = styled.div`
 
 				input {
 					width: 79.8rem;
-					height: 7.8rem;
+					height: 3.75rem;
 					flex-shrink: 0;
 					border-radius: 0.75rem;
 					border: 0.75px solid #bebebe;
 					background: #fff;
+					outline: none;
+					padding-left: 1.3rem;
 				}
 
 				button {
@@ -524,6 +526,7 @@ const RecruitDetailPage = styled.div`
 					border: none;
 					outline: none;
 					color: #fff;
+					cursor: pointer;
 				}
 			}
 		}
