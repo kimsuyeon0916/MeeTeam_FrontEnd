@@ -34,6 +34,7 @@ import {
 	MEMBER_PLUS_CARD,
 	MEMBER_BOTTOM_ARROW_ICON,
 } from './meeteam/main/member/MemberData';
+import MemberInviteModal from './meeteam/memberInviteModal/MemberInviteModal';
 import type { MeeTeamMember } from './meeteam/main/member/MemberData';
 import {
 	meeteamInformation,
@@ -143,4 +144,5 @@ export {
 	Filter,
 	Dropdown,
 	DeadlineSelect,
+	MemberInviteModal,
 };

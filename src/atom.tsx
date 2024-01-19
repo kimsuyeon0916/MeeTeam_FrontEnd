@@ -105,3 +105,8 @@ export const memberListState = atom<MeeTeamMember[]>({
 	key: 'memberListState1',
 	default: [],
 });
+
+export const memberModalState = atom({
+	key: 'memberModalState',
+	default: false,
+});

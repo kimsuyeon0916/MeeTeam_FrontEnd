@@ -1,9 +1,23 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
-import { Exit, Plus, Upload } from '../../../assets';
+import React, { useRef, useState, useCallback } from 'react';
+import { Plus, Upload } from '../../../assets';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { modules } from '../../../utils/index';
-import { Subtitle, Dot, InfoItem, MeeteamTag, MeeTeamMember } from '../../../components';
-import { areaState, categoryState, dateState, fieldState, memberListState } from '../../../atom';
+import {
+	Subtitle,
+	Dot,
+	InfoItem,
+	MeeteamTag,
+	MeeTeamMember,
+	MemberInviteModal,
+} from '../../../components';
+import {
+	areaState,
+	categoryState,
+	dateState,
+	fieldState,
+	memberListState,
+	memberModalState,
+} from '../../../atom';
 import S from './MeeTeamCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -17,21 +31,13 @@ const MeeTeamCreatePage = () => {
 	const category = useRecoilValue(categoryState);
 	const quillRef = useRef<ReactQuill | null>(null);
 	const [memberList, setMemberList] = useState<MeeTeamMember[]>([]);
-	const copyMemberList = [...memberList];
 	const [teamName, setTeamName] = useState<string>('');
 	const [startDate, endDate] = useRecoilValue(dateState);
 	const [file, setFile] = useState<string>('');
 	const [fileName, setFileName] = useState<string>('');
 	const [isHover, setIsHover] = useState<boolean>(false);
 	const [memberListRe, setMemberListRe] = useRecoilState(memberListState);
-
-	const [modalOpen, setModalOpen] = useState<boolean>(false);
-	const modalRef = useRef<HTMLDivElement | null>(null);
-	const [modalDropdown, setModalDropdown] = useState<boolean>(false);
-	const modalDropdownRef = useRef<HTMLDivElement | null>(null);
-
-	const roles: string[] = ['프론트엔드 개발자', '백엔드 개발자', '디자이너', '기획자'];
-	const [currentRole, setCurrentRole] = useState<string>('프론트엔드 개발자');
+	const [modalOpen, setModalOpen] = useRecoilState<boolean>(memberModalState);
 
 	const [isValidName, setIsValidName] = useState({
 		validName: false,
@@ -131,11 +137,6 @@ const MeeTeamCreatePage = () => {
 		navigate('/manage/meeteam');
 	};
 
-	const onClickRole = (event: React.MouseEvent<HTMLElement>) => {
-		const { innerText } = event.target as HTMLElement;
-		setCurrentRole(innerText);
-	};
-
 	const onClickTestAdd = () => {
 		let temp = [...memberList];
 		temp.push((<MemberTest id={(temp.length - 1).toString()} />) as any);
@@ -144,26 +145,26 @@ const MeeTeamCreatePage = () => {
 		setModalOpen(false);
 	};
 
-	useEffect(() => {
-		const outsideClick = (event: MouseEvent) => {
-			const { target } = event;
-			if (
-				modalDropdown &&
-				modalDropdownRef.current &&
-				!modalDropdownRef.current.contains(target as Node)
-			) {
-				setModalDropdown(false);
-			}
+	// useEffect(() => {
+	// 	const outsideClick = (event: MouseEvent) => {
+	// 		const { target } = event;
+	// 		if (
+	// 			modalDropdown &&
+	// 			modalDropdownRef.current &&
+	// 			!modalDropdownRef.current.contains(target as Node)
+	// 		) {
+	// 			setModalDropdown(false);
+	// 		}
 
-			if (modalOpen && modalRef.current && !modalRef.current.contains(target as Node)) {
-				setModalOpen(false);
-			}
-		};
-		document.addEventListener('mousedown', outsideClick);
-		return () => {
-			document.removeEventListener('mousedown', outsideClick);
-		};
-	}, [modalDropdownRef.current, modalDropdown, modalRef.current, modalOpen]);
+	// 		if (modalOpen && modalRef.current && !modalRef.current.contains(target as Node)) {
+	// 			setModalOpen(false);
+	// 		}
+	// 	};
+	// 	document.addEventListener('mousedown', outsideClick);
+	// 	return () => {
+	// 		document.removeEventListener('mousedown', outsideClick);
+	// 	};
+	// }, [modalDropdownRef.current, modalDropdown, modalRef.current, modalOpen]);
 
 	return (
 		<S.MeeTeamCreatePage>
@@ -300,7 +301,8 @@ const MeeTeamCreatePage = () => {
 									멤버 초대 +
 								</button>
 							</div>
-							{modalOpen && (
+							{modalOpen && <MemberInviteModal onClick={onClickTestAdd} />}
+							{/* {modalOpen && (
 								<div
 									className='wrapper-modal'
 									ref={modalRef}
@@ -354,7 +356,7 @@ const MeeTeamCreatePage = () => {
 										</div>
 									</div>
 								</div>
-							)}
+							)} */}
 							<div className='container__member-area'>
 								{memberListRe.map((e, index) => (
 									<MemberTest key={index} id={index.toString()} />
