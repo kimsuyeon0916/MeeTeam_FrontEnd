@@ -1,4 +1,5 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react';
+import { Exit, Plus, Upload } from '../../../assets';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { modules } from '../../../utils/index';
 import {
@@ -72,14 +73,6 @@ const MeeTeamCreatePage = () => {
 		validDate: false,
 		validMessage: '',
 	});
-
-	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
-		if (event.target instanceof Element) {
-			const deletedIndex = Number(event.target.id);
-			copyMemberList.splice(deletedIndex, 1);
-			setMemberList(copyMemberList);
-		}
-	};
 
 	const onClickCancel = () => {
 		// 모달창 띄워서 한 번 더 확인시키고 이동하기
@@ -309,22 +302,7 @@ const MeeTeamCreatePage = () => {
 									<img src='https://ifh.cc/g/YO5Z7z.jpg' />
 									{isHover && (
 										<div className='icon-upload'>
-											<svg
-												xmlns='http://www.w3.org/2000/svg'
-												width='99'
-												height='99'
-												viewBox='0 0 99 99'
-												fill='none'
-												className='icon'
-											>
-												<path
-													d='M66 49.5L49.5 33M49.5 33L33 49.5M49.5 33V66M90.75 49.5C90.75 72.2817 72.2817 90.75 49.5 90.75C26.7183 90.75 8.25 72.2817 8.25 49.5C8.25 26.7183 26.7183 8.25 49.5 8.25C72.2817 8.25 90.75 26.7183 90.75 49.5Z'
-													stroke='white'
-													stroke-width='5'
-													stroke-linecap='round'
-													stroke-linejoin='round'
-												/>
-											</svg>
+											<img src={Upload} />
 										</div>
 									)}
 								</label>
@@ -361,34 +339,7 @@ const MeeTeamCreatePage = () => {
 													setModalOpen(prev => !prev);
 												}}
 											>
-												<svg
-													xmlns='http://www.w3.org/2000/svg'
-													width='24'
-													height='24'
-													viewBox='0 0 24 24'
-													fill='none'
-												>
-													<g opacity='0.8'>
-														<rect
-															x='6.99609'
-															y='5.39844'
-															width='16.5158'
-															height='1.65158'
-															rx='0.825792'
-															transform='rotate(45 6.99609 5.39844)'
-															fill='#373F41'
-														/>
-														<rect
-															x='18.668'
-															y='6.5625'
-															width='16.5158'
-															height='1.65158'
-															rx='0.825792'
-															transform='rotate(135 18.668 6.5625)'
-															fill='#373F41'
-														/>
-													</g>
-												</svg>
+												<img src={Exit} />
 											</button>
 										</div>
 										<div className='container-modal__search'>
@@ -435,25 +386,7 @@ const MeeTeamCreatePage = () => {
 									}}
 									className='container__member-area__element'
 								>
-									<svg
-										xmlns='http://www.w3.org/2000/svg'
-										width='20'
-										height='20'
-										viewBox='0 0 20 20'
-										fill='none'
-									>
-										<g opacity='0.8'>
-											<rect y='8.99316' width='20' height='2' rx='1' fill='#373F41' />
-											<rect
-												x='10.9922'
-												width='20'
-												height='2'
-												rx='1'
-												transform='rotate(90 10.9922 0)'
-												fill='#373F41'
-											/>
-										</g>
-									</svg>
+									<img src={Plus} />
 								</button>
 							</div>
 						</div>
