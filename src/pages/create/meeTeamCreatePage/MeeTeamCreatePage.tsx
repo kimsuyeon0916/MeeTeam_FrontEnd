@@ -361,7 +361,34 @@ const MeeTeamCreatePage = () => {
 													setModalOpen(prev => !prev);
 												}}
 											>
-												x
+												<svg
+													xmlns='http://www.w3.org/2000/svg'
+													width='24'
+													height='24'
+													viewBox='0 0 24 24'
+													fill='none'
+												>
+													<g opacity='0.8'>
+														<rect
+															x='6.99609'
+															y='5.39844'
+															width='16.5158'
+															height='1.65158'
+															rx='0.825792'
+															transform='rotate(45 6.99609 5.39844)'
+															fill='#373F41'
+														/>
+														<rect
+															x='18.668'
+															y='6.5625'
+															width='16.5158'
+															height='1.65158'
+															rx='0.825792'
+															transform='rotate(135 18.668 6.5625)'
+															fill='#373F41'
+														/>
+													</g>
+												</svg>
 											</button>
 										</div>
 										<div className='container-modal__search'>
