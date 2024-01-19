@@ -145,27 +145,6 @@ const MeeTeamCreatePage = () => {
 		setModalOpen(false);
 	};
 
-	// useEffect(() => {
-	// 	const outsideClick = (event: MouseEvent) => {
-	// 		const { target } = event;
-	// 		if (
-	// 			modalDropdown &&
-	// 			modalDropdownRef.current &&
-	// 			!modalDropdownRef.current.contains(target as Node)
-	// 		) {
-	// 			setModalDropdown(false);
-	// 		}
-
-	// 		if (modalOpen && modalRef.current && !modalRef.current.contains(target as Node)) {
-	// 			setModalOpen(false);
-	// 		}
-	// 	};
-	// 	document.addEventListener('mousedown', outsideClick);
-	// 	return () => {
-	// 		document.removeEventListener('mousedown', outsideClick);
-	// 	};
-	// }, [modalDropdownRef.current, modalDropdown, modalRef.current, modalOpen]);
-
 	return (
 		<S.MeeTeamCreatePage>
 			<div className='procedure'>
@@ -302,61 +281,6 @@ const MeeTeamCreatePage = () => {
 								</button>
 							</div>
 							{modalOpen && <MemberInviteModal onClick={onClickTestAdd} />}
-							{/* {modalOpen && (
-								<div
-									className='wrapper-modal'
-									ref={modalRef}
-									onClick={e => {
-										if (e.target === modalRef.current) {
-											setModalOpen(false);
-										}
-									}}
-								>
-									<div className='container-modal'>
-										<div className='container-modal__top'>
-											<Subtitle>{'멤버 초대'}</Subtitle>
-											<button
-												className='exit'
-												onClick={() => {
-													setModalOpen(prev => !prev);
-												}}
-											>
-												<img src={Exit} />
-											</button>
-										</div>
-										<div className='container-modal__search'>
-											<span>멤버</span>
-											<input placeholder='유저를 검색해주세요.' />
-										</div>
-										<div className='container-modal__role'>
-											<span>역할</span>
-											<div
-												className='dropdown-header'
-												onClick={() => {
-													setModalDropdown(prev => !prev);
-												}}
-												ref={modalDropdownRef}
-											>
-												<label>{currentRole}</label>
-												{modalDropdown && (
-													<div className='dropdown'>
-														{roles.map((role, index) => (
-															<span key={index} onClick={onClickRole}>
-																{role}
-															</span>
-														))}
-													</div>
-												)}
-											</div>
-										</div>
-										<div className='container-modal__button'>
-											<button type='button' className='button-invite' onClick={onClickTestAdd}>
-												초대하기
-											</button>
-										</div>
-									</div>
-								</div>
-							)} */}
 							<div className='container__member-area'>
 								{memberListRe.map((e, index) => (
 									<MemberTest key={index} id={index.toString()} />
@@ -383,4 +307,4 @@ const MeeTeamCreatePage = () => {
 	);
 };
 
-export default MeeTeamCreatePage;
+export default React.memo(MeeTeamCreatePage);
