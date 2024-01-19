@@ -30,12 +30,14 @@ const MeeTeamCreatePage = () => {
 	const field = useRecoilValue(fieldState);
 	const category = useRecoilValue(categoryState);
 	const quillRef = useRef<ReactQuill | null>(null);
+
 	const [memberList, setMemberList] = useState<MeeTeamMember[]>([]);
 	const [teamName, setTeamName] = useState<string>('');
 	const [startDate, endDate] = useRecoilValue(dateState);
 	const [file, setFile] = useState<string>('');
 	const [fileName, setFileName] = useState<string>('');
 	const [isHover, setIsHover] = useState<boolean>(false);
+	const [isChecked, setIsChecked] = useState<boolean>(false);
 	const [memberListRe, setMemberListRe] = useRecoilState(memberListState);
 	const [modalOpen, setModalOpen] = useRecoilState<boolean>(memberModalState);
 
@@ -62,7 +64,7 @@ const MeeTeamCreatePage = () => {
 
 	const onClickCancel = () => {
 		// 모달창 띄워서 한 번 더 확인시키고 이동하기
-		navigate('/');
+		// navigate('/');
 	};
 
 	const onChangeTeamName = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -134,7 +136,7 @@ const MeeTeamCreatePage = () => {
 				validMessage: '',
 			});
 		}
-		navigate('/manage/meeteam');
+		// navigate('/manage/meeteam');
 	};
 
 	const onClickTestAdd = () => {
@@ -215,11 +217,21 @@ const MeeTeamCreatePage = () => {
 											<Subtitle>{'수업'}</Subtitle>
 											<span className='description'>수업인 경우에 체크해주세요.</span>
 											<span className='description-check'>수업 선택</span>
-											<input type='checkbox' />
+											<input type='checkbox' onClick={() => setIsChecked(prev => !prev)} />
 										</div>
 										<div className='container-course'>
-											<input type='text' placeholder='수업명' />
-											<input type='text' placeholder='교수명' />
+											<input
+												type='text'
+												placeholder='수업명'
+												className={!isChecked ? 'disable' : ''}
+												disabled={!isChecked ? true : false}
+											/>
+											<input
+												type='text'
+												placeholder='교수명'
+												className={!isChecked ? 'disable' : ''}
+												disabled={!isChecked ? true : false}
+											/>
 										</div>
 									</div>
 								</div>
