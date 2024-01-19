@@ -1,5 +1,5 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { modules } from '../../../utils/index';
 import {
 	Subtitle,
@@ -9,7 +9,7 @@ import {
 	MemberCard,
 	MeeTeamMember,
 } from '../../../components';
-import { areaState, categoryState, dateState, fieldState } from '../../../atom';
+import { areaState, categoryState, dateState, fieldState, memberListState } from '../../../atom';
 import S from './MeeTeamCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -29,6 +29,7 @@ const MeeTeamCreatePage = () => {
 	const [file, setFile] = useState<string>('');
 	const [fileName, setFileName] = useState<string>('');
 	const [isHover, setIsHover] = useState<boolean>(false);
+	const [memberListRe, setMemberListRe] = useRecoilState(memberListState);
 
 	const [modalOpen, setModalOpen] = useState<boolean>(false);
 	const modalRef = useRef<HTMLDivElement | null>(null);
@@ -72,12 +73,6 @@ const MeeTeamCreatePage = () => {
 		validMessage: '',
 	});
 
-	const onClickMember = () => {
-		// let updatedMemberList = [...memberList];
-		// updatedMemberList.push(<MemberSelect id={memberList.length} />);
-		// setMemberList(updatedMemberList);
-	};
-
 	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
 		if (event.target instanceof Element) {
 			const deletedIndex = Number(event.target.id);
@@ -86,9 +81,9 @@ const MeeTeamCreatePage = () => {
 		}
 	};
 
-	const onClickCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const onClickCancel = () => {
 		// 모달창 띄워서 한 번 더 확인시키고 이동하기
-		// navigate('/');
+		navigate('/');
 	};
 
 	const onChangeTeamName = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
@@ -170,8 +165,10 @@ const MeeTeamCreatePage = () => {
 
 	const onClickTestAdd = () => {
 		let temp = [...memberList];
-		temp.push((<MemberTest />) as any);
+		temp.push((<MemberTest id={(temp.length - 1).toString()} />) as any);
 		setMemberList(temp);
+		setMemberListRe(temp);
+		setModalOpen(false);
 	};
 
 	useEffect(() => {
@@ -393,7 +390,7 @@ const MeeTeamCreatePage = () => {
 											</div>
 										</div>
 										<div className='container-modal__button'>
-											<button type='button' className='button-invite'>
+											<button type='button' className='button-invite' onClick={onClickTestAdd}>
 												초대하기
 											</button>
 										</div>
@@ -401,14 +398,37 @@ const MeeTeamCreatePage = () => {
 								</div>
 							)}
 							<div className='container__member-area'>
-								{/* <div className='container__member-area__element'></div> */}
-								{memberList.map((e, index) => (
-									<MemberTest key={index} />
+								{memberListRe.map((e, index) => (
+									<MemberTest key={index} id={index.toString()} />
 								))}
+								<button
+									type='button'
+									onClick={() => {
+										setModalOpen(prev => !prev);
+									}}
+									className='container__member-area__element'
+								>
+									<svg
+										xmlns='http://www.w3.org/2000/svg'
+										width='20'
+										height='20'
+										viewBox='0 0 20 20'
+										fill='none'
+									>
+										<g opacity='0.8'>
+											<rect y='8.99316' width='20' height='2' rx='1' fill='#373F41' />
+											<rect
+												x='10.9922'
+												width='20'
+												height='2'
+												rx='1'
+												transform='rotate(90 10.9922 0)'
+												fill='#373F41'
+											/>
+										</g>
+									</svg>
+								</button>
 							</div>
-							<button type='button' onClick={onClickTestAdd}>
-								추가하기
-							</button>
 						</div>
 						<div className='container__controller'>
 							<button onClick={onClickCancel}>취소</button>

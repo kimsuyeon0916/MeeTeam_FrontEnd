@@ -1,8 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MemberCard, MeeTeamMember } from '../../../index';
+import { useRecoilState } from 'recoil';
+import { memberListState } from '../../../../atom';
 
-const MemberTest = () => {
+interface Member {
+	id: string;
+}
+
+const MemberTest = ({ id }: Member) => {
 	const memberTemp: MeeTeamMember = {
 		nickName: '송지원',
 		imageUrl:
@@ -15,11 +21,26 @@ const MemberTest = () => {
 		school: '세종대학교',
 		introduction: '열심히 하겠습니다!☺️',
 		specifications: [['Figma', `#E0E6FF`]],
+		id: id,
 	};
+	const [memberList, setMemberList] = useRecoilState(memberListState);
+
+	const onClickDelete = (event: any) => {
+		console.log(+event.target.id);
+		let temp = [...memberList];
+		if (event.target instanceof Element) {
+			const deletedIndex = Number(event.target.id);
+			temp.splice(deletedIndex, 1);
+			setMemberList(temp);
+		}
+	};
+
 	return (
-		<div className='member'>
+		<div className='member' id={id}>
 			<MemberCard member={memberTemp} />
-			<div className='delete'>x</div>
+			<div className='delete' onClick={onClickDelete} id={id}>
+				x
+			</div>
 		</div>
 	);
 };

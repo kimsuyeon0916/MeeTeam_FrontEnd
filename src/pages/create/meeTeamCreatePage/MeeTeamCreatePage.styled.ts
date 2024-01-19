@@ -447,11 +447,15 @@ const MeeTeamCreatePage = styled.div`
 				border: 1px solid #dcdcdc;
 				border-radius: 1rem;
 				padding: 3rem 4rem;
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr;
+				grid-template-rows: 1fr 1fr;
+				gap: 1rem 1rem;
 			}
 
 			.container__member-area__element {
 				width: 24rem;
-				height: 18rem;
+				height: 14rem;
 				flex-shrink: 0;
 				border-radius: 1rem;
 				border: 1px dashed #cdcdcd;

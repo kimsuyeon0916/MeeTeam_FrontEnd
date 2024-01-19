@@ -11,6 +11,7 @@ interface MeeTeamMember {
 	school: string;
 	introduction: string;
 	specifications: string[][];
+	id?: string;
 }
 export type { MeeTeamMember };
 
