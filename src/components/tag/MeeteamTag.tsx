@@ -11,7 +11,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 	const [isTouched, setIsTouched] = useState<boolean>(false);
 	const copyTagList = [...tagList];
 	const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
-	const options = ['#UI/UX', '#GUI', '#CX', '#BI', '#Figma'];
+	const options = ['UI/UX', 'GUI', 'CX', 'BI', 'Figma', 'React', 'Spring', 'Node.js'];
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -27,7 +27,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 
 	const submitTagItem = () => {
 		let updatedTagList = [...tagList];
-		updatedTagList.push('#' + tagItem);
+		updatedTagList.push(tagItem);
 		setTagList(updatedTagList);
 		setTagItem('');
 		setIsDropdownVisible(false);
