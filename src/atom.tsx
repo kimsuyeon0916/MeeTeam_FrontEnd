@@ -6,6 +6,12 @@ const { persistAtom } = recoilPersist({
 	storage: sessionStorage,
 });
 
+export const preUrlState = atom({
+	key: 'preUrlState',
+	default: '',
+	effects_UNSTABLE: [persistAtom],
+});
+
 export const contentState = atom({
 	key: 'contentState',
 	default: '대시보드',
