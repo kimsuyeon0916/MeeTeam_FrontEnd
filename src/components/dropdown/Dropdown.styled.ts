@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 // allowNeed 매개변수로 받아서 false면 백그라운드 투명하게 하기
 interface IDropdown {
-	allowNeed?: boolean;
+	$allowNeed?: boolean;
 }
 
 const Dropdown = styled.div<IDropdown>`
@@ -34,13 +34,13 @@ const Dropdown = styled.div<IDropdown>`
 			justify-content: space-between;
 			gap: 1.1rem;
 			cursor: pointer;
-			color: ${props => (props.allowNeed ? '#373f41' : 'transparent')};
-			font-size: ${props => (!props.allowNeed ? '5rem' : '1.6rem')};
+			color: ${props => (props.$allowNeed ? '#373f41' : 'transparent')};
+			font-size: ${props => (!props.$allowNeed ? '5rem' : '1.6rem')};
 		}
 
 		.dropdown {
 			position: absolute;
-			top: ${props => (!props.allowNeed ? '4rem' : '5rem')};
+			top: ${props => (!props.$allowNeed ? '4rem' : '5rem')};
 			width: 100%;
 			right: 0rem;
 			background-color: #f7f7f7;

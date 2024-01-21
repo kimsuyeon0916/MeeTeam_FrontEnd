@@ -4,10 +4,10 @@ import S from './Dropdown.styled';
 interface IDropdown {
 	data: string[];
 	initialData?: string;
-	allowNeed?: boolean;
+	$allowNeed?: boolean;
 }
 
-const Dropdown = ({ data, initialData, allowNeed }: IDropdown) => {
+const Dropdown = ({ data, initialData, $allowNeed }: IDropdown) => {
 	const [currentValue, setCurrentValue] = useState(`${initialData}`);
 	const [showDropdown, setShowDropdown] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -36,7 +36,7 @@ const Dropdown = ({ data, initialData, allowNeed }: IDropdown) => {
 	}, [dropdownRef.current, showDropdown]);
 
 	return (
-		<S.Dropdown allowNeed={allowNeed}>
+		<S.Dropdown $allowNeed={$allowNeed}>
 			<div className='menu' onClick={onClickDropdown} ref={dropdownRef}>
 				<div className='temp'>
 					<div>{currentValue}</div>
