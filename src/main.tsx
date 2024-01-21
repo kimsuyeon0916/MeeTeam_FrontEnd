@@ -16,6 +16,7 @@ import {
 	RecruitCreatePage,
 	OutputCreatePage,
 	IntegratedManagePage,
+	SignInPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
 			{
 				path: 'member',
 				element: <MemberPage />,
+			},
+			{
+				path: 'signIn',
+				element: <SignInPage />,
 			},
 			{
 				path: 'information',
