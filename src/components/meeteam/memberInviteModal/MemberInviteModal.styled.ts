@@ -162,6 +162,6 @@ const MemberInviteModal = styled.div`
 	}
 `;
 
-const SMember = { MemberInviteModal };
+const S = { MemberInviteModal };
 
-export default SMember;
+export default S;

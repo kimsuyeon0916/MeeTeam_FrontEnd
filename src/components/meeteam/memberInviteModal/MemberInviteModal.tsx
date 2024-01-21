@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import { Exit } from '../../../assets';
 import { memberModalState } from '../../../atom';
 import { Subtitle } from '../..';
-import SMember from './MemberInviteModal.styled';
+import S from './MemberInviteModal.styled';
 
 interface MemberInvite {
 	onClick: () => void;
@@ -45,7 +45,7 @@ const MemberInviteModal = ({ onClick }: MemberInvite) => {
 	}, [modalDropdownRef.current, modalDropdown, modalRef.current, modalOpen]);
 
 	return (
-		<SMember.MemberInviteModal
+		<S.MemberInviteModal
 			ref={modalRef}
 			onClick={e => {
 				if (e.target === modalRef.current) {
@@ -97,7 +97,7 @@ const MemberInviteModal = ({ onClick }: MemberInvite) => {
 					</button>
 				</div>
 			</div>
-		</SMember.MemberInviteModal>
+		</S.MemberInviteModal>
 	);
 };
 
