@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useState } from 'react';
 import { Plus, Upload } from '../../../assets';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { modules } from '../../../utils/index';
@@ -29,11 +29,11 @@ const MeeTeamCreatePage = () => {
 	const field = useRecoilValue(fieldState);
 	const category = useRecoilValue(categoryState);
 	const quillRef = useRef<ReactQuill | null>(null);
+	const imgRef = useRef<HTMLInputElement | null>(null);
 
 	const [teamName, setTeamName] = useState<string>('');
 	const [startDate, endDate] = useRecoilValue(dateState);
-	const [file, setFile] = useState<string>('');
-	const [fileName, setFileName] = useState<string>('');
+	const [imgFile, setImgFile] = useState<string>('');
 	const [isHover, setIsHover] = useState<boolean>(false);
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 	const [memberList, setMemberList] = useRecoilState(memberListState);
@@ -65,18 +65,25 @@ const MeeTeamCreatePage = () => {
 		// navigate('/');
 	};
 
-	const onChangeTeamName = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangeTeamName = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTeamName(event.target.value);
 		setIsValidName({ validName: true, validMessage: '' });
-	}, []);
+	};
 
-	const onChangeImg = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangeImg = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files !== null) {
-			setFileName(event.target.files[0].name);
-			const selectedFiles = event.target.files as FileList;
-			setFile(URL.createObjectURL(selectedFiles?.[0]));
+			const selectedFiles = event.target.files[0];
+			const reader = new FileReader();
+			reader.readAsDataURL(selectedFiles);
+
+			return new Promise<void>(resolve => {
+				reader.onload = () => {
+					setImgFile(reader.result as any);
+					resolve();
+				};
+			});
 		}
-	}, []);
+	};
 
 	const handleMouseOver = () => {
 		setIsHover(true);
@@ -255,23 +262,17 @@ const MeeTeamCreatePage = () => {
 								<Subtitle>{'커버 이미지'}</Subtitle>
 							</div>
 							<div className='container__img-input'>
-								<input
-									type='file'
-									accept='image/*'
-									id='meeteamImg'
-									placeholder='이미지를 업로드해주세요.'
-									onChange={onChangeImg}
-								/>
+								<input type='file' accept='image/*' id='meeteamImg' onChange={onChangeImg} />
 								<label
-									className={`file-label ${file ? 'haveFile' : ''}`}
+									className='file-label'
 									htmlFor='meeteamImg'
 									onMouseOver={handleMouseOver}
 									onMouseOut={handleMouseOut}
 								>
-									<img src='https://ifh.cc/g/YO5Z7z.jpg' />
+									<img src={imgFile ? imgFile : 'https://ifh.cc/g/YO5Z7z.jpg'} />
 									{isHover && (
 										<div className='icon-upload'>
-											<img src={Upload} />
+											<img className='icon' src={Upload} />
 										</div>
 									)}
 								</label>

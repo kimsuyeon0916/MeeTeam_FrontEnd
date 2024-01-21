@@ -242,6 +242,7 @@ const MeeTeamCreatePage = styled.div`
 
 					img {
 						width: 100%;
+						height: 100%;
 						border-radius: 0.75rem;
 
 						&:hover {
@@ -256,10 +257,7 @@ const MeeTeamCreatePage = styled.div`
 						right: 7.6rem;
 						transition: 0.5s ease-in-out;
 						opacity: 70%;
-					}
-
-					&:hover .icon {
-						opacity: 70%;
+						width: 10rem;
 					}
 				}
 
