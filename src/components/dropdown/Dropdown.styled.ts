@@ -27,7 +27,8 @@ const Dropdown = styled.div<IDropdown>`
 		width: 11rem;
 		border-radius: 0.6rem;
 		border: 0.75px solid var(--sub-color, #e0e6ff);
-		padding: 1.2rem 1.1rem 1.2rem 0;
+		padding: 1.2rem 1.1rem;
+		/* padding: 1.2rem 1.1rem 1.2rem 0rem; */
 
 		.temp {
 			display: flex;
