@@ -266,23 +266,6 @@ const RecruitCreatePage = () => {
 								<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
 							</div>
 						</div>
-						<div className='container__img'>
-							<div>
-								<Subtitle>{'구인 이미지'}</Subtitle>
-							</div>
-							<div className='container__img-input'>
-								<input
-									type='file'
-									accept='image/*'
-									id='meeteamImg'
-									placeholder='이미지를 업로드해주세요.'
-									onChange={onChangeImg}
-								/>
-								<label className={file ? 'haveFile' : ''} htmlFor='meeteamImg'>
-									{file ? `${fileName}` : '이미지를 업로드해주세요.'}
-								</label>
-							</div>
-						</div>
 						<div className='container__member'>
 							<div className='container__member-title'>
 								<Subtitle>{'멤버'}</Subtitle>
