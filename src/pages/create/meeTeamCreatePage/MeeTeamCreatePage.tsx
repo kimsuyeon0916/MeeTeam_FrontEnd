@@ -316,4 +316,4 @@ const MeeTeamCreatePage = () => {
 	);
 };
 
-export default React.memo(MeeTeamCreatePage);
+export default MeeTeamCreatePage;

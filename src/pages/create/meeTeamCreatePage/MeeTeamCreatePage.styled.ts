@@ -118,10 +118,12 @@ const MeeTeamCreatePage = styled.div`
 				.title-info {
 					position: relative;
 
-					input {
+					input[type='checkbox'] {
 						top: 1.25rem;
 						left: 32.3rem;
 						position: absolute;
+						border: 1.5px solid #5877fc;
+						background: #fff;
 					}
 				}
 
