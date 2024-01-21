@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import SRecruit from './RecruitDetailPage.styled';
 import { useLocation } from 'react-router-dom';
 import { Tag, Icon } from '../../components';
@@ -16,8 +16,16 @@ interface Role {
 	specs: string[];
 }
 
+interface Comment {
+	// id: number;
+	username: string;
+	content: string;
+}
+
 const RecruitDetailPage = () => {
 	const location = useLocation();
+	const [commentsList, setCommentsList] = useState<Comment[]>([]);
+	const [contents, setContents] = useState<string>('');
 
 	const informationList: RequiredInformation[] = [
 		{
@@ -79,6 +87,20 @@ const RecruitDetailPage = () => {
 			return false;
 		}
 		return true;
+	};
+
+	const addComment = () => {
+		if (contents !== '') {
+			const lastCmtIndex = commentsList.length - 1;
+			// const addedCmtId = commentsList[lastCmtIndex].id + 1;
+			const newComment = {
+				// id: addedCmtId,
+				username: 'yeom',
+				content: contents,
+			};
+			setCommentsList([...commentsList, newComment]);
+		}
+		setContents('');
 	};
 
 	return (
@@ -159,7 +181,7 @@ const RecruitDetailPage = () => {
 						<div className='container-tags__box'>
 							{TAGS.map((tag, index) => (
 								<div className='tag' key={index}>
-									#{tag}
+									{tag}
 								</div>
 							))}
 						</div>
@@ -223,14 +245,26 @@ const RecruitDetailPage = () => {
 			</div>
 			<div className='container-comments'>
 				<span className='container-comments__title'>댓글</span>
+				<ul className='list-cmt'>
+					{commentsList.map((comment, index) => {
+						// const commentId = comment.id;
+						return <li key={index}>{comment.content as any}</li>;
+					})}
+				</ul>
 				<div className='container-comments__wrapper'>
 					<div className='comments'></div>
 					<div className='user-input'>
 						<div className='user-input__icon'>
 							<Icon />
 						</div>
-						<input />
-						<button type='button'>댓글 등록</button>
+						<input
+							type='text'
+							onKeyDown={e => (e.key === 'Enter' ? addComment() : null)}
+							onChange={e => setContents(e.target.value)}
+						/>
+						<button type='button' onClick={addComment}>
+							댓글 등록
+						</button>
 					</div>
 				</div>
 			</div>
