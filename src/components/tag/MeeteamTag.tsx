@@ -26,9 +26,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 	};
 
 	const submitTagItem = () => {
-		let updatedTagList = [...tagList];
-		updatedTagList.push(tagItem);
-		setTagList(updatedTagList);
+		setTagList([...tagList, tagItem]);
 		setTagItem('');
 		setIsDropdownVisible(false);
 	};
@@ -46,9 +44,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 
 	const onClickTagOptions = (selectedTag: string) => {
 		if (tagList.length < 20) {
-			let updatedTagList = [...tagList];
-			updatedTagList.push(selectedTag);
-			setTagList(updatedTagList);
+			setTagList([...tagList, selectedTag]);
 			setIsDropdownVisible(false);
 		}
 	};
