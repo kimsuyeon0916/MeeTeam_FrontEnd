@@ -7,8 +7,8 @@ import {
 	Dot,
 	InfoItem,
 	MeeteamTag,
-	MeeTeamMember,
 	MemberInviteModal,
+	MemberTest,
 } from '../../../components';
 import {
 	areaState,
@@ -22,7 +22,6 @@ import S from './MeeTeamCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from 'react-router-dom';
-import MemberTest from '../../../components/meeteam/main/member/MemberTest';
 
 const MeeTeamCreatePage = () => {
 	const navigate = useNavigate();
@@ -31,14 +30,13 @@ const MeeTeamCreatePage = () => {
 	const category = useRecoilValue(categoryState);
 	const quillRef = useRef<ReactQuill | null>(null);
 
-	const [memberList, setMemberList] = useState<MeeTeamMember[]>([]);
 	const [teamName, setTeamName] = useState<string>('');
 	const [startDate, endDate] = useRecoilValue(dateState);
 	const [file, setFile] = useState<string>('');
 	const [fileName, setFileName] = useState<string>('');
 	const [isHover, setIsHover] = useState<boolean>(false);
 	const [isChecked, setIsChecked] = useState<boolean>(false);
-	const [memberListRe, setMemberListRe] = useRecoilState(memberListState);
+	const [memberList, setMemberList] = useRecoilState(memberListState);
 	const [modalOpen, setModalOpen] = useRecoilState<boolean>(memberModalState);
 
 	const [isValidName, setIsValidName] = useState({
@@ -140,10 +138,9 @@ const MeeTeamCreatePage = () => {
 	};
 
 	const onClickTestAdd = () => {
-		let temp = [...memberListRe];
+		let temp = [...memberList];
 		temp.push((<MemberTest id={(temp.length - 1).toString()} />) as any);
 		setMemberList(temp);
-		setMemberListRe(temp);
 		setModalOpen(false);
 	};
 
@@ -294,7 +291,7 @@ const MeeTeamCreatePage = () => {
 							</div>
 							{modalOpen && <MemberInviteModal onClick={onClickTestAdd} />}
 							<div className='container__member-area'>
-								{memberListRe.map((e, index) => (
+								{memberList.map((e, index) => (
 									<MemberTest key={index} id={index.toString()} />
 								))}
 								<button
