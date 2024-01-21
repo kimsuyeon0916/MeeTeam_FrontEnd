@@ -24,7 +24,6 @@ const Dropdown = ({ data, initialData, $allowNeed }: IDropdown) => {
 	useEffect(() => {
 		const outsideClick = (event: MouseEvent) => {
 			const { target } = event;
-			console.log(target);
 			if (showDropdown && dropdownRef.current && !dropdownRef.current.contains(target as Node)) {
 				setShowDropdown(false);
 			}
@@ -58,4 +57,4 @@ const Dropdown = ({ data, initialData, $allowNeed }: IDropdown) => {
 	);
 };
 
-export default React.memo(Dropdown);
+export default Dropdown;
