@@ -140,7 +140,7 @@ const MeeTeamCreatePage = () => {
 	};
 
 	const onClickTestAdd = () => {
-		let temp = [...memberList];
+		let temp = [...memberListRe];
 		temp.push((<MemberTest id={(temp.length - 1).toString()} />) as any);
 		setMemberList(temp);
 		setMemberListRe(temp);
