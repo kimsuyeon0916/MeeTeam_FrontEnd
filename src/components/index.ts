@@ -33,6 +33,7 @@ import {
 	MEMBER_PLUS_ICON,
 	MEMBER_PLUS_CARD,
 	MEMBER_BOTTOM_ARROW_ICON,
+	MemberTest,
 } from './meeteam/main/member/MemberData';
 import MemberInviteModal from './meeteam/memberInviteModal/MemberInviteModal';
 import type { MeeTeamMember } from './meeteam/main/member/MemberData';
@@ -145,4 +146,5 @@ export {
 	Dropdown,
 	DeadlineSelect,
 	MemberInviteModal,
+	MemberTest,
 };

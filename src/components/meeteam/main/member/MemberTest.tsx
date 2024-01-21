@@ -25,8 +25,7 @@ const MemberTest = ({ id }: Member) => {
 	};
 	const [memberList, setMemberList] = useRecoilState(memberListState);
 
-	const onClickDelete = (event: any) => {
-		console.log(+event.target.id);
+	const onClickDelete = (event: React.MouseEvent<HTMLDivElement>) => {
 		let temp = [...memberList];
 		if (event.target instanceof Element) {
 			const deletedIndex = Number(event.target.id);
