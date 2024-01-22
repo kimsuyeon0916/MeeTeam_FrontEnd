@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Tag, Alarm } from '..';
+import { Alarm } from '../../assets';
+import { Tag } from '..';
 import S from './RecruitCard.styled';
 
 export interface IRecruitCard {
@@ -32,7 +33,7 @@ const RecruitCard = ({ title, type, $recruit, $proceed }: IRecruitCard) => {
 					<div className={`toggle-circle ${isOn ? 'toggle-checked' : ''}`}></div>
 				</div>
 				<div className='alarm'>
-					<Alarm />
+					<img src={Alarm} />
 				</div>
 			</div>
 		</S.RecruitCard>

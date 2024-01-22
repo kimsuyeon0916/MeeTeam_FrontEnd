@@ -78,10 +78,12 @@ const MeeteamTag = styled.div`
 		border: 0.75px solid #e7e7e7;
 		background: #fff;
 		box-shadow: 0px 2.25px 15px 0px rgba(0, 0, 0, 0.1);
-		top: 6rem;
+		top: 110%;
+		right: 0rem;
 		display: flex;
 		padding-top: 2rem;
 		padding-left: 2.5rem;
+		z-index: 102;
 	}
 `;
 

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-// allowNeed 매개변수로 받아서 false면 백그라운드 투명하게 하기
+// arrowNeed 매개변수로 받아서 false면 백그라운드 투명하게 하기
 interface IDropdown {
-	allowNeed?: boolean;
+	$arrowNeed?: boolean;
+	$showDropdown?: boolean;
 }
 
 const Dropdown = styled.div<IDropdown>`
@@ -14,7 +15,7 @@ const Dropdown = styled.div<IDropdown>`
 	.menu {
 		position: relative;
 		display: flex;
-		justify-content: center;
+		justify-content: flex-end;
 		align-items: center;
 		color: #373f41;
 		font-family: Apple SD Gothic Neo;
@@ -24,18 +25,32 @@ const Dropdown = styled.div<IDropdown>`
 		line-height: 2.1rem; /* 233.333% */
 		letter-spacing: 0.015rem;
 		cursor: pointer;
-		/* width: 10rem; */
+		width: 11rem;
+		border-radius: 0.6rem;
+		border: 0.75px solid var(--sub-color, #e0e6ff);
+		padding: 1.2rem 1.1rem;
+		/* padding: 1.2rem 1.1rem 1.2rem 0rem; */
 
-		label {
+		.temp {
+			display: flex;
+			justify-content: space-between;
+			gap: 1.1rem;
 			cursor: pointer;
-			color: ${props => (props.allowNeed ? '#373f41' : 'transparent')};
-			font-size: ${props => (!props.allowNeed ? '5rem' : '')};
+			color: ${props => (props.$arrowNeed ? '#373f41' : '')};
+			font-size: ${props => (!props.$arrowNeed ? '5rem' : '1.6rem')};
+
+			div:nth-child(2) {
+				font-size: 1.1rem;
+				transition: transform 0.2s ease-in-out;
+				transform: rotateZ(${props => (props.$showDropdown ? '180deg' : '0deg')});
+			}
 		}
 
 		.dropdown {
 			position: absolute;
-			top: ${props => (!props.allowNeed ? '4rem' : '3rem')};
-			width: 10rem;
+			top: ${props => (!props.$arrowNeed ? '4rem' : '5rem')};
+			width: 100%;
+			right: 0rem;
 			background-color: #f7f7f7;
 			border-radius: 0.75rem;
 			padding: 1rem 1rem;

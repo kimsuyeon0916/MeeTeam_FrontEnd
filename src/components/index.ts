@@ -1,4 +1,4 @@
-import Header from './Header/Header';
+import Header from './header/Header';
 import Subtitle from './subtitle/Subtitle';
 import Dot from './dot/Dot';
 import InfoItem from './infoItem/InfoItem';
@@ -33,7 +33,9 @@ import {
 	MEMBER_PLUS_ICON,
 	MEMBER_PLUS_CARD,
 	MEMBER_BOTTOM_ARROW_ICON,
+	MemberTest,
 } from './meeteam/main/member/MemberData';
+import MemberInviteModal from './meeteam/memberInviteModal/MemberInviteModal';
 import type { MeeTeamMember } from './meeteam/main/member/MemberData';
 import {
 	meeteamInformation,
@@ -69,7 +71,6 @@ import EssentialInformation from './meeteam/main/information/subInformation/Esse
 import Sidebar from './sidebar/Sidebar';
 import Card from './meeteam/card/Card';
 import Tag from './meeteam/tag/Tag';
-import Alarm from './alarm/Alarm';
 import RecruitCard from './recruit/RecruitCard';
 import Status from './meeteam/status/Status';
 import Filter from './meeteam/filter/Filter';
@@ -140,11 +141,12 @@ export {
 	Sidebar,
 	Card,
 	Tag,
-	Alarm,
 	RecruitCard,
 	Status,
 	Filter,
 	Dropdown,
 	DeadlineSelect,
 	Icon,
+	MemberInviteModal,
+	MemberTest,
 };

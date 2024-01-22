@@ -8,22 +8,25 @@ interface IMeeteamTag {
 const MeeteamTag = ({ tags }: IMeeteamTag) => {
 	const [tagItem, setTagItem] = useState<string>('');
 	const [tagList, setTagList] = useState<string[]>([]);
+	const [isTouched, setIsTouched] = useState<boolean>(false);
 	const copyTagList = [...tagList];
 	const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
-	const options = ['#UI/UX', '#GUI', '#CX', '#BI', '#Figma'];
+	const options = ['UI/UX', 'GUI', 'CX', 'BI', 'Figma', 'React', 'Spring', 'Node.js'];
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		if (event.target.value.length !== 0 && event.key === 'Enter') {
+		const target = event.currentTarget;
+		if (target.value.length !== 0 && event.key === 'Enter') {
 			event.preventDefault();
 			submitTagItem();
+		}
+		if (event.key === 'Enter') {
+			event.preventDefault();
 		}
 	};
 
 	const submitTagItem = () => {
-		let updatedTagList = [...tagList];
-		updatedTagList.push('#' + tagItem);
-		setTagList(updatedTagList);
+		setTagList([...tagList, tagItem]);
 		setTagItem('');
 		setIsDropdownVisible(false);
 	};
@@ -35,14 +38,15 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 	};
 
 	const onClickInput = () => {
-		setIsDropdownVisible(prev => !prev);
+		setIsDropdownVisible(true);
+		setIsTouched(true);
 	};
 
 	const onClickTagOptions = (selectedTag: string) => {
-		let updatedTagList = [...tagList];
-		updatedTagList.push(selectedTag);
-		setTagList(updatedTagList);
-		setIsDropdownVisible(false);
+		if (tagList.length < 20) {
+			setTagList([...tagList, selectedTag]);
+			setIsDropdownVisible(false);
+		}
 	};
 
 	useEffect(() => {
@@ -54,6 +58,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 				!dropdownRef.current.contains(target as Node)
 			) {
 				setIsDropdownVisible(false);
+				setTagItem('');
 			}
 		};
 		document.addEventListener('mousedown', outsideClick);
@@ -70,7 +75,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 						return (
 							<div className='tag__item' key={index}>
 								<span>{tagItem}</span>
-								<button onClick={deleteTagItem} id={'' + index}>
+								<button type='button' onClick={deleteTagItem} id={'' + index}>
 									X
 								</button>
 							</div>
@@ -78,12 +83,34 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 					})}
 					<input
 						type='text'
-						placeholder='태그를 입력하고 엔터를 누르세요.'
+						placeholder={
+							isTouched
+								? isDropdownVisible
+									? tagList.length < 20
+										? '태그를 입력하고 엔터를 누르세요.'
+										: '태그는 20개까지 선택할 수 있습니다.'
+									: ''
+								: '태그를 입력하고 엔터를 누르세요.'
+						}
 						tabIndex={2}
+						disabled={tagList.length < 20 ? false : true}
 						onChange={event => setTagItem(event.target.value)}
 						value={tagItem}
 						onKeyPress={onKeyPress}
 					/>
+					{isDropdownVisible && (
+						<div className='tag-dropdown'>
+							{options.map((tag, index) => (
+								<div
+									className='tag__item option'
+									key={index}
+									onClick={() => onClickTagOptions(tag)}
+								>
+									{tag}
+								</div>
+							))}
+						</div>
+					)}
 				</div>
 			) : (
 				<div className='tag__box'>
@@ -94,15 +121,6 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 							</div>
 						);
 					})}
-				</div>
-			)}
-			{isDropdownVisible && (
-				<div className='tag-dropdown'>
-					{options.map((tag, index) => (
-						<div className='tag__item option' key={index} onClick={() => onClickTagOptions(tag)}>
-							{tag}
-						</div>
-					))}
 				</div>
 			)}
 		</S.MeeteamTag>

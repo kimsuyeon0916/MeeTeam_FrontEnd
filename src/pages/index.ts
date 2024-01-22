@@ -12,6 +12,7 @@ import ManagePortpolioPage from './manage/portpolio/ManagePortpolioPage';
 import RecruitCreatePage from './create/recruitCreatePage/RecruitCreatePage';
 import OutputCreatePage from './create/outputCreatePage/OutputCreatePage';
 import RecruitDetailPage from './recruit/RecruitDetailPage';
+import MyActivityManagePage from './manage/activity/MyActivityManagePage';
 
 export {
 	MainPage,
@@ -28,4 +29,5 @@ export {
 	RecruitCreatePage,
 	OutputCreatePage,
 	RecruitDetailPage,
+	MyActivityManagePage,
 };

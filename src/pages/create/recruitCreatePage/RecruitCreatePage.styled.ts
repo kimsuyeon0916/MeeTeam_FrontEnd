@@ -116,6 +116,65 @@ const RecruitCreatePage = styled.div`
 					padding-top: 1rem;
 					box-sizing: border-box;
 				}
+
+				.title-info {
+					position: relative;
+
+					input {
+						top: 1.25rem;
+						left: 32.3rem;
+						position: absolute;
+					}
+				}
+
+				.fix {
+					margin-top: 0.5rem;
+				}
+
+				.description {
+					color: #8e8e8e;
+					font-family: Pretendard;
+					font-size: 1.4rem;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 1.35rem; /* 90% */
+					letter-spacing: 0.015rem;
+					margin-left: 2rem;
+				}
+
+				.description-check {
+					position: absolute;
+					top: 1.6rem;
+					left: 34.5rem;
+					color: var(--text-color-2, #373f41);
+					font-family: Pretendard;
+					font-size: 1.35rem;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 1.35rem; /* 100% */
+					letter-spacing: 0.015rem;
+				}
+
+				.container-course {
+					display: flex;
+					gap: 5.8rem;
+
+					input {
+						width: 40.125rem;
+						height: 4.875rem;
+						flex-shrink: 0;
+						border-radius: 0.75rem;
+						border: 0.75px solid #e3e3e3;
+						background: #fff;
+						outline: none;
+						padding-left: 2.1rem;
+						box-sizing: border-box;
+					}
+
+					.disable {
+						background-color: #e3e3e3;
+					}
+				}
 			}
 		}
 
@@ -189,8 +248,29 @@ const RecruitCreatePage = styled.div`
 		}
 
 		.container__member {
-			margin-top: 70px;
+			position: relative;
+			margin-top: 4.35rem;
 			width: 100%;
+
+			.container__member-title {
+				display: flex;
+				justify-content: space-between;
+
+				button {
+					display: flex;
+					width: 10rem;
+					height: 3.5rem;
+					padding: 1rem;
+					justify-content: center;
+					align-items: center;
+					gap: 1rem;
+					border: none;
+					outline: none;
+					border-radius: 0.4rem;
+					background: var(--main-color, #5877fc);
+					color: #fff;
+				}
+			}
 
 			.container__member-area {
 				min-height: 24rem;
@@ -198,6 +278,33 @@ const RecruitCreatePage = styled.div`
 				background-color: #fff;
 				border: 1px solid #dcdcdc;
 				border-radius: 1rem;
+				padding: 3rem 4rem;
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr;
+				grid-template-rows: 1fr 1fr;
+				gap: 1rem 1rem;
+			}
+
+			.container__member-area__element {
+				width: 24rem;
+				height: 14rem;
+				flex-shrink: 0;
+				border-radius: 1rem;
+				border: 1px dashed #cdcdcd;
+				background: #fdfdfd;
+			}
+
+			.member {
+				position: relative;
+				width: 24rem;
+
+				.delete {
+					position: absolute;
+					top: 1rem;
+					right: 1.2rem;
+					font-size: 1.5rem;
+					cursor: pointer;
+				}
 			}
 
 			.controll {
