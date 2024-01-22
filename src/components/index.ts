@@ -75,6 +75,7 @@ import Status from './meeteam/status/Status';
 import Filter from './meeteam/filter/Filter';
 import Dropdown from './dropdown/Dropdown';
 import DeadlineSelect from './dateSelect/DeadlineSelect';
+import NaverLogin from './naver/NaverLogin';
 
 export {
 	Header,
@@ -145,4 +146,5 @@ export {
 	Filter,
 	Dropdown,
 	DeadlineSelect,
+	NaverLogin,
 };
