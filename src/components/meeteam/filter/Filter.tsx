@@ -32,9 +32,9 @@ const Filter = () => {
 				<Dropdown
 					data={['프로젝트', '스터디', '동아리', '공모전']}
 					initialData='프로젝트'
-					$allowNeed={true}
+					$arrowNeed={true}
 				/>
-				<Dropdown data={['개발']} initialData='카테고리' $allowNeed={true} />
+				<Dropdown data={['개발']} initialData='카테고리' $arrowNeed={true} />
 			</div>
 			<div className='container-checkbox'>
 				<input type='checkbox' id='recruit' />

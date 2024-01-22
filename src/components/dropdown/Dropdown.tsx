@@ -1,13 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import S from './Dropdown.styled';
+import DropdownArrow from './DropdownArrow';
 
 interface IDropdown {
 	data: string[];
 	initialData?: string;
-	$allowNeed?: boolean;
+	$arrowNeed?: boolean;
+	$showDropdown?: boolean;
 }
 
-const Dropdown = ({ data, initialData, $allowNeed }: IDropdown) => {
+const Dropdown = ({ data, initialData, $arrowNeed }: IDropdown) => {
 	const [currentValue, setCurrentValue] = useState(`${initialData}`);
 	const [showDropdown, setShowDropdown] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -35,11 +37,13 @@ const Dropdown = ({ data, initialData, $allowNeed }: IDropdown) => {
 	}, [dropdownRef.current, showDropdown]);
 
 	return (
-		<S.Dropdown $allowNeed={$allowNeed}>
+		<S.Dropdown $arrowNeed={$arrowNeed} $showDropdown={showDropdown}>
 			<div className='menu' onClick={onClickDropdown} ref={dropdownRef}>
 				<div className='temp'>
 					<div>{currentValue}</div>
-					<div>{showDropdown ? '▲' : '▼'}</div>
+					<div>
+						<DropdownArrow />
+					</div>
 				</div>
 				{showDropdown && (
 					<div className='dropdown'>
