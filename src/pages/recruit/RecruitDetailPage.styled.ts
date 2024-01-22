@@ -424,6 +424,7 @@ const RecruitDetailPage = styled.div`
 					}
 
 					button:nth-child(2) {
+						color: #fff;
 						background: linear-gradient(270deg, rgba(95, 92, 236, 0.76) -6.3%, #d85cec 101.52%);
 					}
 				}
@@ -472,13 +473,59 @@ const RecruitDetailPage = styled.div`
 	}
 	.container-comments {
 		width: 100%;
-		height: 23.25rem;
+		height: 100%;
 		flex-shrink: 0;
 		border-radius: 0.75rem;
 		border: 1.5px solid #bcd7ff;
 		background: #f7faff;
 		margin-top: 1.5rem;
 		padding: 2rem 3.45rem;
+
+		.container-comments__lists {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			gap: 1.3rem;
+			margin-bottom: 2rem;
+
+			.comment {
+				display: flex;
+				gap: 2rem;
+				align-items: center;
+
+				.comment-icon {
+					display: flex;
+				}
+
+				.comment-info {
+					display: flex;
+					flex-direction: column;
+					gap: 0.3rem;
+
+					span:nth-child(1) {
+						color: #434343;
+						font-family: 'Apple SD Gothic Neo';
+						font-size: 1.2rem;
+						font-style: normal;
+						font-weight: 400;
+						line-height: 1.35rem; /* 150% */
+						letter-spacing: 0.015rem;
+					}
+					span:nth-child(2) {
+						padding: 0.4rem 1.5rem;
+						background-color: #fff;
+						color: var(--text-color-2, #373f41);
+						font-family: 'Apple SD Gothic Neo';
+						font-size: 1.5rem;
+						font-style: normal;
+						font-weight: 400;
+						line-height: 150%; /* 2.25rem */
+						letter-spacing: 0.015rem;
+						border-radius: 0.75rem;
+					}
+				}
+			}
+		}
 
 		.container-comments__title {
 			color: var(--Light-Black, var(--text-color-2, #373f41));

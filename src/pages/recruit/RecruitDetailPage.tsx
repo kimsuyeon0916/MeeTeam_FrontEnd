@@ -103,6 +103,17 @@ const RecruitDetailPage = () => {
 		setContents('');
 	};
 
+	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		const target = event.currentTarget;
+		if (target.value.length !== 0 && event.key === 'Enter') {
+			event.preventDefault();
+			addComment();
+		}
+		if (event.key === 'Enter') {
+			event.preventDefault();
+		}
+	};
+
 	return (
 		<SRecruit.RecruitDetailPage>
 			<div className='container'>
@@ -245,10 +256,20 @@ const RecruitDetailPage = () => {
 			</div>
 			<div className='container-comments'>
 				<span className='container-comments__title'>댓글</span>
-				<ul className='list-cmt'>
+				<ul className='container-comments__lists'>
 					{commentsList.map((comment, index) => {
 						// const commentId = comment.id;
-						return <li key={index}>{comment.content as any}</li>;
+						return (
+							<li key={index} className='comment'>
+								<div className='comment-icon'>
+									<Icon />
+								</div>
+								<div className='comment-info'>
+									<span>{comment.username}</span>
+									<span>{comment.content}</span>
+								</div>
+							</li>
+						);
 					})}
 				</ul>
 				<div className='container-comments__wrapper'>
@@ -259,10 +280,11 @@ const RecruitDetailPage = () => {
 						</div>
 						<input
 							type='text'
-							onKeyDown={e => (e.key === 'Enter' ? addComment() : null)}
-							onChange={e => setContents(e.target.value)}
+							onKeyDown={onKeyPress}
+							value={contents}
+							onChange={event => setContents(event.target.value)}
 						/>
-						<button type='button' onClick={addComment}>
+						<button type='submit' onClick={addComment}>
 							댓글 등록
 						</button>
 					</div>
