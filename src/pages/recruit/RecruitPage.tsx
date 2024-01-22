@@ -44,11 +44,15 @@ const RecruitPage = () => {
 					<Dropdown data={['개발']} initialData='카테고리' $arrowNeed={true} />
 					<div className='dropdown-spec'>
 						<Dropdown
-							data={['React', 'JavaScript', 'Node.js', 'Spring']}
+							data={['React', 'JavaScript', 'Node.js', 'Spring', 'Figma']}
 							initialData='기술 스택'
 							$arrowNeed={true}
 						/>
-						<Dropdown data={['개발']} initialData='👤 포지션' $arrowNeed={true} />
+						<Dropdown
+							data={['기획', '디자인', '프론트엔드', '백엔드']}
+							initialData='👤 포지션'
+							$arrowNeed={true}
+						/>
 					</div>
 				</div>
 			</div>

@@ -22,58 +22,58 @@ interface Comment {
 	content: string;
 }
 
+const informationList: RequiredInformation[] = [
+	{
+		title: '범위',
+		content: '교내',
+	},
+	{
+		title: '유형',
+		content: '프로젝트',
+	},
+	{
+		title: '진행',
+		content: '오프라인',
+	},
+	{
+		title: '분야',
+		content: '개발',
+	},
+	{
+		title: '기간',
+		content: '23.10.23 - 24.02.14',
+	},
+	{
+		title: '태그',
+		content: '응소실,Spring,C#,Window Form',
+	},
+];
+
+const role: Role[] = [
+	{
+		role: '디자이너',
+		max: 2,
+		current: ['Valverde'],
+		specs: ['Figma'],
+	},
+	{
+		role: '프론트엔드 개발자',
+		max: 2,
+		current: ['Bellinham', 'Son'],
+		specs: ['TypeScript', 'React'],
+	},
+	{
+		role: '백엔드 개발자',
+		max: 2,
+		current: ['Rice', 'Salah'],
+		specs: ['Node.js', 'Spring'],
+	},
+];
+
 const RecruitDetailPage = () => {
 	const location = useLocation();
 	const [commentsList, setCommentsList] = useState<Comment[]>([]);
 	const [contents, setContents] = useState<string>('');
-
-	const informationList: RequiredInformation[] = [
-		{
-			title: '범위',
-			content: '교내',
-		},
-		{
-			title: '유형',
-			content: '프로젝트',
-		},
-		{
-			title: '진행',
-			content: '오프라인',
-		},
-		{
-			title: '분야',
-			content: '개발',
-		},
-		{
-			title: '기간',
-			content: '23.10.23 - 24.02.14',
-		},
-		{
-			title: '태그',
-			content: '응소실,Spring,C#,Window Form',
-		},
-	];
-
-	const role: Role[] = [
-		{
-			role: '디자이너',
-			max: 2,
-			current: ['Valverde'],
-			specs: ['Figma'],
-		},
-		{
-			role: '프론트엔드 개발자',
-			max: 2,
-			current: ['Bellinham', 'Son'],
-			specs: ['TypeScript', 'React'],
-		},
-		{
-			role: '백엔드 개발자',
-			max: 2,
-			current: ['Rice', 'Salah'],
-			specs: ['Node.js', 'Spring'],
-		},
-	];
 
 	const TAGS: string[] = ['UI/UX', '디자이너', '구인', '디자이너 구함'];
 
