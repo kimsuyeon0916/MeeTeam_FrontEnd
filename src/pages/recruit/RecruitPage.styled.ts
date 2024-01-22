@@ -33,6 +33,10 @@ const RecruitPage = styled.div`
 		.no {
 			background-color: #fff;
 		}
+
+		.out {
+			background-color: #f3f5ff;
+		}
 	}
 
 	.container-filter_menu {

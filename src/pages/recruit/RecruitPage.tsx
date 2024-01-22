@@ -11,10 +11,11 @@ const RecruitPage = () => {
 	});
 
 	const onClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-		if (event.target.innerText === '교내') {
+		const target = event.currentTarget;
+		if (target.innerText === '교내') {
 			setIsFiltered({ isInside: true, isOutside: false });
 		}
-		if (event.target.innerText === '교외') {
+		if (target.innerText === '교외') {
 			setIsFiltered({ isInside: false, isOutside: true });
 		}
 	};
@@ -29,7 +30,7 @@ const RecruitPage = () => {
 					<div className={`area ${isFiltered.isInside ? '' : 'no'}`} onClick={onClickHandler}>
 						교내
 					</div>
-					<div className={`area ${isFiltered.isOutside ? '' : 'no'}`} onClick={onClickHandler}>
+					<div className={`area ${isFiltered.isOutside ? 'out' : 'no'}`} onClick={onClickHandler}>
 						교외
 					</div>
 				</div>
@@ -37,13 +38,17 @@ const RecruitPage = () => {
 					<Dropdown
 						data={['프로젝트', '스터디', '동아리', '공모전']}
 						initialData='프로젝트'
-						allowNeed={true}
+						$arrowNeed={true}
 					/>
 					<div className='sep'></div>
-					<Dropdown data={['개발']} initialData='카테고리' allowNeed={true} />
+					<Dropdown data={['개발']} initialData='카테고리' $arrowNeed={true} />
 					<div className='dropdown-spec'>
-						<Dropdown data={['개발']} initialData='🔗 기술 스택' allowNeed={true} />
-						<Dropdown data={['개발']} initialData='👤 포지션' allowNeed={true} />
+						<Dropdown
+							data={['React', 'JavaScript', 'Node.js', 'Spring']}
+							initialData='기술 스택'
+							$arrowNeed={true}
+						/>
+						<Dropdown data={['개발']} initialData='👤 포지션' $arrowNeed={true} />
 					</div>
 				</div>
 			</div>
