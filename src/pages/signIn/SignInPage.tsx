@@ -1,0 +1,59 @@
+import React, { useRef } from 'react';
+import S from './SignInPage.styled';
+import { NaverLogin } from '../../components';
+
+const SignInPage = () => {
+	const naverRef = useRef<HTMLButtonElement | null>(null);
+	return (
+		<S.SignInPageLayout>
+			<header className='sign-in__header'>
+				<h1>로그인</h1>
+			</header>
+			<S.SignInPageForm>
+				<label className='sign-in__label'>
+					<input className='sign-in__input' type='text' placeholder='학교 이메일' name='username' />
+				</label>
+				<label className='sign-in__label'>
+					<input
+						className='sign-in__input'
+						type='password'
+						placeholder='비밀번호'
+						name='password'
+					/>
+				</label>
+				<label className='sign-in__label--auto-sign-in'>
+					<input type='checkbox' className='sign-in__input--auto-sign-in' name='autoSignIn' />
+					자동 로그인
+				</label>
+				<S.SignInPageButton type='submit' value='submit'>
+					로그인
+				</S.SignInPageButton>
+			</S.SignInPageForm>
+			<div className='sign-in__button-row'>
+				<button type='button' className='sign-in__button'>
+					회원가입
+				</button>
+				<hr className='sign_in__vertical' />
+				<button type='button' className='sign-in__button'>
+					비밀번호 찾기
+				</button>
+			</div>
+			<div className='sign-in__social-login-column'>
+				<div className='sign-in__social-login-marker'>
+					<hr className='sign_in__horizon' />
+					소셜 계정 로그인
+					<hr className='sign_in__horizon' />
+				</div>
+				<div>
+					<NaverLogin naverRef={naverRef} />
+					<S.SignInPageNaverButton>
+						<img src='/src/assets/NaverIcon.png' className='sign-in__naver-icon' alt='naverIcon'/>
+						<span>네이버 로그인</span>
+					</S.SignInPageNaverButton>
+				</div>
+			</div>
+		</S.SignInPageLayout>
+	);
+};
+
+export default SignInPage;
