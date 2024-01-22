@@ -1,25 +1,43 @@
-import React, { useRef, useState, useCallback } from 'react';
-import { useRecoilValue } from 'recoil';
+import React, { useRef, useState } from 'react';
+import { Plus, Upload } from '../../../assets';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { modules } from '../../../utils/index';
-import { useNavigate } from 'react-router-dom';
-import { Subtitle, Dot, InfoItem, MeeteamTag, AddButton } from '../../../components';
-import { areaState, categoryState, dateState, fieldState } from '../../../atom';
+import {
+	Subtitle,
+	Dot,
+	InfoItem,
+	MeeteamTag,
+	MemberInviteModal,
+	MemberTest,
+} from '../../../components';
+import {
+	areaState,
+	categoryState,
+	dateState,
+	fieldState,
+	memberListState,
+	memberModalState,
+} from '../../../atom';
 import S from './MeeTeamCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useNavigate } from 'react-router-dom';
 
 const MeeTeamCreatePage = () => {
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 	const area = useRecoilValue(areaState);
 	const field = useRecoilValue(fieldState);
 	const category = useRecoilValue(categoryState);
 	const quillRef = useRef<ReactQuill | null>(null);
-	const [memberList, setMemberList] = useState([]);
-	const copyMemberList = [...memberList];
+	const imgRef = useRef<HTMLInputElement | null>(null);
+
 	const [teamName, setTeamName] = useState<string>('');
 	const [startDate, endDate] = useRecoilValue(dateState);
-	const [file, setFile] = useState<string>('');
-	const [fileName, setFileName] = useState<string>('');
+	const [imgFile, setImgFile] = useState<string>('');
+	const [isHover, setIsHover] = useState<boolean>(false);
+	const [isChecked, setIsChecked] = useState<boolean>(false);
+	const [memberList, setMemberList] = useRecoilState(memberListState);
+	const [modalOpen, setModalOpen] = useRecoilState<boolean>(memberModalState);
 
 	const [isValidName, setIsValidName] = useState({
 		validName: false,
@@ -42,42 +60,45 @@ const MeeTeamCreatePage = () => {
 		validMessage: '',
 	});
 
-	const onClickMember = () => {
-		// let updatedMemberList = [...memberList];
-		// updatedMemberList.push(<MemberSelect id={memberList.length} />);
-		// setMemberList(updatedMemberList);
-	};
-
-	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
-		const deletedIndex = Number(event.target.id);
-		copyMemberList.splice(deletedIndex, 1);
-		setMemberList(copyMemberList);
-	};
-
-	const onClickCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const onClickCancel = () => {
 		// 모달창 띄워서 한 번 더 확인시키고 이동하기
 		// navigate('/');
 	};
 
-	const onChangeTeamName = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangeTeamName = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTeamName(event.target.value);
 		setIsValidName({ validName: true, validMessage: '' });
-	}, []);
+	};
 
-	const onChangeImg = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangeImg = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files !== null) {
-			setFileName(event.target.files[0].name);
-			const selectedFiles = event.target.files as FileList;
-			setFile(URL.createObjectURL(selectedFiles?.[0]));
+			const selectedFiles = event.target.files[0];
+			const reader = new FileReader();
+			reader.readAsDataURL(selectedFiles);
+
+			return new Promise<void>(resolve => {
+				reader.onload = () => {
+					setImgFile(reader.result as any);
+					resolve();
+				};
+			});
 		}
-	}, []);
+	};
+
+	const handleMouseOver = () => {
+		setIsHover(true);
+	};
+
+	const handleMouseOut = () => {
+		setIsHover(false);
+	};
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		// 밋팀 팀명 글자수 검사
 		if (teamName.length === 0) {
-			setIsValidName({ validName: false, validMessage: '* 팀명을 입력해주세요.' });
+			setIsValidName({ validName: false, validMessage: '* 밋팀명을 입력해주세요.' });
 		}
 		if (teamName.length !== 0) {
 			setIsValidName({ validName: true, validMessage: '' });
@@ -120,6 +141,14 @@ const MeeTeamCreatePage = () => {
 				validMessage: '',
 			});
 		}
+		// navigate('/manage/meeteam');
+	};
+
+	const onClickTestAdd = () => {
+		let temp = [...memberList];
+		temp.push((<MemberTest id={(temp.length - 1).toString()} />) as any);
+		setMemberList(temp);
+		setModalOpen(false);
 	};
 
 	return (
@@ -135,12 +164,12 @@ const MeeTeamCreatePage = () => {
 					<div className='container'>
 						<div className='container__teamname'>
 							<div className='container__teamname-subtitle'>
-								<Subtitle>{'밋팀 팀명'}</Subtitle>
+								<Subtitle>{'밋팀 이름'}</Subtitle>
 								<Dot />
 							</div>
 							<div className='container__teamname-input'>
 								<input
-									placeholder='밋팀 팀명을 입력해주세요.'
+									placeholder='밋팀 이름을 입력해주세요.'
 									type='text'
 									onChange={onChangeTeamName}
 									maxLength={20}
@@ -159,7 +188,7 @@ const MeeTeamCreatePage = () => {
 										{!isValidArea.validArea && <p>{isValidArea.validMessage}</p>}
 									</div>
 									<div>
-										<InfoItem isDot='true' title='밋팀 분야' optionData={['개발']} type='분야' />
+										<InfoItem isDot='true' title='분야' optionData={['개발']} type='분야' />
 										{!isValidField.validField && <p>{isValidField.validMessage}</p>}
 									</div>
 								</div>
@@ -167,7 +196,7 @@ const MeeTeamCreatePage = () => {
 									<div>
 										<InfoItem
 											isDot='true'
-											title='밋팀 유형'
+											title='유형'
 											optionData={['프로젝트', '스터디']}
 											type='유형'
 										/>
@@ -184,6 +213,30 @@ const MeeTeamCreatePage = () => {
 									</div>
 									<div className='fix'>
 										<InfoItem isDot='false' title='공개 여부' optionData={['공개', '비공개']} />
+									</div>
+								</div>
+								<div className='container__info-select'>
+									<div>
+										<div className='title-info'>
+											<Subtitle>{'수업'}</Subtitle>
+											<span className='description'>수업인 경우에 체크해주세요.</span>
+											<span className='description-check'>수업 선택</span>
+											<input type='checkbox' onClick={() => setIsChecked(prev => !prev)} />
+										</div>
+										<div className='container-course'>
+											<input
+												type='text'
+												placeholder='수업명'
+												className={!isChecked ? 'disable' : ''}
+												disabled={!isChecked ? true : false}
+											/>
+											<input
+												type='text'
+												placeholder='교수명'
+												className={!isChecked ? 'disable' : ''}
+												disabled={!isChecked ? true : false}
+											/>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -206,44 +259,51 @@ const MeeTeamCreatePage = () => {
 						</div>
 						<div className='container__img'>
 							<div>
-								<Subtitle>{'밋팀 이미지'}</Subtitle>
+								<Subtitle>{'커버 이미지'}</Subtitle>
 							</div>
 							<div className='container__img-input'>
-								<input
-									type='file'
-									accept='image/*'
-									id='meeteamImg'
-									placeholder='이미지를 업로드해주세요.'
-									onChange={onChangeImg}
-								/>
-								<label className={file ? 'haveFile' : ''} htmlFor='meeteamImg'>
-									{file ? `${fileName}` : '이미지를 업로드해주세요.'}
+								<input type='file' accept='image/*' id='meeteamImg' onChange={onChangeImg} />
+								<label
+									className='file-label'
+									htmlFor='meeteamImg'
+									onMouseOver={handleMouseOver}
+									onMouseOut={handleMouseOut}
+								>
+									<img src={imgFile ? imgFile : 'https://ifh.cc/g/YO5Z7z.jpg'} />
+									{isHover && (
+										<div className='icon-upload'>
+											<img className='icon' src={Upload} />
+										</div>
+									)}
 								</label>
 							</div>
 						</div>
 						<div className='container__member'>
-							<div>
+							<div className='container__member-title'>
 								<Subtitle>{'멤버'}</Subtitle>
+								<button
+									type='button'
+									onClick={() => {
+										setModalOpen(prev => !prev);
+									}}
+								>
+									멤버 초대 +
+								</button>
 							</div>
+							{modalOpen && <MemberInviteModal onClick={onClickTestAdd} />}
 							<div className='container__member-area'>
-								{/* {memberList.map((memberItem, index) => {
-									return (
-										<div className='controll' key={index}>
-											{React.cloneElement(memberItem, { key: index })}
-											<button id={index.toString()}>초대</button>
-											<button onClick={onClickDelete} id={index.toString()}>
-												삭제
-											</button>
-										</div>
-									);
-								})} */}
-							</div>
-							<div className='container__member-add'>
-								{memberList.length !== 6 && (
-									<div className='addition' onClick={onClickMember}>
-										<AddButton />
-									</div>
-								)}
+								{memberList.map((e, index) => (
+									<MemberTest key={index} id={index.toString()} />
+								))}
+								<button
+									type='button'
+									onClick={() => {
+										setModalOpen(prev => !prev);
+									}}
+									className='container__member-area__element'
+								>
+									<img src={Plus} />
+								</button>
 							</div>
 						</div>
 						<div className='container__controller'>

@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { MeeTeamMember } from './components';
 
 export const contentState = atom({
 	key: 'contentState',
@@ -98,4 +99,14 @@ export const validDateState = atom({
 		validDate: false,
 		validMessage: '',
 	},
+});
+
+export const memberListState = atom<MeeTeamMember[]>({
+	key: 'memberListState1',
+	default: [],
+});
+
+export const memberModalState = atom({
+	key: 'memberModalState',
+	default: false,
 });

@@ -73,7 +73,7 @@ const OutputCreatePage = () => {
 
 		// 밋팀 팀명 글자수 검사
 		if (teamName.length === 0) {
-			setIsValidName({ validName: false, validMessage: '* 팀명을 입력해주세요.' });
+			setIsValidName({ validName: false, validMessage: '* 밋팀명을 입력해주세요.' });
 		}
 		if (teamName.length !== 0) {
 			setIsValidName({ validName: true, validMessage: '' });
@@ -130,12 +130,12 @@ const OutputCreatePage = () => {
 					<div className='container'>
 						<div className='container__teamname'>
 							<div className='container__teamname-subtitle'>
-								<Subtitle>{'밋팀 팀명'}</Subtitle>
+								<Subtitle>{'밋팀명'}</Subtitle>
 								<Dot />
 							</div>
 							<div className='container__teamname-input'>
 								<input
-									placeholder='밋팀 팀명을 입력해주세요.'
+									placeholder='밋팀명을 입력해주세요.'
 									type='text'
 									onChange={onChangeTeamName}
 									maxLength={20}

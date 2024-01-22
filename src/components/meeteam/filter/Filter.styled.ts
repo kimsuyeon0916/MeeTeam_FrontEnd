@@ -9,6 +9,7 @@ const Filter = styled.div`
 	margin-top: 4.65rem;
 	.container-filter_area {
 		display: flex;
+		align-items: center;
 		margin-right: 2.6rem;
 		.area {
 			display: flex;
@@ -24,12 +25,16 @@ const Filter = styled.div`
 			background-color: #fcefaa;
 			color: #000;
 			font-family: Apple SD Gothic Neo;
-			font-size: 1.5rem;
+			font-size: 1.6rem;
 			font-style: normal;
 			font-weight: 400;
 			line-height: 2.1rem; /* 100% */
 			letter-spacing: 0.015rem;
 			cursor: pointer;
+		}
+
+		.out {
+			background-color: #f3f5ff;
 		}
 
 		.no {
@@ -40,11 +45,32 @@ const Filter = styled.div`
 		display: flex;
 		gap: 1.5rem;
 	}
-	.sep {
-		width: 0.3rem;
-		height: 3.225rem;
-		flex-shrink: 0;
-		background-color: #d9d9d9;
+	.container-checkbox {
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		margin-left: 2.03rem;
+
+		input {
+			display: flex;
+			align-items: center;
+			transform: scale(1.1);
+		}
+
+		label {
+			display: flex;
+			margin-left: 0.2rem;
+			padding-top: 0.2rem;
+			align-items: center;
+			color: var(--text-color-2, #373f41);
+			font-family: Pretendard;
+			font-size: 1.35rem;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 1.35rem; /* 100% */
+			letter-spacing: 0.015rem;
+			box-sizing: border-box;
+		}
 	}
 `;
 
