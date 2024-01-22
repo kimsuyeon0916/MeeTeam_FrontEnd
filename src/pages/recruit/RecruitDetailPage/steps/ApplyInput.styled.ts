@@ -34,6 +34,7 @@ const ApplyInput = styled.div`
 
 		.container-apply__form-input {
 			display: flex;
+			position: relative;
 			flex-direction: column;
 			align-items: center;
 			margin-top: 1.75rem;
@@ -46,7 +47,7 @@ const ApplyInput = styled.div`
 				padding: 0.45rem 1.35rem;
 				align-items: center;
 				border-radius: 0.75rem;
-				border: 1.125px solid #614bf7;
+				border: 0.05rem solid #614bf7;
 				background: #fff;
 				outline: none;
 				color: var(--Light-Black, var(--text-color-2, #373f41));
@@ -58,6 +59,31 @@ const ApplyInput = styled.div`
 				letter-spacing: 0.015rem;
 				cursor: pointer;
 			}
+			.dropdown {
+				position: absolute;
+				top: 5rem;
+				width: 100%;
+				z-index: 101;
+				background-color: #ffeaa7;
+				padding: 2rem 1.2rem;
+				border-radius: 1.2rem;
+
+				ul {
+					display: flex;
+					flex-direction: column;
+					gap: 2rem;
+
+					li {
+						font-size: 1.3rem;
+						cursor: pointer;
+
+						&:hover {
+							transition: 0.2s;
+							color: #9a77ee;
+						}
+					}
+				}
+			}
 
 			.container-apply__words {
 				display: flex;
@@ -66,7 +92,7 @@ const ApplyInput = styled.div`
 				padding: 0.45rem 1.35rem;
 				align-items: center;
 				border-radius: 0.75rem;
-				border: 1.125px solid #614bf7;
+				border: 0.05rem solid #614bf7;
 				background: #fff;
 				outline: none;
 			}
@@ -128,6 +154,15 @@ const ApplyInput = styled.div`
 			gap: 0.75rem;
 			flex-shrink: 0;
 			border-radius: 7.5rem;
+		}
+
+		.disable {
+			background-color: #dfe6e9;
+			color: #000;
+			cursor: not-allowed;
+		}
+
+		.able {
 			background: linear-gradient(270deg, rgba(95, 92, 236, 0.76) -6.3%, #d85cec 101.52%);
 			color: #fff;
 		}

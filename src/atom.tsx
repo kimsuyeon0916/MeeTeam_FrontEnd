@@ -115,3 +115,11 @@ export const applyStepState = atom({
 	key: 'applyStepState',
 	default: 0,
 });
+
+export const applyInfoState = atom({
+	key: 'applyInfoState',
+	default: {
+		role: '',
+		message: '',
+	},
+});
