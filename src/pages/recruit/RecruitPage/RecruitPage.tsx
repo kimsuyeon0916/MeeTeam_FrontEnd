@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dropdown, Tag } from '../../components';
+import { Dropdown, Tag } from '../../../components';
 import S from './RecruitPage.styled';
 import { useNavigate } from 'react-router-dom';
 

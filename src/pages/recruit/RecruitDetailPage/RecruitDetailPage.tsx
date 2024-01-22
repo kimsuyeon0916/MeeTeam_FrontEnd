@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import SRecruit from './RecruitDetailPage.styled';
 // import { useLocation } from 'react-router-dom';
-import { Tag, Icon } from '../../components';
-import ColorMatching from '../../utils/ColorMatching';
+import { Tag, Icon } from '../../../components';
+import ColorMatching from '../../../utils/ColorMatching';
 
 interface RequiredInformation {
 	title: string;
