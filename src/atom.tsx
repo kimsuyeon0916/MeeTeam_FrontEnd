@@ -110,3 +110,8 @@ export const memberModalState = atom({
 	key: 'memberModalState',
 	default: false,
 });
+
+export const applyStepState = atom({
+	key: 'applyStepState',
+	default: 0,
+});

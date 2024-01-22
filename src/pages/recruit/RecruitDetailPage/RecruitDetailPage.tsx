@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import SRecruit from './RecruitDetailPage.styled';
 // import { useLocation } from 'react-router-dom';
-import { Tag, Icon } from '../../../components';
+import { Tag, Icon, ApplyInfomation, ApplyInput, ApplySubmit } from '../../../components';
 import ColorMatching from '../../../utils/ColorMatching';
+import { useRecoilValue } from 'recoil';
+import { applyStepState } from '../../../atom';
 
 interface RequiredInformation {
 	title: string;
@@ -21,6 +23,10 @@ interface Comment {
 	username: string;
 	content: string;
 }
+
+type ComponentProps = {
+	[key: number]: JSX.Element;
+};
 
 const informationList: RequiredInformation[] = [
 	{
@@ -74,7 +80,12 @@ const RecruitDetailPage = () => {
 	// const location = useLocation();
 	const [commentsList, setCommentsList] = useState<Comment[]>([]);
 	const [contents, setContents] = useState<string>('');
-	const [isApply, setIsApply] = useState<boolean>(false);
+	const step = useRecoilValue(applyStepState);
+	const stepLists: ComponentProps = {
+		0: <ApplyInfomation />,
+		1: <ApplyInput />,
+		2: <ApplySubmit />,
+	};
 
 	const TAGS: string[] = ['UI/UX', '디자이너', '구인', '디자이너 구함'];
 
@@ -113,10 +124,6 @@ const RecruitDetailPage = () => {
 		if (event.key === 'Enter') {
 			event.preventDefault();
 		}
-	};
-
-	const onClickApply = () => {
-		setIsApply(true);
 	};
 
 	return (
@@ -204,66 +211,9 @@ const RecruitDetailPage = () => {
 					</div>
 				</div>
 				<div className='container-right'>
-					<div className='container-apply'>
-						<form>
-							{!isApply ? (
-								<>
-									<div className='container-apply__member'>
-										<div>
-											<span className='type'>리더</span>
-											<div className='leader-info'>
-												<div className='leader-info__icon'></div>
-												<div className='leader-info__name'>
-													<span>김민지</span>
-													<span>평점: 4.8</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<hr />
-									<div className='container-apply__deadline'>
-										<span>마감일</span>
-										<span>{'23.10.16(7일 남음)'}</span>
-									</div>
-									<div className='container-apply__buttons'>
-										<button type='button'>북마크하기</button>
-										<button type='button' onClick={onClickApply}>
-											팀 신청하기
-										</button>
-									</div>
-								</>
-							) : (
-								<>
-									<div className='container-apply__form'>
-										<span className='container-apply__form-title'>신청 정보</span>
-										<div className='container-apply__form-my'>
-											<Icon />
-											<span>{'송유진'}</span>
-										</div>
-										<div className='container-apply__form-input'>
-											<div className='container-apply__roles'>역할 선택</div>
-											<input
-												className='container-apply__words'
-												placeholder='전할 말을 20자 이내로 입력해주세요.'
-												maxLength={20}
-											/>
-										</div>
-										<div className='container-apply__form-warn'>
-											<span>멤버들에게 내 정보 공개할 수 있나요?</span>
-											<span>정보 공개 동의 시, 팀매칭에 유리합니다.</span>
-											<div className='container-checkbox'>
-												<input type='checkbox' />
-												<label>개인 정보 열람 동의</label>
-											</div>
-										</div>
-										<button className='container-apply__form-button' type='submit'>
-											제출하기
-										</button>
-									</div>
-								</>
-							)}
-						</form>
-					</div>
+					<form>
+						<div className='container-apply'>{stepLists[step]}</div>
+					</form>
 					<div className='container-recommend'>
 						<div>
 							<span className='title'>👀 비슷한 프로젝트</span>

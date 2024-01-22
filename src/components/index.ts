@@ -77,6 +77,9 @@ import Filter from './meeteam/filter/Filter';
 import Dropdown from './dropdown/Dropdown';
 import DeadlineSelect from './dateSelect/DeadlineSelect';
 import Icon from './meeteam/icon/Icon';
+import ApplyInfomation from '../pages/recruit/RecruitDetailPage/steps/ApplyInfomation';
+import ApplyInput from '../pages/recruit/RecruitDetailPage/steps/ApplyInput';
+import ApplySubmit from '../pages/recruit/RecruitDetailPage/steps/ApplySubmit';
 
 export {
 	Header,
@@ -149,4 +152,7 @@ export {
 	Icon,
 	MemberInviteModal,
 	MemberTest,
+	ApplyInfomation,
+	ApplyInput,
+	ApplySubmit,
 };
