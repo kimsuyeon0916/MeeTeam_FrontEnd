@@ -18,6 +18,7 @@ import {
 	RecruitDetailPage,
 	IntegratedManagePage,
 	MyActivityManagePage,
+	OutputPreviewPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
 			{
 				path: 'create/output',
 				element: <OutputCreatePage />,
+			},
+			{
+				path: 'create/output/preview',
+				element: <OutputPreviewPage />,
 			},
 			{
 				path: 'manage/meeteam/:meeteamId?',

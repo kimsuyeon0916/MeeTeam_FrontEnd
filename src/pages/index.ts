@@ -13,6 +13,7 @@ import RecruitCreatePage from './create/recruitCreatePage/RecruitCreatePage';
 import OutputCreatePage from './create/outputCreatePage/OutputCreatePage';
 import RecruitDetailPage from './recruit/RecruitDetailPage/RecruitDetailPage';
 import MyActivityManagePage from './manage/activity/MyActivityManagePage';
+import OutputPreviewPage from './create/outputPreviewPage/OutputPreviewPage';
 
 export {
 	MainPage,
@@ -30,4 +31,5 @@ export {
 	OutputCreatePage,
 	RecruitDetailPage,
 	MyActivityManagePage,
+	OutputPreviewPage,
 };
