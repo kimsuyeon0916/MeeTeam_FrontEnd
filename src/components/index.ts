@@ -148,3 +148,5 @@ export {
 	Content,
 	MemberInviteModal,
 	MemberTest,
+	DeadlineSelect,
+};
