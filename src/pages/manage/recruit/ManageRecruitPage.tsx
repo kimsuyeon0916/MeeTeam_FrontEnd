@@ -75,10 +75,10 @@ const ManageRecruitPage = () => {
 
 	const onClickHandler = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		const target = event.currentTarget;
-		if (target.innerText === '신청글') {
+		if (target.innerText === '신청 글') {
 			setIsClicked({ isApply: true, isMine: false, isBookmark: false });
 		}
-		if (target.innerText === '내 구인글') {
+		if (target.innerText === '내 구인 글') {
 			setIsClicked({ isApply: false, isMine: true, isBookmark: false });
 		}
 		if (target.innerText === '북마크') {

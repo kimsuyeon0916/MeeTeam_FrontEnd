@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const ManageMeeTeamPage = styled.div`
 	.container-status {
 		display: flex;
-		gap: 2.1rem;
 		margin-top: 3.83rem;
 
 		.status {
