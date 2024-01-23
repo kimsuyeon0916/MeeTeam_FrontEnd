@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import S from './Recruitment.styeld';
-import { recruitmentInformation } from '../../..';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { recruitmentInformationEditState, recruitmentState } from '../../../../atom';
+import { recruitmentInformation, DeadlineSelect } from '../../..';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
+import { recruitmentInformationEditState, recruitmentState, deadlineState } from '../../../../atom';
 
 const RecruitmentDeadLine = () => {
 	const [editMode, setEditMode] = useState(false);
+	const deadLine = useRecoilValue(deadlineState);
 
-	const year = recruitmentInformation?.deadLine?.getFullYear();
-	const month = (recruitmentInformation?.deadLine?.getMonth() + 1).toString().padStart(2, '0');
-	const date = recruitmentInformation?.deadLine?.getDate().toString().padStart(2, '0');
+	const year = deadLine?.getFullYear();
+	const month = (deadLine?.getMonth() + 1).toString().padStart(2, '0');
+	const date = deadLine?.getDate().toString().padStart(2, '0');
 
 	const [recruitment, setRecruitment] = useRecoilState(recruitmentState);
 	const setRecruitmentInformationEdit = useSetRecoilState(recruitmentInformationEditState);
@@ -26,6 +27,7 @@ const RecruitmentDeadLine = () => {
 			{recruitment ? (
 				editMode ? (
 					<>
+						<DeadlineSelect type='밋팀 관리 페이지' />
 						<div className='recruitment__button-row'>
 							<S.RecruitmentCancelButton type='button' onClick={() => setEditMode(false)}>
 								취소
@@ -38,7 +40,7 @@ const RecruitmentDeadLine = () => {
 				) : (
 					<>
 						<div>
-							~ {year}.{month}.{date}
+							~ {year}년 {month}월 {date}일
 						</div>
 						<div className='recruitment__button-row'>
 							<S.RecruitmentCorrectButton type='button' onClick={() => setEditMode(true)}>

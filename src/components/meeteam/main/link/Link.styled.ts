@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import Main from '../Main.styled';
 
+const LinkForm = styled.form`
+	min-width: 0;
+`;
+
 const LinkLayout = styled(Main.MainArticle)`
 	display: flex;
 	flex: 1;
@@ -12,6 +16,7 @@ const LinkLayout = styled(Main.MainArticle)`
 
 	.link__row {
 		display: flex;
+		flex-direction: row;
 		align-items: center;
 		column-gap: 1.8rem;
 	}
@@ -22,20 +27,29 @@ const LinkLayout = styled(Main.MainArticle)`
 		column-gap: 0.4rem;
 		margin-left: auto;
 	}
+
+	.link__icon {
+		display: flex;
+		flex: 1 1 0;
+	}
 `;
 
 const LinkInput = styled.input`
 	all: unset;
 	padding: 0 1rem;
-	width: 26.125rem;
+	flex: 6 1 0;
 	height: 3.45rem;
 	border-radius: 0.75rem;
 	border: 0.075rem solid #e3e3e3;
 	background: #fff;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 `;
 
 const LinkAnchor = styled.a`
-	width: 26.125rem;
+	flex: 6 1 0;
+	color: var(--text-color, #151515) !important;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
@@ -58,8 +72,9 @@ const LinkSaveButton = styled.button`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 0.5rem;
-	font-size: 0.8rem;
+	height: 2.3rem;
+	padding: 0 1rem;
+	font-size: 1.2rem;
 	border-radius: 0.6rem;
 	background: var(--main-color, #5877fc);
 	color: #fff;
@@ -72,6 +87,7 @@ const LinkCancelButton = styled(LinkSaveButton)`
 `;
 
 const S = {
+	LinkForm,
 	LinkLayout,
 	LinkInput,
 	LinkAnchor,
