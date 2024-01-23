@@ -163,7 +163,7 @@ const RecruitCreatePage = () => {
 				</div>
 			</div>
 			<div className='wrapper'>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} id='submit'>
 					<div className='container'>
 						<div className='container__teamname'>
 							<div className='container__teamname-subtitle'>
@@ -294,12 +294,14 @@ const RecruitCreatePage = () => {
 								</button>
 							</div>
 						</div>
-						<div className='container__controller'>
-							<button onClick={onClickCancel}>취소</button>
-							<button type='submit'>등록하기</button>
-						</div>
 					</div>
 				</form>
+			</div>
+			<div className='container__controller'>
+				<button onClick={onClickCancel}>취소</button>
+				<button type='submit' form='submit'>
+					등록하기
+				</button>
 			</div>
 		</S.RecruitCreatePage>
 	);

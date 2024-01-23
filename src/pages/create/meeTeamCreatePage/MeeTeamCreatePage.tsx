@@ -160,7 +160,7 @@ const MeeTeamCreatePage = () => {
 				</div>
 			</div>
 			<div className='wrapper'>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} id='submit'>
 					<div className='container'>
 						<div className='container__teamname'>
 							<div className='container__teamname-subtitle'>
@@ -309,12 +309,14 @@ const MeeTeamCreatePage = () => {
 								</button>
 							</div>
 						</div>
-						<div className='container__controller'>
-							<button onClick={onClickCancel}>취소</button>
-							<button type='submit'>생성하기</button>
-						</div>
 					</div>
 				</form>
+			</div>
+			<div className='container__controller'>
+				<button onClick={onClickCancel}>취소</button>
+				<button type='submit' form='submit'>
+					생성하기
+				</button>
 			</div>
 		</S.MeeTeamCreatePage>
 	);

@@ -48,7 +48,6 @@ const MeeTeamCreatePage = styled.div`
 	.wrapper {
 		width: 100%;
 		margin-top: 2.5rem;
-		margin-bottom: 50px;
 		padding-bottom: 50px;
 		border-radius: 0.5rem;
 		border: 2px solid #bcd7ff;
@@ -374,40 +373,39 @@ const MeeTeamCreatePage = styled.div`
 				}
 			}
 		}
+	}
+	.container__controller {
+		margin-top: 2.77rem;
+		display: flex;
+		justify-content: flex-end;
+		gap: 2rem;
 
-		.container__controller {
-			margin-top: 70px;
+		button {
 			display: flex;
 			justify-content: center;
-			gap: 2rem;
+			align-items: center;
+			width: 15rem;
+			height: 5rem;
+			padding: 1rem 1rem;
+			border: none;
+			gap: 1rem;
+			border-radius: 0.8rem;
+			cursor: pointer;
+			color: #373f41;
+			font-size: 1.5rem;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 1.8rem; /* 75% */
+			letter-spacing: 0.02rem;
+		}
 
-			button {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				width: 15rem;
-				height: 5rem;
-				padding: 1rem 1rem;
-				border: none;
-				gap: 1rem;
-				border-radius: 0.8rem;
-				cursor: pointer;
-				color: #373f41;
-				font-size: 1.5rem;
-				font-style: normal;
-				font-weight: 400;
-				line-height: 1.8rem; /* 75% */
-				letter-spacing: 0.02rem;
-			}
+		button:nth-child(1) {
+			background: #e0e6ff;
+		}
 
-			button:nth-child(1) {
-				background: #e0e6ff;
-			}
-
-			button:nth-child(2) {
-				background: #5877fc;
-				color: #fff;
-			}
+		button:nth-child(2) {
+			background: #5877fc;
+			color: #fff;
 		}
 	}
 `;
