@@ -3,6 +3,6 @@ import Alarm from './Alarm.svg';
 import Plus from './Plus.svg';
 import Upload from './Upload.svg';
 import DropdownArrow from './DropdownArrow.svg';
-import Checkbox from './Checkbox.svg';
+import SearchIcon from './SearchIcon.svg';
 
-export { Exit, Alarm, Plus, Upload, DropdownArrow, Checkbox };
+export { Exit, Alarm, Plus, Upload, DropdownArrow, SearchIcon };

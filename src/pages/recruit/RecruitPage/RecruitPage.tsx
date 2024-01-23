@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Dropdown, Tag } from '../../../components';
 import S from './RecruitPage.styled';
 import { useNavigate } from 'react-router-dom';
-import { Checkbox } from '../../../assets';
+import { SearchIcon } from '../../../assets';
 
 const RecruitPage = () => {
 	const navigate = useNavigate();
@@ -66,7 +66,7 @@ const RecruitPage = () => {
 					</div>
 					<div className='container-options__search'>
 						<div>
-							<img src={Checkbox} />
+							<img src={SearchIcon} />
 						</div>
 						<div>
 							<input placeholder='제목, 글, 내용으로 검색해보세요.' />
