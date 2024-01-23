@@ -24,104 +24,30 @@ const MyActivityManagePage = styled.div`
 				display: flex;
 				margin: 0 auto;
 				gap: 1.8rem;
+			}
 
-				.content {
-					display: flex;
-					flex-direction: column;
-					width: 25.65rem;
-					height: 18.375rem;
-					flex-shrink: 0;
-					border-radius: 0.75rem;
-					border: 0.1rem solid #dcdcdc;
-					background: #f9f9f9;
-					padding: 1.35rem 1.5rem 1.8rem 1.5rem;
-					cursor: pointer;
-					box-sizing: border-box;
+			.title {
+				margin-top: 0.5rem;
+				width: 25.65rem;
+				overflow: hidden;
+				display: -webkit-box;
+				-webkit-line-clamp: 2; /* 두 줄을 표시하도록 설정 */
+				-webkit-box-orient: vertical;
+				word-break: break-word;
+				color: var(--Light-Black, var(--text-color-2, #373f41));
+				text-overflow: ellipsis;
+				font-family: Pretendard;
+				font-size: 1.5rem;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 130%; /* 2.145rem */
+				letter-spacing: 0.015rem;
+				cursor: pointer;
+				transition: 0.2s; /* hover 효과를 부드럽게 만들기 위한 트랜지션 */
 
-					&:hover {
-						transition: 0.4s;
-						border: 0.1rem solid #5877fc;
-					}
-
-					.content-tags {
-						display: flex;
-						justify-content: space-between;
-
-						.tags {
-							display: flex;
-							gap: 0.6rem;
-
-							div:nth-child(1) {
-								display: flex;
-								width: 4.05rem;
-								height: 2.4rem;
-								padding: 0.75rem;
-								justify-content: center;
-								align-items: center;
-								gap: 0.75rem;
-								border-radius: 0.6rem;
-								background: var(--main-color, #5877fc);
-								color: #fff;
-								font-family: Apple SD Gothic Neo;
-								font-size: 1.2rem;
-								font-style: normal;
-								font-weight: 400;
-								line-height: 1.35rem; /* 112.5% */
-								letter-spacing: 0.015rem;
-							}
-
-							div:nth-child(2) {
-								display: flex;
-								width: 5.55rem;
-								height: 2.4rem;
-								padding: 0.75rem;
-								justify-content: center;
-								align-items: center;
-								gap: 0.75rem;
-								border-radius: 0.6rem;
-								background: #e4e1ff;
-								color: var(--Light-Black, var(--text-color-2, #373f41));
-								font-family: Apple SD Gothic Neo;
-								font-size: 1.1rem;
-								font-style: normal;
-								font-weight: 400;
-								line-height: 1.35rem; /* 112.5% */
-								letter-spacing: 0.015rem;
-							}
-						}
-					}
-
-					.content-title {
-						height: 4.8rem;
-						flex-shrink: 0;
-						margin-top: 1.65rem;
-						/* overflow: hidden; */
-						color: var(--Light-Black, var(--text-color-2, #373f41));
-						text-overflow: ellipsis;
-						/* white-space: nowrap; */
-						font-family: Apple SD Gothic Neo;
-						font-size: 1.65rem;
-						font-style: normal;
-						font-weight: 400;
-						line-height: 130%; /* 2.145rem */
-						letter-spacing: 0.015rem;
-					}
-
-					.content-info {
-						display: flex;
-						margin-top: 5rem;
-						justify-content: space-between;
-
-						div {
-							color: var(--Light-Black, var(--text-color-2, #373f41));
-							font-family: Apple SD Gothic Neo;
-							font-size: 1.2rem;
-							font-style: normal;
-							font-weight: 400;
-							line-height: 1.35rem; /* 112.5% */
-							letter-spacing: 0.015rem;
-						}
-					}
+				&:hover {
+					color: #5877fc; /* hover 시의 색상 */
+					text-decoration: underline; /* hover 시에 밑줄 표시 */
 				}
 			}
 		}
