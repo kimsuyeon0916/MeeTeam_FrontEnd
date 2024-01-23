@@ -73,7 +73,7 @@ const OutputCreatePage = () => {
 
 		// 밋팀 팀명 글자수 검사
 		if (teamName.length === 0) {
-			setIsValidName({ validName: false, validMessage: '* 밋팀명을 입력해주세요.' });
+			setIsValidName({ validName: false, validMessage: '* 밋팀 이름을 입력해주세요.' });
 		}
 		if (teamName.length !== 0) {
 			setIsValidName({ validName: true, validMessage: '' });
@@ -130,12 +130,12 @@ const OutputCreatePage = () => {
 					<div className='container'>
 						<div className='container__teamname'>
 							<div className='container__teamname-subtitle'>
-								<Subtitle>{'밋팀명'}</Subtitle>
+								<Subtitle>{'밋팀 이름'}</Subtitle>
 								<Dot />
 							</div>
 							<div className='container__teamname-input'>
 								<input
-									placeholder='밋팀명을 입력해주세요.'
+									placeholder='밋팀 이름을 입력해주세요.'
 									type='text'
 									onChange={onChangeTeamName}
 									maxLength={20}
@@ -154,7 +154,7 @@ const OutputCreatePage = () => {
 										{!isValidArea.validArea && <p>{isValidArea.validMessage}</p>}
 									</div>
 									<div>
-										<InfoItem isDot='true' title='밋팀 분야' optionData={['개발']} type='분야' />
+										<InfoItem isDot='true' title='분야' optionData={['개발']} type='분야' />
 										{!isValidField.validField && <p>{isValidField.validMessage}</p>}
 									</div>
 								</div>
@@ -209,7 +209,7 @@ const OutputCreatePage = () => {
 						</div>
 						<div className='container__img'>
 							<div>
-								<Subtitle>{'밋팀 이미지'}</Subtitle>
+								<Subtitle>{'커버 이미지'}</Subtitle>
 							</div>
 							<div className='container__img-input'>
 								<input
@@ -226,7 +226,7 @@ const OutputCreatePage = () => {
 						</div>
 						<div className='container__intro'>
 							<div>
-								<Subtitle>{'소개 글'}</Subtitle>
+								<Subtitle>{'소개글'}</Subtitle>
 							</div>
 							<div>
 								<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />

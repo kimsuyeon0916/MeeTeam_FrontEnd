@@ -157,7 +157,7 @@ const RecruitCreatePage = () => {
 	return (
 		<S.RecruitCreatePage>
 			<div className='procedure'>
-				<div className='procedure__subtitle'>구인 글 작성</div>
+				<div className='procedure__subtitle'>구인글 작성</div>
 				<div className='procedure__intro'>
 					<p>구인에 대한 정보를 입력하시고 소개해주세요.</p>
 				</div>
@@ -167,7 +167,7 @@ const RecruitCreatePage = () => {
 					<div className='container'>
 						<div className='container__teamname'>
 							<div className='container__teamname-subtitle'>
-								<Subtitle>{'구인 글 제목'}</Subtitle>
+								<Subtitle>{'구인글 제목'}</Subtitle>
 								<Dot />
 							</div>
 							<div className='container__teamname-input'>
@@ -260,7 +260,7 @@ const RecruitCreatePage = () => {
 						</div>
 						<div className='container__intro'>
 							<div>
-								<Subtitle>{'구인 글'}</Subtitle>
+								<Subtitle>{'구인글'}</Subtitle>
 							</div>
 							<div>
 								<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
