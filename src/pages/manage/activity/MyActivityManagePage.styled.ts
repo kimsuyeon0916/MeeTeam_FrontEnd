@@ -32,10 +32,16 @@ const MyActivityManagePage = styled.div`
 					height: 18.375rem;
 					flex-shrink: 0;
 					border-radius: 0.75rem;
-					border: 1.5px solid var(--main-color, #5877fc);
+					border: 0.1rem solid #dcdcdc;
 					background: #f9f9f9;
 					padding: 1.35rem 1.5rem 1.8rem 1.5rem;
 					cursor: pointer;
+					box-sizing: border-box;
+
+					&:hover {
+						transition: 0.4s;
+						border: 0.1rem solid #5877fc;
+					}
 
 					.content-tags {
 						display: flex;
