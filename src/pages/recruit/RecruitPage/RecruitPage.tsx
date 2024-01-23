@@ -41,7 +41,6 @@ const RecruitPage = () => {
 						initialData='프로젝트'
 						$arrowNeed={true}
 					/>
-					<div className='sep'></div>
 					<Dropdown data={['개발']} initialData='카테고리' $arrowNeed={true} />
 					<div className='dropdown-spec'>
 						<Dropdown

@@ -174,14 +174,7 @@ const RecruitDetailPage = () => {
 									<div className='roles-info'>
 										<div className='roles-info__role'>
 											<div className='role'>
-												{e.role} {e.current.length} / {e.max}
-											</div>
-											<div className='members'>
-												{e.current.map((v, i) => (
-													<div className='member' key={i}>
-														<Icon />
-													</div>
-												))}
+												{e.role} ({e.current.length} / {e.max})
 											</div>
 										</div>
 										<div className='roles-info__spec'>
