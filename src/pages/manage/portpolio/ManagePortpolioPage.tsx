@@ -2,9 +2,10 @@ import { Card, Filter } from '../../../components';
 import S from './ManagePortpolio.styled';
 
 const ManagePortpolioPage = () => {
+	const noRecruit: boolean = true;
 	return (
 		<S.ManagePortpolioPage>
-			<Filter />
+			<Filter noRecruit={noRecruit} />
 			<h1>📁 완성된 포트폴리오</h1>
 			<div className='container-contents'>
 				<div className='content'>
