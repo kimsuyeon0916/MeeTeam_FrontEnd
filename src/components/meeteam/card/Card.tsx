@@ -6,6 +6,7 @@ const Card = () => {
 			<div className='tag-container'>
 				<div></div>
 				<div></div>
+				<img src='https://ifh.cc/g/YO5Z7z.jpg' />
 			</div>
 		</S.Card>
 	);

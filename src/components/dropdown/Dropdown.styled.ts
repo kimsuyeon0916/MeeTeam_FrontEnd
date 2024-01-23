@@ -58,6 +58,7 @@ const Dropdown = styled.div<IDropdown>`
 			background-color: #f7f7f7;
 			border-radius: 0.75rem;
 			padding: 1rem 1rem;
+			z-index: 500;
 		}
 	}
 
