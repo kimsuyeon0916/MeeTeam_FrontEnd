@@ -1,5 +1,6 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import { Upload } from '../../../assets';
 import { modules } from '../../../utils/index';
 import { Subtitle, Dot, InfoItem, MeeteamTag } from '../../../components';
 import { areaState, categoryState, dateState, fieldState } from '../../../atom';
@@ -16,6 +17,7 @@ const OutputCreatePage = () => {
 
 	const [teamName, setTeamName] = useState<string>('');
 	const [imgFile, setImgFile] = useState<string>('');
+	const [isHover, setIsHover] = useState<boolean>(false);
 	const [imgFileName, setImgFileName] = useState<string>('');
 	const [file, setFile] = useState<string>('');
 	const [fileName, setFileName] = useState<string>('');
@@ -46,27 +48,34 @@ const OutputCreatePage = () => {
 		// navigate('/');
 	};
 
-	const onChangeTeamName = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangeTeamName = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTeamName(event.target.value);
 		setIsValidName({ validName: true, validMessage: '' });
-	}, []);
+	};
 
-	const onChangeImg = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangeImg = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files !== null) {
-			setImgFileName(event.target.files[0].name);
-			const selectedFiles = event.target.files as FileList;
-			setImgFile(URL.createObjectURL(selectedFiles?.[0]));
-		}
-	}, []);
+			const selectedFiles = event.target.files[0];
+			const reader = new FileReader();
+			reader.readAsDataURL(selectedFiles);
 
-	const onChangeFile = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+			return new Promise<void>(resolve => {
+				reader.onload = () => {
+					setImgFile(reader.result as any);
+					resolve();
+				};
+			});
+		}
+	};
+
+	const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files !== null) {
 			console.log(event);
 			setFileName(event.target.files[0].name);
 			const selectedFiles = event.target.files as FileList;
 			setFile(URL.createObjectURL(selectedFiles?.[0]));
 		}
-	}, []);
+	};
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -117,6 +126,15 @@ const OutputCreatePage = () => {
 			});
 		}
 	};
+
+	const handleMouseOver = () => {
+		setIsHover(true);
+	};
+
+	const handleMouseOut = () => {
+		setIsHover(false);
+	};
+
 	return (
 		<S.OutputCreatePage>
 			<div className='procedure'>
@@ -212,15 +230,22 @@ const OutputCreatePage = () => {
 								<Subtitle>{'커버 이미지'}</Subtitle>
 							</div>
 							<div className='container__img-input'>
-								<input
-									type='file'
-									accept='image/*'
-									id='meeteamImg'
-									placeholder='이미지를 업로드해주세요.'
-									onChange={onChangeImg}
-								/>
-								<label className={imgFile ? 'haveImgFile' : ''} htmlFor='meeteamImg'>
-									{imgFile ? `${imgFileName}` : '이미지를 업로드해주세요.'}
+								<input type='file' accept='image/*' id='meeteamImg' onChange={onChangeImg} />
+								<label
+									className='file-label'
+									htmlFor='meeteamImg'
+									onMouseOver={handleMouseOver}
+									onMouseOut={handleMouseOut}
+								>
+									<img
+										className='uploaded-img'
+										src={imgFile ? imgFile : 'https://ifh.cc/g/YO5Z7z.jpg'}
+									/>
+									{isHover && (
+										<div className='icon-upload'>
+											<img className='icon' src={Upload} />
+										</div>
+									)}
 								</label>
 							</div>
 						</div>

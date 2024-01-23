@@ -188,7 +188,7 @@ const OutputCreatePage = styled.div`
 		}
 
 		.container__img {
-			margin-top: 7rem;
+			margin-top: 4.35rem;
 
 			.container__img-input {
 				padding: 10px 0px;
@@ -197,28 +197,47 @@ const OutputCreatePage = styled.div`
 					display: none;
 				}
 
-				label {
+				.file-label {
+					position: relative;
 					display: block;
-					width: 100%;
-					height: 4.875rem;
+					width: 25.65rem;
+					height: 13.5rem;
 					flex-shrink: 0;
 					border-radius: 0.75rem;
 					border: 0.75px solid #e3e3e3;
 					background: #fff;
 					outline: none;
-					padding-left: 2.1rem;
-					box-sizing: border-box;
 					color: #a7a7a7;
 					font-size: 1.3rem;
 					font-style: normal;
 					font-weight: 400;
-					line-height: 1.8rem; /* 90% */
+					line-height: 1.8rem;
 					letter-spacing: 0.02rem;
 					display: flex;
 					align-items: center;
+					cursor: pointer;
+
+					.uploaded-img {
+						width: 100%;
+						height: 100%;
+						border-radius: 0.75rem;
+
+						&:hover {
+							transition: 0.2s ease-in-out;
+						}
+					}
+
+					.icon {
+						position: absolute;
+						top: 1.8rem;
+						right: 7.6rem;
+						transition: 0.5s ease-in-out;
+						opacity: 70%;
+						width: 10rem;
+					}
 				}
 
-				.haveImgFile {
+				.haveFile {
 					color: #000;
 				}
 			}

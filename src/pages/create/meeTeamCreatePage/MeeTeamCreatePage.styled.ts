@@ -245,7 +245,6 @@ const MeeTeamCreatePage = styled.div`
 						border-radius: 0.75rem;
 
 						&:hover {
-							opacity: 70%;
 							transition: 0.2s ease-in-out;
 						}
 					}
