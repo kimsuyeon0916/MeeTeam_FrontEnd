@@ -111,8 +111,8 @@ const RecruitDetailPage = () => {
 				content: contents,
 			};
 			setCommentsList([...commentsList, newComment]);
+			setContents('');
 		}
-		setContents('');
 	};
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {

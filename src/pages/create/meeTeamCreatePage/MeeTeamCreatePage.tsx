@@ -269,7 +269,10 @@ const MeeTeamCreatePage = () => {
 									onMouseOver={handleMouseOver}
 									onMouseOut={handleMouseOut}
 								>
-									<img src={imgFile ? imgFile : 'https://ifh.cc/g/YO5Z7z.jpg'} />
+									<img
+										className='uploaded-img'
+										src={imgFile ? imgFile : 'https://ifh.cc/g/YO5Z7z.jpg'}
+									/>
 									{isHover && (
 										<div className='icon-upload'>
 											<img className='icon' src={Upload} />

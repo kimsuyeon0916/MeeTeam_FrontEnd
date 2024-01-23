@@ -240,7 +240,7 @@ const MeeTeamCreatePage = styled.div`
 					align-items: center;
 					cursor: pointer;
 
-					img {
+					.uploaded-img {
 						width: 100%;
 						height: 100%;
 						border-radius: 0.75rem;
