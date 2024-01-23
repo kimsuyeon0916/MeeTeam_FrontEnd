@@ -75,10 +75,10 @@ const ManageRecruitPage = () => {
 
 	const onClickHandler = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		const target = event.currentTarget;
-		if (target.innerText === '신청 글') {
+		if (target.innerText === '신청글') {
 			setIsClicked({ isApply: true, isMine: false, isBookmark: false });
 		}
-		if (target.innerText === '내 구인 글') {
+		if (target.innerText === '내 구인글') {
 			setIsClicked({ isApply: false, isMine: true, isBookmark: false });
 		}
 		if (target.innerText === '북마크') {
@@ -117,6 +117,7 @@ const ManageRecruitPage = () => {
 							$recruit={e.$recruit}
 							$proceed={e.$proceed}
 							key={index}
+							isMine={false}
 						/>
 					))}
 				</div>
@@ -130,6 +131,7 @@ const ManageRecruitPage = () => {
 							$recruit={e.$recruit}
 							$proceed={e.$proceed}
 							key={index}
+							isMine={true}
 						/>
 					))}
 				</div>
@@ -143,6 +145,7 @@ const ManageRecruitPage = () => {
 							$recruit={e.$recruit}
 							$proceed={e.$proceed}
 							key={index}
+							isMine={false}
 						/>
 					))}
 				</div>
