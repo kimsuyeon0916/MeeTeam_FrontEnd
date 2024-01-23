@@ -1,5 +1,6 @@
 import { atom } from 'recoil';
 import { SessionStorageEffect } from './utils';
+import { MeeTeamMember } from './components';
 
 export const preUrlState = atom({
 	key: 'preUrlState',
@@ -106,4 +107,14 @@ export const validDateState = atom({
 		validDate: false,
 		validMessage: '',
 	},
+});
+
+export const memberListState = atom<MeeTeamMember[]>({
+	key: 'memberListState1',
+	default: [],
+});
+
+export const memberModalState = atom({
+	key: 'memberModalState',
+	default: false,
 });

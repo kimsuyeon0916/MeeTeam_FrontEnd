@@ -1,0 +1,19 @@
+<svg
+    xmlns='http://www.w3.org/2000/svg'
+    width='20'
+    height='20'
+    viewBox='0 0 20 20'
+    fill='none'
+>
+    <g opacity='0.8'>
+        <rect y='8.99316' width='20' height='2' rx='1' fill='#373F41' />
+        <rect
+            x='10.9922'
+            width='20'
+            height='2'
+            rx='1'
+            transform='rotate(90 10.9922 0)'
+            fill='#373F41'
+        />
+    </g>
+</svg>

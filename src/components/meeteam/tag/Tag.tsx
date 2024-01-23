@@ -7,7 +7,6 @@ interface ITag {
 }
 
 const Tag = ({ type, $recruit, $proceed }: ITag) => {
-	console.log($proceed);
 	return (
 		<S.Tag $recruit={$recruit} $proceed={$proceed}>
 			{$recruit ? '구인중' : $proceed ? '진행중' : type}

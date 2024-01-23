@@ -47,7 +47,7 @@ const MeeTeamCreatePage = styled.div`
 
 	.wrapper {
 		width: 100%;
-		margin-top: 2rem;
+		margin-top: 2.5rem;
 		margin-bottom: 50px;
 		padding-bottom: 50px;
 		border-radius: 0.5rem;
@@ -60,11 +60,9 @@ const MeeTeamCreatePage = styled.div`
 			padding-top: 50px;
 			display: flex;
 			flex-direction: column;
-			gap: 5rem;
+			gap: 2rem;
 		}
 		.container__teamname {
-			height: 100px;
-
 			.container__teamname-input {
 				padding: 10px 0px;
 
@@ -97,7 +95,7 @@ const MeeTeamCreatePage = styled.div`
 			.info-wrapper {
 				display: flex;
 				flex-direction: column;
-				gap: 2rem;
+				gap: 2.5rem;
 				margin: 0 auto;
 			}
 
@@ -107,7 +105,7 @@ const MeeTeamCreatePage = styled.div`
 				justify-content: flex-start;
 				align-items: center;
 				gap: 30.82rem;
-				margin-top: 15px;
+				margin-top: 0.6rem;
 
 				p {
 					position: absolute;
@@ -116,15 +114,76 @@ const MeeTeamCreatePage = styled.div`
 					padding-top: 1rem;
 					box-sizing: border-box;
 				}
+
+				.title-info {
+					position: relative;
+
+					input[type='checkbox'] {
+						top: 1.25rem;
+						left: 32.3rem;
+						position: absolute;
+						border: 1.5px solid #5877fc;
+						background: #fff;
+					}
+				}
+
+				.fix {
+					margin-top: 0.5rem;
+				}
+
+				.description {
+					color: #8e8e8e;
+					font-family: Pretendard;
+					font-size: 1.4rem;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 1.35rem; /* 90% */
+					letter-spacing: 0.015rem;
+					margin-left: 2rem;
+				}
+
+				.description-check {
+					position: absolute;
+					top: 1.6rem;
+					left: 34.5rem;
+					color: var(--text-color-2, #373f41);
+					font-family: Pretendard;
+					font-size: 1.35rem;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 1.35rem; /* 100% */
+					letter-spacing: 0.015rem;
+				}
+
+				.container-course {
+					display: flex;
+					gap: 5.8rem;
+
+					input {
+						width: 40.125rem;
+						height: 4.875rem;
+						flex-shrink: 0;
+						border-radius: 0.75rem;
+						border: 0.75px solid #e3e3e3;
+						background: #fff;
+						outline: none;
+						padding-left: 2.1rem;
+						box-sizing: border-box;
+					}
+
+					.disable {
+						background-color: #e3e3e3;
+					}
+				}
 			}
 		}
 
 		.container__tag {
-			margin-top: 70px;
+			margin-top: 2.55rem;
 		}
 
 		.container__intro {
-			margin-top: 7rem;
+			margin-top: 4.35rem;
 
 			div:nth-child(2) {
 				/* padding: 10px 20px; */
@@ -152,7 +211,7 @@ const MeeTeamCreatePage = styled.div`
 		}
 
 		.container__img {
-			margin-top: 7rem;
+			margin-top: 4.35rem;
 
 			.container__img-input {
 				padding: 10px 0px;
@@ -161,25 +220,45 @@ const MeeTeamCreatePage = styled.div`
 					display: none;
 				}
 
-				label {
+				.file-label {
+					position: relative;
 					display: block;
-					width: 100%;
-					height: 4.875rem;
+					width: 25.65rem;
+					height: 13.5rem;
 					flex-shrink: 0;
 					border-radius: 0.75rem;
 					border: 0.75px solid #e3e3e3;
 					background: #fff;
 					outline: none;
-					padding-left: 2.1rem;
-					box-sizing: border-box;
 					color: #a7a7a7;
 					font-size: 1.3rem;
 					font-style: normal;
 					font-weight: 400;
-					line-height: 1.8rem; /* 90% */
+					line-height: 1.8rem;
 					letter-spacing: 0.02rem;
 					display: flex;
 					align-items: center;
+					cursor: pointer;
+
+					img {
+						width: 100%;
+						height: 100%;
+						border-radius: 0.75rem;
+
+						&:hover {
+							opacity: 70%;
+							transition: 0.2s ease-in-out;
+						}
+					}
+
+					.icon {
+						position: absolute;
+						top: 1.8rem;
+						right: 7.6rem;
+						transition: 0.5s ease-in-out;
+						opacity: 70%;
+						width: 10rem;
+					}
 				}
 
 				.haveFile {
@@ -189,8 +268,29 @@ const MeeTeamCreatePage = styled.div`
 		}
 
 		.container__member {
-			margin-top: 70px;
+			position: relative;
+			margin-top: 4.35rem;
 			width: 100%;
+
+			.container__member-title {
+				display: flex;
+				justify-content: space-between;
+
+				button {
+					display: flex;
+					width: 10rem;
+					height: 3.5rem;
+					padding: 1rem;
+					justify-content: center;
+					align-items: center;
+					gap: 1rem;
+					border: none;
+					outline: none;
+					border-radius: 0.4rem;
+					background: var(--main-color, #5877fc);
+					color: #fff;
+				}
+			}
 
 			.container__member-area {
 				min-height: 24rem;
@@ -198,6 +298,33 @@ const MeeTeamCreatePage = styled.div`
 				background-color: #fff;
 				border: 1px solid #dcdcdc;
 				border-radius: 1rem;
+				padding: 3rem 4rem;
+				display: grid;
+				grid-template-columns: 1fr 1fr 1fr;
+				grid-template-rows: 1fr 1fr;
+				gap: 1rem 1rem;
+			}
+
+			.container__member-area__element {
+				width: 24rem;
+				height: 14rem;
+				flex-shrink: 0;
+				border-radius: 1rem;
+				border: 1px dashed #cdcdcd;
+				background: #fdfdfd;
+			}
+
+			.member {
+				position: relative;
+				width: 24rem;
+
+				.delete {
+					position: absolute;
+					top: 1rem;
+					right: 1.2rem;
+					font-size: 1.5rem;
+					cursor: pointer;
+				}
 			}
 
 			.controll {
