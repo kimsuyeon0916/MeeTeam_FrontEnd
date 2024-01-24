@@ -24,13 +24,13 @@ const SIGN_UP_DATA = [
 	{
 		label: '이메일',
 		type: 'email',
-		placeholder: '학과',
+		placeholder: '학교 이메일 고정',
 		name: 'email',
 	},
 	{
 		label: '비밀번호',
 		type: 'password',
-		placeholder: '영문 소문자/ 숫자, 4-16자',
+		placeholder: '영문 소문자 및 숫자, 4-16자',
 		name: 'password',
 	},
 	{
