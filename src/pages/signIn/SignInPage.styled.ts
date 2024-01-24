@@ -5,7 +5,7 @@ const SignInPageLayout = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	margin: 10.27rem auto;
+	margin: 15rem auto;
 	width: 34.8rem;
 	letter-spacing: 0.015rem;
 	font-weight: 400;
