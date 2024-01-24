@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import signIn from '../signIn/SignInPage.styled';
+import SignIn from '../signIn/SignInPage.styled';
+
 const SchoolCertificationLayout = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -56,7 +57,7 @@ const SchoolCertificationPageForm = styled.form`
 	}
 `;
 
-const SchoolCertificationButton = styled(signIn.SignInPageButton)`
+const SchoolCertificationButton = styled(SignIn.SignInPageButton)`
 	width: 16.5rem;
 	margin: 0 auto;
 `;

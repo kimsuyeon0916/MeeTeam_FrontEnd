@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import S from './SignInPage.styled';
-import { NaverLogin } from '../../components';
+import { NaverLogin } from '../../../components';
 import { useNavigate } from 'react-router-dom';
 
 const SignInPage = () => {

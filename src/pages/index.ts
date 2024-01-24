@@ -11,11 +11,14 @@ import ManageRecruitPage from './manage/recruit/ManageRecruitPage';
 import ManagePortpolioPage from './manage/portpolio/ManagePortpolioPage';
 import RecruitCreatePage from './create/recruitCreatePage/RecruitCreatePage';
 import OutputCreatePage from './create/outputCreatePage/OutputCreatePage';
-import SignInPage from './signIn/SignInPage';
-import SignUpPage from './signUp/SignUpPage';
-import SchoolCertificationPage from './schoolCertification/SchoolCertificationPage';
-import type { School } from './schoolCertification/SchoolCertificationData';
-import { SCHOOL_CERTIFICATION_DATA } from './schoolCertification/SchoolCertificationData';
+import SignInPage from './account/signIn/SignInPage';
+import SignUpPage from './account/signUp/SignUpPage';
+import SchoolCertificationPage from './account/schoolCertification/SchoolCertificationPage';
+import type { School } from './account/schoolCertification/SchoolCertificationData';
+import { SCHOOL_CERTIFICATION_DATA } from './account/schoolCertification/SchoolCertificationData';
+import type { User } from './account/signUp/SignUpData';
+import { SIGN_UP_DATA } from './account/signUp/SignUpData';
+import NickNameSettingPage from './account/signUp/nickNameSetting/NickNameSettingPage';
 
 export {
 	MainPage,
@@ -36,4 +39,7 @@ export {
 	SchoolCertificationPage,
 	School,
 	SCHOOL_CERTIFICATION_DATA,
+	User,
+	SIGN_UP_DATA,
+	NickNameSettingPage,
 };

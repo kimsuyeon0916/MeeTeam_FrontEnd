@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import S from './SchoolCertificationPage.styled';
-import { GoBack } from '../../components';
-import { School, SCHOOL_CERTIFICATION_DATA } from '..';
+import { GoBack } from '../../../components';
+import { School, SCHOOL_CERTIFICATION_DATA } from '../..';
 
 const SchoolCertificationPage = () => {
 	const [school, setSchool] = useState<School>({ school: '', major: '', year: '', email: '' });
@@ -26,7 +26,7 @@ const SchoolCertificationPage = () => {
 		<S.SchoolCertificationLayout>
 			<header className='school-certification__header'>
 				<h1>
-					학교 인증하고, <b>밋팀</b>을 만나보세요.
+					학교 인증하고, <b>밋팀</b>을 만나보세요!
 				</h1>
 				{next && (
 					<GoBack clickHandler={e => nextHandler(e)} style='left: -15.98rem; top: -5.53rem; ' />
