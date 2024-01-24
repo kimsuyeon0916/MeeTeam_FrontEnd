@@ -18,6 +18,7 @@ import {
 	IntegratedManagePage,
 	SignInPage,
 	SchoolCertificationPage,
+	NickNameSettingPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -48,7 +49,10 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'signUp',
-				children: [{ path: ':school?', element: <SchoolCertificationPage /> }],
+				children: [
+					{ path: ':school?', element: <SchoolCertificationPage /> },
+					{ path: 'nickName', element: <NickNameSettingPage /> },
+				],
 			},
 			{
 				path: 'information',
