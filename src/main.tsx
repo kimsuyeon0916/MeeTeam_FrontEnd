@@ -19,6 +19,7 @@ import {
 	SignInPage,
 	SchoolCertificationPage,
 	NickNameSettingPage,
+	SignUpPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -49,6 +50,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'signUp',
+				element: <SignUpPage />,
 				children: [
 					{ path: ':school?', element: <SchoolCertificationPage /> },
 					{ path: 'nickName', element: <NickNameSettingPage /> },
