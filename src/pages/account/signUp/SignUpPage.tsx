@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import S from './SignUpPage.styled';
-import { SIGN_UP_DATA } from '../../index';
+import { SIGN_UP_DATA, Account } from '../../index';
 
 const SignUpPage = () => {
 	const submitHandelr = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+	};
+
+	const [account, setAccount] = useState<Account>({
+		name: '',
+		password: '',
+	});
+
+	const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = e.target;
+		setAccount({ ...account, [name]: value });
 	};
 
 	return (
@@ -24,6 +34,8 @@ const SignUpPage = () => {
 										type={type}
 										placeholder={placeholder}
 										name={name}
+										value={account[name]}
+										onChange={e => changeHandler(e)}
 									></input>
 								</label>
 							)

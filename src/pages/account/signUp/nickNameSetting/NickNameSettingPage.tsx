@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import S from './NickNameSettingPage.styled';
 import { SIGN_UP_DATA } from '../SignUpData';
 
 const NickNameSettingPage = () => {
 	const title = `밋팀에서 사용하실\n닉네임을 설정해주세요`;
+
+	const [nickName, setNickName] = useState<string>('');
+
+	const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newNickName = e.target.value;
+		setNickName(() => newNickName);
+	};
+
 	return (
 		<S.NickNameSettingPageLayout>
 			<header className='account__header'>
@@ -19,6 +27,8 @@ const NickNameSettingPage = () => {
 									type={type}
 									placeholder={placeholder}
 									name={name}
+									value={nickName}
+									onChange={e => changeHandler(e)}
 								/>
 							</label>
 						)
