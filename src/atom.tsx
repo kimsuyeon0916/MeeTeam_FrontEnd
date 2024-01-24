@@ -1,9 +1,17 @@
 import { atom } from 'recoil';
+import { SessionStorageEffect } from './utils';
 import { MeeTeamMember } from './components';
+
+export const preUrlState = atom({
+	key: 'preUrlState',
+	default: '',
+	effects: [SessionStorageEffect('preUrlState')],
+});
 
 export const contentState = atom({
 	key: 'contentState',
 	default: '대시보드',
+	effects: [SessionStorageEffect('contentState')],
 });
 
 export const recruitmentState = atom({

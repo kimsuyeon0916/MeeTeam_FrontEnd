@@ -80,6 +80,7 @@ import Icon from './meeteam/icon/Icon';
 import ApplyInfomation from '../pages/recruit/RecruitDetailPage/steps/ApplyInfomation';
 import ApplyInput from '../pages/recruit/RecruitDetailPage/steps/ApplyInput';
 import ApplySubmit from '../pages/recruit/RecruitDetailPage/steps/ApplySubmit';
+import Content from './meeteam/Content';
 
 export {
 	Header,
@@ -155,4 +156,5 @@ export {
 	ApplyInfomation,
 	ApplyInput,
 	ApplySubmit,
+	Content,
 };

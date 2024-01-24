@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react';
 import S from './Header.styled';
 import { BiSearch, BiBell, BiUser } from 'react-icons/bi';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { preUrlState } from '../../atom';
+import { useSetRecoilState } from 'recoil';
 
 const Header = () => {
 	const navigate = useNavigate();
@@ -34,6 +36,8 @@ const Header = () => {
 		navigate('/information');
 	};
 
+	const setPreUrl = useSetRecoilState(preUrlState);
+
 	useEffect(() => {
 		if (location.pathname === '/recruit' || location.pathname === '/recruit/:id') {
 			setIsHere({ recruit: true, galary: false, member: false, inform: false });
@@ -47,6 +51,7 @@ const Header = () => {
 		if (location.pathname === '/information') {
 			setIsHere({ recruit: false, galary: false, member: false, inform: true });
 		}
+		setPreUrl(location.pathname);
 	}, [location]);
 
 	useEffect(() => {

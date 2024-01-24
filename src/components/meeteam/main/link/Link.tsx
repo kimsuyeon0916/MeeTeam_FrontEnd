@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import S from './Link.styled';
-import { KebabMenu, linkList, LINK_BOTTOM_ARROW_ICON, LINK_SHORTCUTS_BUTTON } from '../../..';
+import { KebabMenu, linkList, LINK_SHORTCUTS_BUTTON } from '../../..';
 import { CopyClipBoard } from '../../../../utils';
 
 const Link = () => {
@@ -14,10 +14,10 @@ const Link = () => {
 	const [editMode, setEditMode] = useState(false);
 
 	const copyLinkIcon: string =
-		'https://s3-alpha-sig.figma.com/img/05ef/6744/dbc3fa3693c319737315c7eb7568b0a5?Expires=1705276800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=hcpN-~UN7asKyK-Q8KZPWiQD6MzsrFEm6Bi3QQaTcRJVTQ9GIo56SBIBmKm97NDEmP8IWE~gCxkttWulIgS-UoMyNDTkbhj1G~ngiVzp4MdD89jkVOSHb~U2o2TaTFStQh~JRqN2cB2PtNYDSb43BPNxzSPxZxnBs1cEFG0zFy~1Fs7bNoUViEzacBxzqjoQx7qfNuaxklw4-89T~r~HfSUyRbZph77B~sTu0EyO74jjFqUbCoUFgIJHBtg6X48g4Dz3lh8GLOmF8y~sYe2M2Ag~VMsq1ONLh41wN7~nOH3s-5v0WD2Cn78eYpQMOiiWYo48E5zd3lgb2sTQiYANhg__';
+		'https://s3-alpha-sig.figma.com/img/05ef/6744/dbc3fa3693c319737315c7eb7568b0a5?Expires=1706486400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=jFAAgsBEHGI2YKE6NHhi7FTrA2b~u~juWVyopEsGZGuJSVhQ8MWcqY-Re~dEsFr55y3P4Hrw6sJKpzHF~HcWqd3q-caE~b1a7TAMX45gbdhrghV5A2jZP78bqtHr78nEmomwTRSmpAegNFWHnH0Gl7Nu9W01SFuuJdTmSGckrB8901Jfi1yuZeL1RT8T-N-FL7ME0H6xf-o-6WX8MdMytZctVF7qvLgUyPrOXE4NwJhnsMvHeZ~OKsfYy2SUx8gEjvh9OLXKQzS9WF9kEHrLj-F6lPdODyLPpbTU6vJzuTkqVadqPSP1R0NKeh8hOGgmLQy7FnebopbQTJp9kDGwEQ__';
 
 	return (
-		<form>
+		<S.LinkForm>
 			<S.LinkLayout>
 				<header className='main__row'>
 					<h2 className='main--big-text'>링크</h2>
@@ -27,7 +27,7 @@ const Link = () => {
 								취소
 							</S.LinkCancelButton>
 							<S.LinkSaveButton type='submit' onClick={() => setEditMode(false)}>
-								저장하기
+								저장
 							</S.LinkSaveButton>
 						</div>
 					) : (
@@ -38,7 +38,6 @@ const Link = () => {
 					(element, index) => (
 						<div className='link__row' key={index}>
 							<S.LinkImageIcon src={element.icon} alt={element.title + ` 아이콘`} />
-							{editMode && LINK_BOTTOM_ARROW_ICON}
 							{editMode ? (
 								<S.LinkInput type='url' defaultValue={element.link} />
 							) : (
@@ -52,13 +51,16 @@ const Link = () => {
 								</S.LinkAnchor>
 							)}
 							{editMode ? (
-								<S.LinkCopyIcon
-									src={copyLinkIcon}
-									alt={element.title}
-									onClick={() => CopyClipBoard(element.link)}
-								/>
+								<span className='link__icon'>
+									<S.LinkCopyIcon
+										src={copyLinkIcon}
+										alt={element.title + ` 클립보드 복사`}
+										onClick={() => CopyClipBoard(element.link)}
+									/>
+								</span>
 							) : (
 								<a
+									className='link__icon'
 									href={element.link}
 									target='_blank'
 									title={element.title}
@@ -71,7 +73,7 @@ const Link = () => {
 					)
 				)}
 			</S.LinkLayout>
-		</form>
+		</S.LinkForm>
 	);
 };
 

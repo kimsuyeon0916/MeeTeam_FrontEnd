@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom';
 const GoBack = () => {
 	const navigate = useNavigate();
 
+	const clickHandler = () => {
+		window.sessionStorage.removeItem('contentState');
+		navigate(-1);
+	};
+
 	return (
 		<>
-			<S.GoBackButton
-				type='button'
-				onClick={() => {
-					navigate(-1);
-				}}
-			/>
+			<S.GoBackButton type='button' onClick={clickHandler} />
 		</>
 	);
 };
