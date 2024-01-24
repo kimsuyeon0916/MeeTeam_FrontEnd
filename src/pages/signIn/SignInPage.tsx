@@ -1,9 +1,11 @@
 import React, { useRef } from 'react';
 import S from './SignInPage.styled';
 import { NaverLogin } from '../../components';
+import { useNavigate } from 'react-router-dom';
 
 const SignInPage = () => {
 	const naverRef = useRef<HTMLButtonElement | null>(null);
+	const navigate = useNavigate();
 	return (
 		<S.SignInPageLayout>
 			<header className='sign-in__header'>
@@ -30,7 +32,11 @@ const SignInPage = () => {
 				</S.SignInPageButton>
 			</S.SignInPageForm>
 			<div className='sign-in__button-row'>
-				<button type='button' className='sign-in__button'>
+				<button
+					type='button'
+					className='sign-in__button'
+					onClick={() => navigate('/signUp/school')}
+				>
 					회원가입
 				</button>
 				<hr className='sign_in__vertical' />
@@ -47,7 +53,7 @@ const SignInPage = () => {
 				<div>
 					<NaverLogin naverRef={naverRef} />
 					<S.SignInPageNaverButton>
-						<img src='/src/assets/NaverIcon.png' className='sign-in__naver-icon' alt='naverIcon'/>
+						<img src='/src/assets/NaverIcon.png' className='sign-in__naver-icon' alt='naverIcon' />
 						<span>네이버 로그인</span>
 					</S.SignInPageNaverButton>
 				</div>
