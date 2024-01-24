@@ -1,9 +1,14 @@
 import { School } from '../..';
 
-interface User {
-	nickName: string;
+interface Account {
 	name: string;
 	password: string;
+}
+export type { Account };
+
+interface User {
+	nickName: string;
+	accountInformation: Account;
 	schoolInformation: School;
 }
 export type { User };
