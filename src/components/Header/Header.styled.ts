@@ -182,6 +182,7 @@ const Header = styled.div`
 				flex-direction: column;
 				gap: 2rem;
 				padding: 2rem 2.8rem;
+				z-index: 501;
 			}
 
 			.menu {

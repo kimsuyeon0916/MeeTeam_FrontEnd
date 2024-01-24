@@ -43,12 +43,14 @@ const OutputPreview = styled.div`
 				position: absolute;
 				top: 45%;
 				left: -5rem;
+				cursor: pointer;
 			}
 
 			.right-btn {
 				position: absolute;
 				top: 45%;
 				right: -5rem;
+				cursor: pointer;
 			}
 		}
 	}
