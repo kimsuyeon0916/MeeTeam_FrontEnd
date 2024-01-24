@@ -12,6 +12,10 @@ import ManagePortpolioPage from './manage/portpolio/ManagePortpolioPage';
 import RecruitCreatePage from './create/recruitCreatePage/RecruitCreatePage';
 import OutputCreatePage from './create/outputCreatePage/OutputCreatePage';
 import SignInPage from './signIn/SignInPage';
+import SignUpPage from './signUp/SignUpPage';
+import SchoolCertificationPage from './schoolCertification/SchoolCertificationPage';
+import type { School } from './schoolCertification/SchoolCertificationData';
+import { SCHOOL_CERTIFICATION_DATA } from './schoolCertification/SchoolCertificationData';
 
 export {
 	MainPage,
@@ -27,5 +31,9 @@ export {
 	ManagePortpolioPage,
 	RecruitCreatePage,
 	OutputCreatePage,
-	SignInPage
+	SignInPage,
+	SignUpPage,
+	SchoolCertificationPage,
+	School,
+	SCHOOL_CERTIFICATION_DATA,
 };
