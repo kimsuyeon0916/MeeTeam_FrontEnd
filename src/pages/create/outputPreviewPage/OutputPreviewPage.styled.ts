@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 const OutputPreview = styled.div`
-	width: clamp(45%, 108rem, 75%);
-	margin: 0 auto;
 	margin-bottom: 5rem;
+	overflow-x: hidden;
 
 	.container-images {
+		width: clamp(45%, 108rem, 75%);
+		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
 		margin-top: 3rem;
@@ -64,6 +65,8 @@ const OutputPreview = styled.div`
 	}
 
 	.container-info {
+		width: clamp(45%, 108rem, 75%);
+		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
 		margin-top: 3.38rem;
@@ -108,6 +111,8 @@ const OutputPreview = styled.div`
 	}
 
 	.container-members {
+		width: clamp(45%, 108rem, 75%);
+		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
 		margin-top: 3.75rem;

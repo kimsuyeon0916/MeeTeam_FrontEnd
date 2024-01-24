@@ -22,8 +22,6 @@ const OutputPreviewPage = () => {
 		setSlideIndex(prevIndex => (prevIndex === lists.length - 1 ? 0 : prevIndex + 1));
 	};
 
-	console.log(isBack);
-
 	return (
 		<S.OutputPreview>
 			<div className='container-images'>
@@ -53,6 +51,7 @@ const OutputPreviewPage = () => {
 								x: { type: 'spring', damping: 30, stiffness: 300 },
 								opacity: { duration: 0.5 },
 							}}
+							onClick={handleNextSlide}
 						/>
 						<img className='left-btn' src={LeftBtn} onClick={handlePrevSlide} />
 						<img className='right-btn' src={RightBtn} onClick={handleNextSlide} />
