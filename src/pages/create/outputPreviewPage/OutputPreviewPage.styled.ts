@@ -8,7 +8,7 @@ const OutputPreview = styled.div`
 	.container-images {
 		display: flex;
 		flex-direction: column;
-		margin-top: 4.05rem;
+		margin-top: 3rem;
 
 		.container-images__title {
 			display: flex;
@@ -31,24 +31,32 @@ const OutputPreview = styled.div`
 		.container-images__slide {
 			position: relative;
 			margin-top: 1.95rem;
+			position: relative;
 
 			.slider {
 				width: 100%;
-				height: 51rem;
+				height: 59rem;
 				border-radius: 0.6rem;
 				background: #f1f1f1;
+
+				/* img {
+					width: 100%;
+					height: 100%;
+					border-radius: 0.6rem;
+					overflow: hidden;
+				} */
 			}
 
 			.left-btn {
 				position: absolute;
-				top: 45%;
+				top: 47%;
 				left: -5rem;
 				cursor: pointer;
 			}
 
 			.right-btn {
 				position: absolute;
-				top: 45%;
+				top: 47%;
 				right: -5rem;
 				cursor: pointer;
 			}
