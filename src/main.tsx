@@ -50,9 +50,9 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'signUp',
-				element: <SignUpPage />,
 				children: [
-					{ path: ':school?', element: <SchoolCertificationPage /> },
+					{ path: '', element: <SignUpPage /> },
+					{ path: 'school?', element: <SchoolCertificationPage /> },
 					{ path: 'nickName', element: <NickNameSettingPage /> },
 				],
 			},
