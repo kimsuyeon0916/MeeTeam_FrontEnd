@@ -7,14 +7,7 @@ const SchoolCertificationLayout = styled(Account.AccountLayout)`
 	}
 `;
 
-const SchoolCertificationPageForm = styled(Account.AccountForm)`
-	.school-certification_form-row {
-		display: flex;
-		flex-direction: column;
-		row-gap: 1.35rem;
-		width: 34.8rem;
-	}
-`;
+const SchoolCertificationPageForm = styled(Account.AccountForm)``;
 
 const SchoolCertificationButton = styled(Account.AccountButton)`
 	width: 16.5rem;

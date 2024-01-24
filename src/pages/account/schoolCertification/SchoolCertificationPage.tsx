@@ -32,8 +32,8 @@ const SchoolCertificationPage = () => {
 					<GoBack clickHandler={e => nextHandler(e)} style='left: -15.98rem; top: -5.53rem; ' />
 				)}
 			</header>
-			<S.SchoolCertificationPageForm onSubmit={certificateHandler}>
-				<div className='school-certification_form-row'>
+			<S.SchoolCertificationPageForm onSubmit={e => certificateHandler(e)}>
+				<div className='account__form-row'>
 					{SCHOOL_CERTIFICATION_DATA.map(
 						({ label, type, placeholder, name, isNext }, index) =>
 							isNext === next && (
