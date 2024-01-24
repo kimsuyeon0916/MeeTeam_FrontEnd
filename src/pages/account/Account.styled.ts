@@ -44,6 +44,13 @@ const AccountForm = styled.form`
 		background: #f9f9f9;
 		cursor: text;
 	}
+
+	.account__form-row {
+		display: flex;
+		flex-direction: column;
+		row-gap: 1.5rem;
+		width: 34.8rem;
+	}
 `;
 
 const AccountButton = styled.button`
