@@ -24,7 +24,7 @@ const SchoolCertificationPage = () => {
 
 	return (
 		<S.SchoolCertificationLayout>
-			<header className='school-certification__header'>
+			<header className='account__header'>
 				<h1>
 					학교 인증하고, <b>밋팀</b>을 만나보세요!
 				</h1>
@@ -37,10 +37,10 @@ const SchoolCertificationPage = () => {
 					{SCHOOL_CERTIFICATION_DATA.map(
 						({ label, type, placeholder, name, isNext }, index) =>
 							isNext === next && (
-								<label className='school-certification__label' key={index}>
+								<label className='account__label' key={index}>
 									{label}
 									<input
-										className='school-certification__input'
+										className='account__input'
 										type={type}
 										placeholder={placeholder}
 										name={name}
