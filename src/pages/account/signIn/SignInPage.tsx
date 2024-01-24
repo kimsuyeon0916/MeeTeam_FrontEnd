@@ -13,11 +13,11 @@ const SignInPage = () => {
 			</header>
 			<S.SignInPageForm>
 				<label className='sign-in__label'>
-					<input className='sign-in__input' type='text' placeholder='학교 이메일' name='username' />
+					<input className='account__input' type='text' placeholder='학교 이메일' name='username' />
 				</label>
 				<label className='sign-in__label'>
 					<input
-						className='sign-in__input'
+						className='account__input'
 						type='password'
 						placeholder='비밀번호'
 						name='password'

@@ -1,21 +1,15 @@
 import styled from 'styled-components';
+import Account from '../Account.styled';
 
-const SignInPageLayout = styled.div`
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin: 15rem auto;
+const SignInPageLayout = styled(Account.AccountLayout)`
+	row-gap: 0;
 	width: 34.8rem;
-	letter-spacing: 0.015rem;
-	font-weight: 400;
-	color: var(--text-color-2, #373f41);
 
 	.sign-in__header {
 		display: flex;
 		line-height: 4.2rem;
 		margin-bottom: 4.49rem;
-		color: var(--text-color, #151515);
+		color: var(--text-color-2, #151515);
 		font-size: 2.7rem;
 	}
 
@@ -42,11 +36,11 @@ const SignInPageLayout = styled.div`
 		font-size: 1.2rem;
 	}
 
-  .sign-in__social-login-column {
-    display: flex;
-    flex-direction: column;
-    row-gap: 1.5rem;
-  }
+	.sign-in__social-login-column {
+		display: flex;
+		flex-direction: column;
+		row-gap: 1.5rem;
+	}
 
 	.sign_in__vertical {
 		all: unset;
@@ -65,7 +59,7 @@ const SignInPageLayout = styled.div`
 	}
 `;
 
-const SignInPageForm = styled.form`
+const SignInPageForm = styled(Account.AccountForm)`
 	display: flex;
 	flex-direction: column;
 	row-gap: 1.35rem;
@@ -82,19 +76,6 @@ const SignInPageForm = styled.form`
 		font-size: 1.35rem;
 	}
 
-	.sign-in__input {
-		all: unset;
-		display: flex;
-		flex: 1;
-		align-items: center;
-		padding: 1.5rem;
-		border-radius: 0.75rem;
-		border: 0.75px solid var(--box_stroke, #e3e3e3);
-		background: #f9f9f9;
-		font-size: 1.5rem;
-		cursor: text;
-	}
-
 	.sign-in__input--auto-sign-in {
 		display: flex;
 		margin: 0;
@@ -102,35 +83,21 @@ const SignInPageForm = styled.form`
 	}
 `;
 
-const SignInPageButton = styled.button`
-	all: unset;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin-top: 0.45rem;
-	height: 4.875rem;
-	border-radius: 7.5rem;
-	background: var(--main-color, #5877fc);
-	color: #fff;
-	font-size: 1.5rem;
-	font-weight: 500;
-	line-height: 1.35rem;
-	cursor: pointer;
-`;
+const SignInPageButton = styled(Account.AccountButton)``;
 
 const SignInPageNaverButton = styled(SignInPageButton)`
 	position: relative;
-  display: flex;
+	display: flex;
 	width: 100%;
 	background: #03c75a;
 	margin-top: 0;
 	border-radius: 0.45rem;
-  
+
 	.sign-in__naver-icon {
-    position: absolute;
-    display: flex;
+		position: absolute;
+		display: flex;
 		height: 4.875rem;
-    left: 0;
+		left: 0;
 	}
 `;
 
