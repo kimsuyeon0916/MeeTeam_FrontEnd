@@ -4,7 +4,6 @@ import { NaverLogin } from '../../../components';
 import { useNavigate } from 'react-router-dom';
 
 const SignInPage = () => {
-	const naverRef = useRef<HTMLButtonElement | null>(null);
 	const navigate = useNavigate();
 	return (
 		<S.SignInPageLayout>
@@ -51,11 +50,7 @@ const SignInPage = () => {
 					<hr className='sign_in__horizon' />
 				</div>
 				<div>
-					<NaverLogin naverRef={naverRef} />
-					<S.SignInPageNaverButton>
-						<img src='/src/assets/NaverIcon.png' className='sign-in__naver-icon' alt='naverIcon' />
-						<span>네이버 로그인</span>
-					</S.SignInPageNaverButton>
+					<NaverLogin />
 				</div>
 			</div>
 		</S.SignInPageLayout>

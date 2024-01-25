@@ -85,22 +85,6 @@ const SignInPageForm = styled(Account.AccountForm)`
 
 const SignInPageButton = styled(Account.AccountButton)``;
 
-const SignInPageNaverButton = styled(SignInPageButton)`
-	position: relative;
-	display: flex;
-	width: 100%;
-	background: #03c75a;
-	margin-top: 0;
-	border-radius: 0.45rem;
-
-	.sign-in__naver-icon {
-		position: absolute;
-		display: flex;
-		height: 4.875rem;
-		left: 0;
-	}
-`;
-
-const S = { SignInPageLayout, SignInPageForm, SignInPageButton, SignInPageNaverButton };
+const S = { SignInPageLayout, SignInPageForm, SignInPageButton };
 
 export default S;
