@@ -11,14 +11,17 @@ const GoBack = ({
 }) => {
 	const navigate = useNavigate();
 
+	const clickHandler = () => {
+		window.sessionStorage.removeItem('contentState');
+		navigate(-1);
+	};
+
 	return (
-		<>
-			<S.GoBackButton
-				type='button'
-				onClick={clickHandler ? clickHandler : () => navigate(-1)}
-				$style={style}
-			/>
-		</>
+    <S.GoBackButton
+      type='button'
+      onClick={clickHandler ? clickHandler : () => navigate(-1)}
+      $style={style}
+    />
 	);
 };
 

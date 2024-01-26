@@ -20,6 +20,7 @@ import type { User } from './account/signUp/SignUpData';
 import { SIGN_UP_DATA } from './account/signUp/SignUpData';
 import NickNameSettingPage from './account/signUp/nickNameSetting/NickNameSettingPage';
 import type { Account } from './account/signUp/SignUpData';
+import MyActivityManagePage from './manage/activity/MyActivityManagePage';
 
 export {
 	MainPage,
@@ -44,4 +45,5 @@ export {
 	SIGN_UP_DATA,
 	NickNameSettingPage,
 	Account,
+	MyActivityManagePage,
 };

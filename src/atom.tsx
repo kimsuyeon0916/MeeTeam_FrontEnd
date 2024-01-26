@@ -1,4 +1,6 @@
 import { atom } from 'recoil';
+import { SessionStorageEffect } from './utils';
+import { MeeTeamMember } from './components';
 import type { User } from './types';
 import { LocalStorageEffect } from './utils';
 import type { SignUp } from './pages';
@@ -15,9 +17,16 @@ export const naverSignUpState = atom<SignUp | null>({
 	effects: [LocalStorageEffect<SignUp | null>('naverSignUpState')],
 });
 
+export const preUrlState = atom({
+	key: 'preUrlState',
+	default: '',
+	effects: [SessionStorageEffect('preUrlState')],
+});
+
 export const contentState = atom({
 	key: 'contentState',
 	default: '대시보드',
+	effects: [SessionStorageEffect('contentState')],
 });
 
 export const recruitmentState = atom({
@@ -113,4 +122,14 @@ export const validDateState = atom({
 		validDate: false,
 		validMessage: '',
 	},
+});
+
+export const memberListState = atom<MeeTeamMember[]>({
+	key: 'memberListState1',
+	default: [],
+});
+
+export const memberModalState = atom({
+	key: 'memberModalState',
+	default: false,
 });

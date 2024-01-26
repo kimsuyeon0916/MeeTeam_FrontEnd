@@ -1,17 +1,28 @@
 import React, { useRef, useState, useCallback } from 'react';
-import { useRecoilValue } from 'recoil';
-import { Subtitle, Dot, InfoItem, MeeteamTag, AddButton } from '../../../components/index';
+import { Plus } from '../../../assets';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import {
+	Subtitle,
+	Dot,
+	InfoItem,
+	MeeteamTag,
+	MeeTeamMember,
+	MemberInviteModal,
+} from '../../../components/index';
 import {
 	areaRecruitState,
 	fieldRecruitState,
 	dateRecruitState,
 	deadlineState,
 	categoryRecruitState,
+	memberListState,
+	memberModalState,
 } from '../../../atom';
 import { modules } from '../../../utils/index';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import S from './recruitCreatePage.styled';
+import S from './RecruitCreatePage.styled';
+import MemberTest from '../../../components/meeteam/main/member/MemberTest';
 
 const RecruitCreatePage = () => {
 	const area = useRecoilValue(areaRecruitState);
@@ -19,12 +30,15 @@ const RecruitCreatePage = () => {
 	const category = useRecoilValue(categoryRecruitState);
 	const deadline = useRecoilValue(deadlineState);
 	const quillRef = useRef<ReactQuill | null>(null);
-	const [memberList, setMemberList] = useState([]);
-	const copyMemberList = [...memberList];
+	const [memberList, setMemberList] = useState<MeeTeamMember[]>([]);
+
 	const [teamName, setTeamName] = useState<string>('');
+	const [isChecked, setIsChecked] = useState<boolean>(false);
 	const [startDate, endDate] = useRecoilValue(dateRecruitState);
 	const [file, setFile] = useState<string>('');
 	const [fileName, setFileName] = useState<string>('');
+	const [memberListRe, setMemberListRe] = useRecoilState(memberListState);
+	const [modalOpen, setModalOpen] = useRecoilState<boolean>(memberModalState);
 
 	const [isValidName, setIsValidName] = useState({
 		validName: false,
@@ -51,18 +65,6 @@ const RecruitCreatePage = () => {
 		validMessage: '',
 	});
 
-	const onClickMember = () => {
-		// let updatedMemberList = [...memberList];
-		// updatedMemberList.push(<MemberSelect id={memberList.length} />);
-		// setMemberList(updatedMemberList);
-	};
-
-	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
-		const deletedIndex = Number(event.target.id);
-		copyMemberList.splice(deletedIndex, 1);
-		setMemberList(copyMemberList);
-	};
-
 	const onClickCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
 		// 모달창 띄워서 한 번 더 확인시키고 이동하기
 		// navigate('/');
@@ -80,6 +82,14 @@ const RecruitCreatePage = () => {
 			setFile(URL.createObjectURL(selectedFiles?.[0]));
 		}
 	}, []);
+
+	const onClickTestAdd = () => {
+		let temp = [...memberList];
+		temp.push((<MemberTest id={(temp.length - 1).toString()} />) as any);
+		setMemberList(temp);
+		setMemberListRe(temp);
+		setModalOpen(false);
+	};
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -210,6 +220,30 @@ const RecruitCreatePage = () => {
 								</div>
 								<div className='container__info-select'>
 									<div>
+										<div className='title-info'>
+											<Subtitle>{'수업'}</Subtitle>
+											<span className='description'>수업인 경우에 체크해주세요.</span>
+											<span className='description-check'>수업 선택</span>
+											<input type='checkbox' onClick={() => setIsChecked(prev => !prev)} />
+										</div>
+										<div className='container-course'>
+											<input
+												type='text'
+												placeholder='수업명'
+												className={!isChecked ? 'disable' : ''}
+												disabled={!isChecked ? true : false}
+											/>
+											<input
+												type='text'
+												placeholder='교수명'
+												className={!isChecked ? 'disable' : ''}
+												disabled={!isChecked ? true : false}
+											/>
+										</div>
+									</div>
+								</div>
+								<div className='container__info-select'>
+									<div>
 										<InfoItem isDot='true' title='구인 마감일' optionData={[]} type='구인 마감일' />
 										{!isValidDeadline.validDeadline && <p>{isValidDeadline.validMessage}</p>}
 									</div>
@@ -232,46 +266,32 @@ const RecruitCreatePage = () => {
 								<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
 							</div>
 						</div>
-						<div className='container__img'>
-							<div>
-								<Subtitle>{'구인 이미지'}</Subtitle>
-							</div>
-							<div className='container__img-input'>
-								<input
-									type='file'
-									accept='image/*'
-									id='meeteamImg'
-									placeholder='이미지를 업로드해주세요.'
-									onChange={onChangeImg}
-								/>
-								<label className={file ? 'haveFile' : ''} htmlFor='meeteamImg'>
-									{file ? `${fileName}` : '이미지를 업로드해주세요.'}
-								</label>
-							</div>
-						</div>
 						<div className='container__member'>
-							<div>
+							<div className='container__member-title'>
 								<Subtitle>{'멤버'}</Subtitle>
+								<button
+									type='button'
+									onClick={() => {
+										setModalOpen(prev => !prev);
+									}}
+								>
+									멤버 초대 +
+								</button>
 							</div>
+							{modalOpen && <MemberInviteModal onClick={onClickTestAdd} />}
 							<div className='container__member-area'>
-								{/* {memberList.map((memberItem, index) => {
-									return (
-										<div className='controll' key={index}>
-											{React.cloneElement(memberItem, { key: index })}
-											<button id={index.toString()}>초대</button>
-											<button onClick={onClickDelete} id={index.toString()}>
-												삭제
-											</button>
-										</div>
-									);
-								})} */}
-							</div>
-							<div className='container__member-add'>
-								{memberList.length !== 6 && (
-									<div className='addition' onClick={onClickMember}>
-										<AddButton />
-									</div>
-								)}
+								{memberListRe.map((e, index) => (
+									<MemberTest key={index} id={index.toString()} />
+								))}
+								<button
+									type='button'
+									onClick={() => {
+										setModalOpen(prev => !prev);
+									}}
+									className='container__member-area__element'
+								>
+									<img src={Plus} />
+								</button>
 							</div>
 						</div>
 						<div className='container__controller'>

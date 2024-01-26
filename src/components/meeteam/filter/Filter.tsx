@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Dropdown } from '../..';
 import S from './Filter.styled';
 
@@ -8,14 +8,15 @@ const Filter = () => {
 		isOutside: false,
 	});
 
-	const onClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-		if (event.target.innerText === '교내') {
+	const onClickHandler = useCallback((event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+		const target = event.currentTarget;
+		if (target.innerText === '교내') {
 			setIsFiltered({ isInside: true, isOutside: false });
 		}
-		if (event.target.innerText === '교외') {
+		if (target.innerText === '교외') {
 			setIsFiltered({ isInside: false, isOutside: true });
 		}
-	};
+	}, []);
 
 	return (
 		<S.Filter>
@@ -23,7 +24,7 @@ const Filter = () => {
 				<div className={`area ${isFiltered.isInside ? '' : 'no'}`} onClick={onClickHandler}>
 					교내
 				</div>
-				<div className={`area ${isFiltered.isOutside ? '' : 'no'}`} onClick={onClickHandler}>
+				<div className={`area ${isFiltered.isOutside ? 'out' : 'no'}`} onClick={onClickHandler}>
 					교외
 				</div>
 			</div>
@@ -31,10 +32,13 @@ const Filter = () => {
 				<Dropdown
 					data={['프로젝트', '스터디', '동아리', '공모전']}
 					initialData='프로젝트'
-					allowNeed={true}
+					$arrowNeed={true}
 				/>
-				<div className='sep'></div>
-				<Dropdown data={['개발']} initialData='카테고리' allowNeed={true} />
+				<Dropdown data={['개발']} initialData='카테고리' $arrowNeed={true} />
+			</div>
+			<div className='container-checkbox'>
+				<input type='checkbox' id='recruit' />
+				<label id='recruit'>구인중인 밋팀 보기</label>
 			</div>
 		</S.Filter>
 	);

@@ -20,6 +20,7 @@ import {
 	SchoolCertificationPage,
 	NickNameSettingPage,
 	SignUpPage,
+	MyActivityManagePage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
 					{
 						path: 'portpolio',
 						element: <ManagePortpolioPage />,
+					},
+					{
+						path: 'activity',
+						element: <MyActivityManagePage />,
 					},
 				],
 			},

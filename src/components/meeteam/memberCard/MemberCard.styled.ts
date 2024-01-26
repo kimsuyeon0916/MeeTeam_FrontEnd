@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const MemberCardLayout = styled.article`
 	display: flex;
 	min-width: 0;
+	max-width: 24rem;
 	padding: 2.4rem 1.26rem;
 	height: 13.5rem;
 	border-radius: 0.75rem;
