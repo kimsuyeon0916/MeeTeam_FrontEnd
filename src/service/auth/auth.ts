@@ -7,15 +7,12 @@ const axiosConfig = {
 	},
 };
 
-export const signUp = async ({ school, major, year, email, nickName }: SignUpPayload) => {
+export const signUp = async ({ emailCode, nickName }: { emailCode: string; nickName: string }) => {
 	try {
 		const response = await axiosInstance.post<UserReponse>(
 			EndPoint.SIGN_UP.all,
 			{
-				school,
-				major,
-				year,
-				email,
+				emailCode,
 				nickName,
 			},
 			axiosConfig
@@ -28,11 +25,11 @@ export const signUp = async ({ school, major, year, email, nickName }: SignUpPay
 	}
 };
 
-export const certificateSchool = async ({ email }: { email: string }) => {
+export const certificateSchool = async ({ school, major, year, email }: SignUpPayload) => {
 	try {
 		const response = await axiosInstance.post<UserReponse>(
 			EndPoint.SIGN_UP.school,
-			{ email },
+			{ school, major, year, email },
 			axiosConfig
 		);
 
