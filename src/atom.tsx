@@ -1,4 +1,19 @@
 import { atom } from 'recoil';
+import type { User } from './types';
+import { LocalStorageEffect } from './utils';
+import type { SignUp } from './pages';
+
+export const userState = atom<User | null>({
+	key: 'userState',
+	default: null,
+	effects: [LocalStorageEffect<User | null>('userState')],
+});
+
+export const naverSignUpState = atom<SignUp | null>({
+	key: 'naverSignUpState',
+	default: null,
+	effects: [LocalStorageEffect<SignUp | null>('naverSignUpState')],
+});
 
 export const contentState = atom({
 	key: 'contentState',
