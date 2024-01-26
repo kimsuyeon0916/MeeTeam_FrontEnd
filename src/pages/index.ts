@@ -14,7 +14,7 @@ import OutputCreatePage from './create/outputCreatePage/OutputCreatePage';
 import SignInPage from './account/signIn/SignInPage';
 import SignUpPage from './account/signUp/SignUpPage';
 import SchoolCertificationPage from './account/schoolCertification/SchoolCertificationPage';
-import type { School } from './account/schoolCertification/SchoolCertificationData';
+import type { SignUp } from './account/schoolCertification/SchoolCertificationData';
 import { SCHOOL_CERTIFICATION_DATA } from './account/schoolCertification/SchoolCertificationData';
 import type { User } from './account/signUp/SignUpData';
 import { SIGN_UP_DATA } from './account/signUp/SignUpData';
@@ -38,7 +38,7 @@ export {
 	SignInPage,
 	SignUpPage,
 	SchoolCertificationPage,
-	School,
+	SignUp,
 	SCHOOL_CERTIFICATION_DATA,
 	User,
 	SIGN_UP_DATA,
