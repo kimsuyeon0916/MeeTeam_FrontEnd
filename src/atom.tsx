@@ -17,6 +17,12 @@ export const naverSignUpState = atom<SignUp | null>({
 	effects: [LocalStorageEffect<SignUp | null>('naverSignUpState')],
 });
 
+export const submitEmailState = atom<boolean | null>({
+	key: 'submitEmailState',
+	default: null,
+	effects: [LocalStorageEffect<boolean | null>('submitEmailState')],
+});
+
 export const preUrlState = atom({
 	key: 'preUrlState',
 	default: '',
