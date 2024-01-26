@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import S from './SignInPage.styled';
 import { NaverLogin } from '../../../components';
 import { useNavigate } from 'react-router-dom';
 
 const SignInPage = () => {
 	const navigate = useNavigate();
+
 	return (
 		<S.SignInPageLayout>
 			<header className='sign-in__header'>
