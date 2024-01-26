@@ -1,7 +1,6 @@
 export interface UserReponse {
 	user: User;
 	token: string;
-	isEnable?: boolean;
 }
 
 export interface User {
