@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import S from './SchoolCertificationPage.styled';
 import { GoBack } from '../../../components';
-import { School, SCHOOL_CERTIFICATION_DATA } from '../..';
+import { SCHOOL_CERTIFICATION_DATA } from '../..';
+import { useNavigate } from 'react-router-dom';
+import { useCertificateSchool } from '../../../hooks';
+import { useRecoilState } from 'recoil';
+import { naverSignUpState } from '../../../atom';
 
 const SchoolCertificationPage = () => {
-	const [school, setSchool] = useState<School>({ school: '', major: '', year: '', email: '' });
+	const navigate = useNavigate();
+
+	const [signUp, setSignUp] = useRecoilState(naverSignUpState);
 
 	const [next, setNext] = useState(false);
 
 	const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
-		setSchool({ ...school, [name]: value });
+		setSignUp({ ...signUp, [name]: value });
 	};
 
 	const nextHandler = (e: React.MouseEvent) => {
@@ -18,8 +24,15 @@ const SchoolCertificationPage = () => {
 		setNext(prev => !prev);
 	};
 
+	const checkCertificationInSuccess = () => {
+		navigate('/signUp/nickName');
+	};
+
+	const { mutate } = useCertificateSchool({ onSuccess: checkCertificationInSuccess });
+
 	const certificateHandler = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		signUp && mutate({ email: signUp.email });
 	};
 
 	return (
@@ -44,7 +57,7 @@ const SchoolCertificationPage = () => {
 										type={type}
 										placeholder={placeholder}
 										name={name}
-										value={school[name]}
+										value={signUp?.[name]}
 										onChange={e => changeHandler(e)}
 									/>
 								</label>
@@ -53,7 +66,7 @@ const SchoolCertificationPage = () => {
 				</div>
 				<S.SchoolCertificationButton
 					onClick={e => !next && nextHandler(e)}
-					type={next ? 'button' : 'submit'}
+					type={next ? 'submit' : 'button'}
 					value={next ? 'certificate' : 'next'}
 				>
 					{next ? '인증하기' : '다음'}
