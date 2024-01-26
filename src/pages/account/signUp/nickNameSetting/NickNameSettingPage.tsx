@@ -3,7 +3,7 @@ import S from './NickNameSettingPage.styled';
 import { SIGN_UP_DATA } from '../SignUpData';
 import { useNavigate } from 'react-router-dom';
 import { useNaverSignUp } from '../../../../hooks';
-import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { naverSignUpState, userState } from '../../../../atom';
 
 const NickNameSettingPage = () => {
@@ -14,7 +14,6 @@ const NickNameSettingPage = () => {
 	const [signUp, setSignUp] = useRecoilState(naverSignUpState);
 
 	const setUserState = useSetRecoilState(userState);
-	const naverSignUp = useRecoilValue(naverSignUpState);
 
 	const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -30,9 +29,11 @@ const NickNameSettingPage = () => {
 
 	const naverSignUpHandler = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log(naverSignUp);
-		console.log(userState);
-		naverSignUp && mutate(naverSignUp);
+
+		const urlParams = new URLSearchParams(window.location.search);
+		const code = urlParams.get('code');
+
+		code && signUp && mutate({ emailCode: code, nickName: signUp.nickName });
 	};
 
 	return (
