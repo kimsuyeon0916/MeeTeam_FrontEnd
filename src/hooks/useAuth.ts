@@ -42,15 +42,13 @@ export const useNaverSignUp = ({ onSuccess, setUserState }: AuthProps = {}) => {
 };
 
 /**
- * @description 학사 인증 API를 호출하는 hook입니다. 학사 인증 여부를 확인합니다.
+ * @description 학사 인증 API를 호출하는 hook입니다. 학사 인증 이메일을 전송합니다.
  */
 export const useCertificateSchool = ({ onSuccess }: AuthProps = {}) => {
 	return useMutation({
 		mutationFn: certificateSchool,
-		onSuccess: data => {
-			if (data?.isEnable) {
-				onSuccess?.();
-			}
+		onSuccess: () => {
+			onSuccess?.();
 		},
 	});
 };
