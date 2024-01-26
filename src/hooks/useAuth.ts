@@ -2,18 +2,16 @@ import { useMutation } from '@tanstack/react-query';
 import { SetterOrUpdater } from 'recoil';
 import { checkExist, signUp, certificateSchool } from '../service';
 import { User } from '../types';
-import { NavigateFunction } from 'react-router-dom';
 
 const ACCESS_TOKEN_KEY = import.meta.env.VITE_ACCESS_TOKEN_KEY;
 
 interface AuthProps {
 	onSuccess?: () => void;
 	setUserState?: SetterOrUpdater<User | null>;
-	navigator?: NavigateFunction;
 }
 
 /**
- * @description useMutation으로 회원 체크 API를 호출하는 hook입니다. 기존 회원인 경우 access token 을 로컬 스토리지에 저장합니다. 회원이 아닌 경우, 회원가입 페이지로 이동합니다.
+ * @description useMutation으로 회원 여부 체크 API를 호출하는 hook입니다. 기존 회원인 경우 access token 을 로컬 스토리지에 저장합니다. 회원이 아닌 경우, 회원가입 페이지로 이동합니다.
  * @param onSuccess - optional) 성공 시 수행할 callback 함수를 넘겨줄 때 사용합니다.
  */
 export const useCheckExist = ({ onSuccess, setUserState }: AuthProps = {}) => {
