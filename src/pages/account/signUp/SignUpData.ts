@@ -1,15 +1,14 @@
-import { School } from '../..';
+import { SignUp } from '../..';
 
 interface Account {
-	name: string;
-	password: string;
+	[key: string]: string;
 }
 export type { Account };
 
 interface User {
 	nickName: string;
 	accountInformation: Account;
-	schoolInformation: School;
+	schoolInformation: SignUp;
 }
 export type { User };
 

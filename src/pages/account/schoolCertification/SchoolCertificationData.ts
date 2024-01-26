@@ -1,10 +1,6 @@
-interface School {
-	school: string;
-	major: string;
-	year: string;
-	email: string;
-}
-export type { School };
+export type SignUp = {
+	[key: string]: string;
+};
 
 const SCHOOL_CERTIFICATION_DATA = [
 	{
@@ -23,7 +19,7 @@ const SCHOOL_CERTIFICATION_DATA = [
 	},
 	{
 		label: '입학년도',
-		type: 'number',
+		type: 'text',
 		placeholder: 'ex) 2023',
 		name: 'year',
 		isNext: true,
