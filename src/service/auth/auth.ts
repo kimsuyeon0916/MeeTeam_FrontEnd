@@ -44,7 +44,7 @@ export const certificateSchool = async ({ email }: { email: string }) => {
 };
 
 /**
- * @description 이미 회원인지 확인합니다.
+ * @description 네이버 연동 여부를 확인합니다.
  * @return 실패할 경우 null을 반환합니다.
  */
 export const checkExist = async ({ code }: { code: string }) => {

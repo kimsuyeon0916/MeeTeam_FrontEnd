@@ -11,8 +11,7 @@ interface AuthProps {
 }
 
 /**
- * @description useMutation으로 회원 여부 체크 API를 호출하는 hook입니다. 기존 회원인 경우 access token 을 로컬 스토리지에 저장합니다. 회원이 아닌 경우, 회원가입 페이지로 이동합니다.
- * @param onSuccess - optional) 성공 시 수행할 callback 함수를 넘겨줄 때 사용합니다.
+ * @description 네이버 연동 여부 체크 API를 호출하는 hook입니다. 기존 회원인 경우 access token 을 로컬 스토리지에 저장합니다. 회원이 아닌 경우, 회원가입 페이지로 이동합니다.
  */
 export const useCheckExist = ({ onSuccess, setUserState }: AuthProps = {}) => {
 	return useMutation({
@@ -27,8 +26,7 @@ export const useCheckExist = ({ onSuccess, setUserState }: AuthProps = {}) => {
 };
 
 /**
- * @description useMutation으로 naver 연동 회원가입 API를 호출하는 hook입니다. 성공 시 access token을 로컬 스토리지에 저장합니다.
- * @param onSuccess - optional) 성공 시 수행할 callback 함수를 넘겨줄 때 사용합니다.
+ * @description 네이버 연동 회원가입 API를 호출하는 hook입니다. 성공 시 access token을 로컬 스토리지에 저장합니다.
  */
 export const useNaverSignUp = ({ onSuccess, setUserState }: AuthProps = {}) => {
 	return useMutation({
@@ -44,8 +42,7 @@ export const useNaverSignUp = ({ onSuccess, setUserState }: AuthProps = {}) => {
 };
 
 /**
- * @description useMutation으로 학사 인증 API를 호출하는 hook입니다. 학사 인증 여부를 확인합니다.
- * @param onSuccess - optional) 성공 시 수행할 callback 함수를 넘겨줄 때 사용합니다.
+ * @description 학사 인증 API를 호출하는 hook입니다. 학사 인증 여부를 확인합니다.
  */
 export const useCertificateSchool = ({ onSuccess }: AuthProps = {}) => {
 	return useMutation({
