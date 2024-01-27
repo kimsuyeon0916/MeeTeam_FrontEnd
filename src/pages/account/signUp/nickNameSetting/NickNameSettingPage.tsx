@@ -23,6 +23,7 @@ const NickNameSettingPage = () => {
 	const checkNaverSignUpInSuccess = () => {
 		navigate('/');
 		localStorage.removeItem('naverSignUpState');
+		localStorage.removeItem('submitEmailState');
 	};
 
 	const { mutate } = useNaverSignUp({ onSuccess: checkNaverSignUpInSuccess, setUserState });
