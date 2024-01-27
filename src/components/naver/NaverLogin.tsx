@@ -22,7 +22,10 @@ const NaverLogin = () => {
 	};
 
 	const handleNaverSignInSuccess = () => {
-		data?.token ? navigate('/') : navigate('/signUp/school');
+		if (data?.token) {
+			return navigate('/');
+		}
+		return navigate('/signUp/school');
 	};
 
 	const { data, mutate } = useCheckExist({ onSuccess: handleNaverSignInSuccess });
