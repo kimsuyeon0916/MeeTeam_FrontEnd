@@ -125,6 +125,7 @@ const RecruitDetailPage = () => {
 			event.preventDefault();
 		}
 	};
+	console.log(contents);
 
 	return (
 		<SRecruit.RecruitDetailPage>

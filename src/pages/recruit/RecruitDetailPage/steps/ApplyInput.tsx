@@ -5,6 +5,10 @@ import { useRecoilState } from 'recoil';
 import { applyInfoState, applyStepState } from '../../../../atom';
 
 const roles: string[] = ['프론트엔드 개발자', '백엔드 개발자', '디자이너', '기획자'];
+interface Input {
+	message: string;
+	currentValue: string;
+}
 
 const ApplyInput = () => {
 	const [step, setStep] = useRecoilState(applyStepState);
@@ -12,12 +16,16 @@ const ApplyInput = () => {
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 	const [message, setMessage] = useState<string>('');
 	const [currentValue, setCurrentValue] = useState<string>('역할 선택');
+	const [inputValue, setInputValue] = useState<Input>({
+		message: '',
+		currentValue: '역할 선택',
+	});
 	const [openDropdown, setOpenDropdown] = useState<boolean>(false);
-	const isValid = isChecked && currentValue !== '역할 선택';
+	const isValid = isChecked && inputValue.currentValue !== '역할 선택';
 
 	const onClickStep = () => {
 		setStep(prev => prev + 1);
-		setInfo({ role: currentValue, message: message });
+		setInfo({ role: inputValue.currentValue, message: inputValue.message });
 	};
 
 	const onClickDropdown = () => {
@@ -25,12 +33,12 @@ const ApplyInput = () => {
 	};
 
 	const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setMessage(event.target.value);
+		setInputValue({ ...inputValue, message: event.target.value });
 	};
 
 	const onClickList = (event: React.MouseEvent<HTMLLIElement>) => {
 		const target = event.currentTarget;
-		setCurrentValue(target.innerText);
+		setInputValue({ ...inputValue, currentValue: target.innerText });
 		setOpenDropdown(false);
 	};
 
@@ -44,7 +52,7 @@ const ApplyInput = () => {
 				</div>
 				<div className='container-apply__form-input'>
 					<div className='container-apply__roles' onClick={onClickDropdown}>
-						{currentValue}
+						{inputValue.currentValue}
 					</div>
 					{openDropdown && (
 						<div className='dropdown'>
