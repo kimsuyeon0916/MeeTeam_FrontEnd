@@ -2,6 +2,7 @@ import React from 'react';
 import S from './SignInPage.styled';
 import { NaverLogin } from '../../../components';
 import { useNavigate } from 'react-router-dom';
+import { EndPoint } from '../../../service';
 
 const SignInPage = () => {
 	const navigate = useNavigate();
@@ -11,7 +12,7 @@ const SignInPage = () => {
 			<header className='sign-in__header'>
 				<h1>로그인</h1>
 			</header>
-			<S.SignInPageForm>
+			<S.SignInPageForm method='post' action={import.meta.env.VITE_BASE_URL + EndPoint.SIGN_IN}>
 				<label className='sign-in__label'>
 					<input className='account__input' type='text' placeholder='학교 이메일' name='username' />
 				</label>
