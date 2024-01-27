@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import SRecruit from './RecruitDetailPage.styled';
 // import { useLocation } from 'react-router-dom';
 import { Tag, Icon, ApplyInfomation, ApplyInput, ApplySubmit } from '../../../components';
@@ -121,11 +121,15 @@ const RecruitDetailPage = () => {
 			event.preventDefault();
 			addComment();
 		}
-		if (event.key === 'Enter') {
-			event.preventDefault();
-		}
+		// if (event.key === 'Enter') {
+		// 	event.preventDefault();
+		// }
 	};
-	console.log(contents);
+	console.log(commentsList);
+
+	const onChangeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+		setContents(event.target.value);
+	}, []);
 
 	return (
 		<SRecruit.RecruitDetailPage>
@@ -250,9 +254,9 @@ const RecruitDetailPage = () => {
 						</div>
 						<input
 							type='text'
-							onKeyDown={onKeyPress}
+							onKeyPress={onKeyPress}
 							value={contents}
-							onChange={event => setContents(event.target.value)}
+							onChange={onChangeHandler}
 						/>
 						<button type='button' onClick={addComment}>
 							댓글 등록
