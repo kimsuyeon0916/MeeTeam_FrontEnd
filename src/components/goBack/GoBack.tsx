@@ -19,7 +19,7 @@ const GoBack = ({
 	return (
 		<S.GoBackButton
 			type='button'
-			onClick={clickHandler ? handleClick : () => navigate(-1)}
+			onClick={clickHandler ? clickHandler : handleClick}
 			$style={style}
 		/>
 	);
