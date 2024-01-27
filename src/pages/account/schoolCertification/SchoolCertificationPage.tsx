@@ -2,17 +2,16 @@ import React, { useState } from 'react';
 import S from './SchoolCertificationPage.styled';
 import { GoBack } from '../../../components';
 import { SCHOOL_CERTIFICATION_DATA } from '../..';
-import { useNavigate } from 'react-router-dom';
 import { useCertificateSchool } from '../../../hooks';
 import { useRecoilState } from 'recoil';
-import { naverSignUpState } from '../../../atom';
+import { naverSignUpState, submitEmailState } from '../../../atom';
 
 const SchoolCertificationPage = () => {
-	const navigate = useNavigate();
-
 	const [signUp, setSignUp] = useRecoilState(naverSignUpState);
 
 	const [next, setNext] = useState(false);
+
+	const [submitEmail, setSubmitEmail] = useRecoilState(submitEmailState);
 
 	const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -25,14 +24,15 @@ const SchoolCertificationPage = () => {
 	};
 
 	const checkCertificationInSuccess = () => {
-		navigate('/signUp/nickName');
+		setSubmitEmail(() => true);
 	};
 
 	const { mutate } = useCertificateSchool({ onSuccess: checkCertificationInSuccess });
 
 	const certificateHandler = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		signUp && mutate({ email: signUp.email });
+
+		signUp && mutate(signUp);
 	};
 
 	return (
@@ -45,7 +45,10 @@ const SchoolCertificationPage = () => {
 					<GoBack clickHandler={e => nextHandler(e)} style='left: -15.98rem; top: -5.53rem; ' />
 				)}
 			</header>
-			<S.SchoolCertificationPageForm onSubmit={e => certificateHandler(e)}>
+			<S.SchoolCertificationPageForm
+				onSubmit={e => certificateHandler(e)}
+				$submitEmail={submitEmail}
+			>
 				<div className='account__form-row'>
 					{SCHOOL_CERTIFICATION_DATA.map(
 						({ label, type, placeholder, name, isNext }, index) =>
@@ -64,6 +67,9 @@ const SchoolCertificationPage = () => {
 							)
 					)}
 				</div>
+				{submitEmail && (
+					<S.SchoolCertificationMark>인증 이메일이 발송되었습니다.</S.SchoolCertificationMark>
+				)}
 				<S.SchoolCertificationButton
 					onClick={e => !next && nextHandler(e)}
 					type={next ? 'submit' : 'button'}
