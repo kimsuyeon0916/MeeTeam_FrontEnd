@@ -36,7 +36,7 @@ const router = createBrowserRouter([
 				element: <RecruitPage />,
 			},
 			{
-				path: 'recruit/:id',
+				path: 'recruit/:recruitId?',
 				element: <RecruitDetailPage />,
 			},
 			{

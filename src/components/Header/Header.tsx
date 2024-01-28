@@ -39,7 +39,7 @@ const Header = () => {
 	const setPreUrl = useSetRecoilState(preUrlState);
 
 	useEffect(() => {
-		if (location.pathname === '/recruit' || location.pathname === '/recruit/:id') {
+		if (location.pathname === '/recruit/:recruitId?') {
 			setIsHere({ recruit: true, galary: false, member: false, inform: false });
 		}
 		if (location.pathname === '/galary') {
