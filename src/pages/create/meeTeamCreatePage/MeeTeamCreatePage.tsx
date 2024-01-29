@@ -73,15 +73,8 @@ const MeeTeamCreatePage = () => {
 	const onChangeImg = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files !== null) {
 			const selectedFiles = event.target.files[0];
-			const reader = new FileReader();
-			reader.readAsDataURL(selectedFiles);
-
-			return new Promise<void>(resolve => {
-				reader.onload = () => {
-					setImgFile(reader.result as any);
-					resolve();
-				};
-			});
+			let image = window.URL.createObjectURL(selectedFiles);
+			setImgFile(image);
 		}
 	};
 
