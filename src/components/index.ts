@@ -70,6 +70,7 @@ import {
 import EssentialInformation from './meeteam/main/information/subInformation/EssentialInformation';
 import Sidebar from './sidebar/Sidebar';
 import Card from './meeteam/card/Card';
+import PortpolioCard from './meeteam/card/PortpolioCard';
 import Tag from './meeteam/tag/Tag';
 import RecruitCard from './recruit/RecruitCard';
 import Status from './meeteam/status/Status';
@@ -157,4 +158,5 @@ export {
 	ApplyInput,
 	ApplySubmit,
 	Content,
+	PortpolioCard,
 };
