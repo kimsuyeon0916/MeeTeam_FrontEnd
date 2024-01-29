@@ -106,12 +106,89 @@ const MemberRoleTag = styled.div<{ $color?: string }>`
 	background: ${props => props.$color};
 `;
 
+const MemberInviteCard = styled.div`
+	display: flex;
+	min-width: 0;
+	max-width: 24rem;
+	padding: 2.4rem 1.26rem;
+	height: 13.5rem;
+	border-radius: 0.75rem;
+	border: 0.075rem solid #cdcdcd;
+	background: #fdfdfd;
+	color: var(--text-color, #151515);
+	font-size: 0.9rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.08rem;
+	letter-spacing: 0.015rem;
+`;
+
+const MemberCardLayout = styled.article`
+	display: flex;
+	min-width: 0;
+	max-width: 24rem;
+	padding: 2.4rem 3rem;
+	height: 13.5rem;
+	border-radius: 0.75rem;
+	border: 0.075rem solid #cdcdcd;
+	background: #fdfdfd;
+	color: var(--text-color, #151515);
+	font-size: 0.9rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.08rem;
+	letter-spacing: 0.015rem;
+
+	.member-card__title {
+		font-size: 1.5rem;
+		font-style: normal;
+		font-weight: 500;
+	}
+
+	.member-card__row {
+		display: flex;
+		column-gap: 1.8rem;
+		align-items: center;
+	}
+
+	.member-card__column {
+		display: flex;
+		flex-direction: column;
+		row-gap: 1.1rem;
+	}
+
+	.member-card__tag-column {
+		display: flex;
+		flex-direction: row;
+		column-gap: 0.45rem;
+		color: #373f41;
+	}
+
+	.member-card__row--small-text {
+		display: flex;
+		flex-direction: row;
+		font-size: 1.3rem;
+		align-items: center;
+		column-gap: 0.3rem;
+		color: #696969;
+	}
+
+	.member-card__column--small-text {
+		display: flex;
+		flex-direction: column;
+		row-gap: 0.4rem;
+		color: #696969;
+	}
+`;
+
 const S = {
 	MemberLayout,
 	MemberHeader,
 	MemberViewButton,
 	MemberInviteButton,
 	MemberRoleTag,
+	MemberInviteCard,
+	MemberCardLayout,
 };
 
 export default S;

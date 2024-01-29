@@ -1,8 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
-import { MemberCard, MeeTeamMember } from '../../../index';
+import S from './Member.styled';
+import { RadiusProfile } from '../../../index';
+import { MeeTeamMember } from '../../../index';
 import { useRecoilState } from 'recoil';
 import { memberListState } from '../../../../atom';
+import { SCHOOL_ICON, BOOK_ICON } from '../../memberCard/MemberCard';
 
 interface Member {
 	id: string;
@@ -36,7 +38,26 @@ const MemberTest = ({ id }: Member) => {
 
 	return (
 		<div className='member' id={id}>
-			<MemberCard member={memberTemp} />
+			<S.MemberCardLayout>
+				<div className='member-card__row'>
+					<RadiusProfile size='middle' url={memberTemp.imageUrl} />
+					<div className='member-card__column'>
+						<div className='member-card__title'>{memberTemp.nickName}</div>
+						<div className='member-card__row'>
+							<div className='member-card__column--small-text'>
+								<div className='member-card__row--small-text'>
+									{SCHOOL_ICON}
+									{memberTemp.school}
+								</div>
+								<div className='member-card__row--small-text'>
+									{BOOK_ICON}
+									{memberTemp.task}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</S.MemberCardLayout>
 			<div className='delete' onClick={onClickDelete} id={id}>
 				x
 			</div>

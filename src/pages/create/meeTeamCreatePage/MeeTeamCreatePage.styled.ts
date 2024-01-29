@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const MeeTeamCreatePage = styled.div`
 	width: clamp(45%, 108rem, 75%);
 	margin: 0 auto;
-	margin-bottom: 30px;
+	margin-bottom: 7rem;
 
 	.procedure {
 		height: 80px;
@@ -305,7 +305,7 @@ const MeeTeamCreatePage = styled.div`
 
 			.container__member-area__element {
 				width: 24rem;
-				height: 14rem;
+				height: 13.5rem;
 				flex-shrink: 0;
 				border-radius: 1rem;
 				border: 1px dashed #cdcdcd;
@@ -322,30 +322,6 @@ const MeeTeamCreatePage = styled.div`
 					right: 1.2rem;
 					font-size: 1.5rem;
 					cursor: pointer;
-				}
-			}
-
-			.controll {
-				/* display: flex; */
-				gap: 0.5rem;
-				margin-bottom: 30px;
-
-				button {
-					border: none;
-					width: 5rem;
-					height: 1.5rem;
-					border-radius: 5px;
-					cursor: pointer;
-				}
-
-				button:nth-child(2) {
-					background-color: #00b894;
-					color: #fff;
-				}
-
-				button:nth-child(3) {
-					background-color: #e17055;
-					color: #fff;
 				}
 			}
 
@@ -383,9 +359,9 @@ const MeeTeamCreatePage = styled.div`
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			width: 15rem;
-			height: 5rem;
-			padding: 1rem 1rem;
+			width: 16.5rem;
+			height: 4.875rem;
+			padding: 0.75rem;
 			border: none;
 			gap: 1rem;
 			border-radius: 0.8rem;
