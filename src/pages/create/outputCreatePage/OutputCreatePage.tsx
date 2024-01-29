@@ -20,7 +20,6 @@ const OutputCreatePage = () => {
 	const [teamName, setTeamName] = useState<string>('');
 	const [imgFile, setImgFile] = useState<string>('');
 	const [isHover, setIsHover] = useState<boolean>(false);
-	const [imgFileName, setImgFileName] = useState<string>('');
 	const [file, setFile] = useState<string>('');
 	const [fileName, setFileName] = useState<string>('');
 
