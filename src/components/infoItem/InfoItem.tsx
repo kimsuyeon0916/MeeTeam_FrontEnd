@@ -3,14 +3,15 @@ import { Dot, CustomSelect, Subtitle, DeadlineSelect } from '..';
 import DateSelect from '../dateSelect/DateSelect';
 import S from './InfoItem.styled';
 
-interface IInfoItem {
+interface Information {
 	isDot: string;
 	title: string;
 	optionData: string[];
 	type?: string;
 }
 
-const InfoItem = (props: IInfoItem) => {
+const InfoItem = (props: Information) => {
+	// console.log('is InfoItem');
 	return (
 		<S.InfoItem>
 			<Subtitle>{props.title}</Subtitle>
@@ -26,4 +27,4 @@ const InfoItem = (props: IInfoItem) => {
 	);
 };
 
-export default InfoItem;
+export default React.memo(InfoItem);

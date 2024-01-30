@@ -38,4 +38,4 @@ const DateSelect = () => {
 	);
 };
 
-export default DateSelect;
+export default React.memo(DateSelect);

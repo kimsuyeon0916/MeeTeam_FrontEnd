@@ -11,7 +11,6 @@ interface RecruitmentDeadLine {
 
 const DeadlineSelect = ({ type }: RecruitmentDeadLine) => {
 	const [endDate, setEndDate] = useRecoilState(deadlineState);
-
 	return (
 		<S.DeadlineSelect>
 			<DatePicker
@@ -28,4 +27,4 @@ const DeadlineSelect = ({ type }: RecruitmentDeadLine) => {
 	);
 };
 
-export default DeadlineSelect;
+export default React.memo(DeadlineSelect);

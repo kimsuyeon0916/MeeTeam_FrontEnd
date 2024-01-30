@@ -54,7 +54,7 @@ const Header = () => {
 			setIsHere({ recruit: false, galary: false, member: false, inform: true });
 		}
 		setPreUrl(location.pathname);
-	}, [currentUrl]);
+	}, [location]);
 
 	useEffect(() => {
 		const outsideClick = (event: MouseEvent) => {

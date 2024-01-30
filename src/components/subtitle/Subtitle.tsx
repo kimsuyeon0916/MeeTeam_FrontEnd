@@ -1,3 +1,4 @@
+import React from 'react';
 import S from './Subtitle.styled';
 
 const Subtitle = (children: any) => {
@@ -5,4 +6,4 @@ const Subtitle = (children: any) => {
 	return <S.Subtitle>{content}</S.Subtitle>;
 };
 
-export default Subtitle;
+export default React.memo(Subtitle);

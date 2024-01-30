@@ -99,6 +99,7 @@ const Header = styled.div`
 				background: #fff;
 				top: 4rem;
 				right: -2rem;
+				z-index: 501;
 
 				box-sizing: border-box;
 				/* box */

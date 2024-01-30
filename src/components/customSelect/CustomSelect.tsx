@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import S from './CustomSelect.styled';
 import { useRecoilState } from 'recoil';
 import { areaState, categoryState, fieldState } from '../../atom';
@@ -35,7 +35,6 @@ const CustomSelect = ({ optionData, $isMember, type }: ICustomSelect) => {
 	const onClickhandler = () => {
 		setShowOptions(prev => !prev);
 	};
-
 	return (
 		<S.CustomSelect onClick={onClickhandler} $isMember={$isMember} $show={showOptions}>
 			<S.Label $isSelected={currentValue}>{currentValue}</S.Label>
@@ -50,4 +49,4 @@ const CustomSelect = ({ optionData, $isMember, type }: ICustomSelect) => {
 	);
 };
 
-export default CustomSelect;
+export default React.memo(CustomSelect);

@@ -1,14 +1,7 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { Plus } from '../../../assets';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import {
-	Subtitle,
-	Dot,
-	InfoItem,
-	MeeteamTag,
-	MeeTeamMember,
-	MemberInviteModal,
-} from '../../../components/index';
+import { Subtitle, Dot, InfoItem, MeeteamTag, MemberInviteModal } from '../../../components/index';
 import {
 	areaRecruitState,
 	fieldRecruitState,
@@ -30,14 +23,11 @@ const RecruitCreatePage = () => {
 	const category = useRecoilValue(categoryRecruitState);
 	const deadline = useRecoilValue(deadlineState);
 	const quillRef = useRef<ReactQuill | null>(null);
-	const [memberList, setMemberList] = useState<MeeTeamMember[]>([]);
 
 	const [teamName, setTeamName] = useState<string>('');
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 	const [startDate, endDate] = useRecoilValue(dateRecruitState);
-	const [file, setFile] = useState<string>('');
-	const [fileName, setFileName] = useState<string>('');
-	const [memberListRe, setMemberListRe] = useRecoilState(memberListState);
+	const [memberList, setMemberList] = useRecoilState(memberListState);
 	const [modalOpen, setModalOpen] = useRecoilState<boolean>(memberModalState);
 
 	const [isValidName, setIsValidName] = useState({
@@ -70,33 +60,24 @@ const RecruitCreatePage = () => {
 		// navigate('/');
 	};
 
-	const onChangeTeamName = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangeTeamName = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTeamName(event.target.value);
 		setIsValidName({ validName: true, validMessage: '' });
-	}, []);
-
-	const onChangeImg = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-		if (event.target.files !== null) {
-			setFileName(event.target.files[0].name);
-			const selectedFiles = event.target.files as FileList;
-			setFile(URL.createObjectURL(selectedFiles?.[0]));
-		}
-	}, []);
+	};
 
 	const onClickTestAdd = () => {
 		let temp = [...memberList];
 		temp.push((<MemberTest id={(temp.length - 1).toString()} />) as any);
 		setMemberList(temp);
-		setMemberListRe(temp);
 		setModalOpen(false);
 	};
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		// 밋팀 팀명 글자수 검사
+		// 구인 글 제목 글자수 검사
 		if (teamName.length === 0) {
-			setIsValidName({ validName: false, validMessage: '* 팀명을 입력해주세요.' });
+			setIsValidName({ validName: false, validMessage: '* 구인 글 제목을 입력해주세요.' });
 		}
 		if (teamName.length !== 0) {
 			setIsValidName({ validName: true, validMessage: '' });
@@ -172,7 +153,7 @@ const RecruitCreatePage = () => {
 							</div>
 							<div className='container__teamname-input'>
 								<input
-									placeholder='밋팀 팀명을 입력해주세요.'
+									placeholder='구인 글의 제목을 입력해주세요.'
 									type='text'
 									onChange={onChangeTeamName}
 									maxLength={20}
@@ -187,11 +168,23 @@ const RecruitCreatePage = () => {
 							<div className='info-wrapper'>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem isDot='true' title='범위' optionData={['교내', '교외']} type='범위' />
+										<InfoItem
+											isDot='true'
+											title='범위'
+											optionData={['교내', '교외']}
+											type='범위'
+											key='area'
+										/>
 										{!isValidArea.validArea && <p>{isValidArea.validMessage}</p>}
 									</div>
 									<div>
-										<InfoItem isDot='true' title='밋팀 분야' optionData={['개발']} type='분야' />
+										<InfoItem
+											isDot='true'
+											title='밋팀 분야'
+											optionData={['개발']}
+											type='분야'
+											key='field'
+										/>
 										{!isValidField.validField && <p>{isValidField.validMessage}</p>}
 									</div>
 								</div>
@@ -202,20 +195,31 @@ const RecruitCreatePage = () => {
 											title='밋팀 유형'
 											optionData={['프로젝트', '스터디']}
 											type='유형'
+											key='category'
 										/>
 										{!isValidCategory.validCategory && <p>{isValidCategory.validMessage}</p>}
 									</div>
 									<div>
-										<InfoItem isDot='false' title='진행 방식' optionData={['온라인', '오프라인']} />
+										<InfoItem
+											isDot='false'
+											title='진행 방식'
+											optionData={['온라인', '오프라인']}
+											key='process'
+										/>
 									</div>
 								</div>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem isDot='true' title='기간' optionData={[]} type='기간' />
+										<InfoItem isDot='true' title='기간' optionData={[]} type='기간' key='period' />
 										{!isValidDate.validDate && <p>{isValidDate.validMessage}</p>}
 									</div>
 									<div className='fix'>
-										<InfoItem isDot='false' title='공개 여부' optionData={['공개', '비공개']} />
+										<InfoItem
+											isDot='false'
+											title='공개 여부'
+											optionData={['공개', '비공개']}
+											key='open'
+										/>
 									</div>
 								</div>
 								<div className='container__info-select'>
@@ -244,7 +248,13 @@ const RecruitCreatePage = () => {
 								</div>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem isDot='true' title='구인 마감일' optionData={[]} type='구인 마감일' />
+										<InfoItem
+											isDot='true'
+											title='구인 마감일'
+											optionData={[]}
+											type='구인 마감일'
+											key='deadline'
+										/>
 										{!isValidDeadline.validDeadline && <p>{isValidDeadline.validMessage}</p>}
 									</div>
 								</div>
@@ -280,7 +290,7 @@ const RecruitCreatePage = () => {
 							</div>
 							{modalOpen && <MemberInviteModal onClick={onClickTestAdd} />}
 							<div className='container__member-area'>
-								{memberListRe.map((e, index) => (
+								{memberList.map((e, index) => (
 									<MemberTest key={index} id={index.toString()} />
 								))}
 								<button
