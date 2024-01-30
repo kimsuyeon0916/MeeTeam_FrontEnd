@@ -39,6 +39,10 @@ const Dropdown = styled.div<IDropdown>`
 			color: ${props => (props.$arrowNeed ? '#373f41' : '')};
 			font-size: ${props => (!props.$arrowNeed ? '5rem' : '1.6rem')};
 
+			div:nth-child(1) {
+				font-size: 1.5rem;
+			}
+
 			div:nth-child(2) {
 				font-size: 1.1rem;
 				transition: transform 0.2s ease-in-out;
@@ -54,6 +58,7 @@ const Dropdown = styled.div<IDropdown>`
 			background-color: #f7f7f7;
 			border-radius: 0.75rem;
 			padding: 1rem 1rem;
+			z-index: 500;
 		}
 	}
 

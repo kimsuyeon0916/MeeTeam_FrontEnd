@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-interface IFilter {
-	$checked: boolean;
-}
-
 const Filter = styled.div`
 	display: flex;
 	margin-top: 4.65rem;

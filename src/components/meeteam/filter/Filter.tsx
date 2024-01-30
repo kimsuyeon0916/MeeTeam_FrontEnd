@@ -1,8 +1,12 @@
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Dropdown } from '../..';
 import S from './Filter.styled';
 
-const Filter = () => {
+interface FilterOptions {
+	noRecruit?: boolean;
+}
+
+const Filter = ({ noRecruit }: FilterOptions) => {
 	const [isFiltered, setIsFiltered] = useState({
 		isInside: true,
 		isOutside: false,
@@ -36,10 +40,12 @@ const Filter = () => {
 				/>
 				<Dropdown data={['개발']} initialData='카테고리' $arrowNeed={true} />
 			</div>
-			<div className='container-checkbox'>
-				<input type='checkbox' id='recruit' />
-				<label id='recruit'>구인중인 밋팀 보기</label>
-			</div>
+			{!noRecruit && (
+				<div className='container-checkbox'>
+					<input type='checkbox' id='recruit' />
+					<label id='recruit'>구인중인 밋팀 보기</label>
+				</div>
+			)}
 		</S.Filter>
 	);
 };

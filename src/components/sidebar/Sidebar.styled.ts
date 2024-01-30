@@ -41,7 +41,7 @@ const Sidebar = styled.div`
 			}
 
 			.active {
-				color: #373f41;
+				color: #558bf1;
 				font-family: Apple SD Gothic Neo;
 				font-size: 1.5rem;
 				font-style: normal;

@@ -8,9 +8,10 @@ export interface IRecruitCard {
 	type: string;
 	$recruit?: boolean;
 	$proceed?: boolean;
+	isMine?: boolean;
 }
 
-const RecruitCard = ({ title, type, $recruit, $proceed }: IRecruitCard) => {
+const RecruitCard = ({ title, type, $recruit, $proceed, isMine }: IRecruitCard) => {
 	const [isOn, setIsOn] = useState<boolean>(false);
 	const toggleHandler = () => {
 		setIsOn(prev => !prev);
@@ -27,11 +28,15 @@ const RecruitCard = ({ title, type, $recruit, $proceed }: IRecruitCard) => {
 				</div>
 			</div>
 			<div className='container-recruits__options'>
-				<div className='info'>{isOn ? '공개' : '비공개'}</div>
-				<div className='toggle' onClick={toggleHandler}>
-					<div className={`toggle-container ${isOn ? 'toggle-checked' : ''}`}></div>
-					<div className={`toggle-circle ${isOn ? 'toggle-checked' : ''}`}></div>
-				</div>
+				{isMine && (
+					<div className='container-open'>
+						<div className='info'>{isOn ? '공개' : '비공개'}</div>
+						<div className='toggle' onClick={toggleHandler}>
+							<div className={`toggle-container ${isOn ? 'toggle-checked' : ''}`}></div>
+							<div className={`toggle-circle ${isOn ? 'toggle-checked' : ''}`}></div>
+						</div>
+					</div>
+				)}
 				<div className='alarm'>
 					<img src={Alarm} />
 				</div>

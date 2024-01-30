@@ -1,3 +1,4 @@
+import React from 'react';
 import { useRecoilState } from 'recoil';
 import { dateState } from '../../atom';
 import DatePicker from 'react-datepicker';
@@ -5,14 +6,20 @@ import S from './DateSelect.styled';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const DateSelect = () => {
-	// const [dateRange, setDateRange] = useState([new Date(), new Date()]);
 	const [date, setDate] = useRecoilState(dateState);
 	const [startDate, endDate] = date;
 
-	// 더 좋은 방법이 있을 것 같음.
-	// useEffect(() => {
-	// 	setDate(dateRange);
-	// }, [dateRange]);
+	// const startYear = startDate.getFullYear().toString();
+	// const startMonth = (startDate.getMonth() + 1).toString();
+	// const startDay = startDate.getDate().toString();
+	// const startStr = startYear + '-' + startMonth + '-' + startDay;
+	// console.log(startStr);
+
+	// const endYear = endDate.getFullYear().toString();
+	// const endMonth = (endDate.getMonth() + 1).toString();
+	// const endDay = endDate.getDate().toString();
+	// const endStr = endYear + '-' + endMonth + '-' + endDay;
+	// console.log(endStr);
 
 	return (
 		<S.DateSelect>
