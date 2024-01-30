@@ -52,6 +52,10 @@ const router = createBrowserRouter([
 				element: <InformationUsePage />,
 			},
 			{
+				path: 'activity',
+				element: <MyActivityManagePage />,
+			},
+			{
 				path: 'create/meeteam', // meeteam/create
 				element: <MeeTeamCreatePage />,
 			},
@@ -92,10 +96,6 @@ const router = createBrowserRouter([
 					{
 						path: 'portpolio',
 						element: <ManagePortpolioPage />,
-					},
-					{
-						path: 'activity',
-						element: <MyActivityManagePage />,
 					},
 				],
 			},

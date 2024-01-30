@@ -125,7 +125,6 @@ const RecruitDetailPage = () => {
 		// 	event.preventDefault();
 		// }
 	};
-	console.log(commentsList);
 
 	const onChangeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
 		setContents(event.target.value);

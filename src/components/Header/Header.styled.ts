@@ -17,12 +17,11 @@ const Header = styled.div`
 		justify-content: flex-end;
 		align-items: center;
 		flex-shrink: 0;
-		margin-left: 14.88rem;
+		margin-left: 20.88rem;
 		cursor: pointer;
 
-		.header__logo--bridge {
-			left: 14.5rem;
-			top: 2.6rem;
+		img {
+			width: 13rem;
 		}
 	}
 
