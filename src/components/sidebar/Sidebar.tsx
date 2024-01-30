@@ -1,12 +1,16 @@
 import { NavLink } from 'react-router-dom';
 import S from './Sidebar.styled';
 
-const Sidebar = () => {
-	const menus = [
-		{ name: '전체 밋팀 관리', path: 'meeteam' },
-		{ name: '구인글 관리', path: 'recruit' },
-		{ name: '포트폴리오 관리', path: 'portpolio' },
-	];
+interface MenuItem {
+	name: string;
+	path: string;
+}
+
+interface MenuProps {
+	menus: MenuItem[];
+}
+
+const Sidebar = ({ menus }: MenuProps) => {
 	return (
 		<S.Sidebar>
 			<div className='sidebar-container'>
