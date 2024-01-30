@@ -80,7 +80,7 @@ const router = createBrowserRouter([
 				element: <OutputCreatePage />,
 			},
 			{
-				path: 'create/output/preview',
+				path: 'create/output/preview', // meeteam 이름 또는 id
 				element: <OutputPreviewPage />,
 			},
 			{

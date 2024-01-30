@@ -7,8 +7,10 @@ import { areaState, categoryState, dateState, fieldState } from '../../../atom';
 import S from './OutputCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useNavigate } from 'react-router-dom';
 
 const OutputCreatePage = () => {
+	const navigate = useNavigate();
 	const quillRef = useRef<ReactQuill | null>(null);
 	const area = useRecoilValue(areaState);
 	const field = useRecoilValue(fieldState);
@@ -18,7 +20,6 @@ const OutputCreatePage = () => {
 	const [teamName, setTeamName] = useState<string>('');
 	const [imgFile, setImgFile] = useState<string>('');
 	const [isHover, setIsHover] = useState<boolean>(false);
-	const [imgFileName, setImgFileName] = useState<string>('');
 	const [file, setFile] = useState<string>('');
 	const [fileName, setFileName] = useState<string>('');
 
@@ -133,6 +134,10 @@ const OutputCreatePage = () => {
 
 	const handleMouseOut = () => {
 		setIsHover(false);
+	};
+
+	const onClickPreview = () => {
+		navigate('preview');
 	};
 
 	return (
@@ -261,7 +266,12 @@ const OutputCreatePage = () => {
 				</form>
 			</div>
 			<div className='container__controller'>
-				<button onClick={onClickCancel}>취소</button>
+				<button type='button' onClick={onClickPreview}>
+					미리보기
+				</button>
+				<button type='button' onClick={onClickCancel}>
+					취소
+				</button>
 				<button type='submit' form='submit'>
 					등록하기
 				</button>

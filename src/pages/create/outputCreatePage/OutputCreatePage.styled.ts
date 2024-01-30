@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const OutputCreatePage = styled.div`
 	width: clamp(45%, 108rem, 75%);
 	margin: 0 auto;
-	margin-bottom: 30px;
+	margin-bottom: 7rem;
 
 	.procedure {
 		height: 80px;
@@ -311,13 +311,14 @@ const OutputCreatePage = styled.div`
 
 		button {
 			display: flex;
+			width: 16.5rem;
+			height: 4.875rem;
+			padding: 0.75rem;
 			justify-content: center;
 			align-items: center;
-			width: 15rem;
-			height: 5rem;
+			gap: 0.75rem;
 			padding: 1rem 1rem;
 			border: none;
-			gap: 1rem;
 			border-radius: 0.8rem;
 			cursor: pointer;
 			color: #373f41;
@@ -332,7 +333,7 @@ const OutputCreatePage = styled.div`
 			background: #e0e6ff;
 		}
 
-		button:nth-child(2) {
+		button:nth-child(3) {
 			background: #5877fc;
 			color: #fff;
 		}
