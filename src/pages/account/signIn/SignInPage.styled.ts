@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import Account from '../Account.styled';
 
-const SignInPageLayout = styled(Account.AccountLayout)`
+const SignInPageLayout = styled(Account.AccountLayout)<{ $callBack?: boolean }>`
+	${props => props.$callBack && 'visibility: hidden'};
 	row-gap: 0;
 	width: 34.8rem;
 
