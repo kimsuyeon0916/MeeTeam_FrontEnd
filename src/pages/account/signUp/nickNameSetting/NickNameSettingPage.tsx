@@ -32,7 +32,7 @@ const NickNameSettingPage = () => {
 		e.preventDefault();
 
 		const urlParams = new URLSearchParams(window.location.search);
-		const code = urlParams.get('code');
+		const code = urlParams.get('emailCode');
 
 		code && signUp && mutate({ emailCode: code, nickName: signUp.nickName });
 	};
