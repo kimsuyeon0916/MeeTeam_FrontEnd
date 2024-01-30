@@ -1,3 +1,4 @@
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from '../../components';
 import { ScrollToTop } from '../../utils';
@@ -11,7 +12,7 @@ const IntegratedManagePage = () => {
 	];
 	return (
 		<S.ManagePage>
-			<Sidebar menus={manageMenus} />
+			<Sidebar menus={manageMenus} title={'밋팀 관리'} />
 			<main>
 				<ScrollToTop />
 				<Outlet />

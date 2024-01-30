@@ -8,14 +8,15 @@ interface MenuItem {
 
 interface MenuProps {
 	menus: MenuItem[];
+	title: string;
 }
 
-const Sidebar = ({ menus }: MenuProps) => {
+const Sidebar = ({ menus, title }: MenuProps) => {
 	return (
 		<S.Sidebar>
 			<div className='sidebar-container'>
 				<div className='sidebar-container_title'>
-					<h1>밋팀 관리</h1>
+					<h1>{title}</h1>
 				</div>
 				<div className='sidebar-container_list'>
 					{menus.map((menu, index) => {

@@ -17,8 +17,10 @@ import {
 	OutputCreatePage,
 	RecruitDetailPage,
 	IntegratedManagePage,
-	MyActivityManagePage,
+	MyActivityLike,
 	OutputPreviewPage,
+	MyActivityWrapper,
+	MyActivityInvited,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -53,7 +55,17 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'activity',
-				element: <MyActivityManagePage />,
+				element: <MyActivityWrapper />,
+				children: [
+					{
+						path: 'invited',
+						element: <MyActivityInvited />,
+					},
+					{
+						path: 'like',
+						element: <MyActivityLike />,
+					},
+				],
 			},
 			{
 				path: 'create/meeteam', // meeteam/create
@@ -82,12 +94,6 @@ const router = createBrowserRouter([
 					{
 						path: 'meeteam',
 						element: <ManageMeeteamPage />,
-						children: [
-							{
-								path: ':meeteamId?',
-								element: <ManagementPage />,
-							},
-						],
 					},
 					{
 						path: 'recruit',

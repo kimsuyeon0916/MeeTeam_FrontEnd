@@ -158,7 +158,7 @@ const Header = () => {
 									className='menu'
 									onClick={() => {
 										setOpenDrop(false);
-										navigate('/activity');
+										navigate('/activity/invited');
 									}}
 								>
 									내 활동

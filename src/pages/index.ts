@@ -12,8 +12,11 @@ import ManagePortpolioPage from './manage/portpolio/ManagePortpolioPage';
 import RecruitCreatePage from './create/recruitCreatePage/RecruitCreatePage';
 import OutputCreatePage from './create/outputCreatePage/OutputCreatePage';
 import RecruitDetailPage from './recruit/RecruitDetailPage/RecruitDetailPage';
-import MyActivityManagePage from './manage/activity/MyActivityManagePage';
+import MyActivityManagePage from './activity/MyActivityManagePage';
 import OutputPreviewPage from './create/outputPreviewPage/OutputPreviewPage';
+import MyActivityInvited from './activity/MyActivityInvited';
+import MyActivityWrapper from './activity/MyActivityWrapper';
+import MyActivityLike from './activity/MyActivityLike';
 
 export {
 	MainPage,
@@ -32,4 +35,7 @@ export {
 	RecruitDetailPage,
 	MyActivityManagePage,
 	OutputPreviewPage,
+	MyActivityInvited,
+	MyActivityWrapper,
+	MyActivityLike,
 };
