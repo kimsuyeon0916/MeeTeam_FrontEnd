@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import S from './SignInPage.styled';
 import { NaverLogin } from '../../../components';
 import { useNavigate } from 'react-router-dom';
 import { EndPoint } from '../../../service';
+import { useCheckExist } from '../../../hooks';
 
 const SignInPage = () => {
 	const navigate = useNavigate();
+	const [callBack, setCallBack] = useState(true);
+
+	const getAuthCode = () => {
+		const urlParams = new URLSearchParams(window.location.search);
+		return urlParams.get('code');
+	};
+
+	const handleNaverSignInSuccess = () => {
+		if (data?.token) {
+			return navigate('/');
+		}
+		return navigate('/signUp/school');
+	};
+
+	const { data, mutate } = useCheckExist({ onSuccess: handleNaverSignInSuccess });
+
+	useEffect(() => {
+		const code = getAuthCode();
+		!code && setCallBack(false);
+		code && mutate({ code: code });
+	}, [mutate]);
 
 	return (
-		<S.SignInPageLayout>
+		<S.SignInPageLayout $callBack={callBack}>
 			<header className='sign-in__header'>
 				<h1>로그인</h1>
 			</header>

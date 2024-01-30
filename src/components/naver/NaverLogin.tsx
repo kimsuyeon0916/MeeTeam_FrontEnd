@@ -1,11 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import S from './NaverLogin.styled';
-import { useNavigate } from 'react-router-dom';
-import { useCheckExist } from '../../hooks';
 
 const NaverLogin = () => {
-	const navigate = useNavigate();
-
 	const initializeNaver = () => {
 		const NAVER_AUTH_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${
 			import.meta.env.VITE_NAVER_CLIENT_ID
@@ -15,25 +11,6 @@ const NaverLogin = () => {
 
 		window.location.href = NAVER_AUTH_URL;
 	};
-
-	const getAuthCode = () => {
-		const urlParams = new URLSearchParams(window.location.search);
-		return urlParams.get('code');
-	};
-
-	const handleNaverSignInSuccess = () => {
-		if (data?.token) {
-			return navigate('/');
-		}
-		return navigate('/signUp/school');
-	};
-
-	const { data, mutate } = useCheckExist({ onSuccess: handleNaverSignInSuccess });
-
-	useEffect(() => {
-		const code = getAuthCode();
-		code && mutate({ code: code });
-	}, [mutate]);
 
 	return (
 		<S.NaverCustomButton onClick={initializeNaver}>
