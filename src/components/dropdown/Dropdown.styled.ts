@@ -45,7 +45,7 @@ const Dropdown = styled.div<IDropdown>`
 
 			div:nth-child(2) {
 				font-size: 1.1rem;
-				transition: transform 0.2s ease-in-out;
+				transition: transform 0.1s ease-in-out;
 				transform: rotateZ(${props => (props.$showDropdown ? '180deg' : '0deg')});
 			}
 		}

@@ -94,6 +94,12 @@ const router = createBrowserRouter([
 					{
 						path: 'meeteam',
 						element: <ManageMeeteamPage />,
+						children: [
+							{
+								path: ':meeteamId?',
+								element: <ManagementPage />,
+							},
+						],
 					},
 					{
 						path: 'recruit',
