@@ -180,7 +180,7 @@ const RecruitCreatePage = () => {
 									<div>
 										<InfoItem
 											isDot='true'
-											title='밋팀 분야'
+											title='분야'
 											optionData={['개발']}
 											type='분야'
 											key='field'
@@ -192,7 +192,7 @@ const RecruitCreatePage = () => {
 									<div>
 										<InfoItem
 											isDot='true'
-											title='밋팀 유형'
+											title='유형'
 											optionData={['프로젝트', '스터디']}
 											type='유형'
 											key='category'
@@ -274,34 +274,6 @@ const RecruitCreatePage = () => {
 							</div>
 							<div>
 								<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
-							</div>
-						</div>
-						<div className='container__member'>
-							<div className='container__member-title'>
-								<Subtitle>{'멤버'}</Subtitle>
-								<button
-									type='button'
-									onClick={() => {
-										setModalOpen(prev => !prev);
-									}}
-								>
-									멤버 초대 +
-								</button>
-							</div>
-							{modalOpen && <MemberInviteModal onClick={onClickTestAdd} />}
-							<div className='container__member-area'>
-								{memberList.map((e, index) => (
-									<MemberTest key={index} id={index.toString()} />
-								))}
-								<button
-									type='button'
-									onClick={() => {
-										setModalOpen(prev => !prev);
-									}}
-									className='container__member-area__element'
-								>
-									<img src={Plus} />
-								</button>
 							</div>
 						</div>
 					</div>
