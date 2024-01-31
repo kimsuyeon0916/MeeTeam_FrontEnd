@@ -21,6 +21,7 @@ import {
 	NickNameSettingPage,
 	SignUpPage,
 	MyActivityManagePage,
+	PassWordFindingPage
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
 			{
 				path: 'signIn',
 				element: <SignInPage />,
+			},
+			{
+				path: 'find/password',
+				element: <PassWordFindingPage />
 			},
 			{
 				path: 'signUp',
