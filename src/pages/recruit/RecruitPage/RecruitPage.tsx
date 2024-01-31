@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { Dropdown, Tag } from '../../../components';
+import { Dropdown, Subtitle, RecruitCardSmall } from '../../../components';
 import S from './RecruitPage.styled';
-import { useNavigate } from 'react-router-dom';
 import { SearchIcon } from '../../../assets';
 
 const RecruitPage = () => {
-	const navigate = useNavigate();
 	const [isFiltered, setIsFiltered] = useState({
 		isInside: true,
 		isOutside: false,
@@ -21,9 +19,6 @@ const RecruitPage = () => {
 		}
 	};
 
-	const onClickContent = () => {
-		navigate('/recruit/1');
-	};
 	return (
 		<S.RecruitPage>
 			<div>
@@ -60,8 +55,7 @@ const RecruitPage = () => {
 			<div>
 				<div className='container-options'>
 					<div className='container-options__filters'>
-						<div className='filter'>👀 모집중만 보기</div>
-						<div className='filter bookmark'>☑️ 북마크만 보기</div>
+						<div className='filter bookmark'>☑️ 수업만 보기</div>
 					</div>
 					<div className='container-options__search'>
 						<div>
@@ -74,141 +68,31 @@ const RecruitPage = () => {
 				</div>
 				<div className='container-contents'>
 					<div className='container-contents__row'>
-						<div className='subtitle'>👀 내가 관심 있을 만한 프로젝트</div>
-						<div className='contents'>
-							<div className='content' onClick={onClickContent}>
-								<div className='content-tags'>
-									<div className='tags'>
-										<div>교외</div>
-										<div>프로젝트</div>
-									</div>
-									<Tag $recruit={true} $proceed={false}></Tag>
-								</div>
-								<div className='content-title'>
-									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
-								</div>
-								<div className='content-info'>
-									<div>🚨 마감 1일 전</div>
-									<div>조회수 101회</div>
-								</div>
-							</div>
-							<div className='content'>
-								<div className='content-tags'>
-									<div className='tags'>
-										<div>교외</div>
-										<div>프로젝트</div>
-									</div>
-									<Tag $recruit={true} $proceed={false}></Tag>
-								</div>
-								<div className='content-title'>
-									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
-								</div>
-								<div className='content-info'>
-									<div>마감 7일 전</div>
-									<div>조회수 101회</div>
-								</div>
-							</div>
-							<div className='content'>
-								<div className='content-tags'>
-									<div className='tags'>
-										<div>교외</div>
-										<div>프로젝트</div>
-									</div>
-									<Tag $recruit={true} $proceed={false}></Tag>
-								</div>
-								<div className='content-title'>
-									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
-								</div>
-								<div className='content-info'>
-									<div>마감 7일 전</div>
-									<div>조회수 101회</div>
-								</div>
-							</div>
-							<div className='content'>
-								<div className='content-tags'>
-									<div className='tags'>
-										<div>교외</div>
-										<div>프로젝트</div>
-									</div>
-									<Tag $recruit={true} $proceed={false}></Tag>
-								</div>
-								<div className='content-title'>
-									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
-								</div>
-								<div className='content-info'>
-									<div>마감 7일 전</div>
-									<div>조회수 101회</div>
-								</div>
+						<div className='container-subtitle'>
+							<div className='subtitle'>👀 내가 관심 있을 만한 구인 글</div>
+							<div className='container-sort'>
+								<select name='sorted-by'>
+									<option value='recent'>최신순</option>
+									<option value='deadline'>마감일순</option>
+									<option value='bookmark'>북마크순</option>
+								</select>
 							</div>
 						</div>
-					</div>
-					<div className='container-contents__row'>
-						<div className='subtitle'>👀 내가 관심 있을 만한 프로젝트</div>
 						<div className='contents'>
-							<div className='content'>
-								<div className='content-tags'>
-									<div className='tags'>
-										<div>교외</div>
-										<div>프로젝트</div>
-									</div>
-									<Tag $recruit={true} $proceed={false}></Tag>
-								</div>
-								<div className='content-title'>
-									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
-								</div>
-								<div className='content-info'>
-									<div>마감 7일 전</div>
-									<div>조회수 101회</div>
-								</div>
-							</div>
-							<div className='content'>
-								<div className='content-tags'>
-									<div className='tags'>
-										<div>교외</div>
-										<div>프로젝트</div>
-									</div>
-									<Tag $recruit={true} $proceed={false}></Tag>
-								</div>
-								<div className='content-title'>
-									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
-								</div>
-								<div className='content-info'>
-									<div>마감 7일 전</div>
-									<div>조회수 101회</div>
-								</div>
-							</div>
-							<div className='content'>
-								<div className='content-tags'>
-									<div className='tags'>
-										<div>교외</div>
-										<div>프로젝트</div>
-									</div>
-									<Tag $recruit={true} $proceed={false}></Tag>
-								</div>
-								<div className='content-title'>
-									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
-								</div>
-								<div className='content-info'>
-									<div>마감 7일 전</div>
-									<div>조회수 101회</div>
-								</div>
-							</div>
-							<div className='content'>
-								<div className='content-tags'>
-									<div className='tags'>
-										<div>교외</div>
-										<div>프로젝트</div>
-									</div>
-									<Tag $recruit={true} $proceed={false}></Tag>
-								</div>
-								<div className='content-title'>
-									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
-								</div>
-								<div className='content-info'>
-									<div>마감 7일 전</div>
-									<div>조회수 101회</div>
-								</div>
-							</div>
+							<RecruitCardSmall />
+							<RecruitCardSmall />
+							<RecruitCardSmall />
+							<RecruitCardSmall />
+						</div>
+					</div>
+					<div>
+						<Subtitle>전체 구인 글</Subtitle>
+						<div className='container-contents__grid'>
+							<RecruitCardSmall />
+							<RecruitCardSmall />
+							<RecruitCardSmall />
+							<RecruitCardSmall />
+							<RecruitCardSmall />
 						</div>
 					</div>
 				</div>

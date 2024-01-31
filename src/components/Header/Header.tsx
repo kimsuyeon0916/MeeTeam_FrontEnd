@@ -83,7 +83,7 @@ const Header = () => {
 						className={`header__navigation--navi-text ${isHere.recruit ? 'here' : ''}`}
 						onClick={goRecruit}
 					>
-						구인 밋팀
+						구인 게시판
 					</div>
 					<div
 						className={`header__navigation--navi-text ${isHere.galary ? 'here' : ''}`}
