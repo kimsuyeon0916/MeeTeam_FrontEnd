@@ -42,6 +42,10 @@ const ApplyInput = () => {
 		setOpenDropdown(false);
 	};
 
+	const onClickCancel = () => {
+		setStep(prev => prev - 1);
+	};
+
 	return (
 		<S.ApplyInput>
 			<div className='container-apply__form'>
@@ -88,7 +92,9 @@ const ApplyInput = () => {
 				>
 					제출하기
 				</button>
-				<button>취소하기</button>
+				<button className='container-apply__form-button' type='button' onClick={onClickCancel}>
+					취소하기
+				</button>
 			</div>
 		</S.ApplyInput>
 	);

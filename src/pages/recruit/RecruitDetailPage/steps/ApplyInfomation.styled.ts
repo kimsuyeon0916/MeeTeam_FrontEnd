@@ -27,7 +27,12 @@ const ApplyInformation = styled.div`
 				height: 3.3075rem;
 				flex-shrink: 0;
 				border-radius: 50%;
-				background-color: #bcd7ff;
+
+				img {
+					width: 100%;
+					height: 100%;
+					border-radius: 50%;
+				}
 			}
 
 			.leader-info__user {

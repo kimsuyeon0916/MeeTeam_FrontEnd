@@ -138,7 +138,9 @@ const RecruitDetailPage = () => {
 								<Tag $recruit={true} $proceed={false} />
 							</div>
 							<div className='container-info__writer'>
-								<div className='profile-img'></div>
+								<div className='profile-img'>
+									<img src='https://i.pinimg.com/236x/90/c7/f7/90c7f7afa68ea9b875eafbe887f454e8.jpg' />
+								</div>
 								<div>{'김민지'}</div>
 							</div>
 						</div>

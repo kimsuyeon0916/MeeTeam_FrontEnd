@@ -57,8 +57,13 @@ const RecruitDetailPage = styled.div`
 						width: 3.3075rem;
 						height: 3.3075rem;
 						flex-shrink: 0;
-						background-color: #bcd7ff;
 						border-radius: 50%;
+
+						img {
+							width: 100%;
+							height: 100%;
+							border-radius: 50%;
+						}
 					}
 
 					div:nth-child(2) {

@@ -14,7 +14,9 @@ const ApplyInfomation = () => {
 				<div>
 					<span className='type'>리더</span>
 					<div className='leader-info'>
-						<div className='leader-info__icon'></div>
+						<div className='leader-info__icon'>
+							<img src='https://i.pinimg.com/236x/90/c7/f7/90c7f7afa68ea9b875eafbe887f454e8.jpg' />
+						</div>
 						<div className='leader-info__user'>
 							<span>김민지</span>
 							<span>
