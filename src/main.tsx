@@ -22,7 +22,7 @@ import {
 	NickNameSettingPage,
 	SignUpPage,
 	MyActivityManagePage,
-	PassWordFindingPage
+	PassWordFindingPage,
 	OutputPreviewPage,
 } from './pages/index.ts';
 import './globalStyle.css';
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'find/password',
-				element: <PassWordFindingPage />
+				element: <PassWordFindingPage />,
 			},
 			{
 				path: 'signUp',

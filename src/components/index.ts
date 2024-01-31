@@ -154,7 +154,6 @@ export {
 	Icon,
 	MemberInviteModal,
 	MemberTest,
-	DeadlineSelect,
 	NaverLogin,
 	ApplyInfomation,
 	ApplyInput,
