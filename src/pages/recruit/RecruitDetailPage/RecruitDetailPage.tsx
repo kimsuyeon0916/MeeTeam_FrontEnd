@@ -13,6 +13,7 @@ import {
 import ColorMatching from '../../../utils/ColorMatching';
 import { useRecoilValue } from 'recoil';
 import { applyStepState } from '../../../atom';
+import { useNavigate } from 'react-router-dom';
 
 interface Comment {
 	// id: number;
@@ -25,6 +26,7 @@ type ComponentProps = {
 };
 
 const RecruitDetailPage = () => {
+	const navigate = useNavigate();
 	const [commentsList, setCommentsList] = useState<Comment[]>([]);
 	const [contents, setContents] = useState<string>('');
 	const isLogin = false; // 임시 코드
@@ -77,6 +79,7 @@ const RecruitDetailPage = () => {
 	const onClickInput = () => {
 		if (!isLogin) {
 			// 로그인 페이지로 이동
+			// navigate('/login');
 		}
 	};
 
