@@ -63,7 +63,11 @@ const SignInPage = () => {
 					회원가입
 				</button>
 				<hr className='sign_in__vertical' />
-				<button type='button' className='sign-in__button'>
+				<button
+					type='button'
+					className='sign-in__button'
+					onClick={() => navigate('/find/password')}
+				>
 					비밀번호 찾기
 				</button>
 			</div>
