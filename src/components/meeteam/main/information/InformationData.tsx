@@ -77,6 +77,9 @@ const recruitmentInformation: Information = {
 	deadLine: new Date('2024/02/14'),
 };
 
+const CONTENT =
+	'밋팀(Meeteam)은 나 자신을 의미하는 Me, 팀을 의미하는 Team, 만남을 의미하는 Meet이 합쳐진 단어입니다. 대학생들의 보다 원활한 팀프로젝트를 위해 기획하게 되었으며, 그 외에 포토폴리오로서의 기능까지 생각하고 있습니다! 이를 위해 함께 멋진 서비스를 완성할 웹 디자이너를 찾고 있어요!';
+
 const BOTTOM_ARROW_ICON: JSX.Element = (
 	<svg xmlns='http://www.w3.org/2000/svg' width='20' height='11' viewBox='0 0 20 11' fill='none'>
 		<path
@@ -106,4 +109,5 @@ export {
 	TOP_ARROW_BUTTON,
 	informationList,
 	role,
+	CONTENT,
 };

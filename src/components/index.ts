@@ -44,6 +44,7 @@ import {
 	TOP_ARROW_BUTTON,
 	informationList,
 	role,
+	CONTENT,
 } from './meeteam/main/information/InformationData';
 import MemberCard from './meeteam/memberCard/MemberCard';
 import MemberContact from './meeteam/memberContact/MemberContact';
@@ -163,4 +164,5 @@ export {
 	PortpolioCard,
 	informationList,
 	role,
+	CONTENT,
 };

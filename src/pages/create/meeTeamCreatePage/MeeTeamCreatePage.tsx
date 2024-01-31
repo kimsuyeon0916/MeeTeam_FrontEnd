@@ -138,6 +138,12 @@ const MeeTeamCreatePage = () => {
 		setModalOpen(false);
 	};
 
+	if (modalOpen) {
+		document.body.style.overflow = 'hidden';
+	} else {
+		document.body.style.overflow = 'auto';
+	}
+
 	return (
 		<S.MeeTeamCreatePage>
 			<div className='procedure'>

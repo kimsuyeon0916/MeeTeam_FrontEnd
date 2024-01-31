@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import SRecruit from './RecruitDetailPage.styled';
+import S from './RecruitDetailPage.styled';
 import {
 	Tag,
 	Icon,
@@ -8,6 +8,7 @@ import {
 	ApplySubmit,
 	informationList,
 	role,
+	CONTENT,
 } from '../../../components';
 import ColorMatching from '../../../utils/ColorMatching';
 import { useRecoilValue } from 'recoil';
@@ -24,18 +25,16 @@ type ComponentProps = {
 };
 
 const RecruitDetailPage = () => {
-	// const location = useLocation();
 	const [commentsList, setCommentsList] = useState<Comment[]>([]);
 	const [contents, setContents] = useState<string>('');
+	const isLogin = false; // 임시 코드
+	const [needLogin, setNeedLogin] = useState<boolean>(false);
 	const step = useRecoilValue(applyStepState);
 	const stepLists: ComponentProps = {
 		0: <ApplyInfomation />,
 		1: <ApplyInput />,
 		2: <ApplySubmit />,
 	};
-
-	const CONTENT =
-		'밋팀(Meeteam)은 나 자신을 의미하는 Me, 팀을 의미하는 Team, 만남을 의미하는 Meet이 합쳐진 단어입니다. 대학생들의 보다 원활한 팀프로젝트를 위해 기획하게 되었으며, 그 외에 포토폴리오로서의 기능까지 생각하고 있습니다! 이를 위해 함께 멋진 서비스를 완성할 웹 디자이너를 찾고 있어요!';
 
 	const isRound = (title: string) => {
 		const roundTitles = ['유형', '진행'];
@@ -71,12 +70,18 @@ const RecruitDetailPage = () => {
 		// }
 	};
 
-	const onChangeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setContents(event.target.value);
-	}, []);
+	};
+
+	const onClickInput = () => {
+		if (!isLogin) {
+			setNeedLogin(true);
+		}
+	};
 
 	return (
-		<SRecruit.RecruitDetailPage>
+		<S.RecruitDetailPage>
 			<div className='container'>
 				<div className='container-left'>
 					<div className='container-info'>
@@ -94,22 +99,20 @@ const RecruitDetailPage = () => {
 						</div>
 						<div className='container-required__info'>
 							{informationList.map((information, index) => (
-								<SRecruit.RequiredInformationItem key={index}>
-									<SRecruit.RequiredInformationHead>
-										{information.title}
-									</SRecruit.RequiredInformationHead>
+								<S.RequiredInformationItem key={index}>
+									<S.RequiredInformationHead>{information.title}</S.RequiredInformationHead>
 									<div className='required-information__row'>
 										{information.content.split(',').map((content, index) => (
-											<SRecruit.RequiredInformationSpan
+											<S.RequiredInformationSpan
 												$isRound={isRound(information.title)}
 												$color={ColorMatching(content)}
 												key={index}
 											>
 												{content}
-											</SRecruit.RequiredInformationSpan>
+											</S.RequiredInformationSpan>
 										))}
 									</div>
-								</SRecruit.RequiredInformationItem>
+								</S.RequiredInformationItem>
 							))}
 						</div>
 						<div className='container-introduction'>
@@ -196,6 +199,7 @@ const RecruitDetailPage = () => {
 							onKeyPress={onKeyPress}
 							value={contents}
 							onChange={onChangeHandler}
+							onClick={onClickInput}
 						/>
 						<button type='button' onClick={addComment}>
 							댓글 등록
@@ -203,7 +207,8 @@ const RecruitDetailPage = () => {
 					</div>
 				</div>
 			</div>
-		</SRecruit.RecruitDetailPage>
+			<div className='container-popup'>안녕</div>
+		</S.RecruitDetailPage>
 	);
 };
 

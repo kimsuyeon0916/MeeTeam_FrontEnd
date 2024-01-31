@@ -346,6 +346,7 @@ const RecruitDetailPage = styled.div`
 			}
 		}
 	}
+
 	.container-comments {
 		width: 100%;
 		height: 100%;
@@ -484,11 +485,11 @@ const RequiredInformationSpan = styled.span<Props>`
 	background: ${props => props.$color};
 `;
 
-const SRecruit = {
+const S = {
 	RecruitDetailPage,
 	RequiredInformationItem,
 	RequiredInformationSpan,
 	RequiredInformationHead,
 };
 
-export default SRecruit;
+export default S;
