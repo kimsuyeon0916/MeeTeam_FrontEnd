@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import S from './ApplyInfomation.styled';
 import { useRecoilState } from 'recoil';
 import { applyStepState } from '../../../../atom';
+import { FaRegBookmark, FaBookmark } from 'react-icons/fa6';
 
 const ApplyInfomation = () => {
 	const [step, setStep] = useRecoilState(applyStepState);
+	const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
 	const onClickStep = () => {
 		setStep(prev => prev + 1);
+	};
+	const onClickBookmark = () => {
+		setIsBookmarked(prev => !prev);
 	};
 	return (
 		<S.ApplyInformation>
@@ -33,7 +38,10 @@ const ApplyInfomation = () => {
 				<span>{'23.10.16(1일 남음)'}</span>
 			</div>
 			<div className='container-apply__buttons'>
-				<button type='button'>북마크하기</button>
+				<button type='button' onClick={onClickBookmark}>
+					{isBookmarked ? <FaBookmark /> : <FaRegBookmark />}
+					<span>북마크하기</span>
+				</button>
 				<button type='button' onClick={onClickStep}>
 					신청하기
 				</button>

@@ -69,32 +69,6 @@ const ApplyInformation = styled.div`
 		}
 	}
 
-	.member-info {
-		position: relative;
-		display: flex;
-		position: relative;
-		margin-top: 2rem;
-		/* height: 3.3rem; */
-
-		.member-info__icon {
-			width: 3.15rem;
-			height: 3.15rem;
-			flex-shrink: 0;
-		}
-
-		.first {
-			left: 2rem;
-		}
-
-		.second {
-			right: 0rem;
-		}
-
-		.third {
-			right: 2rem;
-		}
-	}
-
 	hr {
 		margin-top: 2.8rem;
 	}
@@ -145,6 +119,10 @@ const ApplyInformation = styled.div`
 			flex-shrink: 0;
 			border-radius: 7.5rem;
 			cursor: pointer;
+
+			span {
+				margin-top: 0.1rem;
+			}
 		}
 
 		button:nth-child(1) {
