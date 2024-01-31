@@ -42,6 +42,8 @@ import {
 	recruitmentInformation,
 	BOTTOM_ARROW_ICON,
 	TOP_ARROW_BUTTON,
+	informationList,
+	role,
 } from './meeteam/main/information/InformationData';
 import MemberCard from './meeteam/memberCard/MemberCard';
 import MemberContact from './meeteam/memberContact/MemberContact';
@@ -159,4 +161,6 @@ export {
 	ApplySubmit,
 	Content,
 	PortpolioCard,
+	informationList,
+	role,
 };
