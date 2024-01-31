@@ -88,7 +88,7 @@ const RecruitPage = () => {
 									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
 								</div>
 								<div className='content-info'>
-									<div>🚨 마감 7일 전</div>
+									<div>🚨 마감 1일 전</div>
 									<div>조회수 101회</div>
 								</div>
 							</div>
@@ -104,7 +104,7 @@ const RecruitPage = () => {
 									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
 								</div>
 								<div className='content-info'>
-									<div>🚨 마감 7일 전</div>
+									<div>마감 7일 전</div>
 									<div>조회수 101회</div>
 								</div>
 							</div>
@@ -120,7 +120,7 @@ const RecruitPage = () => {
 									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
 								</div>
 								<div className='content-info'>
-									<div>🚨 마감 7일 전</div>
+									<div>마감 7일 전</div>
 									<div>조회수 101회</div>
 								</div>
 							</div>
@@ -136,7 +136,7 @@ const RecruitPage = () => {
 									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
 								</div>
 								<div className='content-info'>
-									<div>🚨 마감 7일 전</div>
+									<div>마감 7일 전</div>
 									<div>조회수 101회</div>
 								</div>
 							</div>
@@ -157,7 +157,7 @@ const RecruitPage = () => {
 									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
 								</div>
 								<div className='content-info'>
-									<div>🚨 마감 7일 전</div>
+									<div>마감 7일 전</div>
 									<div>조회수 101회</div>
 								</div>
 							</div>
@@ -173,7 +173,7 @@ const RecruitPage = () => {
 									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
 								</div>
 								<div className='content-info'>
-									<div>🚨 마감 7일 전</div>
+									<div>마감 7일 전</div>
 									<div>조회수 101회</div>
 								</div>
 							</div>
@@ -189,7 +189,7 @@ const RecruitPage = () => {
 									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
 								</div>
 								<div className='content-info'>
-									<div>🚨 마감 7일 전</div>
+									<div>마감 7일 전</div>
 									<div>조회수 101회</div>
 								</div>
 							</div>
@@ -205,7 +205,7 @@ const RecruitPage = () => {
 									[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
 								</div>
 								<div className='content-info'>
-									<div>🚨 마감 7일 전</div>
+									<div>마감 7일 전</div>
 									<div>조회수 101회</div>
 								</div>
 							</div>

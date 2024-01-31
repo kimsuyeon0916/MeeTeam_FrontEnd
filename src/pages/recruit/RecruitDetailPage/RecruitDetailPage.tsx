@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 import SRecruit from './RecruitDetailPage.styled';
-// import { useLocation } from 'react-router-dom';
 import { Tag, Icon, ApplyInfomation, ApplyInput, ApplySubmit } from '../../../components';
 import ColorMatching from '../../../utils/ColorMatching';
 import { useRecoilValue } from 'recoil';
@@ -86,8 +85,6 @@ const RecruitDetailPage = () => {
 		1: <ApplyInput />,
 		2: <ApplySubmit />,
 	};
-
-	const TAGS: string[] = ['UI/UX', '디자이너', '구인', '디자이너 구함'];
 
 	const CONTENT =
 		'밋팀(Meeteam)은 나 자신을 의미하는 Me, 팀을 의미하는 Team, 만남을 의미하는 Meet이 합쳐진 단어입니다. 대학생들의 보다 원활한 팀프로젝트를 위해 기획하게 되었으며, 그 외에 포토폴리오로서의 기능까지 생각하고 있습니다! 이를 위해 함께 멋진 서비스를 완성할 웹 디자이너를 찾고 있어요!';
@@ -189,19 +186,6 @@ const RecruitDetailPage = () => {
 											))}
 										</div>
 									</div>
-									<button type='button' className='roles-button'>
-										지원하기
-									</button>
-								</div>
-							))}
-						</div>
-					</div>
-					<div className='container-tags'>
-						<span className='container-tags__title'>태그</span>
-						<div className='container-tags__box'>
-							{TAGS.map((tag, index) => (
-								<div className='tag' key={index}>
-									{tag}
 								</div>
 							))}
 						</div>
@@ -213,15 +197,21 @@ const RecruitDetailPage = () => {
 					</form>
 					<div className='container-recommend'>
 						<div>
-							<span className='title'>👀 비슷한 프로젝트</span>
+							<span className='title'>비슷한 구인 글</span>
 						</div>
-						<div className='container-recommend__img'>
-							<div>
-								<img src='https://ifh.cc/g/YO5Z7z.jpg' />
-								<div className='container-recommend__img--tags'>
-									<Tag type='오프라인' />
-									<Tag type='프로젝트' />
+						<div className='content'>
+							<div className='content-tags'>
+								<div className='tags'>
+									<div>교외</div>
+									<div>프로젝트</div>
 								</div>
+							</div>
+							<div className='content-title'>
+								[반려 동물을 위한 앱 서비스] 프론트엔드/백엔드 개발자를 모집합니다.
+							</div>
+							<div className='content-info'>
+								<div>마감 7일 전</div>
+								<div>조회수 101회</div>
 							</div>
 						</div>
 					</div>

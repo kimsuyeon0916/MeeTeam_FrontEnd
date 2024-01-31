@@ -24,17 +24,17 @@ const ApplyInfomation = () => {
 			</div>
 			<hr />
 			<div className='container-apply__deadline'>
-				<span>마감일</span>
-				<span>{'23.10.16(7일 남음)'}</span>
+				<span>🚨 마감일</span>
+				<span>{'23.10.16(1일 남음)'}</span>
 			</div>
 			<div className='container-apply__buttons'>
 				<button type='button'>북마크하기</button>
 				<button type='button' onClick={onClickStep}>
-					팀 신청하기
+					신청하기
 				</button>
 			</div>
 		</S.ApplyInformation>
 	);
 };
 
-export default ApplyInfomation;
+export default React.memo(ApplyInfomation);
