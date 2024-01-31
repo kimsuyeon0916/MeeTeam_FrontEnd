@@ -286,7 +286,11 @@ const MeeTeamCreatePage = () => {
 									멤버 초대 +
 								</button>
 							</div>
-							{modalOpen && <MemberInviteModal onClick={onClickTestAdd} />}
+							{modalOpen && (
+								<div className='modal-box'>
+									<MemberInviteModal onClick={onClickTestAdd} />
+								</div>
+							)}
 							<div className='container__member-area'>
 								{memberList.map((e, index) => (
 									<MemberTest key={index} id={index.toString()} />

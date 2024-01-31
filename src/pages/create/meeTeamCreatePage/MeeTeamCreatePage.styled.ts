@@ -4,6 +4,7 @@ const MeeTeamCreatePage = styled.div`
 	width: clamp(45%, 108rem, 75%);
 	margin: 0 auto;
 	margin-bottom: 7rem;
+	position: relative;
 
 	.procedure {
 		height: 80px;
@@ -266,7 +267,6 @@ const MeeTeamCreatePage = styled.div`
 		}
 
 		.container__member {
-			position: relative;
 			margin-top: 4.35rem;
 			width: 100%;
 
@@ -288,6 +288,16 @@ const MeeTeamCreatePage = styled.div`
 					background: var(--main-color, #5877fc);
 					color: #fff;
 				}
+			}
+
+			.modal-box {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				background-color: rgba(0, 0, 0, 0.3);
+				z-index: 100;
 			}
 
 			.container__member-area {
