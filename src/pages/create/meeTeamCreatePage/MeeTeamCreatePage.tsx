@@ -73,15 +73,8 @@ const MeeTeamCreatePage = () => {
 	const onChangeImg = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files !== null) {
 			const selectedFiles = event.target.files[0];
-			const reader = new FileReader();
-			reader.readAsDataURL(selectedFiles);
-
-			return new Promise<void>(resolve => {
-				reader.onload = () => {
-					setImgFile(reader.result as any);
-					resolve();
-				};
-			});
+			let image = window.URL.createObjectURL(selectedFiles);
+			setImgFile(image);
 		}
 	};
 
@@ -160,7 +153,7 @@ const MeeTeamCreatePage = () => {
 				</div>
 			</div>
 			<div className='wrapper'>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} id='submit'>
 					<div className='container'>
 						<div className='container__teamname'>
 							<div className='container__teamname-subtitle'>
@@ -269,7 +262,10 @@ const MeeTeamCreatePage = () => {
 									onMouseOver={handleMouseOver}
 									onMouseOut={handleMouseOut}
 								>
-									<img src={imgFile ? imgFile : 'https://ifh.cc/g/YO5Z7z.jpg'} />
+									<img
+										className='uploaded-img'
+										src={imgFile ? imgFile : 'https://ifh.cc/g/YO5Z7z.jpg'}
+									/>
 									{isHover && (
 										<div className='icon-upload'>
 											<img className='icon' src={Upload} />
@@ -306,12 +302,14 @@ const MeeTeamCreatePage = () => {
 								</button>
 							</div>
 						</div>
-						<div className='container__controller'>
-							<button onClick={onClickCancel}>취소</button>
-							<button type='submit'>생성하기</button>
-						</div>
 					</div>
 				</form>
+			</div>
+			<div className='container__controller'>
+				<button onClick={onClickCancel}>취소</button>
+				<button type='submit' form='submit'>
+					생성하기
+				</button>
 			</div>
 		</S.MeeTeamCreatePage>
 	);

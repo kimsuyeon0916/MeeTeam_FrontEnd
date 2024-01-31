@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const RequiredInformationGrid = styled.ul`
+interface RequiredDate {
+	$isPreview?: boolean;
+}
+
+const RequiredInformationGrid = styled.ul<RequiredDate>`
 	display: grid;
 	grid-template-columns: repeat(3, auto);
 	column-gap: 9.75rem;
@@ -8,7 +12,8 @@ const RequiredInformationGrid = styled.ul`
 	font-family: Pretendard;
 	font-size: 1.5rem;
 	font-style: normal;
-	width: clamp(45%, 108rem, 75%);
+	/* width: clamp(45%, 108rem, 75%); */
+	width: ${props => (props.$isPreview ? '100%' : 'clamp(45%, 108rem, 75%)')};
 	// background-color: #fff;
 	margin: 3rem auto;
 	border: 0.75px solid #bcd7ff;

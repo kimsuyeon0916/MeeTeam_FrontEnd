@@ -1,5 +1,5 @@
 import MainPage from './MainPage';
-import RecruitPage from './RecruitPage';
+import RecruitPage from './recruit/RecruitPage/RecruitPage';
 import GalaryPage from './GalaryPage';
 import MemberPage from './MemberPage';
 import InformationUsePage from './InformationUsePage';
@@ -23,6 +23,9 @@ import type { Account } from './account/signUp/SignUpData';
 import MyActivityManagePage from './manage/activity/MyActivityManagePage';
 import PassWordFindingPage from './account/passWordFindingPage/PassWordFindingPage';
 import { PASSWORD_DATA } from './account/passWordFindingPage/PassWordData';
+import RecruitDetailPage from './recruit/RecruitDetailPage/RecruitDetailPage';
+import MyActivityManagePage from './manage/activity/MyActivityManagePage';
+import OutputPreviewPage from './create/outputPreviewPage/OutputPreviewPage';
 
 export {
 	MainPage,
@@ -50,4 +53,7 @@ export {
 	MyActivityManagePage,
 	PassWordFindingPage,
 	PASSWORD_DATA,
+	RecruitDetailPage,
+	MyActivityManagePage,
+	OutputPreviewPage,
 };

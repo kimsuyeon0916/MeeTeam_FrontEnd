@@ -47,6 +47,11 @@ const RecruitCard = styled.div<IManageRecruitPage>`
 		display: flex;
 		margin-right: 3.45rem;
 	}
+
+	.container-open {
+		display: flex;
+	}
+
 	.info {
 		margin-right: 1.8rem;
 		display: flex;

@@ -2,7 +2,11 @@ import React from 'react';
 import S from './RequiredInformation.styled';
 import { ColorMatching } from '../../../utils';
 
-const RequiredInformation = () => {
+interface RequiredData {
+	$isPreview?: boolean;
+}
+
+const RequiredInformation = ({ $isPreview }: RequiredData) => {
 	interface RequiredInformation {
 		title: string;
 		content: string;
@@ -44,7 +48,7 @@ const RequiredInformation = () => {
 	};
 
 	return (
-		<S.RequiredInformationGrid>
+		<S.RequiredInformationGrid $isPreview={$isPreview}>
 			{informationList.map((information, index) => (
 				<S.RequiredInformationItem key={index}>
 					<S.RequiredInformationHead>{information.title}</S.RequiredInformationHead>

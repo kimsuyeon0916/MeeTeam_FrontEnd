@@ -117,6 +117,7 @@ const ManageRecruitPage = () => {
 							$recruit={e.$recruit}
 							$proceed={e.$proceed}
 							key={index}
+							isMine={false}
 						/>
 					))}
 				</div>
@@ -130,6 +131,7 @@ const ManageRecruitPage = () => {
 							$recruit={e.$recruit}
 							$proceed={e.$proceed}
 							key={index}
+							isMine={true}
 						/>
 					))}
 				</div>
@@ -143,6 +145,7 @@ const ManageRecruitPage = () => {
 							$recruit={e.$recruit}
 							$proceed={e.$proceed}
 							key={index}
+							isMine={false}
 						/>
 					))}
 				</div>

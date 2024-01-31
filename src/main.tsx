@@ -15,6 +15,7 @@ import {
 	ManagePortpolioPage,
 	RecruitCreatePage,
 	OutputCreatePage,
+	RecruitDetailPage,
 	IntegratedManagePage,
 	SignInPage,
 	SchoolCertificationPage,
@@ -22,6 +23,7 @@ import {
 	SignUpPage,
 	MyActivityManagePage,
 	PassWordFindingPage
+	OutputPreviewPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -37,6 +39,10 @@ const router = createBrowserRouter([
 			{
 				path: 'recruit',
 				element: <RecruitPage />,
+			},
+			{
+				path: 'recruit/:recruitId?',
+				element: <RecruitDetailPage />,
 			},
 			{
 				path: 'galary',
@@ -77,6 +83,10 @@ const router = createBrowserRouter([
 			{
 				path: 'create/output',
 				element: <OutputCreatePage />,
+			},
+			{
+				path: 'create/output/preview', // meeteam 이름 또는 id
+				element: <OutputPreviewPage />,
 			},
 			{
 				path: 'manage/meeteam/:meeteamId?',

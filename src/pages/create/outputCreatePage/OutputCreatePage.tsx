@@ -1,13 +1,16 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
+import { Upload } from '../../../assets';
 import { modules } from '../../../utils/index';
 import { Subtitle, Dot, InfoItem, MeeteamTag } from '../../../components';
 import { areaState, categoryState, dateState, fieldState } from '../../../atom';
 import S from './OutputCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useNavigate } from 'react-router-dom';
 
 const OutputCreatePage = () => {
+	const navigate = useNavigate();
 	const quillRef = useRef<ReactQuill | null>(null);
 	const area = useRecoilValue(areaState);
 	const field = useRecoilValue(fieldState);
@@ -16,7 +19,7 @@ const OutputCreatePage = () => {
 
 	const [teamName, setTeamName] = useState<string>('');
 	const [imgFile, setImgFile] = useState<string>('');
-	const [imgFileName, setImgFileName] = useState<string>('');
+	const [isHover, setIsHover] = useState<boolean>(false);
 	const [file, setFile] = useState<string>('');
 	const [fileName, setFileName] = useState<string>('');
 
@@ -46,34 +49,41 @@ const OutputCreatePage = () => {
 		// navigate('/');
 	};
 
-	const onChangeTeamName = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangeTeamName = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTeamName(event.target.value);
 		setIsValidName({ validName: true, validMessage: '' });
-	}, []);
+	};
 
-	const onChangeImg = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangeImg = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files !== null) {
-			setImgFileName(event.target.files[0].name);
-			const selectedFiles = event.target.files as FileList;
-			setImgFile(URL.createObjectURL(selectedFiles?.[0]));
-		}
-	}, []);
+			const selectedFiles = event.target.files[0];
+			const reader = new FileReader();
+			reader.readAsDataURL(selectedFiles);
 
-	const onChangeFile = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+			return new Promise<void>(resolve => {
+				reader.onload = () => {
+					setImgFile(reader.result as any);
+					resolve();
+				};
+			});
+		}
+	};
+
+	const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files !== null) {
 			console.log(event);
 			setFileName(event.target.files[0].name);
 			const selectedFiles = event.target.files as FileList;
 			setFile(URL.createObjectURL(selectedFiles?.[0]));
 		}
-	}, []);
+	};
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		// 밋팀 팀명 글자수 검사
 		if (teamName.length === 0) {
-			setIsValidName({ validName: false, validMessage: '* 밋팀명을 입력해주세요.' });
+			setIsValidName({ validName: false, validMessage: '* 밋팀 이름을 입력해주세요.' });
 		}
 		if (teamName.length !== 0) {
 			setIsValidName({ validName: true, validMessage: '' });
@@ -117,6 +127,19 @@ const OutputCreatePage = () => {
 			});
 		}
 	};
+
+	const handleMouseOver = () => {
+		setIsHover(true);
+	};
+
+	const handleMouseOut = () => {
+		setIsHover(false);
+	};
+
+	const onClickPreview = () => {
+		navigate('preview');
+	};
+
 	return (
 		<S.OutputCreatePage>
 			<div className='procedure'>
@@ -126,16 +149,16 @@ const OutputCreatePage = () => {
 				</div>
 			</div>
 			<div className='wrapper'>
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={handleSubmit} id='submit'>
 					<div className='container'>
 						<div className='container__teamname'>
 							<div className='container__teamname-subtitle'>
-								<Subtitle>{'밋팀명'}</Subtitle>
+								<Subtitle>{'밋팀 이름'}</Subtitle>
 								<Dot />
 							</div>
 							<div className='container__teamname-input'>
 								<input
-									placeholder='밋팀명을 입력해주세요.'
+									placeholder='밋팀 이름을 입력해주세요.'
 									type='text'
 									onChange={onChangeTeamName}
 									maxLength={20}
@@ -154,7 +177,7 @@ const OutputCreatePage = () => {
 										{!isValidArea.validArea && <p>{isValidArea.validMessage}</p>}
 									</div>
 									<div>
-										<InfoItem isDot='true' title='밋팀 분야' optionData={['개발']} type='분야' />
+										<InfoItem isDot='true' title='분야' optionData={['개발']} type='분야' />
 										{!isValidField.validField && <p>{isValidField.validMessage}</p>}
 									</div>
 								</div>
@@ -209,35 +232,49 @@ const OutputCreatePage = () => {
 						</div>
 						<div className='container__img'>
 							<div>
-								<Subtitle>{'밋팀 이미지'}</Subtitle>
+								<Subtitle>{'커버 이미지'}</Subtitle>
 							</div>
 							<div className='container__img-input'>
-								<input
-									type='file'
-									accept='image/*'
-									id='meeteamImg'
-									placeholder='이미지를 업로드해주세요.'
-									onChange={onChangeImg}
-								/>
-								<label className={imgFile ? 'haveImgFile' : ''} htmlFor='meeteamImg'>
-									{imgFile ? `${imgFileName}` : '이미지를 업로드해주세요.'}
+								<input type='file' accept='image/*' id='meeteamImg' onChange={onChangeImg} />
+								<label
+									className='file-label'
+									htmlFor='meeteamImg'
+									onMouseOver={handleMouseOver}
+									onMouseOut={handleMouseOut}
+								>
+									<img
+										className='uploaded-img'
+										src={imgFile ? imgFile : 'https://ifh.cc/g/YO5Z7z.jpg'}
+									/>
+									{isHover && (
+										<div className='icon-upload'>
+											<img className='icon' src={Upload} />
+										</div>
+									)}
 								</label>
 							</div>
 						</div>
 						<div className='container__intro'>
 							<div>
-								<Subtitle>{'소개 글'}</Subtitle>
+								<Subtitle>{'소개글'}</Subtitle>
 							</div>
 							<div>
 								<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
 							</div>
 						</div>
-						<div className='container__controller'>
-							<button onClick={onClickCancel}>취소</button>
-							<button type='submit'>등록하기</button>
-						</div>
 					</div>
 				</form>
+			</div>
+			<div className='container__controller'>
+				<button type='button' onClick={onClickPreview}>
+					미리보기
+				</button>
+				<button type='button' onClick={onClickCancel}>
+					취소
+				</button>
+				<button type='submit' form='submit'>
+					등록하기
+				</button>
 			</div>
 		</S.OutputCreatePage>
 	);

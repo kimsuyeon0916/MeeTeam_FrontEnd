@@ -76,6 +76,10 @@ import Status from './meeteam/status/Status';
 import Filter from './meeteam/filter/Filter';
 import Dropdown from './dropdown/Dropdown';
 import DeadlineSelect from './dateSelect/DeadlineSelect';
+import Icon from './meeteam/icon/Icon';
+import ApplyInfomation from '../pages/recruit/RecruitDetailPage/steps/ApplyInfomation';
+import ApplyInput from '../pages/recruit/RecruitDetailPage/steps/ApplyInput';
+import ApplySubmit from '../pages/recruit/RecruitDetailPage/steps/ApplySubmit';
 import Content from './meeteam/Content';
 import NaverLogin from './naver/NaverLogin';
 
@@ -146,9 +150,14 @@ export {
 	Status,
 	Filter,
 	Dropdown,
-	Content,
+	DeadlineSelect,
+	Icon,
 	MemberInviteModal,
 	MemberTest,
 	DeadlineSelect,
 	NaverLogin,
+	ApplyInfomation,
+	ApplyInput,
+	ApplySubmit,
+	Content,
 };
