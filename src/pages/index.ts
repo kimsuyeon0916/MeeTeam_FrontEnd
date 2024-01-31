@@ -21,6 +21,8 @@ import { SIGN_UP_DATA } from './account/signUp/SignUpData';
 import NickNameSettingPage from './account/signUp/nickNameSetting/NickNameSettingPage';
 import type { Account } from './account/signUp/SignUpData';
 import MyActivityManagePage from './manage/activity/MyActivityManagePage';
+import PassWordFindingPage from './account/passWordFindingPage/PassWordFindingPage';
+import { PASSWORD_DATA } from './account/passWordFindingPage/PassWordData';
 
 export {
 	MainPage,
@@ -46,4 +48,6 @@ export {
 	NickNameSettingPage,
 	Account,
 	MyActivityManagePage,
+	PassWordFindingPage,
+	PASSWORD_DATA,
 };
