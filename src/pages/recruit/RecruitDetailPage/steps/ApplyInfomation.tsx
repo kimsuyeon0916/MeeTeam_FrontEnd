@@ -15,9 +15,12 @@ const ApplyInfomation = () => {
 					<span className='type'>리더</span>
 					<div className='leader-info'>
 						<div className='leader-info__icon'></div>
-						<div className='leader-info__name'>
+						<div className='leader-info__user'>
 							<span>김민지</span>
-							<span>평점: 4.8</span>
+							<span>
+								<span className='user-info'>응답률: 90%</span>
+								<span className='user-info'>평점: 4.8</span>
+							</span>
 						</div>
 					</div>
 				</div>

@@ -30,7 +30,7 @@ const ApplyInformation = styled.div`
 				background-color: #bcd7ff;
 			}
 
-			.leader-info__name {
+			.leader-info__user {
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
@@ -47,41 +47,46 @@ const ApplyInformation = styled.div`
 				}
 
 				span:nth-child(2) {
-					color: #858585;
-					font-family: Apple SD Gothic Neo;
-					font-size: 1.2rem;
-					font-style: normal;
-					font-weight: 400;
-					line-height: 1.35rem; /* 150% */
-					letter-spacing: 0.015rem;
+					display: flex;
+					gap: 1rem;
+
+					.user-info {
+						color: #858585;
+						font-family: Apple SD Gothic Neo;
+						font-size: 1.2rem;
+						font-style: normal;
+						font-weight: 400;
+						line-height: 1.35rem;
+						letter-spacing: 0.015rem;
+					}
 				}
 			}
 		}
+	}
 
-		.member-info {
-			position: relative;
-			display: flex;
-			position: relative;
-			margin-top: 2rem;
-			/* height: 3.3rem; */
+	.member-info {
+		position: relative;
+		display: flex;
+		position: relative;
+		margin-top: 2rem;
+		/* height: 3.3rem; */
 
-			.member-info__icon {
-				width: 3.15rem;
-				height: 3.15rem;
-				flex-shrink: 0;
-			}
+		.member-info__icon {
+			width: 3.15rem;
+			height: 3.15rem;
+			flex-shrink: 0;
+		}
 
-			.first {
-				left: 2rem;
-			}
+		.first {
+			left: 2rem;
+		}
 
-			.second {
-				right: 0rem;
-			}
+		.second {
+			right: 0rem;
+		}
 
-			.third {
-				right: 2rem;
-			}
+		.third {
+			right: 2rem;
 		}
 	}
 
