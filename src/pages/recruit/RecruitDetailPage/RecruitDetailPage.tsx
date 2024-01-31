@@ -76,7 +76,7 @@ const RecruitDetailPage = () => {
 
 	const onClickInput = () => {
 		if (!isLogin) {
-			setNeedLogin(true);
+			// 로그인 페이지로 이동
 		}
 	};
 
@@ -200,6 +200,7 @@ const RecruitDetailPage = () => {
 							value={contents}
 							onChange={onChangeHandler}
 							onClick={onClickInput}
+							placeholder={isLogin ? '' : '로그인이 필요합니다.'}
 						/>
 						<button type='button' onClick={addComment}>
 							댓글 등록
@@ -207,7 +208,6 @@ const RecruitDetailPage = () => {
 					</div>
 				</div>
 			</div>
-			<div className='container-popup'>안녕</div>
 		</S.RecruitDetailPage>
 	);
 };
