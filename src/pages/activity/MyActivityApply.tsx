@@ -1,17 +1,18 @@
-import { RecruitCard } from '../../../components';
-import S from './ManageRecruitPage.styled';
-import { RecruitInformation } from '../../../components/recruit/RecruitCard';
+import React from 'react';
+import S from './MyActivityManagePage.styled';
+import { RecruitCard } from '../../components/index';
+import { RecruitInformation } from '../../components/recruit/RecruitCard';
 
-const ManageRecruitPage = () => {
+const MyActivityApply = () => {
 	const data: RecruitInformation[] = [
 		{
-			title: '[중고차 거래 서비스 프로젝트] 웹 개발자 모집',
+			title: '[커뮤니티 웹 서비스 프로젝트] 디자이너 모집',
 			type: '프로젝트',
 			$recruit: true,
 			$proceed: false,
 		},
 		{
-			title: '[커뮤니티 웹 서비스 프로젝트] 디자이너 모집',
+			title: '[중고차 거래 서비스 프로젝트] 웹 개발자 모집',
 			type: '프로젝트',
 			$recruit: true,
 			$proceed: false,
@@ -25,7 +26,7 @@ const ManageRecruitPage = () => {
 	];
 
 	return (
-		<S.ManageRecruitPage>
+		<S.MyActivityRecruit>
 			<div className='container'>
 				{data.map((e, index) => (
 					<RecruitCard
@@ -34,12 +35,11 @@ const ManageRecruitPage = () => {
 						$recruit={e.$recruit}
 						$proceed={e.$proceed}
 						key={index}
-						isMine={true}
 					/>
 				))}
 			</div>
-		</S.ManageRecruitPage>
+		</S.MyActivityRecruit>
 	);
 };
 
-export default ManageRecruitPage;
+export default MyActivityApply;

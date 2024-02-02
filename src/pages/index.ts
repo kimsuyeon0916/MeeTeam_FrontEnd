@@ -17,6 +17,8 @@ import OutputPreviewPage from './create/outputPreviewPage/OutputPreviewPage';
 import MyActivityInvited from './activity/MyActivityInvited';
 import MyActivityWrapper from './activity/MyActivityWrapper';
 import MyActivityLike from './activity/MyActivityLike';
+import MyActivityApply from './activity/MyActivityApply';
+import MyActivityBookmark from './activity/MyActivityBookmark';
 
 export {
 	MainPage,
@@ -38,4 +40,6 @@ export {
 	MyActivityInvited,
 	MyActivityWrapper,
 	MyActivityLike,
+	MyActivityApply,
+	MyActivityBookmark,
 };

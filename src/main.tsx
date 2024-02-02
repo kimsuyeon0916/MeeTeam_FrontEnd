@@ -21,6 +21,8 @@ import {
 	OutputPreviewPage,
 	MyActivityWrapper,
 	MyActivityInvited,
+	MyActivityApply,
+	MyActivityBookmark,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -64,6 +66,14 @@ const router = createBrowserRouter([
 					{
 						path: 'like',
 						element: <MyActivityLike />,
+					},
+					{
+						path: 'apply',
+						element: <MyActivityApply />,
+					},
+					{
+						path: 'bookmark',
+						element: <MyActivityBookmark />,
 					},
 				],
 			},

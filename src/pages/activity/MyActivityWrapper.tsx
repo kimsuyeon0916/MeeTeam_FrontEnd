@@ -14,6 +14,14 @@ const MyActivityWrapper = () => {
 			name: '좋아요한 밋팀',
 			path: 'like',
 		},
+		{
+			name: '신청한 구인 글',
+			path: 'apply',
+		},
+		{
+			name: '북마크한 구인 글',
+			path: 'bookmark',
+		},
 	];
 	return (
 		<S.MyActivityWrapper>

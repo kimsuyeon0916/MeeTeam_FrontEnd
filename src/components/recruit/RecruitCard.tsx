@@ -3,7 +3,7 @@ import { Alarm } from '../../assets';
 import { Tag } from '..';
 import S from './RecruitCard.styled';
 
-export interface IRecruitCard {
+export interface RecruitInformation {
 	title: string;
 	type: string;
 	$recruit?: boolean;
@@ -11,7 +11,7 @@ export interface IRecruitCard {
 	isMine?: boolean;
 }
 
-const RecruitCard = ({ title, type, $recruit, $proceed, isMine }: IRecruitCard) => {
+const RecruitCard = ({ title, type, $recruit, $proceed, isMine }: RecruitInformation) => {
 	const [isOn, setIsOn] = useState<boolean>(false);
 	const toggleHandler = () => {
 		setIsOn(prev => !prev);
