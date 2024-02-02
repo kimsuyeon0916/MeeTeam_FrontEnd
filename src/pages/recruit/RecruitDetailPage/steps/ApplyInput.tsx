@@ -93,7 +93,7 @@ const ApplyInput = () => {
 					제출하기
 				</button>
 				<button className='container-apply__form-button' type='button' onClick={onClickCancel}>
-					취소하기
+					뒤로가기
 				</button>
 			</div>
 		</S.ApplyInput>

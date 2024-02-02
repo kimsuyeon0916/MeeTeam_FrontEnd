@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import S from './Card.styled';
 import { useNavigate } from 'react-router-dom';
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa6';
 
 const RecruitCardSmall = () => {
 	const navigate = useNavigate();
+	const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
 
 	const onClickContent = () => {
 		navigate('/recruit/1');
+	};
+
+	const onClickBookmark = (event: React.MouseEvent<HTMLDivElement>) => {
+		event.stopPropagation();
+		setIsBookmarked(prev => !prev);
 	};
 	return (
 		<S.RecruitCard onClick={onClickContent}>
@@ -15,6 +21,9 @@ const RecruitCardSmall = () => {
 				<div className='tags'>
 					<div>교외</div>
 					<div>프로젝트</div>
+				</div>
+				<div className='bookmark' onClick={onClickBookmark}>
+					{isBookmarked ? <FaBookmark /> : <FaRegBookmark />}
 				</div>
 			</div>
 			<div className='content-title'>

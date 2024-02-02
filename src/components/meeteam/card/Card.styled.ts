@@ -123,6 +123,10 @@ const RecruitCard = styled.div`
 				letter-spacing: 0.015rem;
 			}
 		}
+
+		.bookmark {
+			font-size: 2rem;
+		}
 	}
 
 	.content-title {
