@@ -81,6 +81,7 @@ import ApplyInfomation from '../pages/recruit/RecruitDetailPage/steps/ApplyInfom
 import ApplyInput from '../pages/recruit/RecruitDetailPage/steps/ApplyInput';
 import ApplySubmit from '../pages/recruit/RecruitDetailPage/steps/ApplySubmit';
 import Content from './meeteam/Content';
+import NaverLogin from './naver/NaverLogin';
 
 export {
 	Header,
@@ -153,6 +154,7 @@ export {
 	Icon,
 	MemberInviteModal,
 	MemberTest,
+	NaverLogin,
 	ApplyInfomation,
 	ApplyInput,
 	ApplySubmit,

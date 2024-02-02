@@ -17,7 +17,12 @@ import {
 	OutputCreatePage,
 	RecruitDetailPage,
 	IntegratedManagePage,
+	SignInPage,
+	SchoolCertificationPage,
+	NickNameSettingPage,
+	SignUpPage,
 	MyActivityManagePage,
+	PassWordFindingPage,
 	OutputPreviewPage,
 } from './pages/index.ts';
 import './globalStyle.css';
@@ -46,6 +51,22 @@ const router = createBrowserRouter([
 			{
 				path: 'member',
 				element: <MemberPage />,
+			},
+			{
+				path: 'signIn',
+				element: <SignInPage />,
+			},
+			{
+				path: 'find/password',
+				element: <PassWordFindingPage />,
+			},
+			{
+				path: 'signUp',
+				children: [
+					{ path: '', element: <SignUpPage /> },
+					{ path: 'school?', element: <SchoolCertificationPage /> },
+					{ path: 'nickName', element: <NickNameSettingPage /> },
+				],
 			},
 			{
 				path: 'information',
