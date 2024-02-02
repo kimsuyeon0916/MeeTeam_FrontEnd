@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
-import { Dropdown, Subtitle, RecruitCardSmall } from '../../../components';
+import { Dropdown, Subtitle, RecruitCardSmall, Pagination } from '../../../components';
 import S from './RecruitPage.styled';
 import { SearchIcon } from '../../../assets';
 
 const RecruitPage = () => {
+	const postsNum = 150;
+	const postsPerPage = 24;
+	const pageList: string[] = [];
+	const totalPages = Math.ceil(postsNum / postsPerPage);
+
+	const [currentPage, setCurrentPage] = useState<number>(1);
+
 	const [isFiltered, setIsFiltered] = useState({
 		isInside: true,
 		isOutside: false,
@@ -96,6 +103,14 @@ const RecruitPage = () => {
 						</div>
 					</div>
 				</div>
+			</div>
+			<div className='container-pagination'>
+				<Pagination
+					postsNum={postsNum}
+					postsPerPage={20}
+					currentPage={currentPage}
+					setCurrentPage={setCurrentPage}
+				/>
 			</div>
 		</S.RecruitPage>
 	);

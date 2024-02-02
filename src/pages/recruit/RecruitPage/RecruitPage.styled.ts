@@ -183,6 +183,17 @@ const RecruitPage = styled.div`
 			gap: 1.8rem 1.8rem;
 		}
 	}
+
+	.container-pagination {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		ul {
+			list-style: none;
+			display: flex;
+		}
+	}
 `;
 
 const S = { RecruitPage };

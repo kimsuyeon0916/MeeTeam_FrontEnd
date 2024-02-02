@@ -86,6 +86,7 @@ import ApplyInput from '../pages/recruit/RecruitDetailPage/steps/ApplyInput';
 import ApplySubmit from '../pages/recruit/RecruitDetailPage/steps/ApplySubmit';
 import Content from './meeteam/Content';
 import RecruitCardSmall from './meeteam/card/RecruitCardSmall';
+import Pagination from './pagination/Pagination';
 
 export {
 	Header,
@@ -167,4 +168,5 @@ export {
 	role,
 	CONTENT,
 	RecruitCardSmall,
+	Pagination,
 };
