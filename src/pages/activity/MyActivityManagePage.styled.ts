@@ -154,7 +154,7 @@ const MyActivityRecruit = styled.div`
 				font-size: 1.8rem;
 				font-style: normal;
 				font-weight: 400;
-				line-height: 4.2rem; /* 233.333% */
+				line-height: 4.2rem;
 				letter-spacing: 0.015rem;
 			}
 		}

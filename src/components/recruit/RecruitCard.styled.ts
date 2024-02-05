@@ -92,10 +92,6 @@ const RecruitCard = styled.div<IManageRecruitPage>`
 		left: 27px;
 		transition: 0.3s;
 	}
-
-	.alarm {
-		margin-left: 5.4rem;
-	}
 `;
 
 const S = { RecruitCard };

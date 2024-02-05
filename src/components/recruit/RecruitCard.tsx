@@ -21,13 +21,12 @@ const RecruitCard = ({ title, type, $recruit, $proceed, isMine }: RecruitInforma
 			<div className='container-recruits__info'>
 				<div className='container-tags'>
 					<Tag type={type} />
-					<Tag type={type} $recruit={$recruit} $proceed={$proceed} />
 				</div>
 				<div className='container-title'>
 					<h1>{title}</h1>
 				</div>
 			</div>
-			<div className='container-recruits__options'>
+			{/* <div className='container-recruits__options'>
 				{isMine && (
 					<div className='container-open'>
 						<div className='info'>{isOn ? '공개' : '비공개'}</div>
@@ -37,10 +36,7 @@ const RecruitCard = ({ title, type, $recruit, $proceed, isMine }: RecruitInforma
 						</div>
 					</div>
 				)}
-				<div className='alarm'>
-					<img src={Alarm} />
-				</div>
-			</div>
+			</div> */}
 		</S.RecruitCard>
 	);
 };

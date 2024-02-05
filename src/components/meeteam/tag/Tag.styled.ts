@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-interface ITag {
+interface TagInfo {
 	$recruit?: boolean;
 	$proceed?: boolean;
+	type?: string;
 }
 
-const Tag = styled.div<ITag>`
+const Tag = styled.div<TagInfo>`
 	display: flex;
 	width: 5.55rem;
 	height: 2.4rem;
@@ -14,12 +15,22 @@ const Tag = styled.div<ITag>`
 	align-items: center;
 	gap: 0.75rem;
 	border-radius: 0.6rem;
-	background: ${props =>
-		props.$recruit
-			? 'linear-gradient(270deg, rgba(95, 92, 236, 0.76) -6.3%, #d85cec 101.52%)'
-			: props.$proceed
-			? 'linear-gradient(90deg, #4E99EF -6.72%, #723DFF 107.8%)'
-			: '#eeecff'};
+	background-color: ${props => {
+		if (props.$recruit) {
+			return `linear-gradient(270deg, rgba(95, 92, 236, 0.76) -6.3%, #d85cec 101.52%)`;
+		}
+		if (props.$proceed) {
+			return `linear-gradient(90deg, #4E99EF -6.72%, #723DFF 107.8%)`;
+		}
+		if (props.type == '스터디') {
+			return `#4cd137`;
+		}
+		if (props.type == '프로젝트') {
+			return `#00a8ff`;
+		} else {
+			return `#eeecff`;
+		}
+	}};
 	color: ${props => (props.$recruit ? '#fff' : props.$proceed ? '#fff' : '#373f41;')};
 	font-family: Apple SD Gothic Neo;
 	font-size: 1.1rem;
