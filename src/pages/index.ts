@@ -25,6 +25,7 @@ import { PASSWORD_DATA } from './account/passWordFindingPage/PassWordData';
 import RecruitDetailPage from './recruit/RecruitDetailPage/RecruitDetailPage';
 import MyActivityManagePage from './manage/activity/MyActivityManagePage';
 import OutputPreviewPage from './create/outputPreviewPage/OutputPreviewPage';
+import SearchResultPage from './search/SearchResultPage';
 
 export {
 	MainPage,
@@ -54,4 +55,5 @@ export {
 	RecruitDetailPage,
 	MyActivityManagePage,
 	OutputPreviewPage,
+	SearchResultPage,
 };
