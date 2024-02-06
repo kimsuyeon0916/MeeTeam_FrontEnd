@@ -252,6 +252,81 @@ const Header = styled.div`
 					}
 				}
 			}
+
+			.subtitle {
+				color: #373f41;
+				font-size: 2.2rem;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 5.6rem;
+				letter-spacing: 0.02rem;
+			}
+
+			.word_recent {
+				color: var(--main-color, #5877fc);
+				font-size: 2rem;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 120%; /* 2.88rem */
+				letter-spacing: -0.048rem;
+			}
+
+			.keyword {
+				color: #696969;
+				font-size: 2rem;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 170%; /* 4.08rem */
+				letter-spacing: -0.048rem;
+				cursor: pointer;
+			}
+
+			.search-box__recent {
+				display: flex;
+				flex-direction: column;
+				margin-top: 2.8rem;
+				min-height: 10rem;
+
+				.container-elements__recent {
+					display: flex;
+					gap: 1rem;
+					flex-wrap: wrap;
+
+					.element {
+						display: flex;
+						height: 4.7rem;
+						width: 18rem;
+						padding: 0.5rem 2rem 0.5rem 3rem;
+						justify-content: center;
+						align-items: center;
+						gap: 0.6rem;
+						border-radius: 10rem;
+						border: 1px solid #6091f0;
+						background: #fff;
+
+						span {
+							cursor: pointer;
+						}
+
+						img {
+							width: 2.5rem;
+							margin-bottom: 0.4rem;
+							cursor: pointer;
+						}
+					}
+				}
+			}
+
+			.search-box__popular {
+				margin-top: 4.5rem;
+				display: flex;
+				flex-direction: column;
+
+				.container-keys__popular {
+					display: flex;
+					flex-direction: column;
+				}
+			}
 		}
 
 		.btn-cancel {

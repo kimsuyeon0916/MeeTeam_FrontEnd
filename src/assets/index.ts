@@ -8,5 +8,18 @@ import LeftBtn from './LeftBtn.svg';
 import RightBtn from './RightBtn.svg';
 import Logo from './Logo.svg';
 import CancelBtn from './CancelBtn.svg';
+import XBtn from './XBtn.svg';
 
-export { Exit, Alarm, Plus, Upload, DropdownArrow, SearchIcon, LeftBtn, RightBtn, Logo, CancelBtn };
+export {
+	Exit,
+	Alarm,
+	Plus,
+	Upload,
+	DropdownArrow,
+	SearchIcon,
+	LeftBtn,
+	RightBtn,
+	Logo,
+	CancelBtn,
+	XBtn,
+};

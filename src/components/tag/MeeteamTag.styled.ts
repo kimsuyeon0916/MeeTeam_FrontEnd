@@ -11,7 +11,6 @@ const MeeteamTag = styled.div`
 		flex-wrap: wrap;
 		min-height: 4.875rem;
 		width: 100%;
-		height: auto;
 		padding: 0.5rem 1.3rem;
 		border-radius: 0.75rem;
 		border: 0.75px solid #e3e3e3;

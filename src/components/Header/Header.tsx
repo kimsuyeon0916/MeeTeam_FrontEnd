@@ -4,7 +4,7 @@ import { BiSearch, BiBell, BiUser } from 'react-icons/bi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { searchPageState } from '../../atom';
 import { useRecoilState } from 'recoil';
-import { CancelBtn, Logo, SearchIcon } from '../../assets';
+import { CancelBtn, Logo, SearchIcon, XBtn } from '../../assets';
 import { Create } from '..';
 
 const Header = () => {
@@ -195,8 +195,35 @@ const Header = () => {
 								<input />
 							</div>
 						</div>
-						<div className='search-box__recent'></div>
-						<div className='search-box__popular'></div>
+						<div className='search-box__recent'>
+							<span className='subtitle'>최근 검색어</span>
+							<div className='container-elements__recent'>
+								<div className='element word_recent'>
+									<span>프로젝트</span>
+									<img src={XBtn} />
+								</div>
+								<div className='element word_recent'>
+									<span>프로젝트</span>
+									<img src={XBtn} />
+								</div>
+								<div className='element word_recent'>
+									<span>프로젝트</span>
+									<img src={XBtn} />
+								</div>
+								<div className='element word_recent'>
+									<span>프로젝트</span>
+									<img src={XBtn} />
+								</div>
+							</div>
+						</div>
+						<div className='search-box__popular'>
+							<span className='subtitle'>인기 검색어</span>
+							<div className='container-keys__popular'>
+								<span className='keyword'>1. {'프로젝트'}</span>
+								<span className='keyword'>2. {'응용소프트웨어실습'}</span>
+								<span className='keyword'>3. {'오픈소스소프트웨어'}</span>
+							</div>
+						</div>
 					</div>
 					<div className='btn-cancel'>
 						<img src={CancelBtn} onClick={onClickCancel} />
