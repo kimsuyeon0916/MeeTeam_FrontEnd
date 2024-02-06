@@ -82,6 +82,7 @@ import ApplyInput from '../pages/recruit/RecruitDetailPage/steps/ApplyInput';
 import ApplySubmit from '../pages/recruit/RecruitDetailPage/steps/ApplySubmit';
 import Content from './meeteam/Content';
 import NaverLogin from './naver/NaverLogin';
+import Create from './header/Create';
 
 export {
 	Header,
@@ -159,4 +160,5 @@ export {
 	ApplyInput,
 	ApplySubmit,
 	Content,
+	Create,
 };

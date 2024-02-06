@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Header = styled.div`
+	position: relative;
 	.header {
 		display: flex;
 		height: 6.75rem;
@@ -12,7 +13,7 @@ const Header = styled.div`
 
 	.header__logo {
 		display: flex;
-		width: 10.79338rem;
+		width: 12.79338rem;
 		height: 1.29563rem;
 		justify-content: flex-end;
 		align-items: center;
@@ -20,9 +21,8 @@ const Header = styled.div`
 		margin-left: 14.88rem;
 		cursor: pointer;
 
-		.header__logo--bridge {
-			left: 14.5rem;
-			top: 2.6rem;
+		img {
+			width: 100%;
 		}
 	}
 
@@ -198,6 +198,70 @@ const Header = styled.div`
 					color: #614bf7;
 					transition: 0.1s;
 				}
+			}
+		}
+	}
+
+	.search-box {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background-color: #fff;
+		z-index: 1001;
+
+		.search-box__container {
+			width: 70.8rem;
+			display: flex;
+			flex-direction: column;
+			margin: 0 auto;
+			position: relative;
+
+			.search-box__bar {
+				margin-top: 21.2rem;
+				display: inline-flex;
+				justify-content: flex-start;
+				align-items: center;
+				width: 100%;
+
+				img {
+					position: absolute;
+					left: 2rem;
+					top: 22.7rem;
+				}
+
+				.container-input {
+					width: 100%;
+					input {
+						display: flex;
+						margin: 0 auto;
+						width: 100%;
+						height: 5rem;
+						padding: 0.6rem 1.8rem 0.6rem 5rem;
+						box-sizing: border-box;
+						align-items: center;
+						gap: 1rem;
+						flex-shrink: 0;
+						border-radius: 10rem;
+						background: var(--sub-color, #e0e6ff);
+						border: none;
+						outline: none;
+						font-size: 1.8rem;
+						font-weight: 400;
+					}
+				}
+			}
+		}
+
+		.btn-cancel {
+			position: absolute;
+			top: 5rem;
+			right: 30rem;
+
+			img {
+				width: 7rem;
+				cursor: pointer;
 			}
 		}
 	}

@@ -6,5 +6,7 @@ import DropdownArrow from './DropdownArrow.svg';
 import SearchIcon from './SearchIcon.svg';
 import LeftBtn from './LeftBtn.svg';
 import RightBtn from './RightBtn.svg';
+import Logo from './Logo.svg';
+import CancelBtn from './CancelBtn.svg';
 
-export { Exit, Alarm, Plus, Upload, DropdownArrow, SearchIcon, LeftBtn, RightBtn };
+export { Exit, Alarm, Plus, Upload, DropdownArrow, SearchIcon, LeftBtn, RightBtn, Logo, CancelBtn };
