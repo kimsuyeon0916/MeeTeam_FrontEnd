@@ -87,6 +87,7 @@ import ApplySubmit from '../pages/recruit/RecruitDetailPage/steps/ApplySubmit';
 import Content from './meeteam/Content';
 import RecruitCardSmall from './meeteam/card/RecruitCardSmall';
 import Pagination from './pagination/Pagination';
+import NaverLogin from './naver/NaverLogin';
 
 export {
 	Header,
@@ -159,6 +160,7 @@ export {
 	Icon,
 	MemberInviteModal,
 	MemberTest,
+	NaverLogin,
 	ApplyInfomation,
 	ApplyInput,
 	ApplySubmit,

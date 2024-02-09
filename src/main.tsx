@@ -18,6 +18,12 @@ import {
 	RecruitDetailPage,
 	IntegratedManagePage,
 	MyActivityLike,
+	SignInPage,
+	SchoolCertificationPage,
+	NickNameSettingPage,
+	SignUpPage,
+	MyActivityManagePage,
+	PassWordFindingPage,
 	OutputPreviewPage,
 	MyActivityWrapper,
 	MyActivityInvited,
@@ -50,6 +56,22 @@ const router = createBrowserRouter([
 			{
 				path: 'member',
 				element: <MemberPage />,
+			},
+			{
+				path: 'signIn',
+				element: <SignInPage />,
+			},
+			{
+				path: 'find/password',
+				element: <PassWordFindingPage />,
+			},
+			{
+				path: 'signUp',
+				children: [
+					{ path: '', element: <SignUpPage /> },
+					{ path: 'school?', element: <SchoolCertificationPage /> },
+					{ path: 'nickName', element: <NickNameSettingPage /> },
+				],
 			},
 			{
 				path: 'information',

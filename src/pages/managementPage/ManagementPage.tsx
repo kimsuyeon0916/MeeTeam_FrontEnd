@@ -10,7 +10,7 @@ const ManagementPage = () => {
 	return (
 		<>
 			<S.ManagementPageRow>
-				<GoBack />
+				<GoBack style={`left: -4.85rem;`} />
 				<Title title={title} status={status} />
 			</S.ManagementPageRow>
 			<RequiredInformation />
