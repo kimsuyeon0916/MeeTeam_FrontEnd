@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import S from './RecruitDetailPage.styled';
 import {
 	Tag,
@@ -27,6 +27,7 @@ type ComponentProps = {
 
 const RecruitDetailPage = () => {
 	const navigate = useNavigate();
+	const [isReply, setIsReply] = useState<boolean>(false);
 	const [commentsList, setCommentsList] = useState<Comment[]>([]);
 	const [contents, setContents] = useState<string>('');
 	const isLogin = false; // 임시 코드
@@ -179,15 +180,44 @@ const RecruitDetailPage = () => {
 					{commentsList.map((comment, index) => {
 						// const commentId = comment.id;
 						return (
-							<li key={index} className='comment'>
-								<div className='comment-icon'>
-									<Icon />
-								</div>
-								<div className='comment-info'>
-									<span>{comment.username}</span>
-									<span>{comment.content}</span>
-								</div>
-							</li>
+							<>
+								<li key={index} className='comment'>
+									<div className='comment-icon'>
+										<Icon />
+									</div>
+									<div className='comment-info'>
+										<span>{comment.username}</span>
+										<span>{comment.content}</span>
+									</div>
+									<button
+										type='button'
+										onClick={() => {
+											setIsReply(true);
+										}}
+									>
+										답글
+									</button>
+								</li>
+								{isReply && (
+									<div className='reply-container'>
+										<div className='user-input__icon'>
+											<Icon />
+										</div>
+										<input
+											type='text'
+											onKeyPress={onKeyPress}
+											value={contents}
+											onChange={onChangeHandler}
+											onClick={onClickInput}
+											placeholder={isLogin ? '' : '로그인이 필요합니다.'}
+											className='reply-input'
+										/>
+										<button type='button' onClick={addComment} className='reply-btn'>
+											답글
+										</button>
+									</div>
+								)}
+							</>
 						);
 					})}
 				</ul>
