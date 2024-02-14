@@ -14,12 +14,11 @@ import OutputCreatePage from './create/outputCreatePage/OutputCreatePage';
 import SignInPage from './account/signIn/SignInPage';
 import SignUpPage from './account/signUp/SignUpPage';
 import SchoolCertificationPage from './account/schoolCertification/SchoolCertificationPage';
-import type { SignUp } from './account/schoolCertification/SchoolCertificationData';
 import { SCHOOL_CERTIFICATION_DATA } from './account/schoolCertification/SchoolCertificationData';
-import type { User } from './account/signUp/SignUpData';
+import { INPUT_VALIDATION } from './account/validation';
 import { SIGN_UP_DATA } from './account/signUp/SignUpData';
 import NickNameSettingPage from './account/signUp/nickNameSetting/NickNameSettingPage';
-import type { Account } from './account/signUp/SignUpData';
+import type { Account, User } from './account/signUp/SignUpData';
 import PassWordFindingPage from './account/passWordFindingPage/PassWordFindingPage';
 import { PASSWORD_DATA } from './account/passWordFindingPage/PassWordData';
 import RecruitDetailPage from './recruit/RecruitDetailPage/RecruitDetailPage';
@@ -43,9 +42,9 @@ export {
 	SignInPage,
 	SignUpPage,
 	SchoolCertificationPage,
-	SignUp,
 	SCHOOL_CERTIFICATION_DATA,
 	User,
+	INPUT_VALIDATION,
 	SIGN_UP_DATA,
 	NickNameSettingPage,
 	Account,
