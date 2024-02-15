@@ -3,22 +3,28 @@ import S from './NickNameSettingPage.styled';
 import { SIGN_UP_DATA } from '../SignUpData';
 import { useNavigate } from 'react-router-dom';
 import { useNaverSignUp } from '../../../../hooks';
-import { useRecoilState, useSetRecoilState } from 'recoil';
-import { naverSignUpState, userState } from '../../../../atom';
+import { useSetRecoilState } from 'recoil';
+import { userState } from '../../../../atom';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
 
 const NickNameSettingPage = () => {
 	const navigate = useNavigate();
 
 	const title = `밋팀에서 사용하실\n닉네임을 설정해주세요`;
 
-	const [signUp, setSignUp] = useRecoilState(naverSignUpState);
+	interface FormValues {
+		nickName: string;
+	}
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		control,
+	} = useForm<FormValues>({ mode: 'onChange' });
 
 	const setUserState = useSetRecoilState(userState);
-
-	const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		setSignUp({ ...signUp, [name]: value });
-	};
 
 	const checkNaverSignUpInSuccess = () => {
 		navigate('/');
@@ -28,13 +34,11 @@ const NickNameSettingPage = () => {
 
 	const { mutate } = useNaverSignUp({ onSuccess: checkNaverSignUpInSuccess, setUserState });
 
-	const naverSignUpHandler = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-
+	const naverSignUpHandler: SubmitHandler<FormValues> = data => {
 		const urlParams = new URLSearchParams(window.location.search);
 		const code = urlParams.get('emailCode');
 
-		code && signUp && mutate({ emailCode: code, nickName: signUp.nickName });
+		code && mutate({ emailCode: code, nickName: data.nickName });
 	};
 
 	return (
@@ -42,19 +46,13 @@ const NickNameSettingPage = () => {
 			<header className='account__header'>
 				<h1>{title}</h1>
 			</header>
-			<S.NickNameSettingPageForm onSubmit={e => naverSignUpHandler(e)}>
+			<S.NickNameSettingPageForm onSubmit={handleSubmit(naverSignUpHandler)}>
 				{SIGN_UP_DATA.map(
-					({ type, placeholder, name }, index) =>
+					({ name, validation, ...props }, index) =>
 						name === 'nickName' && (
 							<label className='account__label' key={index}>
-								<input
-									className='account__input'
-									type={type}
-									placeholder={placeholder}
-									name={name}
-									value={signUp?.nickName}
-									onChange={e => changeHandler(e)}
-								/>
+								<input className='account__input' {...register(name, validation)} {...props} />
+								<small className='account_input-validation'>{errors[name]?.message}</small>
 							</label>
 						)
 				)}
@@ -62,6 +60,7 @@ const NickNameSettingPage = () => {
 					확인
 				</S.NickNameSettingButton>
 			</S.NickNameSettingPageForm>
+			<DevTool control={control} />
 		</S.NickNameSettingPageLayout>
 	);
 };
