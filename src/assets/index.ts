@@ -8,6 +8,9 @@ import LeftBtn from './LeftBtn.svg';
 import RightBtn from './RightBtn.svg';
 import MeeteamLogo from './MeeteamLogo.svg';
 import { CREATE_ICON } from './IconData';
+import Logo from './Logo.svg';
+import CancelBtn from './CancelBtn.svg';
+import XBtn from './XBtn.svg';
 
 export {
 	Exit,
@@ -20,4 +23,7 @@ export {
 	RightBtn,
 	MeeteamLogo,
 	CREATE_ICON,
+	Logo,
+	CancelBtn,
+	XBtn,
 };

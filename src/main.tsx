@@ -22,13 +22,13 @@ import {
 	SchoolCertificationPage,
 	NickNameSettingPage,
 	SignUpPage,
-	MyActivityManagePage,
 	PassWordFindingPage,
 	OutputPreviewPage,
 	MyActivityWrapper,
 	MyActivityInvited,
 	MyActivityApply,
 	MyActivityBookmark,
+	SearchResultPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -56,6 +56,10 @@ const router = createBrowserRouter([
 			{
 				path: 'member',
 				element: <MemberPage />,
+			},
+			{
+				path: 'search',
+				element: <SearchResultPage />,
 			},
 			{
 				path: 'signIn',

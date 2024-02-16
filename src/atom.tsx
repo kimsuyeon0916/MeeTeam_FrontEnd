@@ -152,3 +152,8 @@ export const applyInfoState = atom({
 		message: '',
 	},
 });
+
+export const searchPageState = atom({
+	key: 'searchPageState',
+	default: false,
+});

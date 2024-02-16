@@ -5,6 +5,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { preUrlState } from '../../atom';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { MeeteamLogo, CREATE_ICON } from '../../assets';
+import { searchPageState } from '../../atom';
+import { useRecoilState } from 'recoil';
+import { CancelBtn, Logo, SearchIcon, XBtn } from '../../assets';
+import { Create } from '..';
 
 const Header = () => {
 	const navigate = useNavigate();
@@ -13,6 +17,7 @@ const Header = () => {
 	const alarmRef = useRef<HTMLDivElement | null>(null);
 	const [openDrop, setOpenDrop] = useState<boolean>(false);
 	const [openDropAlarm, setOpenDropAlarm] = useState<boolean>(false);
+	const [openSearch, setOpenSearch] = useRecoilState(searchPageState);
 	const [newAlarm, setNewAlarm] = useState<boolean>(true);
 	const [isHere, setIsHere] = useState({
 		recruit: false,
@@ -37,8 +42,13 @@ const Header = () => {
 		navigate('/information');
 	};
 
-	const setPreUrl = useSetRecoilState(preUrlState);
-	const currentUrl = useRecoilValue(preUrlState);
+	const onClickSearch = () => {
+		setOpenSearch(true);
+	};
+
+	const onClickCancel = () => {
+		setOpenSearch(false);
+	};
 
 	useEffect(() => {
 		if (location.pathname === '/recruit/:recruitId?' || location.pathname === '/recruit') {
@@ -53,7 +63,6 @@ const Header = () => {
 		if (location.pathname === '/information') {
 			setIsHere({ recruit: false, galary: false, member: false, inform: true });
 		}
-		setPreUrl(location.pathname);
 	}, [location]);
 
 	useEffect(() => {
@@ -76,7 +85,7 @@ const Header = () => {
 		<S.Header>
 			<div className='header'>
 				<div className='header__logo' onClick={goHome}>
-					<img src={MeeteamLogo} />
+					<img src={Logo} />
 				</div>
 				<div className='header__navigation'>
 					<div
@@ -105,7 +114,7 @@ const Header = () => {
 					</div>
 				</div>
 				<div className='header__menu'>
-					<div className='header__menu--search'>
+					<div className='header__menu--search' onClick={onClickSearch}>
 						<BiSearch />
 					</div>
 					<div className='header__menu--alarm' ref={alarmRef}>
@@ -137,7 +146,7 @@ const Header = () => {
 						)}
 					</div>
 					<div className='header__menu--create' onClick={() => navigate('/create/meeteam')}>
-						{CREATE_ICON}
+						<Create />
 					</div>
 					<div className='header__menu--my' ref={dropdownRef}>
 						<div className='icon' onClick={() => setOpenDrop(prev => !prev)}>
@@ -187,6 +196,52 @@ const Header = () => {
 					</div>
 				</div>
 			</div>
+			{openSearch && (
+				<div className='search-box'>
+					<div className='search-box__container'>
+						<div className='search-box__bar'>
+							<div>
+								<img src={SearchIcon} />
+							</div>
+							<div className='container-input'>
+								<input />
+							</div>
+						</div>
+						<div className='search-box__recent'>
+							<span className='subtitle'>최근 검색어</span>
+							<div className='container-elements__recent'>
+								<div className='element word_recent'>
+									<span>프로젝트</span>
+									<img src={XBtn} />
+								</div>
+								<div className='element word_recent'>
+									<span>프로젝트</span>
+									<img src={XBtn} />
+								</div>
+								<div className='element word_recent'>
+									<span>프로젝트</span>
+									<img src={XBtn} />
+								</div>
+								<div className='element word_recent'>
+									<span>프로젝트</span>
+									<img src={XBtn} />
+								</div>
+							</div>
+						</div>
+						<div className='search-box__popular'>
+							<span className='subtitle'>인기 검색어</span>
+							<div className='container-keys__popular'>
+								<span className='keyword'>1. {'프로젝트'}</span>
+								<span className='keyword'>2. {'응용소프트웨어실습'}</span>
+								<span className='keyword'>3. {'오픈소스소프트웨어'}</span>
+							</div>
+						</div>
+					</div>
+					<div className='btn-cancel'>
+						<img src={CancelBtn} onClick={onClickCancel} />
+					</div>
+				</div>
+			)}
 		</S.Header>
 	);
 };

@@ -88,6 +88,7 @@ import Content from './meeteam/Content';
 import RecruitCardSmall from './meeteam/card/RecruitCardSmall';
 import Pagination from './pagination/Pagination';
 import NaverLogin from './naver/NaverLogin';
+import Create from './header/Create';
 
 export {
 	Header,
@@ -171,4 +172,5 @@ export {
 	CONTENT,
 	RecruitCardSmall,
 	Pagination,
+	Create,
 };
