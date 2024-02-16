@@ -11,7 +11,6 @@ interface Information {
 }
 
 const InfoItem = (props: Information) => {
-	// console.log('is InfoItem');
 	return (
 		<S.InfoItem>
 			<Subtitle>{props.title}</Subtitle>
