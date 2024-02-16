@@ -35,9 +35,10 @@
 
 ## git branch 전략
 
-- Github Flow
+- Git Flow
 - develop에서 기능별 브랜치 생성 -> pr후 삭제
-- [참고](https://hudi.blog/git-branch-strategy/)
+
+[참고1](https://hudi.blog/git-branch-strategy/), [참고2](https://techblog.woowahan.com/2553/)
 
 ## 협업 컨벤션
 
