@@ -50,6 +50,8 @@ const Header = () => {
 		setOpenSearch(false);
 	};
 
+	const setPreUrl = useSetRecoilState(preUrlState);
+
 	useEffect(() => {
 		if (location.pathname === '/recruit/:recruitId?' || location.pathname === '/recruit') {
 			setIsHere({ recruit: true, galary: false, member: false, inform: false });
@@ -63,6 +65,7 @@ const Header = () => {
 		if (location.pathname === '/information') {
 			setIsHere({ recruit: false, galary: false, member: false, inform: true });
 		}
+		setPreUrl(location.pathname);
 	}, [location]);
 
 	useEffect(() => {
