@@ -5,17 +5,12 @@ import { SearchIcon } from '../../../assets';
 
 const RecruitPage = () => {
 	const postsNum = 150;
-	const postsPerPage = 24;
-	const pageList: string[] = [];
-	const totalPages = Math.ceil(postsNum / postsPerPage);
-
 	const [currentPage, setCurrentPage] = useState<number>(1);
-
 	const [isFiltered, setIsFiltered] = useState({
 		isInside: true,
 		isOutside: false,
 	});
-
+	console.log(currentPage);
 	const onClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
 		const target = event.currentTarget;
 		if (target.innerText === '교내') {

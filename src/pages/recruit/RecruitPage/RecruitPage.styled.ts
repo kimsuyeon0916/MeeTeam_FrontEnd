@@ -21,7 +21,7 @@ const RecruitPage = styled.div`
 			border-radius: 7.5rem;
 			background-color: #fcefaa;
 			color: #000;
-			font-family: Apple SD Gothic Neo;
+
 			font-size: 1.5rem;
 			font-style: normal;
 			font-weight: 400;
@@ -86,7 +86,7 @@ const RecruitPage = styled.div`
 				border-radius: 7.5rem;
 				background: var(--sub-color, #e0e6ff);
 				color: var(--Light-Black, var(--text-color-2, #373f41));
-				font-family: Apple SD Gothic Neo;
+
 				font-size: 1.5rem;
 				font-style: normal;
 				font-weight: 400;
@@ -114,7 +114,7 @@ const RecruitPage = styled.div`
 			border: 0.75px solid #dcdcdc;
 			background: #f9f9f9;
 			color: var(--Light-Black, var(--text-color-2, #373f41));
-			font-family: Apple SD Gothic Neo;
+
 			font-size: 1.2rem;
 			font-style: normal;
 			font-weight: 400;
@@ -151,7 +151,7 @@ const RecruitPage = styled.div`
 			}
 			.subtitle {
 				color: var(--Light-Black, var(--text-color-2, #373f41));
-				font-family: Apple SD Gothic Neo;
+
 				font-size: 2rem;
 				font-style: normal;
 				font-weight: 500;
@@ -163,7 +163,7 @@ const RecruitPage = styled.div`
 				border: none;
 				outline: none;
 				color: var(--Light-Black, var(--text-color-2, #373f41));
-				font-family: 'Apple SD Gothic Neo';
+
 				font-size: 1.3rem;
 				font-style: normal;
 				font-weight: 400;

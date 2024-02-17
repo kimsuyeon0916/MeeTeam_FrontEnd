@@ -32,7 +32,6 @@ const Tag = styled.div<TagInfo>`
 		}
 	}};
 	color: ${props => (props.$recruit ? '#fff' : props.$proceed ? '#fff' : '#373f41;')};
-	font-family: Apple SD Gothic Neo;
 	font-size: 1.1rem;
 	font-style: normal;
 	font-weight: 400;

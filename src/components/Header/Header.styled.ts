@@ -35,7 +35,6 @@ const Header = styled.div`
 
 		.header__navigation--navi-text {
 			color: #515565;
-			font-family: Inter;
 			font-size: 1.5rem;
 			font-style: normal;
 			font-weight: 600;
@@ -109,7 +108,6 @@ const Header = styled.div`
 				.message {
 					padding: 0 3.9rem 0 3.9rem;
 					color: #373f41;
-					font-family: Apple SD Gothic Neo;
 					font-size: 1.5rem;
 					font-style: normal;
 					font-weight: 400;
@@ -188,7 +186,6 @@ const Header = styled.div`
 
 			.menu {
 				color: var(--Light-Black, var(--text-color-2, #373f41));
-				font-family: Apple SD Gothic Neo;
 				font-size: 1.6rem;
 				font-style: normal;
 				font-weight: 400;

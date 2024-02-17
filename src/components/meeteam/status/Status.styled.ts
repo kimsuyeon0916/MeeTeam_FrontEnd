@@ -16,7 +16,6 @@ const Status = styled.div<IStatus>`
 	border-radius: 0.6rem;
 	background-color: ${props => (!props.$check ? '#fff' : '#5877FC')};
 	color: ${props => (!props.$check ? '#000' : '#fff')};
-	font-family: Apple SD Gothic Neo;
 	font-size: 1.5rem;
 	font-style: normal;
 	font-weight: 400;

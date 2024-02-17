@@ -19,9 +19,8 @@ const MainArticle = styled.article`
 	border-radius: 0.75rem;
 	border: 0.075rem solid #bcd7ff;
 	background: #fff;
-	color: var(--Light-Black, #373f41);
+	color: #373f41;
 	font-style: normal;
-	font-family: Pretendard;
 
 	.main__column {
 		display: flex;

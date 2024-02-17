@@ -17,11 +17,10 @@ const MeeTeamCreatePage = styled.div`
 
 		.procedure__subtitle {
 			color: #373f41;
-			font-family: Apple SD Gothic Neo;
 			font-size: 2.4rem;
 			font-style: normal;
 			font-weight: 400;
-			line-height: 4.2rem; /* 175% */
+			line-height: 4.2rem;
 			letter-spacing: 0.015rem;
 		}
 
@@ -36,11 +35,10 @@ const MeeTeamCreatePage = styled.div`
 
 			p {
 				color: #8e8e8e;
-				font-family: Apple SD Gothic Neo;
 				font-size: 1.65rem;
 				font-style: normal;
 				font-weight: 400;
-				line-height: 1.65rem; /* 100% */
+				line-height: 1.65rem;
 				letter-spacing: -0.033rem;
 			}
 		}
@@ -133,11 +131,10 @@ const MeeTeamCreatePage = styled.div`
 
 				.description {
 					color: #8e8e8e;
-					font-family: Pretendard;
 					font-size: 1.4rem;
 					font-style: normal;
 					font-weight: 400;
-					line-height: 1.35rem; /* 90% */
+					line-height: 1.35rem;
 					letter-spacing: 0.015rem;
 					margin-left: 2rem;
 				}
@@ -146,12 +143,11 @@ const MeeTeamCreatePage = styled.div`
 					position: absolute;
 					top: 1.6rem;
 					left: 34.5rem;
-					color: var(--text-color-2, #373f41);
-					font-family: Pretendard;
+					color: #373f41;
 					font-size: 1.35rem;
 					font-style: normal;
 					font-weight: 400;
-					line-height: 1.35rem; /* 100% */
+					line-height: 1.35rem;
 					letter-spacing: 0.015rem;
 				}
 
@@ -186,7 +182,6 @@ const MeeTeamCreatePage = styled.div`
 			margin-top: 4.35rem;
 
 			div:nth-child(2) {
-				/* padding: 10px 20px; */
 				.editor {
 					background-color: #fff;
 					border-radius: 10px;
@@ -205,7 +200,6 @@ const MeeTeamCreatePage = styled.div`
 				border-top-right-radius: 0.75rem;
 				border-top-left-radius: 0.75rem;
 				box-sizing: border-box;
-				font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 				padding: 8px;
 			}
 		}

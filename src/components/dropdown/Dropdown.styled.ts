@@ -18,7 +18,6 @@ const Dropdown = styled.div<IDropdown>`
 		justify-content: flex-end;
 		align-items: center;
 		color: #373f41;
-		font-family: Apple SD Gothic Neo;
 		font-size: 1.8rem;
 		font-style: normal;
 		font-weight: 400;

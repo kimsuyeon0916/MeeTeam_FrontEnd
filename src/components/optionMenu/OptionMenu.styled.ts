@@ -22,13 +22,12 @@ const OptionMenuItem = styled.li`
 	width: 6.9rem;
 	height: 2.7rem;
 	border-radius: 0.6rem;
-	color: var(--text-color, #151515);
-	font-family: Pretendard;
+	color: #151515;
 	font-size: 1.2rem;
 	font-style: normal;
 	font-weight: 400;
 	&:hover {
-		background: var(--sub-color, #e0e6ff);
+		background: #e0e6ff;
 	}
 `;
 

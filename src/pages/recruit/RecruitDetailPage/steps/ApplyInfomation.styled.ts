@@ -9,7 +9,7 @@ const ApplyInformation = styled.div`
 
 		.type {
 			color: #000;
-			font-family: Apple SD Gothic Neo;
+
 			font-size: 1.8rem;
 			font-style: normal;
 			font-weight: 400;
@@ -43,7 +43,7 @@ const ApplyInformation = styled.div`
 
 				span:nth-child(1) {
 					color: var(--Light-Black, var(--text-color-2, #373f41));
-					font-family: Apple SD Gothic Neo;
+
 					font-size: 1.5rem;
 					font-style: normal;
 					font-weight: 400;
@@ -57,7 +57,7 @@ const ApplyInformation = styled.div`
 
 					.user-info {
 						color: #858585;
-						font-family: Apple SD Gothic Neo;
+
 						font-size: 1.2rem;
 						font-style: normal;
 						font-weight: 400;
@@ -81,7 +81,7 @@ const ApplyInformation = styled.div`
 
 		span:nth-child(1) {
 			color: #000;
-			font-family: Apple SD Gothic Neo;
+
 			font-size: 1.8rem;
 			font-style: normal;
 			font-weight: 400;
@@ -90,7 +90,7 @@ const ApplyInformation = styled.div`
 		}
 		span:nth-child(2) {
 			color: var(--Light-Black, var(--text-color-2, #373f41));
-			font-family: Apple SD Gothic Neo;
+
 			font-size: 1.5rem;
 			font-style: normal;
 			font-weight: 400;

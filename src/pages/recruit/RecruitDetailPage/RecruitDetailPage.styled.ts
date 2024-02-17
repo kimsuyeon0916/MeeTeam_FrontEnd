@@ -38,7 +38,7 @@ const RecruitDetailPage = styled.div`
 					h1 {
 						margin-top: 0.2rem;
 						color: #000;
-						font-family: Apple SD Gothic Neo;
+
 						font-size: 2.4rem;
 						font-style: normal;
 						font-weight: 400;
@@ -68,7 +68,7 @@ const RecruitDetailPage = styled.div`
 
 					div:nth-child(2) {
 						color: var(--Light-Black, var(--text-color-2, #373f41));
-						font-family: Apple SD Gothic Neo;
+
 						font-size: 1.5rem;
 						font-style: normal;
 						font-weight: 400;
@@ -91,7 +91,7 @@ const RecruitDetailPage = styled.div`
 
 				h4 {
 					color: #000;
-					font-family: Apple SD Gothic Neo;
+
 					font-size: 1.8rem;
 					font-style: normal;
 					font-weight: 400;
@@ -120,7 +120,7 @@ const RecruitDetailPage = styled.div`
 
 				.container-current__title {
 					color: #000;
-					font-family: Apple SD Gothic Neo;
+
 					font-size: 1.8rem;
 					font-style: normal;
 					font-weight: 400;
@@ -162,7 +162,7 @@ const RecruitDetailPage = styled.div`
 
 							.role {
 								color: #000;
-								font-family: Apple SD Gothic Neo;
+
 								font-size: 1.65rem;
 								font-style: normal;
 								font-weight: 400;
@@ -197,7 +197,7 @@ const RecruitDetailPage = styled.div`
 								gap: 0.75rem;
 								flex-shrink: 0;
 								color: var(--Light-Black, var(--text-color-2, #373f41));
-								font-family: Apple SD Gothic Neo;
+
 								font-size: 1.4rem;
 								font-style: normal;
 								font-weight: 400;
@@ -238,7 +238,7 @@ const RecruitDetailPage = styled.div`
 
 				.title {
 					color: #000;
-					font-family: Apple SD Gothic Neo;
+
 					font-size: 1.8rem;
 					font-style: normal;
 					font-weight: 400;
@@ -282,7 +282,7 @@ const RecruitDetailPage = styled.div`
 								border-radius: 0.6rem;
 								background: #e0e6ff;
 								color: #000;
-								font-family: Apple SD Gothic Neo;
+
 								font-size: 1.2rem;
 								font-style: normal;
 								font-weight: 400;
@@ -301,7 +301,7 @@ const RecruitDetailPage = styled.div`
 								border-radius: 0.6rem;
 								background: #e3f5ff;
 								color: var(--Light-Black, var(--text-color-2, #373f41));
-								font-family: Apple SD Gothic Neo;
+
 								font-size: 1.1rem;
 								font-style: normal;
 								font-weight: 400;
@@ -319,7 +319,7 @@ const RecruitDetailPage = styled.div`
 						color: var(--Light-Black, var(--text-color-2, #373f41));
 						text-overflow: ellipsis;
 						/* white-space: nowrap; */
-						font-family: Apple SD Gothic Neo;
+
 						font-size: 1.65rem;
 						font-style: normal;
 						font-weight: 400;
@@ -334,7 +334,7 @@ const RecruitDetailPage = styled.div`
 
 						div {
 							color: var(--Light-Black, var(--text-color-2, #373f41));
-							font-family: Apple SD Gothic Neo;
+
 							font-size: 1.2rem;
 							font-style: normal;
 							font-weight: 400;
@@ -380,22 +380,20 @@ const RecruitDetailPage = styled.div`
 
 					span:nth-child(1) {
 						color: #434343;
-						font-family: 'Apple SD Gothic Neo';
 						font-size: 1.2rem;
 						font-style: normal;
 						font-weight: 400;
-						line-height: 1.35rem; /* 150% */
+						line-height: 1.35rem;
 						letter-spacing: 0.015rem;
 					}
 					span:nth-child(2) {
 						padding: 0.4rem 1.5rem;
 						background-color: #fff;
-						color: var(--text-color-2, #373f41);
-						font-family: 'Apple SD Gothic Neo';
+						color: #373f41;
 						font-size: 1.5rem;
 						font-style: normal;
 						font-weight: 400;
-						line-height: 150%; /* 2.25rem */
+						line-height: 150%;
 						letter-spacing: 0.015rem;
 						border-radius: 0.75rem;
 					}
@@ -445,12 +443,11 @@ const RecruitDetailPage = styled.div`
 		}
 
 		.container-comments__title {
-			color: var(--Light-Black, var(--text-color-2, #373f41));
-			font-family: Apple SD Gothic Neo;
+			color: #373f41;
 			font-size: 1.8rem;
 			font-style: normal;
 			font-weight: 400;
-			line-height: 3rem; /* 233.333% */
+			line-height: 3rem;
 			letter-spacing: 0.015rem;
 		}
 

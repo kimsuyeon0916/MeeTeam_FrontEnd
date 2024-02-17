@@ -12,9 +12,7 @@ const RequiredInformationGrid = styled.ul<RequiredDate>`
 	font-family: Pretendard;
 	font-size: 1.5rem;
 	font-style: normal;
-	/* width: clamp(45%, 108rem, 75%); */
 	width: ${props => (props.$isPreview ? '100%' : 'clamp(45%, 108rem, 75%)')};
-	// background-color: #fff;
 	margin: 3rem auto;
 	border: 0.75px solid #bcd7ff;
 	border-radius: 0.75rem;

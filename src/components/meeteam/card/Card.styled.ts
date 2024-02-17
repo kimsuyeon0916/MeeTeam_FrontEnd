@@ -44,7 +44,6 @@ const PortpolioCard = styled.div`
 		word-break: break-word;
 		color: var(--Light-Black, var(--text-color-2, #373f41));
 		text-overflow: ellipsis;
-		font-family: Pretendard;
 		font-size: 1.5rem;
 		font-style: normal;
 		font-weight: 400;
@@ -96,7 +95,6 @@ const RecruitCard = styled.div`
 				border-radius: 0.6rem;
 				background: #e0e6ff;
 				color: #000;
-				font-family: Apple SD Gothic Neo;
 				font-size: 1.2rem;
 				font-style: normal;
 				font-weight: 400;
@@ -114,8 +112,7 @@ const RecruitCard = styled.div`
 				gap: 0.75rem;
 				border-radius: 0.6rem;
 				background: #e3f5ff;
-				color: var(--Light-Black, var(--text-color-2, #373f41));
-				font-family: Apple SD Gothic Neo;
+				color: #373f41;
 				font-size: 1.1rem;
 				font-style: normal;
 				font-weight: 400;
@@ -133,15 +130,12 @@ const RecruitCard = styled.div`
 		height: 4.8rem;
 		flex-shrink: 0;
 		margin-top: 1.65rem;
-		/* overflow: hidden; */
-		color: var(--Light-Black, var(--text-color-2, #373f41));
+		color: #373f41;
 		text-overflow: ellipsis;
-		/* white-space: nowrap; */
-		font-family: Apple SD Gothic Neo;
 		font-size: 1.65rem;
 		font-style: normal;
 		font-weight: 400;
-		line-height: 130%; /* 2.145rem */
+		line-height: 130%;
 		letter-spacing: 0.015rem;
 	}
 
@@ -151,12 +145,11 @@ const RecruitCard = styled.div`
 		justify-content: space-between;
 
 		div {
-			color: var(--Light-Black, var(--text-color-2, #373f41));
-			font-family: Apple SD Gothic Neo;
+			color: #373f41;
 			font-size: 1.2rem;
 			font-style: normal;
 			font-weight: 400;
-			line-height: 1.35rem; /* 112.5% */
+			line-height: 1.35rem;
 			letter-spacing: 0.015rem;
 		}
 	}

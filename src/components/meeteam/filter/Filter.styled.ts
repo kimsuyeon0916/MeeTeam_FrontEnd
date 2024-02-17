@@ -20,7 +20,6 @@ const Filter = styled.div`
 			border-radius: 7.5rem;
 			background-color: #fcefaa;
 			color: #000;
-			font-family: Apple SD Gothic Neo;
 			font-size: 1.6rem;
 			font-style: normal;
 			font-weight: 400;
@@ -59,7 +58,6 @@ const Filter = styled.div`
 			padding-top: 0.2rem;
 			align-items: center;
 			color: var(--text-color-2, #373f41);
-			font-family: Pretendard;
 			font-size: 1.35rem;
 			font-style: normal;
 			font-weight: 400;

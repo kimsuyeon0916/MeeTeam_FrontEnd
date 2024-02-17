@@ -39,7 +39,7 @@ const ManageRecruitPage = styled.div<ManageRecruit>`
 			.container-title {
 				color: #000;
 				text-align: center;
-				font-family: Apple SD Gothic Neo;
+
 				font-size: 1.8rem;
 				font-style: normal;
 				font-weight: 400;
