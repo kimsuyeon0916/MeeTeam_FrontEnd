@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tag, Card } from '../../../components';
+import { Card } from '../../components';
 import S from './MyActivityManagePage.styled';
 
 const MyActivityManagePage = () => {

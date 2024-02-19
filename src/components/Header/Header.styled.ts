@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const Header = styled.div`
+	position: relative;
 	.header {
 		display: flex;
 		height: 6.75rem;
@@ -12,17 +13,16 @@ const Header = styled.div`
 
 	.header__logo {
 		display: flex;
-		width: 10.79338rem;
+		width: 12.79338rem;
 		height: 1.29563rem;
 		justify-content: flex-end;
 		align-items: center;
 		flex-shrink: 0;
-		margin-left: 14.88rem;
+		margin-left: 20.88rem;
 		cursor: pointer;
 
-		.header__logo--bridge {
-			left: 14.5rem;
-			top: 2.6rem;
+		img {
+			width: 13rem;
 		}
 	}
 
@@ -35,7 +35,6 @@ const Header = styled.div`
 
 		.header__navigation--navi-text {
 			color: #515565;
-			font-family: Inter;
 			font-size: 1.5rem;
 			font-style: normal;
 			font-weight: 600;
@@ -100,6 +99,7 @@ const Header = styled.div`
 				background: #fff;
 				top: 4rem;
 				right: -2rem;
+				z-index: 501;
 
 				box-sizing: border-box;
 				/* box */
@@ -108,7 +108,6 @@ const Header = styled.div`
 				.message {
 					padding: 0 3.9rem 0 3.9rem;
 					color: #373f41;
-					font-family: Apple SD Gothic Neo;
 					font-size: 1.5rem;
 					font-style: normal;
 					font-weight: 400;
@@ -187,7 +186,6 @@ const Header = styled.div`
 
 			.menu {
 				color: var(--Light-Black, var(--text-color-2, #373f41));
-				font-family: Apple SD Gothic Neo;
 				font-size: 1.6rem;
 				font-style: normal;
 				font-weight: 400;
@@ -198,6 +196,145 @@ const Header = styled.div`
 					color: #614bf7;
 					transition: 0.1s;
 				}
+			}
+		}
+	}
+
+	.search-box {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background-color: #fff;
+		z-index: 1001;
+
+		.search-box__container {
+			width: 70.8rem;
+			display: flex;
+			flex-direction: column;
+			margin: 0 auto;
+			position: relative;
+
+			.search-box__bar {
+				margin-top: 21.2rem;
+				display: inline-flex;
+				justify-content: flex-start;
+				align-items: center;
+				width: 100%;
+
+				img {
+					position: absolute;
+					left: 2rem;
+					top: 22.7rem;
+				}
+
+				.container-input {
+					width: 100%;
+					input {
+						display: flex;
+						margin: 0 auto;
+						width: 100%;
+						height: 5rem;
+						padding: 0.6rem 1.8rem 0.6rem 5rem;
+						box-sizing: border-box;
+						align-items: center;
+						gap: 1rem;
+						flex-shrink: 0;
+						border-radius: 10rem;
+						background: var(--sub-color, #e0e6ff);
+						border: none;
+						outline: none;
+						font-size: 1.8rem;
+						font-weight: 400;
+					}
+				}
+			}
+
+			.subtitle {
+				color: #373f41;
+				font-size: 2.2rem;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 5.6rem;
+				letter-spacing: 0.02rem;
+			}
+
+			.word_recent {
+				color: var(--main-color, #5877fc);
+				font-size: 2rem;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 120%; /* 2.88rem */
+				letter-spacing: -0.048rem;
+			}
+
+			.keyword {
+				color: #696969;
+				font-size: 2rem;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 170%; /* 4.08rem */
+				letter-spacing: -0.048rem;
+				cursor: pointer;
+			}
+
+			.search-box__recent {
+				display: flex;
+				flex-direction: column;
+				margin-top: 2.8rem;
+				min-height: 10rem;
+
+				.container-elements__recent {
+					display: flex;
+					gap: 1rem;
+					flex-wrap: wrap;
+
+					.element {
+						display: flex;
+						height: 4.7rem;
+						width: 18rem;
+						padding: 0.5rem 2rem 0.5rem 3rem;
+						justify-content: center;
+						align-items: center;
+						gap: 0.6rem;
+						border-radius: 10rem;
+						border: 1px solid #6091f0;
+						background: #fff;
+
+						span {
+							cursor: pointer;
+						}
+
+						img {
+							width: 2.5rem;
+							margin-bottom: 0.4rem;
+							cursor: pointer;
+						}
+					}
+				}
+			}
+
+			.search-box__popular {
+				margin-top: 4.5rem;
+				display: flex;
+				flex-direction: column;
+
+				.container-keys__popular {
+					display: flex;
+					flex-direction: column;
+				}
+			}
+		}
+
+		.btn-cancel {
+			position: absolute;
+			top: 5rem;
+			right: 30rem;
+
+			img {
+				width: 7rem;
+				cursor: pointer;
 			}
 		}
 	}

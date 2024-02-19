@@ -60,7 +60,6 @@ const DateSelect = styled.div`
 		z-index: 105;
 	}
 	.react-datepicker {
-		font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
 		font-size: 1.2rem;
 		background-color: #f7fafe;
 		color: #000;

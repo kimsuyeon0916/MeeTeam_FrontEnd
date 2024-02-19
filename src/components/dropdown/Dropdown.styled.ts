@@ -18,7 +18,6 @@ const Dropdown = styled.div<IDropdown>`
 		justify-content: flex-end;
 		align-items: center;
 		color: #373f41;
-		font-family: Apple SD Gothic Neo;
 		font-size: 1.8rem;
 		font-style: normal;
 		font-weight: 400;
@@ -45,7 +44,7 @@ const Dropdown = styled.div<IDropdown>`
 
 			div:nth-child(2) {
 				font-size: 1.1rem;
-				transition: transform 0.2s ease-in-out;
+				transition: transform 0.1s ease-in-out;
 				transform: rotateZ(${props => (props.$showDropdown ? '180deg' : '0deg')});
 			}
 		}

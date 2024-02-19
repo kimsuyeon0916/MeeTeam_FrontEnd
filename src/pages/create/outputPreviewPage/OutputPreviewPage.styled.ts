@@ -19,11 +19,10 @@ const OutputPreview = styled.div`
 			span {
 				color: #000;
 				text-align: center;
-				font-family: 'Apple SD Gothic Neo';
 				font-size: 2.7rem;
 				font-style: normal;
 				font-weight: 400;
-				line-height: 4.2rem; /* 155.556% */
+				line-height: 4.2rem;
 				letter-spacing: 0.015rem;
 				margin-top: 0.3rem;
 			}
@@ -39,13 +38,6 @@ const OutputPreview = styled.div`
 				height: 59rem;
 				border-radius: 0.6rem;
 				background: #f1f1f1;
-
-				/* img {
-					width: 100%;
-					height: 100%;
-					border-radius: 0.6rem;
-					overflow: hidden;
-				} */
 			}
 
 			.left-btn {
@@ -73,11 +65,10 @@ const OutputPreview = styled.div`
 
 		.container-info__subtitle {
 			color: #000;
-			font-family: 'Apple SD Gothic Neo';
 			font-size: 2.4rem;
 			font-style: normal;
 			font-weight: 400;
-			line-height: 4.2rem; /* 175% */
+			line-height: 4.2rem;
 			letter-spacing: 0.015rem;
 		}
 
@@ -89,21 +80,19 @@ const OutputPreview = styled.div`
 			margin-top: 4.05rem;
 			span {
 				color: #000;
-				font-family: 'Apple SD Gothic Neo';
 				font-size: 1.8rem;
 				font-style: normal;
 				font-weight: 400;
-				line-height: 1.8rem; /* 100% */
+				line-height: 1.8rem;
 				letter-spacing: -0.036rem;
 			}
 
 			p {
-				color: var(--text-color-2, #373f41);
-				font-family: 'Apple SD Gothic Neo';
+				color: #373f41;
 				font-size: 1.5rem;
 				font-style: normal;
 				font-weight: 400;
-				line-height: 150%; /* 2.25rem */
+				line-height: 150%;
 				letter-spacing: 0.015rem;
 				margin-top: 1rem;
 			}
@@ -118,12 +107,11 @@ const OutputPreview = styled.div`
 		margin-top: 3.75rem;
 
 		.container-members__subtitle {
-			color: var(--Light-Black, var(--text-color-2, #373f41));
-			font-family: 'Apple SD Gothic Neo';
+			color: #373f41;
 			font-size: 2.1rem;
 			font-style: normal;
 			font-weight: 400;
-			line-height: 4.2rem; /* 200% */
+			line-height: 4.2rem;
 			letter-spacing: 0.015rem;
 		}
 

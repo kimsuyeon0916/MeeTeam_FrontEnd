@@ -27,7 +27,7 @@ const OptionMenuItem = styled.li`
 	font-style: normal;
 	font-weight: 400;
 	&:hover {
-		background: var(--sub-color, #e0e6ff);
+		background: #e0e6ff;
 	}
 `;
 

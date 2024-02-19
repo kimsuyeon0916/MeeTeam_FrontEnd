@@ -17,13 +17,18 @@ import {
 	OutputCreatePage,
 	RecruitDetailPage,
 	IntegratedManagePage,
+	MyActivityLike,
 	SignInPage,
 	SchoolCertificationPage,
 	NickNameSettingPage,
 	SignUpPage,
-	MyActivityManagePage,
 	PassWordFindingPage,
 	OutputPreviewPage,
+	MyActivityWrapper,
+	MyActivityInvited,
+	MyActivityApply,
+	MyActivityBookmark,
+	SearchResultPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -53,6 +58,10 @@ const router = createBrowserRouter([
 				element: <MemberPage />,
 			},
 			{
+				path: 'search',
+				element: <SearchResultPage />,
+			},
+			{
 				path: 'signIn',
 				element: <SignInPage />,
 			},
@@ -71,6 +80,28 @@ const router = createBrowserRouter([
 			{
 				path: 'information',
 				element: <InformationUsePage />,
+			},
+			{
+				path: 'activity',
+				element: <MyActivityWrapper />,
+				children: [
+					{
+						path: 'invited',
+						element: <MyActivityInvited />,
+					},
+					{
+						path: 'like',
+						element: <MyActivityLike />,
+					},
+					{
+						path: 'apply',
+						element: <MyActivityApply />,
+					},
+					{
+						path: 'bookmark',
+						element: <MyActivityBookmark />,
+					},
+				],
 			},
 			{
 				path: 'create/meeteam', // meeteam/create
@@ -113,10 +144,6 @@ const router = createBrowserRouter([
 					{
 						path: 'portpolio',
 						element: <ManagePortpolioPage />,
-					},
-					{
-						path: 'activity',
-						element: <MyActivityManagePage />,
 					},
 				],
 			},

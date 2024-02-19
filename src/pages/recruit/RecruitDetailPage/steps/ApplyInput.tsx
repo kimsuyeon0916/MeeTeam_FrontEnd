@@ -42,6 +42,10 @@ const ApplyInput = () => {
 		setOpenDropdown(false);
 	};
 
+	const onClickCancel = () => {
+		setStep(prev => prev - 1);
+	};
+
 	return (
 		<S.ApplyInput>
 			<div className='container-apply__form'>
@@ -87,6 +91,9 @@ const ApplyInput = () => {
 					onClick={onClickStep}
 				>
 					제출하기
+				</button>
+				<button className='container-apply__form-button' type='button' onClick={onClickCancel}>
+					뒤로가기
 				</button>
 			</div>
 		</S.ApplyInput>

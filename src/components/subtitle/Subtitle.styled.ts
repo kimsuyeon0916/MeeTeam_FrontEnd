@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const Subtitle = styled.span`
 	color: #373f41;
-	font-family: Apple SD Gothic Neo;
 	font-size: 2.1rem;
 	font-style: normal;
 	font-weight: 400;

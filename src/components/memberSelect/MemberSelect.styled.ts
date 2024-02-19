@@ -13,7 +13,6 @@ const MemberSelect = styled.div`
 		justify-content: center;
 		flex-shrink: 0;
 		color: var(--Light-Black, #373f41);
-		font-family: Apple SD Gothic Neo;
 		font-size: 1.5rem;
 		font-style: normal;
 		font-weight: 400;

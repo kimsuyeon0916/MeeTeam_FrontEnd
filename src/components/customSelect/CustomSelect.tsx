@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import S from './CustomSelect.styled';
 import { useRecoilState } from 'recoil';
 import { areaState, categoryState, fieldState } from '../../atom';
@@ -17,6 +17,7 @@ const CustomSelect = ({ optionData, $isMember, type }: ICustomSelect) => {
 	const [field, setField] = useRecoilState(fieldState);
 	const [category, setCategory] = useRecoilState(categoryState);
 
+	// console.log('hi');
 	const handleOnChangeSelectValue = (event: React.MouseEvent<HTMLElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		setCurrentValue(innerText);
@@ -36,6 +37,8 @@ const CustomSelect = ({ optionData, $isMember, type }: ICustomSelect) => {
 		setShowOptions(prev => !prev);
 	};
 
+	// useEffect(() => {}, []);
+
 	return (
 		<S.CustomSelect onClick={onClickhandler} $isMember={$isMember} $show={showOptions}>
 			<S.Label $isSelected={currentValue}>{currentValue}</S.Label>
@@ -50,4 +53,4 @@ const CustomSelect = ({ optionData, $isMember, type }: ICustomSelect) => {
 	);
 };
 
-export default CustomSelect;
+export default React.memo(CustomSelect);

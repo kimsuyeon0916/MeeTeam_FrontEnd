@@ -1,15 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Plus, Upload } from '../../../assets';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { modules } from '../../../utils/index';
-import {
-	Subtitle,
-	Dot,
-	InfoItem,
-	MeeteamTag,
-	MemberInviteModal,
-	MemberTest,
-} from '../../../components';
+import { Subtitle, Dot, InputDropdown, MeeteamTag, MemberInviteModal } from '../../../components';
 import {
 	areaState,
 	categoryState,
@@ -18,10 +11,12 @@ import {
 	memberListState,
 	memberModalState,
 } from '../../../atom';
+import MemberTest from '../../../components/meeteam/main/member/MemberTest';
 import S from './MeeTeamCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from 'react-router-dom';
+import { fixModalBackground } from '../../../utils/index';
 
 const MeeTeamCreatePage = () => {
 	const navigate = useNavigate();
@@ -29,8 +24,7 @@ const MeeTeamCreatePage = () => {
 	const field = useRecoilValue(fieldState);
 	const category = useRecoilValue(categoryState);
 	const quillRef = useRef<ReactQuill | null>(null);
-	const imgRef = useRef<HTMLInputElement | null>(null);
-
+	const nameRef = useRef(null);
 	const [teamName, setTeamName] = useState<string>('');
 	const [startDate, endDate] = useRecoilValue(dateState);
 	const [imgFile, setImgFile] = useState<string>('');
@@ -66,7 +60,8 @@ const MeeTeamCreatePage = () => {
 	};
 
 	const onChangeTeamName = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setTeamName(event.target.value);
+		// setTeamName(event.target.value);
+		nameRef.current = event.target.value;
 		setIsValidName({ validName: true, validMessage: '' });
 	};
 
@@ -144,6 +139,9 @@ const MeeTeamCreatePage = () => {
 		setModalOpen(false);
 	};
 
+	useEffect(() => {
+		fixModalBackground(modalOpen);
+	}, [modalOpen]);
 	return (
 		<S.MeeTeamCreatePage>
 			<div className='procedure'>
@@ -160,12 +158,13 @@ const MeeTeamCreatePage = () => {
 								<Subtitle>{'밋팀 이름'}</Subtitle>
 								<Dot />
 							</div>
-							<div className='container__teamname-input'>
+							<div className='container__teamname-input' ref={nameRef}>
 								<input
 									placeholder='밋팀 이름을 입력해주세요.'
 									type='text'
 									onChange={onChangeTeamName}
 									maxLength={20}
+									ref={nameRef}
 								/>
 							</div>
 							<span className='teamname-length'>
@@ -177,17 +176,22 @@ const MeeTeamCreatePage = () => {
 							<div className='info-wrapper'>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem isDot='true' title='범위' optionData={['교내', '교외']} type='범위' />
+										<InputDropdown
+											isDot='true'
+											title='범위'
+											optionData={['교내', '교외']}
+											type='범위'
+										/>
 										{!isValidArea.validArea && <p>{isValidArea.validMessage}</p>}
 									</div>
 									<div>
-										<InfoItem isDot='true' title='분야' optionData={['개발']} type='분야' />
+										<InputDropdown isDot='true' title='분야' optionData={['개발']} type='분야' />
 										{!isValidField.validField && <p>{isValidField.validMessage}</p>}
 									</div>
 								</div>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem
+										<InputDropdown
 											isDot='true'
 											title='유형'
 											optionData={['프로젝트', '스터디']}
@@ -196,16 +200,24 @@ const MeeTeamCreatePage = () => {
 										{!isValidCategory.validCategory && <p>{isValidCategory.validMessage}</p>}
 									</div>
 									<div>
-										<InfoItem isDot='false' title='진행 방식' optionData={['온라인', '오프라인']} />
+										<InputDropdown
+											isDot='false'
+											title='진행 방식'
+											optionData={['온라인', '오프라인']}
+										/>
 									</div>
 								</div>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem isDot='true' title='기간' optionData={[]} type='기간' />
+										<InputDropdown isDot='true' title='기간' optionData={[]} type='기간' />
 										{!isValidDate.validDate && <p>{isValidDate.validMessage}</p>}
 									</div>
 									<div className='fix'>
-										<InfoItem isDot='false' title='공개 여부' optionData={['공개', '비공개']} />
+										<InputDropdown
+											isDot='false'
+											title='공개 여부'
+											optionData={['공개', '비공개']}
+										/>
 									</div>
 								</div>
 								<div className='container__info-select'>
@@ -286,7 +298,11 @@ const MeeTeamCreatePage = () => {
 									멤버 초대 +
 								</button>
 							</div>
-							{modalOpen && <MemberInviteModal onClick={onClickTestAdd} />}
+							{modalOpen && (
+								<div className='modal-box'>
+									<MemberInviteModal onClick={onClickTestAdd} />
+								</div>
+							)}
 							<div className='container__member-area'>
 								{memberList.map((e, index) => (
 									<MemberTest key={index} id={index.toString()} />

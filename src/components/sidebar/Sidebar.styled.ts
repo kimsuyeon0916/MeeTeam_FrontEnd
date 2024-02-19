@@ -13,7 +13,6 @@ const Sidebar = styled.div`
 
 			h1 {
 				color: #373f41;
-				font-family: Apple SD Gothic Neo;
 				font-size: 2.1rem;
 				font-style: normal;
 				font-weight: 400;
@@ -31,7 +30,6 @@ const Sidebar = styled.div`
 
 			.normal {
 				color: #7c7c7c;
-				font-family: Apple SD Gothic Neo;
 				font-size: 1.5rem;
 				font-style: normal;
 				font-weight: 400;
@@ -42,7 +40,6 @@ const Sidebar = styled.div`
 
 			.active {
 				color: #558bf1;
-				font-family: Apple SD Gothic Neo;
 				font-size: 1.5rem;
 				font-style: normal;
 				font-weight: 400;

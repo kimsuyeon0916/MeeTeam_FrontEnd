@@ -18,7 +18,6 @@ const CustomSelect = styled.div<ISelectOptionsProps>`
 	cursor: pointer;
 	box-sizing: border-box;
 	&::before {
-		/* ${props => (props.$show ? `content: '⌃';` : `content: '⌵';`)} */
 		content: '⌵';
 		position: absolute;
 		top: 1rem;
@@ -36,7 +35,6 @@ const Label = styled.label<ISelectOptionsProps>`
 	margin-left: 2.1rem;
 	text-align: center;
 	color: ${props => (props.$isSelected === '선택' ? '#a7a7a7' : '#000')};
-	font-family: Apple SD Gothic Neo;
 	font-size: 1.5rem;
 	font-style: normal;
 	font-weight: 400;

@@ -8,7 +8,7 @@ const ApplySubmit = styled.div`
 
 		.container-apply__form-title {
 			color: #000;
-			font-family: 'Apple SD Gothic Neo';
+
 			font-size: 1.8rem;
 			font-style: normal;
 			font-weight: 400;
@@ -42,7 +42,7 @@ const ApplySubmit = styled.div`
 
 		.info-subtitle {
 			color: var(--Light-Black, var(--text-color-2, #373f41));
-			font-family: 'Apple SD Gothic Neo';
+
 			font-size: 1.5rem;
 			font-style: normal;
 			font-weight: 400;
@@ -52,7 +52,7 @@ const ApplySubmit = styled.div`
 
 		.info-value {
 			color: var(--Light-Black, var(--text-color-2, #373f41));
-			font-family: 'Apple SD Gothic Neo';
+
 			font-size: 1.5rem;
 			font-style: normal;
 			font-weight: 400;
@@ -73,7 +73,7 @@ const ApplySubmit = styled.div`
 
 			span:nth-child(1) {
 				color: #000;
-				font-family: 'Apple SD Gothic Neo';
+
 				font-size: 1.5rem;
 				font-style: normal;
 				font-weight: 400;
@@ -82,7 +82,7 @@ const ApplySubmit = styled.div`
 			}
 			span:nth-child(2) {
 				color: #686868;
-				font-family: 'Apple SD Gothic Neo';
+
 				font-size: 1.05rem;
 				font-style: normal;
 				font-weight: 400;
@@ -107,7 +107,7 @@ const ApplySubmit = styled.div`
 				flex-shrink: 0;
 				border-radius: 0.6rem;
 				color: var(--Light-Black, var(--text-color-2, #373f41));
-				font-family: 'Apple SD Gothic Neo';
+
 				font-size: 1.5rem;
 				font-style: normal;
 				font-weight: 400;
