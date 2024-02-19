@@ -3,9 +3,11 @@ import { Dropdown, Subtitle, RecruitCard, Pagination } from '../../../components
 import S from './RecruitPage.styled';
 import { SearchIcon } from '../../../assets';
 
+const START_PAGE_NUM = 1;
+
 const RecruitPage = () => {
 	const postsNum = 150;
-	const [currentPage, setCurrentPage] = useState<number>(1);
+	const [currentPage, setCurrentPage] = useState<number>(START_PAGE_NUM);
 	const [isFiltered, setIsFiltered] = useState({
 		isInside: true,
 		isOutside: false,

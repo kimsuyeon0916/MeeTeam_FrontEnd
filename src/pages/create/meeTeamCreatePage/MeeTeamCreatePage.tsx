@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Plus, Upload } from '../../../assets';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { modules } from '../../../utils/index';
@@ -23,8 +23,7 @@ const MeeTeamCreatePage = () => {
 	const field = useRecoilValue(fieldState);
 	const category = useRecoilValue(categoryState);
 	const quillRef = useRef<ReactQuill | null>(null);
-	const imgRef = useRef<HTMLInputElement | null>(null);
-
+	const nameRef = useRef(null);
 	const [teamName, setTeamName] = useState<string>('');
 	const [startDate, endDate] = useRecoilValue(dateState);
 	const [imgFile, setImgFile] = useState<string>('');
@@ -60,7 +59,8 @@ const MeeTeamCreatePage = () => {
 	};
 
 	const onChangeTeamName = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setTeamName(event.target.value);
+		// setTeamName(event.target.value);
+		nameRef.current = event.target.value;
 		setIsValidName({ validName: true, validMessage: '' });
 	};
 
@@ -143,7 +143,7 @@ const MeeTeamCreatePage = () => {
 	} else {
 		document.body.style.overflow = 'auto';
 	}
-
+	console.log('Main');
 	return (
 		<S.MeeTeamCreatePage>
 			<div className='procedure'>
@@ -160,12 +160,13 @@ const MeeTeamCreatePage = () => {
 								<Subtitle>{'밋팀 이름'}</Subtitle>
 								<Dot />
 							</div>
-							<div className='container__teamname-input'>
+							<div className='container__teamname-input' ref={nameRef}>
 								<input
 									placeholder='밋팀 이름을 입력해주세요.'
 									type='text'
 									onChange={onChangeTeamName}
 									maxLength={20}
+									ref={nameRef}
 								/>
 							</div>
 							<span className='teamname-length'>
