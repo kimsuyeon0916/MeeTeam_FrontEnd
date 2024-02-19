@@ -1,4 +1,4 @@
-const fixModalBackgrond = (modalState: boolean) => {
+const fixModalBackground = (modalState: boolean) => {
 	// state인자로 받기
 	if (modalState) {
 		document.body.style.overflow = 'hidden';
@@ -7,4 +7,4 @@ const fixModalBackgrond = (modalState: boolean) => {
 	}
 };
 
-export default fixModalBackgrond;
+export default fixModalBackground;

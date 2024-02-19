@@ -5,6 +5,7 @@ import ColorMatching from './ColorMatching';
 import CopyClipBoard from './CopyClipBoard';
 import SessionStorageEffect from './SessionStorageEffect';
 import { LocalStorageEffect } from './LocalStorageEffect';
+import fixModalBackground from './FixModalBackground';
 
 export {
 	modules,
@@ -15,4 +16,5 @@ export {
 	CopyClipBoard,
 	SessionStorageEffect,
 	LocalStorageEffect,
+	fixModalBackground,
 };

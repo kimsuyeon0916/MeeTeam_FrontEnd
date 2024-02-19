@@ -16,7 +16,7 @@ import S from './MeeTeamCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from 'react-router-dom';
-import fixModalBackgrond from '../../../utils/fixModalBackground';
+import { fixModalBackground } from '../../../utils/index';
 
 const MeeTeamCreatePage = () => {
 	const navigate = useNavigate();
@@ -140,7 +140,7 @@ const MeeTeamCreatePage = () => {
 	};
 
 	useEffect(() => {
-		fixModalBackgrond(modalOpen);
+		fixModalBackground(modalOpen);
 	}, [modalOpen]);
 	return (
 		<S.MeeTeamCreatePage>
