@@ -18,7 +18,6 @@ const MenuBox = styled.button<{ $color?: boolean }>`
 	border-bottom: ${props => (props.$color ? `0` : `0.15rem solid #BCD7FF`)};
 	background: ${props => (props.$color ? '#F7FAFF' : '#FFF')};
 	color: var(--light-black, ${props => (props.$color ? '#151515' : '#373F41')});
-	font-family: Pretendard;
 	font-size: 1.5rem;
 	font-style: normal;
 	font-weight: ${props => (props.$color ? `600` : `400`)};

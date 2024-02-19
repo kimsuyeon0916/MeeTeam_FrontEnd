@@ -4,7 +4,6 @@ const InformationLayout = styled.div`
 	display: flex;
 	flex-direction: column;
 	row-gap: 1.8rem;
-	font-family: Pretendard;
 
 	.information__grid {
 		display: grid;

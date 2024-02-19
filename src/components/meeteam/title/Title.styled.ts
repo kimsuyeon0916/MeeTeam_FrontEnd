@@ -4,7 +4,6 @@ const TitleRow = styled.header`
 	display: flex;
 	align-items: center;
 	color: #000;
-	font-family: Pretendard;
 	font-size: 2.7rem;
 	font-style: normal;
 	font-weight: 400;

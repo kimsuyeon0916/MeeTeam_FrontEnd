@@ -1,9 +1,9 @@
 import { atom } from 'recoil';
 import { SessionStorageEffect } from './utils';
 import { MeeTeamMember } from './components';
-import type { User } from './types';
+import { User } from './types';
 import { LocalStorageEffect } from './utils';
-import type { SignUp } from './pages';
+import { Account } from './pages';
 
 export const userState = atom<User | null>({
 	key: 'userState',
@@ -11,10 +11,10 @@ export const userState = atom<User | null>({
 	effects: [LocalStorageEffect<User | null>('userState')],
 });
 
-export const naverSignUpState = atom<SignUp | null>({
+export const naverSignUpState = atom<Account | null>({
 	key: 'naverSignUpState',
 	default: null,
-	effects: [LocalStorageEffect<SignUp | null>('naverSignUpState')],
+	effects: [LocalStorageEffect<Account | null>('naverSignUpState')],
 });
 
 export const submitEmailState = atom({

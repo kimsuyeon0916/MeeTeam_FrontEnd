@@ -1,7 +1,3 @@
-export type SignUp = {
-	[key: string]: string;
-};
-
 const SCHOOL_CERTIFICATION_DATA = [
 	{
 		label: '학교',
