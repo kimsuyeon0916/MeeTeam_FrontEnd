@@ -5,7 +5,6 @@ const SettingLayout = styled.div`
 	display: flex;
 	flex-direction: column;
 	row-gap: 1.8rem;
-	font-family: Pretendard;
 `;
 
 const SettingArticle = styled(Main.MainArticle)`
@@ -23,11 +22,11 @@ const SettingButton = styled.button<{ $color?: string }>`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-  margin-left: auto;
+	margin-left: auto;
 	height: 3.45rem;
 	padding: 0 1.5rem;
 	border-radius: 0.6rem;
-	background: ${props => props.$color ? props.$color : '#5877FC'};
+	background: ${props => (props.$color ? props.$color : '#5877FC')};
 	color: #fff;
 	font-size: 1.5rem;
 	cursor: pointer;

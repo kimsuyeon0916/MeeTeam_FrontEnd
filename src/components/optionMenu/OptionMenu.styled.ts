@@ -23,7 +23,6 @@ const OptionMenuItem = styled.li`
 	height: 2.7rem;
 	border-radius: 0.6rem;
 	color: var(--text-color, #151515);
-	font-family: Pretendard;
 	font-size: 1.2rem;
 	font-style: normal;
 	font-weight: 400;

@@ -10,7 +10,6 @@ const DashBoardLayout = styled.div`
 	display: flex;
 	flex-direction: column;
 	row-gap: 1.8rem;
-	font-family: Pretendard;
 
 	.dash-board__row {
 		display: flex;
@@ -59,7 +58,6 @@ const DashBoardMeeTeamButton = styled.button`
 
 const DashBoardDefaultButton = styled.button<{ $done?: boolean }>`
 	all: unset;
-	font-family: Pretendard;
 	display: flex;
 	justify-content: center;
 	align-items: center;

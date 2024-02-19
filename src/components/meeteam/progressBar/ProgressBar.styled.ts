@@ -20,7 +20,6 @@ const ProgressBarBox = styled.div<{ $color?: boolean }>`
 	border-radius: 0.417vw;
 	background: ${props => (props.$color ? '#5877FC' : '#eeecff')};
 	color: var(--light-black, ${props => (props.$color ? '#FFFFFF' : '#373f41')});
-	font-family: Pretendard;
 	font-size: 1.1rem;
 	font-style: normal;
 	font-weight: 600;
