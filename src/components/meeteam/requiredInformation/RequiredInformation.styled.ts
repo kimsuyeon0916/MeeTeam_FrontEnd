@@ -9,7 +9,6 @@ const RequiredInformationGrid = styled.ul<RequiredDate>`
 	grid-template-columns: repeat(3, auto);
 	column-gap: 9.75rem;
 	row-gap: 1.57rem;
-	font-family: Pretendard;
 	font-size: 1.5rem;
 	font-style: normal;
 	/* width: clamp(45%, 108rem, 75%); */

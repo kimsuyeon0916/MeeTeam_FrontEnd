@@ -1,47 +1,51 @@
-import { SignUp } from '../..';
+import { INPUT_VALIDATION } from '../..';
 
-interface Account {
+export interface Account {
 	[key: string]: string;
 }
-export type { Account };
 
-interface User {
+export interface User {
 	nickName: string;
 	accountInformation: Account;
-	schoolInformation: SignUp;
+	schoolInformation: Account;
 }
-export type { User };
 
 const SIGN_UP_DATA = [
 	{
 		label: '닉네임',
+		name: 'nickName',
 		type: 'text',
 		placeholder: '닉네임을 입력해주세요',
-		name: 'nickName',
+		required: true,
+		validation: INPUT_VALIDATION.nickName,
 	},
 	{
 		label: '이름',
+		name: 'name',
 		type: 'text',
 		placeholder: '실명을 입력해주세요',
-		name: 'name',
+		required: true,
 	},
 	{
 		label: '이메일',
+		name: 'email',
 		type: 'email',
 		placeholder: '학교 이메일 고정',
-		name: 'email',
+		required: true,
 	},
 	{
 		label: '비밀번호',
+		name: 'password',
 		type: 'password',
 		placeholder: '영문 소문자 및 숫자, 4-16자',
-		name: 'password',
+		required: true,
 	},
 	{
 		label: '비밀번호 확인',
+		name: 'passwordCheck',
 		type: 'password',
 		placeholder: '비밀번호 재입력',
-		name: 'passwordCheck',
+		required: true,
 	},
 ];
 

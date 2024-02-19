@@ -21,7 +21,6 @@ const MainArticle = styled.article`
 	background: #fff;
 	color: var(--Light-Black, #373f41);
 	font-style: normal;
-	font-family: Pretendard;
 
 	.main__column {
 		display: flex;
