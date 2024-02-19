@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dot, CustomSelect, Subtitle, DeadlineSelect } from '..';
 import DateSelect from '../dateSelect/DateSelect';
-import S from './InfoItem.styled';
+import S from './InputDropdown.styled';
 
 interface Information {
 	isDot: string;
@@ -10,9 +10,9 @@ interface Information {
 	type?: string;
 }
 
-const InfoItem = (props: Information) => {
+const InputDropdown = (props: Information) => {
 	return (
-		<S.InfoItem>
+		<S.InputDropdown>
 			<Subtitle>{props.title}</Subtitle>
 			{props.isDot === 'true' && <Dot />}
 			{props.title === '기간' ? (
@@ -22,8 +22,8 @@ const InfoItem = (props: Information) => {
 			) : (
 				<CustomSelect optionData={props.optionData} type={props.type} />
 			)}
-		</S.InfoItem>
+		</S.InputDropdown>
 	);
 };
 
-export default React.memo(InfoItem);
+export default React.memo(InputDropdown);

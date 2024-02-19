@@ -3,7 +3,7 @@ import S from './Card.styled';
 import { useNavigate } from 'react-router-dom';
 import { FaRegBookmark, FaBookmark } from 'react-icons/fa6';
 
-const RecruitCardSmall = () => {
+const RecruitCard = () => {
 	const navigate = useNavigate();
 	const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
 
@@ -36,4 +36,4 @@ const RecruitCardSmall = () => {
 	);
 };
 
-export default React.memo(RecruitCardSmall);
+export default React.memo(RecruitCard);

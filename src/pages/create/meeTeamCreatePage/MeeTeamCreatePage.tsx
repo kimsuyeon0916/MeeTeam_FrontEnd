@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Plus, Upload } from '../../../assets';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { modules } from '../../../utils/index';
-import { Subtitle, Dot, InfoItem, MeeteamTag, MemberInviteModal } from '../../../components';
+import { Subtitle, Dot, InputDropdown, MeeteamTag, MemberInviteModal } from '../../../components';
 import {
 	areaState,
 	categoryState,
@@ -177,17 +177,22 @@ const MeeTeamCreatePage = () => {
 							<div className='info-wrapper'>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem isDot='true' title='범위' optionData={['교내', '교외']} type='범위' />
+										<InputDropdown
+											isDot='true'
+											title='범위'
+											optionData={['교내', '교외']}
+											type='범위'
+										/>
 										{!isValidArea.validArea && <p>{isValidArea.validMessage}</p>}
 									</div>
 									<div>
-										<InfoItem isDot='true' title='분야' optionData={['개발']} type='분야' />
+										<InputDropdown isDot='true' title='분야' optionData={['개발']} type='분야' />
 										{!isValidField.validField && <p>{isValidField.validMessage}</p>}
 									</div>
 								</div>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem
+										<InputDropdown
 											isDot='true'
 											title='유형'
 											optionData={['프로젝트', '스터디']}
@@ -196,16 +201,24 @@ const MeeTeamCreatePage = () => {
 										{!isValidCategory.validCategory && <p>{isValidCategory.validMessage}</p>}
 									</div>
 									<div>
-										<InfoItem isDot='false' title='진행 방식' optionData={['온라인', '오프라인']} />
+										<InputDropdown
+											isDot='false'
+											title='진행 방식'
+											optionData={['온라인', '오프라인']}
+										/>
 									</div>
 								</div>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem isDot='true' title='기간' optionData={[]} type='기간' />
+										<InputDropdown isDot='true' title='기간' optionData={[]} type='기간' />
 										{!isValidDate.validDate && <p>{isValidDate.validMessage}</p>}
 									</div>
 									<div className='fix'>
-										<InfoItem isDot='false' title='공개 여부' optionData={['공개', '비공개']} />
+										<InputDropdown
+											isDot='false'
+											title='공개 여부'
+											optionData={['공개', '비공개']}
+										/>
 									</div>
 								</div>
 								<div className='container__info-select'>

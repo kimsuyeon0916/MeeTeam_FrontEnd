@@ -4,7 +4,7 @@ interface IManageRecruitPage {
 	isOn?: boolean;
 }
 
-const RecruitCard = styled.div<IManageRecruitPage>`
+const ManageRecruitCard = styled.div<IManageRecruitPage>`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -93,6 +93,6 @@ const RecruitCard = styled.div<IManageRecruitPage>`
 	}
 `;
 
-const S = { RecruitCard };
+const S = { ManageRecruitCard };
 
 export default S;

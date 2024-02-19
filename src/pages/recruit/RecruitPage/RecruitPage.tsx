@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dropdown, Subtitle, RecruitCardSmall, Pagination } from '../../../components';
+import { Dropdown, Subtitle, RecruitCard, Pagination } from '../../../components';
 import S from './RecruitPage.styled';
 import { SearchIcon } from '../../../assets';
 
@@ -81,20 +81,20 @@ const RecruitPage = () => {
 							</div>
 						</div>
 						<div className='contents'>
-							<RecruitCardSmall />
-							<RecruitCardSmall />
-							<RecruitCardSmall />
-							<RecruitCardSmall />
+							<RecruitCard />
+							<RecruitCard />
+							<RecruitCard />
+							<RecruitCard />
 						</div>
 					</div>
 					<div>
 						<Subtitle>전체 구인 글</Subtitle>
 						<div className='container-contents__grid'>
-							<RecruitCardSmall />
-							<RecruitCardSmall />
-							<RecruitCardSmall />
-							<RecruitCardSmall />
-							<RecruitCardSmall />
+							<RecruitCard />
+							<RecruitCard />
+							<RecruitCard />
+							<RecruitCard />
+							<RecruitCard />
 						</div>
 					</div>
 				</div>

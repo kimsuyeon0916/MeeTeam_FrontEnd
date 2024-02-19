@@ -1,7 +1,7 @@
 import Header from './header/Header';
 import Subtitle from './subtitle/Subtitle';
 import Dot from './dot/Dot';
-import InfoItem from './infoItem/InfoItem';
+import InputDropdown from './InputDropdown/InputDropdown';
 import CustomSelect from './customSelect/CustomSelect';
 import MeeteamTag from './tag/MeeteamTag';
 import MemberSelect from './memberSelect/MemberSelect';
@@ -75,7 +75,7 @@ import Sidebar from './sidebar/Sidebar';
 import Card from './meeteam/card/Card';
 import PortpolioCard from './meeteam/card/PortpolioCard';
 import Tag from './meeteam/tag/Tag';
-import RecruitCard from './recruit/RecruitCard';
+import ManageRecruitCard from './recruit/ManageRecruitCard';
 import Status from './meeteam/status/Status';
 import Filter from './meeteam/filter/Filter';
 import Dropdown from './dropdown/Dropdown';
@@ -85,7 +85,7 @@ import ApplyInfomation from '../pages/recruit/RecruitDetailPage/steps/ApplyInfom
 import ApplyInput from '../pages/recruit/RecruitDetailPage/steps/ApplyInput';
 import ApplySubmit from '../pages/recruit/RecruitDetailPage/steps/ApplySubmit';
 import Content from './meeteam/Content';
-import RecruitCardSmall from './meeteam/card/RecruitCardSmall';
+import RecruitCard from './meeteam/card/RecruitCard';
 import Pagination from './pagination/Pagination';
 import NaverLogin from './naver/NaverLogin';
 import Create from './header/Create';
@@ -94,7 +94,7 @@ export {
 	Header,
 	Subtitle,
 	Dot,
-	InfoItem,
+	InputDropdown,
 	CustomSelect,
 	MeeteamTag,
 	MemberSelect,
@@ -153,7 +153,7 @@ export {
 	Sidebar,
 	Card,
 	Tag,
-	RecruitCard,
+	ManageRecruitCard,
 	Status,
 	Filter,
 	Dropdown,
@@ -170,7 +170,7 @@ export {
 	informationList,
 	role,
 	CONTENT,
-	RecruitCardSmall,
+	RecruitCard,
 	Pagination,
 	Create,
 };

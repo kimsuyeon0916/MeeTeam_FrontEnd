@@ -1,7 +1,13 @@
 import React, { useRef, useState, useCallback } from 'react';
 import { Plus } from '../../../assets';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { Subtitle, Dot, InfoItem, MeeteamTag, MemberInviteModal } from '../../../components/index';
+import {
+	Subtitle,
+	Dot,
+	InputDropdown,
+	MeeteamTag,
+	MemberInviteModal,
+} from '../../../components/index';
 import {
 	areaRecruitState,
 	fieldRecruitState,
@@ -168,7 +174,7 @@ const RecruitCreatePage = () => {
 							<div className='info-wrapper'>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem
+										<InputDropdown
 											isDot='true'
 											title='범위'
 											optionData={['교내', '교외']}
@@ -178,7 +184,7 @@ const RecruitCreatePage = () => {
 										{!isValidArea.validArea && <p>{isValidArea.validMessage}</p>}
 									</div>
 									<div>
-										<InfoItem
+										<InputDropdown
 											isDot='true'
 											title='분야'
 											optionData={['개발']}
@@ -190,7 +196,7 @@ const RecruitCreatePage = () => {
 								</div>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem
+										<InputDropdown
 											isDot='true'
 											title='유형'
 											optionData={['프로젝트', '스터디']}
@@ -200,7 +206,7 @@ const RecruitCreatePage = () => {
 										{!isValidCategory.validCategory && <p>{isValidCategory.validMessage}</p>}
 									</div>
 									<div>
-										<InfoItem
+										<InputDropdown
 											isDot='false'
 											title='진행 방식'
 											optionData={['온라인', '오프라인']}
@@ -210,11 +216,17 @@ const RecruitCreatePage = () => {
 								</div>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem isDot='true' title='기간' optionData={[]} type='기간' key='period' />
+										<InputDropdown
+											isDot='true'
+											title='기간'
+											optionData={[]}
+											type='기간'
+											key='period'
+										/>
 										{!isValidDate.validDate && <p>{isValidDate.validMessage}</p>}
 									</div>
 									<div className='fix'>
-										<InfoItem
+										<InputDropdown
 											isDot='false'
 											title='공개 여부'
 											optionData={['공개', '비공개']}
@@ -248,7 +260,7 @@ const RecruitCreatePage = () => {
 								</div>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem
+										<InputDropdown
 											isDot='true'
 											title='구인 마감일'
 											optionData={[]}
