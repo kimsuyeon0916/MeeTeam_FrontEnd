@@ -22,7 +22,7 @@ const OptionMenuItem = styled.li`
 	width: 6.9rem;
 	height: 2.7rem;
 	border-radius: 0.6rem;
-	color: #151515;
+	color: var(--text-color, #151515);
 	font-size: 1.2rem;
 	font-style: normal;
 	font-weight: 400;

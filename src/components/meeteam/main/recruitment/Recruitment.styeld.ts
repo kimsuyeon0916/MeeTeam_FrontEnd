@@ -5,7 +5,6 @@ const RecruitmentLayout = styled.div`
 	display: flex;
 	flex-direction: column;
 	row-gap: 1.8rem;
-	font-family: Pretendard;
 `;
 
 const RecruitmentArticle = styled(Main.MainArticle)`
