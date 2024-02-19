@@ -8,14 +8,14 @@ import { userState } from '../../../../atom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 
-const NickNameSettingPage = () => {
-	const navigate = useNavigate();
+interface FormValues {
+	nickName: string;
+}
 
+const NickNameSettingPage = () => {
 	const title = `밋팀에서 사용하실\n닉네임을 설정해주세요`;
 
-	interface FormValues {
-		nickName: string;
-	}
+	const navigate = useNavigate();
 
 	const {
 		register,
