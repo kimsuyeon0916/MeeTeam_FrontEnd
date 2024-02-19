@@ -14,5 +14,5 @@ export {
 	ColorMatching,
 	CopyClipBoard,
 	SessionStorageEffect,
-  LocalStorageEffect,
+	LocalStorageEffect,
 };

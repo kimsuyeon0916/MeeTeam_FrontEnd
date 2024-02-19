@@ -16,6 +16,7 @@ import S from './MeeTeamCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from 'react-router-dom';
+import fixModalBackgrond from '../../../utils/fixModalBackground';
 
 const MeeTeamCreatePage = () => {
 	const navigate = useNavigate();
@@ -138,12 +139,9 @@ const MeeTeamCreatePage = () => {
 		setModalOpen(false);
 	};
 
-	if (modalOpen) {
-		document.body.style.overflow = 'hidden';
-	} else {
-		document.body.style.overflow = 'auto';
-	}
-	console.log('Main');
+	useEffect(() => {
+		fixModalBackgrond(modalOpen);
+	}, [modalOpen]);
 	return (
 		<S.MeeTeamCreatePage>
 			<div className='procedure'>
