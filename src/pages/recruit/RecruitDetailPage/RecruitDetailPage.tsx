@@ -20,6 +20,11 @@ import { ComponentProps } from '../../../types';
 
 let addedCmtId;
 
+// 댓글은 전역적으로 관리 x
+// 해당 페이지에서 관리
+// 자식들에게 props로 전달하고 변환된 값을 부모로 올려줘야 함.
+// 자식들에게 list와 변경함수 모두 전달해야함.
+
 const RecruitDetailPage = () => {
 	const navigate = useNavigate();
 	const [isReply, setIsReply] = useState<boolean>(false);
@@ -79,6 +84,10 @@ const RecruitDetailPage = () => {
 			// 로그인 페이지로 이동
 			// navigate('/login');
 		}
+	};
+
+	const onClickReply = () => {
+		setIsReply(true);
 	};
 
 	return (
@@ -177,11 +186,21 @@ const RecruitDetailPage = () => {
 					{commentsList.map(comment => {
 						return (
 							<>
-								<Comment id={comment.id} username={comment.username} content={comment.content} />
+								<Comment
+									id={comment.id}
+									username={comment.username}
+									content={comment.content}
+									onClickReply={onClickReply}
+								/>
 								<ul>
 									{replyList.map(reply => {
 										return (
-											<Comment id={reply.id} username={reply.username} content={reply.content} />
+											<Comment
+												id={reply.id}
+												username={reply.username}
+												content={reply.content}
+												onClickReply={onClickReply}
+											/>
 										);
 									})}
 								</ul>
@@ -190,7 +209,12 @@ const RecruitDetailPage = () => {
 						);
 					})}
 				</ul>
-				<CommentInput />
+				<CommentInput
+					addComment={addComment}
+					onKeyPress={onKeyPress}
+					onChangeHandler={onChangeHandler}
+					onClickInput={onClickInput}
+				/>
 			</div>
 		</S.RecruitDetailPage>
 	);

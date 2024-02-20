@@ -3,12 +3,7 @@ import { Icon } from '../..';
 import S from './Comment.styled';
 import { Comment } from '../../../types';
 
-const Comment = ({ id, username, content }: Comment) => {
-	const [isReply, setIsReply] = useState<boolean>(false);
-
-	const onClickReply = () => {
-		setIsReply(true);
-	};
+const Comment = ({ id, username, content, onClickReply }: Comment) => {
 	return (
 		<S.Comment key={id}>
 			<div className='comment-icon'>
