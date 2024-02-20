@@ -1,4 +1,4 @@
-import { Card, Filter } from '../../../components';
+import { Card, Filter } from '../../components';
 import S from './ManagePortpolio.styled';
 
 const ManagePortpolioPage = () => {

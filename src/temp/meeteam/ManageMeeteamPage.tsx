@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Card, Filter } from '../../../components';
+import { Card, Filter } from '../../components';
 import S from './ManageMeeteamPage.styled';
 import { useNavigate } from 'react-router-dom';
 

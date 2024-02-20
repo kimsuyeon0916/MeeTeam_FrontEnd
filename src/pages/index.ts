@@ -1,14 +1,14 @@
 import MainPage from './MainPage';
 import RecruitPage from './recruit/RecruitPage/RecruitPage';
 import GalaryPage from './GalaryPage';
-import MemberPage from './MemberPage';
-import InformationUsePage from './InformationUsePage';
-import ManagementPage from './managementPage/ManagementPage';
-import MeeTeamCreatePage from './create/meeTeamCreatePage/MeeTeamCreatePage';
+import MemberPage from '../temp/MemberPage';
+import InformationUsePage from '../temp/InformationUsePage';
+import ManagementPage from '../temp/managementPage/ManagementPage';
+import MeeTeamCreatePage from '../temp/meeTeamCreatePage/MeeTeamCreatePage';
 import IntegratedManagePage from './manage/IntegratedManagePage';
-import ManageMeeteamPage from './manage/meeteam/ManageMeeteamPage';
+import ManageMeeteamPage from '../temp/meeteam/ManageMeeteamPage';
 import ManageRecruitPage from './manage/recruit/ManageRecruitPage';
-import ManagePortpolioPage from './manage/portpolio/ManagePortpolioPage';
+import ManagePortpolioPage from '../temp/portpolio/ManagePortpolioPage';
 import RecruitCreatePage from './create/recruitCreatePage/RecruitCreatePage';
 import OutputCreatePage from './create/outputCreatePage/OutputCreatePage';
 import SignInPage from './account/signIn/SignInPage';
@@ -23,7 +23,7 @@ import PassWordFindingPage from './account/passWordFindingPage/PassWordFindingPa
 import { PASSWORD_DATA } from './account/passWordFindingPage/PassWordData';
 import RecruitDetailPage from './recruit/RecruitDetailPage/RecruitDetailPage';
 import MyActivityManagePage from './manage/activity/MyActivityManagePage';
-import OutputPreviewPage from './create/outputPreviewPage/OutputPreviewPage';
+import OutputPreviewPage from '../temp/outputPreviewPage/OutputPreviewPage';
 
 export {
 	MainPage,

@@ -6,9 +6,7 @@ import {
 	MainPage,
 	RecruitPage,
 	GalaryPage,
-	MemberPage,
 	InformationUsePage,
-	MeeTeamCreatePage,
 	ManagementPage,
 	ManageMeeteamPage,
 	ManageRecruitPage,
@@ -23,7 +21,6 @@ import {
 	SignUpPage,
 	MyActivityManagePage,
 	PassWordFindingPage,
-	OutputPreviewPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -49,10 +46,6 @@ const router = createBrowserRouter([
 				element: <GalaryPage />,
 			},
 			{
-				path: 'member',
-				element: <MemberPage />,
-			},
-			{
 				path: 'signIn',
 				element: <SignInPage />,
 			},
@@ -73,24 +66,12 @@ const router = createBrowserRouter([
 				element: <InformationUsePage />,
 			},
 			{
-				path: 'create/meeteam', // meeteam/create
-				element: <MeeTeamCreatePage />,
-			},
-			{
 				path: 'create/recruit',
 				element: <RecruitCreatePage />,
 			},
 			{
 				path: 'create/output',
 				element: <OutputCreatePage />,
-			},
-			{
-				path: 'create/output/preview', // meeteam 이름 또는 id
-				element: <OutputPreviewPage />,
-			},
-			{
-				path: 'manage/meeteam/:meeteamId?',
-				element: <ManagementPage />,
 			},
 			{
 				path: 'manage',

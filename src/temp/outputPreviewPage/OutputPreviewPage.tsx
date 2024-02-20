@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import S from './OutputPreviewPage.styled';
-import { RequiredInformation, Tag } from '../../../components';
-import { LeftBtn, RightBtn } from '../../../assets';
+import { RequiredInformation, Tag } from '../../components';
+import { LeftBtn, RightBtn } from '../../assets';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const OutputPreviewPage = () => {

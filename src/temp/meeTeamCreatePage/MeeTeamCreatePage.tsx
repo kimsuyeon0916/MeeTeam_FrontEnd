@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { Plus, Upload } from '../../../assets';
+import { Plus, Upload } from '../../assets';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { modules } from '../../../utils/index';
+import { modules } from '../../utils/index';
 import {
 	Subtitle,
 	Dot,
@@ -9,7 +9,7 @@ import {
 	MeeteamTag,
 	MemberInviteModal,
 	MemberTest,
-} from '../../../components';
+} from '../../components';
 import {
 	areaState,
 	categoryState,
@@ -17,7 +17,7 @@ import {
 	fieldState,
 	memberListState,
 	memberModalState,
-} from '../../../atom';
+} from '../../atom';
 import S from './MeeTeamCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
