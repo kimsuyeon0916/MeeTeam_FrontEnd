@@ -7,10 +7,7 @@ import {
 	RecruitPage,
 	GalaryPage,
 	InformationUsePage,
-	ManagementPage,
-	ManageMeeteamPage,
 	ManageRecruitPage,
-	ManagePortpolioPage,
 	RecruitCreatePage,
 	OutputCreatePage,
 	RecruitDetailPage,
@@ -98,30 +95,6 @@ const router = createBrowserRouter([
 			{
 				path: 'create/output',
 				element: <OutputCreatePage />,
-			},
-			{
-				path: 'manage',
-				element: <IntegratedManagePage />,
-				children: [
-					{
-						path: 'meeteam',
-						element: <ManageMeeteamPage />,
-						children: [
-							{
-								path: ':meeteamId?',
-								element: <ManagementPage />,
-							},
-						],
-					},
-					{
-						path: 'recruit',
-						element: <ManageRecruitPage />,
-					},
-					{
-						path: 'portpolio',
-						element: <ManagePortpolioPage />,
-					},
-				],
 			},
 		],
 	},
