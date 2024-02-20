@@ -38,7 +38,7 @@ const RecruitDetailPage = styled.div`
 					h1 {
 						margin-top: 0.2rem;
 						color: #000;
-						font-family: Apple SD Gothic Neo;
+
 						font-size: 2.4rem;
 						font-style: normal;
 						font-weight: 400;
@@ -57,13 +57,18 @@ const RecruitDetailPage = styled.div`
 						width: 3.3075rem;
 						height: 3.3075rem;
 						flex-shrink: 0;
-						background-color: #bcd7ff;
 						border-radius: 50%;
+
+						img {
+							width: 100%;
+							height: 100%;
+							border-radius: 50%;
+						}
 					}
 
 					div:nth-child(2) {
 						color: var(--Light-Black, var(--text-color-2, #373f41));
-						font-family: Apple SD Gothic Neo;
+
 						font-size: 1.5rem;
 						font-style: normal;
 						font-weight: 400;
@@ -86,7 +91,7 @@ const RecruitDetailPage = styled.div`
 
 				h4 {
 					color: #000;
-					font-family: Apple SD Gothic Neo;
+
 					font-size: 1.8rem;
 					font-style: normal;
 					font-weight: 400;
@@ -115,7 +120,7 @@ const RecruitDetailPage = styled.div`
 
 				.container-current__title {
 					color: #000;
-					font-family: Apple SD Gothic Neo;
+
 					font-size: 1.8rem;
 					font-style: normal;
 					font-weight: 400;
@@ -157,7 +162,7 @@ const RecruitDetailPage = styled.div`
 
 							.role {
 								color: #000;
-								font-family: Apple SD Gothic Neo;
+
 								font-size: 1.65rem;
 								font-style: normal;
 								font-weight: 400;
@@ -192,7 +197,7 @@ const RecruitDetailPage = styled.div`
 								gap: 0.75rem;
 								flex-shrink: 0;
 								color: var(--Light-Black, var(--text-color-2, #373f41));
-								font-family: Apple SD Gothic Neo;
+
 								font-size: 1.4rem;
 								font-style: normal;
 								font-weight: 400;
@@ -203,67 +208,6 @@ const RecruitDetailPage = styled.div`
 								background: #fff;
 							}
 						}
-
-						.roles-button {
-							border: none;
-							outline: none;
-							width: 9.15rem;
-							height: 4.125rem;
-							flex-shrink: 0;
-							border-radius: 0.75rem;
-							color: #fff;
-							font-family: Inter;
-							font-size: 1.5rem;
-							font-style: normal;
-							font-weight: 400;
-							line-height: 4.2rem; /* 233.333% */
-							letter-spacing: 0.015rem;
-							background: var(--main-color, #5877fc);
-							cursor: pointer;
-						}
-					}
-				}
-			}
-			.container-tags {
-				flex-shrink: 0;
-				border-radius: 0.75rem;
-				border: 1.5px solid #eeecff;
-				background: #fff;
-				padding: 2rem 3.45rem;
-				box-sizing: border-box;
-
-				.container-tags__title {
-					color: #000;
-					font-family: Apple SD Gothic Neo;
-					font-size: 1.8rem;
-					font-style: normal;
-					font-weight: 400;
-					line-height: 1.8rem; /* 100% */
-					letter-spacing: -0.036rem;
-				}
-
-				.container-tags__box {
-					margin-top: 1.73rem;
-					display: flex;
-					align-items: center;
-					gap: 0.97rem;
-
-					.tag {
-						display: flex;
-						height: 3.15rem;
-						padding: 0.75rem 1.125rem;
-						justify-content: center;
-						align-items: center;
-						gap: 0.75rem;
-						border-radius: 7.5rem;
-						background: var(--sub-color, #e0e6ff);
-						color: var(--Light-Black, var(--text-color-2, #373f41));
-						font-family: Apple SD Gothic Neo;
-						font-size: 1.5rem;
-						font-style: normal;
-						font-weight: 400;
-						line-height: 1.35rem; /* 90% */
-						letter-spacing: 0.015rem;
 					}
 				}
 			}
@@ -283,7 +227,6 @@ const RecruitDetailPage = styled.div`
 			}
 
 			.container-recommend {
-				height: 24rem;
 				flex-shrink: 0;
 				border-radius: 0.75rem;
 				border: 0.75px solid #dcdcdc;
@@ -291,10 +234,11 @@ const RecruitDetailPage = styled.div`
 				display: flex;
 				flex-direction: column;
 				padding: 3.08rem 2.55rem 2.55rem 2.55rem;
+				gap: 1.5rem;
 
 				.title {
 					color: #000;
-					font-family: Apple SD Gothic Neo;
+
 					font-size: 1.8rem;
 					font-style: normal;
 					font-weight: 400;
@@ -302,27 +246,107 @@ const RecruitDetailPage = styled.div`
 					letter-spacing: -0.036rem;
 				}
 
-				.container-recommend__img {
-					width: 29.7rem;
-					position: relative;
+				.content {
+					display: flex;
+					flex-direction: column;
+					width: 100%;
+					height: 18.375rem;
+					flex-shrink: 0;
+					border-radius: 0.75rem;
+					border: 1.5px solid var(--main-color, #ababab);
+					background: #f9f9f9;
+					padding: 1.35rem 1.5rem 1.8rem 1.5rem;
+					cursor: pointer;
 
-					img {
-						width: 100%;
-						border-radius: 0.75rem;
-						margin-top: 1.5rem;
+					&:hover {
+						transition: 0.3s ease-in-out;
+						border: 1.5px solid var(--main-color, #5877fc);
 					}
 
-					.container-recommend__img--tags {
+					.content-tags {
 						display: flex;
-						gap: 0.6rem;
-						position: absolute;
-						top: 2.5rem;
-						left: 1rem;
+						justify-content: space-between;
+
+						.tags {
+							display: flex;
+							gap: 0.6rem;
+
+							div:nth-child(1) {
+								display: flex;
+								width: 4.05rem;
+								height: 2.4rem;
+								padding: 0.75rem;
+								justify-content: center;
+								align-items: center;
+								gap: 0.75rem;
+								border-radius: 0.6rem;
+								background: #e0e6ff;
+								color: #000;
+
+								font-size: 1.2rem;
+								font-style: normal;
+								font-weight: 400;
+								line-height: 1.35rem; /* 112.5% */
+								letter-spacing: 0.015rem;
+							}
+
+							div:nth-child(2) {
+								display: flex;
+								width: 5.55rem;
+								height: 2.4rem;
+								padding: 0.75rem;
+								justify-content: center;
+								align-items: center;
+								gap: 0.75rem;
+								border-radius: 0.6rem;
+								background: #e3f5ff;
+								color: var(--Light-Black, var(--text-color-2, #373f41));
+
+								font-size: 1.1rem;
+								font-style: normal;
+								font-weight: 400;
+								line-height: 1.35rem; /* 112.5% */
+								letter-spacing: 0.015rem;
+							}
+						}
+					}
+
+					.content-title {
+						height: 4.8rem;
+						flex-shrink: 0;
+						margin-top: 1.65rem;
+						/* overflow: hidden; */
+						color: var(--Light-Black, var(--text-color-2, #373f41));
+						text-overflow: ellipsis;
+						/* white-space: nowrap; */
+
+						font-size: 1.65rem;
+						font-style: normal;
+						font-weight: 400;
+						line-height: 130%; /* 2.145rem */
+						letter-spacing: 0.015rem;
+					}
+
+					.content-info {
+						display: flex;
+						margin-top: 5rem;
+						justify-content: space-between;
+
+						div {
+							color: var(--Light-Black, var(--text-color-2, #373f41));
+
+							font-size: 1.2rem;
+							font-style: normal;
+							font-weight: 400;
+							line-height: 1.35rem; /* 112.5% */
+							letter-spacing: 0.015rem;
+						}
 					}
 				}
 			}
 		}
 	}
+
 	.container-comments {
 		width: 100%;
 		height: 100%;
@@ -356,36 +380,74 @@ const RecruitDetailPage = styled.div`
 
 					span:nth-child(1) {
 						color: #434343;
-						font-family: 'Apple SD Gothic Neo';
 						font-size: 1.2rem;
 						font-style: normal;
 						font-weight: 400;
-						line-height: 1.35rem; /* 150% */
+						line-height: 1.35rem;
 						letter-spacing: 0.015rem;
 					}
 					span:nth-child(2) {
 						padding: 0.4rem 1.5rem;
 						background-color: #fff;
-						color: var(--text-color-2, #373f41);
-						font-family: 'Apple SD Gothic Neo';
+						color: #373f41;
 						font-size: 1.5rem;
 						font-style: normal;
 						font-weight: 400;
-						line-height: 150%; /* 2.25rem */
+						line-height: 150%;
 						letter-spacing: 0.015rem;
 						border-radius: 0.75rem;
 					}
 				}
 			}
+
+			.reply-container {
+				display: flex;
+				gap: 2.1rem;
+				margin-left: 5rem;
+
+				.user-input__icon {
+					width: 3.15rem;
+					height: 3.15rem;
+					flex-shrink: 0;
+				}
+
+				.reply-input {
+					width: 76.4rem;
+					box-sizing: border-box;
+					height: 3.75rem;
+					flex-shrink: 0;
+					border-radius: 0.75rem;
+					border: 0.75px solid #bebebe;
+					background: #fff;
+					outline: none;
+					padding-left: 1.3rem;
+				}
+
+				.reply-btn {
+					display: flex;
+					width: 6.7rem;
+					height: 3.75rem;
+					padding: 0.75rem;
+					justify-content: center;
+					align-items: center;
+					gap: 0.75rem;
+					flex-shrink: 0;
+					border-radius: 0.6rem;
+					background: #000;
+					border: none;
+					outline: none;
+					color: #fff;
+					cursor: pointer;
+				}
+			}
 		}
 
 		.container-comments__title {
-			color: var(--Light-Black, var(--text-color-2, #373f41));
-			font-family: Apple SD Gothic Neo;
+			color: #373f41;
 			font-size: 1.8rem;
 			font-style: normal;
 			font-weight: 400;
-			line-height: 3rem; /* 233.333% */
+			line-height: 3rem;
 			letter-spacing: 0.015rem;
 		}
 
@@ -461,11 +523,11 @@ const RequiredInformationSpan = styled.span<Props>`
 	background: ${props => props.$color};
 `;
 
-const SRecruit = {
+const S = {
 	RecruitDetailPage,
 	RequiredInformationItem,
 	RequiredInformationSpan,
 	RequiredInformationHead,
 };
 
-export default SRecruit;
+export default S;

@@ -2,21 +2,23 @@ import React, { useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Upload } from '../../../assets';
 import { modules } from '../../../utils/index';
-import { Subtitle, Dot, InfoItem, MeeteamTag } from '../../../components';
+import { Subtitle, Dot, InputDropdown, MeeteamTag } from '../../../components';
 import { areaState, categoryState, dateState, fieldState } from '../../../atom';
 import S from './OutputCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const OutputCreatePage = () => {
 	const navigate = useNavigate();
+	const constraintsRef = useRef(null);
 	const quillRef = useRef<ReactQuill | null>(null);
 	const area = useRecoilValue(areaState);
 	const field = useRecoilValue(fieldState);
 	const category = useRecoilValue(categoryState);
 	const [startDate, endDate] = useRecoilValue(dateState);
-
+	const [images, setImages] = useState(['Image 1', 'Image 2', 'Image 3', 'Image 4', 'Image 5']);
 	const [teamName, setTeamName] = useState<string>('');
 	const [imgFile, setImgFile] = useState<string>('');
 	const [isHover, setIsHover] = useState<boolean>(false);
@@ -140,6 +142,13 @@ const OutputCreatePage = () => {
 		navigate('preview');
 	};
 
+	const handleDragEnd = () => {};
+	const handleDragLeave = () => {
+		console.log('hi');
+	};
+
+	const onClickLinkAdd = () => {};
+
 	return (
 		<S.OutputCreatePage>
 			<div className='procedure'>
@@ -173,35 +182,48 @@ const OutputCreatePage = () => {
 							<div className='info-wrapper'>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem isDot='true' title='범위' optionData={['교내', '교외']} type='범위' />
+										<InputDropdown
+											isDot='true'
+											title='범위'
+											optionData={['교내', '교외']}
+											type='범위'
+										/>
 										{!isValidArea.validArea && <p>{isValidArea.validMessage}</p>}
 									</div>
 									<div>
-										<InfoItem isDot='true' title='분야' optionData={['개발']} type='분야' />
+										<InputDropdown isDot='true' title='분야' optionData={['개발']} type='분야' />
 										{!isValidField.validField && <p>{isValidField.validMessage}</p>}
 									</div>
 								</div>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem
+										<InputDropdown
 											isDot='true'
-											title='밋팀 유형'
+											title='유형'
 											optionData={['프로젝트', '스터디']}
 											type='유형'
 										/>
 										{!isValidCategory.validCategory && <p>{isValidCategory.validMessage}</p>}
 									</div>
 									<div>
-										<InfoItem isDot='false' title='진행 방식' optionData={['온라인', '오프라인']} />
+										<InputDropdown
+											isDot='false'
+											title='진행 방식'
+											optionData={['온라인', '오프라인']}
+										/>
 									</div>
 								</div>
 								<div className='container__info-select'>
 									<div>
-										<InfoItem isDot='true' title='기간' optionData={[]} type='기간' />
+										<InputDropdown isDot='true' title='기간' optionData={[]} type='기간' />
 										{!isValidDate.validDate && <p>{isValidDate.validMessage}</p>}
 									</div>
 									<div className='fix'>
-										<InfoItem isDot='false' title='공개 여부' optionData={['공개', '비공개']} />
+										<InputDropdown
+											isDot='false'
+											title='공개 여부'
+											optionData={['공개', '비공개']}
+										/>
 									</div>
 								</div>
 							</div>
@@ -214,20 +236,12 @@ const OutputCreatePage = () => {
 								<MeeteamTag tags={['React', 'Node.js', 'Spring']} />
 							</div>
 						</div>
-						<div className='container__file'>
+						<div className='container__intro'>
 							<div>
-								<Subtitle>{'첨부 파일'}</Subtitle>
+								<Subtitle>{'소개글'}</Subtitle>
 							</div>
-							<div className='container__file-input'>
-								<input
-									type='file'
-									id='meeteamFile'
-									placeholder='첨부 파일을 업로드해주세요.'
-									onChange={onChangeFile}
-								/>
-								<label className={file ? 'haveFile' : ''} htmlFor='meeteamFile'>
-									{file ? `${fileName}` : '첨부 파일을 업로드해주세요.'}
-								</label>
+							<div>
+								<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
 							</div>
 						</div>
 						<div className='container__img'>
@@ -254,12 +268,62 @@ const OutputCreatePage = () => {
 								</label>
 							</div>
 						</div>
-						<div className='container__intro'>
+						<div className='container__outputs'>
 							<div>
-								<Subtitle>{'소개글'}</Subtitle>
+								<Subtitle>{'산출물 이미지'}</Subtitle>
+								<p className='description'>
+									{'이미지들은 드래그를 통해 순서를 변경할 수 있습니다.'}
+								</p>
 							</div>
+							<div className='container__outputs--images' ref={constraintsRef}>
+								{images.map((image, index) => (
+									<div draggable='true' className='image' onDragLeave={handleDragLeave}>
+										{image}
+									</div>
+								))}
+							</div>
+						</div>
+						<div className='container__links'>
 							<div>
-								<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
+								<Subtitle>{'링크'}</Subtitle>
+								<p>
+									깃헙, 노션으로 작성한 포트폴리오, 구글 드라이브 파일 등 작업 성과를 보여줄 수 있는
+									링크가 있다면 작성해주세요.
+								</p>
+							</div>
+							<div className='container__links--wrapper'>
+								<button type='button' className='btn-add' onClick={onClickLinkAdd}>
+									+ 추가
+								</button>
+								<div className='links'>
+									<ul>
+										<li className='link'>
+											<div className='link-item'>
+												<div className='link-item__dropdown'>
+													<select id='link_name' name='link_name'>
+														<option value='0'>Link</option>
+														<option value='1'>github</option>
+														<option value='2'>notion</option>
+														<option value='3'>Google Drive</option>
+													</select>
+												</div>
+												<div className='link-item__input'>
+													<div>
+														<input placeholder='링크를 입력해주세요.' className='link-address' />
+													</div>
+													<div>
+														<input
+															placeholder='링크 설명'
+															value='링크 설명'
+															className='link-description'
+														/>
+													</div>
+												</div>
+												<button>x</button>
+											</div>
+										</li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>

@@ -21,7 +21,7 @@ const RecruitPage = styled.div`
 			border-radius: 7.5rem;
 			background-color: #fcefaa;
 			color: #000;
-			font-family: Apple SD Gothic Neo;
+
 			font-size: 1.5rem;
 			font-style: normal;
 			font-weight: 400;
@@ -86,7 +86,7 @@ const RecruitPage = styled.div`
 				border-radius: 7.5rem;
 				background: var(--sub-color, #e0e6ff);
 				color: var(--Light-Black, var(--text-color-2, #373f41));
-				font-family: Apple SD Gothic Neo;
+
 				font-size: 1.5rem;
 				font-style: normal;
 				font-weight: 400;
@@ -114,7 +114,7 @@ const RecruitPage = styled.div`
 			border: 0.75px solid #dcdcdc;
 			background: #f9f9f9;
 			color: var(--Light-Black, var(--text-color-2, #373f41));
-			font-family: Apple SD Gothic Neo;
+
 			font-size: 1.2rem;
 			font-style: normal;
 			font-weight: 400;
@@ -137,126 +137,61 @@ const RecruitPage = styled.div`
 	}
 
 	.container-contents {
-		margin-top: 3rem;
+		margin-top: 2rem;
 		display: flex;
 		flex-direction: column;
 		gap: 3.75rem;
 		margin-bottom: 5rem;
 
 		.container-contents__row {
+			.container-subtitle {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+			}
 			.subtitle {
 				color: var(--Light-Black, var(--text-color-2, #373f41));
-				font-family: Apple SD Gothic Neo;
+
 				font-size: 2rem;
 				font-style: normal;
 				font-weight: 500;
-				line-height: 4.2rem; /* 200% */
+				line-height: 4.2rem;
 				letter-spacing: 0.015rem;
 			}
 
-			.contents {
-				display: flex;
-				margin: 0 auto;
-				gap: 1.8rem;
+			select {
+				border: none;
+				outline: none;
+				color: var(--Light-Black, var(--text-color-2, #373f41));
 
-				.content {
-					display: flex;
-					flex-direction: column;
-					width: 25.65rem;
-					height: 18.375rem;
-					flex-shrink: 0;
-					border-radius: 0.75rem;
-					border: 1.5px solid var(--main-color, #ababab);
-					background: #f9f9f9;
-					padding: 1.35rem 1.5rem 1.8rem 1.5rem;
-					cursor: pointer;
-
-					&:hover {
-						transition: 0.7s;
-						border: 1.5px solid var(--main-color, #5877fc);
-					}
-
-					.content-tags {
-						display: flex;
-						justify-content: space-between;
-
-						.tags {
-							display: flex;
-							gap: 0.6rem;
-
-							div:nth-child(1) {
-								display: flex;
-								width: 4.05rem;
-								height: 2.4rem;
-								padding: 0.75rem;
-								justify-content: center;
-								align-items: center;
-								gap: 0.75rem;
-								border-radius: 0.6rem;
-								background: #e0e6ff;
-								color: #000;
-								font-family: Apple SD Gothic Neo;
-								font-size: 1.2rem;
-								font-style: normal;
-								font-weight: 400;
-								line-height: 1.35rem; /* 112.5% */
-								letter-spacing: 0.015rem;
-							}
-
-							div:nth-child(2) {
-								display: flex;
-								width: 5.55rem;
-								height: 2.4rem;
-								padding: 0.75rem;
-								justify-content: center;
-								align-items: center;
-								gap: 0.75rem;
-								border-radius: 0.6rem;
-								background: #e3f5ff;
-								color: var(--Light-Black, var(--text-color-2, #373f41));
-								font-family: Apple SD Gothic Neo;
-								font-size: 1.1rem;
-								font-style: normal;
-								font-weight: 400;
-								line-height: 1.35rem; /* 112.5% */
-								letter-spacing: 0.015rem;
-							}
-						}
-					}
-
-					.content-title {
-						height: 4.8rem;
-						flex-shrink: 0;
-						margin-top: 1.65rem;
-						/* overflow: hidden; */
-						color: var(--Light-Black, var(--text-color-2, #373f41));
-						text-overflow: ellipsis;
-						/* white-space: nowrap; */
-						font-family: Apple SD Gothic Neo;
-						font-size: 1.65rem;
-						font-style: normal;
-						font-weight: 400;
-						line-height: 130%; /* 2.145rem */
-						letter-spacing: 0.015rem;
-					}
-
-					.content-info {
-						display: flex;
-						margin-top: 5rem;
-						justify-content: space-between;
-
-						div {
-							color: var(--Light-Black, var(--text-color-2, #373f41));
-							font-family: Apple SD Gothic Neo;
-							font-size: 1.2rem;
-							font-style: normal;
-							font-weight: 400;
-							line-height: 1.35rem; /* 112.5% */
-							letter-spacing: 0.015rem;
-						}
-					}
-				}
+				font-size: 1.3rem;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 4.2rem; /* 280% */
+				letter-spacing: 0.015rem;
 			}
+		}
+		.contents {
+			display: flex;
+			margin: 0 auto;
+			gap: 1.8rem;
+		}
+
+		.container-contents__grid {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 1.8rem 1.8rem;
+		}
+	}
+
+	.container-pagination {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		ul {
+			list-style: none;
+			display: flex;
 		}
 	}
 `;

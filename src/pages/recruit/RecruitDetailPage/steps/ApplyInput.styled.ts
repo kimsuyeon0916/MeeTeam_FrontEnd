@@ -8,7 +8,7 @@ const ApplyInput = styled.div`
 
 		.container-apply__form-title {
 			color: #000;
-			font-family: 'Apple SD Gothic Neo';
+
 			font-size: 1.8rem;
 			font-style: normal;
 			font-weight: 400;
@@ -23,7 +23,7 @@ const ApplyInput = styled.div`
 
 			span {
 				color: var(--Light-Black, var(--text-color-2, #373f41));
-				font-family: 'Apple SD Gothic Neo';
+
 				font-size: 1.5rem;
 				font-style: normal;
 				font-weight: 400;
@@ -51,7 +51,7 @@ const ApplyInput = styled.div`
 				background: #fff;
 				outline: none;
 				color: var(--Light-Black, var(--text-color-2, #373f41));
-				font-family: 'Apple SD Gothic Neo';
+
 				font-size: 1.3rem;
 				font-style: normal;
 				font-weight: 400;
@@ -108,7 +108,7 @@ const ApplyInput = styled.div`
 
 			span:nth-child(1) {
 				color: #000;
-				font-family: 'Apple SD Gothic Neo';
+
 				font-size: 1.5rem;
 				font-style: normal;
 				font-weight: 400;
@@ -118,7 +118,7 @@ const ApplyInput = styled.div`
 			span:nth-child(2) {
 				margin-top: 0.3rem;
 				color: #686868;
-				font-family: 'Apple SD Gothic Neo';
+
 				font-size: 1.05rem;
 				font-style: normal;
 				font-weight: 400;
@@ -133,7 +133,7 @@ const ApplyInput = styled.div`
 
 				label {
 					color: #000;
-					font-family: 'Apple SD Gothic Neo';
+
 					font-size: 1.2rem;
 					font-style: normal;
 					font-weight: 400;

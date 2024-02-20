@@ -9,23 +9,12 @@ const DateSelect = () => {
 	const [date, setDate] = useRecoilState(dateState);
 	const [startDate, endDate] = date;
 
-	// const startYear = startDate.getFullYear().toString();
-	// const startMonth = (startDate.getMonth() + 1).toString();
-	// const startDay = startDate.getDate().toString();
-	// const startStr = startYear + '-' + startMonth + '-' + startDay;
-	// console.log(startStr);
-
-	// const endYear = endDate.getFullYear().toString();
-	// const endMonth = (endDate.getMonth() + 1).toString();
-	// const endDay = endDate.getDate().toString();
-	// const endStr = endYear + '-' + endMonth + '-' + endDay;
-	// console.log(endStr);
-
 	return (
 		<S.DateSelect>
 			<DatePicker
 				selectsRange={true}
 				startDate={startDate}
+				dateFormat='yyyy년 MM월 dd일'
 				showPopperArrow={false}
 				endDate={endDate}
 				onChange={update => {
@@ -38,4 +27,4 @@ const DateSelect = () => {
 	);
 };
 
-export default DateSelect;
+export default React.memo(DateSelect);

@@ -4,7 +4,7 @@ interface IManageRecruitPage {
 	isOn?: boolean;
 }
 
-const RecruitCard = styled.div<IManageRecruitPage>`
+const ManageRecruitCard = styled.div<IManageRecruitPage>`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -34,7 +34,6 @@ const RecruitCard = styled.div<IManageRecruitPage>`
 		.container-title {
 			color: #000;
 			text-align: center;
-			font-family: Apple SD Gothic Neo;
 			font-size: 1.8rem;
 			font-style: normal;
 			font-weight: 400;
@@ -92,12 +91,8 @@ const RecruitCard = styled.div<IManageRecruitPage>`
 		left: 27px;
 		transition: 0.3s;
 	}
-
-	.alarm {
-		margin-left: 5.4rem;
-	}
 `;
 
-const S = { RecruitCard };
+const S = { ManageRecruitCard };
 
 export default S;

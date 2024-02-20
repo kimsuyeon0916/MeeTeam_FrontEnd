@@ -9,7 +9,7 @@ const ApplyInformation = styled.div`
 
 		.type {
 			color: #000;
-			font-family: Apple SD Gothic Neo;
+
 			font-size: 1.8rem;
 			font-style: normal;
 			font-weight: 400;
@@ -27,10 +27,15 @@ const ApplyInformation = styled.div`
 				height: 3.3075rem;
 				flex-shrink: 0;
 				border-radius: 50%;
-				background-color: #bcd7ff;
+
+				img {
+					width: 100%;
+					height: 100%;
+					border-radius: 50%;
+				}
 			}
 
-			.leader-info__name {
+			.leader-info__user {
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
@@ -38,7 +43,7 @@ const ApplyInformation = styled.div`
 
 				span:nth-child(1) {
 					color: var(--Light-Black, var(--text-color-2, #373f41));
-					font-family: Apple SD Gothic Neo;
+
 					font-size: 1.5rem;
 					font-style: normal;
 					font-weight: 400;
@@ -47,40 +52,19 @@ const ApplyInformation = styled.div`
 				}
 
 				span:nth-child(2) {
-					color: #858585;
-					font-family: Apple SD Gothic Neo;
-					font-size: 1.2rem;
-					font-style: normal;
-					font-weight: 400;
-					line-height: 1.35rem; /* 150% */
-					letter-spacing: 0.015rem;
+					display: flex;
+					gap: 1rem;
+
+					.user-info {
+						color: #858585;
+
+						font-size: 1.2rem;
+						font-style: normal;
+						font-weight: 400;
+						line-height: 1.35rem;
+						letter-spacing: 0.015rem;
+					}
 				}
-			}
-		}
-
-		.member-info {
-			position: relative;
-			display: flex;
-			position: relative;
-			margin-top: 2rem;
-			/* height: 3.3rem; */
-
-			.member-info__icon {
-				width: 3.15rem;
-				height: 3.15rem;
-				flex-shrink: 0;
-			}
-
-			.first {
-				left: 2rem;
-			}
-
-			.second {
-				right: 0rem;
-			}
-
-			.third {
-				right: 2rem;
 			}
 		}
 	}
@@ -97,7 +81,7 @@ const ApplyInformation = styled.div`
 
 		span:nth-child(1) {
 			color: #000;
-			font-family: Apple SD Gothic Neo;
+
 			font-size: 1.8rem;
 			font-style: normal;
 			font-weight: 400;
@@ -106,7 +90,7 @@ const ApplyInformation = styled.div`
 		}
 		span:nth-child(2) {
 			color: var(--Light-Black, var(--text-color-2, #373f41));
-			font-family: Apple SD Gothic Neo;
+
 			font-size: 1.5rem;
 			font-style: normal;
 			font-weight: 400;
@@ -135,6 +119,10 @@ const ApplyInformation = styled.div`
 			flex-shrink: 0;
 			border-radius: 7.5rem;
 			cursor: pointer;
+
+			span {
+				margin-top: 0.1rem;
+			}
 		}
 
 		button:nth-child(1) {

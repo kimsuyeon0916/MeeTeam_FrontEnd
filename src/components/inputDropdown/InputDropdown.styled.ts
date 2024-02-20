@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-const InfoItem = styled.div`
+const InputDropdown = styled.div`
 	width: 15rem;
 `;
 
-const S = { InfoItem };
+const S = { InputDropdown };
 
 export default S;

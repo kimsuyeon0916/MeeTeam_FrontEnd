@@ -15,12 +15,16 @@ import {
 	OutputCreatePage,
 	RecruitDetailPage,
 	IntegratedManagePage,
+	MyActivityLike,
 	SignInPage,
 	SchoolCertificationPage,
 	NickNameSettingPage,
 	SignUpPage,
-	MyActivityManagePage,
 	PassWordFindingPage,
+	MyActivityWrapper,
+	MyActivityInvited,
+	MyActivityApply,
+	MyActivityBookmark,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -66,6 +70,28 @@ const router = createBrowserRouter([
 				element: <InformationUsePage />,
 			},
 			{
+				path: 'activity',
+				element: <MyActivityWrapper />,
+				children: [
+					{
+						path: 'invited',
+						element: <MyActivityInvited />,
+					},
+					{
+						path: 'like',
+						element: <MyActivityLike />,
+					},
+					{
+						path: 'apply',
+						element: <MyActivityApply />,
+					},
+					{
+						path: 'bookmark',
+						element: <MyActivityBookmark />,
+					},
+				],
+			},
+			{
 				path: 'create/recruit',
 				element: <RecruitCreatePage />,
 			},
@@ -94,10 +120,6 @@ const router = createBrowserRouter([
 					{
 						path: 'portpolio',
 						element: <ManagePortpolioPage />,
-					},
-					{
-						path: 'activity',
-						element: <MyActivityManagePage />,
 					},
 				],
 			},

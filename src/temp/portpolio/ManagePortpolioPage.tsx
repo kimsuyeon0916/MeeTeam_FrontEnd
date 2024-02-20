@@ -1,4 +1,5 @@
-import { Card, Filter } from '../../components';
+import React from 'react';
+import { Filter, PortpolioCard } from '../../components';
 import S from './ManagePortpolio.styled';
 
 const ManagePortpolioPage = () => {
@@ -7,37 +8,14 @@ const ManagePortpolioPage = () => {
 		<S.ManagePortpolioPage>
 			<Filter noRecruit={noRecruit} />
 			<h1>📁 완성된 포트폴리오</h1>
+			<span className='description'>
+				핀을 클릭하여 프로필에서 보이고 싶은 나의 밋팀을 선택할 수 있습니다.
+			</span>
 			<div className='container-contents'>
-				<div className='content'>
-					<Card />
-					<div className='title'>
-						[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
-					</div>
-				</div>
-				<div className='content'>
-					<Card />
-					<div className='title'>
-						[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
-					</div>
-				</div>
-				<div className='content'>
-					<Card />
-					<div className='title'>
-						[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
-					</div>
-				</div>
-				<div className='content'>
-					<Card />
-					<div className='title'>
-						[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
-					</div>
-				</div>
-				<div className='content'>
-					<Card />
-					<div className='title'>
-						[반려 동물을 위한 ~ 팀 프로젝트] 개발자를 모집합니다. 프로그래밍 스터디 진행
-					</div>
-				</div>
+				<PortpolioCard />
+				<PortpolioCard />
+				<PortpolioCard />
+				<PortpolioCard />
 			</div>
 		</S.ManagePortpolioPage>
 	);

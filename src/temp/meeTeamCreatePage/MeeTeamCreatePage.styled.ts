@@ -3,7 +3,8 @@ import styled from 'styled-components';
 const MeeTeamCreatePage = styled.div`
 	width: clamp(45%, 108rem, 75%);
 	margin: 0 auto;
-	margin-bottom: 30px;
+	margin-bottom: 7rem;
+	position: relative;
 
 	.procedure {
 		height: 80px;
@@ -16,11 +17,10 @@ const MeeTeamCreatePage = styled.div`
 
 		.procedure__subtitle {
 			color: #373f41;
-			font-family: Apple SD Gothic Neo;
 			font-size: 2.4rem;
 			font-style: normal;
 			font-weight: 400;
-			line-height: 4.2rem; /* 175% */
+			line-height: 4.2rem;
 			letter-spacing: 0.015rem;
 		}
 
@@ -35,11 +35,10 @@ const MeeTeamCreatePage = styled.div`
 
 			p {
 				color: #8e8e8e;
-				font-family: Apple SD Gothic Neo;
 				font-size: 1.65rem;
 				font-style: normal;
 				font-weight: 400;
-				line-height: 1.65rem; /* 100% */
+				line-height: 1.65rem;
 				letter-spacing: -0.033rem;
 			}
 		}
@@ -132,11 +131,10 @@ const MeeTeamCreatePage = styled.div`
 
 				.description {
 					color: #8e8e8e;
-					font-family: Pretendard;
 					font-size: 1.4rem;
 					font-style: normal;
 					font-weight: 400;
-					line-height: 1.35rem; /* 90% */
+					line-height: 1.35rem;
 					letter-spacing: 0.015rem;
 					margin-left: 2rem;
 				}
@@ -145,12 +143,11 @@ const MeeTeamCreatePage = styled.div`
 					position: absolute;
 					top: 1.6rem;
 					left: 34.5rem;
-					color: var(--text-color-2, #373f41);
-					font-family: Pretendard;
+					color: #373f41;
 					font-size: 1.35rem;
 					font-style: normal;
 					font-weight: 400;
-					line-height: 1.35rem; /* 100% */
+					line-height: 1.35rem;
 					letter-spacing: 0.015rem;
 				}
 
@@ -185,7 +182,6 @@ const MeeTeamCreatePage = styled.div`
 			margin-top: 4.35rem;
 
 			div:nth-child(2) {
-				/* padding: 10px 20px; */
 				.editor {
 					background-color: #fff;
 					border-radius: 10px;
@@ -204,7 +200,6 @@ const MeeTeamCreatePage = styled.div`
 				border-top-right-radius: 0.75rem;
 				border-top-left-radius: 0.75rem;
 				box-sizing: border-box;
-				font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 				padding: 8px;
 			}
 		}
@@ -266,7 +261,6 @@ const MeeTeamCreatePage = styled.div`
 		}
 
 		.container__member {
-			position: relative;
 			margin-top: 4.35rem;
 			width: 100%;
 
@@ -290,6 +284,16 @@ const MeeTeamCreatePage = styled.div`
 				}
 			}
 
+			.modal-box {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100vw;
+				height: 100vh;
+				background-color: rgba(0, 0, 0, 0.3);
+				z-index: 100;
+			}
+
 			.container__member-area {
 				min-height: 24rem;
 				width: 100%;
@@ -305,7 +309,7 @@ const MeeTeamCreatePage = styled.div`
 
 			.container__member-area__element {
 				width: 24rem;
-				height: 14rem;
+				height: 13.5rem;
 				flex-shrink: 0;
 				border-radius: 1rem;
 				border: 1px dashed #cdcdcd;
@@ -322,30 +326,6 @@ const MeeTeamCreatePage = styled.div`
 					right: 1.2rem;
 					font-size: 1.5rem;
 					cursor: pointer;
-				}
-			}
-
-			.controll {
-				/* display: flex; */
-				gap: 0.5rem;
-				margin-bottom: 30px;
-
-				button {
-					border: none;
-					width: 5rem;
-					height: 1.5rem;
-					border-radius: 5px;
-					cursor: pointer;
-				}
-
-				button:nth-child(2) {
-					background-color: #00b894;
-					color: #fff;
-				}
-
-				button:nth-child(3) {
-					background-color: #e17055;
-					color: #fff;
 				}
 			}
 
@@ -383,9 +363,9 @@ const MeeTeamCreatePage = styled.div`
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			width: 15rem;
-			height: 5rem;
-			padding: 1rem 1rem;
+			width: 16.5rem;
+			height: 4.875rem;
+			padding: 0.75rem;
 			border: none;
 			gap: 1rem;
 			border-radius: 0.8rem;

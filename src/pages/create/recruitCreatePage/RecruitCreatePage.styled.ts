@@ -16,11 +16,10 @@ const RecruitCreatePage = styled.div`
 
 		.procedure__subtitle {
 			color: #373f41;
-			font-family: Apple SD Gothic Neo;
 			font-size: 2.4rem;
 			font-style: normal;
 			font-weight: 400;
-			line-height: 4.2rem; /* 175% */
+			line-height: 4.2rem;
 			letter-spacing: 0.015rem;
 		}
 
@@ -35,7 +34,7 @@ const RecruitCreatePage = styled.div`
 
 			p {
 				color: #8e8e8e;
-				font-family: Apple SD Gothic Neo;
+
 				font-size: 1.65rem;
 				font-style: normal;
 				font-weight: 400;

@@ -24,7 +24,6 @@ const DeadlineSelect = styled.div`
 	.date-picker__recruitment-deadline {
 		margin-top: 0;
 		height: 4.725rem;
-		font-family: Pretendard;
 	}
 
 	.react-datepicker-popper {
@@ -68,7 +67,6 @@ const DeadlineSelect = styled.div`
 	}
 
 	.react-datepicker {
-		font-family: 'Helvetica Neue', helvetica, arial, sans-serif;
 		font-size: 1.2rem;
 		background-color: #f7fafe;
 		color: #000;
