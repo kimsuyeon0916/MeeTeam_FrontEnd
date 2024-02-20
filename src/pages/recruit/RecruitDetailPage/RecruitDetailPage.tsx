@@ -1,38 +1,34 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import S from './RecruitDetailPage.styled';
 import {
 	Tag,
-	Icon,
 	ApplyInfomation,
 	ApplyInput,
 	ApplySubmit,
 	informationList,
 	role,
 	CONTENT,
+	Comment,
+	CommentInput,
+	ReplyInput,
 } from '../../../components';
 import ColorMatching from '../../../utils/ColorMatching';
 import { useRecoilValue } from 'recoil';
 import { applyStepState } from '../../../atom';
 import { useNavigate } from 'react-router-dom';
+import { ComponentProps } from '../../../types';
 
-interface Comment {
-	// id: number;
-	username: string;
-	content: string;
-}
-
-type ComponentProps = {
-	[key: number]: JSX.Element;
-};
+let addedCmtId;
 
 const RecruitDetailPage = () => {
 	const navigate = useNavigate();
 	const [isReply, setIsReply] = useState<boolean>(false);
 	const [commentsList, setCommentsList] = useState<Comment[]>([]);
+	const [replyList, setReplyList] = useState<Comment[]>([]);
 	const [contents, setContents] = useState<string>('');
-	const isLogin = false; // 임시 코드
-	const [needLogin, setNeedLogin] = useState<boolean>(false);
+	const isLogin = true; // 임시 코드
 	const step = useRecoilValue(applyStepState);
+
 	const stepLists: ComponentProps = {
 		0: <ApplyInfomation />,
 		1: <ApplyInput />,
@@ -50,10 +46,14 @@ const RecruitDetailPage = () => {
 
 	const addComment = () => {
 		if (contents !== '') {
-			// const lastCmtIndex = commentsList.length - 1;
-			// const addedCmtId = commentsList[lastCmtIndex].id + 1;
+			if (commentsList.length === 0) {
+				addedCmtId = 0;
+			} else {
+				const lastCmtIndex = commentsList.length - 1;
+				addedCmtId = commentsList[lastCmtIndex].id + 1;
+			}
 			const newComment = {
-				// id: addedCmtId,
+				id: addedCmtId,
 				username: 'yeom',
 				content: contents,
 			};
@@ -68,9 +68,6 @@ const RecruitDetailPage = () => {
 			event.preventDefault();
 			addComment();
 		}
-		// if (event.key === 'Enter') {
-		// 	event.preventDefault();
-		// }
 	};
 
 	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,9 +92,9 @@ const RecruitDetailPage = () => {
 								<Tag $recruit={true} $proceed={false} />
 							</div>
 							<div className='container-info__writer'>
-								<div className='profile-img'>
+								<picture className='profile-img'>
 									<img src='https://i.pinimg.com/236x/90/c7/f7/90c7f7afa68ea9b875eafbe887f454e8.jpg' />
-								</div>
+								</picture>
 								<div>{'김민지'}</div>
 							</div>
 						</div>
@@ -177,69 +174,17 @@ const RecruitDetailPage = () => {
 			<div className='container-comments'>
 				<span className='container-comments__title'>댓글</span>
 				<ul className='container-comments__lists'>
-					{commentsList.map((comment, index) => {
-						// const commentId = comment.id;
+					{commentsList.map(comment => {
 						return (
 							<>
-								<li key={index} className='comment'>
-									<div className='comment-icon'>
-										<Icon />
-									</div>
-									<div className='comment-info'>
-										<span>{comment.username}</span>
-										<span>{comment.content}</span>
-									</div>
-									<button
-										type='button'
-										onClick={() => {
-											setIsReply(true);
-										}}
-									>
-										답글
-									</button>
-								</li>
-								{isReply && (
-									<div className='reply-container'>
-										<div className='user-input__icon'>
-											<Icon />
-										</div>
-										<input
-											type='text'
-											onKeyPress={onKeyPress}
-											value={contents}
-											onChange={onChangeHandler}
-											onClick={onClickInput}
-											placeholder={isLogin ? '' : '로그인이 필요합니다.'}
-											className='reply-input'
-										/>
-										<button type='button' onClick={addComment} className='reply-btn'>
-											답글
-										</button>
-									</div>
-								)}
+								<Comment id={comment.id} username={comment.username} content={comment.content} />
+								<ul></ul>
+								{isReply && <ReplyInput />}
 							</>
 						);
 					})}
 				</ul>
-				<div className='container-comments__wrapper'>
-					<div className='comments'></div>
-					<div className='user-input'>
-						<div className='user-input__icon'>
-							<Icon />
-						</div>
-						<input
-							type='text'
-							onKeyPress={onKeyPress}
-							value={contents}
-							onChange={onChangeHandler}
-							onClick={onClickInput}
-							placeholder={isLogin ? '' : '로그인이 필요합니다.'}
-						/>
-						<button type='button' onClick={addComment}>
-							댓글 등록
-						</button>
-					</div>
-				</div>
+				<CommentInput />
 			</div>
 		</S.RecruitDetailPage>
 	);
