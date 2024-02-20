@@ -45,6 +45,10 @@ const router = createBrowserRouter([
 				element: <GalaryPage />,
 			},
 			{
+				path: 'information',
+				element: <InformationUsePage />,
+			},
+			{
 				path: 'signIn',
 				element: <SignInPage />,
 			},
