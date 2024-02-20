@@ -29,7 +29,7 @@ import MyActivityWrapper from './activity/MyActivityWrapper';
 import MyActivityLike from './activity/MyActivityLike';
 import MyActivityApply from './activity/MyActivityApply';
 import MyActivityBookmark from './activity/MyActivityBookmark';
-import SearchResultPage from './search/SearchResultPage';
+import SearchResultPage from '../temp/search/SearchResultPage';
 
 export {
 	MainPage,
