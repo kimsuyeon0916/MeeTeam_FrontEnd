@@ -178,7 +178,13 @@ const RecruitDetailPage = () => {
 						return (
 							<>
 								<Comment id={comment.id} username={comment.username} content={comment.content} />
-								<ul></ul>
+								<ul>
+									{replyList.map(reply => {
+										return (
+											<Comment id={reply.id} username={reply.username} content={reply.content} />
+										);
+									})}
+								</ul>
 								{isReply && <ReplyInput />}
 							</>
 						);

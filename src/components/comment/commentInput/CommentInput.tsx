@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { Icon } from '../..';
 import { Comment } from '../../../types';
+import S from './CommentInput.styled';
 
 let addedCmtId;
 
 const CommentInput = () => {
+	const isLogin = true; // 임시 코드
 	const [commentsList, setCommentsList] = useState<Comment[]>([]);
 	const [contents, setContents] = useState<string>('');
-	const isLogin = true; // 임시 코드
-	const [needLogin, setNeedLogin] = useState<boolean>(false);
+
 	const addComment = () => {
 		if (contents !== '') {
 			if (commentsList.length === 0) {
@@ -46,7 +47,7 @@ const CommentInput = () => {
 		}
 	};
 	return (
-		<div className='container-comments__wrapper'>
+		<S.CommentInput>
 			<div className='user-input'>
 				<div className='user-input__icon'>
 					<Icon />
@@ -63,7 +64,7 @@ const CommentInput = () => {
 					댓글 등록
 				</button>
 			</div>
-		</div>
+		</S.CommentInput>
 	);
 };
 
