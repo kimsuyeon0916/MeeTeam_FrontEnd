@@ -20,11 +20,6 @@ import { ComponentProps } from '../../../types';
 
 let addedCmtId;
 
-// 댓글은 전역적으로 관리 x
-// 해당 페이지에서 관리
-// 자식들에게 props로 전달하고 변환된 값을 부모로 올려줘야 함.
-// 자식들에게 list와 변경함수 모두 전달해야함.
-
 const RecruitDetailPage = () => {
 	const navigate = useNavigate();
 	const [isReply, setIsReply] = useState<boolean>(false);
@@ -33,6 +28,7 @@ const RecruitDetailPage = () => {
 	const [contents, setContents] = useState<string>('');
 	const isLogin = true; // 임시 코드
 	const step = useRecoilValue(applyStepState);
+	const [selectedCommentId, setSelectedCommentId] = useState<number | null>(null);
 
 	const stepLists: ComponentProps = {
 		0: <ApplyInfomation />,
@@ -86,9 +82,9 @@ const RecruitDetailPage = () => {
 		}
 	};
 
-	const onClickReply = (event: any) => {
-		console.log(event);
+	const onClickReply = (commentId: number) => {
 		setIsReply(true);
+		setSelectedCommentId(commentId);
 	};
 
 	return (
@@ -186,29 +182,13 @@ const RecruitDetailPage = () => {
 				<ul className='container-comments__lists'>
 					{commentsList.map(comment => {
 						return (
-							<>
-								<Comment
-									key={comment.id}
-									id={comment.id}
-									username={comment.username}
-									content={comment.content}
-									onClickReply={onClickReply}
-								/>
-								<ul className='container-reply__lists'>
-									{replyList.map(reply => {
-										return (
-											<Comment
-												key={reply.id}
-												id={reply.id}
-												username={reply.username}
-												content={reply.content}
-												onClickReply={onClickReply}
-											/>
-										);
-									})}
-								</ul>
-								{isReply && <ReplyInput />}
-							</>
+							<Comment
+								key={comment.id}
+								id={comment.id}
+								username={comment.username}
+								content={comment.content}
+								replyList={replyList}
+							/>
 						);
 					})}
 				</ul>

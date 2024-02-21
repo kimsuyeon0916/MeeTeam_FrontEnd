@@ -4,7 +4,7 @@ export interface Comment {
 	id: number;
 	username: string;
 	content: string;
-	onClickReply?: (event: any) => void;
+	replyList?: Comment[];
 }
 
 export interface CommentInputFunctions {

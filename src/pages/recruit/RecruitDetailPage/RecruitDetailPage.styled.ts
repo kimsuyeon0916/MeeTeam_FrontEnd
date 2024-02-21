@@ -363,10 +363,6 @@ const RecruitDetailPage = styled.div`
 			flex-direction: column;
 			gap: 1.3rem;
 			margin-bottom: 2rem;
-
-			.container-reply__lists {
-				margin-left: 5rem;
-			}
 		}
 
 		.container-comments__title {

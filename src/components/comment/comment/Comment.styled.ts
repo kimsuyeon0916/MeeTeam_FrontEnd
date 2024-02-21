@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
 const Comment = styled.li`
-	display: flex;
-	gap: 2rem;
-	align-items: center;
+	main {
+		display: flex;
+		gap: 2rem;
+		align-items: center;
+	}
 
 	.comment-icon {
 		display: flex;
@@ -33,6 +35,12 @@ const Comment = styled.li`
 			letter-spacing: 0.015rem;
 			border-radius: 0.75rem;
 		}
+	}
+
+	.container-reply__lists {
+		display: flex;
+		flex-direction: column;
+		margin-top: 2rem;
 	}
 `;
 
