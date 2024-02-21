@@ -10,7 +10,6 @@ import {
 	CONTENT,
 	Comment,
 	CommentInput,
-	ReplyInput,
 } from '../../../components';
 import ColorMatching from '../../../utils/ColorMatching';
 import { useRecoilValue } from 'recoil';
@@ -24,11 +23,9 @@ const RecruitDetailPage = () => {
 	const navigate = useNavigate();
 	const [isReply, setIsReply] = useState<boolean>(false);
 	const [commentsList, setCommentsList] = useState<Comment[]>([]);
-	const [replyList, setReplyList] = useState<Comment[]>([]);
 	const [contents, setContents] = useState<string>('');
 	const isLogin = true; // 임시 코드
 	const step = useRecoilValue(applyStepState);
-	const [selectedCommentId, setSelectedCommentId] = useState<number | null>(null);
 
 	const stepLists: ComponentProps = {
 		0: <ApplyInfomation />,
@@ -80,11 +77,6 @@ const RecruitDetailPage = () => {
 			// 로그인 페이지로 이동
 			// navigate('/login');
 		}
-	};
-
-	const onClickReply = (commentId: number) => {
-		setIsReply(true);
-		setSelectedCommentId(commentId);
 	};
 
 	return (
@@ -187,7 +179,6 @@ const RecruitDetailPage = () => {
 								id={comment.id}
 								username={comment.username}
 								content={comment.content}
-								replyList={replyList}
 							/>
 						);
 					})}

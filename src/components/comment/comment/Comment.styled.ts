@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Comment = styled.li`
-	main {
+	.container {
 		display: flex;
 		gap: 2rem;
 		align-items: center;
@@ -41,6 +41,7 @@ const Comment = styled.li`
 		display: flex;
 		flex-direction: column;
 		margin-top: 2rem;
+		margin-left: 5rem;
 	}
 `;
 

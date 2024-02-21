@@ -4,7 +4,6 @@ export interface Comment {
 	id: number;
 	username: string;
 	content: string;
-	replyList?: Comment[];
 }
 
 export interface CommentInputFunctions {
