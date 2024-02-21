@@ -86,7 +86,8 @@ const RecruitDetailPage = () => {
 		}
 	};
 
-	const onClickReply = () => {
+	const onClickReply = (event: any) => {
+		console.log(event);
 		setIsReply(true);
 	};
 
@@ -187,15 +188,17 @@ const RecruitDetailPage = () => {
 						return (
 							<>
 								<Comment
+									key={comment.id}
 									id={comment.id}
 									username={comment.username}
 									content={comment.content}
 									onClickReply={onClickReply}
 								/>
-								<ul>
+								<ul className='container-reply__lists'>
 									{replyList.map(reply => {
 										return (
 											<Comment
+												key={reply.id}
 												id={reply.id}
 												username={reply.username}
 												content={reply.content}
@@ -210,6 +213,7 @@ const RecruitDetailPage = () => {
 					})}
 				</ul>
 				<CommentInput
+					contents={contents}
 					addComment={addComment}
 					onKeyPress={onKeyPress}
 					onChangeHandler={onChangeHandler}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Icon } from '../..';
 import { Comment } from '../../../types';
+import S from './ReplyInput.styled';
 
 let addedCmtId;
 
@@ -42,7 +43,7 @@ const ReplyInput = () => {
 		}
 	};
 	return (
-		<div className='reply-container'>
+		<S.ReplyInput className='reply-container'>
 			<div className='user-input__icon'>
 				<Icon />
 			</div>
@@ -58,7 +59,7 @@ const ReplyInput = () => {
 			<button type='button' onClick={addComment} className='reply-btn'>
 				답글
 			</button>
-		</div>
+		</S.ReplyInput>
 	);
 };
 

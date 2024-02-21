@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { Icon } from '../..';
-import { Comment, CommentInputFunctions } from '../../../types';
+import { CommentInputFunctions } from '../../../types';
 import S from './CommentInput.styled';
 
 const CommentInput = ({
+	contents,
 	addComment,
 	onKeyPress,
 	onChangeHandler,
 	onClickInput,
 }: CommentInputFunctions) => {
 	const isLogin = true; // 임시 코드
-	const [commentsList, setCommentsList] = useState<Comment[]>([]);
-	const [contents, setContents] = useState<string>('');
 
 	return (
 		<S.CommentInput>
