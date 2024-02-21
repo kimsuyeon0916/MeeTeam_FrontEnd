@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# V2 관련 디렉토리 주석 처리
+**/temp/
