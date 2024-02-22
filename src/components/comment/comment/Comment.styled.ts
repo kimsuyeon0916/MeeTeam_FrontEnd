@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const Comment = styled.li`
+interface CommentDepth {
+	depth?: number;
+}
+
+const Comment = styled.li<CommentDepth>`
 	.container {
 		display: flex;
 		gap: 2rem;
@@ -9,6 +13,7 @@ const Comment = styled.li`
 
 	.comment-icon {
 		display: flex;
+		width: ${props => (props.depth === 1 ? '2.5rem' : '')};
 	}
 
 	.comment-info {
@@ -35,6 +40,11 @@ const Comment = styled.li`
 			letter-spacing: 0.015rem;
 			border-radius: 0.75rem;
 		}
+	}
+
+	.reply-btn {
+		background-color: transparent;
+		margin-left: -1.5rem;
 	}
 
 	.container-reply__lists {

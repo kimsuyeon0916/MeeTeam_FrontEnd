@@ -6,7 +6,7 @@ import { ReplyInput } from '../../index';
 
 let addedCmtId;
 
-const Comment = ({ id, username, content }: Comment) => {
+const Comment = ({ id, username, content, depth }: Comment) => {
 	const isLogin = true; // 임시 코드
 	const [replyList, setReplyList] = useState<Comment[]>([]);
 	const [replyClicked, setReplyClicked] = useState<boolean>(false);
@@ -54,7 +54,7 @@ const Comment = ({ id, username, content }: Comment) => {
 	};
 
 	return (
-		<S.Comment key={id}>
+		<S.Comment key={id} depth={depth}>
 			<section className='container'>
 				<div className='comment-icon'>
 					<Icon />
@@ -63,9 +63,11 @@ const Comment = ({ id, username, content }: Comment) => {
 					<span>{username}</span>
 					<span>{content}</span>
 				</div>
-				<button type='button' onClick={handleReplyClick}>
-					답글
-				</button>
+				{depth !== 1 && (
+					<button type='button' onClick={handleReplyClick} className='reply-btn'>
+						답글
+					</button>
+				)}
 			</section>
 			<section>
 				<ul className='container-reply__lists'>
@@ -76,6 +78,7 @@ const Comment = ({ id, username, content }: Comment) => {
 								id={reply.id}
 								username={reply.username}
 								content={reply.content}
+								depth={1}
 							/>
 						);
 					})}
