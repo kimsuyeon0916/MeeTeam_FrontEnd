@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Icon } from '../..';
+import { Icon, KebabMenu } from '../..';
 import S from './Comment.styled';
 import { Comment } from '../../../types';
 import { ReplyInput } from '../../index';
@@ -11,6 +11,18 @@ const Comment = ({ id, username, content, depth }: Comment) => {
 	const [replyList, setReplyList] = useState<Comment[]>([]);
 	const [replyClicked, setReplyClicked] = useState<boolean>(false);
 	const [contents, setContents] = useState<string>('');
+	const [isOpen, setIsOpen] = useState<boolean>(false);
+
+	const optionLists = [
+		{
+			title: '수정',
+			optionClickHandler: () => setIsOpen(true),
+		},
+		{
+			title: '삭제',
+			optionClickHandler: () => setIsOpen(true),
+		},
+	];
 
 	const handleReplyClick = () => {
 		setReplyClicked(true);
@@ -55,19 +67,24 @@ const Comment = ({ id, username, content, depth }: Comment) => {
 
 	return (
 		<S.Comment key={id} depth={depth}>
-			<section className='container'>
-				<div className='comment-icon'>
-					<Icon />
+			<section className='wrapper'>
+				<section className='container'>
+					<div className='comment-icon'>
+						<Icon />
+					</div>
+					<div className='comment-info'>
+						<span>{username}</span>
+						<span>{content}</span>
+					</div>
+					{depth !== 1 && (
+						<button type='button' onClick={handleReplyClick} className='reply-btn'>
+							답글
+						</button>
+					)}
+				</section>
+				<div>
+					<KebabMenu options={optionLists} />
 				</div>
-				<div className='comment-info'>
-					<span>{username}</span>
-					<span>{content}</span>
-				</div>
-				{depth !== 1 && (
-					<button type='button' onClick={handleReplyClick} className='reply-btn'>
-						답글
-					</button>
-				)}
 			</section>
 			<section>
 				<ul className='container-reply__lists'>

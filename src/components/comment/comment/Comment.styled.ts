@@ -5,6 +5,12 @@ interface CommentDepth {
 }
 
 const Comment = styled.li<CommentDepth>`
+	.wrapper {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
 	.container {
 		display: flex;
 		gap: 2rem;
