@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
-interface CommentDepth {
-	depth?: number;
-}
-
-const Comment = styled.li<CommentDepth>`
+const Comment = styled.li`
 	.wrapper {
 		display: flex;
 		justify-content: space-between;
@@ -19,7 +15,6 @@ const Comment = styled.li<CommentDepth>`
 
 	.comment-icon {
 		display: flex;
-		width: ${props => (props.depth === 1 ? '2.5rem' : '')};
 	}
 
 	.comment-info {

@@ -3,10 +3,11 @@ import S from './ReplyComment.styled';
 import { Icon, KebabMenu } from '../..';
 import { Reply } from '../../../types';
 
-const ReplyComment = ({ id, parentId, username, content }: Reply) => {
+const ReplyComment = ({ id, username, content }: Reply) => {
+	const isLogin = true; // 임시 코드
 	const [showKebab, setShowKebab] = useState<boolean>(true);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
-	const [replyClicked, setReplyClicked] = useState<boolean>(false);
+	const isValid = isLogin && username === 'yeom' && showKebab;
 	const optionLists = [
 		{
 			title: '수정',
@@ -22,11 +23,9 @@ const ReplyComment = ({ id, parentId, username, content }: Reply) => {
 			},
 		},
 	];
-	const handleReplyClick = () => {
-		setReplyClicked(true);
-	};
+
 	return (
-		<S.ReplyComment key={id}>
+		<S.ReplyComment>
 			<section className='wrapper'>
 				<section className='container'>
 					<div className='comment-icon'>
@@ -36,13 +35,12 @@ const ReplyComment = ({ id, parentId, username, content }: Reply) => {
 						<span>{username}</span>
 						<span>{content}</span>
 					</div>
-					<button type='button' onClick={handleReplyClick} className='reply-btn'>
-						답글
-					</button>
 				</section>
-				<div>
-					<KebabMenu options={optionLists} />
-				</div>
+				{isValid && (
+					<div>
+						<KebabMenu options={optionLists} />
+					</div>
+				)}
 			</section>
 		</S.ReplyComment>
 	);

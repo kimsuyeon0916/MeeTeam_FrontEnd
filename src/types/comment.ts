@@ -1,7 +1,7 @@
 import React from 'react';
 
 export interface Comment {
-	id: number;
+	id: string;
 	username: string;
 	content: string;
 	replies: Reply[];
@@ -16,8 +16,7 @@ export interface CommentInputFunctions {
 }
 
 export interface Reply {
-	id: number;
-	parentId: number;
+	id: string;
 	username: string;
 	content: string;
 }

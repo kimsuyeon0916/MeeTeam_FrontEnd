@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { Icon, KebabMenu } from '../..';
 import S from './Comment.styled';
-import { Comment } from '../../../types';
+import { Comment, Reply } from '../../../types';
 import { ReplyInput } from '../../index';
 import ReplyComment from './ReplyComment';
-
-let addedCmtId;
 
 const Comment = ({ id, username, content, replies }: Comment) => {
 	const isLogin = true; // 임시 코드
@@ -13,6 +11,7 @@ const Comment = ({ id, username, content, replies }: Comment) => {
 	const [contents, setContents] = useState<string>('');
 	const [showKebab, setShowKebab] = useState<boolean>(true);
 	const isValid = isLogin && username === 'yeom' && showKebab;
+	const [repliesList, setRepliesList] = useState<Reply[]>(replies);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
 	const optionLists = [
 		{
@@ -33,13 +32,23 @@ const Comment = ({ id, username, content, replies }: Comment) => {
 	const handleReplyClick = () => {
 		setReplyClicked(true);
 	};
-	const addComment = () => {};
+	const addComment = () => {
+		if (contents !== '' && contents.trim() !== '') {
+			const newComment = {
+				id: id + '-' + replies.length.toString(),
+				username: 'yeom',
+				content: contents,
+			};
+			setRepliesList([...repliesList, newComment]);
+			setContents('');
+		}
+	};
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		const target = event.currentTarget;
 		if (target.value.length !== 0 && event.key === 'Enter') {
 			event.preventDefault();
-			// addComment();
+			addComment();
 		}
 	};
 
@@ -55,7 +64,7 @@ const Comment = ({ id, username, content, replies }: Comment) => {
 	};
 
 	return (
-		<S.Comment key={id}>
+		<S.Comment>
 			<section className='wrapper'>
 				<section className='container'>
 					<div className='comment-icon'>
@@ -77,12 +86,11 @@ const Comment = ({ id, username, content, replies }: Comment) => {
 			</section>
 			<section>
 				<ul className='container-reply__lists'>
-					{replies?.map(reply => {
+					{repliesList?.map(reply => {
 						return (
 							<ReplyComment
 								key={reply.id}
 								id={reply.id}
-								parentId={id}
 								username={reply.username}
 								content={reply.content}
 							/>

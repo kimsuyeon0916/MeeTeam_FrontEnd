@@ -17,42 +17,36 @@ import { applyStepState } from '../../../atom';
 import { useNavigate } from 'react-router-dom';
 import { ComponentProps } from '../../../types';
 
-let addedCmtId;
-
-const commentsData: Comment[] = [
+let commentsData: Comment[] = [
 	{
-		id: 0,
+		id: '0',
 		username: 'john',
 		content: 'This is a comment',
 		replies: [
 			{
-				id: 0,
-				parentId: 0,
+				id: '0-0',
 				username: 'lee',
 				content: 'Reply to the comment',
 			},
 			{
-				id: 0,
-				parentId: 1,
+				id: '0-1',
 				username: 'jun',
 				content: 'Another reply',
 			},
 		],
 	},
 	{
-		id: 1,
+		id: '1',
 		username: 'yeom',
 		content: 'a comment',
 		replies: [
 			{
-				id: 0,
-				parentId: 0,
+				id: '1-0',
 				username: 'lee',
 				content: 'Reply to the comment',
 			},
 			{
-				id: 0,
-				parentId: 1,
+				id: '1-1',
 				username: 'jun',
 				content: 'Another reply',
 			},
@@ -62,7 +56,7 @@ const commentsData: Comment[] = [
 
 const RecruitDetailPage = () => {
 	const navigate = useNavigate();
-	const [commentsList, setCommentsList] = useState<Comment[]>([]);
+	const [commentsList, setCommentsList] = useState<Comment[]>(commentsData);
 	const [contents, setContents] = useState<string>('');
 	const isLogin = true; // 임시 코드
 	const step = useRecoilValue(applyStepState);
@@ -83,15 +77,9 @@ const RecruitDetailPage = () => {
 	};
 
 	const addComment = () => {
-		if (contents !== '') {
-			if (commentsList.length === 0) {
-				addedCmtId = 0;
-			} else {
-				const lastCmtIndex = commentsList.length - 1;
-				addedCmtId = commentsList[lastCmtIndex].id + 1;
-			}
+		if (contents !== '' && contents.trim() !== '') {
 			const newComment = {
-				id: addedCmtId,
+				id: commentsData.length.toString(),
 				username: 'yeom',
 				content: contents,
 				replies: [],
@@ -213,10 +201,10 @@ const RecruitDetailPage = () => {
 			<div className='container-comments'>
 				<span className='container-comments__title'>댓글</span>
 				<ul className='container-comments__lists'>
-					{commentsData.map(comment => {
+					{commentsList.map((comment, index) => {
 						return (
 							<Comment
-								key={comment.id}
+								key={index}
 								id={comment.id}
 								username={comment.username}
 								content={comment.content}
