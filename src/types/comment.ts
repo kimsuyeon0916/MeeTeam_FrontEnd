@@ -4,7 +4,7 @@ export interface Comment {
 	id: number;
 	username: string;
 	content: string;
-	depth?: number;
+	replies: Reply[];
 }
 
 export interface CommentInputFunctions {
@@ -13,4 +13,11 @@ export interface CommentInputFunctions {
 	onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 	onChangeHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	onClickInput?: () => void;
+}
+
+export interface Reply {
+	id: number;
+	parentId: number;
+	username: string;
+	content: string;
 }

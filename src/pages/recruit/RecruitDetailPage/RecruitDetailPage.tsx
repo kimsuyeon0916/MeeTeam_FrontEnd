@@ -19,9 +19,49 @@ import { ComponentProps } from '../../../types';
 
 let addedCmtId;
 
+const commentsData: Comment[] = [
+	{
+		id: 0,
+		username: 'john',
+		content: 'This is a comment',
+		replies: [
+			{
+				id: 0,
+				parentId: 0,
+				username: 'lee',
+				content: 'Reply to the comment',
+			},
+			{
+				id: 0,
+				parentId: 1,
+				username: 'jun',
+				content: 'Another reply',
+			},
+		],
+	},
+	{
+		id: 1,
+		username: 'yeom',
+		content: 'a comment',
+		replies: [
+			{
+				id: 0,
+				parentId: 0,
+				username: 'lee',
+				content: 'Reply to the comment',
+			},
+			{
+				id: 0,
+				parentId: 1,
+				username: 'jun',
+				content: 'Another reply',
+			},
+		],
+	},
+];
+
 const RecruitDetailPage = () => {
 	const navigate = useNavigate();
-	const [isReply, setIsReply] = useState<boolean>(false);
 	const [commentsList, setCommentsList] = useState<Comment[]>([]);
 	const [contents, setContents] = useState<string>('');
 	const isLogin = true; // 임시 코드
@@ -54,6 +94,7 @@ const RecruitDetailPage = () => {
 				id: addedCmtId,
 				username: 'yeom',
 				content: contents,
+				replies: [],
 			};
 			setCommentsList([...commentsList, newComment]);
 			setContents('');
@@ -172,13 +213,14 @@ const RecruitDetailPage = () => {
 			<div className='container-comments'>
 				<span className='container-comments__title'>댓글</span>
 				<ul className='container-comments__lists'>
-					{commentsList.map(comment => {
+					{commentsData.map(comment => {
 						return (
 							<Comment
 								key={comment.id}
 								id={comment.id}
 								username={comment.username}
 								content={comment.content}
+								replies={comment.replies}
 							/>
 						);
 					})}

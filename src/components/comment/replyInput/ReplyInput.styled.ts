@@ -4,6 +4,8 @@ const ReplyInput = styled.div`
 	display: flex;
 	gap: 2rem;
 	margin-left: 5rem;
+	margin-top: 2rem;
+	margin: 2rem 0 2rem 5rem;
 
 	.user-input__icon {
 		display: flex;
@@ -12,9 +14,10 @@ const ReplyInput = styled.div`
 
 	.user-input__container {
 		display: flex;
+		width: 87%;
 
 		.reply-input {
-			width: 83rem;
+			width: 100%;
 			box-sizing: border-box;
 			height: 3.75rem;
 			flex-shrink: 0;

@@ -1,7 +1,7 @@
 import type { SignUpPayload } from './payload';
 import type { UserReponse, User } from './response';
 import type { CustomInstance } from './api';
-import type { Comment, CommentInputFunctions } from './comment';
+import type { Comment, CommentInputFunctions, Reply } from './comment';
 import type { ComponentProps } from './applySteps';
 
 export {
@@ -12,4 +12,5 @@ export {
 	Comment,
 	ComponentProps,
 	CommentInputFunctions,
+	Reply,
 };

@@ -58,6 +58,7 @@ const Comment = styled.li<CommentDepth>`
 		flex-direction: column;
 		margin-top: 2rem;
 		margin-left: 5rem;
+		gap: 2rem;
 	}
 `;
 
