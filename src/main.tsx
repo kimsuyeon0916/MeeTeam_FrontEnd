@@ -6,7 +6,6 @@ import {
 	MainPage,
 	RecruitPage,
 	GalaryPage,
-	// InformationUsePage,
 	RecruitCreatePage,
 	OutputCreatePage,
 	RecruitDetailPage,
@@ -44,10 +43,6 @@ const router = createBrowserRouter([
 				path: 'galary',
 				element: <GalaryPage />,
 			},
-			// {
-			// 	path: 'information',
-			// 	element: <InformationUsePage />,
-			// },
 			{
 				path: 'signIn',
 				element: <SignInPage />,
