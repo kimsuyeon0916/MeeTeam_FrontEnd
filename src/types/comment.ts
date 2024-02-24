@@ -6,6 +6,7 @@ export interface CommentForm {
 	content: string;
 	replies: ReplyForm[];
 	deleteComment?: (id: string) => void;
+	inputRef?: any;
 }
 
 export interface CommentInputFunctions {

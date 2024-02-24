@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import S from './RecruitDetailPage.styled';
 import {
 	Tag,
@@ -57,6 +57,7 @@ const commentsData: CommentForm[] = [
 
 const RecruitDetailPage = () => {
 	const navigate = useNavigate();
+	const scrollRef = useRef(null);
 	const [commentsList, setCommentsList] = useState<CommentForm[]>(commentsData);
 	const [contents, setContents] = useState<string>('');
 	const isLogin = true; // 임시 코드

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import S from './ReplyComment.styled';
 import { Icon, KebabMenu } from '../..';
 import { ReplyForm } from '../../../types';
@@ -44,7 +44,6 @@ const ReplyComment = ({ id, username, content, deleteReply }: ReplyForm) => {
 			editComment();
 		}
 	};
-
 	return (
 		<S.ReplyComment>
 			<section className='wrapper'>
