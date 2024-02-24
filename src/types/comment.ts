@@ -1,10 +1,10 @@
 import React from 'react';
 
-export interface Comment {
+export interface CommentForm {
 	id: string;
 	username: string;
 	content: string;
-	replies: Reply[];
+	replies: ReplyForm[];
 }
 
 export interface CommentInputFunctions {
@@ -15,8 +15,9 @@ export interface CommentInputFunctions {
 	onClickInput?: () => void;
 }
 
-export interface Reply {
+export interface ReplyForm {
 	id: string;
 	username: string;
 	content: string;
+	deleteReply?: (id: string) => void;
 }

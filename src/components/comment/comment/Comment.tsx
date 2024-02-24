@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Icon, KebabMenu } from '../..';
 import S from './Comment.styled';
-import { Comment, Reply } from '../../../types';
+import { CommentForm, ReplyForm } from '../../../types';
 import { ReplyInput } from '../../index';
 import ReplyComment from './ReplyComment';
 
-const Comment = ({ id, username, content, replies }: Comment) => {
+const Comment = ({ id, username, content, replies }: CommentForm) => {
 	const isLogin = true; // 임시 코드
 	const [replyClicked, setReplyClicked] = useState<boolean>(false);
 	const [contents, setContents] = useState<string>('');
 	const [showKebab, setShowKebab] = useState<boolean>(true);
 	const isValid = isLogin && username === 'yeom' && showKebab;
-	const [repliesList, setRepliesList] = useState<Reply[]>(replies);
+	const [repliesList, setRepliesList] = useState<ReplyForm[]>(replies);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
 	const optionLists = [
 		{
@@ -29,13 +29,21 @@ const Comment = ({ id, username, content, replies }: Comment) => {
 		},
 	];
 
+	const deleteReply = (id: string) => {
+		let updatedReplies = [...repliesList];
+		console.log(updatedReplies);
+		updatedReplies = updatedReplies.filter(v => v.id !== id);
+		console.log(id);
+		setRepliesList(updatedReplies);
+	};
+
 	const handleReplyClick = () => {
 		setReplyClicked(true);
 	};
 	const addComment = () => {
 		if (contents !== '' && contents.trim() !== '') {
 			const newComment = {
-				id: id + '-' + replies.length.toString(),
+				id: id + '-' + repliesList.length.toString(),
 				username: 'yeom',
 				content: contents,
 			};
@@ -93,6 +101,7 @@ const Comment = ({ id, username, content, replies }: Comment) => {
 								id={reply.id}
 								username={reply.username}
 								content={reply.content}
+								deleteReply={() => deleteReply(reply.id)}
 							/>
 						);
 					})}

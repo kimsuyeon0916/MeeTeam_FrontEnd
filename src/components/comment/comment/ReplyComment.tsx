@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import S from './ReplyComment.styled';
 import { Icon, KebabMenu } from '../..';
-import { Reply } from '../../../types';
+import { ReplyForm } from '../../../types';
 
-const ReplyComment = ({ id, username, content }: Reply) => {
+const ReplyComment = ({ id, username, content, deleteReply }: ReplyForm) => {
 	const isLogin = true; // 임시 코드
 	const [showKebab, setShowKebab] = useState<boolean>(true);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -20,6 +20,9 @@ const ReplyComment = ({ id, username, content }: Reply) => {
 			title: '삭제',
 			optionClickHandler: () => {
 				setShowKebab(false);
+				if (deleteReply) {
+					deleteReply(id);
+				}
 			},
 		},
 	];

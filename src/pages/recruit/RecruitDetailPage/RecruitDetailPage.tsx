@@ -16,8 +16,9 @@ import { useRecoilValue } from 'recoil';
 import { applyStepState } from '../../../atom';
 import { useNavigate } from 'react-router-dom';
 import { ComponentProps } from '../../../types';
+import { CommentForm } from '../../../types';
 
-let commentsData: Comment[] = [
+let commentsData: CommentForm[] = [
 	{
 		id: '0',
 		username: 'john',
@@ -56,7 +57,7 @@ let commentsData: Comment[] = [
 
 const RecruitDetailPage = () => {
 	const navigate = useNavigate();
-	const [commentsList, setCommentsList] = useState<Comment[]>(commentsData);
+	const [commentsList, setCommentsList] = useState<CommentForm[]>(commentsData);
 	const [contents, setContents] = useState<string>('');
 	const isLogin = true; // 임시 코드
 	const step = useRecoilValue(applyStepState);
