@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Icon } from '../..';
 import { CommentInputFunctions } from '../../../types';
 import S from './CommentInput.styled';

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import S from './ReplyComment.styled';
 import { Icon, KebabMenu } from '../..';
 import { ReplyForm } from '../../../types';

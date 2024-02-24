@@ -11,7 +11,7 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 	const [value, setValue] = useState<string>(content);
 	const [contents, setContents] = useState<string>('');
 	const [showKebab, setShowKebab] = useState<boolean>(true);
-	const isValid = isLogin && username === 'yeom' && showKebab;
+	const isValid = isLogin && username === 'yeom';
 	const [repliesList, setRepliesList] = useState<ReplyForm[]>(replies);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
 	const optionLists = [
@@ -32,7 +32,7 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 			},
 		},
 	];
-
+	console.log(username, isValid);
 	const deleteReply = (id: string) => {
 		setRepliesList(prevReplies => prevReplies.filter(v => v.id !== id));
 	};
@@ -110,15 +110,17 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 							onKeyPress={onKeyPressEdit}
 						/>
 					)}
-					<button
-						type='button'
-						onClick={!isEdit ? handleReplyClick : editComment}
-						className='reply-btn'
-					>
-						{isEdit ? '수정' : '답글'}
-					</button>
+					{isValid && (
+						<button
+							type='button'
+							onClick={!isEdit ? handleReplyClick : editComment}
+							className='reply-btn'
+						>
+							{isEdit ? '수정' : '답글'}
+						</button>
+					)}
 				</section>
-				{isValid && <KebabMenu options={optionLists} />}
+				{isValid && showKebab && <KebabMenu options={optionLists} />}
 			</section>
 			<section>
 				<ul className='container-reply__lists'>

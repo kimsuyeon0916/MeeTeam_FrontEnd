@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import S from './RecruitDetailPage.styled';
 import {
 	Tag,
@@ -21,7 +21,7 @@ import { CommentForm } from '../../../types';
 const commentsData: CommentForm[] = [
 	{
 		id: '0',
-		username: 'john',
+		username: 'johny',
 		content: '이거 어때?',
 		replies: [
 			{
@@ -57,7 +57,6 @@ const commentsData: CommentForm[] = [
 
 const RecruitDetailPage = () => {
 	const navigate = useNavigate();
-	const scrollRef = useRef(null);
 	const [commentsList, setCommentsList] = useState<CommentForm[]>(commentsData);
 	const [contents, setContents] = useState<string>('');
 	const isLogin = true; // 임시 코드
@@ -109,8 +108,7 @@ const RecruitDetailPage = () => {
 
 	const onClickInput = () => {
 		if (!isLogin) {
-			// 로그인 페이지로 이동
-			// navigate('/login');
+			navigate('/login');
 		}
 	};
 
