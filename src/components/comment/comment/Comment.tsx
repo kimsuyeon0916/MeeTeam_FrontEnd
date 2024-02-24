@@ -5,7 +5,7 @@ import { CommentForm, ReplyForm } from '../../../types';
 import { ReplyInput } from '../../index';
 import ReplyComment from './ReplyComment';
 
-const Comment = ({ id, username, content, replies }: CommentForm) => {
+const Comment = ({ id, username, content, replies, deleteComment }: CommentForm) => {
 	const isLogin = true; // 임시 코드
 	const [replyClicked, setReplyClicked] = useState<boolean>(false);
 	const [contents, setContents] = useState<string>('');
@@ -25,6 +25,9 @@ const Comment = ({ id, username, content, replies }: CommentForm) => {
 			title: '삭제',
 			optionClickHandler: () => {
 				setShowKebab(false);
+				if (deleteComment) {
+					deleteComment(id);
+				}
 			},
 		},
 	];

@@ -5,6 +5,7 @@ export interface CommentForm {
 	username: string;
 	content: string;
 	replies: ReplyForm[];
+	deleteComment?: (id: string) => void;
 }
 
 export interface CommentInputFunctions {
