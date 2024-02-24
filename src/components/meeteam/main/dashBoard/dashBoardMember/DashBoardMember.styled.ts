@@ -33,7 +33,7 @@ const DashBoardMemberLayout = styled(Main.MainArticle)`
 	}
 `;
 
-const DashBoardMemberSpan = styled.span<{ $index?: number }>`
+const DashBoardMemberSpan = styled.span<{ $index: number }>`
 	position: ${props => (props.$index === 0 ? '' : 'absolute')};
 	left: ${props => 4.3 + 2.8 * props.$index}rem;
 	z-index: ${props => props.$index};

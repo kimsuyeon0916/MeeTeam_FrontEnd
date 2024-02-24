@@ -4,7 +4,7 @@ import RandomColor from './RandomColor';
 import ColorMatching from './ColorMatching';
 import CopyClipBoard from './CopyClipBoard';
 import SessionStorageEffect from './SessionStorageEffect';
-import { LocalStorageEffect } from './LocalStorageEffect';
+import LocalStorageEffect from './LocalStorageEffect';
 import fixModalBackground from './fixModalBackground';
 
 export {

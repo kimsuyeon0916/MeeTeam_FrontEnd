@@ -1,5 +1,5 @@
 const fixModalBackground = (modalState: boolean) => {
-	// state인자로 받기
+	// state 인자로 받기
 	if (modalState) {
 		document.body.style.overflow = 'hidden';
 	} else {

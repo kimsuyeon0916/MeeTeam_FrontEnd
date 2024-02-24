@@ -6,7 +6,6 @@ import {
 	MainPage,
 	RecruitPage,
 	GalaryPage,
-	InformationUsePage,
 	RecruitCreatePage,
 	OutputCreatePage,
 	RecruitDetailPage,
@@ -45,10 +44,6 @@ const router = createBrowserRouter([
 				element: <GalaryPage />,
 			},
 			{
-				path: 'information',
-				element: <InformationUsePage />,
-			},
-			{
 				path: 'signIn',
 				element: <SignInPage />,
 			},
@@ -63,10 +58,6 @@ const router = createBrowserRouter([
 					{ path: 'school?', element: <SchoolCertificationPage /> },
 					{ path: 'nickName', element: <NickNameSettingPage /> },
 				],
-			},
-			{
-				path: 'information',
-				element: <InformationUsePage />,
 			},
 			{
 				path: 'activity',
