@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import { Icon, KebabMenu } from '../..';
+import { Icon, KebabMenu, ReplyComment, ReplyInput } from '../..';
 import S from './Comment.styled';
 import { CommentForm, ReplyForm } from '../../../types';
-import { ReplyInput } from '../../index';
-import ReplyComment from './ReplyComment';
 
 const Comment = ({ id, username, content, replies, deleteComment }: CommentForm) => {
 	const isLogin = true; // 임시 코드
@@ -32,7 +30,6 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 			},
 		},
 	];
-	console.log(username, isValid);
 	const deleteReply = (id: string) => {
 		setRepliesList(prevReplies => prevReplies.filter(v => v.id !== id));
 	};
