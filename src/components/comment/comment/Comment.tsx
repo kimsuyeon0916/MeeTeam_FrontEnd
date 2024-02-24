@@ -30,11 +30,7 @@ const Comment = ({ id, username, content, replies }: CommentForm) => {
 	];
 
 	const deleteReply = (id: string) => {
-		let updatedReplies = [...repliesList];
-		console.log(updatedReplies);
-		updatedReplies = updatedReplies.filter(v => v.id !== id);
-		console.log(id);
-		setRepliesList(updatedReplies);
+		setRepliesList(prevReplies => prevReplies.filter(v => v.id !== id));
 	};
 
 	const handleReplyClick = () => {
