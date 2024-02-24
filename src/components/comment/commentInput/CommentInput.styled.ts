@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const CommentInput = styled.div`
 	.user-input {
 		display: flex;
-		gap: 2.1rem;
+		gap: 2rem;
 
 		.user-input__icon {
 			width: 3.15rem;
@@ -14,10 +14,10 @@ const CommentInput = styled.div`
 		.user-input__container {
 			display: flex;
 			gap: 1rem;
-			margin: 0 auto;
+			width: 100%;
 
 			input {
-				width: 85.15rem;
+				width: 89%;
 				height: 3.75rem;
 				flex-shrink: 0;
 				border-radius: 0.75rem;

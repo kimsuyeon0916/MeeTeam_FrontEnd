@@ -14,7 +14,7 @@ const ReplyInput = styled.div`
 
 	.user-input__container {
 		display: flex;
-		width: 87%;
+		width: 86%;
 
 		.reply-input {
 			width: 100%;

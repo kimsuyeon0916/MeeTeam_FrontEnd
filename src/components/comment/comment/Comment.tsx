@@ -8,6 +8,7 @@ import ReplyComment from './ReplyComment';
 const Comment = ({ id, username, content, replies, deleteComment }: CommentForm) => {
 	const isLogin = true; // 임시 코드
 	const [replyClicked, setReplyClicked] = useState<boolean>(false);
+	const [value, setValue] = useState<string>(content);
 	const [contents, setContents] = useState<string>('');
 	const [showKebab, setShowKebab] = useState<boolean>(true);
 	const isValid = isLogin && username === 'yeom' && showKebab;
@@ -39,6 +40,7 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 	const handleReplyClick = () => {
 		setReplyClicked(true);
 	};
+
 	const addComment = () => {
 		if (contents !== '' && contents.trim() !== '') {
 			const newComment = {
@@ -50,12 +52,24 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 			setContents('');
 		}
 	};
+	const editComment = () => {
+		setIsEdit(false);
+		setShowKebab(true);
+	};
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		const target = event.currentTarget;
 		if (target.value.length !== 0 && event.key === 'Enter') {
 			event.preventDefault();
 			addComment();
+		}
+	};
+
+	const onKeyPressEdit = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		const target = event.currentTarget;
+		if (target.value.length !== 0 && event.key === 'Enter') {
+			event.preventDefault();
+			editComment();
 		}
 	};
 
@@ -70,6 +84,10 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 		}
 	};
 
+	const onChangeEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setValue(event.target.value);
+	};
+
 	return (
 		<S.Comment>
 			<section className='wrapper'>
@@ -77,19 +95,30 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 					<div className='comment-icon'>
 						<Icon />
 					</div>
-					<div className='comment-info'>
-						<span>{username}</span>
-						<span>{content}</span>
-					</div>
-					<button type='button' onClick={handleReplyClick} className='reply-btn'>
-						답글
+					{!isEdit ? (
+						<div className='comment-info'>
+							<span>{username}</span>
+							<span>{value}</span>
+						</div>
+					) : (
+						<input
+							type='text'
+							className='input-edit'
+							placeholder='댓글 입력'
+							value={value}
+							onChange={onChangeEdit}
+							onKeyPress={onKeyPressEdit}
+						/>
+					)}
+					<button
+						type='button'
+						onClick={!isEdit ? handleReplyClick : editComment}
+						className='reply-btn'
+					>
+						{isEdit ? '수정' : '답글'}
 					</button>
 				</section>
-				{isValid && (
-					<div>
-						<KebabMenu options={optionLists} />
-					</div>
-				)}
+				{isValid && <KebabMenu options={optionLists} />}
 			</section>
 			<section>
 				<ul className='container-reply__lists'>

@@ -5,6 +5,7 @@ import { ReplyForm } from '../../../types';
 
 const ReplyComment = ({ id, username, content, deleteReply }: ReplyForm) => {
 	const isLogin = true; // 임시 코드
+	const [value, setValue] = useState<string>(content);
 	const [showKebab, setShowKebab] = useState<boolean>(true);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
 	const isValid = isLogin && username === 'yeom' && showKebab;
@@ -27,6 +28,23 @@ const ReplyComment = ({ id, username, content, deleteReply }: ReplyForm) => {
 		},
 	];
 
+	const editComment = () => {
+		setIsEdit(false);
+		setShowKebab(true);
+	};
+
+	const onChangeEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setValue(event.target.value);
+	};
+
+	const onKeyPressEdit = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		const target = event.currentTarget;
+		if (target.value.length !== 0 && event.key === 'Enter') {
+			event.preventDefault();
+			editComment();
+		}
+	};
+
 	return (
 		<S.ReplyComment>
 			<section className='wrapper'>
@@ -34,16 +52,28 @@ const ReplyComment = ({ id, username, content, deleteReply }: ReplyForm) => {
 					<div className='comment-icon'>
 						<Icon />
 					</div>
-					<div className='comment-info'>
-						<span>{username}</span>
-						<span>{content}</span>
-					</div>
+					{!isEdit ? (
+						<div className='comment-info'>
+							<span>{username}</span>
+							<span>{value}</span>
+						</div>
+					) : (
+						<>
+							<input
+								type='text'
+								className='input-edit'
+								placeholder='댓글 입력'
+								value={value}
+								onChange={onChangeEdit}
+								onKeyPress={onKeyPressEdit}
+							/>
+							<button type='button' onClick={editComment} className='reply-btn'>
+								수정
+							</button>
+						</>
+					)}
 				</section>
-				{isValid && (
-					<div>
-						<KebabMenu options={optionLists} />
-					</div>
-				)}
+				{isValid && <KebabMenu options={optionLists} />}
 			</section>
 		</S.ReplyComment>
 	);

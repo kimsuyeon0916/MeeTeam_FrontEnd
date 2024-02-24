@@ -11,6 +11,17 @@ const Comment = styled.li`
 		display: flex;
 		gap: 2rem;
 		align-items: center;
+		width: 100%;
+
+		.input-edit {
+			width: 86%;
+			border: none;
+			border-bottom: 1px solid #373f41;
+			background-color: transparent;
+			outline: none;
+			padding-bottom: 0.5rem;
+			font-size: 1.5rem;
+		}
 	}
 
 	.comment-icon {
