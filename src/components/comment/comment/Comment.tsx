@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Icon, KebabMenu, ReplyComment, ReplyInput } from '../..';
 import S from './Comment.styled';
 import { CommentForm, ReplyForm } from '../../../types';
+import { useNavigate } from 'react-router-dom';
 
 const Comment = ({ id, username, content, replies, deleteComment }: CommentForm) => {
+	const navigate = useNavigate();
 	const isLogin = true; // 임시 코드
 	const [replyClicked, setReplyClicked] = useState<boolean>(false);
 	const [value, setValue] = useState<string>(content);
@@ -78,7 +80,7 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 	const onClickInput = () => {
 		if (!isLogin) {
 			// 로그인 페이지로 이동
-			// navigate('/login');
+			navigate('/signin');
 		}
 	};
 

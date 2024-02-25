@@ -107,7 +107,7 @@ const RecruitDetailPage = () => {
 
 	const onClickInput = () => {
 		if (!isLogin) {
-			navigate('/login');
+			navigate('/signin');
 		}
 	};
 
