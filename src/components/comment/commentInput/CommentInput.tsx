@@ -14,7 +14,7 @@ const CommentInput = ({
 
 	return (
 		<S.CommentInput>
-			<div className='user-input'>
+			<article className='user-input'>
 				<section className='user-input__icon'>
 					<Icon />
 				</section>
@@ -31,7 +31,7 @@ const CommentInput = ({
 						댓글
 					</button>
 				</section>
-			</div>
+			</article>
 		</S.CommentInput>
 	);
 };
