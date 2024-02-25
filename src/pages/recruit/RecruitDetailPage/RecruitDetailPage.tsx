@@ -15,8 +15,7 @@ import ColorMatching from '../../../utils/ColorMatching';
 import { useRecoilValue } from 'recoil';
 import { applyStepState } from '../../../atom';
 import { useNavigate } from 'react-router-dom';
-import { ComponentProps } from '../../../types';
-import { CommentForm } from '../../../types';
+import { JsxElementComponentProps, CommentForm } from '../../../types';
 
 const commentsData: CommentForm[] = [
 	{
@@ -62,7 +61,7 @@ const RecruitDetailPage = () => {
 	const isLogin = true; // 임시 코드
 	const step = useRecoilValue(applyStepState);
 
-	const stepLists: ComponentProps = {
+	const stepLists: JsxElementComponentProps = {
 		0: <ApplyInfomation />,
 		1: <ApplyInput />,
 		2: <ApplySubmit />,

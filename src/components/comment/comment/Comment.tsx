@@ -47,6 +47,7 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 			};
 			setRepliesList([...repliesList, newComment]);
 			setContents('');
+			setReplyClicked(false);
 		}
 	};
 	const editComment = () => {
