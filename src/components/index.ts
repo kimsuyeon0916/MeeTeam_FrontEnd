@@ -92,7 +92,6 @@ import Create from './header/Create';
 import Comment from './comment/comment/Comment';
 import CommentInput from './comment/commentInput/CommentInput';
 import ReplyInput from './comment/replyInput/ReplyInput';
-import CommentList from './comment/comment/CommentList';
 import ReplyComment from './comment/comment/ReplyComment';
 
 export {
@@ -180,7 +179,6 @@ export {
 	Create,
 	CommentInput,
 	ReplyInput,
-	CommentList,
 	Comment,
 	ReplyComment,
 };
