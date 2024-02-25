@@ -38,7 +38,7 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 		setReplyClicked(true);
 	};
 
-	const addComment = () => {
+	const addReply = () => {
 		if (contents !== '' && contents.trim() !== '') {
 			const newComment = {
 				id: id + '-' + repliesList.length.toString(),
@@ -59,7 +59,7 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 		const target = event.currentTarget;
 		if (target.value.length !== 0 && event.key === 'Enter') {
 			event.preventDefault();
-			addComment();
+			addReply();
 		}
 	};
 
@@ -138,7 +138,7 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 					<ReplyInput
 						key={id}
 						contents={contents}
-						addComment={addComment}
+						addComment={addReply}
 						onKeyPress={onKeyPress}
 						onChangeHandler={onChangeHandler}
 						onClickInput={onClickInput}
