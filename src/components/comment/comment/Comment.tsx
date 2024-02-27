@@ -131,7 +131,7 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 								id={reply.id}
 								username={reply.username}
 								content={reply.content}
-								deleteReply={() => deleteReply(reply.id)}
+								deleteComment={() => deleteReply(reply.id)}
 							/>
 						);
 					})}
