@@ -1,5 +1,5 @@
 import Header from './header/Header';
-import Subtitle from './subtitle/Subtitle';
+import Subtitle from './title/subtitle/Subtitle';
 import Dot from './dot/Dot';
 import InputDropdown from './inputDropdown/InputDropdown';
 import CustomSelect from './customSelect/CustomSelect';
@@ -89,6 +89,7 @@ import RecruitCard from './meeteam/card/RecruitCard';
 import Pagination from './pagination/Pagination';
 import NaverLogin from './naver/NaverLogin';
 import Create from './header/Create';
+import TitleAndIntro from './title/titleAndIntro/TitleAndIntro';
 
 export {
 	Header,
@@ -173,4 +174,5 @@ export {
 	RecruitCard,
 	Pagination,
 	Create,
+	TitleAndIntro,
 };

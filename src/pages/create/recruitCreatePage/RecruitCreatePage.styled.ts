@@ -5,45 +5,6 @@ const RecruitCreatePage = styled.div`
 	margin: 0 auto;
 	margin-bottom: 30px;
 
-	.procedure {
-		height: 80px;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: flex-start;
-		box-sizing: border-box;
-		margin-top: 2.81rem;
-
-		.procedure__subtitle {
-			color: #373f41;
-			font-size: 2.4rem;
-			font-style: normal;
-			font-weight: 400;
-			line-height: 4.2rem;
-			letter-spacing: 0.015rem;
-		}
-
-		.procedure__intro {
-			width: 30rem;
-			height: 2.25rem;
-			display: flex;
-			justify-content: flex-start;
-			align-items: flex-end;
-			line-height: 3.5rem;
-			letter-spacing: 0.0125rem;
-
-			p {
-				color: #8e8e8e;
-
-				font-size: 1.65rem;
-				font-style: normal;
-				font-weight: 400;
-				line-height: 1.65rem; /* 100% */
-				letter-spacing: -0.033rem;
-			}
-		}
-	}
-
 	.wrapper {
 		width: 100%;
 		margin-top: 2rem;

@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { Subtitle, Dot, InputDropdown, MeeteamTag } from '../../../components/index';
+import { Subtitle, Dot, InputDropdown, MeeteamTag, TitleAndIntro } from '../../../components/index';
 import {
 	scopeRecruitState,
 	fieldRecruitState,
@@ -15,6 +15,11 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import S from './RecruitCreatePage.styled';
 import MemberTest from '../../../components/meeteam/main/member/MemberTest';
+
+const descriptions = [
+	'함께할 멤버들에게 알릴 기본 정보들을 기입해주세요!',
+	'기본 정보를 기반으로 구인글을 제공할 수 있습니다.',
+];
 
 const RecruitCreatePage = () => {
 	const scope = useRecoilValue(scopeRecruitState);
@@ -137,31 +142,10 @@ const RecruitCreatePage = () => {
 	};
 	return (
 		<S.RecruitCreatePage>
-			<div className='procedure'>
-				<div className='procedure__subtitle'>구인글 작성</div>
-				<div className='procedure__intro'>
-					<p>구인에 대한 정보를 입력하시고 소개해주세요.</p>
-				</div>
-			</div>
+			<TitleAndIntro title='구인글 작성' descriptions={descriptions} />
 			<div className='wrapper'>
 				<form onSubmit={handleSubmit} id='submit'>
 					<div className='container'>
-						<div className='container__teamname'>
-							<div className='container__teamname-subtitle'>
-								<Subtitle>{'구인글 제목'}</Subtitle>
-								<Dot />
-							</div>
-							<div className='container__teamname-input'>
-								<input
-									placeholder='구인 글의 제목을 입력해주세요.'
-									type='text'
-									onChange={onChangeTitle}
-									maxLength={20}
-								/>
-							</div>
-							<span className='teamname-length'>{title.length > 20 ? 20 : title.length} / 20</span>
-							{!isValidTitle.validTitle && <p>{isValidTitle.validMessage}</p>}
-						</div>
 						<div className='container__info'>
 							<div className='info-wrapper'>
 								<div className='container__info-select'>
