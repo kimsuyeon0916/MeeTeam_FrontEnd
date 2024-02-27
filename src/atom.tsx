@@ -55,7 +55,7 @@ export const recruitInputState = atom({
 		scope: '',
 		category: '',
 		field: '',
-		deadline: '',
+		deadline: new Date(),
 		period: [new Date(), new Date()],
 		title: '',
 		contents: '',
