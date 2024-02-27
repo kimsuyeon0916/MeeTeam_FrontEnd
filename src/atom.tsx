@@ -65,29 +65,9 @@ export const dateState = atom({
 	default: [new Date(), new Date()],
 });
 
-export const scopeRecruitState = atom({
-	key: 'scopeRecruitState1',
-	default: '',
-});
-
-export const fieldRecruitState = atom({
-	key: 'fieldRecruitState1',
-	default: '',
-});
-
-export const categoryRecruitState = atom({
-	key: 'categoryRecruitState',
-	default: '',
-});
-
-export const dateRecruitState = atom({
-	key: 'dateRecruitState',
-	default: [new Date(), new Date()],
-});
-
-export const deadlineState = atom({
-	key: 'deadlineState',
-	default: new Date(),
+export const recruitInputState = atom({
+	key: 'recruitInputState',
+	default: {},
 });
 
 export const validNameState = atom({

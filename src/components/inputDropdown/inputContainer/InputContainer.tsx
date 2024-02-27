@@ -1,21 +1,9 @@
 import React, { useState } from 'react';
-import { useRecoilValue } from 'recoil';
 import { Subtitle, DeadlineSelect, DateSelect, RecruitOptions } from '../..';
-import {
-	scopeRecruitState,
-	fieldRecruitState,
-	categoryRecruitState,
-	deadlineState,
-	dateRecruitState,
-} from '../../../atom';
+
 import S from './InputContainer.styled';
 
 const InputContainer = () => {
-	const scope = useRecoilValue(scopeRecruitState);
-	const field = useRecoilValue(fieldRecruitState);
-	const category = useRecoilValue(categoryRecruitState);
-	const deadline = useRecoilValue(deadlineState);
-	const [startDate, endDate] = useRecoilValue(dateRecruitState);
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 
 	return (
