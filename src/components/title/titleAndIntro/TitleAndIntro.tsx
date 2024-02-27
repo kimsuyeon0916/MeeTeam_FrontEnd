@@ -7,7 +7,7 @@ const TitleAndIntro = ({ title, descriptions }: TitleInfo) => {
 		<S.TitleAndIntro>
 			<article className='procedure__subtitle'>{title}</article>
 			<article className='procedure__intro'>
-				{descriptions?.map(description => <p>{description}</p>)}
+				{descriptions?.map((description, index) => <p key={index}>{description}</p>)}
 			</article>
 		</S.TitleAndIntro>
 	);

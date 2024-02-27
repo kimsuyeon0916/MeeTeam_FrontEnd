@@ -8,7 +8,7 @@ interface ISelectOptionsProps {
 
 const CustomSelect = styled.div<ISelectOptionsProps>`
 	position: relative;
-	width: ${props => (props.$isMember ? '18.15rem' : '40.125rem')};
+	width: 100%;
 	height: 4.875rem;
 	border-radius: 0.75rem;
 	border: 0.75px solid #e3e3e3;
@@ -49,7 +49,6 @@ const SelectOptions = styled.ul<ISelectOptionsProps>`
 	left: 0;
 	width: 100%;
 	overflow: hidden;
-	/* height: 90px; */
 	max-height: ${props => (props.$show ? 'none' : '0')};
 	padding: 0;
 	border-radius: 0.75rem;

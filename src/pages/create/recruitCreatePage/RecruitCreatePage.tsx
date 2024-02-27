@@ -1,6 +1,14 @@
 import React, { useRef, useState } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { Subtitle, Dot, InputDropdown, MeeteamTag, TitleAndIntro } from '../../../components/index';
+import {
+	Subtitle,
+	Dot,
+	InputDropdown,
+	MeeteamTag,
+	TitleAndIntro,
+	CustomSelect,
+	DeadlineSelect,
+} from '../../../components/index';
 import {
 	scopeRecruitState,
 	fieldRecruitState,
@@ -15,6 +23,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import S from './RecruitCreatePage.styled';
 import MemberTest from '../../../components/meeteam/main/member/MemberTest';
+import DateSelect from '../../../components/dateSelect/DateSelect';
 
 const descriptions = [
 	'함께할 멤버들에게 알릴 기본 정보들을 기입해주세요!',
@@ -80,190 +89,123 @@ const RecruitCreatePage = () => {
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
-		// 구인 글 제목 글자수 검사
-		if (title.length === 0) {
-			setIsValidTitle({ validTitle: false, validMessage: '* 구인 글 제목을 입력해주세요.' });
-		}
-		if (title.length !== 0) {
-			setIsValidTitle({ validTitle: true, validMessage: '' });
-		}
+		// // 구인 글 제목 글자수 검사
+		// if (title.length === 0) {
+		// 	setIsValidTitle({ validTitle: false, validMessage: '* 구인 글 제목을 입력해주세요.' });
+		// }
+		// if (title.length !== 0) {
+		// 	setIsValidTitle({ validTitle: true, validMessage: '' });
+		// }
 
-		// 밋팀 범위 검사
-		if (scope === '') {
-			setIsValidArea({ validArea: false, validMessage: '* 범위를 선택해주세요.' });
-		}
-		if (scope !== '') {
-			setIsValidArea({ validArea: true, validMessage: '' });
-		}
+		// // 밋팀 범위 검사
+		// if (scope === '') {
+		// 	setIsValidArea({ validArea: false, validMessage: '* 범위를 선택해주세요.' });
+		// }
+		// if (scope !== '') {
+		// 	setIsValidArea({ validArea: true, validMessage: '' });
+		// }
 
-		// 밋팀 분야 검사
-		if (field === '') {
-			setIsValidField({ validField: false, validMessage: '* 분야를 선택해주세요.' });
-		}
-		if (field !== '') {
-			setIsValidField({ validField: true, validMessage: '' });
-		}
+		// // 밋팀 분야 검사
+		// if (field === '') {
+		// 	setIsValidField({ validField: false, validMessage: '* 분야를 선택해주세요.' });
+		// }
+		// if (field !== '') {
+		// 	setIsValidField({ validField: true, validMessage: '' });
+		// }
 
-		// 밋팀 유형 검사
-		if (category === '') {
-			setIsValidCategory({ validCategory: false, validMessage: '* 유형을 선택해주세요.' });
-		}
-		if (category !== '') {
-			setIsValidCategory({ validCategory: true, validMessage: '' });
-		}
+		// // 밋팀 유형 검사
+		// if (category === '') {
+		// 	setIsValidCategory({ validCategory: false, validMessage: '* 유형을 선택해주세요.' });
+		// }
+		// if (category !== '') {
+		// 	setIsValidCategory({ validCategory: true, validMessage: '' });
+		// }
 
-		// 기간 검사
-		if (endDate < new Date()) {
-			setIsValidDate({
-				validDate: false,
-				validMessage: '* 날짜를 다시 설정해주세요.',
-			});
-		}
-		if (endDate > new Date()) {
-			setIsValidDate({
-				validDate: true,
-				validMessage: '',
-			});
-		}
+		// // 기간 검사
+		// if (endDate < new Date()) {
+		// 	setIsValidDate({
+		// 		validDate: false,
+		// 		validMessage: '* 날짜를 다시 설정해주세요.',
+		// 	});
+		// }
+		// if (endDate > new Date()) {
+		// 	setIsValidDate({
+		// 		validDate: true,
+		// 		validMessage: '',
+		// 	});
+		// }
 
-		// 구인 마감일 검사
-		if (deadline < new Date()) {
-			setIsValidDeadline({
-				validDeadline: false,
-				validMessage: '* 날짜를 다시 설정해주세요.',
-			});
-		}
-		if (deadline > new Date()) {
-			setIsValidDeadline({
-				validDeadline: true,
-				validMessage: '',
-			});
-		}
+		// // 구인 마감일 검사
+		// if (deadline < new Date()) {
+		// 	setIsValidDeadline({
+		// 		validDeadline: false,
+		// 		validMessage: '* 날짜를 다시 설정해주세요.',
+		// 	});
+		// }
+		// if (deadline > new Date()) {
+		// 	setIsValidDeadline({
+		// 		validDeadline: true,
+		// 		validMessage: '',
+		// 	});
+		// }
 	};
 	return (
 		<S.RecruitCreatePage>
 			<TitleAndIntro title='구인글 작성' descriptions={descriptions} />
+			<hr />
 			<div className='wrapper'>
 				<form onSubmit={handleSubmit} id='submit'>
 					<div className='container'>
-						<div className='container__info'>
+						<section className='container__info'>
 							<div className='info-wrapper'>
 								<div className='container__info-select'>
-									<div>
-										<InputDropdown
-											isDot='true'
-											title='범위'
-											optionData={['교내', '교외']}
-											type='범위'
-											key='area'
-										/>
-										{!isValidArea.validArea && <p>{isValidArea.validMessage}</p>}
-									</div>
-									<div>
-										<InputDropdown
-											isDot='true'
-											title='분야'
-											optionData={['개발']}
-											type='분야'
-											key='field'
-										/>
-										{!isValidField.validField && <p>{isValidField.validMessage}</p>}
-									</div>
+									<article className='select'>
+										<Subtitle>범위</Subtitle>
+										<article className='select-btn'>
+											<span className='option'>교내</span>
+											<span className='option'>교외</span>
+										</article>
+									</article>
+									<article className='select'>
+										<Subtitle>마감일</Subtitle>
+										<DeadlineSelect />
+									</article>
+									<article className='select'>
+										<Subtitle>수업</Subtitle>
+									</article>
 								</div>
 								<div className='container__info-select'>
-									<div>
-										<InputDropdown
-											isDot='true'
-											title='유형'
-											optionData={['프로젝트', '스터디']}
-											type='유형'
-											key='category'
-										/>
-										{!isValidCategory.validCategory && <p>{isValidCategory.validMessage}</p>}
-									</div>
-									<div>
-										<InputDropdown
-											isDot='false'
-											title='진행 방식'
-											optionData={['온라인', '오프라인']}
-											key='process'
-										/>
-									</div>
-								</div>
-								<div className='container__info-select'>
-									<div>
-										<InputDropdown
-											isDot='true'
-											title='기간'
-											optionData={[]}
-											type='기간'
-											key='period'
-										/>
-										{!isValidDate.validDate && <p>{isValidDate.validMessage}</p>}
-									</div>
-									<div className='fix'>
-										<InputDropdown
-											isDot='false'
-											title='공개 여부'
-											optionData={['공개', '비공개']}
-											key='open'
-										/>
-									</div>
-								</div>
-								<div className='container__info-select'>
-									<div>
-										<div className='title-info'>
-											<Subtitle>{'수업'}</Subtitle>
-											<span className='description'>수업인 경우에 체크해주세요.</span>
-											<span className='description-check'>수업 선택</span>
-											<input type='checkbox' onClick={() => setIsChecked(prev => !prev)} />
-										</div>
-										<div className='container-course'>
-											<input
-												type='text'
-												placeholder='수업명'
-												className={!isChecked ? 'disable' : ''}
-												disabled={!isChecked ? true : false}
-											/>
-											<input
-												type='text'
-												placeholder='교수명'
-												className={!isChecked ? 'disable' : ''}
-												disabled={!isChecked ? true : false}
-											/>
-										</div>
-									</div>
-								</div>
-								<div className='container__info-select'>
-									<div>
-										<InputDropdown
-											isDot='true'
-											title='구인 마감일'
-											optionData={[]}
-											type='구인 마감일'
-											key='deadline'
-										/>
-										{!isValidDeadline.validDeadline && <p>{isValidDeadline.validMessage}</p>}
-									</div>
+									<article className='select'>
+										<Subtitle>유형</Subtitle>
+										<article className='select-btn'>
+											<span className='option'>프로젝트</span>
+											<span className='option'>스터디</span>
+											<span className='option'>공모전</span>
+										</article>
+									</article>
+									<article className='select'>
+										<Subtitle>진행기간</Subtitle>
+										<DateSelect />
+									</article>
 								</div>
 							</div>
-						</div>
-						<div className='container__tag'>
+						</section>
+						<section className='container__tag'>
 							<div>
 								<Subtitle>{'구인 태그'}</Subtitle>
 							</div>
 							<div>
 								<MeeteamTag />
 							</div>
-						</div>
-						<div className='container__intro'>
+						</section>
+						<section className='container__intro'>
 							<div>
 								<Subtitle>{'구인글'}</Subtitle>
 							</div>
 							<div>
 								<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
 							</div>
-						</div>
+						</section>
 					</div>
 				</form>
 			</div>

@@ -5,133 +5,60 @@ const RecruitCreatePage = styled.div`
 	margin: 0 auto;
 	margin-bottom: 30px;
 
+	hr {
+		margin-top: 1.6rem;
+	}
+
 	.wrapper {
 		width: 100%;
 		margin-top: 2rem;
 		padding-bottom: 50px;
 		border-radius: 0.5rem;
-		border: 2px solid #bcd7ff;
-		background: #f7faff;
 
 		.container {
-			width: 80%;
+			width: 100%;
 			margin: 0 auto;
-			padding-top: 50px;
 			display: flex;
 			flex-direction: column;
 			gap: 5rem;
-		}
-		.container__teamname {
-			height: 100px;
-
-			.container__teamname-input {
-				padding: 10px 0px;
-
-				input {
-					width: 40.125rem;
-					height: 4.875rem;
-					flex-shrink: 0;
-					border-radius: 0.75rem;
-					border: 0.75px solid #e3e3e3;
-					background: #fff;
-					outline: none;
-					padding-left: 2.1rem;
-					box-sizing: border-box;
-				}
-			}
-
-			.teamname-length {
-				width: 40rem;
-				display: flex;
-				justify-content: flex-end;
-			}
-
-			p {
-				color: red;
-				font-size: 1.2rem;
-			}
 		}
 
 		.container__info {
 			.info-wrapper {
 				display: flex;
-				flex-direction: column;
 				gap: 2rem;
 				margin: 0 auto;
-			}
 
-			.container__info-select {
-				width: 100%;
-				display: flex;
-				justify-content: flex-start;
-				align-items: center;
-				gap: 30.82rem;
-				margin-top: 15px;
-
-				p {
-					position: absolute;
-					color: red;
-					font-size: 1.2rem;
-					padding-top: 1rem;
-					box-sizing: border-box;
-				}
-
-				.title-info {
-					position: relative;
-
-					input {
-						top: 1.25rem;
-						left: 32.3rem;
-						position: absolute;
-					}
-				}
-
-				.fix {
-					margin-top: 0.5rem;
-				}
-
-				.description {
-					color: #8e8e8e;
-					font-family: Pretendard;
-					font-size: 1.4rem;
-					font-style: normal;
-					font-weight: 400;
-					line-height: 1.35rem; /* 90% */
-					letter-spacing: 0.015rem;
-					margin-left: 2rem;
-				}
-
-				.description-check {
-					position: absolute;
-					top: 1.6rem;
-					left: 34.5rem;
-					color: var(--text-color-2, #373f41);
-					font-family: Pretendard;
-					font-size: 1.35rem;
-					font-style: normal;
-					font-weight: 400;
-					line-height: 1.35rem; /* 100% */
-					letter-spacing: 0.015rem;
-				}
-
-				.container-course {
+				.container__info-select {
+					width: 100%;
 					display: flex;
-					gap: 5.8rem;
+					flex-direction: column;
+					margin-top: 15px;
+					gap: 4rem;
+				}
 
-					input {
-						width: 40.125rem;
-						height: 4.875rem;
-						flex-shrink: 0;
-						border-radius: 0.75rem;
-						border: 0.75px solid #e3e3e3;
+				.select {
+					width: 100%;
+				}
+
+				.select-btn {
+					margin-top: 1.2rem;
+					display: flex;
+					align-items: center;
+					gap: 1.6rem;
+
+					.option {
+						border-radius: 1rem;
+						border: 1px solid #e3e3e3;
 						background: #fff;
-						outline: none;
-						padding-left: 2.1rem;
-						box-sizing: border-box;
-					}
-
-					.disable {
-						background-color: #e3e3e3;
+						color: #8e8e8e;
+						font-size: 1.5rem;
+						font-style: normal;
+						font-weight: 500;
+						line-height: normal;
+						letter-spacing: 0.02rem;
+						padding: 1.2rem 2.4rem;
+						cursor: pointer;
 					}
 				}
 			}

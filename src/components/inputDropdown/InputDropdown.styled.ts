@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const InputDropdown = styled.div`
-	width: 15rem;
+	width: 100%;
 `;
 
 const S = { InputDropdown };

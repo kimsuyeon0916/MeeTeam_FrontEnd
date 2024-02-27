@@ -37,8 +37,6 @@ const CustomSelect = ({ optionData, $isMember, type }: ICustomSelect) => {
 		setShowOptions(prev => !prev);
 	};
 
-	// useEffect(() => {}, []);
-
 	return (
 		<S.CustomSelect onClick={onClickhandler} $isMember={$isMember} $show={showOptions}>
 			<S.Label $isSelected={currentValue}>{currentValue}</S.Label>
