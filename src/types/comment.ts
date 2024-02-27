@@ -1,10 +1,10 @@
 import React from 'react';
 
-export interface CommentForm {
+export interface Comment {
 	id: string;
 	username: string;
 	content: string;
-	replies?: CommentForm[];
+	replies?: Comment[];
 	deleteComment?: (id: string) => void;
 }
 
