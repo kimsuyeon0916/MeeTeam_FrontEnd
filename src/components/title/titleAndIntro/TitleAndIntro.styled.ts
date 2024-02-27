@@ -24,7 +24,7 @@ const TitleAndIntro = styled.section`
 			color: #151515;
 			font-size: 1.65rem;
 			font-style: normal;
-			font-weight: 400;
+			font-weight: 500;
 			line-height: 1.65rem;
 			letter-spacing: -0.033rem;
 		}

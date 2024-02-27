@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const DeadlineSelect = styled.div`
-	width: 100%;
+	margin-top: 1.2rem;
 
 	.date-picker {
 		width: 100%;
@@ -13,7 +13,7 @@ const DeadlineSelect = styled.div`
 		outline: none;
 		box-sizing: border-box;
 		border-radius: 0.75rem;
-		border: 0.75px solid #e3e3e3;
+		border: 0.1rem solid #e3e3e3;
 		background: #fff;
 		color: #0e0e0e;
 		font-size: 1.5rem;

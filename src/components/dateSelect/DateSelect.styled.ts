@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const DateSelect = styled.div`
+	margin-top: 1.2rem;
 	.date-picker {
 		width: 100%;
 		height: 4.875rem;
@@ -11,7 +12,7 @@ const DateSelect = styled.div`
 		outline: none;
 		box-sizing: border-box;
 		border-radius: 0.75rem;
-		border: 0.75px solid #e3e3e3;
+		border: 0.1rem solid #e3e3e3;
 		background: #fff;
 		color: #0e0e0e;
 		font-size: 1.5rem;

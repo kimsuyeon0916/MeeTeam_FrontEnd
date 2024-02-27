@@ -12,7 +12,7 @@ const RecruitCreatePage = styled.div`
 	.wrapper {
 		width: 100%;
 		margin-top: 2rem;
-		padding-bottom: 50px;
+		padding-bottom: 0.5rem;
 		border-radius: 0.5rem;
 
 		.container {
@@ -39,6 +39,61 @@ const RecruitCreatePage = styled.div`
 
 				.select {
 					width: 100%;
+
+					.title-info {
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+
+						.description {
+							color: #8e8e8e;
+							font-size: 1.4rem;
+							font-style: normal;
+							font-weight: 400;
+							line-height: 1.35rem;
+							letter-spacing: 0.015rem;
+							margin-left: 2rem;
+						}
+
+						article:nth-child(2) {
+							display: flex;
+							align-items: center;
+
+							.description-check {
+								color: #373f41;
+								font-size: 1.35rem;
+								font-style: normal;
+								font-weight: 400;
+								line-height: 1.35rem;
+								letter-spacing: 0.015rem;
+							}
+							input {
+								margin-bottom: 0.6rem;
+							}
+						}
+					}
+
+					.temp {
+						height: 2.35rem;
+					}
+
+					.course {
+						width: 100%;
+						height: 4.875rem;
+						flex-shrink: 0;
+						border-radius: 0.75rem;
+						border: 0.1rem solid #e3e3e3;
+						background: #fff;
+						outline: none;
+						padding-left: 2.1rem;
+						box-sizing: border-box;
+						margin-top: 1.2rem;
+					}
+
+					.disable {
+						background-color: #e3e3e3;
+						border: 0.1rem solid #8e8e8e;
+					}
 				}
 
 				.select-btn {
@@ -65,35 +120,6 @@ const RecruitCreatePage = styled.div`
 		}
 
 		.container__tag {
-			margin-top: 70px;
-		}
-
-		.container__intro {
-			margin-top: 7rem;
-
-			div:nth-child(2) {
-				/* padding: 10px 20px; */
-				.editor {
-					background-color: #fff;
-					border-radius: 10px;
-				}
-			}
-
-			.ql-container.ql-snow {
-				border: 0.75px solid #e3e3e3;
-				border-bottom-right-radius: 0.75rem;
-				border-bottom-left-radius: 0.75rem;
-				height: 30.825rem;
-			}
-
-			.ql-toolbar.ql-snow {
-				border: 0.75px solid #e3e3e3;
-				border-top-right-radius: 0.75rem;
-				border-top-left-radius: 0.75rem;
-				box-sizing: border-box;
-				font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-				padding: 8px;
-			}
 		}
 
 		.container__img {
@@ -241,6 +267,55 @@ const RecruitCreatePage = styled.div`
 			}
 		}
 	}
+
+	.wrapper-recruit {
+		.title {
+			display: flex;
+			flex-direction: column;
+			margin-top: 4rem;
+
+			input {
+				width: 48%;
+				height: 4.875rem;
+				flex-shrink: 0;
+				border-radius: 0.75rem;
+				border: 0.1rem solid #e3e3e3;
+				background: #fff;
+				outline: none;
+				padding-left: 2.1rem;
+				box-sizing: border-box;
+				margin-top: 1.2rem;
+			}
+		}
+
+		.container__intro {
+			margin-top: 4rem;
+			div:nth-child(1) {
+				margin-top: 1.2rem;
+				.editor {
+					background-color: #fff;
+					border-radius: 0.1rem;
+				}
+			}
+
+			.ql-container.ql-snow {
+				border: 0.1rem solid #e3e3e3;
+				border-bottom-right-radius: 0.75rem;
+				border-bottom-left-radius: 0.75rem;
+				height: 30.825rem;
+			}
+
+			.ql-toolbar.ql-snow {
+				border: 0.75px solid #e3e3e3;
+				border-top-right-radius: 0.75rem;
+				border-top-left-radius: 0.75rem;
+				box-sizing: border-box;
+				font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+				padding: 0.8rem;
+			}
+		}
+	}
+
 	.container__controller {
 		margin-top: 2.77rem;
 		display: flex;

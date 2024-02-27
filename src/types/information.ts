@@ -1,4 +1,4 @@
 export interface TitleInfo {
-	title: string;
+	title?: string;
 	descriptions?: string[];
 }

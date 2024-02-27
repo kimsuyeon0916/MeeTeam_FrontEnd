@@ -30,6 +30,11 @@ const descriptions = [
 	'기본 정보를 기반으로 구인글을 제공할 수 있습니다.',
 ];
 
+const introductions = [
+	'게시될 구인글을 작성해주세요!',
+	'어떤 방식으로 진행하고 싶은지 구체적으로 작성해주세요.',
+];
+
 const RecruitCreatePage = () => {
 	const scope = useRecoilValue(scopeRecruitState);
 	const field = useRecoilValue(fieldRecruitState);
@@ -153,8 +158,8 @@ const RecruitCreatePage = () => {
 		<S.RecruitCreatePage>
 			<TitleAndIntro title='구인글 작성' descriptions={descriptions} />
 			<hr />
-			<div className='wrapper'>
-				<form onSubmit={handleSubmit} id='submit'>
+			<form onSubmit={handleSubmit} id='submit'>
+				<section className='wrapper'>
 					<div className='container'>
 						<section className='container__info'>
 							<div className='info-wrapper'>
@@ -171,7 +176,22 @@ const RecruitCreatePage = () => {
 										<DeadlineSelect />
 									</article>
 									<article className='select'>
-										<Subtitle>수업</Subtitle>
+										<div className='title-info'>
+											<article>
+												<Subtitle>{'수업'}</Subtitle>
+												<span className='description'>수업인 경우에 체크해주세요.</span>
+											</article>
+											<article>
+												<span className='description-check'>수업 선택</span>
+												<input type='checkbox' onClick={() => setIsChecked(prev => !prev)} />
+											</article>
+										</div>
+										<input
+											type='text'
+											placeholder='수업명'
+											className={!isChecked ? 'disable course' : 'course'}
+											disabled={!isChecked ? true : false}
+										/>
 									</article>
 								</div>
 								<div className='container__info-select'>
@@ -187,28 +207,42 @@ const RecruitCreatePage = () => {
 										<Subtitle>진행기간</Subtitle>
 										<DateSelect />
 									</article>
+									<article className='select'>
+										<div className='temp'></div>
+										<input
+											type='text'
+											placeholder='교수명'
+											className={!isChecked ? 'disable course' : 'course'}
+											disabled={!isChecked ? true : false}
+										/>
+									</article>
 								</div>
 							</div>
 						</section>
 						<section className='container__tag'>
-							<div>
-								<Subtitle>{'구인 태그'}</Subtitle>
-							</div>
-							<div>
-								<MeeteamTag />
-							</div>
+							<Subtitle>{'태그'}</Subtitle>
+							<MeeteamTag />
 						</section>
-						<section className='container__intro'>
-							<div>
-								<Subtitle>{'구인글'}</Subtitle>
-							</div>
-							<div>
-								<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
-							</div>
+						<section className='container__role'>
+							<Subtitle>{'역할'}</Subtitle>
 						</section>
 					</div>
-				</form>
-			</div>
+				</section>
+				<TitleAndIntro descriptions={introductions} />
+				<hr />
+				<section className='wrapper-recruit'>
+					<section className='title'>
+						<Subtitle>{'제목'}</Subtitle>
+						<input type='text' placeholder='제목을 입력해주세요' />
+					</section>
+					<section className='container__intro'>
+						<Subtitle>{'구인글'}</Subtitle>
+						<div>
+							<ReactQuill className='editor' ref={quillRef} theme='snow' modules={modules} />
+						</div>
+					</section>
+				</section>
+			</form>
 			<div className='container__controller'>
 				<button onClick={onClickCancel}>취소</button>
 				<button type='submit' form='submit'>
