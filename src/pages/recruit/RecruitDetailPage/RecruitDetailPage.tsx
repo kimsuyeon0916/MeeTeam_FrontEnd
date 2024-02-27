@@ -1,39 +1,67 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import S from './RecruitDetailPage.styled';
 import {
 	Tag,
-	Icon,
 	ApplyInfomation,
 	ApplyInput,
 	ApplySubmit,
 	informationList,
 	role,
 	CONTENT,
+	Comment,
+	CommentInput,
 } from '../../../components';
 import ColorMatching from '../../../utils/ColorMatching';
 import { useRecoilValue } from 'recoil';
 import { applyStepState } from '../../../atom';
 import { useNavigate } from 'react-router-dom';
+import { JsxElementComponentProps, CommentForm } from '../../../types';
 
-interface Comment {
-	// id: number;
-	username: string;
-	content: string;
-}
-
-type ComponentProps = {
-	[key: number]: JSX.Element;
-};
+const commentsData: CommentForm[] = [
+	{
+		id: '0',
+		username: 'johny',
+		content: '이거 어때?',
+		replies: [
+			{
+				id: '0-0',
+				username: 'lee',
+				content: '뭘 어때 걍 하셈',
+			},
+			{
+				id: '0-1',
+				username: 'jun',
+				content: '조용히하셈',
+			},
+		],
+	},
+	{
+		id: '1',
+		username: 'yeom',
+		content: '아니 근데 왜 나도 이거 지원하고 싶다',
+		replies: [
+			{
+				id: '1-0',
+				username: 'lee',
+				content: '하셈',
+			},
+			{
+				id: '1-1',
+				username: 'jun',
+				content: '바로 탈락하쥬?ㅋ',
+			},
+		],
+	},
+];
 
 const RecruitDetailPage = () => {
 	const navigate = useNavigate();
-	const [isReply, setIsReply] = useState<boolean>(false);
-	const [commentsList, setCommentsList] = useState<Comment[]>([]);
+	const [commentsList, setCommentsList] = useState<CommentForm[]>(commentsData);
 	const [contents, setContents] = useState<string>('');
-	const isLogin = false; // 임시 코드
-	const [needLogin, setNeedLogin] = useState<boolean>(false);
+	const isLogin = true; // 임시 코드
 	const step = useRecoilValue(applyStepState);
-	const stepLists: ComponentProps = {
+
+	const stepLists: JsxElementComponentProps = {
 		0: <ApplyInfomation />,
 		1: <ApplyInput />,
 		2: <ApplySubmit />,
@@ -49,17 +77,20 @@ const RecruitDetailPage = () => {
 	};
 
 	const addComment = () => {
-		if (contents !== '') {
-			// const lastCmtIndex = commentsList.length - 1;
-			// const addedCmtId = commentsList[lastCmtIndex].id + 1;
+		if (contents !== '' && contents.trim() !== '') {
 			const newComment = {
-				// id: addedCmtId,
+				id: commentsData.length.toString(),
 				username: 'yeom',
 				content: contents,
+				replies: [],
 			};
 			setCommentsList([...commentsList, newComment]);
 			setContents('');
 		}
+	};
+
+	const deleteComment = (id: string) => {
+		setCommentsList(prevComments => prevComments.filter(v => v.id !== id));
 	};
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -68,9 +99,6 @@ const RecruitDetailPage = () => {
 			event.preventDefault();
 			addComment();
 		}
-		// if (event.key === 'Enter') {
-		// 	event.preventDefault();
-		// }
 	};
 
 	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -79,8 +107,7 @@ const RecruitDetailPage = () => {
 
 	const onClickInput = () => {
 		if (!isLogin) {
-			// 로그인 페이지로 이동
-			// navigate('/login');
+			navigate('/signin');
 		}
 	};
 
@@ -95,9 +122,9 @@ const RecruitDetailPage = () => {
 								<Tag $recruit={true} $proceed={false} />
 							</div>
 							<div className='container-info__writer'>
-								<div className='profile-img'>
+								<picture className='profile-img'>
 									<img src='https://i.pinimg.com/236x/90/c7/f7/90c7f7afa68ea9b875eafbe887f454e8.jpg' />
-								</div>
+								</picture>
 								<div>{'김민지'}</div>
 							</div>
 						</div>
@@ -178,68 +205,25 @@ const RecruitDetailPage = () => {
 				<span className='container-comments__title'>댓글</span>
 				<ul className='container-comments__lists'>
 					{commentsList.map((comment, index) => {
-						// const commentId = comment.id;
 						return (
-							<>
-								<li key={index} className='comment'>
-									<div className='comment-icon'>
-										<Icon />
-									</div>
-									<div className='comment-info'>
-										<span>{comment.username}</span>
-										<span>{comment.content}</span>
-									</div>
-									<button
-										type='button'
-										onClick={() => {
-											setIsReply(true);
-										}}
-									>
-										답글
-									</button>
-								</li>
-								{isReply && (
-									<div className='reply-container'>
-										<div className='user-input__icon'>
-											<Icon />
-										</div>
-										<input
-											type='text'
-											onKeyPress={onKeyPress}
-											value={contents}
-											onChange={onChangeHandler}
-											onClick={onClickInput}
-											placeholder={isLogin ? '' : '로그인이 필요합니다.'}
-											className='reply-input'
-										/>
-										<button type='button' onClick={addComment} className='reply-btn'>
-											답글
-										</button>
-									</div>
-								)}
-							</>
+							<Comment
+								key={index}
+								id={comment.id}
+								username={comment.username}
+								content={comment.content}
+								replies={comment.replies}
+								deleteComment={() => deleteComment(comment.id)}
+							/>
 						);
 					})}
 				</ul>
-				<div className='container-comments__wrapper'>
-					<div className='comments'></div>
-					<div className='user-input'>
-						<div className='user-input__icon'>
-							<Icon />
-						</div>
-						<input
-							type='text'
-							onKeyPress={onKeyPress}
-							value={contents}
-							onChange={onChangeHandler}
-							onClick={onClickInput}
-							placeholder={isLogin ? '' : '로그인이 필요합니다.'}
-						/>
-						<button type='button' onClick={addComment}>
-							댓글 등록
-						</button>
-					</div>
-				</div>
+				<CommentInput
+					contents={contents}
+					addComment={addComment}
+					onKeyPress={onKeyPress}
+					onChangeHandler={onChangeHandler}
+					onClickInput={onClickInput}
+				/>
 			</div>
 		</S.RecruitDetailPage>
 	);

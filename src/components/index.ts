@@ -93,6 +93,10 @@ import Create from './header/Create';
 import TitleAndIntro from './title/titleAndIntro/TitleAndIntro';
 import InputContainer from './inputDropdown/inputContainer/InputContainer';
 import RecruitOptions from './optionMenu/recruitOptions/RecruitOptions';
+import Comment from './comment/comment/Comment';
+import CommentInput from './comment/commentInput/CommentInput';
+import ReplyInput from './comment/replyInput/ReplyInput';
+import ReplyComment from './comment/comment/ReplyComment';
 
 export {
 	Header,
@@ -181,4 +185,8 @@ export {
 	DateSelect,
 	InputContainer,
 	RecruitOptions,
+	CommentInput,
+	ReplyInput,
+	Comment,
+	ReplyComment,
 };
