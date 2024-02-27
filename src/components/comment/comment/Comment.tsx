@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Icon, KebabMenu, ReplyComment, ReplyInput } from '../..';
 import S from './Comment.styled';
-import { CommentForm, ReplyForm } from '../../../types';
+import { CommentForm } from '../../../types';
 import { useNavigate } from 'react-router-dom';
 
 const Comment = ({ id, username, content, replies, deleteComment }: CommentForm) => {
@@ -12,7 +12,7 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 	const [contents, setContents] = useState<string>('');
 	const [showKebab, setShowKebab] = useState<boolean>(true);
 	const isValid = isLogin && username === 'yeom';
-	const [repliesList, setRepliesList] = useState<ReplyForm[]>(replies);
+	const [repliesList, setRepliesList] = useState<CommentForm[] | undefined>(replies);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
 	const optionLists = [
 		{
@@ -33,7 +33,7 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 		},
 	];
 	const deleteReply = (id: string) => {
-		setRepliesList(prevReplies => prevReplies.filter(v => v.id !== id));
+		setRepliesList(prevReplies => prevReplies?.filter(v => v.id !== id));
 	};
 
 	const handleReplyClick = () => {
@@ -41,9 +41,9 @@ const Comment = ({ id, username, content, replies, deleteComment }: CommentForm)
 	};
 
 	const addReply = () => {
-		if (contents !== '' && contents.trim() !== '') {
+		if (contents !== '' && contents.trim() !== '' && repliesList) {
 			const newComment = {
-				id: id + '-' + repliesList.length.toString(),
+				id: id + '-' + repliesList?.length.toString(),
 				username: 'yeom',
 				content: contents,
 			};

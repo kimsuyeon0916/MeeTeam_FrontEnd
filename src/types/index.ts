@@ -1,7 +1,7 @@
 import type { SignUpPayload } from './payload';
 import type { UserReponse, User } from './response';
 import type { CustomInstance } from './api';
-import type { CommentForm, CommentInputFunctions, ReplyForm } from './comment';
+import type { CommentForm, CommentInputFunctions } from './comment';
 import type { JsxElementComponentProps } from './indexSigniture';
 
 export {
@@ -12,5 +12,4 @@ export {
 	CommentForm,
 	JsxElementComponentProps,
 	CommentInputFunctions,
-	ReplyForm,
 };

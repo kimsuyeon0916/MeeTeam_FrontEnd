@@ -4,7 +4,7 @@ export interface CommentForm {
 	id: string;
 	username: string;
 	content: string;
-	replies: ReplyForm[];
+	replies?: CommentForm[];
 	deleteComment?: (id: string) => void;
 }
 
@@ -14,11 +14,4 @@ export interface CommentInputFunctions {
 	onKeyPress?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 	onChangeHandler?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	onClickInput?: () => void;
-}
-
-export interface ReplyForm {
-	id: string;
-	username: string;
-	content: string;
-	deleteReply?: (id: string) => void;
 }
