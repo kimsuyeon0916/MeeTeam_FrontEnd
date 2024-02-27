@@ -1,15 +1,8 @@
-import React, { useRef, useState, useCallback } from 'react';
-import { Plus } from '../../../assets';
+import React, { useRef, useState } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
+import { Subtitle, Dot, InputDropdown, MeeteamTag } from '../../../components/index';
 import {
-	Subtitle,
-	Dot,
-	InputDropdown,
-	MeeteamTag,
-	MemberInviteModal,
-} from '../../../components/index';
-import {
-	areaRecruitState,
+	scopeRecruitState,
 	fieldRecruitState,
 	dateRecruitState,
 	deadlineState,
@@ -24,20 +17,21 @@ import S from './RecruitCreatePage.styled';
 import MemberTest from '../../../components/meeteam/main/member/MemberTest';
 
 const RecruitCreatePage = () => {
-	const area = useRecoilValue(areaRecruitState);
+	const scope = useRecoilValue(scopeRecruitState);
 	const field = useRecoilValue(fieldRecruitState);
 	const category = useRecoilValue(categoryRecruitState);
 	const deadline = useRecoilValue(deadlineState);
+
 	const quillRef = useRef<ReactQuill | null>(null);
 
-	const [teamName, setTeamName] = useState<string>('');
+	const [title, setTitle] = useState<string>('');
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 	const [startDate, endDate] = useRecoilValue(dateRecruitState);
 	const [memberList, setMemberList] = useRecoilState(memberListState);
 	const [modalOpen, setModalOpen] = useRecoilState<boolean>(memberModalState);
 
-	const [isValidName, setIsValidName] = useState({
-		validName: false,
+	const [isValidTitle, setIsValidTitle] = useState({
+		validTitle: false,
 		validMessage: '',
 	});
 	const [isValidArea, setIsValidArea] = useState({
@@ -66,9 +60,9 @@ const RecruitCreatePage = () => {
 		// navigate('/');
 	};
 
-	const onChangeTeamName = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setTeamName(event.target.value);
-		setIsValidName({ validName: true, validMessage: '' });
+	const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setTitle(event.target.value);
+		setIsValidTitle({ validTitle: true, validMessage: '' });
 	};
 
 	const onClickTestAdd = () => {
@@ -82,18 +76,18 @@ const RecruitCreatePage = () => {
 		event.preventDefault();
 
 		// 구인 글 제목 글자수 검사
-		if (teamName.length === 0) {
-			setIsValidName({ validName: false, validMessage: '* 구인 글 제목을 입력해주세요.' });
+		if (title.length === 0) {
+			setIsValidTitle({ validTitle: false, validMessage: '* 구인 글 제목을 입력해주세요.' });
 		}
-		if (teamName.length !== 0) {
-			setIsValidName({ validName: true, validMessage: '' });
+		if (title.length !== 0) {
+			setIsValidTitle({ validTitle: true, validMessage: '' });
 		}
 
 		// 밋팀 범위 검사
-		if (area === '') {
+		if (scope === '') {
 			setIsValidArea({ validArea: false, validMessage: '* 범위를 선택해주세요.' });
 		}
-		if (area !== '') {
+		if (scope !== '') {
 			setIsValidArea({ validArea: true, validMessage: '' });
 		}
 
@@ -161,14 +155,12 @@ const RecruitCreatePage = () => {
 								<input
 									placeholder='구인 글의 제목을 입력해주세요.'
 									type='text'
-									onChange={onChangeTeamName}
+									onChange={onChangeTitle}
 									maxLength={20}
 								/>
 							</div>
-							<span className='teamname-length'>
-								{teamName.length > 20 ? 20 : teamName.length} / 20
-							</span>
-							{!isValidName.validName && <p>{isValidName.validMessage}</p>}
+							<span className='teamname-length'>{title.length > 20 ? 20 : title.length} / 20</span>
+							{!isValidTitle.validTitle && <p>{isValidTitle.validMessage}</p>}
 						</div>
 						<div className='container__info'>
 							<div className='info-wrapper'>

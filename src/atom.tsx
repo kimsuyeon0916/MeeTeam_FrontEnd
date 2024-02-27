@@ -65,8 +65,8 @@ export const dateState = atom({
 	default: [new Date(), new Date()],
 });
 
-export const areaRecruitState = atom({
-	key: 'areaRecruitState1',
+export const scopeRecruitState = atom({
+	key: 'scopeRecruitState1',
 	default: '',
 });
 
