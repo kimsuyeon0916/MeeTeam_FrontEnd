@@ -6,6 +6,7 @@ interface Option {
 	title: string;
 	optionClickHandler: (e: React.MouseEvent<HTMLLIElement>) => void;
 }
+
 export type { Option };
 
 const KebabMenu = ({ options }: { options: Option[] }) => {

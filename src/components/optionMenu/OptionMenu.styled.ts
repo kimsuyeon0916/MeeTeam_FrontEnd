@@ -13,6 +13,7 @@ const OptionMenuLayout = styled.ul`
 	background: #fff;
 	box-shadow: 0px 3px 15px 0px rgba(0, 0, 0, 0.1);
 	cursor: pointer;
+	z-index: 501;
 `;
 
 const OptionMenuItem = styled.li`

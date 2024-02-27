@@ -89,6 +89,10 @@ import RecruitCard from './meeteam/card/RecruitCard';
 import Pagination from './pagination/Pagination';
 import NaverLogin from './naver/NaverLogin';
 import Create from './header/Create';
+import Comment from './comment/comment/Comment';
+import CommentInput from './comment/commentInput/CommentInput';
+import ReplyInput from './comment/replyInput/ReplyInput';
+import ReplyComment from './comment/comment/ReplyComment';
 
 export {
 	Header,
@@ -173,4 +177,8 @@ export {
 	RecruitCard,
 	Pagination,
 	Create,
+	CommentInput,
+	ReplyInput,
+	Comment,
+	ReplyComment,
 };
