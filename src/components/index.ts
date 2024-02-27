@@ -92,6 +92,7 @@ import NaverLogin from './naver/NaverLogin';
 import Create from './header/Create';
 import TitleAndIntro from './title/titleAndIntro/TitleAndIntro';
 import InputContainer from './inputDropdown/inputContainer/InputContainer';
+import RecruitOptions from './optionMenu/recruitOptions/RecruitOptions';
 
 export {
 	Header,
@@ -179,4 +180,5 @@ export {
 	TitleAndIntro,
 	DateSelect,
 	InputContainer,
+	RecruitOptions,
 };

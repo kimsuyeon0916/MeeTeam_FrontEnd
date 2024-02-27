@@ -71,27 +71,6 @@ const InputContainer = styled.section`
 			border: 0.1rem solid #8e8e8e;
 		}
 	}
-
-	.select-btn {
-		margin-top: 1.2rem;
-		display: flex;
-		align-items: center;
-		gap: 1.6rem;
-
-		.option {
-			border-radius: 1rem;
-			border: 1px solid #e3e3e3;
-			background: #fff;
-			color: #8e8e8e;
-			font-size: 1.5rem;
-			font-style: normal;
-			font-weight: 500;
-			line-height: normal;
-			letter-spacing: 0.02rem;
-			padding: 1.2rem 2.4rem;
-			cursor: pointer;
-		}
-	}
 `;
 
 const S = { InputContainer };

@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
-import { Subtitle, DeadlineSelect, DateSelect } from '../..';
-import S from './InputDropdown.styled';
+import { useRecoilValue } from 'recoil';
+import { Subtitle, DeadlineSelect, DateSelect, RecruitOptions } from '../..';
+import {
+	scopeRecruitState,
+	fieldRecruitState,
+	categoryRecruitState,
+	deadlineState,
+	dateRecruitState,
+} from '../../../atom';
+import S from './InputContainer.styled';
 
 const InputContainer = () => {
+	const scope = useRecoilValue(scopeRecruitState);
+	const field = useRecoilValue(fieldRecruitState);
+	const category = useRecoilValue(categoryRecruitState);
+	const deadline = useRecoilValue(deadlineState);
+	const [startDate, endDate] = useRecoilValue(dateRecruitState);
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 
 	return (
@@ -10,10 +23,7 @@ const InputContainer = () => {
 			<div className='container__info-select'>
 				<article className='select'>
 					<Subtitle>범위</Subtitle>
-					<article className='select-btn'>
-						<span className='option'>교내</span>
-						<span className='option'>교외</span>
-					</article>
+					<RecruitOptions options={['교내', '교외']} />
 				</article>
 				<article className='select'>
 					<Subtitle>마감일</Subtitle>
@@ -41,11 +51,7 @@ const InputContainer = () => {
 			<div className='container__info-select'>
 				<article className='select'>
 					<Subtitle>유형</Subtitle>
-					<article className='select-btn'>
-						<span className='option'>프로젝트</span>
-						<span className='option'>스터디</span>
-						<span className='option'>공모전</span>
-					</article>
+					<RecruitOptions options={['프로젝트', '스터디', '공모전']} />
 				</article>
 				<article className='select'>
 					<Subtitle>진행기간</Subtitle>
