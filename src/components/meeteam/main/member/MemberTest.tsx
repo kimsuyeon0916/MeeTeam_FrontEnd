@@ -3,7 +3,6 @@ import S from './Member.styled';
 import { RadiusProfile } from '../../../index';
 import { MeeTeamMember } from '../../../index';
 import { useRecoilState } from 'recoil';
-import { memberListState } from '../../../../atom';
 import { SCHOOL_ICON, BOOK_ICON } from '../../memberCard/MemberCard';
 
 interface Member {
@@ -24,16 +23,6 @@ const MemberTest = ({ id }: Member) => {
 		introduction: '열심히 하겠습니다!☺️',
 		specifications: [['Figma', `#E0E6FF`]],
 		id: id,
-	};
-	const [memberList, setMemberList] = useRecoilState(memberListState);
-
-	const onClickDelete = (event: React.MouseEvent<HTMLDivElement>) => {
-		let temp = [...memberList];
-		if (event.target instanceof Element) {
-			const deletedIndex = Number(event.target.id);
-			temp.splice(deletedIndex, 1);
-			setMemberList(temp);
-		}
 	};
 
 	return (
@@ -58,7 +47,7 @@ const MemberTest = ({ id }: Member) => {
 					</div>
 				</div>
 			</S.MemberCardLayout>
-			<div className='delete' onClick={onClickDelete} id={id}>
+			<div className='delete' id={id}>
 				x
 			</div>
 		</div>

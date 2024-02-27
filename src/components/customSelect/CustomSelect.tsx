@@ -1,7 +1,6 @@
 import React, { useCallback, useState, useEffect } from 'react';
 import S from './CustomSelect.styled';
 import { useRecoilState } from 'recoil';
-import { areaState, categoryState, fieldState } from '../../atom';
 
 export interface ICustomSelect {
 	optionData: string[];
@@ -13,24 +12,11 @@ export interface ICustomSelect {
 const CustomSelect = ({ optionData, $isMember, type }: ICustomSelect) => {
 	const [currentValue, setCurrentValue] = useState('선택');
 	const [showOptions, setShowOptions] = useState(false);
-	const [area, setArea] = useRecoilState(areaState);
-	const [field, setField] = useRecoilState(fieldState);
-	const [category, setCategory] = useRecoilState(categoryState);
 
 	// console.log('hi');
 	const handleOnChangeSelectValue = (event: React.MouseEvent<HTMLElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		setCurrentValue(innerText);
-
-		if (type === '범위') {
-			setArea(innerText);
-		}
-		if (type === '분야') {
-			setField(innerText);
-		}
-		if (type === '유형') {
-			setCategory(innerText);
-		}
 	};
 
 	const onClickhandler = () => {

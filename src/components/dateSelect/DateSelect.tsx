@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { dateState } from '../../atom';
 import DatePicker from 'react-datepicker';
 import S from './DateSelect.styled';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const DateSelect = () => {
-	const [date, setDate] = useRecoilState(dateState);
+	const [date, setDate] = useState([new Date(), new Date()]);
 	const [startDate, endDate] = date;
 
 	return (

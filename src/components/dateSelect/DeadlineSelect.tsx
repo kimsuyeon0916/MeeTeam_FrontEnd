@@ -1,6 +1,4 @@
-import React from 'react';
-import { deadlineState } from '../../atom';
-import { useRecoilState } from 'recoil';
+import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import S from './DeadlineSelect.styled';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -10,7 +8,7 @@ interface RecruitmentDeadLine {
 }
 
 const DeadlineSelect = ({ type }: RecruitmentDeadLine) => {
-	const [endDate, setEndDate] = useRecoilState(deadlineState);
+	const [endDate, setEndDate] = useState(new Date());
 	return (
 		<S.DeadlineSelect>
 			<DatePicker

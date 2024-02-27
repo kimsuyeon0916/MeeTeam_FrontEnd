@@ -1,6 +1,5 @@
 import { atom } from 'recoil';
 import { SessionStorageEffect } from './utils';
-import { MeeTeamMember } from './components';
 import { User } from './types';
 import { LocalStorageEffect } from './utils';
 import { Account } from './pages';
@@ -45,29 +44,22 @@ export const recruitmentInformationEditState = atom({
 	default: false,
 });
 
-export const areaState = atom({
-	key: 'areaState1',
-	default: '',
-});
-
-export const fieldState = atom({
-	key: 'fieldState',
-	default: '',
-});
-
-export const categoryState = atom({
-	key: 'categoryState',
-	default: '',
-});
-
-export const dateState = atom({
-	key: 'dateState',
-	default: [new Date(), new Date()],
+export const deadlineState = atom({
+	key: 'deadlineState',
+	default: new Date(),
 });
 
 export const recruitInputState = atom({
 	key: 'recruitInputState',
-	default: {},
+	default: {
+		scope: '',
+		category: '',
+		field: '',
+		deadline: '',
+		period: [new Date(), new Date()],
+		title: '',
+		contents: '',
+	},
 });
 
 export const validNameState = atom({
@@ -108,16 +100,6 @@ export const validDateState = atom({
 		validDate: false,
 		validMessage: '',
 	},
-});
-
-export const memberListState = atom<MeeTeamMember[]>({
-	key: 'memberListState1',
-	default: [],
-});
-
-export const memberModalState = atom({
-	key: 'memberModalState',
-	default: false,
 });
 
 export const applyStepState = atom({
