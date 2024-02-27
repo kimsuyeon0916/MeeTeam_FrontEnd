@@ -1,6 +1,6 @@
 import React from 'react';
-import { Dot, CustomSelect, Subtitle, DeadlineSelect } from '..';
-import DateSelect from '../dateSelect/DateSelect';
+import { Dot, CustomSelect, Subtitle, DeadlineSelect } from '../..';
+import DateSelect from '../../dateSelect/DateSelect';
 import S from './InputDropdown.styled';
 
 interface Information {
