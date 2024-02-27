@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import S from './ReplyComment.styled';
 import { Icon, KebabMenu } from '../..';
-import { ReplyForm } from '../../../types';
+import { Comment } from '../../../types';
 
-const ReplyComment = ({ id, username, content, deleteReply }: ReplyForm) => {
+const ReplyComment = ({ id, username, content, deleteComment }: Comment) => {
 	const isLogin = true; // 임시 코드
 	const [value, setValue] = useState<string>(content);
 	const [showKebab, setShowKebab] = useState<boolean>(true);
@@ -21,8 +21,8 @@ const ReplyComment = ({ id, username, content, deleteReply }: ReplyForm) => {
 			title: '삭제',
 			optionClickHandler: () => {
 				setShowKebab(false);
-				if (deleteReply) {
-					deleteReply(id);
+				if (deleteComment) {
+					deleteComment(id);
 				}
 			},
 		},

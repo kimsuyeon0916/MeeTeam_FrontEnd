@@ -15,48 +15,12 @@ import ColorMatching from '../../../utils/ColorMatching';
 import { useRecoilValue } from 'recoil';
 import { applyStepState } from '../../../atom';
 import { useNavigate } from 'react-router-dom';
-import { JsxElementComponentProps, CommentForm } from '../../../types';
-
-const commentsData: CommentForm[] = [
-	{
-		id: '0',
-		username: 'johny',
-		content: '이거 어때?',
-		replies: [
-			{
-				id: '0-0',
-				username: 'lee',
-				content: '뭘 어때 걍 하셈',
-			},
-			{
-				id: '0-1',
-				username: 'jun',
-				content: '조용히하셈',
-			},
-		],
-	},
-	{
-		id: '1',
-		username: 'yeom',
-		content: '아니 근데 왜 나도 이거 지원하고 싶다',
-		replies: [
-			{
-				id: '1-0',
-				username: 'lee',
-				content: '하셈',
-			},
-			{
-				id: '1-1',
-				username: 'jun',
-				content: '바로 탈락하쥬?ㅋ',
-			},
-		],
-	},
-];
+import { JsxElementComponentProps } from '../../../types';
+import { commentsData } from './data';
 
 const RecruitDetailPage = () => {
 	const navigate = useNavigate();
-	const [commentsList, setCommentsList] = useState<CommentForm[]>(commentsData);
+	const [commentsList, setCommentsList] = useState<Comment[]>(commentsData);
 	const [contents, setContents] = useState<string>('');
 	const isLogin = true; // 임시 코드
 	const step = useRecoilValue(applyStepState);
