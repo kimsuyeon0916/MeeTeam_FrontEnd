@@ -8,3 +8,9 @@ export interface OptionList {
 	isScope?: boolean;
 	isCategory?: boolean;
 }
+
+export interface Option {
+	children: string;
+	isScope?: boolean;
+	isCategory?: boolean;
+}

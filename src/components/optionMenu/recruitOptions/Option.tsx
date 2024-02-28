@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 import S from './RecruitOptions.styled';
 import { useRecoilState } from 'recoil';
 import { recruitInputState } from '../../../atom';
-
-interface Option {
-	children: string;
-	isScope?: boolean;
-	isCategory?: boolean;
-}
+import { Option } from '../../../types';
 
 const Option = ({ children, isScope, isCategory }: Option) => {
 	const [isClicked, setIsClicked] = useState<boolean>(false);
