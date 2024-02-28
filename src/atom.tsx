@@ -57,6 +57,11 @@ export const recruitInputState = atom({
 		field: '',
 		deadline: '',
 		period: ['', ''],
+		courseTagDto: {
+			isCourse: false,
+			courseTagName: '',
+			courseTagProfessor: '',
+		},
 		title: '',
 		contents: '',
 	},
