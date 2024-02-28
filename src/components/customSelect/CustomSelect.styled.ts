@@ -6,12 +6,12 @@ interface ISelectOptionsProps {
 	$isMember?: boolean;
 }
 
-const CustomSelect = styled.div<ISelectOptionsProps>`
+const CustomSelect = styled.div`
 	position: relative;
 	width: 100%;
 	height: 4.875rem;
 	border-radius: 0.75rem;
-	border: 0.75px solid #e3e3e3;
+	border: 0.1rem solid #e3e3e3;
 	background: #fff;
 	align-self: center;
 	margin-top: 5px;
@@ -34,11 +34,11 @@ const Label = styled.label<ISelectOptionsProps>`
 	height: 100%;
 	margin-left: 2.1rem;
 	text-align: center;
-	color: ${props => (props.$isSelected === '선택' ? '#a7a7a7' : '#000')};
+	color: ${props => (props.$isSelected === '역할' ? '#8E8E8E' : '#000')};
 	font-size: 1.5rem;
 	font-style: normal;
 	font-weight: 400;
-	line-height: 1.35rem; /* 90% */
+	line-height: 1.35rem;
 	letter-spacing: 0.015rem;
 `;
 
@@ -55,6 +55,7 @@ const SelectOptions = styled.ul<ISelectOptionsProps>`
 	background-color: #fff;
 	color: #000;
 	z-index: 100;
+	border: ${props => (props.$show ? '0.1rem solid #e3e3e3' : 'none')};
 `;
 
 const Option = styled.li`

@@ -1,19 +1,14 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import S from './CustomSelect.styled';
-import { useRecoilState } from 'recoil';
 
-export interface ICustomSelect {
+export interface CustomSelect {
 	optionData: string[];
-	$isMember?: boolean;
-	key?: number;
-	type?: string;
 }
 
-const CustomSelect = ({ optionData, $isMember, type }: ICustomSelect) => {
-	const [currentValue, setCurrentValue] = useState('선택');
+const CustomSelect = ({ optionData }: CustomSelect) => {
+	const [currentValue, setCurrentValue] = useState('역할');
 	const [showOptions, setShowOptions] = useState(false);
 
-	// console.log('hi');
 	const handleOnChangeSelectValue = (event: React.MouseEvent<HTMLElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		setCurrentValue(innerText);
@@ -24,7 +19,7 @@ const CustomSelect = ({ optionData, $isMember, type }: ICustomSelect) => {
 	};
 
 	return (
-		<S.CustomSelect onClick={onClickhandler} $isMember={$isMember} $show={showOptions}>
+		<S.CustomSelect onClick={onClickhandler}>
 			<S.Label $isSelected={currentValue}>{currentValue}</S.Label>
 			<S.SelectOptions $show={showOptions}>
 				{optionData.map((data: string, index: number) => (

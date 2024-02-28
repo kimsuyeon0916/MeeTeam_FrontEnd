@@ -32,6 +32,7 @@ const DeadlineSelect = ({ type }: RecruitmentDeadLine) => {
 				minDate={new Date()}
 				placeholderText={type && '구인 글 마감일을 선택해주세요.'}
 				dateFormat='yyyy년 MM월 dd일'
+				tabIndex={-1}
 			/>
 		</S.DeadlineSelect>
 	);

@@ -29,6 +29,7 @@ const DateSelect = () => {
 				onChange={update => onChangeHandler(update)}
 				isClearable={true}
 				className='date-picker'
+				tabIndex={-1}
 			/>
 		</S.DateSelect>
 	);
