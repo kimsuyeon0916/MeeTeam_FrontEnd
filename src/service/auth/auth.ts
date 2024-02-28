@@ -7,13 +7,16 @@ const axiosConfig = {
 	},
 };
 
-export const signUp = async ({ emailCode, nickName }: { emailCode: string; nickName: string }) => {
+const platformType = 'NAVER';
+const platformId = import.meta.env.VITE_PLATFORM_ID;
+
+export const signUp = async ({ emailCode, nickname }: { emailCode: string; nickname: string }) => {
 	try {
 		const response = await axiosInstance.post<UserReponse>(
 			EndPoint.SIGN_UP.all,
 			{
 				emailCode,
-				nickName,
+				nickname,
 			},
 			axiosConfig
 		);
@@ -25,11 +28,16 @@ export const signUp = async ({ emailCode, nickName }: { emailCode: string; nickN
 	}
 };
 
-export const certificateSchool = async ({ school, major, year, email }: SignUpPayload) => {
+export const certificateSchool = async ({
+	year,
+	universityId,
+	departmentId,
+	emailId,
+}: SignUpPayload) => {
 	try {
 		const response = await axiosInstance.post<UserReponse>(
 			EndPoint.SIGN_UP.school,
-			{ school, major, year, email },
+			{ platformType, platformId, year, universityId, departmentId, emailId },
 			axiosConfig
 		);
 
@@ -44,11 +52,11 @@ export const certificateSchool = async ({ school, major, year, email }: SignUpPa
  * @description 네이버 연동 여부를 확인합니다.
  * @return 실패할 경우 null을 반환합니다.
  */
-export const checkExist = async ({ code }: { code: string }) => {
+export const checkExist = async ({ authorizationCode }: { authorizationCode: string }) => {
 	try {
 		const response = await axiosInstance.post<UserReponse>(
-			EndPoint.SIGN_UP.school,
-			{ code },
+			EndPoint.SIGN_IN,
+			{ platformType, authorizationCode },
 			axiosConfig
 		);
 
