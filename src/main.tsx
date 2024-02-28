@@ -44,7 +44,7 @@ const router = createBrowserRouter([
 				element: <GalaryPage />,
 			},
 			{
-				path: 'signIn',
+				path: 'signin',
 				element: <SignInPage />,
 			},
 			{
@@ -52,11 +52,11 @@ const router = createBrowserRouter([
 				element: <PassWordFindingPage />,
 			},
 			{
-				path: 'signUp',
+				path: 'signup',
 				children: [
 					{ path: '', element: <SignUpPage /> },
 					{ path: 'school?', element: <SchoolCertificationPage /> },
-					{ path: 'nickName', element: <NickNameSettingPage /> },
+					{ path: 'nickname', element: <NickNameSettingPage /> },
 				],
 			},
 			{
