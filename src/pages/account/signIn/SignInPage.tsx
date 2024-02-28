@@ -15,10 +15,10 @@ const SignInPage = () => {
 	};
 
 	const handleNaverSignInSuccess = () => {
-		if (data?.token) {
+		if (data?.accessToken) {
 			return navigate('/');
 		}
-		return navigate('/signUp/school');
+		return navigate('/signup/school');
 	};
 
 	const { data, mutate } = useCheckExist({ onSuccess: handleNaverSignInSuccess });
@@ -26,7 +26,7 @@ const SignInPage = () => {
 	useEffect(() => {
 		const code = getAuthCode();
 		!code && setCallBack(false);
-		code && mutate({ code: code });
+		code && mutate({ authorizationCode: code });
 	}, [mutate]);
 
 	return (
