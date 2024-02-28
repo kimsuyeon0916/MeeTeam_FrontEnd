@@ -11,7 +11,7 @@ const InputContainer = () => {
 			<div className='container__info-select'>
 				<article className='select'>
 					<Subtitle>범위</Subtitle>
-					<RecruitOptions options={['교내', '교외']} />
+					<RecruitOptions isScope options={['교내', '교외']} />
 				</article>
 				<article className='select'>
 					<Subtitle>마감일</Subtitle>
@@ -39,7 +39,7 @@ const InputContainer = () => {
 			<div className='container__info-select'>
 				<article className='select'>
 					<Subtitle>유형</Subtitle>
-					<RecruitOptions options={['프로젝트', '스터디', '공모전']} />
+					<RecruitOptions isCategory options={['프로젝트', '스터디', '공모전']} />
 				</article>
 				<article className='select'>
 					<Subtitle>진행기간</Subtitle>

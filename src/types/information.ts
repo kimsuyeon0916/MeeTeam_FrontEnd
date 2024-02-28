@@ -5,4 +5,6 @@ export interface TitleInfo {
 
 export interface OptionList {
 	options: string[];
+	isScope?: boolean;
+	isCategory?: boolean;
 }

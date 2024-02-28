@@ -1,22 +1,15 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { OptionList } from '../../../types';
-import { useRecoilState } from 'recoil';
 import S from './RecruitOptions.styled';
-import { recruitInputState } from '../../../atom';
+import Option from './Option';
 
-const RecruitOptions = ({ options }: OptionList) => {
-	const isClicked = useRef<boolean | null>(null);
-	const [info, setInfos] = useRecoilState(recruitInputState);
-	const onClickOption = (event: React.MouseEvent<HTMLSpanElement>) => {
-		const { innerText } = event.target as HTMLElement;
-		setInfos({ ...info, scope: innerText });
-	};
+const RecruitOptions = ({ options, isScope, isCategory }: OptionList) => {
 	return (
 		<S.RecruitOptions>
 			{options.map((option, index) => (
-				<span key={index} className='option' onClick={onClickOption}>
+				<Option isScope={isScope} isCategory={isCategory} key={index}>
 					{option}
-				</span>
+				</Option>
 			))}
 		</S.RecruitOptions>
 	);
