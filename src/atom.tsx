@@ -62,6 +62,14 @@ export const recruitInputState = atom({
 			courseTagName: '',
 			courseTagProfessor: '',
 		},
+		recruitmentRoleDto: [
+			{
+				role: '',
+				count: 0,
+				skill: [],
+			},
+		],
+		tag: [],
 		title: '',
 		contents: '',
 	},
