@@ -9,7 +9,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 
 interface FormValues {
-	nickName: string;
+	nickname: string;
 }
 
 const NickNameSettingPage = () => {
@@ -38,7 +38,7 @@ const NickNameSettingPage = () => {
 		const urlParams = new URLSearchParams(window.location.search);
 		const code = urlParams.get('emailCode');
 
-		code && mutate({ emailCode: code, nickName: data.nickName });
+		code && mutate({ emailCode: code, nickname: data.nickname });
 	};
 
 	return (
@@ -49,7 +49,7 @@ const NickNameSettingPage = () => {
 			<S.NickNameSettingPageForm onSubmit={handleSubmit(naverSignUpHandler)}>
 				{SIGN_UP_DATA.map(
 					({ name, validation, ...props }, index) =>
-						name === 'nickName' && (
+						name === 'nickname' && (
 							<label className='account__label' key={index}>
 								<input className='account__input' {...register(name, validation)} {...props} />
 								<small className='account_input-validation'>{errors[name]?.message}</small>
