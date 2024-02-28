@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Upload } from '../../../assets';
 import { modules } from '../../../utils/index';
-import { Subtitle, Dot, InputDropdown, MeeteamTag } from '../../../components';
+import { Subtitle, Dot, MeeteamTag } from '../../../components';
 import S from './OutputCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -127,56 +127,7 @@ const OutputCreatePage = () => {
 							</span>
 							{!isValidName.validName && <p>{isValidName.validMessage}</p>}
 						</div>
-						<div className='container__info'>
-							<div className='info-wrapper'>
-								<div className='container__info-select'>
-									<div>
-										<InputDropdown
-											isDot='true'
-											title='범위'
-											optionData={['교내', '교외']}
-											type='범위'
-										/>
-										{!isValidArea.validArea && <p>{isValidArea.validMessage}</p>}
-									</div>
-									<div>
-										<InputDropdown isDot='true' title='분야' optionData={['개발']} type='분야' />
-										{!isValidField.validField && <p>{isValidField.validMessage}</p>}
-									</div>
-								</div>
-								<div className='container__info-select'>
-									<div>
-										<InputDropdown
-											isDot='true'
-											title='유형'
-											optionData={['프로젝트', '스터디']}
-											type='유형'
-										/>
-										{!isValidCategory.validCategory && <p>{isValidCategory.validMessage}</p>}
-									</div>
-									<div>
-										<InputDropdown
-											isDot='false'
-											title='진행 방식'
-											optionData={['온라인', '오프라인']}
-										/>
-									</div>
-								</div>
-								<div className='container__info-select'>
-									<div>
-										<InputDropdown isDot='true' title='기간' optionData={[]} type='기간' />
-										{!isValidDate.validDate && <p>{isValidDate.validMessage}</p>}
-									</div>
-									<div className='fix'>
-										<InputDropdown
-											isDot='false'
-											title='공개 여부'
-											optionData={['공개', '비공개']}
-										/>
-									</div>
-								</div>
-							</div>
-						</div>
+						<div className='container__info'></div>
 						<div className='container__tag'>
 							<div>
 								<Subtitle>{'밋팀 태그'}</Subtitle>

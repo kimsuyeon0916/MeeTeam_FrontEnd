@@ -1,10 +1,8 @@
 import Header from './header/Header';
 import Subtitle from './title/subtitle/Subtitle';
 import Dot from './dot/Dot';
-import InputDropdown from './inputDropdown/inputDropdown/InputDropdown';
 import CustomSelect from './customSelect/CustomSelect';
 import MeeteamTag from './tag/MeeteamTag';
-import MemberSelect from './memberSelect/MemberSelect';
 import AddButton from './addButton/AddButton';
 import ProgressBar from './meeteam/progressBar/ProgressBar';
 import Menu from './meeteam/menu/Menu';
@@ -104,10 +102,8 @@ export {
 	Header,
 	Subtitle,
 	Dot,
-	InputDropdown,
 	CustomSelect,
 	MeeteamTag,
-	MemberSelect,
 	ProgressBar,
 	Menu,
 	Main,

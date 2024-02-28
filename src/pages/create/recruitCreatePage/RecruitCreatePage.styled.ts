@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const RecruitCreatePage = styled.div`
 	width: clamp(45%, 108rem, 75%);
 	margin: 0 auto;
-	margin-bottom: 30px;
+	margin-bottom: 18rem;
 
 	hr {
 		margin-top: 1.6rem;
@@ -29,8 +29,8 @@ const RecruitCreatePage = styled.div`
 			color: #373f41;
 			font-size: 1.5rem;
 			font-style: normal;
-			font-weight: 400;
-			line-height: 1.8rem; /* 75% */
+			font-weight: 500;
+			line-height: 1.8rem;
 			letter-spacing: 0.02rem;
 		}
 

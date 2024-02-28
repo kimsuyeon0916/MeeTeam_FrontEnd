@@ -25,6 +25,7 @@ const RecruitCreatePage = () => {
 
 		// 구인글 상세페이지로 이동
 		// navigate('');
+		// info post 호출
 	};
 	return (
 		<S.RecruitCreatePage>
@@ -39,7 +40,7 @@ const RecruitCreatePage = () => {
 			<div className='container__controller'>
 				<button onClick={onClickCancel}>취소</button>
 				<button type='submit' form='submit'>
-					등록하기
+					등록
 				</button>
 			</div>
 		</S.RecruitCreatePage>
