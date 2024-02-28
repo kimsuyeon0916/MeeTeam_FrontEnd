@@ -1,15 +1,17 @@
 export interface UserReponse {
 	user: User;
-	token: string;
+	accessToken: string;
+	refreshToken?: string;
+	platformId?: string;
 }
 
 export interface User {
-	school: string;
-	major: string;
+	university: string;
+	department: string;
 	year: string;
 	email: string;
-	nickName: string;
-	name?: string;
+	nickname: string;
+	username?: string;
 	imageUrl?: string;
 	rate?: number;
 	phone?: '';
