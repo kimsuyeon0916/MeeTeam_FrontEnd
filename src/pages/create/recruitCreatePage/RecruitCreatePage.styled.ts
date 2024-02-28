@@ -10,9 +10,9 @@ const RecruitCreatePage = styled.div`
 	}
 
 	.container__controller {
-		margin-top: 2.77rem;
+		margin-top: 10rem;
 		display: flex;
-		justify-content: flex-end;
+		justify-content: center;
 		gap: 2rem;
 
 		button {

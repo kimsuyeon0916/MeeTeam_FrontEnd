@@ -17,7 +17,7 @@ const InputContainer = () => {
 	};
 	return (
 		<S.InputContainer>
-			<div className='container__info-select'>
+			<section className='container__info-select'>
 				<article className='select'>
 					<Subtitle>범위</Subtitle>
 					<RecruitOptions isScope options={['교내', '교외']} />
@@ -29,8 +29,8 @@ const InputContainer = () => {
 				<article className='select'>
 					<InputCourse isChecked={isChecked} onClickHandler={onClickHandler} />
 				</article>
-			</div>
-			<div className='container__info-select'>
+			</section>
+			<section className='container__info-select'>
 				<article className='select'>
 					<Subtitle>유형</Subtitle>
 					<RecruitOptions isCategory options={['프로젝트', '스터디', '공모전']} />
@@ -42,7 +42,7 @@ const InputContainer = () => {
 				<article className='select'>
 					<InputProfessor isChecked={isChecked} />
 				</article>
-			</div>
+			</section>
 		</S.InputContainer>
 	);
 };
