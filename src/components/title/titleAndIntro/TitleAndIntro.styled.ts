@@ -14,11 +14,11 @@ const TitleAndIntro = styled.section`
 		font-weight: 700;
 		line-height: normal;
 		letter-spacing: 0.1rem;
-		margin-top: 4rem;
+		margin-top: 6.83rem;
 	}
 
 	.procedure__intro {
-		margin-top: 4rem;
+		margin-top: 2.25rem;
 
 		p:nth-child(1) {
 			color: #151515;

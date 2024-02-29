@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const DateSelect = styled.div`
-	margin-top: 1.2rem;
+	margin-top: 0.9rem;
 	.date-picker {
 		width: 100%;
 		height: 4.875rem;

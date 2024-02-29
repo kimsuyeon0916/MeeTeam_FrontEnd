@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { InputContainer, Subtitle, MeeteamTag, CustomSelect } from '../../../../components';
 import S from './RecruitInfoWrapper.styled';
-import { XBtn } from '../../../../assets';
+import { Plus, XBtn } from '../../../../assets';
 
 const RecruitInfoWrapper = () => {
 	const [tagItem, setTagItem] = useState<string>('');
@@ -26,7 +26,7 @@ const RecruitInfoWrapper = () => {
 
 	const deleteTagItem = (event: any) => {
 		const deletedIndex = Number(event.target.id);
-		copyTagList.splice(deletedIndex, 1);
+		copyTagList.splice(deletedIndex, 1); // 수정 필요
 		setTagList(copyTagList);
 	};
 
@@ -71,7 +71,9 @@ const RecruitInfoWrapper = () => {
 								</section>
 							</article>
 							<article className='add-btn'>
-								<button>+</button>
+								<button>
+									<img src={Plus} />
+								</button>
 							</article>
 						</article>
 						<article></article>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import S from './RecruitCreatePage.styled';
 import { TitleAndIntro } from '../../../components/index';
 import RecruitInfoWrapper from './wrappers/RecruitInfoWrapper';

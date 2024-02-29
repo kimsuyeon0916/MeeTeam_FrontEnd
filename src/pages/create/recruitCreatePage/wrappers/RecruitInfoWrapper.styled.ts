@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const RecruitInfoWrapper = styled.section`
 	width: 100%;
-	margin-top: 2rem;
 	padding-bottom: 0.5rem;
 	border-radius: 0.5rem;
 
@@ -11,7 +10,7 @@ const RecruitInfoWrapper = styled.section`
 		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
-		gap: 5rem;
+		gap: 3rem;
 	}
 
 	.container__info {
@@ -150,6 +149,13 @@ const RecruitInfoWrapper = styled.section`
 					border-radius: 0.75rem;
 					background: #fff;
 					border: 0.1rem solid #e3e3e3;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+
+					img {
+						width: 2rem;
+					}
 				}
 			}
 		}

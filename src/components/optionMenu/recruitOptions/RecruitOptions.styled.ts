@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const RecruitOptions = styled.article`
-	margin-top: 1.2rem;
+	margin-top: 0.9rem;
 	display: flex;
 	align-items: center;
 	gap: 1.6rem;

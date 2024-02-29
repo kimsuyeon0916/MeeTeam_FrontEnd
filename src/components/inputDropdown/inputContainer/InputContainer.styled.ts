@@ -10,7 +10,7 @@ const InputContainer = styled.section`
 		display: flex;
 		flex-direction: column;
 		margin-top: 15px;
-		gap: 4rem;
+		gap: 3rem;
 	}
 
 	.select {
