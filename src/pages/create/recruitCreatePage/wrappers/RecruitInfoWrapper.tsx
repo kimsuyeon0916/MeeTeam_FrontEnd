@@ -3,13 +3,39 @@ import { InputContainer, Subtitle, MeeteamTag, CustomSelect } from '../../../../
 import S from './RecruitInfoWrapper.styled';
 import { Plus, XBtn } from '../../../../assets';
 
+const examples = [
+	{
+		role: '백엔드 개발자',
+		count: 2,
+		skill: ['Node.js', 'Spring', 'AWS'],
+	},
+	{
+		role: '프론트엔드 개발자',
+		count: 1,
+		skill: ['TypeScript', 'React', 'React Query'],
+	},
+];
+
+interface Role {
+	role: string;
+	count: number;
+	skill: string[];
+}
+
 const RecruitInfoWrapper = () => {
 	const [tagItem, setTagItem] = useState<string>('');
 	const [tagList, setTagList] = useState<string[]>([]);
 	const copyTagList = [...tagList];
+	const [userRole, setUserRole] = useState<Role>({
+		role: '',
+		count: 0,
+		skill: [],
+	});
+	const [userRoleList, setUserRoleList] = useState<Role[]>([]);
 
 	const submitTagItem = () => {
 		setTagList([...tagList, tagItem]);
+		setUserRole({ ...userRole, skill: tagList });
 		setTagItem('');
 	};
 
@@ -24,10 +50,33 @@ const RecruitInfoWrapper = () => {
 		}
 	};
 
-	const deleteTagItem = (event: any) => {
+	const deleteTagItem = (event: React.MouseEvent<HTMLButtonElement>) => {
 		const deletedIndex = Number(event.target.id);
 		copyTagList.splice(deletedIndex, 1); // 수정 필요
 		setTagList(copyTagList);
+	};
+
+	const onClickHandler = () => {
+		setUserRoleList([...userRoleList, userRole]);
+		setUserRole({
+			role: '',
+			count: 0,
+			skill: [],
+		});
+	};
+
+	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setUserRole({
+			...userRole,
+			role: event.target.value,
+		});
+	};
+
+	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setUserRole({
+			...userRole,
+			count: Number(event.target.value),
+		});
 	};
 
 	return (
@@ -46,16 +95,26 @@ const RecruitInfoWrapper = () => {
 						<article className='container-role__input'>
 							<article className='inputs'>
 								<section className='role-input'>
-									<CustomSelect optionData={['기획자', '디자이너', '프론트엔드', '백엔드']} />
+									<input
+										type='text'
+										placeholder='역할'
+										value={userRole.role}
+										onChange={onChangeRole}
+									/>
 								</section>
-								<input className='count-input' type='number' placeholder='인원' />
+								<input
+									className='count-input'
+									type='number'
+									placeholder='인원'
+									onChange={onChangeCount}
+								/>
 								<section className='container-skills'>
 									{copyTagList.map((tagItem, index) => {
 										return (
 											<article className='container-tags' key={index}>
 												<span>{tagItem}</span>
-												<button type='button' id={index.toString()} onClick={deleteTagItem}>
-													<img src={XBtn} />
+												<button type='button' onClick={deleteTagItem}>
+													<img src={XBtn} id={index.toString()} />
 												</button>
 											</article>
 										);
@@ -71,12 +130,22 @@ const RecruitInfoWrapper = () => {
 								</section>
 							</article>
 							<article className='add-btn'>
-								<button>
+								<button type='button' onClick={onClickHandler}>
 									<img src={Plus} />
 								</button>
 							</article>
 						</article>
-						<article></article>
+						<article>
+							{examples.map((userRole, index) => (
+								<div key={index}>
+									<span>{userRole.role}</span>
+									<span>{userRole.count}</span>
+									{userRole.skill.map((skill, i) => (
+										<span key={i}>{skill}</span>
+									))}
+								</div>
+							))}
+						</article>
 					</section>
 				</article>
 			</section>

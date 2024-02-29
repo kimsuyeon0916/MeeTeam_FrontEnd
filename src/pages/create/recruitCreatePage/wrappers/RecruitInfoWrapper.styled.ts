@@ -46,6 +46,20 @@ const RecruitInfoWrapper = styled.section`
 
 				.role-input {
 					width: 65%;
+					height: 100%;
+
+					input {
+						width: 100%;
+						border-radius: 0.75rem;
+						height: 100%;
+						border: 0.1rem solid #e3e3e3;
+						background: #fff;
+						outline: none;
+						padding-left: 2.1rem;
+						box-sizing: border-box;
+						margin-top: 0.3rem;
+						font-size: 1.5rem;
+					}
 				}
 
 				.count-input {
