@@ -38,7 +38,7 @@ const RecruitInfoWrapper = styled.section`
 
 			.inputs {
 				width: 100%;
-				height: 4.875rem;
+				height: 4.2rem;
 				display: flex;
 				gap: 1.63rem;
 				align-items: center;
@@ -47,19 +47,15 @@ const RecruitInfoWrapper = styled.section`
 				.role-input {
 					width: 65%;
 					height: 100%;
-
-					input {
-						width: 100%;
-						border-radius: 0.75rem;
-						height: 100%;
-						border: 0.1rem solid #e3e3e3;
-						background: #fff;
-						outline: none;
-						padding-left: 2.1rem;
-						box-sizing: border-box;
-						margin-top: 0.3rem;
-						font-size: 1.5rem;
-					}
+					border-radius: 0.75rem;
+					height: 100%;
+					border: 0.1rem solid #e3e3e3;
+					background: #fff;
+					outline: none;
+					padding-left: 2.1rem;
+					box-sizing: border-box;
+					margin-top: 0.3rem;
+					font-size: 1.5rem;
 				}
 
 				.count-input {
@@ -84,7 +80,7 @@ const RecruitInfoWrapper = styled.section`
 				.container-skills {
 					width: 100%;
 					position: relative;
-					height: 4.875rem;
+					height: 4.2rem;
 					display: flex;
 					align-items: center;
 					flex-wrap: nowrap;
@@ -154,12 +150,12 @@ const RecruitInfoWrapper = styled.section`
 			}
 
 			.add-btn {
-				width: 4.875rem;
-				height: 4.875rem;
+				width: 4.2rem;
+				height: 4.2rem;
 				margin-top: 0.5rem;
 				button {
-					width: 4.875rem;
-					height: 4.875rem;
+					width: 4.2rem;
+					height: 4.2rem;
 					border-radius: 0.75rem;
 					background: #fff;
 					border: 0.1rem solid #e3e3e3;
@@ -172,6 +168,10 @@ const RecruitInfoWrapper = styled.section`
 					}
 				}
 			}
+		}
+
+		.container-role__list {
+			margin-top: 2.7rem;
 		}
 	}
 `;

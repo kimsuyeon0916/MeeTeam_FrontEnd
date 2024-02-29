@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { InputContainer, Subtitle, MeeteamTag, CustomSelect } from '../../../../components';
+import { InputContainer, Subtitle, MeeteamTag, InputRole } from '../../../../components';
 import S from './RecruitInfoWrapper.styled';
 import { Plus, XBtn } from '../../../../assets';
 
@@ -51,9 +51,11 @@ const RecruitInfoWrapper = () => {
 	};
 
 	const deleteTagItem = (event: React.MouseEvent<HTMLButtonElement>) => {
-		const deletedIndex = Number(event.target.id);
-		copyTagList.splice(deletedIndex, 1); // 수정 필요
-		setTagList(copyTagList);
+		if (event.target instanceof Element) {
+			const deletedIndex = Number(event.target.id);
+			copyTagList.splice(deletedIndex, 1);
+			setTagList(copyTagList);
+		}
 	};
 
 	const onClickHandler = () => {
@@ -94,14 +96,13 @@ const RecruitInfoWrapper = () => {
 					<section className='wrapper'>
 						<article className='container-role__input'>
 							<article className='inputs'>
-								<section className='role-input'>
-									<input
-										type='text'
-										placeholder='역할'
-										value={userRole.role}
-										onChange={onChangeRole}
-									/>
-								</section>
+								<input
+									className='role-input'
+									type='text'
+									placeholder='역할'
+									value={userRole.role}
+									onChange={onChangeRole}
+								/>
 								<input
 									className='count-input'
 									type='number'
@@ -135,15 +136,14 @@ const RecruitInfoWrapper = () => {
 								</button>
 							</article>
 						</article>
-						<article>
+						<article className='container-role__list'>
 							{examples.map((userRole, index) => (
-								<div key={index}>
-									<span>{userRole.role}</span>
-									<span>{userRole.count}</span>
-									{userRole.skill.map((skill, i) => (
-										<span key={i}>{skill}</span>
-									))}
-								</div>
+								<InputRole
+									key={index}
+									role={userRole.role}
+									count={userRole.count}
+									skill={userRole.skill}
+								/>
 							))}
 						</article>
 					</section>
