@@ -3,23 +3,27 @@ import S from './InputRole.styled';
 import { XBtn } from '../../../assets';
 
 interface InputRole {
+	id: number;
 	role: string;
-	count: number;
+	count: string;
 	skill: string[];
+	onDelete: (id: number) => void;
 }
 
-const InputRole = ({ role, count, skill }: InputRole) => {
+const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 	const [tagItem, setTagItem] = useState<string>('');
-	const [tagList, setTagList] = useState<string[]>([]);
-	const copyTagList = [...tagList];
 	const [roleObj, setRoleObj] = useState<InputRole>({
+		id: id,
 		role: role,
 		count: count,
 		skill: skill,
+		onDelete: onDelete,
 	});
 
+	const copyTagList = [...roleObj.skill];
+
 	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setRoleObj({ ...roleObj, count: Number(event.target.value) });
+		setRoleObj({ ...roleObj, count: event.target.value });
 	};
 
 	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,13 +34,12 @@ const InputRole = ({ role, count, skill }: InputRole) => {
 		if (event.target instanceof Element) {
 			const deletedIndex = Number(event.target.id);
 			copyTagList.splice(deletedIndex, 1);
-			setTagList(copyTagList);
+			setRoleObj({ ...roleObj, skill: copyTagList });
 		}
 	};
 
 	const submitTagItem = () => {
-		setTagList([...tagList, tagItem]);
-		setRoleObj({ ...roleObj, skill: tagList });
+		setRoleObj(prevState => ({ ...prevState, skill: [...prevState.skill, tagItem] }));
 		setTagItem('');
 	};
 
@@ -50,8 +53,6 @@ const InputRole = ({ role, count, skill }: InputRole) => {
 			event.preventDefault();
 		}
 	};
-
-	const onClickDelete = () => {};
 
 	return (
 		<S.InputRole>
@@ -92,7 +93,7 @@ const InputRole = ({ role, count, skill }: InputRole) => {
 				</section>
 			</section>
 			<article className='add-btn'>
-				<button type='button' onClick={onClickDelete}>
+				<button type='button' onClick={() => onDelete(id)}>
 					<img src={XBtn} />
 				</button>
 			</article>

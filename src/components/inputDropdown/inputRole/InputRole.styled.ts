@@ -38,6 +38,12 @@ const InputRole = styled.article`
 		width: 38%;
 	}
 
+	input[type='number']::-webkit-outer-spin-button,
+	input[type='number']::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
 	.container-skills {
 		width: 100%;
 		position: relative;

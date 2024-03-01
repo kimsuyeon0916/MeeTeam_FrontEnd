@@ -17,25 +17,28 @@ const examples = [
 ];
 
 interface Role {
+	id: number;
 	role: string;
-	count: number;
+	count: string;
 	skill: string[];
 }
 
 const RecruitInfoWrapper = () => {
 	const [tagItem, setTagItem] = useState<string>('');
-	const [tagList, setTagList] = useState<string[]>([]);
-	const copyTagList = [...tagList];
 	const [userRole, setUserRole] = useState<Role>({
+		id: 0,
 		role: '',
-		count: 0,
+		count: '',
 		skill: [],
 	});
+	const copyTagList = [...userRole.skill];
 	const [userRoleList, setUserRoleList] = useState<Role[]>([]);
 
 	const submitTagItem = () => {
-		setTagList([...tagList, tagItem]);
-		setUserRole({ ...userRole, skill: tagList });
+		setUserRole(prevState => ({
+			...prevState,
+			skill: [...prevState.skill, tagItem],
+		}));
 		setTagItem('');
 	};
 
@@ -54,15 +57,16 @@ const RecruitInfoWrapper = () => {
 		if (event.target instanceof Element) {
 			const deletedIndex = Number(event.target.id);
 			copyTagList.splice(deletedIndex, 1);
-			setTagList(copyTagList);
+			setUserRole({ ...userRole, skill: copyTagList });
 		}
 	};
 
 	const onClickHandler = () => {
 		setUserRoleList([...userRoleList, userRole]);
 		setUserRole({
+			id: userRoleList.length,
 			role: '',
-			count: 0,
+			count: '',
 			skill: [],
 		});
 	};
@@ -77,10 +81,15 @@ const RecruitInfoWrapper = () => {
 	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setUserRole({
 			...userRole,
-			count: Number(event.target.value),
+			count: event.target.value,
 		});
 	};
 
+	const deleteObj = (id: number) => {
+		setUserRoleList(prev => prev.filter(v => v.id !== id));
+	};
+
+	console.log(userRoleList);
 	return (
 		<S.RecruitInfoWrapper>
 			<section className='container'>
@@ -110,7 +119,7 @@ const RecruitInfoWrapper = () => {
 									onChange={onChangeCount}
 								/>
 								<section className='container-skills'>
-									{copyTagList.map((tagItem, index) => {
+									{userRole.skill.map((tagItem, index) => {
 										return (
 											<article className='container-tags' key={index}>
 												<span>{tagItem}</span>
@@ -137,12 +146,14 @@ const RecruitInfoWrapper = () => {
 							</article>
 						</article>
 						<article className='container-role__list'>
-							{examples.map((userRole, index) => (
+							{userRoleList.map((userRole, index) => (
 								<InputRole
 									key={index}
 									role={userRole.role}
 									count={userRole.count}
 									skill={userRole.skill}
+									onDelete={() => deleteObj(index)}
+									id={index}
 								/>
 							))}
 						</article>
