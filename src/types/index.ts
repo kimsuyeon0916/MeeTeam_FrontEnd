@@ -5,6 +5,7 @@ import type { TitleInfo, OptionList } from './information';
 import type { Comment, CommentInputFunctions } from './comment';
 import type { JsxElementComponentProps } from './indexSigniture';
 import type { Option } from './information';
+import type { Role } from './information';
 
 export type {
 	SignUpPayload,
@@ -17,4 +18,5 @@ export type {
 	TitleInfo,
 	OptionList,
 	Option,
+	Role,
 };

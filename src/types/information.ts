@@ -14,3 +14,10 @@ export interface Option {
 	isScope?: boolean;
 	isCategory?: boolean;
 }
+
+export interface Role {
+	id: number;
+	role: string;
+	count: string;
+	skill: string[];
+}

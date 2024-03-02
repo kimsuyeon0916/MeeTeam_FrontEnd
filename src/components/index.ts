@@ -98,6 +98,7 @@ import ReplyComment from './comment/comment/ReplyComment';
 import InputCourse from './inputDropdown/inputCourse/InputCourse';
 import InputProfessor from './inputDropdown/inputCourse/InputProfessor';
 import InputRole from './inputDropdown/inputRole/InputRole';
+import InputRoleForm from './inputDropdown/inputRole/InputRoleForm';
 
 export {
 	Header,
@@ -191,4 +192,5 @@ export {
 	InputCourse,
 	InputProfessor,
 	InputRole,
+	InputRoleForm,
 };
