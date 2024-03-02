@@ -20,8 +20,6 @@ const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 		onDelete: onDelete,
 	});
 
-	const copyTagList = [...roleObj.skill];
-
 	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setRoleObj({ ...roleObj, count: event.target.value });
 	};
@@ -33,8 +31,10 @@ const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 	const deleteTagItem = (event: React.MouseEvent<HTMLButtonElement>) => {
 		if (event.target instanceof Element) {
 			const deletedIndex = Number(event.target.id);
-			copyTagList.splice(deletedIndex, 1);
-			setRoleObj({ ...roleObj, skill: copyTagList });
+			setRoleObj(prevState => ({
+				...prevState,
+				skill: prevState.skill.filter((_, index) => index !== deletedIndex),
+			}));
 		}
 	};
 
@@ -72,7 +72,7 @@ const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 					placeholder='인원'
 				/>
 				<section className='container-skills'>
-					{copyTagList.map((tagItem, index) => {
+					{roleObj.skill.map((tagItem, index) => {
 						return (
 							<article className='container-tags' key={index}>
 								<span>{tagItem}</span>
@@ -85,7 +85,7 @@ const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 					<input
 						type='text'
 						className='skills-input'
-						placeholder={copyTagList.length ? '' : '태그를 입력하고 엔터를 누르세요.'}
+						placeholder={roleObj.skill.length ? '' : '태그를 입력하고 엔터를 누르세요.'}
 						value={tagItem}
 						onChange={event => setTagItem(event.target.value)}
 						onKeyPress={onKeyPress}

@@ -11,7 +11,6 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 		count: '',
 		skill: [],
 	});
-	const copyTagList = [...userRole.skill];
 
 	const submitTagItem = () => {
 		setUserRole(prevState => ({
@@ -97,7 +96,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 					<input
 						type='text'
 						className='skills-input'
-						placeholder={copyTagList.length ? '' : '태그를 입력하고 엔터를 누르세요.'}
+						placeholder={userRole.skill.length ? '' : '태그를 입력하고 엔터를 누르세요.'}
 						value={tagItem}
 						onChange={event => setTagItem(event.target.value)}
 						onKeyPress={onKeyPress}
