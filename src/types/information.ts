@@ -21,3 +21,8 @@ export interface Role {
 	count: string;
 	skill: string[];
 }
+
+export interface InputRoleForm {
+	userRoleList: Role[];
+	setUserRoleList: (arr: any) => void;
+}

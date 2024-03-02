@@ -1,18 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, XBtn } from '../../../assets';
 import S from './InputRoleForm.styled';
-
-interface Role {
-	id: number;
-	role: string;
-	count: string;
-	skill: string[];
-}
-
-interface InputRoleForm {
-	userRoleList: Role[];
-	setUserRoleList: (arr: any) => void;
-}
+import { Role, InputRoleForm } from '../../../types';
 
 const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	const [tagItem, setTagItem] = useState<string>('');
