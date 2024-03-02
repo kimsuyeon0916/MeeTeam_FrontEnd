@@ -46,8 +46,10 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	const deleteTagItem = (event: React.MouseEvent<HTMLButtonElement>) => {
 		if (event.target instanceof Element) {
 			const deletedIndex = Number(event.target.id);
-			copyTagList.splice(deletedIndex, 1);
-			setUserRole({ ...userRole, skill: copyTagList });
+			setUserRole(prevState => ({
+				...prevState,
+				skill: prevState.skill.filter((_, index) => index !== deletedIndex),
+			}));
 		}
 	};
 
