@@ -3,19 +3,6 @@ import { InputContainer, Subtitle, MeeteamTag, InputRole } from '../../../../com
 import S from './RecruitInfoWrapper.styled';
 import { Plus, XBtn } from '../../../../assets';
 
-const examples = [
-	{
-		role: '백엔드 개발자',
-		count: 2,
-		skill: ['Node.js', 'Spring', 'AWS'],
-	},
-	{
-		role: '프론트엔드 개발자',
-		count: 1,
-		skill: ['TypeScript', 'React', 'React Query'],
-	},
-];
-
 interface Role {
 	id: number;
 	role: string;
@@ -89,7 +76,6 @@ const RecruitInfoWrapper = () => {
 		setUserRoleList(prev => prev.filter(v => v.id !== id));
 	};
 
-	console.log(userRoleList);
 	return (
 		<S.RecruitInfoWrapper>
 			<section className='container'>
@@ -116,6 +102,7 @@ const RecruitInfoWrapper = () => {
 									className='count-input'
 									type='number'
 									placeholder='인원'
+									value={userRole.count}
 									onChange={onChangeCount}
 								/>
 								<section className='container-skills'>
