@@ -6,10 +6,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { recruitInputState } from '../../atom';
 import { simpleDate } from '../../utils';
 
-interface DateUpdate {
-	dateArr: [Date | null, Date | null];
-}
-
 const DateSelect = () => {
 	const [startDate, setStartDate] = useState<Date | null>(new Date());
 	const [endDate, setEndDate] = useState<Date | null>(new Date());
