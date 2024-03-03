@@ -47,7 +47,7 @@ const DateSelect = styled.div`
 		vertical-align: middle;
 
 		&::after {
-			content: '⌵';
+			content: '🗓️';
 			background-color: transparent;
 			color: #49c181;
 			font-size: 2.1rem;

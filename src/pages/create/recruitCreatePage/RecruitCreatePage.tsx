@@ -6,8 +6,8 @@ import RecruitPostWrapper from './wrappers/RecruitPostWrapper';
 import { useMutation } from '@tanstack/react-query';
 import { useRecoilValue } from 'recoil';
 import { recruitInputState } from '../../../atom';
-import axios from 'axios';
 import { postingRecruit } from '../../../api';
+import { useNavigate } from 'react-router-dom';
 
 const descriptions = [
 	'함께할 멤버들에게 알릴 기본 정보들을 기입해주세요!',
@@ -20,6 +20,7 @@ const introductions = [
 ];
 
 const RecruitCreatePage = () => {
+	const navigate = useNavigate();
 	const recruitFormData = useRecoilValue(recruitInputState);
 	const onClickCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
 		// 모달창 띄워서 한 번 더 확인시키고 이동하기
@@ -31,7 +32,7 @@ const RecruitCreatePage = () => {
 		const uploadPost = useMutation({
 			mutationFn: () => postingRecruit(recruitFormData),
 		});
-		// navigate('uploadPost에서 반환한 id로 상세페이지로 이동한다.');
+		navigate(`/recruit/${uploadPost}`);
 	};
 	return (
 		<S.RecruitCreatePage>
