@@ -34,6 +34,8 @@ const RecruitCreatePage = () => {
 		});
 		navigate(`/recruit/${uploadPost}`);
 	};
+
+	console.log(recruitFormData);
 	return (
 		<S.RecruitCreatePage>
 			<TitleAndIntro title='구인글 작성' descriptions={descriptions} />

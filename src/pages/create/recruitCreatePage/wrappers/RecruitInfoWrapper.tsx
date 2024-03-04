@@ -7,6 +7,9 @@ import {
 	InputRoleForm,
 } from '../../../../components';
 import S from './RecruitInfoWrapper.styled';
+import { useValid } from '../../../../hooks';
+import { useRecoilValue } from 'recoil';
+import { recruitInputState } from '../../../../atom';
 
 interface Role {
 	id: number;
@@ -16,12 +19,12 @@ interface Role {
 }
 
 const RecruitInfoWrapper = () => {
+	const formData = useRecoilValue(recruitInputState);
+	const { validMessage, isValid } = useValid(formData);
 	const [userRoleList, setUserRoleList] = useState<Role[]>([]);
-
 	const deleteObj = (id: number) => {
 		setUserRoleList(prev => prev.filter(v => v.id !== id));
 	};
-
 	return (
 		<S.RecruitInfoWrapper>
 			<section className='container'>
