@@ -8,6 +8,9 @@ import { useRecoilValue } from 'recoil';
 import { recruitInputState } from '../../../atom';
 import { postingRecruit } from '../../../api';
 import { useNavigate } from 'react-router-dom';
+import ApplyModal from '../../recruit/RecruitDetailPage/modal/ApplyModal';
+import ConfirmModal from '../../recruit/RecruitDetailPage/modal/ConfirmModal';
+import FinalModal from '../../recruit/RecruitDetailPage/modal/FinalModal';
 
 const descriptions = [
 	'함께할 멤버들에게 알릴 기본 정보들을 기입해주세요!',
@@ -50,6 +53,9 @@ const RecruitCreatePage = () => {
 					등록
 				</button>
 			</div>
+			<ApplyModal />
+			<ConfirmModal />
+			<FinalModal />
 		</S.RecruitCreatePage>
 	);
 };
