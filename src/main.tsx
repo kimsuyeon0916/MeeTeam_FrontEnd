@@ -12,7 +12,7 @@ import {
 	MyActivityLike,
 	SignInPage,
 	SchoolCertificationPage,
-	NickNameSettingPage,
+	NicknameSettingPage,
 	SignUpPage,
 	PassWordFindingPage,
 	MyActivityWrapper,
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
 				children: [
 					{ path: '', element: <SignUpPage /> },
 					{ path: 'school?', element: <SchoolCertificationPage /> },
-					{ path: 'nickname', element: <NickNameSettingPage /> },
+					{ path: 'nickname', element: <NicknameSettingPage /> },
 				],
 			},
 			{
