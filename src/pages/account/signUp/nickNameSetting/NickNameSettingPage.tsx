@@ -2,7 +2,7 @@ import React from 'react';
 import S from './NickNameSettingPage.styled';
 import { SIGN_UP_DATA } from '../SignUpData';
 import { useNavigate } from 'react-router-dom';
-import { useNaverSignUp } from '../../../../hooks';
+import { useNaverSignUp, useCheckDuplicateNickname } from '../../../../hooks';
 import { useSetRecoilState } from 'recoil';
 import { userState } from '../../../../atom';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -20,7 +20,8 @@ const NickNameSettingPage = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
+		watch,
+		formState: { errors, isDirty, isValid },
 		control,
 	} = useForm<FormValues>({ mode: 'onChange' });
 
@@ -41,6 +42,18 @@ const NickNameSettingPage = () => {
 		code && mutate({ emailCode: code, nickname: data.nickname });
 	};
 
+	const nickname = watch('nickname');
+	const authKeys = ['checkDuplicateNickname', nickname];
+
+	const { data } = useCheckDuplicateNickname(authKeys, isDirty && isValid);
+
+	const checkDuplicateNickname = () => {
+		if (data?.isEnable) {
+			return '사용가능한 닉네임입니다';
+		}
+		return '이미 사용중인 닉네임입니다';
+	};
+
 	return (
 		<S.NickNameSettingPageLayout>
 			<header className='account__header'>
@@ -52,11 +65,14 @@ const NickNameSettingPage = () => {
 						name === 'nickname' && (
 							<label className='account__label' key={index}>
 								<input className='account__input' {...register(name, validation)} {...props} />
-								<small className='account_input-validation'>{errors[name]?.message}</small>
+								<small className='account_input-validation'>
+									{errors[name]?.message}
+									{isValid && checkDuplicateNickname()}
+								</small>
 							</label>
 						)
 				)}
-				<S.NickNameSettingButton type='submit' value='signUp'>
+				<S.NickNameSettingButton disabled={!isDirty || !isValid} type='submit' value='signUp'>
 					확인
 				</S.NickNameSettingButton>
 			</S.NickNameSettingPageForm>
