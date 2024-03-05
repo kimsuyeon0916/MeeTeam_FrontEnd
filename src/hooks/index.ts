@@ -1,3 +1,8 @@
-import { useCheckExist, useNaverSignUp, useCertificateSchool } from './useAuth';
+import {
+	useCheckExist,
+	useNaverSignUp,
+	useCertificateSchool,
+	useCheckDuplicateNickname,
+} from './useAuth';
 
-export { useCheckExist, useNaverSignUp, useCertificateSchool };
+export { useCheckExist, useNaverSignUp, useCertificateSchool, useCheckDuplicateNickname };

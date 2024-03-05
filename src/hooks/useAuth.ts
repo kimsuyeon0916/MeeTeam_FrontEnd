@@ -1,6 +1,6 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { SetterOrUpdater } from 'recoil';
-import { checkExist, signUp, certificateSchool } from '../service';
+import { checkExist, signUp, certificateSchool, checkDuplicateNickname } from '../service';
 import { User } from '../types';
 
 const ACCESS_TOKEN_KEY = import.meta.env.VITE_ACCESS_TOKEN_KEY;
@@ -58,5 +58,17 @@ export const useCertificateSchool = ({ onSuccess }: AuthProps = {}) => {
 		onSuccess: () => {
 			onSuccess?.();
 		},
+	});
+};
+
+/**
+ * @description 닉네임 중복 체크 API를 호출하는 hook입니다.
+ */
+export const useCheckDuplicateNickname = (authKeys: string[], isEnabled: boolean) => {
+	return useQuery({
+		queryKey: authKeys,
+		queryFn: () => checkDuplicateNickname(authKeys[1]),
+		enabled: isEnabled,
+		staleTime: 1000,
 	});
 };
