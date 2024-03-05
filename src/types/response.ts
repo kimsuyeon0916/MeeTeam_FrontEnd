@@ -3,6 +3,7 @@ export interface UserReponse {
 	accessToken: string;
 	refreshToken?: string;
 	platformId?: string;
+	isEnable?: boolean;
 }
 
 export interface User {
