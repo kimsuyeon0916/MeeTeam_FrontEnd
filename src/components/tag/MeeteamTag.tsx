@@ -1,11 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import S from './MeeteamTag.styled';
+import { useRecoilState } from 'recoil';
+import { recruitInputState } from '../../atom';
 
 interface IMeeteamTag {
 	tags?: string[];
 }
 
 const MeeteamTag = ({ tags }: IMeeteamTag) => {
+	const [info, setInfos] = useRecoilState(recruitInputState);
 	const [tagItem, setTagItem] = useState<string>('');
 	const [tagList, setTagList] = useState<string[]>([]);
 	const [isTouched, setIsTouched] = useState<boolean>(false);
@@ -29,6 +32,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 		setTagList([...tagList, tagItem]);
 		setTagItem('');
 		setIsDropdownVisible(false);
+		setInfos({ ...info, tag: tagList });
 	};
 
 	const deleteTagItem = (event: any) => {

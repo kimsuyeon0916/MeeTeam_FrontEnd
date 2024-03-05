@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { SessionStorageEffect } from './utils';
-import { User } from './types';
+import { User, InputState } from './types';
 import { LocalStorageEffect } from './utils';
 import { Account } from './pages';
 
@@ -49,7 +49,7 @@ export const deadlineState = atom({
 	default: new Date(),
 });
 
-export const recruitInputState = atom({
+export const recruitInputState = atom<InputState>({
 	key: 'recruitInputState',
 	default: {
 		scope: '',
@@ -75,43 +75,36 @@ export const recruitInputState = atom({
 	},
 });
 
-export const validNameState = atom({
-	key: 'validNameState',
+export const validMessageState = atom({
+	key: 'validMessageState',
 	default: {
-		validName: false,
-		validMessage: '',
+		scope: '',
+		category: '',
+		deadline: '',
+		endDate: '',
+		courseTagDto: {
+			courseTagName: '',
+			courseTagProfessor: '',
+		},
+		tag: '',
+		title: '',
 	},
 });
 
-export const validAreaState = atom({
-	key: 'validAreaState',
+export const validState = atom({
+	key: 'validState',
 	default: {
-		validArea: false,
-		validMessage: '',
-	},
-});
-
-export const validFieldState = atom({
-	key: 'validFieldState',
-	default: {
-		validField: false,
-		validMessage: '',
-	},
-});
-
-export const validCategoryState = atom({
-	key: 'validCategoryState',
-	default: {
-		validCategory: false,
-		validMessage: '',
-	},
-});
-
-export const validDateState = atom({
-	key: 'validDateState',
-	default: {
-		validDate: false,
-		validMessage: '',
+		isSubmitted: false,
+		isScope: false,
+		isCategory: false,
+		isDeadline: false,
+		isEndDate: false,
+		isCourseTagDto: {
+			courseTagName: false,
+			courseTagProfessor: false,
+		},
+		isTag: false,
+		isTitle: false,
 	},
 });
 

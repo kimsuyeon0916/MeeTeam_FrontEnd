@@ -4,8 +4,9 @@ import 'react-quill/dist/quill.snow.css';
 import { modules } from '../../../../utils/index';
 import { Subtitle } from '../../../../components';
 import S from './RecruitPostWrapper.styled';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { recruitInputState } from '../../../../atom';
+import { useValid } from '../../../../hooks';
 
 const RecruitPostWrapper = () => {
 	const quillRef = useRef<ReactQuill | null>(null);
@@ -14,6 +15,9 @@ const RecruitPostWrapper = () => {
 		title: '',
 		contents: '',
 	});
+	const formData = useRecoilValue(recruitInputState);
+	const { validMessage, isValid } = useValid(formData);
+	const isShow = isValid.isSubmitted && !isValid.isTitle;
 
 	const onChangeContents = (contents: string) => {
 		setPosting({ ...posting, contents: contents });
@@ -31,6 +35,7 @@ const RecruitPostWrapper = () => {
 			<article className='title'>
 				<Subtitle>{'제목'}</Subtitle>
 				<input type='text' placeholder='제목을 입력해주세요' onChange={onChangeTitle} />
+				{isShow && <p>{validMessage.title}</p>}
 			</article>
 			<article className='container__intro'>
 				<Subtitle>{'구인글'}</Subtitle>

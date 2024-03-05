@@ -1,7 +1,7 @@
 import type { SignUpPayload } from './payload';
 import type { UserReponse, User } from './response';
 import type { CustomInstance } from './api';
-import type { TitleInfo, OptionList, Option, Role, InputRoleForm } from './information';
+import type { TitleInfo, OptionList, Option, Role, InputRoleForm, InputState } from './information';
 import type { Comment, CommentInputFunctions } from './comment';
 import type { JsxElementComponentProps } from './indexSigniture';
 
@@ -18,4 +18,5 @@ export type {
 	Option,
 	Role,
 	InputRoleForm,
+	InputState,
 };

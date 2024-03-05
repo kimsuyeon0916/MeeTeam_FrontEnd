@@ -7,8 +7,8 @@ import {
 	InputRoleForm,
 } from '../../../../components';
 import S from './RecruitInfoWrapper.styled';
-import { useValid } from '../../../../hooks';
 import { useRecoilValue } from 'recoil';
+import { useValid } from '../../../../hooks';
 import { recruitInputState } from '../../../../atom';
 
 interface Role {
@@ -19,12 +19,14 @@ interface Role {
 }
 
 const RecruitInfoWrapper = () => {
+	const [userRoleList, setUserRoleList] = useState<Role[]>([]);
 	const formData = useRecoilValue(recruitInputState);
 	const { validMessage, isValid } = useValid(formData);
-	const [userRoleList, setUserRoleList] = useState<Role[]>([]);
+
 	const deleteObj = (id: number) => {
 		setUserRoleList(prev => prev.filter(v => v.id !== id));
 	};
+
 	return (
 		<S.RecruitInfoWrapper>
 			<section className='container'>
@@ -34,6 +36,7 @@ const RecruitInfoWrapper = () => {
 				<article className='container__tag'>
 					<Subtitle>{'태그'}</Subtitle>
 					<MeeteamTag />
+					{isValid.isSubmitted && !isValid.isTag && <p>{validMessage.tag}</p>}
 				</article>
 				<article className='container__role'>
 					<Subtitle>{'역할'}</Subtitle>

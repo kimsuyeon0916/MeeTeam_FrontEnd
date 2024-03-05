@@ -4,6 +4,7 @@ const RecruitInfoWrapper = styled.section`
 	width: 100%;
 	padding-bottom: 0.5rem;
 	border-radius: 0.5rem;
+	position: relative;
 
 	.container {
 		width: 100%;
@@ -17,6 +18,13 @@ const RecruitInfoWrapper = styled.section`
 	}
 
 	.container__tag {
+	}
+
+	p {
+		position: absolute;
+		color: red;
+		margin-top: 1rem;
+		font-size: 1.1rem;
 	}
 
 	.container__role {

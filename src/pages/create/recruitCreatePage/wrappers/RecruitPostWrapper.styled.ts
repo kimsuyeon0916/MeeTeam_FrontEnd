@@ -46,6 +46,12 @@ const RecruitPostWrapper = styled.section`
 			padding: 0.8rem;
 		}
 	}
+
+	p {
+		color: red;
+		margin-top: 1rem;
+		font-size: 1.2rem;
+	}
 `;
 
 const S = { RecruitPostWrapper };
