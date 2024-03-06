@@ -31,8 +31,8 @@ export interface InputState {
 	scope: string;
 	category: string;
 	fieldId: number;
-	deadline: string;
-	period: string[];
+	deadline: string | undefined;
+	period: (string | undefined)[];
 	courseTagDto: {
 		isCourse: boolean;
 		courseTagName: string;

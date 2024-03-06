@@ -32,11 +32,13 @@ const InputContainer = () => {
 				<article className='select'>
 					<Subtitle>마감일</Subtitle>
 					<DeadlineSelect />
-					{!isValid.isDeadline && <p>{validMessage.deadline}</p>}
+					{isShow && !isValid.isDeadline && <p>{validMessage.deadline}</p>}
 				</article>
 				<article className='select'>
 					<InputCourse isChecked={isChecked} onClickHandler={onClickHandler} />
-					{/* {!isValid.isCourseTagDto.courseTagName && <p>{validMessage.scope}</p>} */}
+					{isShow && isChecked && !isValid.isCourseTagDto.courseTagName && (
+						<p>{validMessage.courseTagDto.courseTagName}</p>
+					)}
 				</article>
 			</section>
 			<section className='container__info-select'>
@@ -48,11 +50,13 @@ const InputContainer = () => {
 				<article className='select'>
 					<Subtitle>진행기간</Subtitle>
 					<DateSelect />
-					{/* {!isValid.isEndDate && <p>{validMessage.scope}</p>} */}
+					{isShow && !isValid.isEndDate && <p>{validMessage.endDate}</p>}
 				</article>
 				<article className='select'>
 					<InputProfessor isChecked={isChecked} />
-					{/* {!isValid.isCourseTagDto.courseTagProfessor && <p>{validMessage.scope}</p>} */}
+					{isShow && isChecked && !isValid.isCourseTagDto.courseTagProfessor && (
+						<p>{validMessage.courseTagDto.courseTagProfessor}</p>
+					)}
 				</article>
 			</section>
 		</S.InputContainer>

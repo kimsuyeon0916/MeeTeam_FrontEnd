@@ -21,6 +21,7 @@ const DeadlineSelect = ({ type }: RecruitmentDeadLine) => {
 			setInfo({ ...info, deadline: result });
 		}
 	};
+
 	return (
 		<S.DeadlineSelect>
 			<DatePicker

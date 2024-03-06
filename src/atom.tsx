@@ -1,8 +1,11 @@
 import { atom } from 'recoil';
-import { SessionStorageEffect } from './utils';
+import { SessionStorageEffect, simpleDate } from './utils';
 import { User, InputState } from './types';
 import { LocalStorageEffect } from './utils';
 import { Account } from './pages';
+
+const date = new Date();
+const simple = simpleDate(date);
 
 export const userState = atom<User | null>({
 	key: 'userState',
@@ -55,8 +58,8 @@ export const recruitInputState = atom<InputState>({
 		scope: '',
 		category: '',
 		fieldId: 1, // 마지막에 id로 반환 (1로 고정해도 괜찮음)
-		deadline: '',
-		period: ['', ''],
+		deadline: simple,
+		period: [simple, simple],
 		courseTagDto: {
 			isCourse: false,
 			courseTagName: '',
