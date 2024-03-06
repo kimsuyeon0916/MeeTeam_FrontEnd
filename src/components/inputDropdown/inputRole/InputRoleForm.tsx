@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Plus, XBtn } from '../../../assets';
 import S from './InputRoleForm.styled';
 import { Role, InputRoleForm } from '../../../types';
+import { useDebounce } from '../../../hooks';
 
 const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	const [tagItem, setTagItem] = useState<string>('');
@@ -11,6 +12,9 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 		count: '',
 		skill: [],
 	});
+	const [showDropdown, setShowDropdown] = useState(false);
+	const dropdownRef = useRef<HTMLDivElement | null>(null);
+	const { data, isLoading } = useDebounce(userRole.role, 500);
 
 	const submitTagItem = () => {
 		setUserRole(prevState => ({
@@ -65,16 +69,46 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 		});
 	};
 
+	const onClickKeyword = (event: React.MouseEvent<HTMLSpanElement>) => {
+		const { innerText } = event.target as HTMLElement;
+		setUserRole(prev => ({ ...prev, role: innerText }));
+		setShowDropdown(false);
+	};
+
+	useEffect(() => {
+		const outsideClick = (event: MouseEvent) => {
+			const { target } = event;
+			if (showDropdown && dropdownRef.current && !dropdownRef.current.contains(target as Node)) {
+				setShowDropdown(false);
+			}
+		};
+		document.addEventListener('mousedown', outsideClick);
+		return () => {
+			document.removeEventListener('mousedown', outsideClick);
+		};
+	}, [dropdownRef.current, showDropdown]);
+
 	return (
-		<S.InputRoleForm>
-			<article className='inputs'>
+		<S.InputRoleForm $isClicked={showDropdown}>
+			<article className='inputs' ref={dropdownRef}>
 				<input
 					className='role-input'
 					type='text'
 					placeholder='역할'
 					value={userRole.role}
 					onChange={onChangeRole}
+					onClick={() => setShowDropdown(prev => !prev)}
 				/>
+				{showDropdown && (
+					<section className='dropdown'>
+						{!isLoading &&
+							data.map((keyword: any, index: number) => (
+								<span key={index} onClick={onClickKeyword}>
+									{keyword.name}
+								</span>
+							))}
+					</section>
+				)}
 				<input
 					className='count-input'
 					type='number'

@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const InputRoleForm = styled.article`
+interface InputRoleForm {
+	$isClicked: boolean;
+}
+
+const InputRoleForm = styled.article<InputRoleForm>`
 	width: 100%;
 	display: flex;
 	justify-content: center;
@@ -16,6 +20,7 @@ const InputRoleForm = styled.article`
 		gap: 1.63rem;
 		align-items: center;
 		box-sizing: border-box;
+		position: relative;
 
 		.role-input {
 			width: 65%;
@@ -29,6 +34,26 @@ const InputRoleForm = styled.article`
 			box-sizing: border-box;
 			margin-top: 0.5rem;
 			font-size: 1.5rem;
+		}
+
+		.dropdown {
+			position: absolute;
+			top: 5rem;
+			border: ${props => props.$isClicked && '0.1rem solid #e3e3e3'};
+			width: 30.7%;
+			display: flex;
+			flex-direction: column;
+			border-radius: 0.75rem;
+			font-size: 1.2rem;
+			color: #373f41;
+			gap: 1rem;
+			padding: 1rem 2rem;
+			z-index: 401;
+			background-color: #fff;
+
+			span {
+				cursor: pointer;
+			}
 		}
 
 		.count-input {

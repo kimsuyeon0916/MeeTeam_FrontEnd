@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import S from './InputRole.styled';
 import { XBtn } from '../../../assets';
+import { useDebounce } from '../../../hooks';
 
 interface InputRole {
 	id: number;
@@ -19,6 +20,7 @@ const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 		skill: skill,
 		onDelete: onDelete,
 	});
+	const keyword = useDebounce(roleObj.role, 500);
 
 	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setRoleObj({ ...roleObj, count: event.target.value });
