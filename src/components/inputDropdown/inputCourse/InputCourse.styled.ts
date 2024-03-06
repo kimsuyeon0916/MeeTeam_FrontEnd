@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-const InputCourse = styled.section`
+interface InputRoleForm {
+	$isCourseClicked?: boolean;
+	$isProfessorClicked?: boolean;
+}
+
+const InputCourse = styled.section<InputRoleForm>`
+	position: relative;
 	.title-info {
 		display: flex;
 		justify-content: space-between;
@@ -47,13 +53,34 @@ const InputCourse = styled.section`
 		margin-top: 1.2rem;
 	}
 
+	.dropdown {
+		position: absolute;
+		top: 9rem;
+		border: ${props => props.$isCourseClicked && '0.1rem solid #e3e3e3'};
+		width: 30.7%;
+		display: flex;
+		flex-direction: column;
+		border-radius: 0.75rem;
+		font-size: 1.2rem;
+		color: #373f41;
+		gap: 1rem;
+		padding: 1rem 2rem;
+		z-index: 401;
+		background-color: #fff;
+
+		span {
+			cursor: pointer;
+		}
+	}
+
 	.disable {
 		background-color: #e3e3e3;
 		border: 0.1rem solid #8e8e8e;
 	}
 `;
 
-const InputProfessor = styled.section`
+const InputProfessor = styled.section<InputRoleForm>`
+	position: relative;
 	.temp {
 		height: 2.35rem;
 	}
@@ -69,6 +96,26 @@ const InputProfessor = styled.section`
 		padding-left: 2.1rem;
 		box-sizing: border-box;
 		margin-top: 1.2rem;
+	}
+
+	.dropdown {
+		position: absolute;
+		top: 9rem;
+		border: ${props => props.$isProfessorClicked && '0.1rem solid #e3e3e3'};
+		width: 30.7%;
+		display: flex;
+		flex-direction: column;
+		border-radius: 0.75rem;
+		font-size: 1.2rem;
+		color: #373f41;
+		gap: 1rem;
+		padding: 1rem 2rem;
+		z-index: 401;
+		background-color: #fff;
+
+		span {
+			cursor: pointer;
+		}
 	}
 
 	.disable {

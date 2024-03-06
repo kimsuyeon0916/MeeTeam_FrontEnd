@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 interface InputRoleForm {
-	$isClicked: boolean;
+	$isRoleClicked: boolean;
+	$isSkillClicked: boolean;
 }
 
 const InputRoleForm = styled.article<InputRoleForm>`
@@ -39,7 +40,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		.dropdown {
 			position: absolute;
 			top: 5rem;
-			border: ${props => props.$isClicked && '0.1rem solid #e3e3e3'};
+			border: ${props => (props.$isRoleClicked || props.$isSkillClicked) && '0.1rem solid #e3e3e3'};
 			width: 30.7%;
 			display: flex;
 			flex-direction: column;

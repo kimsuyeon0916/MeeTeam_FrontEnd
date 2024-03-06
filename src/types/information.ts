@@ -52,3 +52,8 @@ export interface InputState {
 	title: string;
 	contents: string;
 }
+
+export interface InputCourse {
+	isChecked: boolean;
+	onClickHandler: () => void;
+}

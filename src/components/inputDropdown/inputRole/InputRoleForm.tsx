@@ -12,7 +12,10 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	const [tagItem, setTagItem] = useState<string>('');
 	const [content, setContent] = useState<string>('');
 	const [info, setInfos] = useRecoilState(recruitInputState);
-	const [showDropdown, setShowDropdown] = useState(false);
+	const [showDropdown, setShowDropdown] = useState({
+		role: false,
+		skill: false,
+	});
 	const [userRole, setUserRole] = useState<Role>({
 		id: 0,
 		role: {
@@ -24,8 +27,8 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	});
 	const keywordRole = useDebounce(userRole.role.name, 500);
 	const keywordSkill = useDebounce(content, 500);
-	console.log(keywordSkill);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
+
 	const {
 		data: dataRole,
 		isLoading: isLoadingRole,
@@ -33,13 +36,13 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	} = useQuery({
 		queryKey: ['searchRole', keywordRole],
 		queryFn: () => getRoleKeyword(keywordRole),
+		staleTime: 10000,
 	});
 
 	const { data: dataSkill, isLoading: isLoadingSkill } = useQuery({
 		queryKey: ['searchSkill', keywordSkill],
 		queryFn: () => getSkillKeyword(keywordSkill),
 	});
-	// console.log(dataSkill);
 
 	const submitTagItem = () => {
 		setUserRole(prevState => ({
@@ -99,48 +102,75 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 		setContent(event.target.value);
 	};
 
-	const onClickKeyword = (event: React.MouseEvent<HTMLSpanElement>) => {
+	const onClickRole = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		setUserRole(prev => ({ ...prev, role: { ...userRole.role, name: innerText } }));
-		setShowDropdown(false);
+		setShowDropdown(prev => ({
+			...prev,
+			role: false,
+		}));
+	};
+
+	const onClickSkill = (event: React.MouseEvent<HTMLSpanElement>) => {
+		const { innerText } = event.target as HTMLElement;
+		setUserRole(prev => ({ ...prev, skill: [...prev.skill, innerText] }));
+		setShowDropdown(prev => ({
+			...prev,
+			skill: false,
+		}));
 	};
 
 	useEffect(() => {
 		const outsideClick = (event: MouseEvent) => {
 			const { target } = event;
-			if (showDropdown && dropdownRef.current && !dropdownRef.current.contains(target as Node)) {
-				setShowDropdown(false);
+			if (
+				showDropdown.role &&
+				dropdownRef.current &&
+				!dropdownRef.current.contains(target as Node)
+			) {
+				setShowDropdown(prev => ({
+					...prev,
+					role: false,
+				}));
+			}
+			if (
+				showDropdown.skill &&
+				dropdownRef.current &&
+				!dropdownRef.current.contains(target as Node)
+			) {
+				setShowDropdown(prev => ({
+					...prev,
+					skill: false,
+				}));
 			}
 		};
 		document.addEventListener('mousedown', outsideClick);
 		return () => {
 			document.removeEventListener('mousedown', outsideClick);
 		};
-	}, [dropdownRef.current, showDropdown]);
+	}, [dropdownRef.current, showDropdown.role, showDropdown.skill]);
 
 	return (
-		<S.InputRoleForm $isClicked={showDropdown}>
-			<article className='inputs'>
+		<S.InputRoleForm $isRoleClicked={showDropdown.role} $isSkillClicked={showDropdown.skill}>
+			<article className='inputs' ref={dropdownRef}>
 				<input
 					className='role-input'
 					type='text'
 					placeholder='역할'
 					value={userRole.role.name}
 					onChange={onChangeRole}
-					onClick={() => setShowDropdown(prev => !prev)}
+					onClick={() => setShowDropdown(prev => ({ ...prev, role: !prev.role }))}
 				/>
-
-				{showDropdown && (
+				{showDropdown.role && (
 					<section className='dropdown'>
 						{!isLoadingRole &&
 							dataRole?.map((keyword: any, index: number) => (
-								<span key={index} onClick={onClickKeyword}>
+								<span key={index} onClick={onClickRole}>
 									{keyword.name}
 								</span>
 							))}
 					</section>
 				)}
-
 				<input
 					className='count-input'
 					type='number'
@@ -166,12 +196,19 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 						value={tagItem}
 						onChange={onChangeKeyword}
 						onKeyPress={onKeyPress}
+						onClick={() => setShowDropdown(prev => ({ ...prev, skill: !prev.skill }))}
 					/>
 				</section>
-				<section className='dropdown skill'>
-					{!isLoadingSkill &&
-						dataSkill?.map((keyword: any) => <span key={keyword.id}>{keyword.name}</span>)}
-				</section>
+				{showDropdown.skill && (
+					<section className='dropdown skill'>
+						{!isLoadingSkill &&
+							dataSkill?.map((keyword: any) => (
+								<span key={keyword.id} onClick={onClickSkill}>
+									{keyword.name}
+								</span>
+							))}
+					</section>
+				)}
 			</article>
 			<article className='add-btn'>
 				<button type='button' onClick={onClickHandler}>
