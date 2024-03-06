@@ -67,7 +67,7 @@ export const useCertificateSchool = ({ onSuccess }: AuthProps = {}) => {
 export const useCheckDuplicateNickname = (authKeys: string[], isEnabled: boolean) => {
 	return useQuery({
 		queryKey: authKeys,
-		queryFn: () => checkDuplicateNickname(authKeys[1]),
+		queryFn: isEnabled => isEnabled && checkDuplicateNickname(authKeys[1]),
 		enabled: isEnabled,
 		staleTime: 1000,
 	});
