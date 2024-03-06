@@ -6,10 +6,12 @@ interface Props {
 }
 
 const RecruitDetailPage = styled.div`
-	width: clamp(45%, 108rem, 75%);
+	width: clamp(50%, 108rem, 50%);
 	margin: 0 auto;
 	margin-top: 3.38rem;
 	margin-bottom: 3.38rem;
+	border: 1px solid #000;
+	height: 100vh;
 
 	.container {
 		display: flex;
@@ -376,40 +378,8 @@ const RecruitDetailPage = styled.div`
 	}
 `;
 
-const RequiredInformationItem = styled.li`
-	display: flex;
-	column-gap: 2.25rem;
-	align-items: center;
-	.required-information__row {
-		display: flex;
-		column-gap: 1.2rem;
-	}
-`;
-
-const RequiredInformationHead = styled.h3`
-	display: flex;
-	color: var(--text-color, #151515);
-	font-weight: 400;
-	font-size: 1.4rem;
-`;
-
-const RequiredInformationSpan = styled.span<Props>`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 0.75rem;
-	height: 3.15rem;
-	font-size: 1.4rem;
-	font-weight: 400;
-	border-radius: ${props => (props.$isRound ? `7.5rem` : `0.6rem`)};
-	background: ${props => props.$color};
-`;
-
 const S = {
 	RecruitDetailPage,
-	RequiredInformationItem,
-	RequiredInformationSpan,
-	RequiredInformationHead,
 };
 
 export default S;
