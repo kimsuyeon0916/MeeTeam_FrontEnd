@@ -4,5 +4,12 @@ import {
 	useCertificateSchool,
 	useCheckDuplicateNickname,
 } from './useAuth';
+import useDebounce from './useDebounce';
 
-export { useCheckExist, useNaverSignUp, useCertificateSchool, useCheckDuplicateNickname };
+export {
+	useCheckExist,
+	useNaverSignUp,
+	useCertificateSchool,
+	useCheckDuplicateNickname,
+	useDebounce,
+};
