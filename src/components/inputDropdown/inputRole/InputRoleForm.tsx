@@ -1,20 +1,33 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { Plus, XBtn } from '../../../assets';
 import S from './InputRoleForm.styled';
 import { Role, InputRoleForm } from '../../../types';
 import { useDebounce } from '../../../hooks';
+import { getSearchKeyword } from '../../../api';
+import { useRecoilState } from 'recoil';
+import { recruitInputState } from '../../../atom';
 
 const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	const [tagItem, setTagItem] = useState<string>('');
+	const [info, setInfos] = useRecoilState(recruitInputState);
+	const [showDropdown, setShowDropdown] = useState(false);
 	const [userRole, setUserRole] = useState<Role>({
 		id: 0,
-		role: '',
+		role: {
+			id: null,
+			name: '',
+		},
 		count: '',
 		skill: [],
 	});
-	const [showDropdown, setShowDropdown] = useState(false);
+	const keyword = useDebounce(userRole.role.name, 500);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
-	const { data, isLoading } = useDebounce(userRole.role, 500);
+	const { data, isLoading, refetch } = useQuery({
+		queryKey: ['searchRole', keyword],
+		queryFn: () => getSearchKeyword(keyword),
+		enabled: false,
+	});
 
 	const submitTagItem = () => {
 		setUserRole(prevState => ({
@@ -49,18 +62,22 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 		setUserRoleList([...userRoleList, userRole]);
 		setUserRole({
 			id: userRoleList.length,
-			role: '',
+			role: { id: null, name: '' },
 			count: '',
 			skill: [],
 		});
 	};
 
-	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setUserRole({
-			...userRole,
-			role: event.target.value,
-		});
-	};
+	const onChangeRole = useCallback(
+		(event: React.ChangeEvent<HTMLInputElement>) => {
+			refetch();
+			setUserRole({
+				...userRole,
+				role: { ...userRole.role, name: event.target.value },
+			});
+		},
+		[refetch]
+	);
 
 	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setUserRole({
@@ -71,7 +88,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 
 	const onClickKeyword = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const { innerText } = event.target as HTMLElement;
-		setUserRole(prev => ({ ...prev, role: innerText }));
+		setUserRole(prev => ({ ...prev, role: { ...userRole.role, name: innerText } }));
 		setShowDropdown(false);
 	};
 
@@ -95,14 +112,14 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 					className='role-input'
 					type='text'
 					placeholder='역할'
-					value={userRole.role}
+					value={userRole.role.name}
 					onChange={onChangeRole}
 					onClick={() => setShowDropdown(prev => !prev)}
 				/>
 				{showDropdown && (
 					<section className='dropdown'>
 						{!isLoading &&
-							data.map((keyword: any, index: number) => (
+							data?.map((keyword: any, index: number) => (
 								<span key={index} onClick={onClickKeyword}>
 									{keyword.name}
 								</span>

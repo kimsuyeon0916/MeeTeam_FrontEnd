@@ -10,13 +10,7 @@ import S from './RecruitInfoWrapper.styled';
 import { useRecoilValue } from 'recoil';
 import { useValid } from '../../../../hooks';
 import { recruitInputState } from '../../../../atom';
-
-interface Role {
-	id: number;
-	role: string;
-	count: string;
-	skill: string[];
-}
+import { Role } from '../../../../types';
 
 const RecruitInfoWrapper = () => {
 	const [userRoleList, setUserRoleList] = useState<Role[]>([]);
@@ -26,7 +20,6 @@ const RecruitInfoWrapper = () => {
 	const deleteObj = (id: number) => {
 		setUserRoleList(prev => prev.filter(v => v.id !== id));
 	};
-
 	return (
 		<S.RecruitInfoWrapper>
 			<section className='container'>
@@ -46,7 +39,7 @@ const RecruitInfoWrapper = () => {
 							{userRoleList.map((userRole, index) => (
 								<InputRole
 									key={index}
-									role={userRole.role}
+									role={userRole.role.name}
 									count={userRole.count}
 									skill={userRole.skill}
 									onDelete={() => deleteObj(index)}

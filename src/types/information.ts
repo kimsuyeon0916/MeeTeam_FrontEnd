@@ -16,8 +16,11 @@ export interface Option {
 }
 
 export interface Role {
-	id: number;
-	role: string;
+	id?: number;
+	role: {
+		id: number | null;
+		name: string;
+	};
 	count: string;
 	skill: string[];
 }
@@ -40,9 +43,9 @@ export interface InputState {
 	};
 	recruitmentRoleDto: [
 		{
-			role: string;
+			role: number;
 			count: number;
-			skill: string[];
+			skill: number[];
 		},
 	];
 	tag: string[];

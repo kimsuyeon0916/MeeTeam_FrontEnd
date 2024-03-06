@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { getSearchKeyword } from '../api';
 
 const useDebounce = (value: string, delay: number) => {
 	const [debouncedValue, setDebouncedValue] = useState(value);
@@ -14,10 +12,7 @@ const useDebounce = (value: string, delay: number) => {
 		};
 	}, [value]);
 
-	return useQuery({
-		queryKey: ['searchRole', debouncedValue],
-		queryFn: () => getSearchKeyword(debouncedValue),
-	});
+	return debouncedValue;
 };
 
 export default useDebounce;
