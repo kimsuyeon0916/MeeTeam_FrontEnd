@@ -13,14 +13,18 @@ const DateSelect = () => {
 
 	const onChangeHandler = (dates: [Date | null, Date | null]) => {
 		const [start, end] = dates;
-		setStartDate(start);
-		setEndDate(end);
-		const startDateFormatted = simpleDate(start);
-		const endDateFormatted = simpleDate(end);
+		setStartDate(prevStartDate => {
+			setEndDate(prevEndDate => {
+				const startDateFormatted = simpleDate(start);
+				const endDateFormatted = simpleDate(end);
 
-		if (startDateFormatted && endDateFormatted) {
-			setInfo({ ...info, period: [startDateFormatted, endDateFormatted] });
-		}
+				if (startDateFormatted && endDateFormatted) {
+					setInfo(prevInfo => ({ ...prevInfo, period: [startDateFormatted, endDateFormatted] }));
+				}
+				return end;
+			});
+			return start;
+		});
 	};
 
 	return (
