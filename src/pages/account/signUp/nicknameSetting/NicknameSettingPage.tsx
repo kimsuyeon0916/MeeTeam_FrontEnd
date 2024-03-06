@@ -2,7 +2,7 @@ import React from 'react';
 import S from './NicknameSettingPage.styled';
 import { SIGN_UP_DATA } from '../SignUpData';
 import { useNavigate } from 'react-router-dom';
-import { useNaverSignUp, useCheckDuplicateNickname } from '../../../../hooks';
+import { useNaverSignUp, useCheckDuplicateNickname, useDebounce } from '../../../../hooks';
 import { useSetRecoilState } from 'recoil';
 import { userState } from '../../../../atom';
 import { useForm, SubmitHandler } from 'react-hook-form';
@@ -42,7 +42,7 @@ const NicknameSettingPage = () => {
 		code && mutate({ emailCode: code, nickname: data.nickname });
 	};
 
-	const nickname = watch('nickname');
+	const nickname = useDebounce(watch('nickname'));
 	const authKeys = ['checkDuplicateNickname', nickname];
 
 	const { data } = useCheckDuplicateNickname(authKeys, isDirty && isValid);
