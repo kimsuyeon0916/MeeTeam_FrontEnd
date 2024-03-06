@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import S from './InputCourse.styled';
+import { useQuery } from '@tanstack/react-query';
 import { Subtitle } from '../..';
 import { useRecoilState } from 'recoil';
 import { recruitInputState } from '../../../atom';
+import { useDebounce } from '../../../hooks';
+import { getCourseKeyword } from '../../../api';
 
 interface InputCourse {
 	isChecked: boolean;
@@ -12,6 +15,7 @@ interface InputCourse {
 const InputCourse = ({ isChecked, onClickHandler }: InputCourse) => {
 	const [info, setInfo] = useRecoilState(recruitInputState);
 	const [courseName, setCourseName] = useState<string>('');
+	const keywordCourse = useDebounce(courseName, 500);
 	const onChangeCourseName = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const content = event.target.value;
 		setCourseName(content);
@@ -24,6 +28,11 @@ const InputCourse = ({ isChecked, onClickHandler }: InputCourse) => {
 			},
 		});
 	};
+	const { data, isLoading, refetch } = useQuery({
+		queryKey: ['searchCourse', keywordCourse],
+		queryFn: () => getCourseKeyword(keywordCourse),
+	});
+
 	return (
 		<S.InputCourse>
 			<div className='title-info'>
@@ -43,6 +52,9 @@ const InputCourse = ({ isChecked, onClickHandler }: InputCourse) => {
 				disabled={!isChecked ? true : false}
 				onChange={onChangeCourseName}
 			/>
+			<section className='dropdown'>
+				{!isLoading && data?.map((keyword: any) => <span key={keyword.id}>{keyword.name}</span>)}
+			</section>
 		</S.InputCourse>
 	);
 };

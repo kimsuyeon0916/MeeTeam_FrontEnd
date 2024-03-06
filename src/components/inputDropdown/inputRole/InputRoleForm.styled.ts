@@ -56,6 +56,11 @@ const InputRoleForm = styled.article<InputRoleForm>`
 			}
 		}
 
+		.skill {
+			right: 0rem;
+			width: 46.6%;
+		}
+
 		.count-input {
 			width: 40%;
 			border-radius: 0.75rem;
