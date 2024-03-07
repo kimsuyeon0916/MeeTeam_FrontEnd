@@ -3,12 +3,20 @@ import S from './ReplyComment.styled';
 import { Icon, KebabMenu } from '../..';
 import { Comment } from '../../../types';
 
-const ReplyComment = ({ id, username, content, deleteComment }: Comment) => {
+const ReplyComment = ({
+	id,
+	nickname,
+	content,
+	deleteComment,
+	isWriter,
+	createAt,
+	profileImg,
+}: Comment) => {
 	const isLogin = true; // 임시 코드
 	const [value, setValue] = useState<string>(content);
 	const [showKebab, setShowKebab] = useState<boolean>(true);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
-	const isValid = isLogin && username === 'yeom' && showKebab;
+	const isValid = isLogin && nickname === 'yeom' && showKebab;
 	const optionLists = [
 		{
 			title: '수정',
@@ -53,7 +61,7 @@ const ReplyComment = ({ id, username, content, deleteComment }: Comment) => {
 					</div>
 					{!isEdit ? (
 						<div className='comment-info'>
-							<span>{username}</span>
+							<span>{nickname}</span>
 							<span>{value}</span>
 						</div>
 					) : (

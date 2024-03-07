@@ -1,24 +1,51 @@
 import React, { useState } from 'react';
 import S from './RecruitDetailPage.styled';
-import { RadiusProfile } from '../../../components';
-
-const tempTags = [
-	'응용소프트웨어실습',
-	'광운대학교',
-	'교내',
-	'교내',
-	'팀프로젝트',
-	'Windows Forms',
-	'문승현 교수님',
-	'포트폴리오',
-	'게임개발',
-	'프론트엔드',
-	'백엔드',
-	'자유로운 분위기',
-	'적극 구인중',
-];
+import { RadiusProfile, Comment, CommentInput } from '../../../components';
+import { tempData, tempTags } from './data';
+import { simpleDate } from '../../../utils';
 
 const RecruitDetailPage = () => {
+	const [contents, setContents] = useState<string>('');
+	const [commentsList, setCommentsList] = useState<Comment[]>(tempData.comments);
+	const isWriter = tempData.isWriter;
+	const createAt = simpleDate(new Date());
+
+	console.log(createAt);
+
+	const addComment = () => {
+		if (contents !== '' && contents.trim() !== '') {
+			const newComment = {
+				id: tempData.comments.length + 1,
+				nickname: 'yeom',
+				content: contents,
+				replies: [],
+				isWriter: isWriter,
+				createAt: '',
+				profileImg: '',
+			};
+			setCommentsList(prev => [...prev, newComment]);
+			setContents('');
+		}
+	};
+
+	const deleteComment = (id: number) => {
+		setCommentsList(prevComments => prevComments.filter(v => v.id !== id));
+	};
+
+	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		const target = event.currentTarget;
+		if (target.value.length !== 0 && event.key === 'Enter') {
+			event.preventDefault();
+			addComment();
+		}
+	};
+
+	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setContents(event.target.value);
+	};
+
+	const onClickInput = () => {};
+
 	return (
 		<S.RecruitDetailPage>
 			<article>
@@ -124,11 +151,11 @@ const RecruitDetailPage = () => {
 							<section className='container-role_info'>
 								<h4>프론트엔드</h4>
 								<section>
-									<span>React.js</span>
-									<span>JavaScript</span>
-									<span>jQuery</span>
-									<span>TailwindCSS</span>
-									<span>HTML/CSS</span>
+									<span className='tag'>React.js</span>
+									<span className='tag'>JavaScript</span>
+									<span className='tag'>jQuery</span>
+									<span className='tag'>TailwindCSS</span>
+									<span className='tag'>HTML/CSS</span>
 								</section>
 							</section>
 							<hr />
@@ -154,11 +181,11 @@ const RecruitDetailPage = () => {
 							<section className='container-role_info'>
 								<h4>프론트엔드</h4>
 								<section>
-									<span>React.js</span>
-									<span>JavaScript</span>
-									<span>jQuery</span>
-									<span>TailwindCSS</span>
-									<span>HTML/CSS</span>
+									<span className='tag'>React.js</span>
+									<span className='tag'>JavaScript</span>
+									<span className='tag'>jQuery</span>
+									<span className='tag'>TailwindCSS</span>
+									<span className='tag'>HTML/CSS</span>
 								</section>
 							</section>
 							<hr />
@@ -184,11 +211,11 @@ const RecruitDetailPage = () => {
 							<section className='container-role_info'>
 								<h4>프론트엔드</h4>
 								<section>
-									<span>React.js</span>
-									<span>JavaScript</span>
-									<span>jQuery</span>
-									<span>TailwindCSS</span>
-									<span>HTML/CSS</span>
+									<span className='tag'>React.js</span>
+									<span className='tag'>JavaScript</span>
+									<span className='tag'>jQuery</span>
+									<span className='tag'>TailwindCSS</span>
+									<span className='tag'>HTML/CSS</span>
 								</section>
 							</section>
 							<hr />
@@ -224,7 +251,40 @@ const RecruitDetailPage = () => {
 			<article className='wrapper-btn'>
 				<button>목록보기</button>
 			</article>
-			<article className='wrapper-comments'></article>
+			<article className='wrapper-comments'>
+				<section className='container-title'>
+					<h3>댓글</h3>
+					<span>{'4'}</span>
+				</section>
+				<hr />
+				<section className='container-comments'>
+					<span className='container-comments__title'>댓글</span>
+					<ul className='container-comments__lists'>
+						{commentsList.map((comment, _) => {
+							return (
+								<Comment
+									key={comment.id}
+									id={comment.id}
+									nickname={comment.nickname}
+									content={comment.content}
+									replies={comment.replies}
+									isWriter={isWriter}
+									createAt={''}
+									profileImg={''}
+									deleteComment={() => deleteComment(comment.id)}
+								/>
+							);
+						})}
+					</ul>
+					<CommentInput
+						contents={contents}
+						addComment={addComment}
+						onKeyPress={onKeyPress}
+						onChangeHandler={onChangeHandler}
+						onClickInput={onClickInput}
+					/>
+				</section>
+			</article>
 			<footer></footer>
 		</S.RecruitDetailPage>
 	);

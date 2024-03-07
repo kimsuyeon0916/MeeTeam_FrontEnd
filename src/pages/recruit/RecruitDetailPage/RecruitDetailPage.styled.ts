@@ -278,6 +278,27 @@ const RecruitDetailPage = styled.section`
 			color: #373f41;
 		}
 	}
+
+	.wrapper-comments {
+		.container-title {
+			display: flex;
+			align-items: flex-end;
+			gap: 0.4rem;
+			span {
+				color: #5877fc;
+				font-size: 1.2rem;
+				font-weight: 600;
+				line-height: 1.4rem;
+			}
+		}
+		hr {
+			margin-top: 1.18rem;
+			margin-bottom: 1.6rem;
+			background: #e3e3e3;
+			border: none;
+			height: 0.075rem;
+		}
+	}
 `;
 
 const S = {
