@@ -38,15 +38,15 @@ export const tempData = {
 	comments: [
 		{
 			id: 1,
-			nickname: 'song123',
+			nickname: 'feelgood03',
 			profileImg: 'url형태',
-			content: '저 관심있는데요..',
+			content: '저 으아아아아 정신체리고 빨리허쟈ㅏㅏ아 언제끝나냐 근데 허핳허하허핳..',
 			createAt: '2023-12-24',
 			isWriter: true,
 			replies: [
 				{
 					id: 2,
-					nickname: 'song123',
+					nickname: 'yeom',
 					profileImg: 'url형태',
 					content: '저 관심있는데요..',
 					createAt: '2023-12-25',

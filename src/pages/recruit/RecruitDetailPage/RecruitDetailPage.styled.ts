@@ -291,12 +291,17 @@ const RecruitDetailPage = styled.section`
 				line-height: 1.4rem;
 			}
 		}
+
 		hr {
 			margin-top: 1.18rem;
-			margin-bottom: 1.6rem;
 			background: #e3e3e3;
 			border: none;
 			height: 0.075rem;
+		}
+
+		.container-comments {
+			padding: 1.6rem 3rem;
+			box-sizing: border-box;
 		}
 	}
 `;

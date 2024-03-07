@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import S from './ReplyComment.styled';
-import { Icon, KebabMenu } from '../..';
+import { KebabMenu, RadiusProfile } from '../..';
 import { Comment } from '../../../types';
+import { Reply } from '../../../assets';
 
 const ReplyComment = ({
 	id,
@@ -55,33 +56,20 @@ const ReplyComment = ({
 	return (
 		<S.ReplyComment>
 			<section className='wrapper'>
-				<section className='container'>
-					<div className='comment-icon'>
-						<Icon />
-					</div>
-					{!isEdit ? (
-						<div className='comment-info'>
-							<span>{nickname}</span>
-							<span>{value}</span>
+				<img className='reply-icon' src={Reply} />
+				<article className='container'>
+					<section className='comment-icon'>
+						<div>
+							<RadiusProfile url='' />
 						</div>
-					) : (
-						<>
-							<input
-								type='text'
-								className='input-edit'
-								placeholder='댓글 입력'
-								value={value}
-								onChange={onChangeEdit}
-								onKeyPress={onKeyPressEdit}
-							/>
-							<button type='button' onClick={editComment} className='reply-btn'>
-								수정
-							</button>
-						</>
-					)}
-				</section>
-				{isValid && <KebabMenu options={optionLists} />}
+						<span>{nickname}</span>
+					</section>
+					<section className='comment-info'>
+						<span>{value}</span>
+					</section>
+				</article>
 			</section>
+			<hr />
 		</S.ReplyComment>
 	);
 };

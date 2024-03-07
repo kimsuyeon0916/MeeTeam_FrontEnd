@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Icon, KebabMenu, ReplyComment, ReplyInput } from '../..';
+import { KebabMenu, RadiusProfile, ReplyComment, ReplyInput } from '../..';
 import S from './Comment.styled';
 import { Comment } from '../../../types';
 import { useNavigate } from 'react-router-dom';
@@ -103,38 +103,20 @@ const Comment = ({
 	return (
 		<S.Comment>
 			<section className='wrapper'>
-				<section className='container'>
-					<div className='comment-icon'>
-						<Icon />
-					</div>
-					{!isEdit ? (
-						<div className='comment-info'>
-							<span>{nickname}</span>
-							<span>{value}</span>
+				<article className='container'>
+					<section className='comment-icon'>
+						<div>
+							<RadiusProfile url='' />
 						</div>
-					) : (
-						<input
-							type='text'
-							className='input-edit'
-							placeholder='댓글 입력'
-							value={value}
-							onChange={onChangeEdit}
-							onKeyPress={onKeyPressEdit}
-						/>
-					)}
-					{isUser && (
-						<button
-							type='button'
-							onClick={!isEdit ? handleReplyClick : editComment}
-							className='reply-btn'
-						>
-							{isEdit ? '수정' : '답글'}
-						</button>
-					)}
-				</section>
-				{isUser && showKebab && <KebabMenu options={optionLists} />}
+						<span>{nickname}</span>
+					</section>
+					<section className='comment-info'>
+						<span>{value}</span>
+					</section>
+				</article>
 			</section>
-			<section>
+			<hr />
+			<section className='wrapper-replies'>
 				<ul className='container-reply__lists'>
 					{repliesList?.map(reply => {
 						return (
