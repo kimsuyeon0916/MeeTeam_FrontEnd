@@ -7,7 +7,7 @@ import { simpleDate } from '../../../utils';
 const RecruitDetailPage = () => {
 	const [contents, setContents] = useState<string>('');
 	const [commentsList, setCommentsList] = useState<Comment[]>(tempData.comments);
-	const isWriter = tempData.isWriter;
+	const username = 'yeom';
 	const createAt = simpleDate(new Date());
 
 	console.log(createAt);
@@ -19,7 +19,7 @@ const RecruitDetailPage = () => {
 				nickname: 'yeom',
 				content: contents,
 				replies: [],
-				isWriter: isWriter,
+				isWriter: true,
 				createAt: '',
 				profileImg: '',
 			};
@@ -258,7 +258,6 @@ const RecruitDetailPage = () => {
 				</section>
 				<hr />
 				<section className='container-comments'>
-					<span className='container-comments__title'>댓글</span>
 					<ul className='container-comments__lists'>
 						{commentsList.map((comment, _) => {
 							return (
@@ -268,7 +267,7 @@ const RecruitDetailPage = () => {
 									nickname={comment.nickname}
 									content={comment.content}
 									replies={comment.replies}
-									isWriter={isWriter}
+									isWriter={comment.nickname === username}
 									createAt={''}
 									profileImg={''}
 									deleteComment={() => deleteComment(comment.id)}
