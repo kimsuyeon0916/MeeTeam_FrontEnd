@@ -148,7 +148,7 @@ const RecruitDetailPage = () => {
 								</section>
 							</article>
 							<article className='wrapper-card'>
-								<section className='container-role_info'>
+								<section className='container-role__info'>
 									<h4>프론트엔드</h4>
 									<section>
 										<span className='tag'>React.js</span>
@@ -159,7 +159,7 @@ const RecruitDetailPage = () => {
 									</section>
 								</section>
 								<hr />
-								<section>
+								<section className='container-role__current'>
 									<h4>현황</h4>
 									<section className='apply-info'>
 										<section className='people'>
@@ -172,13 +172,13 @@ const RecruitDetailPage = () => {
 										</section>
 									</section>
 									<section className='progress-bar'>
-										<div>아무튼 현황바임</div>
+										<Progress denominator={5} numerator={2} />
 										<span>현재 N명 중 X명이 모였습니다!</span>
 									</section>
 								</section>
 							</article>
 							<article className='wrapper-card'>
-								<section className='container-role_info'>
+								<section className='container-role__info'>
 									<h4>프론트엔드</h4>
 									<section>
 										<span className='tag'>React.js</span>
@@ -189,7 +189,7 @@ const RecruitDetailPage = () => {
 									</section>
 								</section>
 								<hr />
-								<section>
+								<section className='container-role__current'>
 									<h4>현황</h4>
 									<section className='apply-info'>
 										<section className='people'>
@@ -202,13 +202,13 @@ const RecruitDetailPage = () => {
 										</section>
 									</section>
 									<section className='progress-bar'>
-										<div>아무튼 현황바임</div>
+										<Progress denominator={5} numerator={2} />
 										<span>현재 N명 중 X명이 모였습니다!</span>
 									</section>
 								</section>
 							</article>
 							<article className='wrapper-card'>
-								<section className='container-role_info'>
+								<section className='container-role__info'>
 									<h4>프론트엔드</h4>
 									<section>
 										<span className='tag'>React.js</span>
@@ -219,7 +219,7 @@ const RecruitDetailPage = () => {
 									</section>
 								</section>
 								<hr />
-								<section>
+								<section className='container-role__current'>
 									<h4>현황</h4>
 									<section className='apply-info'>
 										<section className='people'>
@@ -232,7 +232,37 @@ const RecruitDetailPage = () => {
 										</section>
 									</section>
 									<section className='progress-bar'>
-										<div>아무튼 현황바임</div>
+										<Progress denominator={5} numerator={2} />
+										<span>현재 N명 중 X명이 모였습니다!</span>
+									</section>
+								</section>
+							</article>
+							<article className='wrapper-card'>
+								<section className='container-role__info'>
+									<h4>프론트엔드</h4>
+									<section>
+										<span className='tag'>React.js</span>
+										<span className='tag'>JavaScript</span>
+										<span className='tag'>jQuery</span>
+										<span className='tag'>TailwindCSS</span>
+										<span className='tag'>HTML/CSS</span>
+									</section>
+								</section>
+								<hr />
+								<section className='container-role__current'>
+									<h4>현황</h4>
+									<section className='apply-info'>
+										<section className='people'>
+											<span>모집인원</span>
+											<span>N</span>
+										</section>
+										<section className='people'>
+											<span>지원자 수</span>
+											<span>M</span>
+										</section>
+									</section>
+									<section className='progress-bar'>
+										<Progress denominator={5} numerator={2} />
 										<span>현재 N명 중 X명이 모였습니다!</span>
 									</section>
 								</section>
@@ -288,7 +318,9 @@ const RecruitDetailPage = () => {
 			<S.Footer>
 				<section className='container-btn'>
 					<button type='button'>편집하기</button>
-					<button type='button'>마감하기</button>
+					<button type='button' className='apply'>
+						신청하기
+					</button>
 				</section>
 			</S.Footer>
 		</>

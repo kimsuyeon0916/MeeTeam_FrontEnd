@@ -149,7 +149,7 @@ const RecruitDetailPage = styled.section`
 		}
 
 		.container-roles {
-			width: 120%;
+			width: 130%;
 			margin-top: 1.98rem;
 			display: flex;
 			gap: 1.6rem;
@@ -336,10 +336,17 @@ const Footer = styled.footer`
 		button:nth-child(2) {
 			height: 4.8rem;
 			padding: 1.2rem 7.2rem;
-			justify-content: center;
-			align-items: center;
 			border-radius: 0.6rem;
+		}
+
+		.close {
 			background: #f85858;
+			color: #fff;
+		}
+
+		.apply {
+			border-radius: 0.8rem;
+			background: linear-gradient(90deg, #6091f0 0%, #723dff 100%);
 			color: #fff;
 		}
 	}
