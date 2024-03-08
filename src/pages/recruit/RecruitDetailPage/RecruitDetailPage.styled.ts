@@ -136,9 +136,11 @@ const RecruitDetailPage = styled.section`
 
 	.wrapper-roles {
 		margin-top: 8rem;
+		width: 110%;
+		overflow: hidden;
 
 		.scroll {
-			width: 120%;
+			width: 100%;
 			overflow-x: scroll;
 
 			&::-webkit-scrollbar {
@@ -147,11 +149,11 @@ const RecruitDetailPage = styled.section`
 		}
 
 		.container-roles {
+			width: 120%;
 			margin-top: 1.98rem;
 			display: flex;
 			gap: 1.6rem;
 			background-color: #fff;
-			overflow: hidden;
 
 			.wrapper-card {
 				display: flex;
@@ -306,8 +308,44 @@ const RecruitDetailPage = styled.section`
 	}
 `;
 
+const Footer = styled.footer`
+	position: fixed;
+	bottom: 0rem;
+	width: 100%;
+	height: 8.4rem;
+	border-top: 0.075rem solid #e3e3e3;
+	border-bottom: 0.075rem solid #e3e3e3;
+	background: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.container-btn {
+		display: flex;
+		gap: 1.6rem;
+
+		button:nth-child(1) {
+			height: 4.8rem;
+			padding: 1.2rem 3.2rem;
+			border-radius: 0.6rem;
+			border: 1.5px solid #e3e3e3;
+			background: #fff;
+		}
+
+		button:nth-child(2) {
+			height: 4.8rem;
+			padding: 1.2rem 7.2rem;
+			justify-content: center;
+			align-items: center;
+			border-radius: 0.6rem;
+			background: #f85858;
+		}
+	}
+`;
+
 const S = {
 	RecruitDetailPage,
+	Footer,
 };
 
 export default S;
