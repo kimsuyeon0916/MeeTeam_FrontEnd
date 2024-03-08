@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import S from './RecruitDetailPage.styled';
-import { RadiusProfile, Comment, CommentInput } from '../../../components';
+import { RadiusProfile, CommentInput, Comment } from '../../../components';
 import { tempData, tempTags } from './data';
 import { simpleDate } from '../../../utils';
+import { Comment as CommentForm } from '../../../types';
 
 const RecruitDetailPage = () => {
 	const [contents, setContents] = useState<string>('');
-	const [commentsList, setCommentsList] = useState<Comment[]>(tempData.comments);
+	const [commentsList, setCommentsList] = useState<CommentForm[]>(tempData.comments);
 	const username = 'yeom';
 	const createAt = simpleDate(new Date());
-
-	console.log(createAt);
 
 	const addComment = () => {
 		if (contents !== '' && contents.trim() !== '') {
@@ -20,10 +19,10 @@ const RecruitDetailPage = () => {
 				content: contents,
 				replies: [],
 				isWriter: true,
-				createAt: '',
+				createAt: createAt?.toString(),
 				profileImg: '',
 			};
-			setCommentsList(prev => [...prev, newComment]);
+			setCommentsList([...commentsList, newComment]);
 			setContents('');
 		}
 	};
@@ -269,8 +268,8 @@ const RecruitDetailPage = () => {
 										content={comment.content}
 										replies={comment.replies}
 										isWriter={comment.nickname === username}
-										createAt={''}
-										profileImg={''}
+										createAt={comment.createAt}
+										profileImg={comment.profileImg}
 										deleteComment={() => deleteComment(comment.id)}
 									/>
 								);

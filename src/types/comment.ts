@@ -5,7 +5,7 @@ export interface Comment {
 	nickname: string;
 	profileImg: string;
 	content: string;
-	createAt: string;
+	createAt: string | undefined;
 	replies?: Comment[];
 	isWriter: boolean;
 	deleteComment?: (id: number) => void;

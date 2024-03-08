@@ -339,6 +339,7 @@ const Footer = styled.footer`
 			align-items: center;
 			border-radius: 0.6rem;
 			background: #f85858;
+			color: #fff;
 		}
 	}
 `;
