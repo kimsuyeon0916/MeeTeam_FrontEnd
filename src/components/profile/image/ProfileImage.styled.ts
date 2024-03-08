@@ -11,6 +11,7 @@ const ProfileImageLayout = styled.div<ProfileImage>`
 	border-radius: 70%;
 	overflow: hidden;
 	border: ${props => props.$url && '0.075rem solid #b9b9b9'};
+	cursor: pointer;
 `;
 
 const ProfileImage = styled.img`
