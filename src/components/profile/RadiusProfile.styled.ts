@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
-const RadiusProfileLayout = styled.div<{ $size?: string }>`
-	width: ${props =>
-		props.$size === 'big' ? '7.0873rem' : props.$size === 'middle' ? '5.5125rem' : '4.3313rem'};
-	height: ${props =>
-		props.$size === 'big' ? '7.0873rem' : props.$size === 'middle' ? '5.5125rem' : '4.3313rem'};
+interface ProfileImage {
+	$size: string;
+	$url?: string;
+}
+
+const RadiusProfileLayout = styled.div<ProfileImage>`
+	width: ${props => props.$size};
+	height: ${props => props.$size};
 	border-radius: 70%;
 	overflow: hidden;
-	border: 0.075rem solid #b9b9b9;
+	border: ${props => props.$url && '0.075rem solid #b9b9b9'};
 `;
 
 const RadiusProfileImage = styled.img`
