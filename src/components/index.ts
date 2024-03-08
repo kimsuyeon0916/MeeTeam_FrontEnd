@@ -29,7 +29,6 @@ import Link from './meeteam/main/link/Link';
 import DashBoardLink from './meeteam/main/dashBoard/dashBoardLink/DashBoardLink';
 import {
 	memberList,
-	MEMBER_PROFILE_DEFAULT_ICON,
 	MEMBER_PLUS_ICON,
 	MEMBER_PLUS_CARD,
 	MEMBER_BOTTOM_ARROW_ICON,
@@ -126,7 +125,6 @@ export {
 	DashBoardLink,
 	memberList,
 	MeeTeamMember,
-	MEMBER_PROFILE_DEFAULT_ICON,
 	MEMBER_PLUS_ICON,
 	MEMBER_PLUS_CARD,
 	MEMBER_BOTTOM_ARROW_ICON,
