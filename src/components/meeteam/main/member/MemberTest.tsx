@@ -1,6 +1,6 @@
 import React from 'react';
 import S from './Member.styled';
-import { RadiusProfile } from '../../../index';
+import { ProfileImage } from '../../../index';
 import { MeeTeamMember } from '../../../index';
 import { useRecoilState } from 'recoil';
 import { memberListState } from '../../../../atom';
@@ -28,7 +28,7 @@ const MemberTest = ({ id }: Member) => {
 	const [memberList, setMemberList] = useRecoilState(memberListState);
 
 	const onClickDelete = (event: React.MouseEvent<HTMLDivElement>) => {
-		let temp = [...memberList];
+		const temp = [...memberList];
 		if (event.target instanceof Element) {
 			const deletedIndex = Number(event.target.id);
 			temp.splice(deletedIndex, 1);
@@ -40,7 +40,7 @@ const MemberTest = ({ id }: Member) => {
 		<div className='member' id={id}>
 			<S.MemberCardLayout>
 				<div className='member-card__row'>
-					<RadiusProfile size='middle' url={memberTemp.imageUrl} />
+					<ProfileImage size='middle' url={memberTemp.imageUrl} />
 					<div className='member-card__column'>
 						<div className='member-card__title'>{memberTemp.nickName}</div>
 						<div className='member-card__row'>

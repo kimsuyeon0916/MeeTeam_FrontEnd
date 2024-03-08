@@ -1,7 +1,7 @@
 import React from 'react';
 import { CopyClipBoard } from '../../../utils';
 import S from './MemberContact.styled';
-import { MeeTeamMember, RadiusProfile } from '../..';
+import { MeeTeamMember, ProfileImage } from '../..';
 
 const MemberContact = ({ member }: { member: MeeTeamMember }) => {
 	const copyLinkIcon: string =
@@ -19,7 +19,7 @@ const MemberContact = ({ member }: { member: MeeTeamMember }) => {
 			</div>
 			<div className='member-contact__row'>
 				<div className='member-contact__profile-column'>
-					<RadiusProfile size='big' url={member.imageUrl} />
+					<ProfileImage size='big' url={member.imageUrl} />
 					<div className='member-contact__title'>{member.nickName}</div>
 					<div className='member-contact__task'>{member.task}</div>
 				</div>

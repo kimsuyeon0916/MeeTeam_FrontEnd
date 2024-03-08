@@ -64,7 +64,7 @@ import GoBack from './goBack/GoBack';
 import KebabMenu from './kebabMenu/KebabMenu';
 import KebabMenuIcon from './kebabMenuIcon/KebabMenu';
 import OptionMenu from './optionMenu/OptionMenu';
-import RadiusProfile from './profile/RadiusProfile';
+import ProfileImage from './profile/image/ProfileImage';
 import {
 	linkList,
 	LINK_BOTTOM_ARROW_ICON,
@@ -93,6 +93,8 @@ import Comment from './comment/comment/Comment';
 import CommentInput from './comment/commentInput/CommentInput';
 import ReplyInput from './comment/replyInput/ReplyInput';
 import ReplyComment from './comment/comment/ReplyComment';
+import Skill from './skills/Skill';
+import PortfolioCard from './portfolio/card/PortfolioCard';
 
 export {
 	Header,
@@ -148,7 +150,7 @@ export {
 	KebabMenu,
 	KebabMenuIcon,
 	OptionMenu,
-	RadiusProfile,
+	ProfileImage,
 	linkList,
 	LINK_BOTTOM_ARROW_ICON,
 	LINK_SHORTCUTS_BUTTON,
@@ -181,4 +183,6 @@ export {
 	ReplyInput,
 	Comment,
 	ReplyComment,
+	Skill,
+	PortfolioCard,
 };

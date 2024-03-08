@@ -5,7 +5,7 @@ interface ProfileImage {
 	$url?: string;
 }
 
-const RadiusProfileLayout = styled.div<ProfileImage>`
+const ProfileImageLayout = styled.div<ProfileImage>`
 	width: ${props => props.$size};
 	height: ${props => props.$size};
 	border-radius: 70%;
@@ -13,12 +13,12 @@ const RadiusProfileLayout = styled.div<ProfileImage>`
 	border: ${props => props.$url && '0.075rem solid #b9b9b9'};
 `;
 
-const RadiusProfileImage = styled.img`
+const ProfileImage = styled.img`
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 `;
 
-const S = { RadiusProfileLayout, RadiusProfileImage };
+const S = { ProfileImageLayout, ProfileImage };
 
 export default S;

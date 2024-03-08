@@ -1,6 +1,6 @@
 import React from 'react';
 import S from './MemberCard.styled';
-import { MeeTeamMember, RadiusProfile } from '../..';
+import { MeeTeamMember, ProfileImage } from '../..';
 
 export const SCHOOL_ICON = (
 	<svg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 11 11' fill='none'>
@@ -53,7 +53,7 @@ const MemberCard = ({ member }: { member: MeeTeamMember }) => {
 	return (
 		<S.MemberCardLayout>
 			<div className='member-card__row'>
-				<RadiusProfile size='middle' url={member.imageUrl} />
+				<ProfileImage size='middle' url={member.imageUrl} />
 				<div className='member-card__column'>
 					<div className='member-card__title'>{member.nickName}</div>
 					<div className='member-card__row'>
