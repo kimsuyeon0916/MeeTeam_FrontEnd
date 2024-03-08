@@ -167,7 +167,7 @@ const RecruitDetailPage = styled.section`
 				padding: 1.8rem 2rem;
 				box-sizing: border-box;
 
-				.container-role_info {
+				.container-role__info {
 					section {
 						display: flex;
 						flex-wrap: wrap;
@@ -223,6 +223,7 @@ const RecruitDetailPage = styled.section`
 						font-size: 1rem;
 						line-height: 1.2rem;
 						letter-spacing: 0.002rem;
+						margin-left: 2rem;
 					}
 				}
 			}

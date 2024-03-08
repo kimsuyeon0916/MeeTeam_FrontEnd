@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import S from './RecruitDetailPage.styled';
-import { RadiusProfile, CommentInput, Comment } from '../../../components';
+import { RadiusProfile, CommentInput, Comment, Progress } from '../../../components';
 import { tempData, tempTags } from './data';
 import { simpleDate } from '../../../utils';
 import { Comment as CommentForm } from '../../../types';
@@ -118,7 +118,7 @@ const RecruitDetailPage = () => {
 					<section className='scroll'>
 						<section className='container-roles'>
 							<article className='wrapper-card'>
-								<section className='container-role_info'>
+								<section className='container-role__info'>
 									<h4>프론트엔드</h4>
 									<section>
 										<span className='tag'>React.js</span>
@@ -129,7 +129,7 @@ const RecruitDetailPage = () => {
 									</section>
 								</section>
 								<hr />
-								<section>
+								<section className='container-role__current'>
 									<h4>현황</h4>
 									<section className='apply-info'>
 										<section className='people'>
@@ -142,7 +142,7 @@ const RecruitDetailPage = () => {
 										</section>
 									</section>
 									<section className='progress-bar'>
-										<div>아무튼 현황바임</div>
+										<Progress denominator={5} numerator={2} />
 										<span>현재 N명 중 X명이 모였습니다!</span>
 									</section>
 								</section>

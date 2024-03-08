@@ -99,6 +99,7 @@ import InputCourse from './inputDropdown/inputCourse/InputCourse';
 import InputProfessor from './inputDropdown/inputCourse/InputProfessor';
 import InputRole from './inputDropdown/inputRole/InputRole';
 import InputRoleForm from './inputDropdown/inputRole/InputRoleForm';
+import Progress from './progressBar/Progress';
 
 export {
 	Header,
@@ -193,4 +194,5 @@ export {
 	InputProfessor,
 	InputRole,
 	InputRoleForm,
+	Progress,
 };
