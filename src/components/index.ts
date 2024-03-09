@@ -100,6 +100,13 @@ import InputProfessor from './inputDropdown/inputCourse/InputProfessor';
 import InputRole from './inputDropdown/inputRole/InputRole';
 import InputRoleForm from './inputDropdown/inputRole/InputRoleForm';
 import Progress from './progressBar/Progress';
+import TitleInfo from './recruit/recruitDetail/titleInfo/TitleInfo';
+import RecruitInfo from './recruit/recruitDetail/recruitInfo/RecruitInfo';
+import RecruitDescription from './recruit/recruitDetail/recruitDescription/RecruitDescription';
+import RecruitComments from './recruit/recruitDetail/recruitComments/RecruitComments';
+import RecruitRoles from './recruit/recruitDetail/recruitRoles/RecruitRoles';
+import LinkToList from './recruit/recruitDetail/linktoList/LinkToList';
+import RecruitTag from './recruit/recruitDetail/recruitTag/RecruitTag';
 
 export {
 	Header,
@@ -195,4 +202,11 @@ export {
 	InputRole,
 	InputRoleForm,
 	Progress,
+	TitleInfo,
+	RecruitInfo,
+	RecruitDescription,
+	RecruitComments,
+	RecruitRoles,
+	LinkToList,
+	RecruitTag,
 };
