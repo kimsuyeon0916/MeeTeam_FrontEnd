@@ -16,29 +16,6 @@ const RecruitDetailPage = styled.section`
 		letter-spacing: 0.004rem;
 	}
 
-	.wrapper-roles {
-		margin-top: 8rem;
-		width: 110%;
-		overflow: hidden;
-
-		.scroll {
-			width: 100%;
-			overflow-x: scroll;
-
-			&::-webkit-scrollbar {
-				display: none;
-			}
-		}
-
-		.container-roles {
-			width: 130%;
-			margin-top: 1.98rem;
-			display: flex;
-			gap: 1.6rem;
-			background-color: #fff;
-		}
-	}
-
 	.tag {
 		display: flex;
 		padding: 0.6rem 0.8rem;
@@ -48,47 +25,6 @@ const RecruitDetailPage = styled.section`
 		box-sizing: border-box;
 		border-radius: 1.5rem;
 		background: #e0e6ff;
-	}
-
-	.wrapper-tags {
-		margin-top: 8rem;
-		display: flex;
-		flex-direction: column;
-
-		.container-tags {
-			margin-top: 2rem;
-			display: flex;
-			flex-wrap: wrap;
-			gap: 1.6rem;
-
-			span {
-				height: 3.2rem;
-				color: #151515;
-				font-size: 1.4rem;
-				font-weight: 600;
-				line-height: 1.7rem;
-				letter-spacing: 0.0028rem;
-				padding: 0.8rem 1rem;
-			}
-		}
-	}
-
-	.wrapper-btn {
-		margin-top: 8rem;
-		display: flex;
-		justify-content: center;
-
-		button {
-			height: 4.8rem;
-			padding: 1.2rem 3.2rem;
-			justify-content: center;
-			align-items: center;
-			border-radius: 0.6rem;
-			border: 0.15rem solid #e3e3e3;
-			background: #fff;
-			font-size: 1.6rem;
-			color: #373f41;
-		}
 	}
 
 	.wrapper-comments {

@@ -4,7 +4,13 @@ import type { CustomInstance } from './api';
 import type { TitleInfo, OptionList, Option, Role, InputRoleForm, InputState } from './information';
 import type { Comment, CommentInputFunctions } from './comment';
 import type { JsxElementComponentProps } from './indexSigniture';
-import type { TitleAndEtc, RecruitInfo, RecruitDescription, RoleInfo } from './recruit/response';
+import type {
+	TitleAndEtc,
+	RecruitInfo,
+	RecruitDescription,
+	RoleInfo,
+	RecruitTags,
+} from './recruit/response';
 
 export type {
 	SignUpPayload,
@@ -24,4 +30,5 @@ export type {
 	RecruitInfo,
 	RecruitDescription,
 	RoleInfo,
+	RecruitTags,
 };

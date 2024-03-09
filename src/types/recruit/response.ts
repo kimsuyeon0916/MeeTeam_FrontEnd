@@ -33,3 +33,8 @@ export interface RoleInfo {
 	applicantCount: number;
 	recruitedCount: number;
 }
+
+export interface RecruitTags {
+	id: number;
+	name: string;
+}

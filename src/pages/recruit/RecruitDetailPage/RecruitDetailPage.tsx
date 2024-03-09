@@ -7,6 +7,8 @@ import {
 	RecruitInfo,
 	RecruitDescription,
 	RecruitRoles,
+	RecruitTag,
+	LinkToList,
 } from '../../../components';
 import { tempData, tempTags } from './data';
 import { simpleDate } from '../../../utils';
@@ -78,17 +80,8 @@ const RecruitDetailPage = () => {
 				/>
 				<RecruitDescription content={tempData.content} />
 				<RecruitRoles roles={tempData.recruitmentRoles} />
-				<article className='wrapper-tags'>
-					<h3>태그</h3>
-					<section className='container-tags'>
-						{tempTags.map(tag => (
-							<span className='tag'>{tag}</span>
-						))}
-					</section>
-				</article>
-				<article className='wrapper-btn'>
-					<button>목록보기</button>
-				</article>
+				<RecruitTag tags={tempData.tags} />
+				<LinkToList />
 				<article className='wrapper-comments'>
 					<section className='container-title'>
 						<h3>댓글</h3>

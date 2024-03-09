@@ -14,10 +14,38 @@ export const tempData = {
 	scope: '교내',
 	courseName: '공학설계입문',
 	courseProfessor: '최웅철',
-	Tags: [
+	tags: [
 		{
 			id: 1,
 			name: '대학생',
+		},
+		{
+			id: 2,
+			name: '응용소프트웨어실습',
+		},
+		{
+			id: 3,
+			name: '김용혁',
+		},
+		{
+			id: 4,
+			name: 'C#',
+		},
+		{
+			id: 5,
+			name: '게임개발',
+		},
+		{
+			id: 6,
+			name: 'WindowsForms',
+		},
+		{
+			id: 7,
+			name: '바보',
+		},
+		{
+			id: 8,
+			name: '밋팀최고',
 		},
 	],
 	recruitmentRoles: [

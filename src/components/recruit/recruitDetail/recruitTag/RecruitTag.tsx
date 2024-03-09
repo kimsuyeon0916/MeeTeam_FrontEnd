@@ -1,15 +1,17 @@
 import React from 'react';
+import S from './RecruitTag.styled';
+import { RecruitTags } from '../../../../types';
 
-const RecruitTag = () => {
+const RecruitTag = (props: { tags: RecruitTags[] }) => {
 	return (
-		<article className='wrapper-tags'>
+		<S.RecruitTag className='wrapper-tags'>
 			<h3>태그</h3>
 			<section className='container-tags'>
-				{tempTags.map(tag => (
-					<span className='tag'>{tag}</span>
+				{props.tags.map(tag => (
+					<span className='tag'>{tag.name}</span>
 				))}
 			</section>
-		</article>
+		</S.RecruitTag>
 	);
 };
 
