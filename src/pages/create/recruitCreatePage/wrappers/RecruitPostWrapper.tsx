@@ -35,7 +35,7 @@ const RecruitPostWrapper = () => {
 			<article className='title'>
 				<Subtitle>{'제목'}</Subtitle>
 				<input type='text' placeholder='제목을 입력해주세요' onChange={onChangeTitle} />
-				{isShow && <p>{validMessage.title}</p>}
+				{isShow && <p className='validation-msg'>{validMessage.title}</p>}
 			</article>
 			<article className='container__intro'>
 				<Subtitle>{'구인글'}</Subtitle>
