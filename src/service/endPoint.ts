@@ -6,4 +6,9 @@ export const EndPoint = {
 		nickName: 'signUp/nickName',
 		school: 'signUp/school',
 	},
+
+	/* profile */
+	PROFILE: {
+		read: (userId: string) => `/user/profile/${userId}`,
+	},
 };
