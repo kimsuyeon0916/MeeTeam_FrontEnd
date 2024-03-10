@@ -1,12 +1,6 @@
 import type { SignUpPayload, UserReponse } from '../../types';
 import { EndPoint, axiosInstance } from '..';
 
-const axiosConfig = {
-	headers: {
-		'Content-Type': 'application/json',
-	},
-};
-
 const platformType = 'NAVER';
 const platformId = import.meta.env.VITE_PLATFORM_ID;
 
@@ -16,11 +10,10 @@ const platformId = import.meta.env.VITE_PLATFORM_ID;
  */
 export const checkExist = async ({ authorizationCode }: { authorizationCode: string }) => {
 	try {
-		const response = await axiosInstance.post<UserReponse>(
-			EndPoint.SIGN_IN,
-			{ platformType, authorizationCode },
-			axiosConfig
-		);
+		const response = await axiosInstance.post<UserReponse>(EndPoint.SIGN_IN, {
+			platformType,
+			authorizationCode,
+		});
 
 		return response;
 	} catch (error) {
@@ -31,14 +24,10 @@ export const checkExist = async ({ authorizationCode }: { authorizationCode: str
 
 export const signUp = async ({ emailCode, nickname }: { emailCode: string; nickname: string }) => {
 	try {
-		const response = await axiosInstance.post<UserReponse>(
-			EndPoint.SIGN_UP.all,
-			{
-				emailCode,
-				nickname,
-			},
-			axiosConfig
-		);
+		const response = await axiosInstance.post<UserReponse>(EndPoint.SIGN_UP.all, {
+			emailCode,
+			nickname,
+		});
 
 		return response;
 	} catch (error) {
@@ -54,11 +43,14 @@ export const certificateSchool = async ({
 	emailId,
 }: SignUpPayload) => {
 	try {
-		const response = await axiosInstance.post<UserReponse>(
-			EndPoint.SIGN_UP.school,
-			{ platformType, platformId, year, universityId, departmentId, emailId },
-			axiosConfig
-		);
+		const response = await axiosInstance.post<UserReponse>(EndPoint.SIGN_UP.school, {
+			platformType,
+			platformId,
+			year,
+			universityId,
+			departmentId,
+			emailId,
+		});
 
 		return response;
 	} catch (error) {
