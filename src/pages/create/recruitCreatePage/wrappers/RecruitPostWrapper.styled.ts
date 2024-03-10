@@ -47,7 +47,7 @@ const RecruitPostWrapper = styled.section`
 		}
 	}
 
-	p {
+	.validation-msg {
 		color: red;
 		margin-top: 1rem;
 		font-size: 1.2rem;
