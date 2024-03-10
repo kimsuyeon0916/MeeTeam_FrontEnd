@@ -39,7 +39,6 @@ const DateSelect = () => {
 				isClearable={true}
 				className='date-picker'
 				tabIndex={-1}
-				shouldCloseOnSelect={false}
 			/>
 		</S.DateSelect>
 	);

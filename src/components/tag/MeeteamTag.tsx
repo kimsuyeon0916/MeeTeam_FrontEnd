@@ -109,10 +109,10 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 							isTouched
 								? isDropdownVisible
 									? tagList.length < 5
-										? '태그를 입력하고 엔터를 누르세요.'
+										? '태그를 입력하거나 선택해주세요.'
 										: '태그는 5개까지 선택할 수 있습니다.'
 									: ''
-								: '태그를 입력하고 엔터를 누르세요.'
+								: '태그를 입력하거나 선택해주세요.'
 						}
 						tabIndex={2}
 						disabled={tagList.length < 20 ? false : true}
