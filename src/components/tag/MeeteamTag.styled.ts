@@ -40,10 +40,13 @@ const MeeteamTag = styled.div`
 			width: 15px;
 			height: 15px;
 			margin-left: 5px;
-			background-color: white;
-			border-radius: 50%;
+			background-color: transparent;
 			color: #54a0ff;
 			border: none;
+
+			img {
+				width: 2rem;
+			}
 		}
 	}
 

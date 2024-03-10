@@ -35,3 +35,8 @@ export const getProfessorKeyword = async (keyword: string) => {
 	);
 	return response.data;
 };
+
+export const getTagKeyword = async (keyword: string) => {
+	const response = await axios.get(`http://3.38.78.128/tag/search?keyword=${keyword}&limit=5`);
+	return response.data;
+};

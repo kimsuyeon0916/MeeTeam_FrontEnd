@@ -2,6 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import S from './MeeteamTag.styled';
 import { useSetRecoilState } from 'recoil';
 import { recruitInputState } from '../../atom';
+import { useDebounce } from '../../hooks';
+import { useQuery } from '@tanstack/react-query';
+import { getTagKeyword } from '../../api';
+import { XBtn } from '../../assets';
 
 interface IMeeteamTag {
 	tags?: string[];
@@ -15,6 +19,11 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 	const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
 	const options = ['UI/UX', 'GUI', 'CX', 'BI', 'Figma', 'React', 'Spring', 'Node.js'];
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
+	const keywordTag = useDebounce(tagItem, 500);
+	const { data, isLoading } = useQuery({
+		queryKey: ['keywordTag', keywordTag],
+		queryFn: () => getTagKeyword(keywordTag),
+	});
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		const target = event.currentTarget;
@@ -89,7 +98,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 							<div className='tag__item' key={index}>
 								<span>{tagItem}</span>
 								<button type='button' onClick={deleteTagItem} id={'' + index}>
-									X
+									<img src={XBtn} />
 								</button>
 							</div>
 						);
@@ -99,9 +108,9 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 						placeholder={
 							isTouched
 								? isDropdownVisible
-									? tagList.length < 20
+									? tagList.length < 5
 										? '태그를 입력하고 엔터를 누르세요.'
-										: '태그는 20개까지 선택할 수 있습니다.'
+										: '태그는 5개까지 선택할 수 있습니다.'
 									: ''
 								: '태그를 입력하고 엔터를 누르세요.'
 						}
@@ -113,15 +122,16 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 					/>
 					{isDropdownVisible && (
 						<div className='tag-dropdown'>
-							{options.map((tag, index) => (
-								<div
-									className='tag__item option'
-									key={index}
-									onClick={() => onClickTagOptions(tag)}
-								>
-									{tag}
-								</div>
-							))}
+							{!isLoading &&
+								data.map((tag: any) => (
+									<div
+										className='tag__item option'
+										key={tag.id}
+										onClick={() => onClickTagOptions(tag.name)}
+									>
+										{tag.name}
+									</div>
+								))}
 						</div>
 					)}
 				</div>
