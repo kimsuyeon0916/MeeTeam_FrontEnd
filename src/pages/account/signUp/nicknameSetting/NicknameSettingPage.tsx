@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import S from './NicknameSettingPage.styled';
 import { SIGN_UP_DATA } from '../SignUpData';
 import { useNavigate } from 'react-router-dom';
@@ -47,12 +47,17 @@ const NicknameSettingPage = () => {
 
 	const { data } = useCheckDuplicateNickname(authKeys, isDirty && isValid);
 
+	const [duplicateNicknameValidation, setDuplicateNicknameValidation] = useState('');
+
 	const checkDuplicateNickname = () => {
-		if (data?.isEnable) {
-			return '사용가능한 닉네임입니다';
+		if (data && !data.isEnable) {
+			setDuplicateNicknameValidation(() => '이미 사용중인 닉네임입니다');
+		} else if (data?.isEnable) {
+			setDuplicateNicknameValidation(() => '사용가능한 닉네임입니다');
 		}
-		return '이미 사용중인 닉네임입니다';
 	};
+
+	useEffect(() => checkDuplicateNickname(), [data?.isEnable]);
 
 	return (
 		<S.NicknameSettingPageLayout>
@@ -67,7 +72,7 @@ const NicknameSettingPage = () => {
 								<input className='account__input' {...register(name, validation)} {...props} />
 								<small className='account_input-validation'>
 									{errors[name]?.message}
-									{isValid && checkDuplicateNickname()}
+									{isValid && duplicateNicknameValidation}
 								</small>
 							</label>
 						)
