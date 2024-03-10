@@ -2,12 +2,18 @@ import React from 'react';
 import S from './Profile.styled';
 import { userData } from '../index';
 import { PortfolioCard, ProfileImage, Skill } from '../../components';
+import { useReadProfile } from '../../hooks';
+import { useParams } from 'react-router';
 
 const ProfileDetailsPage = () => {
+	const { nickname } = useParams() as { nickname: string };
+
+	const { data: user } = useReadProfile(nickname);
+
 	return (
 		<S.ProfileLayout>
 			<S.ProfileHeader>
-				<ProfileImage size='14rem' url={userData.imageUrl} />
+				<ProfileImage nickname={userData.nickname} size='14rem' url={userData.imageUrl} />
 				<S.ProfileColumn>
 					<div className='profile-header__row'>
 						<h2>{userData.nickname}</h2>
