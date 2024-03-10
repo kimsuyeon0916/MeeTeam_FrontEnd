@@ -91,7 +91,7 @@ const router = createBrowserRouter([
 				element: <OutputCreatePage />,
 			},
 			{
-				path: 'profile/:profileId?',
+				path: 'profile/:nickname?',
 				element: <ProfileDetailsPage />,
 			},
 		],
