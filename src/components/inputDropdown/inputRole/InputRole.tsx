@@ -58,7 +58,6 @@ const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 
 	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
 		if (id || id === 0) {
-			console.log('successed!');
 			onDelete(id);
 		}
 	};

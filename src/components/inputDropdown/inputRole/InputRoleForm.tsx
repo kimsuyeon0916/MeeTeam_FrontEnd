@@ -82,7 +82,6 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 			skill: [],
 		});
 	};
-	console.log(userRoleList);
 
 	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setUserRole({
