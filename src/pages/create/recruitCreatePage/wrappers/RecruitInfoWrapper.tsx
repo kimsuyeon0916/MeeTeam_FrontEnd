@@ -18,7 +18,11 @@ const RecruitInfoWrapper = () => {
 	const { validMessage, isValid } = useValid(formData);
 
 	const deleteObj = (id: number) => {
-		setUserRoleList(prev => prev.filter(v => v.id !== id));
+		setUserRoleList(prev => {
+			const updatedList = [...prev];
+			updatedList.splice(id, 1);
+			return updatedList;
+		});
 	};
 	return (
 		<S.RecruitInfoWrapper>
@@ -43,7 +47,7 @@ const RecruitInfoWrapper = () => {
 									count={userRole.count}
 									skill={userRole.skill}
 									onDelete={() => deleteObj(index)}
-									id={index}
+									id={userRole.id}
 								/>
 							))}
 						</article>

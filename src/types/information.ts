@@ -16,7 +16,7 @@ export interface Option {
 }
 
 export interface Role {
-	id?: number;
+	id: number | null;
 	role: {
 		id: number | null;
 		name: string;

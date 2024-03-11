@@ -4,7 +4,7 @@ import { XBtn } from '../../../assets';
 import { useDebounce } from '../../../hooks';
 
 interface InputRole {
-	id: number;
+	id: number | null;
 	role: string;
 	count: string;
 	skill: string[];
@@ -56,6 +56,13 @@ const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 		}
 	};
 
+	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+		if (id || id === 0) {
+			console.log('successed!');
+			onDelete(id);
+		}
+	};
+
 	return (
 		<S.InputRole>
 			<section className='inputs'>
@@ -95,7 +102,7 @@ const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 				</section>
 			</section>
 			<article className='add-btn'>
-				<button type='button' onClick={() => onDelete(id)}>
+				<button type='button' onClick={onClickDelete}>
 					<img src={XBtn} />
 				</button>
 			</article>
