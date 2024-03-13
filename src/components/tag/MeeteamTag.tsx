@@ -17,9 +17,9 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 	const [tagList, setTagList] = useState<string[]>([]);
 	const [isTouched, setIsTouched] = useState<boolean>(false);
 	const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
-	const options = ['UI/UX', 'GUI', 'CX', 'BI', 'Figma', 'React', 'Spring', 'Node.js'];
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const keywordTag = useDebounce(tagItem, 500);
+
 	const { data, isLoading } = useQuery({
 		queryKey: ['keywordTag', keywordTag],
 		queryFn: () => getTagKeyword(keywordTag),
@@ -38,15 +38,16 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 
 	const submitTagItem = () => {
 		setTagList(prev => {
-			if (!prev.includes(tagItem)) {
-				const updatedList = [...prev, tagItem];
+			const trimmedTagItem = tagItem.trim();
+			if (!prev.includes(trimmedTagItem)) {
+				const updatedList = [...prev, trimmedTagItem];
 				setInfos(prev => ({ ...prev, tag: updatedList }));
 				return updatedList;
 			}
 			return prev;
 		});
 		setTagItem('');
-		setIsDropdownVisible(false);
+		setIsDropdownVisible(true);
 	};
 
 	const deleteTagItem = (event: any) => {
