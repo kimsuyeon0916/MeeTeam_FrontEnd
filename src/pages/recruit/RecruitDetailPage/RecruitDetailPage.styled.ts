@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const RecruitDetailPage = styled.section`
 	width: clamp(33.33%, 108rem, 66.66%);
 	margin: 0 auto;
-	margin-top: 3.38rem;
+	margin-top: 8.02rem;
 	margin-bottom: 3.38rem;
 	background-color: #fff;
 	overflow: hidden;

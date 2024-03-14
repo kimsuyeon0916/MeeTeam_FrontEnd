@@ -12,6 +12,7 @@ import Logo from './Logo.svg';
 import CancelBtn from './CancelBtn.svg';
 import XBtn from './XBtn.svg';
 import Reply from './Reply.svg';
+import LogoName from './LogoName.svg';
 
 export {
 	Exit,
@@ -28,4 +29,5 @@ export {
 	CancelBtn,
 	XBtn,
 	Reply,
+	LogoName,
 };
