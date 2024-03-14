@@ -15,7 +15,7 @@ const RecruitRoles = styled.article`
 	}
 
 	.container-roles {
-		width: 130%;
+		width: 140%;
 		margin-top: 1.98rem;
 		display: flex;
 		gap: 1.6rem;
