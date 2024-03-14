@@ -21,7 +21,7 @@ export interface Role {
 		id: number | null;
 		name: string;
 	};
-	count: string;
+	count: number | null;
 	skill: string[];
 }
 
@@ -38,13 +38,13 @@ export interface InputState {
 	period: (string | undefined)[];
 	courseTagDto: {
 		isCourse: boolean;
-		courseTagName: string;
-		courseTagProfessor: string;
+		courseTagName: string | null;
+		courseTagProfessor: string | null;
 	};
 	recruitmentRoleDto: [
 		{
-			role: number;
-			count: number;
+			role: number | null;
+			count: number | null;
 			skill: number[];
 		},
 	];

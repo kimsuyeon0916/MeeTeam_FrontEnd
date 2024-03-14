@@ -44,7 +44,7 @@ const RecruitInfoWrapper = () => {
 								<InputRole
 									key={index}
 									role={userRole.role.name}
-									count={userRole.count}
+									count={Number(userRole.count)}
 									skill={userRole.skill}
 									onDelete={() => deleteObj(index)}
 									id={userRole.id}

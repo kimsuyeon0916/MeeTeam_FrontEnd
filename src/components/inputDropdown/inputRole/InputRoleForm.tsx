@@ -22,7 +22,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 			id: null,
 			name: '',
 		},
-		count: '',
+		count: null,
 		skill: [],
 	});
 	const keywordRole = useDebounce(userRole.role.name, 500);
@@ -74,26 +74,40 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	};
 
 	const onClickHandler = () => {
-		setUserRoleList([...userRoleList, userRole]);
-		setUserRole({
-			id: userRoleList.length + 1,
-			role: { id: null, name: '' },
-			count: '',
-			skill: [],
-		});
+		if (userRoleList && setUserRoleList) {
+			setUserRoleList((prev: any) => {
+				const updatedRoleList = [...userRoleList, userRole];
+				setInfos(prev => ({
+					...prev,
+					recruitmentRoleDto: {
+						...info.recruitmentRoleDto,
+						role: userRole.id,
+						count: userRole.count,
+						skill: userRole.skill,
+					},
+				}));
+				return updatedRoleList;
+			});
+			setUserRole({
+				id: userRoleList.length + 1,
+				role: { id: null, name: '' },
+				count: null,
+				skill: [],
+			});
+		}
 	};
 
 	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setUserRole({
-			...userRole,
-			role: { ...userRole.role, name: event.target.value },
-		});
+		setUserRole(prev => ({
+			...prev,
+			role: { ...prev.role, name: event.target.value },
+		}));
 	};
 
 	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setUserRole({
 			...userRole,
-			count: event.target.value,
+			count: Number(event.target.value),
 		});
 	};
 
@@ -175,7 +189,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 					className='count-input'
 					type='number'
 					placeholder='인원'
-					value={userRole.count}
+					value={Number(userRole.count)}
 					onChange={onChangeCount}
 				/>
 				<section className='container-skills'>

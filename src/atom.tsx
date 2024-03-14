@@ -67,9 +67,9 @@ export const recruitInputState = atom<InputState>({
 		},
 		recruitmentRoleDto: [
 			{
-				role: 0,
-				count: 0,
-				skill: [], // id를 담는 배열로 변경
+				role: null,
+				count: null,
+				skill: [],
 			},
 		],
 		tag: [],

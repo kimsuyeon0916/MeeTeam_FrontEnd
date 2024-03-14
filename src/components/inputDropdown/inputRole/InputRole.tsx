@@ -6,7 +6,7 @@ import { useDebounce } from '../../../hooks';
 interface InputRole {
 	id: number | null;
 	role: string;
-	count: string;
+	count: number;
 	skill: string[];
 	onDelete: (id: number) => void;
 }
@@ -23,7 +23,7 @@ const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 	const keyword = useDebounce(roleObj.role, 500);
 
 	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setRoleObj({ ...roleObj, count: event.target.value });
+		setRoleObj({ ...roleObj, count: Number(event.target.value) });
 	};
 
 	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +56,7 @@ const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 		}
 	};
 
-	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const onClickDelete = () => {
 		if (id || id === 0) {
 			onDelete(id);
 		}
