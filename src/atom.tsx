@@ -1,9 +1,11 @@
 import { atom } from 'recoil';
-import { SessionStorageEffect } from './utils';
-import { MeeTeamMember } from './components';
-import { User } from './types';
+import { SessionStorageEffect, simpleDate } from './utils';
+import { User, InputState } from './types';
 import { LocalStorageEffect } from './utils';
 import { Account } from './pages';
+
+const date = new Date();
+const simple = simpleDate(date);
 
 export const userState = atom<User | null>({
 	key: 'userState',
@@ -45,99 +47,68 @@ export const recruitmentInformationEditState = atom({
 	default: false,
 });
 
-export const areaState = atom({
-	key: 'areaState1',
-	default: '',
-});
-
-export const fieldState = atom({
-	key: 'fieldState',
-	default: '',
-});
-
-export const categoryState = atom({
-	key: 'categoryState',
-	default: '',
-});
-
-export const dateState = atom({
-	key: 'dateState',
-	default: [new Date(), new Date()],
-});
-
-export const areaRecruitState = atom({
-	key: 'areaRecruitState1',
-	default: '',
-});
-
-export const fieldRecruitState = atom({
-	key: 'fieldRecruitState1',
-	default: '',
-});
-
-export const categoryRecruitState = atom({
-	key: 'categoryRecruitState',
-	default: '',
-});
-
-export const dateRecruitState = atom({
-	key: 'dateRecruitState',
-	default: [new Date(), new Date()],
-});
-
 export const deadlineState = atom({
 	key: 'deadlineState',
 	default: new Date(),
 });
 
-export const validNameState = atom({
-	key: 'validNameState',
+export const recruitInputState = atom<InputState>({
+	key: 'recruitInputState',
 	default: {
-		validName: false,
-		validMessage: '',
+		scope: '',
+		category: '',
+		fieldId: 1, // 마지막에 id로 반환 (1로 고정해도 괜찮음)
+		deadline: simple,
+		period: [simple, simple],
+		courseTagDto: {
+			isCourse: false,
+			courseTagName: '',
+			courseTagProfessor: '',
+		},
+		recruitmentRoleDto: [
+			{
+				role: '', // id로 변경
+				count: 0,
+				skill: [], // id를 담는 배열로 변경
+			},
+		],
+		tag: [],
+		title: '',
+		contents: '',
 	},
 });
 
-export const validAreaState = atom({
-	key: 'validAreaState',
+export const validMessageState = atom({
+	key: 'validMessageState',
 	default: {
-		validArea: false,
-		validMessage: '',
+		scope: '',
+		category: '',
+		deadline: '',
+		endDate: '',
+		courseTagDto: {
+			courseTagName: '',
+			courseTagProfessor: '',
+		},
+		tag: '',
+		title: '',
 	},
 });
 
-export const validFieldState = atom({
-	key: 'validFieldState',
+export const validState = atom({
+	key: 'validState',
 	default: {
-		validField: false,
-		validMessage: '',
+		isSubmitted: false,
+		isScope: false,
+		isCategory: false,
+		isDeadline: false,
+		isEndDate: false,
+		isCourseTagDto: {
+			courseTagName: false,
+			courseTagProfessor: false,
+		},
+		isTag: false,
+		isTitle: false,
 	},
-});
-
-export const validCategoryState = atom({
-	key: 'validCategoryState',
-	default: {
-		validCategory: false,
-		validMessage: '',
-	},
-});
-
-export const validDateState = atom({
-	key: 'validDateState',
-	default: {
-		validDate: false,
-		validMessage: '',
-	},
-});
-
-export const memberListState = atom<MeeTeamMember[]>({
-	key: 'memberListState1',
-	default: [],
-});
-
-export const memberModalState = atom({
-	key: 'memberModalState',
-	default: false,
 });
 
 export const applyStepState = atom({

@@ -22,7 +22,7 @@
 		"noFallthroughCasesInSwitch": true,
 
 		/* 별도 추가 */
-		"removeComments": true, // 컴파일 시 주석 삭제
+		"removeComments": true // 컴파일 시 주석 삭제
 	},
 	"include": ["src"],
 	"references": [{ "path": "./tsconfig.node.json" }]

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const MeeteamTag = styled.div`
 	height: auto;
 	position: relative;
+	margin-top: 1.2rem;
 
 	.tag__box {
 		position: relative;

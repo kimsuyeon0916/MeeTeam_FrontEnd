@@ -1,4 +1,4 @@
-import { Comment } from '../../../types';
+import { Comment, JsxElementComponentProps } from '../../../types';
 
 export const commentsData: Comment[] = [
 	{
