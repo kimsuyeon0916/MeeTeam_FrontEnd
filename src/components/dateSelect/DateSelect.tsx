@@ -36,7 +36,6 @@ const DateSelect = () => {
 				showPopperArrow={false}
 				endDate={endDate}
 				onChange={onChangeHandler}
-				isClearable={true}
 				className='date-picker'
 				tabIndex={-1}
 			/>
