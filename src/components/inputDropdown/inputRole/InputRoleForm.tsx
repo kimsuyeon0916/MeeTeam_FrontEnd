@@ -7,6 +7,7 @@ import { useDebounce } from '../../../hooks';
 import { getRoleKeyword, getSkillKeyword } from '../../../api';
 import { useRecoilState } from 'recoil';
 import { recruitInputState } from '../../../atom';
+import { isNotNumber } from '../../../utils';
 
 const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	const [tagItem, setTagItem] = useState<string>('');
@@ -104,28 +105,24 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 		}));
 	};
 
-	const isNotNumber = (value: any) => {
-		const regExp = /[a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g;
-		return regExp.test(value);
-	};
-
 	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const countValue = event.target.value;
-		if ((event.nativeEvent as any).data && isNotNumber((event.nativeEvent as any).data)) {
-			event.preventDefault();
-			return null;
+		const regex = /^(0|[1-9][0-9]*)$/;
+		if (regex.test(countValue)) {
+			setUserRole(prev => {
+				const updatedObj = { ...prev, count: countValue };
+				setInfos(prevInfo => ({
+					...prevInfo,
+					recruitmentRoleDto: {
+						...prevInfo.recruitmentRoleDto,
+						count: Number(countValue),
+					},
+				}));
+				return updatedObj;
+			});
+		} else {
+			setUserRole(prev => ({ ...prev, count: '' }));
 		}
-		setUserRole(() => {
-			const updatedObj = { ...userRole, count: countValue };
-			setInfos(prevInfo => ({
-				...prevInfo,
-				recruitmentRoleDto: {
-					...prevInfo.recruitmentRoleDto,
-					count: Number(countValue),
-				},
-			}));
-			return updatedObj;
-		});
 	};
 
 	const onChangeKeyword = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -204,7 +201,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 				)}
 				<input
 					className='count-input'
-					type='number'
+					type='text'
 					placeholder='인원'
 					value={userRole.count}
 					onChange={onChangeCount}
