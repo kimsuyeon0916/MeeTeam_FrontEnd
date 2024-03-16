@@ -107,8 +107,8 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 
 	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const countValue = event.target.value;
-		const regex = /^(0|[1-9][0-9]*)$/;
-		if (regex.test(countValue)) {
+
+		if (isNotNumber(countValue)) {
 			setUserRole(prev => {
 				const updatedObj = { ...prev, count: countValue };
 				setInfos(prevInfo => ({
@@ -121,7 +121,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 				return updatedObj;
 			});
 		} else {
-			setUserRole(prev => ({ ...prev, count: '' }));
+			setUserRole(prev => ({ ...prev, count: countValue.replace(/\D/g, '') }));
 		}
 	};
 
