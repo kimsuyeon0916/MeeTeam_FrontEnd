@@ -21,7 +21,7 @@ export interface Role {
 		id: number | null;
 		name: string;
 	};
-	count: number | null;
+	count: string;
 	skill: string[];
 }
 
