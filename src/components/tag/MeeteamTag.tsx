@@ -54,7 +54,12 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 
 	const onClickTagOptions = (selectedTag: string) => {
 		if (tagList.length < 20) {
-			setTagList([...tagList, selectedTag]);
+			//setTagList([...tagList, selectedTag]);
+			setTagList(prev => {
+				const updatedList = [...prev, selectedTag];
+				setInfos(prev => ({ ...prev, tag: updatedList }));
+				return updatedList;
+			});
 			setIsDropdownVisible(false);
 		}
 	};
