@@ -72,7 +72,7 @@ const InputCourse = ({ isChecked, onClickHandler }: InputCourse) => {
 				</article>
 				<article>
 					<span className='description-check'>수업 선택</span>
-					<input type='checkbox' onClick={handleOnClick} />
+					<input type='checkbox' data-cy='checkCourse' onClick={handleOnClick} />
 				</article>
 			</div>
 			<input

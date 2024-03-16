@@ -24,6 +24,7 @@
 		/* 별도 추가 */
 		"removeComments": true // 컴파일 시 주석 삭제
 	},
-	"include": ["src"],
+	"types": ["cpyress"],
+	"include": ["src", "**/*.ts"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

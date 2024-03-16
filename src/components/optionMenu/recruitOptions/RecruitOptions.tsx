@@ -31,6 +31,7 @@ const RecruitOptions = ({ options, isScope, isCategory }: OptionList) => {
 					key={index}
 					onClick={onClickHandler}
 					id={index.toString()}
+					data-cy='option-span'
 				>
 					{option}
 				</span>
