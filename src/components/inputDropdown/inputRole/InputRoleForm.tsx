@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Plus, XBtn } from '../../../assets';
 import S from './InputRoleForm.styled';
-import { Role, InputRoleForm, TempRole, InputState } from '../../../types';
+import { Role, InputRoleForm, RoleForPost, InputState } from '../../../types';
 import { useDebounce } from '../../../hooks';
 import { getRoleKeyword, getSkillKeyword } from '../../../api';
 import { useRecoilState } from 'recoil';
@@ -44,7 +44,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 		skill: [],
 	});
 
-	const [temp, setTemp] = useState<TempRole>({
+	const [temp, setTemp] = useState<RoleForPost>({
 		id: 0,
 		role: null,
 		count: null,

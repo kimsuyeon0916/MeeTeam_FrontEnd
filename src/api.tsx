@@ -1,14 +1,9 @@
 import axios from 'axios';
+import { axiosInstance } from './service';
+import { InputState } from './types';
 
-export const postingRecruit = async (formData: any) => {
-	const formId = await axios
-		.post('http://3.38.78.128/recruitment/post', formData)
-		.then(response => {
-			return response.data;
-		})
-		.catch(error => {
-			console.log(error);
-		});
+export const postingRecruit = async (formData: InputState) => {
+	const formId = await axiosInstance.post('http://3.38.78.128/recruitment/post', formData);
 	return formId;
 };
 

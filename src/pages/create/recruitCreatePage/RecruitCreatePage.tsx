@@ -4,7 +4,7 @@ import { TitleAndIntro } from '../../../components/index';
 import RecruitInfoWrapper from './wrappers/RecruitInfoWrapper';
 import RecruitPostWrapper from './wrappers/RecruitPostWrapper';
 import { useMutation } from '@tanstack/react-query';
-import { useRecoilValue, useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { recruitInputState, validState } from '../../../atom';
 import { postingRecruit } from '../../../api';
 import { useNavigate } from 'react-router-dom';
@@ -21,12 +21,17 @@ const introductions = [
 
 const RecruitCreatePage = () => {
 	const navigate = useNavigate();
-	const recruitFormData = useRecoilValue(recruitInputState);
+	const [info, setInfo] = useRecoilState(recruitInputState);
 	const [isSubmit, setIsSubmit] = useRecoilState(validState);
+
 	const onClickCancel = () => {
 		// 모달창 띄워서 한 번 더 확인시키고 이동하기
 		// navigate('/');
 	};
+
+	const uploadPost = useMutation({
+		mutationFn: () => postingRecruit(info),
+	});
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -36,12 +41,10 @@ const RecruitCreatePage = () => {
 			isSubmitted: true,
 		}));
 
-		// const uploadPost = useMutation({
-		// 	mutationFn: () => postingRecruit(recruitFormData),
-		// });
+		uploadPost.mutate(info as any);
 		// navigate(`/recruit/${uploadPost}`);
 	};
-	console.log(recruitFormData.tag);
+
 	return (
 		<S.RecruitCreatePage>
 			<TitleAndIntro title='구인글 작성' descriptions={descriptions} />
