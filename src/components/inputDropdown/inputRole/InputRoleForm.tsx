@@ -17,9 +17,10 @@ import { isNotNumber } from '../../../utils';
  *  - 역할 이름 입력(없는 경우 id=null => 유효성 검사를 통해 부적절한 역할 명시) ✅
  *  - 역할 선택 시(info 상태(전역)에 id 저장) ✅
  *  - 역할 인원 숫자만 입력(한글, 영어, 특수문자, 지수 e 등 불가) ✅
- *  - 입력하지 않았을 경우 0 할당
+ *  - 입력하지 않았을 경우 0 할당 ✅
  *  - 스킬 모두 숫자 배열로 저장 ✅
- *  - 올바른 데이터 구조로 전역상태에 저장
+ *  - 올바른 데이터 구조로 전역상태에 저장 ✅
+ *  - 역할 삭제 버그 수정 및 전역상태에 반영
  *
  * @param 역할 목록, 역할 목록 setState 함수
  *
@@ -104,6 +105,9 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 			!info.recruitmentRoleDto.some(obj => obj.role === temp.role)
 		) {
 			setUserRoleList((prev: any) => [...prev, userRole]);
+			if (temp.count === null) {
+				temp.count = 0;
+			}
 			setInfos((prev: InputState) => ({
 				...prev,
 				recruitmentRoleDto: [...prev.recruitmentRoleDto, temp],
@@ -120,6 +124,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 				count: null,
 				skill: [],
 			});
+			setTagItem('');
 		}
 	};
 
