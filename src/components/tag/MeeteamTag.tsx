@@ -50,11 +50,10 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 		setIsDropdownVisible(true);
 	};
 
-	const deleteTagItem = (event: any) => {
-		const deletedIndex = Number(event.target.id);
+	const deleteTagItem = (id: string) => {
 		setTagList(prev => {
-			const updatedList = [...prev];
-			updatedList.splice(deletedIndex, 1);
+			const updatedList = prev.filter(elem => elem !== id);
+
 			setInfos(prev => ({ ...prev, tag: updatedList }));
 			return updatedList;
 		});
@@ -96,9 +95,9 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 				<div className='tag__box' onClick={onClickInput}>
 					{tagList.map((tagItem, index) => {
 						return (
-							<div className='tag__item' key={index}>
+							<div className='tag__item' key={tagItem}>
 								<span>{tagItem}</span>
-								<button type='button' onClick={deleteTagItem} id={'' + index}>
+								<button type='button' onClick={() => deleteTagItem(tagItem)}>
 									<img src={XBtn} />
 								</button>
 							</div>

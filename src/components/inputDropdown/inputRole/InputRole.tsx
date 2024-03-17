@@ -4,11 +4,11 @@ import { XBtn } from '../../../assets';
 import { useDebounce } from '../../../hooks';
 
 interface InputRole {
-	id: number | null;
+	id: string | null;
 	role: string;
 	count: number;
 	skill: string[];
-	onDelete: (id: number) => void;
+	onDelete: (id: string | null) => void;
 }
 
 const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
@@ -20,46 +20,9 @@ const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 		skill: skill,
 		onDelete: onDelete,
 	});
-	const keyword = useDebounce(roleObj.role, 500);
-
-	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setRoleObj({ ...roleObj, count: Number(event.target.value) });
-	};
-
-	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setRoleObj({ ...roleObj, role: event.target.value });
-	};
-
-	const deleteTagItem = (event: React.MouseEvent<HTMLButtonElement>) => {
-		if (event.target instanceof Element) {
-			const deletedIndex = Number(event.target.id);
-			setRoleObj(prevState => ({
-				...prevState,
-				skill: prevState.skill.filter((_, index) => index !== deletedIndex),
-			}));
-		}
-	};
-
-	const submitTagItem = () => {
-		setRoleObj(prevState => ({ ...prevState, skill: [...prevState.skill, tagItem] }));
-		setTagItem('');
-	};
-
-	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		const target = event.currentTarget;
-		if (target.value.length !== 0 && event.key === 'Enter') {
-			event.preventDefault();
-			submitTagItem();
-		}
-		if (event.key === 'Enter') {
-			event.preventDefault();
-		}
-	};
 
 	const onClickDelete = () => {
-		if (id || id === 0) {
-			onDelete(id);
-		}
+		onDelete(id);
 	};
 
 	return (

@@ -17,15 +17,9 @@ const RecruitInfoWrapper = () => {
 	const formData = useRecoilValue(recruitInputState);
 	const { validMessage, isValid } = useValid(formData);
 
-	const deleteObj = (id: number) => {
-		setUserRoleList(prev => {
-			const updatedList = [...prev];
-			updatedList.splice(id, 1);
-			return updatedList;
-		});
+	const deleteObj = (id: string) => {
+		setUserRoleList(prev => prev.filter(elem => elem.role.name !== id));
 	};
-
-	console.log(formData);
 	return (
 		<S.RecruitInfoWrapper>
 			<section className='container'>
@@ -44,12 +38,12 @@ const RecruitInfoWrapper = () => {
 						<article className='container-role__list'>
 							{userRoleList.map((userRole, index) => (
 								<InputRole
-									key={index}
+									key={userRole.role.name}
 									role={userRole.role.name}
 									count={Number(userRole.count)}
 									skill={userRole.skill}
-									onDelete={() => deleteObj(index)}
-									id={userRole.id}
+									onDelete={() => deleteObj(userRole.role.name)}
+									id={userRole.role.name}
 								/>
 							))}
 						</article>
