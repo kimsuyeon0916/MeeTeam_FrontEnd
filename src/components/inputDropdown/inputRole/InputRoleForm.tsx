@@ -109,6 +109,12 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 			count: '',
 			skill: [],
 		});
+		setTemp({
+			id: userRoleList.length + 1,
+			role: null,
+			count: null,
+			skill: [],
+		});
 	};
 
 	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -153,7 +159,6 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 			role: Number(target.id),
 		}));
 	};
-	console.log(temp);
 
 	const onClickSkill = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const { innerText } = event.target as HTMLElement;

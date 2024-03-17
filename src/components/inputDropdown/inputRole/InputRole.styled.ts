@@ -79,7 +79,7 @@ const InputRole = styled.article`
 		.container-tags {
 			display: inline-flex;
 			height: 2.15rem;
-			padding: 1.5rem 0 1.5rem 1.125rem;
+			padding: 1.5rem 1.125rem 1.5rem 1.125rem;
 			justify-content: center;
 			align-items: center;
 			flex-shrink: 0;

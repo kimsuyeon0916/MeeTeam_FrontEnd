@@ -69,24 +69,21 @@ const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 					className='input-role input'
 					type='text'
 					value={roleObj.role}
-					onChange={onChangeRole}
 					placeholder='역할'
+					disabled
 				/>
 				<input
 					className='input-count input'
 					type='number'
 					value={roleObj.count}
-					onChange={onChangeCount}
 					placeholder='인원'
+					disabled
 				/>
 				<section className='container-skills'>
 					{roleObj.skill.map((tagItem, index) => {
 						return (
 							<article className='container-tags' key={index}>
 								<span>{tagItem}</span>
-								<button type='button' onClick={deleteTagItem}>
-									<img src={XBtn} id={index.toString()} />
-								</button>
 							</article>
 						);
 					})}
@@ -95,8 +92,7 @@ const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 						className='skills-input'
 						placeholder={roleObj.skill.length ? '' : '태그를 입력하고 엔터를 누르세요.'}
 						value={tagItem}
-						onChange={event => setTagItem(event.target.value)}
-						onKeyPress={onKeyPress}
+						disabled
 					/>
 				</section>
 			</section>

@@ -65,14 +65,7 @@ export const recruitInputState = atom<InputState>({
 			courseTagName: '',
 			courseTagProfessor: '',
 		},
-		recruitmentRoleDto: [
-			{
-				id: null,
-				role: null,
-				count: null,
-				skill: [],
-			},
-		],
+		recruitmentRoleDto: [],
 		tag: [],
 		title: '',
 		contents: '',
