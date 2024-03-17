@@ -24,6 +24,8 @@ const RecruitInfoWrapper = () => {
 			return updatedList;
 		});
 	};
+
+	console.log(formData);
 	return (
 		<S.RecruitInfoWrapper>
 			<section className='container'>

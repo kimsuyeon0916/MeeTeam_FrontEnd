@@ -57,7 +57,7 @@ export const recruitInputState = atom<InputState>({
 	default: {
 		scope: '',
 		category: '',
-		fieldId: 1, // 마지막에 id로 반환 (1로 고정해도 괜찮음)
+		fieldId: 1,
 		deadline: simple,
 		period: [simple, simple],
 		courseTagDto: {
@@ -67,6 +67,7 @@ export const recruitInputState = atom<InputState>({
 		},
 		recruitmentRoleDto: [
 			{
+				id: null,
 				role: null,
 				count: null,
 				skill: [],

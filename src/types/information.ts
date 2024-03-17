@@ -48,13 +48,7 @@ export interface InputState {
 		courseTagName: string | null;
 		courseTagProfessor: string | null;
 	};
-	recruitmentRoleDto: [
-		{
-			role: number | null;
-			count: number | null;
-			skill: number[];
-		},
-	];
+	recruitmentRoleDto: TempRole[];
 	tag: string[];
 	title: string;
 	contents: string;
