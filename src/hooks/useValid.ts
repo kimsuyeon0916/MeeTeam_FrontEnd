@@ -11,6 +11,7 @@ import { InputState } from '../types';
 // 수업(체크 시, 수업명, 교수명 입력) ✅
 // 제목(필수 입력, 몇자 이상(10자)) ✅
 // 부적절한 역할 검사 추가(자동완성 선택지에서 선택하지 않은 역할)
+// 부적절한 스킬 검사 추가(userRole vs temp 길이 비교)
 
 export default function useValid(data: InputState) {
 	const [validMessage, setValidMessage] = useRecoilState(validMessageState);

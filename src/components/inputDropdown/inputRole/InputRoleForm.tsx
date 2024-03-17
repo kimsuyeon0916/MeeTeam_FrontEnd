@@ -98,26 +98,33 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	};
 
 	const onClickHandler = () => {
-		setUserRoleList((prev: any) => [...prev, userRole]);
-		setInfos((prev: InputState) => ({
-			...prev,
-			recruitmentRoleDto: [...prev.recruitmentRoleDto, temp],
-		}));
-		setUserRole({
-			id: userRoleList.length + 1,
-			role: { id: null, name: '' },
-			count: '',
-			skill: [],
-		});
-		setTemp({
-			id: userRoleList.length + 1,
-			role: null,
-			count: null,
-			skill: [],
-		});
+		if (
+			temp.role !== null &&
+			temp.skill.length === userRole.skill.length &&
+			!info.recruitmentRoleDto.some(obj => obj.role === temp.role)
+		) {
+			setUserRoleList((prev: any) => [...prev, userRole]);
+			setInfos((prev: InputState) => ({
+				...prev,
+				recruitmentRoleDto: [...prev.recruitmentRoleDto, temp],
+			}));
+			setUserRole({
+				id: userRoleList.length + 1,
+				role: { id: null, name: '' },
+				count: '',
+				skill: [],
+			});
+			setTemp({
+				id: userRoleList.length + 1,
+				role: null,
+				count: null,
+				skill: [],
+			});
+		}
 	};
 
 	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
+		event.preventDefault();
 		setUserRole(prev => ({
 			...prev,
 			role: { ...prev.role, name: event.target.value },
@@ -163,13 +170,15 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	const onClickSkill = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		const target = event.target as HTMLElement;
-		setUserRole(prev => ({ ...prev, skill: [...prev.skill, innerText] }));
-		setTemp(prev => ({ ...prev, skill: [...prev.skill, Number(target.id)] }));
-		setShowDropdown(prev => ({
-			...prev,
-			skill: false,
-		}));
-		setTagItem('');
+		if (!userRole.skill.includes(innerText) && userRole.skill.length < 6) {
+			setUserRole(prev => ({ ...prev, skill: [...prev.skill, innerText] }));
+			setTemp(prev => ({ ...prev, skill: [...prev.skill, Number(target.id)] }));
+			setShowDropdown(prev => ({
+				...prev,
+				skill: false,
+			}));
+			setTagItem('');
+		}
 	};
 
 	useEffect(() => {
