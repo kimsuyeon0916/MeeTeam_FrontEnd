@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 const DeadlineSelect = styled.div`
+	margin-top: 0.9rem;
+
 	.date-picker {
-		width: 40.125rem;
+		width: 100%;
 		height: 4.875rem;
 		padding: 1.8rem 2.1rem 1.8rem 2.1rem;
 		border-radius: 8px;
@@ -11,7 +13,7 @@ const DeadlineSelect = styled.div`
 		outline: none;
 		box-sizing: border-box;
 		border-radius: 0.75rem;
-		border: 0.75px solid #e3e3e3;
+		border: 0.1rem solid #e3e3e3;
 		background: #fff;
 		color: #0e0e0e;
 		font-size: 1.5rem;
@@ -27,11 +29,12 @@ const DeadlineSelect = styled.div`
 	}
 
 	.react-datepicker-popper {
-		width: 40.125rem;
 		z-index: 105;
+		width: 52.5rem;
 	}
 
 	.react-datepicker-wrapper {
+		width: 100%;
 		position: relative;
 		height: 4.875rem;
 	}
@@ -68,7 +71,7 @@ const DeadlineSelect = styled.div`
 
 	.react-datepicker {
 		font-size: 1.2rem;
-		background-color: #f7fafe;
+		background-color: #fff;
 		color: #000;
 		border: 1px solid #bcd7fe;
 		border-radius: 0.8rem;
@@ -78,9 +81,10 @@ const DeadlineSelect = styled.div`
 	}
 	.react-datepicker__header {
 		text-align: center;
-		background-color: #74b9ff;
+		background-color: #fff;
 		border-bottom: 1px solid #bcd7fe;
-		/* border-top-left-radius: 0.75rem; */
+		border-top-left-radius: 0.75rem;
+		border-top-right-radius: 0.75rem;
 		padding: 8px 0;
 		position: relative;
 	}

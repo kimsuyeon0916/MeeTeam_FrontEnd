@@ -1,7 +1,6 @@
 import React from 'react';
 import { MemberCard } from '../../../index';
 import { useRecoilState } from 'recoil';
-import { memberListState } from '../../../../atom';
 
 export interface MeeTeamMember {
 	nickname: string;
@@ -182,21 +181,11 @@ const MemberTest = ({ id }: Member) => {
 		specifications: [['Figma', `#E0E6FF`]],
 		id: id,
 	};
-	const [memberList, setMemberList] = useRecoilState(memberListState);
-
-	const onClickDelete = (event: React.MouseEvent<HTMLDivElement>) => {
-		const temp = [...memberList];
-		if (event.target instanceof Element) {
-			const deletedIndex = Number(event.target.id);
-			temp.splice(deletedIndex, 1);
-			setMemberList(temp);
-		}
-	};
-
+  
 	return (
 		<div className='member' id={id}>
 			<MemberCard member={memberTemp} />
-			<div className='delete' onClick={onClickDelete} id={id}>
+			<div className='delete' id={id}>
 				x
 			</div>
 		</div>

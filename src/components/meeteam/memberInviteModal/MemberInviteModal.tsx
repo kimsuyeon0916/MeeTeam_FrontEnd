@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { Exit } from '../../../assets';
-import { memberModalState } from '../../../atom';
 import { Subtitle } from '../..';
 import S from './MemberInviteModal.styled';
 
@@ -10,7 +9,6 @@ interface MemberInvite {
 }
 
 const MemberInviteModal = ({ onClick }: MemberInvite) => {
-	const [modalOpen, setModalOpen] = useRecoilState<boolean>(memberModalState);
 	const modalRef = useRef<HTMLDivElement | null>(null);
 	const [modalDropdown, setModalDropdown] = useState<boolean>(false);
 	const modalDropdownRef = useRef<HTMLDivElement | null>(null);
@@ -33,36 +31,25 @@ const MemberInviteModal = ({ onClick }: MemberInvite) => {
 			) {
 				setModalDropdown(false);
 			}
-
-			if (modalOpen && modalRef.current && !modalRef.current.contains(target as Node)) {
-				setModalOpen(false);
-			}
 		};
 		document.addEventListener('mousedown', outsideClick);
 		return () => {
 			document.removeEventListener('mousedown', outsideClick);
 		};
-	}, [modalDropdownRef.current, modalDropdown, modalRef.current, modalOpen]);
+	}, [modalDropdownRef.current, modalDropdown, modalRef.current]);
 
 	return (
 		<S.MemberInviteModal
 			ref={modalRef}
 			onClick={e => {
 				if (e.target === modalRef.current) {
-					setModalOpen(false);
 				}
 			}}
 		>
 			<div className='container-modal'>
 				<div className='container-modal__top'>
 					<Subtitle>{'멤버 초대'}</Subtitle>
-					<button
-						className='exit'
-						type='button'
-						onClick={() => {
-							setModalOpen(prev => !prev);
-						}}
-					>
+					<button className='exit' type='button' onClick={() => {}}>
 						<img src={Exit} />
 					</button>
 				</div>

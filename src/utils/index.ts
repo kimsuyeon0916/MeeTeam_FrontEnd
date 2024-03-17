@@ -6,6 +6,7 @@ import CopyClipBoard from './CopyClipBoard';
 import SessionStorageEffect from './SessionStorageEffect';
 import LocalStorageEffect from './LocalStorageEffect';
 import fixModalBackground from './fixModalBackground';
+import simpleDate from './simpleDate';
 
 export {
 	modules,
@@ -17,4 +18,5 @@ export {
 	SessionStorageEffect,
 	LocalStorageEffect,
 	fixModalBackground,
+	simpleDate,
 };

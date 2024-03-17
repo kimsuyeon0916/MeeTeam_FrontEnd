@@ -18,18 +18,18 @@ import { useNavigate } from 'react-router-dom';
 import { JsxElementComponentProps } from '../../../types';
 import { commentsData } from './data';
 
+const stepLists: JsxElementComponentProps = {
+	0: <ApplyInfomation />,
+	1: <ApplyInput />,
+	2: <ApplySubmit />,
+};
+
 const RecruitDetailPage = () => {
 	const navigate = useNavigate();
 	const [commentsList, setCommentsList] = useState<Comment[]>(commentsData);
 	const [contents, setContents] = useState<string>('');
 	const isLogin = true; // 임시 코드
 	const step = useRecoilValue(applyStepState);
-
-	const stepLists: JsxElementComponentProps = {
-		0: <ApplyInfomation />,
-		1: <ApplyInput />,
-		2: <ApplySubmit />,
-	};
 
 	const isRound = (title: string) => {
 		const roundTitles = ['유형', '진행'];

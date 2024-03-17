@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { dateState } from '../../atom';
 import DatePicker from 'react-datepicker';
 import S from './DateSelect.styled';
 import 'react-datepicker/dist/react-datepicker.css';
+import { recruitInputState } from '../../atom';
+import { simpleDate } from '../../utils';
 
 const DateSelect = () => {
-	const [date, setDate] = useRecoilState(dateState);
-	const [startDate, endDate] = date;
+	const [startDate, setStartDate] = useState<Date | null>(new Date());
+	const [endDate, setEndDate] = useState<Date | null>(new Date());
+	const [info, setInfo] = useRecoilState(recruitInputState);
+
+	const onChangeHandler = (dates: [Date | null, Date | null]) => {
+		const [start, end] = dates;
+		setStartDate(prevStartDate => {
+			setEndDate(prevEndDate => {
+				const startDateFormatted = simpleDate(start);
+				const endDateFormatted = simpleDate(end);
+
+				if (startDateFormatted && endDateFormatted) {
+					setInfo(prevInfo => ({ ...prevInfo, period: [startDateFormatted, endDateFormatted] }));
+				}
+				return end;
+			});
+			return start;
+		});
+	};
 
 	return (
 		<S.DateSelect>
@@ -17,11 +35,9 @@ const DateSelect = () => {
 				dateFormat='yyyy년 MM월 dd일'
 				showPopperArrow={false}
 				endDate={endDate}
-				onChange={update => {
-					setDate(update as any);
-				}}
-				isClearable={true}
+				onChange={onChangeHandler}
 				className='date-picker'
+				tabIndex={-1}
 			/>
 		</S.DateSelect>
 	);
