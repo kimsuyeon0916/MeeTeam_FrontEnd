@@ -4,11 +4,11 @@ import { XBtn } from '../../../assets';
 import { useDebounce } from '../../../hooks';
 
 interface InputRole {
-	id: string | null;
+	id: number | null;
 	role: string;
 	count: number;
 	skill: string[];
-	onDelete: (id: string | null) => void;
+	onDelete: (id: number | null) => void;
 }
 
 const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {

@@ -20,7 +20,7 @@ import { isNotNumber } from '../../../utils';
  *  - 입력하지 않았을 경우 0 할당 ✅
  *  - 스킬 모두 숫자 배열로 저장 ✅
  *  - 올바른 데이터 구조로 전역상태에 저장 ✅
- *  - 역할 삭제 버그 수정 및 전역상태에 반영
+ *  - 역할 삭제 버그 수정 및 전역상태에 반영 ✅
  *
  * @param 역할 목록, 역할 목록 setState 함수
  *
@@ -258,7 +258,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 					<input
 						type='text'
 						className='skills-input'
-						placeholder={userRole.skill.length ? '' : '태그를 입력하고 엔터를 누르세요.'}
+						placeholder={userRole.skill.length ? '' : '태그를 검색하고 선택하세요.'}
 						value={tagItem}
 						onChange={onChangeKeyword}
 						onKeyPress={onKeyPress}

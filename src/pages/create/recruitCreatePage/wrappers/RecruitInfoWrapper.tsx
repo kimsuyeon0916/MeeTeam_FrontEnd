@@ -7,19 +7,24 @@ import {
 	InputRoleForm,
 } from '../../../../components';
 import S from './RecruitInfoWrapper.styled';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { useValid } from '../../../../hooks';
 import { recruitInputState } from '../../../../atom';
 import { Role } from '../../../../types';
 
 const RecruitInfoWrapper = () => {
 	const [userRoleList, setUserRoleList] = useState<Role[]>([]);
-	const formData = useRecoilValue(recruitInputState);
-	const { validMessage, isValid } = useValid(formData);
+	const [info, setInfo] = useRecoilState(recruitInputState);
+	const { validMessage, isValid } = useValid(info);
 
-	const deleteObj = (id: string) => {
-		setUserRoleList(prev => prev.filter(elem => elem.role.name !== id));
+	const deleteObj = (id: number | null) => {
+		setUserRoleList(prev => prev.filter(elem => elem.role.id !== id));
+		setInfo(prev => ({
+			...prev,
+			recruitmentRoleDto: prev.recruitmentRoleDto.filter(elem => elem.role !== id),
+		}));
 	};
+
 	return (
 		<S.RecruitInfoWrapper>
 			<section className='container'>
@@ -38,12 +43,12 @@ const RecruitInfoWrapper = () => {
 						<article className='container-role__list'>
 							{userRoleList.map((userRole, index) => (
 								<InputRole
-									key={userRole.role.name}
+									key={userRole.role.id}
 									role={userRole.role.name}
 									count={Number(userRole.count)}
 									skill={userRole.skill}
-									onDelete={() => deleteObj(userRole.role.name)}
-									id={userRole.role.name}
+									onDelete={() => deleteObj(userRole.role.id)}
+									id={userRole.role.id}
 								/>
 							))}
 						</article>
