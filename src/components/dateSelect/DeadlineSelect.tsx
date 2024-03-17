@@ -16,7 +16,7 @@ const DeadlineSelect = ({ type }: RecruitmentDeadLine) => {
 
 	const onChangeDate = (date: Date) => {
 		if (date) {
-			setEndDate(prevEndDate => {
+			setEndDate(() => {
 				const result = simpleDate(date);
 				setInfo(prevInfo => ({ ...prevInfo, deadline: result }));
 				return date;

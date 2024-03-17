@@ -23,7 +23,7 @@ const RecruitCreatePage = () => {
 	const navigate = useNavigate();
 	const recruitFormData = useRecoilValue(recruitInputState);
 	const [isSubmit, setIsSubmit] = useRecoilState(validState);
-	const onClickCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const onClickCancel = () => {
 		// 모달창 띄워서 한 번 더 확인시키고 이동하기
 		// navigate('/');
 	};
@@ -41,7 +41,7 @@ const RecruitCreatePage = () => {
 		// });
 		// navigate(`/recruit/${uploadPost}`);
 	};
-
+	console.log(recruitFormData.tag);
 	return (
 		<S.RecruitCreatePage>
 			<TitleAndIntro title='구인글 작성' descriptions={descriptions} />
