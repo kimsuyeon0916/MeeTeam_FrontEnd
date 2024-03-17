@@ -9,6 +9,7 @@ import type {
 	InputRoleForm,
 	InputState,
 	InputCourse,
+	TempRole,
 } from './information';
 import type { Comment, CommentInputFunctions } from './comment';
 import type { JsxElementComponentProps } from './indexSigniture';
@@ -28,4 +29,5 @@ export type {
 	InputRoleForm,
 	InputState,
 	InputCourse,
+	TempRole,
 };

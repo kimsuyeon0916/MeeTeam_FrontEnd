@@ -25,6 +25,13 @@ export interface Role {
 	skill: string[];
 }
 
+export interface TempRole {
+	id: number | null;
+	role: number | null;
+	count: number | null;
+	skill: number[];
+}
+
 export interface InputRoleForm {
 	userRoleList: Role[];
 	setUserRoleList: (arr: any) => void;

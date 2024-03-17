@@ -10,6 +10,7 @@ import { InputState } from '../types';
 // 진행기간(마감일보다 일찍 끝날 수 없음) ✅
 // 수업(체크 시, 수업명, 교수명 입력) ✅
 // 제목(필수 입력, 몇자 이상(10자)) ✅
+// 부적절한 역할 검사 추가(자동완성 선택지에서 선택하지 않은 역할)
 
 export default function useValid(data: InputState) {
 	const [validMessage, setValidMessage] = useRecoilState(validMessageState);

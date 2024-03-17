@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Plus, XBtn } from '../../../assets';
 import S from './InputRoleForm.styled';
-import { Role, InputRoleForm } from '../../../types';
+import { Role, InputRoleForm, TempRole } from '../../../types';
 import { useDebounce } from '../../../hooks';
 import { getRoleKeyword, getSkillKeyword } from '../../../api';
 import { useRecoilState } from 'recoil';
@@ -26,10 +26,17 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 		count: '',
 		skill: [],
 	});
+
+	const [temp, setTemp] = useState<TempRole>({
+		id: 0,
+		role: null,
+		count: null,
+		skill: [],
+	});
 	const keywordRole = useDebounce(userRole.role.name, 500);
 	const keywordSkill = useDebounce(content, 500);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
-
+	console.log(userRoleList);
 	const {
 		data: dataRole,
 		isLoading: isLoadingRole,
@@ -81,10 +88,9 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 				setInfos(prev => ({
 					...prev,
 					recruitmentRoleDto: {
+						// 배열로 수정해야함.
 						...info.recruitmentRoleDto,
-						role: userRole.id,
-						count: userRole.count,
-						skill: userRole.skill,
+						updatedRoleList,
 					},
 				}));
 				return updatedRoleList;
@@ -104,20 +110,19 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 			role: { ...prev.role, name: event.target.value },
 		}));
 	};
-
+	console.log(temp);
 	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const countValue = event.target.value;
 
 		if (isNotNumber(countValue)) {
 			setUserRole(prev => {
 				const updatedObj = { ...prev, count: countValue };
-				setInfos(prevInfo => ({
-					...prevInfo,
-					recruitmentRoleDto: {
-						...prevInfo.recruitmentRoleDto,
-						count: Number(countValue),
-					},
-				}));
+				const updatedInfoVer = { ...prev, count: Number(countValue) };
+				const updatedRoleList = [...userRoleList, updatedInfoVer];
+				// setInfos({
+				// 	...info,
+				// 	recruitmentRoleDto: updatedRoleList,
+				// });
 				return updatedObj;
 			});
 		} else {
@@ -132,10 +137,15 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 
 	const onClickRole = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const { innerText } = event.target as HTMLElement;
-		setUserRole(prev => ({ ...prev, role: { ...userRole.role, name: innerText } }));
+		const target = event.target as HTMLElement;
+		setUserRole(prev => ({ ...prev, role: { id: Number(target.id), name: innerText } }));
 		setShowDropdown(prev => ({
 			...prev,
 			role: false,
+		}));
+		setTemp(prev => ({
+			...prev,
+			role: Number(target.id),
 		}));
 	};
 
@@ -193,7 +203,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 					<section className='dropdown'>
 						{!isLoadingRole &&
 							dataRole?.map((keyword: any, index: number) => (
-								<span key={index} onClick={onClickRole}>
+								<span key={keyword.id} onClick={onClickRole} id={keyword.id}>
 									{keyword.name}
 								</span>
 							))}
