@@ -1,7 +1,9 @@
 export interface SignUpPayload {
-	school?: string;
-	major?: string;
+	platformType?: string;
+	platformId?: string;
 	year?: string;
-	email?: string;
-	nickName?: string;
+	universityId?: string;
+	departmentId?: string;
+	emailId?: string;
+	nickname?: string;
 }

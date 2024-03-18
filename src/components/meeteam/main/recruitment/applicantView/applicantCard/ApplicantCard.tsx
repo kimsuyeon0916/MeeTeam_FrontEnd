@@ -106,7 +106,7 @@ const ApplicantCard = ({ applicant }: { applicant: Applicant }) => {
 		<S.ApplicantCardLayout>
 			<div className='applicant-card__profile-column'>
 				<RadiusProfile size='middle' url={applicant.imageUrl} />
-				<div>{applicant.nickName}</div>
+				<div>{applicant.nickname}</div>
 				<div className='applicant-card__small-text'>
 					{applicant.year}학번, {applicant.rate}
 				</div>

@@ -1,12 +1,12 @@
 const REGEXP = {
-	nickName: /^[a-zA-Z0-9가-힣._]{4,16}$/,
+	nickname: /^[a-zA-Z0-9가-힣._]{4,16}$/,
 };
 
 export const INPUT_VALIDATION = {
-	nickName: {
+	nickname: {
 		required: '값이 입력되지 않았습니다',
 		pattern: {
-			value: REGEXP.nickName,
+			value: REGEXP.nickname,
 			message: '공백 없이 영어, 한글, 숫자, 특수문자 _, . 조합만 가능합니다',
 		},
 		minLength: {
