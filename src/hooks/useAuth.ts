@@ -6,6 +6,7 @@ import {
 	certificateSchool,
 	checkDuplicateNickname,
 	readUniversityList,
+	readDepartmentList,
 } from '../service';
 import { User } from '../types';
 
@@ -91,6 +92,17 @@ export const useReadUniversityList = () => {
 	return useQuery({
 		queryKey: authKeys.readUniversityList,
 		queryFn: readUniversityList,
+		enabled: false,
+	});
+};
+
+/**
+ * @description 학과 목록 조회 API를 호출하는 hook입니다.
+ */
+export const useReadDepartmentList = () => {
+	return useQuery({
+		queryKey: authKeys.readDepartmentList(sessionStorage.university),
+		queryFn: () => sessionStorage.university && readDepartmentList(sessionStorage.university),
 		enabled: false,
 	});
 };

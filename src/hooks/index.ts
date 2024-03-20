@@ -4,6 +4,7 @@ import {
 	useCertificateSchool,
 	useCheckDuplicateNickname,
 	useReadUniversityList,
+	useReadDepartmentList,
 } from './useAuth';
 import useDebounce from './useDebounce';
 import useValid from './useValid';
@@ -16,4 +17,5 @@ export {
 	useDebounce,
 	useValid,
 	useReadUniversityList,
+	useReadDepartmentList,
 };
