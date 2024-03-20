@@ -99,9 +99,9 @@ import InputProfessor from './inputDropdown/inputCourse/InputProfessor';
 import InputRole from './inputDropdown/inputRole/InputRole';
 import InputRoleForm from './inputDropdown/inputRole/InputRoleForm';
 import Description from './recruit/create/Description';
-import BasicInformation from './recruit/create/BasicInformation';
-import DetailedInformation from './recruit/create/DetailedInformation';
-import RecruitRoles from './recruit/create/RecruitRoles';
+import BasicInformation from './recruit/create/basicInformation/BasicInformation';
+import DetailedInformation from './recruit/create/detailedInformation/DetailedInformation';
+import RecruitRoles from './recruit/create/recruitRoles/RecruitRoles';
 import ControlButtons from './recruit/create/ControlButtons';
 
 export {

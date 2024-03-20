@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Role } from '../../../types';
-import { XBtn, Plus } from '../../../assets';
+import { Role } from '../../../../types';
+import { XBtn, Plus } from '../../../../assets';
+import S from './RecruitRoles.styled';
 
 const RecruitRoles = () => {
 	const [userRole, setUserRole] = useState<Role>({
@@ -13,7 +14,7 @@ const RecruitRoles = () => {
 		skill: [],
 	});
 	return (
-		<>
+		<S.RecruitRoles>
 			<section className='container-roles'>
 				<section className='subtitle'>
 					<h4>모집 역할</h4>
@@ -48,7 +49,7 @@ const RecruitRoles = () => {
 				</section>
 			</section>
 			<hr className='under-info' />
-		</>
+		</S.RecruitRoles>
 	);
 };
 

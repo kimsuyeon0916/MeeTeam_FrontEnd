@@ -1,9 +1,10 @@
 import React from 'react';
-import { DeadlineSelect, DateSelect } from '../../index';
+import { DeadlineSelect, DateSelect } from '../../../index';
+import S from './BasicInformation.styled';
 
 const BasicInformation = () => {
 	return (
-		<>
+		<S.BasicInformation>
 			<section className='container-basic'>
 				<section className='subtitle'>
 					<h4>기본 정보</h4>
@@ -116,7 +117,7 @@ const BasicInformation = () => {
 				</section>
 			</section>
 			<hr className='under-info' />
-		</>
+		</S.BasicInformation>
 	);
 };
 

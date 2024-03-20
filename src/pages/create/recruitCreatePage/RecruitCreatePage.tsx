@@ -21,15 +21,6 @@ const RecruitCreatePage = () => {
 	const navigate = useNavigate();
 	const [isSubmit, setIsSubmit] = useRecoilState(validState);
 	const [info, setInfo] = useRecoilState(recruitInputState);
-	const [userRole, setUserRole] = useState<Role>({
-		id: 0,
-		role: {
-			id: null,
-			name: '',
-		},
-		count: '',
-		skill: [],
-	});
 
 	const onClickCancel = () => {
 		// 모달창 띄워서 한 번 더 확인시키고 이동하기

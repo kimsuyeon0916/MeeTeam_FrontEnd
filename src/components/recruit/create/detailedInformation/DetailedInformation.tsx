@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react';
 import ReactQuill from 'react-quill';
 import { useRecoilState } from 'recoil';
-import { modules } from '../../../utils';
-import { recruitInputState } from '../../../atom';
+import { modules } from '../../../../utils';
+import { recruitInputState } from '../../../../atom';
+import S from './DetailedInformation.styled';
 
 const DetailedInformation = () => {
 	const quillRef = useRef<ReactQuill | null>(null);
@@ -14,7 +15,7 @@ const DetailedInformation = () => {
 		setInfo({ ...info, contents: contents });
 	};
 	return (
-		<>
+		<S.DetailedInformation>
 			<section className='container-details'>
 				<section className='subtitle'>
 					<h4>상세 내용</h4>
@@ -33,7 +34,7 @@ const DetailedInformation = () => {
 				</section>
 			</section>
 			<hr className='under-info' />
-		</>
+		</S.DetailedInformation>
 	);
 };
 
