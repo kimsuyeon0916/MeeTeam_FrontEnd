@@ -109,15 +109,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 					})}
 					<input
 						type='text'
-						placeholder={
-							isTouched
-								? isDropdownVisible
-									? tagList.length < 5
-										? '태그를 입력하거나 선택해주세요.'
-										: '태그는 5개까지 선택할 수 있습니다.'
-									: ''
-								: '태그를 입력하거나 선택해주세요.'
-						}
+						placeholder={isTouched ? '' : '태그를 선택하거나 입력해주세요.'}
 						tabIndex={2}
 						disabled={tagList.length < 20 ? false : true}
 						onChange={event => setTagItem(event.target.value)}

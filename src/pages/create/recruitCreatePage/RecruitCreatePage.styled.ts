@@ -78,7 +78,7 @@ const RecruitCreatePage = styled.div`
 		min-height: 20rem;
 
 		.container-tags__inputs {
-			width: 100%;
+			width: 76.4rem;
 		}
 	}
 

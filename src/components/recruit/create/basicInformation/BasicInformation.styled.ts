@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface Course {
+	$isChecked: boolean;
+}
+
 const BasicInformation = styled.section`
 	.container-basic {
 		display: flex;
@@ -85,68 +89,88 @@ const BasicInformation = styled.section`
 					}
 				}
 			}
+		}
+	}
+`;
 
-			.inputs-course {
+const ContainerCourse = styled.article<Course>`
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+
+	.intro {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 0.95rem;
+
+		.description {
+			color: #8e8e8e;
+			font-size: 1.4rem;
+			line-height: 1.7rem;
+			letter-spacing: 0.0028rem;
+		}
+
+		section {
+			display: flex;
+			align-items: center;
+
+			input {
+				padding: 0;
+				margin: 0;
+			}
+
+			.course-label {
+				font-size: 1.4rem;
+				margin-left: 0.8rem;
+				margin-top: 0.1rem;
+			}
+		}
+	}
+
+	.wrapper-inputs {
+		display: flex;
+		width: 100%;
+		gap: 2rem;
+		margin-top: 0.8rem;
+
+		.container-inputs {
+			width: 100%;
+			position: relative;
+
+			input {
+				height: 4.8rem;
+				padding: 1.2rem 1.6rem;
+				flex: 1 0 0;
+				box-sizing: border-box;
+				margin: 0;
+				width: 100%;
+				border-radius: 1rem;
+				border: 1px solid #8e8e8e;
+				background: ${props => (props.$isChecked ? 'transparent' : '#e3e3e3')};
+			}
+
+			.dropdown {
+				position: absolute;
+				border: 1px solid #373f41;
+				width: 100%;
 				display: flex;
 				flex-direction: column;
-				width: 100%;
+				border-radius: 0.75rem;
+				font-size: 1.2rem;
+				color: #373f41;
+				gap: 1rem;
+				padding: 1rem 2rem;
+				z-index: 401;
+				background-color: #fff;
 
-				.intro {
-					display: flex;
-					justify-content: space-between;
-					margin-top: 0.95rem;
-
-					.description {
-						color: #8e8e8e;
-						font-size: 1.4rem;
-						line-height: 1.7rem;
-						letter-spacing: 0.0028rem;
-					}
-
-					section {
-						display: flex;
-						align-items: center;
-
-						input {
-							padding: 0;
-							margin: 0;
-						}
-
-						.course-label {
-							font-size: 1.4rem;
-							margin-left: 0.8rem;
-							margin-top: 0.1rem;
-						}
-					}
-				}
-
-				.wrapper-inputs {
-					display: flex;
-					width: 100%;
-					gap: 2rem;
-					margin-top: 0.8rem;
-
-					.container-inputs {
-						width: 100%;
-
-						input {
-							height: 4.8rem;
-							padding: 1.2rem 1.6rem;
-							flex: 1 0 0;
-							box-sizing: border-box;
-							margin: 0;
-							width: 100%;
-							border-radius: 1rem;
-							border: 1px solid #8e8e8e;
-							background: #e3e3e3;
-						}
-					}
+				span {
+					cursor: pointer;
 				}
 			}
 		}
 	}
 `;
 
-const S = { BasicInformation };
+const S = { BasicInformation, ContainerCourse };
 
 export default S;

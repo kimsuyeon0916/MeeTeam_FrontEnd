@@ -10,6 +10,7 @@ export interface InputState {
 	category: string;
 	fieldId: number;
 	deadline: string | undefined;
+	proceedType: string;
 	period: (string | undefined)[];
 	courseTagDto: {
 		isCourse: boolean;

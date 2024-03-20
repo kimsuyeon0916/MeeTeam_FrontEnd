@@ -59,6 +59,7 @@ export const recruitInputState = atom<InputState>({
 		category: '',
 		fieldId: 1,
 		deadline: simple,
+		proceedType: '',
 		period: [simple, simple],
 		courseTagDto: {
 			isCourse: false,

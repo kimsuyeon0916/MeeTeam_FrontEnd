@@ -1,24 +1,28 @@
-import React, { useState } from 'react';
-import { useRecoilState } from 'recoil';
+import React, { useRef, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import DatePicker from 'react-datepicker';
 import S from './DateSelect.styled';
 import 'react-datepicker/dist/react-datepicker.css';
 import { recruitInputState } from '../../atom';
 import { simpleDate } from '../../utils';
 
-const DateSelect = () => {
-	const [startDate, setStartDate] = useState<Date | null>(new Date());
-	const [info, setInfo] = useRecoilState(recruitInputState);
+const DateSelect = ({ type }: { type: string }) => {
+	const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+	const setFormdata = useSetRecoilState(recruitInputState);
 
 	const onChangeHandler = (date: Date | null) => {
-		setStartDate(date);
+		setSelectedDate(date);
+		if (type === 'start') {
+		}
+		if (type === 'end') {
+		}
 	};
 
 	return (
 		<S.DateSelect>
 			<DatePicker
 				showIcon
-				selected={startDate}
+				selected={selectedDate}
 				dateFormat='yy년 MM월 dd일'
 				onChange={date => onChangeHandler(date)}
 				icon={

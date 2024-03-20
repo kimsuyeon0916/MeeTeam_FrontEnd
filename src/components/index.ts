@@ -103,6 +103,11 @@ import BasicInformation from './recruit/create/basicInformation/BasicInformation
 import DetailedInformation from './recruit/create/detailedInformation/DetailedInformation';
 import RecruitRoles from './recruit/create/recruitRoles/RecruitRoles';
 import ControlButtons from './recruit/create/ControlButtons';
+import ContainerScope from './recruit/create/basicInformation/containers/ContainerScope';
+import ContainerCategory from './recruit/create/basicInformation/containers/ContainerCategory';
+import ContainerProcedure from './recruit/create/basicInformation/containers/ContainerProcedure';
+import WrapperScopeCategory from './recruit/create/basicInformation/wrappers/WrapperScopeCategory';
+import ContainerCourse from './recruit/create/basicInformation/containers/ContainerCourse';
 
 export {
 	Header,
@@ -201,4 +206,9 @@ export {
 	DetailedInformation,
 	RecruitRoles,
 	ControlButtons,
+	ContainerScope,
+	ContainerCategory,
+	ContainerProcedure,
+	WrapperScopeCategory,
+	ContainerCourse,
 };
