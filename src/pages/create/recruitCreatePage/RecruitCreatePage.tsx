@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import S from './RecruitCreatePage.styled';
 import {
 	BasicInformation,
 	ControlButtons,
 	Description,
 	DetailedInformation,
-	MeeteamTag,
 	RecruitRoles,
 } from '../../../components/index';
 import { useMutation } from '@tanstack/react-query';
@@ -13,8 +12,6 @@ import { useRecoilState } from 'recoil';
 import { recruitInputState, validState } from '../../../atom';
 import { postingRecruit } from '../../../api';
 import { useNavigate } from 'react-router-dom';
-import { XBtn, Plus } from '../../../assets';
-import { Role } from '../../../types';
 import RecruitTags from '../../../components/recruit/create/RecruitTags';
 
 const RecruitCreatePage = () => {
