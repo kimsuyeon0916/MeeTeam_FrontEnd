@@ -6,6 +6,7 @@ import {
 	certificateSchool,
 	checkDuplicateNickname,
 	readUniversityList,
+	readDepartmentList,
 } from './auth/auth';
 
 export {
@@ -17,4 +18,5 @@ export {
 	certificateSchool,
 	checkDuplicateNickname,
 	readUniversityList,
+	readDepartmentList,
 };

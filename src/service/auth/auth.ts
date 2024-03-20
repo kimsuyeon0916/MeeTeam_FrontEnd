@@ -84,3 +84,18 @@ export const readUniversityList = async () => {
 		return null;
 	}
 };
+
+export const readDepartmentList = async (universityId: string) => {
+	try {
+		const response = await axiosInstance.get<Department[]>(EndPoint.SIGN_UP.readDepartmentList, {
+			params: {
+				university: universityId,
+			},
+		});
+
+		return response;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+};
