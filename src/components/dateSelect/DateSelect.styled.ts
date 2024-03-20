@@ -56,16 +56,25 @@ const DateSelect = styled.div`
 	}
 	.react-datepicker-popper {
 		z-index: 105;
+		position: absolute;
+		inset: 0px auto auto 0px;
+		transform: translate3d(428.5px, 629px, 0px);
+		width: 25.3rem;
+		height: 28rem;
 	}
 	.react-datepicker {
 		font-size: 1.2rem;
 		background-color: #fff;
 		color: #000;
-		border: 1px solid #bcd7fe;
 		border-radius: 0.3rem;
 		display: inline-block;
 		position: relative;
 		width: 100%;
+		border-radius: 1rem;
+		border: 1px solid #e3e3e3;
+
+		/* form_shadow */
+		box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 	}
 	.react-datepicker__header {
 		text-align: center;

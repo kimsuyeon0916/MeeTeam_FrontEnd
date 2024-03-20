@@ -4,6 +4,7 @@ const RecruitCreatePage = styled.div`
 	width: clamp(45%, 96rem, 75%);
 	margin: 0 auto;
 	margin-bottom: 17rem;
+
 	h2 {
 		color: #151515;
 		font-size: 2.4rem;
@@ -40,6 +41,14 @@ const RecruitCreatePage = styled.div`
 		font-weight: 600;
 		line-height: 1.7rem;
 		letter-spacing: 0.0028rem;
+
+		span {
+			color: var(--Redscale-500, #f85858);
+			font-size: 1.4rem;
+			font-weight: 600;
+			line-height: 1.7rem;
+			letter-spacing: 0.0028rem;
+		}
 	}
 
 	label {
