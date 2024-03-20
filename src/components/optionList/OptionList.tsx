@@ -2,21 +2,21 @@ import React from 'react';
 import S from './OptionList.styled';
 
 interface Option {
-	id: string;
+	id?: string;
 	title: string;
 }
 
 interface OptionListProps {
 	name: string;
-	handleOptionClick: (name: string, id: string, title: string) => void;
+	handleOptionClick: (T, ...U) => void;
 	optionList: Option[];
 }
 
 const OptionList = ({ name, handleOptionClick, optionList }: OptionListProps) => {
 	return (
 		<S.OptionList>
-			{optionList.map(({ id, title }) => (
-				<S.OptionItem key={id} onClick={() => handleOptionClick(name, id, title)}>
+			{optionList.map(({ title, id }) => (
+				<S.OptionItem key={title} onClick={() => handleOptionClick(name, title, id)}>
 					{title}
 				</S.OptionItem>
 			))}
