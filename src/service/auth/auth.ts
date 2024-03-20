@@ -1,8 +1,8 @@
-import type { SignUpPayload, UserReponse } from '../../types';
+import type { Department, SignUpPayload, University, UserReponse } from '../../types';
 import { EndPoint, axiosInstance } from '..';
 
 const platformType = 'NAVER';
-const platformId = import.meta.env.VITE_PLATFORM_ID;
+const platformId = localStorage.PLATFORM_ID;
 
 /**
  * @description 네이버 연동 여부를 확인합니다.
@@ -66,6 +66,17 @@ export const checkDuplicateNickname = async (nickname: string) => {
 				nickname: nickname,
 			},
 		});
+
+		return response;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+};
+
+export const readUniversityList = async () => {
+	try {
+		const response = await axiosInstance.get<University[]>(EndPoint.SIGN_UP.readUniversityList);
 
 		return response;
 	} catch (error) {
