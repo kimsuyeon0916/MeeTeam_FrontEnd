@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const ComboBoxLayout = styled.div`
 	display: flex;
 	flex-direction: column;
+	flex: 1;
 
 	h6 {
 		/* Body/body2/semibold */
