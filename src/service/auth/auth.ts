@@ -2,7 +2,6 @@ import type { Department, SignUpPayload, University, UserReponse } from '../../t
 import { EndPoint, axiosInstance } from '..';
 
 const platformType = 'NAVER';
-const platformId = localStorage.PLATFORM_ID;
 
 /**
  * @description 네이버 연동 여부를 확인합니다.
@@ -37,6 +36,7 @@ export const signUp = async ({ emailCode, nickname }: { emailCode: string; nickn
 };
 
 export const certificateSchool = async ({
+	platformId,
 	year,
 	universityId,
 	departmentId,

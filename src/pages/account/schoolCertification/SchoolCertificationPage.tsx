@@ -39,6 +39,7 @@ const SchoolCertificationPage = () => {
 	const certificateHandler: SubmitHandler<FormValues> = data => {
 		console.log(localStorage.PLATFORM_ID);
 		mutate({
+			platformId: localStorage.PLATFORM_ID,
 			year: data.year,
 			universityId: sessionStorage.university,
 			departmentId: sessionStorage.department,
