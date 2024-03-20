@@ -40,3 +40,14 @@ interface Meeteam {}
 interface Comment {}
 
 interface TimeTable {}
+
+export interface University {
+	universityId: string;
+	universityName: string;
+	universityDomain: string;
+}
+
+export interface Department {
+	departmentId: string;
+	departmentName: string;
+}

@@ -1,5 +1,5 @@
 import type { SignUpPayload } from './payload';
-import type { UserReponse, User } from './response';
+import type { UserReponse, User, University, Department } from './response';
 import type { CustomInstance } from './api';
 import type { TitleInfo, OptionList, Option, Role, InputRoleForm, InputState } from './information';
 import type { Comment, CommentInputFunctions } from './comment';
@@ -19,4 +19,6 @@ export type {
 	Role,
 	InputRoleForm,
 	InputState,
+	University,
+	Department,
 };
