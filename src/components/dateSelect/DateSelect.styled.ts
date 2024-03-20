@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const DateSelect = styled.div`
 	margin-top: 0.9rem;
 	.date-picker {
-		width: 100%;
 		height: 4.875rem;
 		padding: 1.8rem 2.1rem 1.8rem 2.1rem;
 		border-radius: 8px;
@@ -31,26 +30,24 @@ const DateSelect = styled.div`
 	.react-datepicker__input-container {
 		display: flex;
 		align-items: center;
-	}
-
-	.react-datepicker__close-icon {
-		cursor: pointer;
-		background-color: transparent;
-		border: 0;
-		outline: 0;
-		padding: 0 1.5rem 0 0;
-		position: absolute;
-		top: 0;
-		right: 0;
-		height: 100%;
-		display: table-cell;
-		vertical-align: middle;
-
-		&::after {
-			content: '🗓️';
-			background-color: transparent;
-			color: #49c181;
-			font-size: 2.1rem;
+		svg {
+			width: 2rem;
+			height: 2rem;
+			position: absolute;
+			right: 1rem;
+		}
+		input {
+			width: 100%;
+			height: 4.8rem;
+			padding: 1.2rem 1.6rem;
+			box-sizing: border-box;
+			border-radius: 0.7581rem;
+			border: 0.1rem solid #e3e3e3;
+			background: #fff;
+			color: #8e8e8e;
+			font-size: 1.6rem;
+			line-height: 1.9rem;
+			letter-spacing: 0.0032rem;
 		}
 	}
 
@@ -58,7 +55,6 @@ const DateSelect = styled.div`
 		width: 100%;
 	}
 	.react-datepicker-popper {
-		width: 52.5rem;
 		z-index: 105;
 	}
 	.react-datepicker {

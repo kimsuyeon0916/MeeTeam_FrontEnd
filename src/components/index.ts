@@ -88,7 +88,6 @@ import RecruitCard from './meeteam/card/RecruitCard';
 import Pagination from './pagination/Pagination';
 import NaverLogin from './naver/NaverLogin';
 import Create from './header/Create';
-import TitleAndIntro from './title/titleAndIntro/TitleAndIntro';
 import InputContainer from './inputDropdown/inputContainer/InputContainer';
 import RecruitOptions from './optionMenu/recruitOptions/RecruitOptions';
 import Comment from './comment/comment/Comment';
@@ -181,7 +180,6 @@ export {
 	RecruitCard,
 	Pagination,
 	Create,
-	TitleAndIntro,
 	DateSelect,
 	InputContainer,
 	RecruitOptions,
