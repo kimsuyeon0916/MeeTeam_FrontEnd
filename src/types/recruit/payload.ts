@@ -11,7 +11,8 @@ export interface InputState {
 	fieldId: number;
 	deadline: string | undefined;
 	proceedType: string;
-	period: (string | undefined)[];
+	startDate: string | undefined;
+	endDate: string | undefined;
 	courseTagDto: {
 		isCourse: boolean;
 		courseTagName: string | null;
