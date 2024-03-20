@@ -1,6 +1,12 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { SetterOrUpdater } from 'recoil';
-import { checkExist, signUp, certificateSchool, checkDuplicateNickname } from '../service';
+import {
+	checkExist,
+	signUp,
+	certificateSchool,
+	checkDuplicateNickname,
+	readUniversityList,
+} from '../service';
 import { User } from '../types';
 
 const ACCESS_TOKEN_KEY = import.meta.env.VITE_ACCESS_TOKEN_KEY;
@@ -11,6 +17,11 @@ interface AuthProps {
 	onSuccess?: () => void;
 	setUserState?: SetterOrUpdater<User | null>;
 }
+
+const authKeys = {
+	readUniversityList: ['readUniversityList'] as const,
+	readDepartmentList: (universityId: string) => ['readDepartmentList', universityId],
+};
 
 /**
  * @description 네이버 연동 여부 체크 API를 호출하는 hook입니다.
@@ -70,5 +81,16 @@ export const useCheckDuplicateNickname = (authKeys: string[], isEnabled: boolean
 		queryFn: isEnabled => isEnabled && checkDuplicateNickname(authKeys[1]),
 		enabled: isEnabled,
 		staleTime: 1000,
+	});
+};
+
+/**
+ * @description 대학교 목록 조회 API를 호출하는 hook입니다.
+ */
+export const useReadUniversityList = () => {
+	return useQuery({
+		queryKey: authKeys.readUniversityList,
+		queryFn: readUniversityList,
+		enabled: false,
 	});
 };

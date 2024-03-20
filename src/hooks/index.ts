@@ -3,6 +3,7 @@ import {
 	useNaverSignUp,
 	useCertificateSchool,
 	useCheckDuplicateNickname,
+	useReadUniversityList,
 } from './useAuth';
 import useDebounce from './useDebounce';
 import useValid from './useValid';
@@ -13,5 +14,6 @@ export {
 	useCertificateSchool,
 	useCheckDuplicateNickname,
 	useDebounce,
-  useValid
+	useValid,
+	useReadUniversityList,
 };
