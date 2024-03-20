@@ -1,4 +1,13 @@
-const SCHOOL_CERTIFICATION_DATA = [
+interface schoolCertification {
+	label: string;
+	type: string;
+	placeholder: string;
+	name: 'year' | 'university' | 'department' | 'email';
+	required: boolean;
+	isNext: boolean;
+}
+
+const SCHOOL_CERTIFICATION_DATA: schoolCertification[] = [
 	{
 		label: '입학년도',
 		type: 'text',
