@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import S from './InputRole.styled';
 import { XBtn } from '../../../assets';
-import { useDebounce } from '../../../hooks';
 
 interface InputRole {
 	id: number | null;
@@ -45,18 +44,11 @@ const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 				<section className='container-skills'>
 					{roleObj.skill.map((tagItem, index) => {
 						return (
-							<article className='container-tags' key={index}>
+							<article className='tags' key={index}>
 								<span>{tagItem}</span>
 							</article>
 						);
 					})}
-					<input
-						type='text'
-						className='skills-input'
-						placeholder={roleObj.skill.length ? '' : '태그를 입력하고 엔터를 누르세요.'}
-						value={tagItem}
-						disabled
-					/>
 				</section>
 			</section>
 			<article className='add-btn'>

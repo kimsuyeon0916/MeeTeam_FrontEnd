@@ -30,7 +30,7 @@ import { isNotNumber } from '../../../utils';
 const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	const [tagItem, setTagItem] = useState<string>('');
 	const [info, setInfos] = useRecoilState(recruitInputState);
-	const [showDropdown, setShowDropdown] = useState({
+	const [dropdown, setDropdown] = useState({
 		role: false,
 		skill: false,
 	});
@@ -44,7 +44,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 		skill: [],
 	});
 
-	const [temp, setTemp] = useState<RoleForPost>({
+	const [roleData, setRoleData] = useState<RoleForPost>({
 		id: 0,
 		role: null,
 		count: null,
@@ -100,17 +100,17 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 
 	const onClickHandler = () => {
 		if (
-			temp.role !== null &&
-			temp.skill.length === userRole.skill.length &&
-			!info.recruitmentRoleDto.some(obj => obj.role === temp.role)
+			roleData.role !== null &&
+			roleData.skill.length === userRole.skill.length &&
+			!info.recruitmentRoleDto.some(obj => obj.role === roleData.role)
 		) {
 			setUserRoleList((prev: any) => [...prev, userRole]);
-			if (temp.count === null) {
-				temp.count = 0;
+			if (roleData.count === null) {
+				roleData.count = 0;
 			}
 			setInfos((prev: InputState) => ({
 				...prev,
-				recruitmentRoleDto: [...prev.recruitmentRoleDto, temp],
+				recruitmentRoleDto: [...prev.recruitmentRoleDto, roleData],
 			}));
 			setUserRole({
 				id: userRoleList.length + 1,
@@ -118,7 +118,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 				count: '',
 				skill: [],
 			});
-			setTemp({
+			setRoleData({
 				id: userRoleList.length + 1,
 				role: null,
 				count: null,
@@ -144,13 +144,13 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 				...prev,
 				count: countValue,
 			}));
-			setTemp(prev => ({
+			setRoleData(prev => ({
 				...prev,
 				count: Number(countValue),
 			}));
 		} else {
 			setUserRole(prev => ({ ...prev, count: countValue.replace(/\D/g, '') }));
-			setTemp(prev => ({ ...prev, count: Number(countValue.replace(/\D/g, '')) }));
+			setRoleData(prev => ({ ...prev, count: Number(countValue.replace(/\D/g, '')) }));
 		}
 	};
 
@@ -162,11 +162,11 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 		const { innerText } = event.target as HTMLElement;
 		const target = event.target as HTMLElement;
 		setUserRole(prev => ({ ...prev, role: { id: Number(target.id), name: innerText } }));
-		setShowDropdown(prev => ({
+		setDropdown(prev => ({
 			...prev,
 			role: false,
 		}));
-		setTemp(prev => ({
+		setRoleData(prev => ({
 			...prev,
 			role: Number(target.id),
 		}));
@@ -177,8 +177,8 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 		const target = event.target as HTMLElement;
 		if (!userRole.skill.includes(innerText) && userRole.skill.length < 6) {
 			setUserRole(prev => ({ ...prev, skill: [...prev.skill, innerText] }));
-			setTemp(prev => ({ ...prev, skill: [...prev.skill, Number(target.id)] }));
-			setShowDropdown(prev => ({
+			setRoleData(prev => ({ ...prev, skill: [...prev.skill, Number(target.id)] }));
+			setDropdown(prev => ({
 				...prev,
 				skill: false,
 			}));
@@ -189,22 +189,14 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	useEffect(() => {
 		const outsideClick = (event: MouseEvent) => {
 			const { target } = event;
-			if (
-				showDropdown.role &&
-				dropdownRef.current &&
-				!dropdownRef.current.contains(target as Node)
-			) {
-				setShowDropdown(prev => ({
+			if (dropdown.role && dropdownRef.current && !dropdownRef.current.contains(target as Node)) {
+				setDropdown(prev => ({
 					...prev,
 					role: false,
 				}));
 			}
-			if (
-				showDropdown.skill &&
-				dropdownRef.current &&
-				!dropdownRef.current.contains(target as Node)
-			) {
-				setShowDropdown(prev => ({
+			if (dropdown.skill && dropdownRef.current && !dropdownRef.current.contains(target as Node)) {
+				setDropdown(prev => ({
 					...prev,
 					skill: false,
 				}));
@@ -214,10 +206,10 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 		return () => {
 			document.removeEventListener('mousedown', outsideClick);
 		};
-	}, [dropdownRef.current, showDropdown.role, showDropdown.skill]);
+	}, [dropdownRef.current, dropdown.role, dropdown.skill]);
 
 	return (
-		<S.InputRoleForm $isRoleClicked={showDropdown.role} $isSkillClicked={showDropdown.skill}>
+		<S.InputRoleForm $isRoleClicked={dropdown.role} $isSkillClicked={dropdown.skill}>
 			<article className='inputs' ref={dropdownRef}>
 				<input
 					className='role-input'
@@ -225,12 +217,12 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 					placeholder='역할'
 					value={userRole.role.name}
 					onChange={onChangeRole}
-					onClick={() => setShowDropdown(prev => ({ ...prev, role: !prev.role }))}
+					onClick={() => setDropdown(prev => ({ ...prev, role: true }))}
 				/>
-				{showDropdown.role && (
+				{dropdown.role && (
 					<section className='dropdown'>
 						{!isLoadingRole &&
-							dataRole?.map((keyword: any, index: number) => (
+							dataRole?.map((keyword: any) => (
 								<span key={keyword.id} onClick={onClickRole} id={keyword.id}>
 									{keyword.name}
 								</span>
@@ -247,7 +239,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 				<section className='container-skills'>
 					{userRole.skill.map((tagItem, index) => {
 						return (
-							<article className='container-tags' key={index}>
+							<article className='tags' key={index}>
 								<span>{tagItem}</span>
 								<button type='button' onClick={deleteTagItem}>
 									<img src={XBtn} id={index.toString()} />
@@ -255,17 +247,19 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 							</article>
 						);
 					})}
-					<input
-						type='text'
-						className='skills-input'
-						placeholder={userRole.skill.length ? '' : '태그를 검색하고 선택하세요.'}
-						value={tagItem}
-						onChange={onChangeKeyword}
-						onKeyPress={onKeyPress}
-						onClick={() => setShowDropdown(prev => ({ ...prev, skill: !prev.skill }))}
-					/>
+					{userRole.skill.length !== 5 && (
+						<input
+							type='text'
+							className='skills-input'
+							placeholder={'스킬을 검색해주세요.'}
+							value={tagItem}
+							onChange={onChangeKeyword}
+							onKeyPress={onKeyPress}
+							onClick={() => setDropdown(prev => ({ ...prev, skill: true }))}
+						/>
+					)}
 				</section>
-				{showDropdown.skill && (
+				{dropdown.skill && (
 					<section className='dropdown skill'>
 						{!isLoadingSkill &&
 							dataSkill?.map((keyword: any) => (

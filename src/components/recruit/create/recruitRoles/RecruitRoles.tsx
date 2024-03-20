@@ -1,50 +1,41 @@
 import React, { useState } from 'react';
 import { Role } from '../../../../types';
-import { XBtn, Plus } from '../../../../assets';
 import S from './RecruitRoles.styled';
+import { recruitInputState } from '../../../../atom';
+import { useRecoilState } from 'recoil';
+import { InputRole, InputRoleForm } from '../../../index';
 
 const RecruitRoles = () => {
-	const [userRole, setUserRole] = useState<Role>({
-		id: 0,
-		role: {
-			id: null,
-			name: '',
-		},
-		count: '',
-		skill: [],
-	});
+	const [userRoleList, setUserRoleList] = useState<Role[]>([]);
+	const [info, setInfo] = useRecoilState(recruitInputState);
+
+	const deleteObj = (id: number | null) => {
+		setUserRoleList(prev => prev.filter(elem => elem.role.id !== id));
+		setInfo(prev => ({
+			...prev,
+			recruitmentRoleDto: prev.recruitmentRoleDto.filter(elem => elem.role !== id),
+		}));
+	};
+
 	return (
 		<S.RecruitRoles>
 			<section className='container-roles'>
 				<section className='subtitle'>
 					<h4>모집 역할</h4>
 				</section>
-				<section className='container-roles__control'>
-					<article className='inputs'>
-						<input className='role-input' type='text' placeholder='역할' />
-						<input className='count-input' type='text' placeholder='인원' />
-						<section className='container-skills'>
-							{userRole.skill.map((tagItem, index) => {
-								return (
-									<article className='container-tags' key={index}>
-										<span>{tagItem}</span>
-										<button type='button'>
-											<img src={XBtn} id={index.toString()} />
-										</button>
-									</article>
-								);
-							})}
-							<input
-								type='text'
-								className='skills-input'
-								placeholder={'해당 역할의 보유 스킬을 검색해주세요.'}
+				<section className='wrapper-roles'>
+					<InputRoleForm userRoleList={userRoleList} setUserRoleList={setUserRoleList} />
+					<article className='container-role__list'>
+						{userRoleList.map(userRole => (
+							<InputRole
+								key={userRole.role.id}
+								role={userRole.role.name}
+								count={Number(userRole.count)}
+								skill={userRole.skill}
+								onDelete={() => deleteObj(userRole.role.id)}
+								id={userRole.role.id}
 							/>
-						</section>
-					</article>
-					<article className='add-btn'>
-						<button type='button'>
-							<img src={Plus} />
-						</button>
+						))}
 					</article>
 				</section>
 			</section>
