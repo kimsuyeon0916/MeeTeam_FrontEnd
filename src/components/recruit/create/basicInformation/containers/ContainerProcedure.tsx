@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { recruitInputState } from '../../../../../atom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
+import { useValid } from '../../../../../hooks';
 
 const ContainerProcedure = () => {
 	const [isSelected, setIsSelected] = useState<string>('');
-	const setFormdata = useSetRecoilState(recruitInputState);
+	const [formData, setFormData] = useRecoilState(recruitInputState);
+	const { validMessage, isValid } = useValid(formData);
 
 	const handleProcedureChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const procedure = event.target.value;
 		setIsSelected(event.target.value);
-		setFormdata(prev => ({ ...prev, proceedType: procedure }));
+		setFormData(prev => ({ ...prev, proceedType: procedure }));
 	};
 
 	return (
@@ -55,6 +57,9 @@ const ContainerProcedure = () => {
 					<label htmlFor='any'>상관없음</label>
 				</section>
 			</section>
+			{isValid.isSubmitted && !isValid.isProcedure && (
+				<p className='valid-msg'>{validMessage.procedure}</p>
+			)}
 		</article>
 	);
 };

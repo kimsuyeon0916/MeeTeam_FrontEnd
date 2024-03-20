@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { recruitInputState } from '../../../../../atom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
+import { useValid } from '../../../../../hooks';
 
 const ContainerCategory = () => {
 	const [isSelected, setIsSelected] = useState<string>('');
-	const setFormdata = useSetRecoilState(recruitInputState);
+	const [formData, setFormData] = useRecoilState(recruitInputState);
+	const { validMessage, isValid } = useValid(formData);
 
 	const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const category = event.target.value;
 		setIsSelected(category);
-		setFormdata(prev => ({ ...prev, category: category }));
+		setFormData(prev => ({ ...prev, category: category }));
 	};
 	return (
 		<section className='container-category'>
@@ -54,6 +56,9 @@ const ContainerCategory = () => {
 					<label htmlFor='contest'>공모전</label>
 				</section>
 			</section>
+			{isValid.isSubmitted && !isValid.isCategory && (
+				<p className='valid-msg'>{validMessage.category}</p>
+			)}
 		</section>
 	);
 };

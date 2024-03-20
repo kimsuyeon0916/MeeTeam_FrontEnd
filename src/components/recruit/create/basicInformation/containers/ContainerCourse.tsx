@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import S from '../BasicInformation.styled';
 import { useQuery } from '@tanstack/react-query';
-import { useDebounce } from '../../../../../hooks';
+import { useDebounce, useValid } from '../../../../../hooks';
 import { getCourseKeyword, getProfessorKeyword } from '../../../../../api';
 import { useSetRecoilState } from 'recoil';
 import { recruitInputState } from '../../../../../atom';
@@ -9,7 +9,7 @@ import { recruitInputState } from '../../../../../atom';
 const ContainerCourse = () => {
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [isChecked, setIsChecked] = useState<boolean>(false);
-	const setFormdata = useSetRecoilState(recruitInputState);
+	const setFormData = useSetRecoilState(recruitInputState);
 	const [name, setName] = useState({
 		course: '',
 		professor: '',
@@ -37,7 +37,7 @@ const ContainerCourse = () => {
 	};
 	const onClickCheckbox = () => {
 		setIsChecked(prev => !prev);
-		setFormdata(prev => ({
+		setFormData(prev => ({
 			...prev,
 			courseTagDto: { ...prev.courseTagDto, isCourse: true },
 		}));
@@ -46,7 +46,7 @@ const ContainerCourse = () => {
 	const onClickCourse = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		setName(prev => ({ ...prev, course: innerText }));
-		setFormdata(prev => ({
+		setFormData(prev => ({
 			...prev,
 			courseTagDto: { ...prev.courseTagDto, courseTagName: innerText },
 		}));
@@ -55,7 +55,7 @@ const ContainerCourse = () => {
 	const onClickProfessor = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		setName(prev => ({ ...prev, professor: innerText }));
-		setFormdata(prev => ({
+		setFormData(prev => ({
 			...prev,
 			courseTagDto: { ...prev.courseTagDto, courseTagProfessor: innerText },
 		}));

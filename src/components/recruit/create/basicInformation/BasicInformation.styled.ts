@@ -14,11 +14,13 @@ const BasicInformation = styled.section`
 			width: 76.4rem;
 			display: flex;
 			flex-direction: column;
-			gap: 2.8rem;
+			gap: 3.5rem;
+			position: relative;
 
 			.inputs-title {
 				display: flex;
 				flex-direction: column;
+				position: relative;
 
 				input {
 					display: flex;
@@ -31,10 +33,25 @@ const BasicInformation = styled.section`
 					background: #fff;
 					margin-top: 0.8rem;
 				}
+
+				.valid-msg {
+					position: absolute;
+					color: red;
+					top: 8rem;
+					font-size: 1.2rem;
+				}
 			}
 
 			.inputs-deadline {
 				width: 48.5%;
+				position: relative;
+
+				.valid-msg {
+					position: absolute;
+					top: 8rem;
+					color: red;
+					font-size: 1.2rem;
+				}
 			}
 
 			.radio-btns {
@@ -69,9 +86,25 @@ const BasicInformation = styled.section`
 
 				.container-scope {
 					width: 100%;
+					position: relative;
+
+					.valid-msg {
+						position: absolute;
+						top: 6rem;
+						color: red;
+						font-size: 1.2rem;
+					}
 				}
 				.container-category {
 					width: 100%;
+					position: relative;
+
+					.valid-msg {
+						position: absolute;
+						top: 6rem;
+						color: red;
+						font-size: 1.2rem;
+					}
 				}
 			}
 
@@ -86,7 +119,26 @@ const BasicInformation = styled.section`
 					}
 					.end-date {
 						width: 100%;
+						position: relative;
+
+						.valid-msg {
+							position: absolute;
+							top: 6.5rem;
+							color: red;
+							font-size: 1.2rem;
+						}
 					}
+				}
+			}
+
+			.inputs-procedure {
+				position: relative;
+
+				.valid-msg {
+					position: absolute;
+					top: 6rem;
+					color: red;
+					font-size: 1.2rem;
 				}
 			}
 		}

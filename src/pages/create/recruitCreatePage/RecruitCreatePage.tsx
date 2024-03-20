@@ -20,16 +20,18 @@ import RecruitTags from '../../../components/recruit/create/RecruitTags';
 const RecruitCreatePage = () => {
 	const navigate = useNavigate();
 	const [isSubmit, setIsSubmit] = useRecoilState(validState);
-	const [formdata, setFormdata] = useRecoilState(recruitInputState);
+	const [formData, setFormData] = useRecoilState(recruitInputState);
 
 	const onClickCancel = () => {
 		// 모달창 띄워서 한 번 더 확인시키고 이동하기
 		// navigate('/');
 	};
-	console.log(formdata);
+
 	const uploadPost = useMutation({
-		mutationFn: () => postingRecruit(formdata),
+		mutationFn: () => postingRecruit(formData),
 	});
+
+	console.log(formData);
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -39,7 +41,7 @@ const RecruitCreatePage = () => {
 			isSubmitted: true,
 		}));
 
-		uploadPost.mutate(formdata as any);
+		uploadPost.mutate(formData as any);
 		// navigate(`/recruit/${uploadPost}`);
 	};
 

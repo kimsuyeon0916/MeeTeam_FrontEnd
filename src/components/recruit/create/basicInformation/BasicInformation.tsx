@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
 	DeadlineSelect,
 	DateSelect,
@@ -7,8 +7,18 @@ import {
 	ContainerCourse,
 } from '../../../index';
 import S from './BasicInformation.styled';
+import { useRecoilState } from 'recoil';
+import { recruitInputState } from '../../../../atom';
+import { useValid } from '../../../../hooks';
 
 const BasicInformation = () => {
+	const [formData, setFormData] = useRecoilState(recruitInputState);
+	const { validMessage, isValid } = useValid(formData);
+
+	const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setFormData(prev => ({ ...prev, title: event.target.value }));
+	};
+
 	return (
 		<S.BasicInformation>
 			<section className='container-basic'>
@@ -20,13 +30,24 @@ const BasicInformation = () => {
 						<span className='input-subtitle'>
 							구인글 제목 <span>{'*'}</span>
 						</span>
-						<input type='text' placeholder='40자 이내로 제목을 작성해주세요.' />
+						<input
+							type='text'
+							placeholder='40자 이내로 제목을 작성해주세요.'
+							value={formData.title}
+							onChange={onChangeTitle}
+						/>
+						{isValid.isSubmitted && !isValid.isTitle && (
+							<p className='valid-msg'>{validMessage.title}</p>
+						)}
 					</article>
 					<article className='inputs-deadline'>
 						<span className='input-subtitle'>
 							구인글 마감일 <span>{'*'}</span>
 						</span>
 						<DeadlineSelect />
+						{isValid.isSubmitted && !isValid.isDeadline && (
+							<p className='valid-msg'>{validMessage.deadline}</p>
+						)}
 					</article>
 					<WrapperScopeCategory />
 					<article className='inputs-dates'>
@@ -39,6 +60,9 @@ const BasicInformation = () => {
 							</div>
 							<div className='end-date'>
 								<DateSelect type='end' />
+								{isValid.isSubmitted && !isValid.isEndDate && (
+									<p className='valid-msg'>{validMessage.endDate}</p>
+								)}
 							</div>
 						</section>
 					</article>

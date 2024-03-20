@@ -60,8 +60,8 @@ export const recruitInputState = atom<InputState>({
 		fieldId: 1,
 		deadline: simple,
 		proceedType: '',
-		startDate: '',
-		endDate: '',
+		startDate: simpleDate(new Date()),
+		endDate: simpleDate(new Date()),
 		courseTagDto: {
 			isCourse: false,
 			courseTagName: '',
@@ -81,6 +81,7 @@ export const validMessageState = atom({
 		category: '',
 		deadline: '',
 		endDate: '',
+		procedure: '',
 		courseTagDto: {
 			courseTagName: '',
 			courseTagProfessor: '',
@@ -98,6 +99,7 @@ export const validState = atom({
 		isCategory: false,
 		isDeadline: false,
 		isEndDate: false,
+		isProcedure: false,
 		isCourseTagDto: {
 			courseTagName: false,
 			courseTagProfessor: false,
