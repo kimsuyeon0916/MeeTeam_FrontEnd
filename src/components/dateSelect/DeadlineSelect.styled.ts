@@ -83,7 +83,9 @@ const DeadlineSelect = styled.div`
 		margin-bottom: -8px;
 		display: flex;
 		justify-content: center;
-		gap: 1.3rem;
+		gap: 2.3rem;
+		font-size: 1.2rem;
+		font-weight: 600;
 	}
 
 	.selectedDay {
@@ -91,22 +93,23 @@ const DeadlineSelect = styled.div`
 		background: #5877fc;
 		color: #fff;
 		display: flex;
-		width: 1rem;
-		height: 1rem;
-		padding: 1rem;
+		width: 2.7rem;
+		height: 2.7rem;
+		padding: 0.4rem;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		flex-shrink: 0;
+		font-weight: 600;
 		box-sizing: border-box;
 	}
 
 	.unselectedDay {
 		border-radius: 0.4rem;
 		display: flex;
-		width: 1rem;
-		height: 1rem;
-		padding: 1rem;
+		width: 2.7rem;
+		height: 2.7rem;
+		padding: 0.4rem;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
@@ -126,13 +129,13 @@ const DeadlineSelect = styled.div`
 		text-align: center;
 		display: flex;
 		flex-direction: column;
-		gap: 1rem;
+		gap: 1.3rem;
 
 		.react-datepicker__day-names,
 		.react-datepicker__week {
 			white-space: nowrap;
 			display: flex;
-			gap: 1rem;
+			gap: 1.3rem;
 			justify-content: center;
 		}
 	}
