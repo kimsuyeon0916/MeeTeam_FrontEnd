@@ -116,6 +116,7 @@ const BasicInformation = styled.section`
 
 					.start-date {
 						width: 100%;
+						position: relative;
 					}
 					.end-date {
 						width: 100%;
