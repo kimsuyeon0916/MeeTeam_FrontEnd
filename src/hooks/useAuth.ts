@@ -34,6 +34,7 @@ export const useCheckExist = ({ onSuccess, setUserState }: AuthProps = {}) => {
 		mutationFn: checkExist,
 		onSuccess: data => {
 			if (data?.accessToken) {
+				localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
 				setUserState?.(data.user);
 			}
 			if (data?.platformId) {
