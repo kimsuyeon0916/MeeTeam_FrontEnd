@@ -2,5 +2,8 @@ import { User } from './index';
 
 export interface UserReponse {
 	user: User;
-	token: string;
+	accessToken: string;
+	refreshToken?: string;
+	platformId?: string;
+	isEnable?: boolean;
 }

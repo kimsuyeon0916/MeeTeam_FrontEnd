@@ -26,7 +26,7 @@ const SignUpPage = () => {
 				<div className='account__form-row'>
 					{SIGN_UP_DATA.map(
 						({ label, type, placeholder, name }, index) =>
-							name !== 'nickName' && (
+							name !== 'nickname' && (
 								<label className='account__label' key={index}>
 									{label}
 									<input

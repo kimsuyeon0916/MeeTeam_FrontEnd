@@ -5,7 +5,7 @@ export interface Account {
 }
 
 export interface User {
-	nickName: string;
+	nickname: string;
 	accountInformation: Account;
 	schoolInformation: Account;
 }
@@ -13,11 +13,11 @@ export interface User {
 const SIGN_UP_DATA = [
 	{
 		label: '닉네임',
-		name: 'nickName',
+		name: 'nickname',
 		type: 'text',
 		placeholder: '닉네임을 입력해주세요',
 		required: true,
-		validation: INPUT_VALIDATION.nickName,
+		validation: INPUT_VALIDATION.nickname,
 	},
 	{
 		label: '이름',

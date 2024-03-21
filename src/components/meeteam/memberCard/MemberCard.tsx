@@ -55,7 +55,7 @@ const MemberCard = ({ member }: { member: MeeTeamMember }) => {
 			<div className='member-card__row'>
 				<ProfileImage size='middle' url={member.imageUrl} />
 				<div className='member-card__column'>
-					<div className='member-card__title'>{member.nickName}</div>
+					<div className='member-card__title'>{member.nickname}</div>
 					<div className='member-card__row'>
 						<div className='member-card__column--small-text'>
 							<div className='member-card__row--small-text'>

@@ -1,16 +1,29 @@
-import React from 'react';
-import { deadlineState } from '../../atom';
-import { useRecoilState } from 'recoil';
+import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import S from './DeadlineSelect.styled';
 import 'react-datepicker/dist/react-datepicker.css';
+import { useRecoilState } from 'recoil';
+import { recruitInputState } from '../../atom';
+import { simpleDate } from '../../utils';
 
 interface RecruitmentDeadLine {
 	type?: string;
 }
 
 const DeadlineSelect = ({ type }: RecruitmentDeadLine) => {
-	const [endDate, setEndDate] = useRecoilState(deadlineState);
+	const [endDate, setEndDate] = useState(new Date());
+	const [info, setInfo] = useRecoilState(recruitInputState);
+
+	const onChangeDate = (date: Date) => {
+		if (date) {
+			setEndDate(() => {
+				const result = simpleDate(date);
+				setInfo(prevInfo => ({ ...prevInfo, deadline: result }));
+				return date;
+			});
+		}
+	};
+
 	return (
 		<S.DeadlineSelect>
 			<DatePicker
@@ -18,10 +31,11 @@ const DeadlineSelect = ({ type }: RecruitmentDeadLine) => {
 				selected={endDate}
 				showPopperArrow={false}
 				isClearable={!type ? true : false}
-				onChange={date => date && setEndDate(date)}
+				onChange={onChangeDate}
 				minDate={new Date()}
 				placeholderText={type && '구인 글 마감일을 선택해주세요.'}
 				dateFormat='yyyy년 MM월 dd일'
+				tabIndex={-1}
 			/>
 		</S.DeadlineSelect>
 	);

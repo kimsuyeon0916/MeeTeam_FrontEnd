@@ -9,7 +9,7 @@ import SchoolCertificationPage from './account/schoolCertification/SchoolCertifi
 import { SCHOOL_CERTIFICATION_DATA } from './account/schoolCertification/SchoolCertificationData';
 import { INPUT_VALIDATION } from './account/validation';
 import { SIGN_UP_DATA } from './account/signUp/SignUpData';
-import NickNameSettingPage from './account/signUp/nickNameSetting/NickNameSettingPage';
+import NicknameSettingPage from './account/signUp/nicknameSetting/NicknameSettingPage';
 import type { Account, User } from './account/signUp/SignUpData';
 import PassWordFindingPage from './account/passWordFindingPage/PassWordFindingPage';
 import { PASSWORD_DATA } from './account/passWordFindingPage/PassWordData';
@@ -36,7 +36,7 @@ export {
 	User,
 	INPUT_VALIDATION,
 	SIGN_UP_DATA,
-	NickNameSettingPage,
+	NicknameSettingPage,
 	Account,
 	PassWordFindingPage,
 	PASSWORD_DATA,

@@ -2,8 +2,7 @@ import React, { useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { Upload } from '../../../assets';
 import { modules } from '../../../utils/index';
-import { Subtitle, Dot, InputDropdown, MeeteamTag } from '../../../components';
-import { areaState, categoryState, dateState, fieldState } from '../../../atom';
+import { Subtitle, Dot, MeeteamTag } from '../../../components';
 import S from './OutputCreatePage.styled';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -14,10 +13,6 @@ const OutputCreatePage = () => {
 	const navigate = useNavigate();
 	const constraintsRef = useRef(null);
 	const quillRef = useRef<ReactQuill | null>(null);
-	const area = useRecoilValue(areaState);
-	const field = useRecoilValue(fieldState);
-	const category = useRecoilValue(categoryState);
-	const [startDate, endDate] = useRecoilValue(dateState);
 	const [images, setImages] = useState(['Image 1', 'Image 2', 'Image 3', 'Image 4', 'Image 5']);
 	const [teamName, setTeamName] = useState<string>('');
 	const [imgFile, setImgFile] = useState<string>('');
@@ -82,52 +77,6 @@ const OutputCreatePage = () => {
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-
-		// 밋팀 팀명 글자수 검사
-		if (teamName.length === 0) {
-			setIsValidName({ validName: false, validMessage: '* 밋팀 이름을 입력해주세요.' });
-		}
-		if (teamName.length !== 0) {
-			setIsValidName({ validName: true, validMessage: '' });
-		}
-
-		// 밋팀 범위 검사
-		if (area === '') {
-			setIsValidArea({ validArea: false, validMessage: '* 범위를 선택해주세요.' });
-		}
-		if (area !== '') {
-			setIsValidArea({ validArea: true, validMessage: '' });
-		}
-
-		// 밋팀 분야 검사
-		if (field === '') {
-			setIsValidField({ validField: false, validMessage: '* 분야를 선택해주세요.' });
-		}
-		if (field !== '') {
-			setIsValidField({ validField: true, validMessage: '' });
-		}
-
-		// 밋팀 유형 검사
-		if (category === '') {
-			setIsValidCategory({ validCategory: false, validMessage: '* 유형을 선택해주세요.' });
-		}
-		if (category !== '') {
-			setIsValidCategory({ validCategory: true, validMessage: '' });
-		}
-
-		// 밋팀 기간 검사
-		if (endDate < new Date()) {
-			setIsValidDate({
-				validDate: false,
-				validMessage: '* 날짜를 다시 설정해주세요.',
-			});
-		}
-		if (endDate > new Date()) {
-			setIsValidDate({
-				validDate: true,
-				validMessage: '',
-			});
-		}
 	};
 
 	const handleMouseOver = () => {
@@ -178,56 +127,7 @@ const OutputCreatePage = () => {
 							</span>
 							{!isValidName.validName && <p>{isValidName.validMessage}</p>}
 						</div>
-						<div className='container__info'>
-							<div className='info-wrapper'>
-								<div className='container__info-select'>
-									<div>
-										<InputDropdown
-											isDot='true'
-											title='범위'
-											optionData={['교내', '교외']}
-											type='범위'
-										/>
-										{!isValidArea.validArea && <p>{isValidArea.validMessage}</p>}
-									</div>
-									<div>
-										<InputDropdown isDot='true' title='분야' optionData={['개발']} type='분야' />
-										{!isValidField.validField && <p>{isValidField.validMessage}</p>}
-									</div>
-								</div>
-								<div className='container__info-select'>
-									<div>
-										<InputDropdown
-											isDot='true'
-											title='유형'
-											optionData={['프로젝트', '스터디']}
-											type='유형'
-										/>
-										{!isValidCategory.validCategory && <p>{isValidCategory.validMessage}</p>}
-									</div>
-									<div>
-										<InputDropdown
-											isDot='false'
-											title='진행 방식'
-											optionData={['온라인', '오프라인']}
-										/>
-									</div>
-								</div>
-								<div className='container__info-select'>
-									<div>
-										<InputDropdown isDot='true' title='기간' optionData={[]} type='기간' />
-										{!isValidDate.validDate && <p>{isValidDate.validMessage}</p>}
-									</div>
-									<div className='fix'>
-										<InputDropdown
-											isDot='false'
-											title='공개 여부'
-											optionData={['공개', '비공개']}
-										/>
-									</div>
-								</div>
-							</div>
-						</div>
+						<div className='container__info'></div>
 						<div className='container__tag'>
 							<div>
 								<Subtitle>{'밋팀 태그'}</Subtitle>

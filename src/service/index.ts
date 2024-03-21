@@ -1,6 +1,6 @@
 import { EndPoint } from './endPoint';
 import { axiosInstance, axiosAuthInstance } from './axiosInstance';
-import { signUp, certificateSchool, checkExist } from './auth/auth';
+import { signUp, certificateSchool, checkExist, checkDuplicateNickname } from './auth/auth';
 import { readProfile } from './user/Profile';
 
 export {
@@ -10,5 +10,6 @@ export {
 	signUp,
 	certificateSchool,
 	checkExist,
+  checkDuplicateNickname,
 	readProfile,
 };

@@ -1,15 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import S from './MeeteamTag.styled';
+import { useSetRecoilState } from 'recoil';
+import { recruitInputState } from '../../atom';
 
 interface IMeeteamTag {
 	tags?: string[];
 }
 
 const MeeteamTag = ({ tags }: IMeeteamTag) => {
+	const setInfos = useSetRecoilState(recruitInputState);
 	const [tagItem, setTagItem] = useState<string>('');
 	const [tagList, setTagList] = useState<string[]>([]);
 	const [isTouched, setIsTouched] = useState<boolean>(false);
-	const copyTagList = [...tagList];
 	const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
 	const options = ['UI/UX', 'GUI', 'CX', 'BI', 'Figma', 'React', 'Spring', 'Node.js'];
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -26,15 +28,23 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 	};
 
 	const submitTagItem = () => {
-		setTagList([...tagList, tagItem]);
+		setTagList(prev => {
+			const updatedList = [...prev, tagItem];
+			setInfos(prev => ({ ...prev, tag: updatedList }));
+			return updatedList;
+		});
 		setTagItem('');
 		setIsDropdownVisible(false);
 	};
 
 	const deleteTagItem = (event: any) => {
 		const deletedIndex = Number(event.target.id);
-		copyTagList.splice(deletedIndex, 1);
-		setTagList(copyTagList);
+		setTagList(prev => {
+			const updatedList = [...prev];
+			updatedList.splice(deletedIndex, 1);
+			setInfos(prev => ({ ...prev, tag: updatedList }));
+			return updatedList;
+		});
 	};
 
 	const onClickInput = () => {
@@ -44,7 +54,12 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 
 	const onClickTagOptions = (selectedTag: string) => {
 		if (tagList.length < 20) {
-			setTagList([...tagList, selectedTag]);
+			//setTagList([...tagList, selectedTag]);
+			setTagList(prev => {
+				const updatedList = [...prev, selectedTag];
+				setInfos(prev => ({ ...prev, tag: updatedList }));
+				return updatedList;
+			});
 			setIsDropdownVisible(false);
 		}
 	};
@@ -71,7 +86,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 		<S.MeeteamTag ref={dropdownRef}>
 			{!tags ? (
 				<div className='tag__box' onClick={onClickInput}>
-					{copyTagList.map((tagItem, index) => {
+					{tagList.map((tagItem, index) => {
 						return (
 							<div className='tag__item' key={index}>
 								<span>{tagItem}</span>

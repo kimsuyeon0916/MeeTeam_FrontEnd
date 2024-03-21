@@ -1,10 +1,8 @@
 import Header from './header/Header';
-import Subtitle from './subtitle/Subtitle';
+import Subtitle from './title/subtitle/Subtitle';
 import Dot from './dot/Dot';
-import InputDropdown from './inputDropdown/InputDropdown';
 import CustomSelect from './customSelect/CustomSelect';
 import MeeteamTag from './tag/MeeteamTag';
-import MemberSelect from './memberSelect/MemberSelect';
 import AddButton from './addButton/AddButton';
 import ProgressBar from './meeteam/progressBar/ProgressBar';
 import Menu from './meeteam/menu/Menu';
@@ -78,6 +76,7 @@ import ManageRecruitCard from './recruit/ManageRecruitCard';
 import Status from './meeteam/status/Status';
 import Filter from './meeteam/filter/Filter';
 import Dropdown from './dropdown/Dropdown';
+import DateSelect from './dateSelect/DateSelect';
 import DeadlineSelect from './dateSelect/DeadlineSelect';
 import Icon from './meeteam/icon/Icon';
 import ApplyInfomation from '../pages/recruit/RecruitDetailPage/steps/ApplyInfomation';
@@ -88,21 +87,26 @@ import RecruitCard from './meeteam/card/RecruitCard';
 import Pagination from './pagination/Pagination';
 import NaverLogin from './naver/NaverLogin';
 import Create from './header/Create';
+import TitleAndIntro from './title/titleAndIntro/TitleAndIntro';
+import InputContainer from './inputDropdown/inputContainer/InputContainer';
+import RecruitOptions from './optionMenu/recruitOptions/RecruitOptions';
 import Comment from './comment/comment/Comment';
 import CommentInput from './comment/commentInput/CommentInput';
 import ReplyInput from './comment/replyInput/ReplyInput';
 import ReplyComment from './comment/comment/ReplyComment';
 import Skill from './skills/Skill';
 import PortfolioCard from './portfolio/card/PortfolioCard';
+import InputCourse from './inputDropdown/inputCourse/InputCourse';
+import InputProfessor from './inputDropdown/inputCourse/InputProfessor';
+import InputRole from './inputDropdown/inputRole/InputRole';
+import InputRoleForm from './inputDropdown/inputRole/InputRoleForm';
 
 export {
 	Header,
 	Subtitle,
 	Dot,
-	InputDropdown,
 	CustomSelect,
 	MeeteamTag,
-	MemberSelect,
 	ProgressBar,
 	Menu,
 	Main,
@@ -177,10 +181,18 @@ export {
 	RecruitCard,
 	Pagination,
 	Create,
+	TitleAndIntro,
+	DateSelect,
+	InputContainer,
+	RecruitOptions,
 	CommentInput,
 	ReplyInput,
 	Comment,
 	ReplyComment,
 	Skill,
 	PortfolioCard,
+	InputCourse,
+	InputProfessor,
+	InputRole,
+	InputRoleForm,
 };
