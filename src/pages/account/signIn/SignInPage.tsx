@@ -15,13 +15,13 @@ const SignInPage = () => {
 	};
 
 	const handleNaverSignInSuccess = () => {
-		if (data?.accessToken) {
+		if (localStorage?.ACCESS_TOKEN_KEY) {
 			return navigate('/');
 		}
 		return navigate('/signup/school');
 	};
 
-	const { data, mutate } = useCheckExist({ onSuccess: handleNaverSignInSuccess });
+	const { mutate } = useCheckExist({ onSuccess: handleNaverSignInSuccess });
 
 	useEffect(() => {
 		const code = getAuthCode();
