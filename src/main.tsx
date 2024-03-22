@@ -12,13 +12,14 @@ import {
 	MyActivityLike,
 	SignInPage,
 	SchoolCertificationPage,
-	NickNameSettingPage,
+	NicknameSettingPage,
 	SignUpPage,
 	PassWordFindingPage,
 	MyActivityWrapper,
 	MyActivityInvited,
 	MyActivityApply,
 	MyActivityBookmark,
+	ProfileDetailsPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
 				element: <GalaryPage />,
 			},
 			{
-				path: 'signIn',
+				path: 'signin',
 				element: <SignInPage />,
 			},
 			{
@@ -52,11 +53,11 @@ const router = createBrowserRouter([
 				element: <PassWordFindingPage />,
 			},
 			{
-				path: 'signUp',
+				path: 'signup',
 				children: [
 					{ path: '', element: <SignUpPage /> },
 					{ path: 'school?', element: <SchoolCertificationPage /> },
-					{ path: 'nickName', element: <NickNameSettingPage /> },
+					{ path: 'nickname', element: <NicknameSettingPage /> },
 				],
 			},
 			{
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
 			{
 				path: 'create/output',
 				element: <OutputCreatePage />,
+			},
+			{
+				path: 'profile/:nickname?',
+				element: <ProfileDetailsPage />,
 			},
 		],
 	},

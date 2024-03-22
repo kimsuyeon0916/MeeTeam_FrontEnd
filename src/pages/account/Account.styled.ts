@@ -7,17 +7,26 @@ const AccountLayout = styled.div`
 	align-items: center;
 	justify-content: center;
 	margin: 15rem auto;
-	letter-spacing: 0.015rem;
-	font-weight: 400;
-	color: var(--text-color-2, #373f41);
-	font-size: 1.5rem;
+
+	color: var(--Text-textColor1, #151515);
+
+	/* Body/body1/medium */
+	font-size: 1.6rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 1.9rem; /* 118.75% */
+	letter-spacing: 0.0032rem;
 
 	.account__header {
 		position: relative;
 		display: flex;
-		line-height: 4.2rem;
-		color: var(--text-color, #151515);
-		font-size: 2.7rem;
+
+		/* Headline/h1 */
+		font-size: 2.8rem;
+		font-style: normal;
+		font-weight: 700;
+		line-height: 3.6rem; /* 128.571% */
+		letter-spacing: 0.0056rem;
 	}
 `;
 
@@ -55,11 +64,10 @@ const AccountForm = styled.form`
 		}
 	}
 
-	.account__form-row {
+	.account__form-column {
 		display: flex;
 		flex-direction: column;
-		row-gap: 1.5rem;
-		width: 34.8rem;
+		row-gap: 2rem;
 	}
 
 	.account_input-validation {

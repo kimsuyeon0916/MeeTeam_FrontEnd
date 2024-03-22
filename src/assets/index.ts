@@ -12,6 +12,9 @@ import Logo from './Logo.svg';
 import CancelBtn from './CancelBtn.svg';
 import XBtn from './XBtn.svg';
 import { DATE_ICON } from './DateIcon';
+import DefaultProfileImage from './DefaultProfileImage.svg';
+import DefaultPortfolioImage from './DefaultPortfolioImage.svg';
+import Search from './Search.svg';
 
 export {
 	Exit,
@@ -28,4 +31,7 @@ export {
 	CancelBtn,
 	XBtn,
 	DATE_ICON,
+	DefaultProfileImage,
+	DefaultPortfolioImage,
+  	Search,
 };

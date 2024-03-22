@@ -1,27 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import S from './SchoolCertificationPage.styled';
 import { GoBack } from '../../../components';
 import { SCHOOL_CERTIFICATION_DATA } from '../..';
-import { useCertificateSchool } from '../../../hooks';
-import { useRecoilState } from 'recoil';
-import { naverSignUpState, submitEmailState } from '../../../atom';
+import { useCertificateSchool, useReadUniversityList, useReadDepartmentList } from '../../../hooks';
+import { ComboBox } from '../../../components';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
+
+interface FormValues {
+	year: string;
+	university: string;
+	department: string;
+	email: string;
+}
 
 const SchoolCertificationPage = () => {
-	const [signUp, setSignUp] = useRecoilState(naverSignUpState);
-
 	const [next, setNext] = useState(false);
-
-	const [submitEmail, setSubmitEmail] = useRecoilState(submitEmailState);
-
-	const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		setSignUp({ ...signUp, [name]: value });
-	};
+	const [submitEmail, setSubmitEmail] = useState(false);
+	const [domain, setDomain] = useState<string>();
 
 	const nextHandler = (e: React.MouseEvent) => {
+		// 학과 리스트 넘겨줄 때 domain 만 따로 넘겨주는 거 변경 요청 시도
 		e.preventDefault();
+		setDomain(
+			universityList?.find(university => university.universityName === getValues('university'))
+				?.universityDomain
+		);
 		setNext(prev => !prev);
 	};
+
+	const { register, handleSubmit, setValue, control, getValues } = useForm<FormValues>();
 
 	const checkCertificationInSuccess = () => {
 		setSubmitEmail(() => true);
@@ -29,41 +37,70 @@ const SchoolCertificationPage = () => {
 
 	const { mutate } = useCertificateSchool({ onSuccess: checkCertificationInSuccess });
 
-	const certificateHandler = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+	const certificateHandler: SubmitHandler<FormValues> = data => {
+		console.log(localStorage.PLATFORM_ID);
+		mutate({
+			platformId: localStorage.PLATFORM_ID,
+			year: data.year,
+			universityId: sessionStorage.university,
+			departmentId: sessionStorage.department,
+			emailId: data.email,
+		});
+	};
 
-		signUp && mutate(signUp);
+	const { data: universityList, refetch: readUniversityList } = useReadUniversityList();
+	const { data: departmentList, refetch: readDepartmentList } = useReadDepartmentList();
+
+	useEffect(() => {
+		readUniversityList();
+	}, []);
+
+	useEffect(() => {
+		sessionStorage?.university && readDepartmentList();
+	}, [sessionStorage?.university]);
+
+	const optionList = (name: string) => {
+		if (name === 'university') {
+			return universityList?.map(university => ({
+				id: university.universityId,
+				title: university.universityName,
+			}));
+		} else if (name === 'department') {
+			return departmentList?.map(department => ({
+				id: department.departmentId,
+				title: department.departmentName,
+			}));
+		}
 	};
 
 	return (
 		<S.SchoolCertificationLayout>
 			<header className='account__header'>
-				<h1>
-					학교 인증하고, <b>밋팀</b>을 만나보세요!
-				</h1>
+				<h1>학교 인증하고, 밋팀을 만나보세요!</h1>
 				{next && (
 					<GoBack clickHandler={e => nextHandler(e)} style='left: -15.98rem; top: -5.53rem; ' />
 				)}
 			</header>
 			<S.SchoolCertificationPageForm
-				onSubmit={e => certificateHandler(e)}
+				onSubmit={handleSubmit(certificateHandler)}
 				$submitEmail={submitEmail}
 			>
-				<div className='account__form-row'>
+				<div className='account__form-column'>
 					{SCHOOL_CERTIFICATION_DATA.map(
-						({ label, type, placeholder, name, isNext }, index) =>
+						({ isNext, name, ...props }) =>
 							isNext === next && (
-								<label className='account__label' key={index}>
-									{label}
-									<input
-										className='account__input'
-										type={type}
-										placeholder={placeholder}
+								<S.SchoolCertificationRow key={name}>
+									<ComboBox
+										register={register}
+										setValue={setValue}
+										optionList={optionList(name)}
 										name={name}
-										value={signUp?.[name]}
-										onChange={e => changeHandler(e)}
+										{...props}
 									/>
-								</label>
+									{next && name === 'email' && (
+										<S.SchoolCertificationEmailDomain>{`@ ${domain}`}</S.SchoolCertificationEmailDomain>
+									)}
+								</S.SchoolCertificationRow>
 							)
 					)}
 				</div>
@@ -78,6 +115,7 @@ const SchoolCertificationPage = () => {
 					{next ? '인증하기' : '다음'}
 				</S.SchoolCertificationButton>
 			</S.SchoolCertificationPageForm>
+			<DevTool control={control} />
 		</S.SchoolCertificationLayout>
 	);
 };
