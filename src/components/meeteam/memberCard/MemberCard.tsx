@@ -53,7 +53,7 @@ const MemberCard = ({ member }: { member: MeeTeamMember }) => {
 	return (
 		<S.MemberCardLayout>
 			<div className='member-card__row'>
-				<ProfileImage size='middle' url={member.imageUrl} />
+				<ProfileImage nickname={member.nickname} size='5.5125rem' url={member.imageUrl} />
 				<div className='member-card__column'>
 					<div className='member-card__title'>{member.nickname}</div>
 					<div className='member-card__row'>
