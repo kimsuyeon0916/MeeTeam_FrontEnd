@@ -8,4 +8,9 @@ export const EndPoint = {
 		readUniversityList: '/university',
 		readDepartmentList: '/department',
 	},
+
+	/* profile */
+	PROFILE: {
+		read: (userId: string) => `/user/profile/${userId}`,
+	},
 };

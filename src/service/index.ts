@@ -8,15 +8,17 @@ import {
 	readUniversityList,
 	readDepartmentList,
 } from './auth/auth';
+import { readProfile } from './user/Profile';
 
 export {
 	EndPoint,
 	axiosInstance,
 	axiosAuthInstance,
-	checkExist,
+  checkExist,
 	signUp,
 	certificateSchool,
-	checkDuplicateNickname,
-	readUniversityList,
+  checkDuplicateNickname,
+  readUniversityList,
 	readDepartmentList,
+	readProfile,
 };

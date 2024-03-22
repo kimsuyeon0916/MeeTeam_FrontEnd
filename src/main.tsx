@@ -19,6 +19,7 @@ import {
 	MyActivityInvited,
 	MyActivityApply,
 	MyActivityBookmark,
+	ProfileDetailsPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
 			{
 				path: 'create/output',
 				element: <OutputCreatePage />,
+			},
+			{
+				path: 'profile/:nickname?',
+				element: <ProfileDetailsPage />,
 			},
 		],
 	},

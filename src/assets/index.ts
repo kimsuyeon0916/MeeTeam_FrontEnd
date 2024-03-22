@@ -11,6 +11,8 @@ import { CREATE_ICON } from './IconData';
 import Logo from './Logo.svg';
 import CancelBtn from './CancelBtn.svg';
 import XBtn from './XBtn.svg';
+import DefaultProfileImage from './DefaultProfileImage.svg';
+import DefaultPortfolioImage from './DefaultPortfolioImage.svg';
 import Search from './Search.svg';
 
 export {
@@ -27,5 +29,7 @@ export {
 	Logo,
 	CancelBtn,
 	XBtn,
-	Search,
+	DefaultProfileImage,
+	DefaultPortfolioImage,
+  Search,
 };

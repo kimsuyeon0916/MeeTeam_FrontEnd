@@ -27,7 +27,6 @@ import Link from './meeteam/main/link/Link';
 import DashBoardLink from './meeteam/main/dashBoard/dashBoardLink/DashBoardLink';
 import {
 	memberList,
-	MEMBER_PROFILE_DEFAULT_ICON,
 	MEMBER_PLUS_ICON,
 	MEMBER_PLUS_CARD,
 	MEMBER_BOTTOM_ARROW_ICON,
@@ -62,7 +61,7 @@ import GoBack from './goBack/GoBack';
 import KebabMenu from './kebabMenu/KebabMenu';
 import KebabMenuIcon from './kebabMenuIcon/KebabMenu';
 import OptionMenu from './optionMenu/OptionMenu';
-import RadiusProfile from './profile/RadiusProfile';
+import ProfileImage from './profile/image/ProfileImage';
 import {
 	linkList,
 	LINK_BOTTOM_ARROW_ICON,
@@ -95,6 +94,8 @@ import Comment from './comment/comment/Comment';
 import CommentInput from './comment/commentInput/CommentInput';
 import ReplyInput from './comment/replyInput/ReplyInput';
 import ReplyComment from './comment/comment/ReplyComment';
+import Skill from './skills/Skill';
+import PortfolioCard from './portfolio/card/PortfolioCard';
 import InputCourse from './inputDropdown/inputCourse/InputCourse';
 import InputProfessor from './inputDropdown/inputCourse/InputProfessor';
 import InputRole from './inputDropdown/inputRole/InputRole';
@@ -130,7 +131,6 @@ export {
 	DashBoardLink,
 	memberList,
 	MeeTeamMember,
-	MEMBER_PROFILE_DEFAULT_ICON,
 	MEMBER_PLUS_ICON,
 	MEMBER_PLUS_CARD,
 	MEMBER_BOTTOM_ARROW_ICON,
@@ -154,7 +154,7 @@ export {
 	KebabMenu,
 	KebabMenuIcon,
 	OptionMenu,
-	RadiusProfile,
+	ProfileImage,
 	linkList,
 	LINK_BOTTOM_ARROW_ICON,
 	LINK_SHORTCUTS_BUTTON,
@@ -191,6 +191,8 @@ export {
 	ReplyInput,
 	Comment,
 	ReplyComment,
+	Skill,
+	PortfolioCard,
 	InputCourse,
 	InputProfessor,
 	InputRole,

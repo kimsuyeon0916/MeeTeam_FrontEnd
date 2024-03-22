@@ -1,6 +1,6 @@
 import React from 'react';
 import S from './DashBoardMember.styled';
-import { memberList, MeeTeamMember, MEMBER_PLUS_ICON, RadiusProfile } from '../../../..';
+import { memberList, MeeTeamMember, MEMBER_PLUS_ICON, ProfileImage } from '../../../..';
 import { useSetRecoilState } from 'recoil';
 import { contentState } from '../../../../../atom';
 
@@ -14,7 +14,7 @@ const DashBoardMember = () => {
 		return memberList.filter(member => member.authority === '멤버');
 	};
 
-	const leader: MeeTeamMember | void = checkLeader();
+	const leader = checkLeader();
 	const members: MeeTeamMember[] = checkMember().slice(0, 3);
 	const remainderCount: number = memberList.length - 4;
 
@@ -33,13 +33,22 @@ const DashBoardMember = () => {
 			</header>
 			<div className='dash-board-member__row'>
 				<h3>리더</h3>
-				<RadiusProfile size='small' url={leader?.imageUrl} />
+				<ProfileImage
+					nickname={leader ? leader.nickname : '리더'}
+					size='4.3313rem'
+					url={leader?.imageUrl}
+				/>
 			</div>
 			<div className='dash-board-member__row'>
 				<h3>멤버</h3>
 				{members.map((member, index) => (
 					<S.DashBoardMemberSpan key={index} $index={index}>
-						<RadiusProfile key={index} size='small' url={member.imageUrl} />
+						<ProfileImage
+							nickname={member.nickname}
+							key={index}
+							size='4.3313rem'
+							url={member.imageUrl}
+						/>
 					</S.DashBoardMemberSpan>
 				))}
 				{remainderCount > 0 && (
