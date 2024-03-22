@@ -98,22 +98,6 @@ const memberList: MeeTeamMember[] = [
 	},
 ];
 
-const MEMBER_PROFILE_DEFAULT_ICON = (
-	<svg xmlns='http://www.w3.org/2000/svg' viewBox='1 1 45 45'>
-		<path
-			d='M23.2472 46.625C35.8793 46.625 46.1195 36.3835 46.1195 23.75C46.1195 11.1165 35.8793 0.875 23.2472 0.875C10.6152 0.875 0.375 11.1165 0.375 23.75C0.375 36.3835 10.6152 46.625 23.2472 46.625Z'
-			fill='#D9D9D9'
-		/>
-		<ellipse cx='23.0149' cy='20.6407' rx='6.94064' ry='6.94149' fill='#878787' />
-		<mask id='mask0_2884_2397' maskUnits='userSpaceOnUse' x='0' y='1'>
-			<ellipse cx='23.259' cy='23.75' rx='22.4972' ry='22.5' fill='#D9D9D9' />
-		</mask>
-		<g mask='url(#mask0_2884_2397)'>
-			<ellipse cx='23.2566' cy='44.3346' rx='14.8386' ry='14.8404' fill='#878787' />
-		</g>
-	</svg>
-);
-
 const MEMBER_PLUS_ICON = (
 	<svg xmlns='http://www.w3.org/2000/svg' width='11' height='11' viewBox='0 0 11 11'>
 		<rect y='4.7207' width='10.5' height='1.05' rx='0.525' />
@@ -181,7 +165,7 @@ const MemberTest = ({ id }: Member) => {
 		specifications: [['Figma', `#E0E6FF`]],
 		id: id,
 	};
-  
+
 	return (
 		<div className='member' id={id}>
 			<MemberCard member={memberTemp} />
@@ -192,11 +176,4 @@ const MemberTest = ({ id }: Member) => {
 	);
 };
 
-export {
-	memberList,
-	MEMBER_PROFILE_DEFAULT_ICON,
-	MEMBER_PLUS_ICON,
-	MEMBER_PLUS_CARD,
-	MEMBER_BOTTOM_ARROW_ICON,
-	MemberTest,
-};
+export { memberList, MEMBER_PLUS_ICON, MEMBER_PLUS_CARD, MEMBER_BOTTOM_ARROW_ICON, MemberTest };

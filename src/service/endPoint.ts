@@ -6,4 +6,9 @@ export const EndPoint = {
 		nickname: '/user/search/check-duplicate',
 		school: '/auth/social/email-verification',
 	},
+
+	/* profile */
+	PROFILE: {
+		read: (userId: string) => `/user/profile/${userId}`,
+	},
 };

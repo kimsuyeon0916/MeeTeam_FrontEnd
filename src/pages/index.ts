@@ -20,6 +20,8 @@ import MyActivityWrapper from './activity/MyActivityWrapper';
 import MyActivityLike from './activity/MyActivityLike';
 import MyActivityApply from './activity/MyActivityApply';
 import MyActivityBookmark from './activity/MyActivityBookmark';
+import ProfileDetailsPage from './profile/ProfileDetailsPage';
+import { userData } from './profile/userData';
 
 export {
 	MainPage,
@@ -45,4 +47,6 @@ export {
 	MyActivityLike,
 	MyActivityApply,
 	MyActivityBookmark,
+	ProfileDetailsPage,
+	userData,
 };

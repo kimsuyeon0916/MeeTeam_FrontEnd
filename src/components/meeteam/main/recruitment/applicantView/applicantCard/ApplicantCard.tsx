@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import S from './ApplicantCard.styled';
-import { Applicant, RadiusProfile } from '../../../../..';
+import { Applicant, ProfileImage } from '../../../../..';
 
 const ApplicantCard = ({ applicant }: { applicant: Applicant }) => {
 	const APPLICANT_PROFILE_ICON = (
@@ -105,8 +105,8 @@ const ApplicantCard = ({ applicant }: { applicant: Applicant }) => {
 	return (
 		<S.ApplicantCardLayout>
 			<div className='applicant-card__profile-column'>
-				<RadiusProfile size='middle' url={applicant.imageUrl} />
-				<div>{applicant.nickname}</div>
+				<ProfileImage size='middle' url={applicant.imageUrl} />
+				<div>{applicant.nickName}</div>
 				<div className='applicant-card__small-text'>
 					{applicant.year}학번, {applicant.rate}
 				</div>
