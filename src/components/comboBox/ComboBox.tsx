@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useImperativeHandle } from 'react';
-import S from './comboBox.styled';
+import S from './ComboBox.styled';
 import { OptionList } from '../index';
 import { FieldValues, UseFormRegister, UseFormSetValue, FormState, Path } from 'react-hook-form';
 
@@ -10,15 +10,15 @@ interface Option {
 
 interface ComboBox<T extends FieldValues> {
 	register: UseFormRegister<T>;
-	setValue: UseFormSetValue<T> | ((T, ...U) => UseFormSetValue<T>);
+	setValue: (...rest: string[]) => UseFormSetValue<T>;
 	formState?: FormState<T>;
 	name: Path<T>;
 	label?: string;
 	icon?: JSX.Element;
 	placeholder?: string;
 	optionList?: Option[];
-	clickInput?: (T) => void;
-	clickOption?: (T) => void;
+	clickInput?: (name: T | string) => void;
+	clickOption?: (name: T | string) => void;
 }
 
 const ComboBox = <T extends FieldValues>({

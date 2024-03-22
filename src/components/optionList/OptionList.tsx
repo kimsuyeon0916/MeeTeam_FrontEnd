@@ -6,17 +6,20 @@ interface Option {
 	title: string;
 }
 
-interface OptionListProps {
-	name: string;
-	handleOptionClick: (T, ...U) => void;
+interface OptionListProps<T> {
+	name: T;
+	handleOptionClick: (...rest: T[]) => void;
 	optionList: Option[];
 }
 
-const OptionList = ({ name, handleOptionClick, optionList }: OptionListProps) => {
+const OptionList = ({ name, handleOptionClick, optionList }: OptionListProps<string>) => {
 	return (
 		<S.OptionList>
 			{optionList.map(({ title, id }) => (
-				<S.OptionItem key={title} onClick={() => handleOptionClick(name, title, id)}>
+				<S.OptionItem
+					key={title}
+					onClick={() => (id ? handleOptionClick(name, title, id) : handleOptionClick(name, title))}
+				>
 					{title}
 				</S.OptionItem>
 			))}
