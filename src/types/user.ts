@@ -1,22 +1,22 @@
 export interface User {
 	imageUrl?: string;
-	nickname: string;
+	nickname?: string;
 	userName?: string;
-	isUserNamePublic: boolean;
+	isUserNamePublic?: boolean;
 	interest?: string;
 	introduction?: string;
 	aboutMe?: string;
-	email: Contact[]; // 논의 필요
+	email?: Contact[]; // 논의 필요
 	phone?: Contact;
-	university: string;
-	department: string;
+	university?: string;
+	department?: string;
 	maxGpa?: string;
 	gpa?: string;
-	year: string;
+	year?: string;
 	skills?: Skill[];
 	awards?: Award[];
 	links?: Link[];
-	portfolios: Portfolio[];
+	portfolios?: Portfolio[];
 	// following?: [
 	// 	{
 	// 		_id: string;

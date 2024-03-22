@@ -13,6 +13,7 @@ import CancelBtn from './CancelBtn.svg';
 import XBtn from './XBtn.svg';
 import DefaultProfileImage from './DefaultProfileImage.svg';
 import DefaultPortfolioImage from './DefaultPortfolioImage.svg';
+import Search from './Search.svg';
 
 export {
 	Exit,
@@ -30,4 +31,5 @@ export {
 	XBtn,
 	DefaultProfileImage,
 	DefaultPortfolioImage,
+  Search,
 };

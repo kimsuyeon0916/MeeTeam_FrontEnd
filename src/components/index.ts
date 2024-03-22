@@ -100,6 +100,8 @@ import InputCourse from './inputDropdown/inputCourse/InputCourse';
 import InputProfessor from './inputDropdown/inputCourse/InputProfessor';
 import InputRole from './inputDropdown/inputRole/InputRole';
 import InputRoleForm from './inputDropdown/inputRole/InputRoleForm';
+import OptionList from './optionList/OptionList';
+import ComboBox from './comboBox/comboBox';
 
 export {
 	Header,
@@ -195,4 +197,6 @@ export {
 	InputProfessor,
 	InputRole,
 	InputRoleForm,
+	OptionList,
+	ComboBox,
 };

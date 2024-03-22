@@ -23,7 +23,7 @@ const SignUpPage = () => {
 				<h1>회원가입</h1>
 			</header>
 			<S.SignUpPageForm onSubmit={e => submitHandelr(e)}>
-				<div className='account__form-row'>
+				<div className='account__form-column'>
 					{SIGN_UP_DATA.map(
 						({ label, type, placeholder, name }, index) =>
 							name !== 'nickname' && (

@@ -5,6 +5,8 @@ export const EndPoint = {
 		all: '/auth/sign-up',
 		nickname: '/user/search/check-duplicate',
 		school: '/auth/social/email-verification',
+		readUniversityList: '/university',
+		readDepartmentList: '/department',
 	},
 
 	/* profile */

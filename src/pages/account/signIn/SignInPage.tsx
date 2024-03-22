@@ -4,6 +4,8 @@ import { NaverLogin } from '../../../components';
 import { useNavigate } from 'react-router-dom';
 import { EndPoint } from '../../../service';
 import { useCheckExist } from '../../../hooks';
+import { useSetRecoilState } from 'recoil';
+import { userState } from '../../../atom';
 
 const SignInPage = () => {
 	const navigate = useNavigate();
@@ -14,14 +16,19 @@ const SignInPage = () => {
 		return urlParams.get('code');
 	};
 
+	const setUserState = useSetRecoilState(userState);
+
 	const handleNaverSignInSuccess = () => {
-		if (data?.accessToken) {
+		if (localStorage?.ACCESS_TOKEN_KEY) {
 			return navigate('/');
 		}
 		return navigate('/signup/school');
 	};
 
-	const { data, mutate } = useCheckExist({ onSuccess: handleNaverSignInSuccess });
+	const { mutate } = useCheckExist({
+		onSuccess: handleNaverSignInSuccess,
+		setUserState: setUserState,
+	});
 
 	useEffect(() => {
 		const code = getAuthCode();
