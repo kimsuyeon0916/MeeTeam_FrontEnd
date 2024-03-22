@@ -35,7 +35,7 @@ export const useCheckExist = ({ onSuccess, setUserState }: AuthProps = {}) => {
 		onSuccess: data => {
 			if (data?.accessToken) {
 				localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
-				setUserState?.(data.user);
+				setUserState?.({ nickname: data.userName, imageUrl: data.pictureUrl }); // data.userName -> data.nickname
 			}
 			if (data?.platformId) {
 				localStorage.setItem(PLATFORM_ID, data.platformId);
@@ -55,7 +55,7 @@ export const useNaverSignUp = ({ onSuccess, setUserState }: AuthProps = {}) => {
 			if (data?.accessToken) {
 				localStorage.removeItem(PLATFORM_ID);
 				localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
-				setUserState?.(data.user);
+				setUserState?.({ nickname: data.userName, imageUrl: data.pictureUrl }); // data.userName -> data.nickname
 				onSuccess?.();
 			}
 		},
