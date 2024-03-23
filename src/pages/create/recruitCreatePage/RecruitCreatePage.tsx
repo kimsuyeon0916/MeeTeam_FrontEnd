@@ -28,8 +28,6 @@ const RecruitCreatePage = () => {
 		mutationFn: () => postingRecruit(formData),
 	});
 
-	console.log(formData);
-
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 

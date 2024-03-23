@@ -19,7 +19,17 @@ const MeeteamTag = styled.div`
 		z-index: 101;
 
 		&:focus-within {
-			border-color: #00a8ff;
+			border-color: #5877fc;
+		}
+
+		&:hover {
+			border: 1px solid #5877fc;
+			transition: 0.2s ease-in-out;
+		}
+
+		.icon-search {
+			position: absolute;
+			right: 2rem;
 		}
 
 		input {

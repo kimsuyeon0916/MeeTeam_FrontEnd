@@ -51,14 +51,6 @@ const RecruitCreatePage = styled.div`
 		}
 	}
 
-	label {
-		color: #8e8e8e;
-		/* Body/body1/medium */
-		font-size: 1.6rem;
-		/* line-height: 1.9rem; */
-		letter-spacing: 0.0032rem;
-	}
-
 	.under-info {
 		width: 100%;
 		height: 0.075rem;

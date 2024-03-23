@@ -7,6 +7,7 @@ import { recruitInputState } from '../../atom';
 import { simpleDate } from '../../utils';
 import { DATE_ICON } from '../../assets';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
+import { WEEKDAY, MONTH } from './dateData';
 
 interface RecruitmentDeadLine {
 	type?: string;
@@ -17,35 +18,11 @@ const YEARS = Array.from(
 	(_, i) => new Date().getFullYear() - i
 );
 
-const MONTH = [
-	'1월',
-	'2월',
-	'3월',
-	'4월',
-	'5월',
-	'6월',
-	'7월',
-	'8월',
-	'9월',
-	'10월',
-	'11월',
-	'12월',
-];
-
-const WEEKDAY = {
-	Sunday: '일',
-	Monday: '월',
-	Tuesday: '화',
-	Wednesday: '수',
-	Thursday: '목',
-	Friday: '금',
-	Saturday: '토',
-};
-
 const DeadlineSelect = ({ type }: RecruitmentDeadLine) => {
 	const [endDate, setEndDate] = useState(new Date());
 	const [info, setInfo] = useRecoilState(recruitInputState);
-	const [isClickMonth, setIsClickMonth] = useState(false);
+	const [isClickMonth, setIsClickMonth] = useState(false); // 달을 클릭하면 변경하기 위해 추가했습니다.
+	const [isClicked, setIsClicked] = useState(false);
 
 	const onChangeDate = (date: Date) => {
 		if (date) {
@@ -55,9 +32,10 @@ const DeadlineSelect = ({ type }: RecruitmentDeadLine) => {
 				return date;
 			});
 		}
+		setIsClicked(true);
 	};
 	return (
-		<S.DeadlineSelect>
+		<S.DeadlineSelect $isClicked={isClicked}>
 			<DatePicker
 				formatWeekDay={nameOfDay => WEEKDAY[nameOfDay]}
 				className={!type ? 'date-picker' : 'date-picker date-picker__recruitment-deadline'}
@@ -69,7 +47,11 @@ const DeadlineSelect = ({ type }: RecruitmentDeadLine) => {
 				dateFormat='yy년 MM월 dd일'
 				tabIndex={-1}
 				icon={DATE_ICON}
-				dayClassName={d => (d.getDate() === endDate!.getDate() ? 'selectedDay' : 'unselectedDay')}
+				dayClassName={d =>
+					d.getDate() === endDate!.getDate() && d.getMonth() === endDate!.getMonth()
+						? 'selectedDay'
+						: 'unselectedDay'
+				}
 				renderCustomHeader={({
 					date,
 					changeYear,

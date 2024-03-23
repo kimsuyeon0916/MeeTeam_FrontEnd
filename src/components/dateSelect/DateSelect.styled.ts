@@ -1,25 +1,11 @@
 import styled from 'styled-components';
 
-const DateSelect = styled.div`
+interface DateControl {
+	$isClicked: boolean;
+}
+
+const DateSelect = styled.div<DateControl>`
 	margin-top: 0.9rem;
-	.date-picker {
-		height: 4.875rem;
-		padding: 1.8rem 2.1rem 1.8rem 2.1rem;
-		border-radius: 8px;
-		cursor: pointer;
-		margin-top: 5px;
-		outline: none;
-		box-sizing: border-box;
-		border-radius: 0.75rem;
-		border: 0.1rem solid #e3e3e3;
-		background: #fff;
-		color: #0e0e0e;
-		font-size: 1.5rem;
-		font-style: normal;
-		font-weight: 400;
-		line-height: 1.35rem; /* 90% */
-		letter-spacing: 0.015rem;
-	}
 
 	.react-datepicker-wrapper {
 		position: relative;
@@ -30,7 +16,7 @@ const DateSelect = styled.div`
 	.container-header {
 		display: flex;
 		justify-content: space-between;
-		padding: 1.8rem 2rem;
+		padding: 1.8rem 4rem;
 		box-sizing: border-box;
 		align-items: center;
 
@@ -91,10 +77,21 @@ const DateSelect = styled.div`
 			border-radius: 0.7581rem;
 			border: 0.1rem solid #e3e3e3;
 			background: #fff;
-			color: #8e8e8e;
+			color: ${props => (props.$isClicked ? '#000' : '#8e8e8e')};
 			font-size: 1.6rem;
 			line-height: 1.9rem;
 			letter-spacing: 0.0032rem;
+			cursor: pointer;
+
+			&:hover {
+				border: 1px solid #5877fc;
+				transition: 0.2s ease-in-out;
+			}
+
+			&:focus {
+				outline: none;
+				border: 1px solid #5877fc;
+			}
 		}
 	}
 

@@ -7,36 +7,13 @@ import { recruitInputState } from '../../atom';
 import { simpleDate } from '../../utils';
 import { DATE_ICON } from '../../assets';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
-
-const MONTH = [
-	'1월',
-	'2월',
-	'3월',
-	'4월',
-	'5월',
-	'6월',
-	'7월',
-	'8월',
-	'9월',
-	'10월',
-	'11월',
-	'12월',
-];
-
-const WEEKDAY = {
-	Sunday: '일',
-	Monday: '월',
-	Tuesday: '화',
-	Wednesday: '수',
-	Thursday: '목',
-	Friday: '금',
-	Saturday: '토',
-};
+import { MONTH, WEEKDAY } from './dateData';
 
 const DateSelect = ({ type }: { type: string }) => {
 	const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 	const setFormdata = useSetRecoilState(recruitInputState);
 	const [isClickMonth, setIsClickMonth] = useState(false);
+	const [isClicked, setIsClicked] = useState(false);
 
 	const onChangeHandler = (date: Date | null) => {
 		setSelectedDate(date);
@@ -47,10 +24,11 @@ const DateSelect = ({ type }: { type: string }) => {
 		if (type === 'end') {
 			setFormdata(prev => ({ ...prev, endDate: convertedDate }));
 		}
+		setIsClicked(true);
 	};
 
 	return (
-		<S.DateSelect>
+		<S.DateSelect $isClicked={isClicked}>
 			<DatePicker
 				formatWeekDay={nameOfDay => WEEKDAY[nameOfDay]}
 				showIcon
@@ -59,7 +37,9 @@ const DateSelect = ({ type }: { type: string }) => {
 				onChange={date => onChangeHandler(date)}
 				icon={DATE_ICON}
 				dayClassName={d =>
-					d.getDate() === selectedDate!.getDate() ? 'selectedDay' : 'unselectedDay'
+					d.getDate() === selectedDate!.getDate() && d.getMonth() === selectedDate!.getMonth()
+						? 'selectedDay'
+						: 'unselectedDay'
 				}
 				renderCustomHeader={({
 					date,

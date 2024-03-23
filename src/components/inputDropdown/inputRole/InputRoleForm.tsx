@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Plus, XBtn } from '../../../assets';
+import { Plus, Search, XBtn } from '../../../assets';
 import S from './InputRoleForm.styled';
 import { Role, InputRoleForm, RoleForPost, InputState } from '../../../types';
 import { useDebounce } from '../../../hooks';
@@ -258,6 +258,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 							onClick={() => setDropdown(prev => ({ ...prev, skill: true }))}
 						/>
 					)}
+					{userRole.skill.length === 0 && <img src={Search} className='icon-search' />}
 				</section>
 				{dropdown.skill && (
 					<section className='dropdown skill'>

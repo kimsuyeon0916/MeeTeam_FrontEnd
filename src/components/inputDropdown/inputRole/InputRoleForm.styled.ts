@@ -48,6 +48,15 @@ const InputRoleForm = styled.article<InputRoleForm>`
 			box-sizing: border-box;
 			border: 0.1rem solid #e3e3e3;
 			border-radius: 0.75rem;
+
+			&:hover {
+				border: 1px solid #5877fc;
+				transition: 0.2s ease-in-out;
+			}
+			&:focus {
+				outline: none;
+				border: 1px solid #5877fc;
+			}
 		}
 
 		.count-input {
@@ -57,6 +66,15 @@ const InputRoleForm = styled.article<InputRoleForm>`
 			box-sizing: border-box;
 			border: 0.1rem solid #e3e3e3;
 			border-radius: 0.75rem;
+
+			&:hover {
+				border: 1px solid #5877fc;
+				transition: 0.2s ease-in-out;
+			}
+			&:focus {
+				outline: none;
+				border: 1px solid #5877fc;
+			}
 		}
 
 		.container-skills {
@@ -77,15 +95,22 @@ const InputRoleForm = styled.article<InputRoleForm>`
 				display: none;
 			}
 
+			&:hover {
+				border: 1px solid #5877fc;
+				transition: 0.2s ease-in-out;
+			}
+
+			&:focus-within {
+				border-color: #5877fc;
+			}
+
 			.skills-input {
 				display: inline-flex;
-				/* min-width: 25rem; */
 				padding: 0;
 				height: 4.875rem;
 				border: none;
 				font-size: 1.4rem;
 				background: transparent;
-				padding-left: 1.3rem;
 				box-sizing: border-box;
 				outline: none;
 			}
@@ -125,6 +150,13 @@ const InputRoleForm = styled.article<InputRoleForm>`
 					width: 2rem;
 					box-sizing: border-box;
 				}
+			}
+
+			.icon-search {
+				position: absolute;
+				width: 2.4rem;
+				height: 2.4rem;
+				right: 1.3rem;
 			}
 		}
 	}

@@ -5,7 +5,7 @@ import { recruitInputState } from '../../atom';
 import { useDebounce } from '../../hooks';
 import { useQuery } from '@tanstack/react-query';
 import { getTagKeyword } from '../../api';
-import { XBtn } from '../../assets';
+import { Search, XBtn } from '../../assets';
 
 interface IMeeteamTag {
 	tags?: string[];
@@ -116,6 +116,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 						value={tagItem}
 						onKeyPress={onKeyPress}
 					/>
+					{tagList.length === 0 && <img src={Search} className='icon-search' />}
 					{isDropdownVisible && (
 						<div className='tag-dropdown'>
 							{!isLoading &&

@@ -32,6 +32,22 @@ const BasicInformation = styled.section`
 					border: 0.1rem solid #e3e3e3;
 					background: #fff;
 					margin-top: 0.8rem;
+					color: #8e8e8e;
+					font-size: 1.6rem;
+					line-height: 1.9rem;
+					letter-spacing: 0.0032rem;
+
+					&:hover {
+						border: 1px solid #5877fc;
+						transition: 0.2s ease-in-out;
+					}
+
+					&:focus {
+						color: #000;
+						outline: none;
+						border-radius: 1rem;
+						border: 1px solid #5877fc;
+					}
 				}
 
 				.valid-msg {
@@ -65,6 +81,22 @@ const BasicInformation = styled.section`
 					display: flex;
 					align-items: center;
 					gap: 0.8rem;
+
+					input:checked + label {
+						color: #000;
+					}
+
+					label {
+						color: #8e8e8e;
+						font-size: 1.6rem;
+						letter-spacing: 0.0032rem;
+
+						&:hover {
+							color: #000;
+							transition: 0.2s ease-in-out;
+							cursor: pointer;
+						}
+					}
 				}
 			}
 
@@ -170,12 +202,22 @@ const ContainerCourse = styled.article<Course>`
 			input {
 				padding: 0;
 				margin: 0;
+
+				&:hover {
+					border: 1px solid red;
+				}
 			}
 
 			.course-label {
 				font-size: 1.4rem;
 				margin-left: 0.8rem;
 				margin-top: 0.1rem;
+				color: #8e8e8e;
+
+				&:hover {
+					color: #000;
+					transition: 0.2s ease-in-out;
+				}
 			}
 		}
 	}
@@ -198,23 +240,34 @@ const ContainerCourse = styled.article<Course>`
 				margin: 0;
 				width: 100%;
 				border-radius: 1rem;
+				font-size: 1.6rem;
 				border: 1px solid #8e8e8e;
 				background: ${props => (props.$isChecked ? 'transparent' : '#e3e3e3')};
+
+				&:hover {
+					border: 1px solid #5877fc;
+					transition: 0.2s ease-in-out;
+				}
+				&:focus {
+					outline: none;
+					border: 1px solid #5877fc;
+				}
 			}
 
 			.dropdown {
 				position: absolute;
-				border: 1px solid #373f41;
 				width: 100%;
 				display: flex;
 				flex-direction: column;
-				border-radius: 0.75rem;
-				font-size: 1.2rem;
-				color: #373f41;
-				gap: 1rem;
-				padding: 1rem 2rem;
+				font-size: 1.4rem;
+				color: #8e8e8e;
+				gap: 1.2rem;
+				padding: 1.2rem 1.6rem;
 				z-index: 401;
 				background-color: #fff;
+				border-radius: 1rem;
+				border: 1px solid #e3e3e3;
+				box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 
 				span {
 					cursor: pointer;
