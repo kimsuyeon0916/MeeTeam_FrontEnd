@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, RadiusProfile } from '../..';
+import { Icon, ProfileImage } from '../..';
 import { CommentInputFunctions } from '../../../types';
 import S from './CommentInput.styled';
 
@@ -22,7 +22,7 @@ const CommentInput = ({
 				<article className='wrapper'>
 					<section className='container-user__icon'>
 						<div>
-							<RadiusProfile url='' />
+							<ProfileImage url='' nickname={'yeom'} size='2.31rem' />
 						</div>
 						<span>{'nayeahyo'}</span>
 					</section>

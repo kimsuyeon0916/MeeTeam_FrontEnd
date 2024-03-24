@@ -109,7 +109,7 @@ import RecruitRoles from './recruit/recruitDetail/recruitRoles/RecruitRoles';
 import LinkToList from './recruit/recruitDetail/linktoList/LinkToList';
 import RecruitTag from './recruit/recruitDetail/recruitTag/RecruitTag';
 import OptionList from './optionList/OptionList';
-import ComboBox from './comboBox/comboBox';
+import ComboBox from './comboBox/ComboBox';
 
 export {
 	Header,

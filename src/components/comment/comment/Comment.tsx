@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { KebabMenu, RadiusProfile, ReplyComment, ReplyInput } from '../..';
+import { KebabMenu, ProfileImage, ReplyComment, ReplyInput } from '../..';
 import S from './Comment.styled';
 import { Comment } from '../../../types';
 import { useNavigate } from 'react-router-dom';
@@ -106,7 +106,7 @@ const Comment = ({
 				<article className='container'>
 					<section className='comment-icon'>
 						<div>
-							<RadiusProfile url='' />
+							<ProfileImage url='' nickname={nickname} size='2.31rem' />
 						</div>
 						<span>{nickname}</span>
 					</section>

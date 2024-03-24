@@ -16,6 +16,8 @@ import LogoName from './LogoName.svg';
 import DefaultProfileImage from './DefaultProfileImage.svg';
 import DefaultPortfolioImage from './DefaultPortfolioImage.svg';
 import Search from './Search.svg';
+import FilledBookmark from './FilledBookmark.svg';
+import UnfilledBookmark from './UnfilledBookmark.svg';
 
 export {
 	Exit,
@@ -36,4 +38,6 @@ export {
 	DefaultProfileImage,
 	DefaultPortfolioImage,
 	Search,
+	FilledBookmark,
+	UnfilledBookmark,
 };

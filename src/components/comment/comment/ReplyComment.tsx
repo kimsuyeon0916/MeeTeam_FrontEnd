@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import S from './ReplyComment.styled';
-import { KebabMenu, RadiusProfile } from '../..';
+import { KebabMenu, ProfileImage } from '../..';
 import { Comment } from '../../../types';
 import { Reply } from '../../../assets';
 
@@ -60,7 +60,7 @@ const ReplyComment = ({
 				<article className='container'>
 					<section className='comment-icon'>
 						<div>
-							<RadiusProfile url='' />
+							<ProfileImage url='' nickname={nickname} size='2.31rem' />
 						</div>
 						<span>{nickname}</span>
 					</section>

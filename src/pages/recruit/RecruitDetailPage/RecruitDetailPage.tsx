@@ -13,8 +13,10 @@ import {
 import { tempData, tempTags } from './data';
 import { simpleDate } from '../../../utils';
 import { Comment as CommentForm } from '../../../types';
+import { FilledBookmark, UnfilledBookmark } from '../../../assets';
 
 const RecruitDetailPage = () => {
+	const [isMarked, setIsMarked] = useState<boolean>(false);
 	const [contents, setContents] = useState<string>('');
 	const [commentsList, setCommentsList] = useState<CommentForm[]>(tempData.comments);
 	const username = 'yeom';
@@ -118,7 +120,10 @@ const RecruitDetailPage = () => {
 			</S.RecruitDetailPage>
 			<S.Footer>
 				<section className='container-btn'>
-					<button type='button'>편집하기</button>
+					<button type='button' onClick={() => setIsMarked(prev => !prev)}>
+						<img src={isMarked ? UnfilledBookmark : FilledBookmark} />
+						<span>북마크</span>
+					</button>
 					<button type='button' className='apply'>
 						신청하기
 					</button>

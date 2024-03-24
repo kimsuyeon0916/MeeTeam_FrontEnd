@@ -1,5 +1,5 @@
 import React from 'react';
-import { RadiusProfile } from '../../..';
+import { ProfileImage } from '../../..';
 import { TitleAndEtc } from '../../../../types';
 import S from './TitleInfo.styled';
 
@@ -19,8 +19,9 @@ const TitleInfo = ({ nickname, responseRate, score, createdAt, title }: TitleAnd
 		<S.TitleInfo>
 			<section className='container-header'>
 				<section className='container-header__profile'>
-					<RadiusProfile
+					<ProfileImage
 						size='3.3075rem'
+						nickname={nickname}
 						url='https://i.pinimg.com/236x/90/c7/f7/90c7f7afa68ea9b875eafbe887f454e8.jpg'
 					/>
 					<span>{nickname}</span>

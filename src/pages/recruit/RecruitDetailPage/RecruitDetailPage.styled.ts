@@ -76,6 +76,10 @@ const Footer = styled.footer`
 			border-radius: 0.6rem;
 			border: 1.5px solid #e3e3e3;
 			background: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 0.8rem;
 		}
 
 		button:nth-child(2) {

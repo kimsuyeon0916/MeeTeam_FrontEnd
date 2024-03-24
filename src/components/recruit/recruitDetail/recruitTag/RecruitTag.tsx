@@ -7,8 +7,10 @@ const RecruitTag = (props: { tags: RecruitTags[] }) => {
 		<S.RecruitTag className='wrapper-tags'>
 			<h3>태그</h3>
 			<section className='container-tags'>
-				{props.tags.map(tag => (
-					<span className='tag'>{tag.name}</span>
+				{props.tags.map((tag, index) => (
+					<span className='tag' key={index}>
+						{tag.name}
+					</span>
 				))}
 			</section>
 		</S.RecruitTag>
