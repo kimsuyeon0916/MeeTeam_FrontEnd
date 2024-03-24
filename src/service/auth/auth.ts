@@ -21,7 +21,6 @@ export const checkExist = async ({ authorizationCode }: { authorizationCode: str
 	}
 };
 
-// 백엔드에 nickname으로 변경 요청
 export const signUp = async ({ emailCode, nickname }: { emailCode: string; nickname: string }) => {
 	try {
 		const response = await axiosInstance.post<UserReponse>(EndPoint.SIGN_UP.all, {
