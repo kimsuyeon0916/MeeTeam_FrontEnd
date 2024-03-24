@@ -39,8 +39,7 @@ const NicknameSettingPage = () => {
 		const urlParams = new URLSearchParams(window.location.search);
 		const code = urlParams.get('emailcode');
 
-		// 백엔드에 nickname으로 변경 요청
-		code && mutate({ emailCode: code, nickName: data.nickname });
+		code && mutate({ emailCode: code, nickname: data.nickname });
 	};
 
 	const nickname = useDebounce(watch('nickname'));

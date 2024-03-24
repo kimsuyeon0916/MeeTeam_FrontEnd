@@ -6,6 +6,7 @@ import { useCertificateSchool, useReadUniversityList, useReadDepartmentList } fr
 import { ComboBox } from '../../../components';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
+import { Department } from '../../../types';
 
 interface FormValues {
 	year: string;
@@ -66,7 +67,7 @@ const SchoolCertificationPage = () => {
 				title: university.universityName,
 			}));
 		} else if (name === 'department') {
-			return departmentList?.map(department => ({
+			return departmentList?.map((department: Department) => ({
 				id: department.departmentId,
 				title: department.departmentName,
 			}));
