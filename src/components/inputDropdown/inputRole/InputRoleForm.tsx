@@ -45,7 +45,6 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	});
 
 	const [roleData, setRoleData] = useState<RoleForPost>({
-		id: 0,
 		role: null,
 		count: null,
 		skill: [],
@@ -119,7 +118,6 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 				skill: [],
 			});
 			setRoleData({
-				id: userRoleList.length + 1,
 				role: null,
 				count: null,
 				skill: [],

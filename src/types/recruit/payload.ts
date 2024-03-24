@@ -1,5 +1,4 @@
 export interface RoleForPost {
-	id: number | null;
 	role: number | null;
 	count: number | null;
 	skill: number[];
