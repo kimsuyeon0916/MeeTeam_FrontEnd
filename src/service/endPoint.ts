@@ -13,4 +13,9 @@ export const EndPoint = {
 	PROFILE: {
 		read: (userId: string) => `/user/profile/${userId}`,
 	},
+
+	/* recruit */
+	POSTING: {
+		post: '/recruitment/postings',
+	},
 };

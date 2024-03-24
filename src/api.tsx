@@ -1,11 +1,4 @@
 import axios from 'axios';
-import { axiosInstance } from './service';
-import { InputState } from './types';
-
-export const postingRecruit = async (formData: InputState) => {
-	const formId = await axiosInstance.post('http://3.38.78.128/recruitment/post', formData);
-	return formId;
-};
 
 export const getRoleKeyword = async (keyword: string) => {
 	const response = await axios.get(`http://3.38.78.128/role/search?keyword=${keyword}&limit=5`);

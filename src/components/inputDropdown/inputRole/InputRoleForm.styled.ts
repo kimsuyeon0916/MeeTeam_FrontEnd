@@ -23,13 +23,14 @@ const InputRoleForm = styled.article<InputRoleForm>`
 			width: 20.6%;
 			display: flex;
 			flex-direction: column;
-			border-radius: 0.75rem;
-			font-size: 1.2rem;
-			color: #373f41;
+			font-size: 1.4rem;
+			color: #8e8e8e;
 			gap: 1rem;
-			padding: 1rem 2rem;
+			padding: 1.2rem 1.6rem;
 			z-index: 401;
 			background-color: #fff;
+			border-radius: 1rem;
+			box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 
 			span {
 				cursor: pointer;

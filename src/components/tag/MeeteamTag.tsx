@@ -72,6 +72,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 				return updatedList;
 			});
 			setIsDropdownVisible(false);
+			setTagItem('');
 		}
 	};
 

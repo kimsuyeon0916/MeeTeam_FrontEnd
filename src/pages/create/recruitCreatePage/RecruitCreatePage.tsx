@@ -10,22 +10,18 @@ import {
 import { useMutation } from '@tanstack/react-query';
 import { useRecoilState } from 'recoil';
 import { recruitInputState, validState } from '../../../atom';
-import { postingRecruit } from '../../../api';
+import { postingRecruit } from '../../../service/recruit/posting';
 import { useNavigate } from 'react-router-dom';
 import RecruitTags from '../../../components/recruit/create/RecruitTags';
+import { InputState } from '../../../types';
 
 const RecruitCreatePage = () => {
 	const navigate = useNavigate();
 	const [isSubmit, setIsSubmit] = useRecoilState(validState);
-	const [formData, setFormData] = useRecoilState(recruitInputState);
-
-	const onClickCancel = () => {
-		// 모달창 띄워서 한 번 더 확인시키고 이동하기
-		// navigate('/');
-	};
+	const [formData, setFormData] = useRecoilState<InputState>(recruitInputState);
 
 	const uploadPost = useMutation({
-		mutationFn: () => postingRecruit(formData),
+		mutationFn: (formData: any) => postingRecruit(formData),
 	});
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -37,6 +33,7 @@ const RecruitCreatePage = () => {
 		}));
 
 		uploadPost.mutate(formData as any);
+		// console.log(uploadPost);
 		// navigate(`/recruit/${uploadPost}`);
 	};
 
