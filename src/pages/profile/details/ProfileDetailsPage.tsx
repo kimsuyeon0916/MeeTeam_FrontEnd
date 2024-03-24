@@ -1,8 +1,8 @@
 import React from 'react';
-import S from './Profile.styled';
-import { userData } from '../index';
-import { PortfolioCard, ProfileImage, Skill } from '../../components';
-import { useReadProfile } from '../../hooks';
+import S from '../Profile.styled';
+import { userData } from '../../index';
+import { PortfolioCard, ProfileImage, Skill } from '../../../components';
+import { useReadProfile } from '../../../hooks';
 import { useParams } from 'react-router';
 
 const ProfileDetailsPage = () => {
