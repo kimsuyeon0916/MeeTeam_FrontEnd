@@ -10,10 +10,10 @@ import {
 	RecruitTag,
 	LinkToList,
 } from '../../../components';
-import { tempData, tempTags } from './data';
+import { tempData } from './data';
 import { simpleDate } from '../../../utils';
 import { Comment as CommentForm } from '../../../types';
-import { FilledBookmark, UnfilledBookmark } from '../../../assets';
+import { Edit, FilledBookmark, TrashCan, UnfilledBookmark } from '../../../assets';
 
 const RecruitDetailPage = () => {
 	const [isMarked, setIsMarked] = useState<boolean>(false);
@@ -25,6 +25,8 @@ const RecruitDetailPage = () => {
 	const diffDate = Math.ceil(
 		Math.abs((new Date(tempData.deadline).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
 	).toString();
+
+	const tempApplied = true;
 
 	const addComment = () => {
 		if (contents !== '' && contents.trim() !== '') {
@@ -120,12 +122,30 @@ const RecruitDetailPage = () => {
 			</S.RecruitDetailPage>
 			<S.Footer>
 				<section className='container-btn'>
-					<button type='button' onClick={() => setIsMarked(prev => !prev)}>
+					{/* <button type='button' className='btn-bookmark' onClick={() => setIsMarked(prev => !prev)}>
 						<img src={isMarked ? UnfilledBookmark : FilledBookmark} />
 						<span>북마크</span>
 					</button>
-					<button type='button' className='apply'>
-						신청하기
+					{!tempApplied ? (
+						<button type='button' className='apply'>
+							<span>신청하기 {Number(diffDate) < 8 && `D-${diffDate}`}</span>
+						</button>
+					) : (
+						<button type='button' className='cancel'>
+							<span>신청취소</span>
+						</button>
+					)} */}
+					<button type='button' className='btn-edit'>
+						<img src={Edit} />
+					</button>
+					<button type='button' className='btn-delete'>
+						<img src={TrashCan} />
+					</button>
+					<button type='button' className='btn-navigate_appliers'>
+						신청자 보러가기
+					</button>
+					<button type='button' className='btn-close'>
+						마감하기
 					</button>
 				</section>
 			</S.Footer>

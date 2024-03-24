@@ -70,32 +70,72 @@ const Footer = styled.footer`
 		display: flex;
 		gap: 1.6rem;
 
-		button:nth-child(1) {
+		.btn-bookmark {
 			height: 4.8rem;
 			padding: 1.2rem 3.2rem;
-			border-radius: 0.6rem;
+			border-radius: 0.8rem;
 			border: 1.5px solid #e3e3e3;
 			background: #fff;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			gap: 0.8rem;
-		}
-
-		button:nth-child(2) {
-			height: 4.8rem;
-			padding: 1.2rem 7.2rem;
-			border-radius: 0.6rem;
-		}
-
-		.close {
-			background: #f85858;
-			color: #fff;
+			font-size: 1.5rem;
 		}
 
 		.apply {
-			border-radius: 0.8rem;
+			height: 4.8rem;
+			padding: 1.2rem 7.2rem;
+			border-radius: 0.6rem;
+			font-size: 1.5rem;
 			background: linear-gradient(90deg, #6091f0 0%, #723dff 100%);
+			color: #fff;
+		}
+
+		.cancel {
+			height: 4.8rem;
+			padding: 1.2rem 7.2rem;
+			border-radius: 0.6rem;
+			font-size: 1.5rem;
+			background-color: #f85858;
+			color: #fff;
+		}
+
+		.btn-edit,
+		.btn-delete {
+			display: flex;
+			width: 4.8rem;
+			height: 4.8rem;
+			padding: 1.2rem;
+			justify-content: center;
+			align-items: center;
+			gap: 1rem;
+			border-radius: 1rem;
+			border: 1px solid #e3e3e3;
+			background: #fff;
+		}
+
+		.btn-navigate_appliers {
+			display: flex;
+			height: 4.8rem;
+			padding: 1.2rem 3.2rem;
+			justify-content: center;
+			align-items: center;
+			gap: 0.75rem;
+			border-radius: 0.6rem;
+			background: #5877fc;
+			color: #fff;
+		}
+
+		.btn-close {
+			display: flex;
+			height: 4.8rem;
+			padding: 1.2rem 3.2rem;
+			justify-content: center;
+			align-items: center;
+			gap: 0.75rem;
+			border-radius: 0.6rem;
+			background: #f85858;
 			color: #fff;
 		}
 	}
