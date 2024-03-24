@@ -110,6 +110,8 @@ import LinkToList from './recruit/recruitDetail/linktoList/LinkToList';
 import RecruitTag from './recruit/recruitDetail/recruitTag/RecruitTag';
 import OptionList from './optionList/OptionList';
 import ComboBox from './comboBox/ComboBox';
+import WriterFooter from './recruit/recruitDetail/footer/WriterFooter';
+import ApplierFooter from './recruit/recruitDetail/footer/ApplierFooter';
 
 export {
 	Header,
@@ -215,4 +217,6 @@ export {
 	RecruitTag,
 	OptionList,
 	ComboBox,
+	WriterFooter,
+	ApplierFooter,
 };

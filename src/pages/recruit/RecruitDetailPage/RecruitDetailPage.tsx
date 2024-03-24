@@ -9,6 +9,8 @@ import {
 	RecruitRoles,
 	RecruitTag,
 	LinkToList,
+	WriterFooter,
+	ApplierFooter,
 } from '../../../components';
 import { tempData } from './data';
 import { simpleDate } from '../../../utils';
@@ -61,6 +63,8 @@ const RecruitDetailPage = () => {
 	};
 
 	const onClickInput = () => {};
+
+	const onClickApply = () => {};
 
 	return (
 		<>
@@ -122,31 +126,7 @@ const RecruitDetailPage = () => {
 			</S.RecruitDetailPage>
 			<S.Footer>
 				<section className='container-btn'>
-					{/* <button type='button' className='btn-bookmark' onClick={() => setIsMarked(prev => !prev)}>
-						<img src={isMarked ? UnfilledBookmark : FilledBookmark} />
-						<span>북마크</span>
-					</button>
-					{!tempApplied ? (
-						<button type='button' className='apply'>
-							<span>신청하기 {Number(diffDate) < 8 && `D-${diffDate}`}</span>
-						</button>
-					) : (
-						<button type='button' className='cancel'>
-							<span>신청취소</span>
-						</button>
-					)} */}
-					<button type='button' className='btn-edit'>
-						<img src={Edit} />
-					</button>
-					<button type='button' className='btn-delete'>
-						<img src={TrashCan} />
-					</button>
-					<button type='button' className='btn-navigate_appliers'>
-						신청자 보러가기
-					</button>
-					<button type='button' className='btn-close'>
-						마감하기
-					</button>
+					{tempData.isWriter ? <ApplierFooter /> : <WriterFooter />}
 				</section>
 			</S.Footer>
 		</>
