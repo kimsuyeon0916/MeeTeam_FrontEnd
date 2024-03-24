@@ -1,39 +1,21 @@
+import { User } from './index';
+
 export interface UserReponse {
-	user: User;
-	token: string;
+	userName?: string; // userName -> nickname 으로 데이터 변경 요청 필요
+	pictureUrl?: string; // imageUrl로 변경 요청 필요
+	accessToken?: string;
+	refreshToken?: string;
+	platformId?: string;
+	isEnable?: boolean;
 }
 
-export interface User {
-	school: string;
-	major: string;
-	year: string;
-	email: string;
-	nickName: string;
-	name?: string;
-	imageUrl?: string;
-	rate?: number;
-	phone?: '';
-	position?: string;
-	introduction?: string;
-	specifications?: string[];
-	links?: string[];
-	meeteam?: Meeteam[];
-	comment?: Comment[];
-	followers?: [];
-	following?: [
-		{
-			_id: string;
-			user: string;
-			follower: string;
-			createdAt: string;
-			updatedAt: string;
-		},
-	];
-	timeTable?: TimeTable[];
+export interface University {
+	universityId: string;
+	universityName: string;
+	universityDomain: string;
 }
 
-interface Meeteam {}
-
-interface Comment {}
-
-interface TimeTable {}
+export interface Department {
+	departmentId: string;
+	departmentName: string;
+}
