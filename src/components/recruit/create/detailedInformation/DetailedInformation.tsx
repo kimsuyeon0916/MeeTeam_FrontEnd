@@ -12,7 +12,7 @@ const DetailedInformation = () => {
 
 	const onChangeContents = (contents: string) => {
 		setPosting(contents);
-		setInfo({ ...info, contents: contents });
+		setInfo({ ...info, content: contents });
 	};
 	return (
 		<S.DetailedInformation>

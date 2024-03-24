@@ -45,9 +45,9 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	});
 
 	const [roleData, setRoleData] = useState<RoleForPost>({
-		role: null,
+		roleId: null,
 		count: null,
-		skill: [],
+		skillIds: [],
 	});
 	const keywordRole = useDebounce(userRole.role.name, 500);
 	const keywordSkill = useDebounce(tagItem, 500);
@@ -99,9 +99,9 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 
 	const onClickHandler = () => {
 		if (
-			roleData.role !== null &&
-			roleData.skill.length === userRole.skill.length &&
-			!info.recruitmentRoleDto.some(obj => obj.role === roleData.role)
+			roleData.roleId !== null &&
+			roleData.skillIds.length === userRole.skill.length &&
+			!info.recruitmentRoles.some(obj => obj.roleId === roleData.roleId)
 		) {
 			setUserRoleList((prev: any) => [...prev, userRole]);
 			if (roleData.count === null) {
@@ -109,7 +109,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 			}
 			setInfos((prev: InputState) => ({
 				...prev,
-				recruitmentRoleDto: [...prev.recruitmentRoleDto, roleData],
+				recruitmentRoles: [...prev.recruitmentRoles, roleData],
 			}));
 			setUserRole({
 				id: userRoleList.length + 1,
@@ -118,14 +118,13 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 				skill: [],
 			});
 			setRoleData({
-				role: null,
+				roleId: null,
 				count: null,
-				skill: [],
+				skillIds: [],
 			});
 			setTagItem('');
 		}
 	};
-
 	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
 		event.preventDefault();
 		setUserRole(prev => ({
@@ -166,7 +165,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 		}));
 		setRoleData(prev => ({
 			...prev,
-			role: Number(target.id),
+			roleId: Number(target.id),
 		}));
 	};
 
@@ -175,7 +174,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 		const target = event.target as HTMLElement;
 		if (!userRole.skill.includes(innerText) && userRole.skill.length < 6) {
 			setUserRole(prev => ({ ...prev, skill: [...prev.skill, innerText] }));
-			setRoleData(prev => ({ ...prev, skill: [...prev.skill, Number(target.id)] }));
+			setRoleData(prev => ({ ...prev, skillIds: [...prev.skillIds, Number(target.id)] }));
 			setDropdown(prev => ({
 				...prev,
 				skill: false,

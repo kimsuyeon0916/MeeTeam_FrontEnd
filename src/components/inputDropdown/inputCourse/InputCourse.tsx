@@ -24,8 +24,8 @@ const InputCourse = ({ isChecked, onClickHandler }: InputCourse) => {
 		setCourseName(content);
 		setInfo({
 			...info,
-			courseTagDto: {
-				...info.courseTagDto,
+			courseTag: {
+				...info.courseTag,
 				isCourse: true,
 				courseTagName: content,
 			},
@@ -37,8 +37,8 @@ const InputCourse = ({ isChecked, onClickHandler }: InputCourse) => {
 		setCourseName(innerText);
 		setInfo({
 			...info,
-			courseTagDto: {
-				...info.courseTagDto,
+			courseTag: {
+				...info.courseTag,
 				isCourse: true,
 				courseTagName: innerText,
 			},

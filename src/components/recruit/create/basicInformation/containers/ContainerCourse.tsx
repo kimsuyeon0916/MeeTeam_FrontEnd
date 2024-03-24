@@ -39,7 +39,7 @@ const ContainerCourse = () => {
 		setIsChecked(prev => !prev);
 		setFormData(prev => ({
 			...prev,
-			courseTagDto: { ...prev.courseTagDto, isCourse: true },
+			courseTag: { ...prev.courseTag, isCourse: true },
 		}));
 	};
 
@@ -48,7 +48,7 @@ const ContainerCourse = () => {
 		setName(prev => ({ ...prev, course: innerText }));
 		setFormData(prev => ({
 			...prev,
-			courseTagDto: { ...prev.courseTagDto, courseTagName: innerText },
+			courseTag: { ...prev.courseTag, courseTagName: innerText },
 		}));
 		setDropdown(prev => ({ ...prev, course: false }));
 	};
@@ -57,7 +57,7 @@ const ContainerCourse = () => {
 		setName(prev => ({ ...prev, professor: innerText }));
 		setFormData(prev => ({
 			...prev,
-			courseTagDto: { ...prev.courseTagDto, courseTagProfessor: innerText },
+			courseTag: { ...prev.courseTag, courseProfessor: innerText },
 		}));
 		setDropdown(prev => ({ ...prev, professor: false }));
 	};

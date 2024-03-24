@@ -13,10 +13,9 @@ const RecruitRoles = () => {
 		setUserRoleList(prev => prev.filter(elem => elem.role.id !== id));
 		setInfo(prev => ({
 			...prev,
-			recruitmentRoleDto: prev.recruitmentRoleDto.filter(elem => elem.role !== id),
+			recruitmentRoles: prev.recruitmentRoles.filter(elem => elem.roleId !== id),
 		}));
 	};
-
 	return (
 		<S.RecruitRoles>
 			<section className='container-roles'>

@@ -41,7 +41,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 			const trimmedTagItem = tagItem.trim();
 			if (!prev.includes(trimmedTagItem)) {
 				const updatedList = [...prev, trimmedTagItem];
-				setInfos(prev => ({ ...prev, tag: updatedList }));
+				setInfos(prev => ({ ...prev, tags: updatedList }));
 				return updatedList;
 			}
 			return prev;
@@ -54,7 +54,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 		setTagList(prev => {
 			const updatedList = prev.filter(elem => elem !== id);
 
-			setInfos(prev => ({ ...prev, tag: updatedList }));
+			setInfos(prev => ({ ...prev, tags: updatedList }));
 			return updatedList;
 		});
 	};
@@ -68,7 +68,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 		if (!tagList.includes(selectedTag) && tagList.length < 6) {
 			setTagList(prev => {
 				const updatedList = [...prev, selectedTag];
-				setInfos(prev => ({ ...prev, tag: updatedList }));
+				setInfos(prev => ({ ...prev, tags: updatedList }));
 				return updatedList;
 			});
 			setIsDropdownVisible(false);

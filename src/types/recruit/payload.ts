@@ -1,7 +1,7 @@
 export interface RoleForPost {
-	role: number | null;
+	roleId: number | null;
 	count: number | null;
-	skill: number[];
+	skillIds: number[];
 }
 
 export interface InputState {
@@ -10,17 +10,17 @@ export interface InputState {
 	fieldId: number;
 	deadline: string | undefined;
 	proceedType: string;
-	startDate: string | undefined;
-	endDate: string | undefined;
-	courseTagDto: {
+	proceedingStart: string | undefined;
+	proceedingEnd: string | undefined;
+	courseTag: {
 		isCourse: boolean;
 		courseTagName: string | null;
-		courseTagProfessor: string | null;
+		courseProfessor: string | null;
 	};
-	recruitmentRoleDto: RoleForPost[];
-	tag: string[];
+	recruitmentRoles: RoleForPost[];
+	tags: string[];
 	title: string;
-	contents: string;
+	content: string;
 }
 
 export interface Role {

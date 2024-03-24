@@ -16,8 +16,8 @@ export default function useValid(data: InputState) {
 	const [isValid, setIsValid] = useRecoilState(validState);
 
 	useEffect(() => {
-		const convertedStart = new Date(data.startDate as any);
-		const convertedEnd = new Date(data.endDate as any);
+		const convertedStart = new Date(data.proceedingStart as any);
+		const convertedEnd = new Date(data.proceedingEnd as any);
 		if (convertedStart > convertedEnd) {
 			setValidMessage(prev => ({
 				...prev,
@@ -33,11 +33,11 @@ export default function useValid(data: InputState) {
 			...prev,
 			isEndDate: convertedStart < convertedEnd,
 		}));
-	}, [data.startDate, data.endDate]);
+	}, [data.proceedingStart, data.proceedingEnd]);
 
 	useEffect(() => {
 		const deadlineDate = new Date(data.deadline as any);
-		const endDate = new Date(data.endDate as any);
+		const endDate = new Date(data.proceedingEnd as any);
 		const endDateCheck = deadlineDate > endDate;
 		if (endDateCheck) {
 			setValidMessage(prev => ({
@@ -54,16 +54,16 @@ export default function useValid(data: InputState) {
 			...prev,
 			isDeadline: !endDateCheck ? true : false,
 		}));
-	}, [data.deadline, data.endDate]);
+	}, [data.deadline, data.proceedingEnd]);
 
 	useEffect(() => {
-		if (data.tag.length === 0) {
+		if (data.tags.length === 0) {
 			setValidMessage(prev => ({ ...prev, tag: '* 태그를 하나 이상 선택해주세요.' }));
 		} else {
 			setValidMessage({ ...validMessage, tag: '' });
 		}
-		setIsValid({ ...isValid, isTag: data.tag.length !== 0 ? true : false });
-	}, [data.tag.length]);
+		setIsValid({ ...isValid, isTag: data.tags.length !== 0 ? true : false });
+	}, [data.tags.length]);
 
 	useEffect(() => {
 		if (data.title === '') {

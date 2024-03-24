@@ -54,17 +54,17 @@ export const recruitInputState = atom<InputState>({
 		fieldId: 1,
 		deadline: simple,
 		proceedType: '',
-		startDate: simpleDate(new Date()),
-		endDate: simpleDate(new Date()),
-		courseTagDto: {
+		proceedingStart: simpleDate(new Date()),
+		proceedingEnd: simpleDate(new Date()),
+		courseTag: {
 			isCourse: false,
 			courseTagName: '',
-			courseTagProfessor: '',
+			courseProfessor: '',
 		},
-		recruitmentRoleDto: [],
-		tag: [],
+		recruitmentRoles: [],
+		tags: [],
 		title: '',
-		contents: '',
+		content: '',
 	},
 });
 

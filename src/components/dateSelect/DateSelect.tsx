@@ -19,10 +19,10 @@ const DateSelect = ({ type }: { type: string }) => {
 		setSelectedDate(date);
 		const convertedDate = simpleDate(date);
 		if (type === 'start') {
-			setFormdata(prev => ({ ...prev, startDate: convertedDate }));
+			setFormdata(prev => ({ ...prev, proceedingStart: convertedDate }));
 		}
 		if (type === 'end') {
-			setFormdata(prev => ({ ...prev, endDate: convertedDate }));
+			setFormdata(prev => ({ ...prev, proceedingEnd: convertedDate }));
 		}
 		setIsClicked(true);
 	};

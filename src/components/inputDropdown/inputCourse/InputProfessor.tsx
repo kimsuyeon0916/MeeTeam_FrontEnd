@@ -22,9 +22,9 @@ const InputProfessor = ({ isChecked }: { isChecked: boolean }) => {
 		setProfessor(content);
 		setInfo({
 			...info,
-			courseTagDto: {
-				...info.courseTagDto,
-				courseTagProfessor: content,
+			courseTag: {
+				...info.courseTag,
+				courseProfessor: content,
 			},
 		});
 	};
@@ -33,10 +33,10 @@ const InputProfessor = ({ isChecked }: { isChecked: boolean }) => {
 		setProfessor(innerText);
 		setInfo({
 			...info,
-			courseTagDto: {
-				...info.courseTagDto,
+			courseTag: {
+				...info.courseTag,
 				isCourse: true,
-				courseTagProfessor: innerText,
+				courseProfessor: innerText,
 			},
 		});
 		setShowDropdown(false);
