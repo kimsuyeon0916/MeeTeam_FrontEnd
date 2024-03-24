@@ -110,7 +110,7 @@ import ContainerProcedure from './recruit/create/basicInformation/containers/Con
 import WrapperScopeCategory from './recruit/create/basicInformation/wrappers/WrapperScopeCategory';
 import ContainerCourse from './recruit/create/basicInformation/containers/ContainerCourse';
 import OptionList from './optionList/OptionList';
-import ComboBox from './comboBox/comboBox';
+import ComboBox from './comboBox/ComboBox';
 
 export {
 	Header,

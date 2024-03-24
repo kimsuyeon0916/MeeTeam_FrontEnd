@@ -13,7 +13,7 @@ const ProfileDetailsPage = () => {
 	return (
 		<S.ProfileLayout>
 			<S.ProfileHeader>
-				<ProfileImage nickname={userData.nickname} size='14rem' url={userData.imageUrl} />
+				<ProfileImage nickname={nickname} size='14rem' url={userData.imageUrl} />
 				<S.ProfileColumn>
 					<div className='profile-header__row'>
 						<h2>{userData.nickname}</h2>
@@ -108,9 +108,10 @@ const ProfileDetailsPage = () => {
 				<S.ProfileArticle>
 					<S.ProfileTitle>포트폴리오</S.ProfileTitle>
 					<S.ProfileGrid>
-						{userData.portfolios.map(({ ...props }, index) => (
-							<PortfolioCard key={index} {...props} />
-						))}
+						{userData.portfolios &&
+							userData.portfolios.map(({ ...props }, index) => (
+								<PortfolioCard key={index} {...props} />
+							))}
 					</S.ProfileGrid>
 					<hr />
 				</S.ProfileArticle>
