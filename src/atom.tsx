@@ -94,10 +94,6 @@ export const validState = atom({
 		isDeadline: false,
 		isEndDate: false,
 		isProcedure: false,
-		isCourseTagDto: {
-			courseTagName: false,
-			courseTagProfessor: false,
-		},
 		isTag: false,
 		isTitle: false,
 	},

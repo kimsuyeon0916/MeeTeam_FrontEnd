@@ -8,7 +8,7 @@ import {
 	RecruitRoles,
 } from '../../../components/index';
 import { useMutation } from '@tanstack/react-query';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { recruitInputState, validState } from '../../../atom';
 import { postingRecruit } from '../../../service/recruit/posting';
 import { useNavigate } from 'react-router-dom';
@@ -17,8 +17,9 @@ import { InputState } from '../../../types';
 
 const RecruitCreatePage = () => {
 	const navigate = useNavigate();
-	const [isSubmit, setIsSubmit] = useRecoilState(validState);
+	const setIsSubmit = useSetRecoilState(validState);
 	const [formData, setFormData] = useRecoilState<InputState>(recruitInputState);
+	const validCheck = useRecoilValue(validState);
 
 	const uploadPost = useMutation({
 		mutationFn: (formData: any) => postingRecruit(formData),
@@ -32,9 +33,18 @@ const RecruitCreatePage = () => {
 			isSubmitted: true,
 		}));
 
-		uploadPost.mutate(formData as any);
-		// console.log(uploadPost);
-		// navigate(`/recruit/${uploadPost}`);
+		const postAvailable =
+			validCheck.isCategory &&
+			validCheck.isDeadline &&
+			validCheck.isProcedure &&
+			validCheck.isScope &&
+			validCheck.isTag &&
+			validCheck.isTitle;
+
+		if (postAvailable) {
+			uploadPost.mutate(formData as any);
+			navigate(`/recruit/${uploadPost}`);
+		}
 	};
 
 	return (

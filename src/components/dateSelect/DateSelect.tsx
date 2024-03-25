@@ -18,6 +18,7 @@ const DateSelect = ({ type }: { type: string }) => {
 	const onChangeHandler = (date: Date | null) => {
 		setSelectedDate(date);
 		const convertedDate = simpleDate(date);
+
 		if (type === 'start') {
 			setFormdata(prev => ({ ...prev, proceedingStart: convertedDate }));
 		}
