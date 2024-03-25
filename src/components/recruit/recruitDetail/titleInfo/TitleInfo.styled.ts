@@ -5,6 +5,7 @@ const TitleInfo = styled.article`
 		display: flex;
 		align-items: center;
 		gap: 0.9rem;
+		position: relative;
 
 		.container-header__profile {
 			display: flex;
@@ -43,6 +44,21 @@ const TitleInfo = styled.article`
 			font-weight: 500;
 			line-height: 1.7rem;
 			letter-spacing: 0.0028rem;
+		}
+
+		.container-bookmark {
+			position: absolute;
+			right: 0rem;
+			display: flex;
+			align-items: center;
+			gap: 0.8rem;
+
+			.count-bookmark {
+				color: #373f41;
+				font-size: 1.6rem;
+				letter-spacing: 0.0032rem;
+				margin-top: 0.3rem;
+			}
 		}
 	}
 

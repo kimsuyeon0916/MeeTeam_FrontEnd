@@ -10,6 +10,7 @@ import type {
 	RecruitDescription,
 	RoleInfo,
 	RecruitTags,
+	RecruitPostings,
 } from './recruit/response';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
 
@@ -40,4 +41,5 @@ export type {
 	RecruitTags,
 	University,
 	Department,
+	RecruitPostings,
 };

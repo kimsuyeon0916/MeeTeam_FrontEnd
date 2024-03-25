@@ -15,15 +15,28 @@ import {
 import { tempData } from './data';
 import { simpleDate } from '../../../utils';
 import { Comment as CommentForm } from '../../../types';
+import { useQuery } from '@tanstack/react-query';
+import { getPostingData } from '../../../service/recruit/detail';
 
 const RecruitDetailPage = () => {
 	const [contents, setContents] = useState<string>('');
 	const [commentsList, setCommentsList] = useState<CommentForm[]>(tempData.comments);
 	const username = 'yeom';
 	const createAt = simpleDate(new Date());
-	const period = tempData.proceedingStart + '-' + tempData.proceedingEnd;
+
+	const pageNumber = 2;
+
+	const { data: detailedData, isLoading } = useQuery({
+		queryKey: ['detailedPage', pageNumber],
+		queryFn: () => getPostingData(pageNumber),
+	});
+
+	const period = detailedData?.proceedingStart + '-' + detailedData?.proceedingEnd;
 	const diffDate = Math.ceil(
-		Math.abs((new Date(tempData.deadline).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
+		Math.abs(
+			(new Date(detailedData?.deadline as any).getTime() - new Date().getTime()) /
+				(1000 * 60 * 60 * 24)
+		)
 	).toString();
 
 	const addComment = () => {
@@ -64,65 +77,70 @@ const RecruitDetailPage = () => {
 
 	return (
 		<>
-			<S.RecruitDetailPage>
-				<TitleInfo
-					nickname={'Minji_98'}
-					responseRate={78}
-					score={4.5}
-					createdAt={'2023-10-04'}
-					title={'응용소프트웨어실습 프론트엔드, 백엔드, 게임분야 개발자 구합니다'}
-				/>
-				<RecruitInfo
-					deadline={tempData.deadline}
-					period={period}
-					scope={tempData.scope}
-					courseName={tempData.courseName}
-					category={tempData.category}
-					proceedType={tempData.proceedType}
-					courseProfessor={tempData.courseProfessor}
-					dDay={diffDate}
-				/>
-				<RecruitDescription content={tempData.content} />
-				<RecruitRoles roles={tempData.recruitmentRoles} />
-				<RecruitTag tags={tempData.tags} />
-				<LinkToList />
-				<article className='wrapper-comments'>
-					<section className='container-title'>
-						<h3>댓글</h3>
-						<span>{'4'}</span>
-					</section>
-					<hr />
-					<section className='container-comments'>
-						<ul className='container-comments__lists'>
-							{commentsList.map((comment, _) => {
-								return (
-									<Comment
-										key={comment.id}
-										id={comment.id}
-										nickname={comment.nickname}
-										content={comment.content}
-										replies={comment.replies}
-										isWriter={comment.nickname === username}
-										createAt={comment.createAt}
-										profileImg={comment.profileImg}
-										deleteComment={() => deleteComment(comment.id)}
-									/>
-								);
-							})}
-						</ul>
-						<CommentInput
-							contents={contents}
-							addComment={addComment}
-							onKeyPress={onKeyPress}
-							onChangeHandler={onChangeHandler}
-							onClickInput={onClickInput}
-						/>
-					</section>
-				</article>
-			</S.RecruitDetailPage>
+			{!isLoading && detailedData && (
+				<S.RecruitDetailPage>
+					<TitleInfo
+						nickname={detailedData.writerNickname}
+						responseRate={detailedData.responseRate}
+						score={detailedData.writerScore}
+						createdAt={detailedData.createdAt.slice(0, -9)}
+						title={detailedData.title}
+						writerProfileImg={detailedData.writerProfileImg}
+						bookmarkCount={detailedData.bookmarkCount}
+						writerScore={detailedData.writerScore}
+					/>
+					<RecruitInfo
+						deadline={detailedData.deadline}
+						period={period}
+						scope={detailedData.scope}
+						courseName={detailedData.courseName}
+						category={detailedData.category}
+						proceedType={detailedData.proceedType}
+						courseProfessor={detailedData.courseProfessor}
+						dDay={diffDate}
+					/>
+					<RecruitDescription content={detailedData.content} />
+					<RecruitRoles roles={detailedData.recruitmentRoles} />
+					<RecruitTag tags={detailedData.tags} />
+					<LinkToList />
+					<article className='wrapper-comments'>
+						<section className='container-title'>
+							<h3>댓글</h3>
+							<span>{'4'}</span>
+						</section>
+						<hr />
+						<section className='container-comments'>
+							<ul className='container-comments__lists'>
+								{commentsList.map((comment, _) => {
+									return (
+										<Comment
+											key={comment.id}
+											id={comment.id}
+											nickname={comment.nickname}
+											content={comment.content}
+											replies={comment.replies}
+											isWriter={comment.nickname === username}
+											createAt={comment.createAt}
+											profileImg={comment.profileImg}
+											deleteComment={() => deleteComment(comment.id)}
+										/>
+									);
+								})}
+							</ul>
+							<CommentInput
+								contents={contents}
+								addComment={addComment}
+								onKeyPress={onKeyPress}
+								onChangeHandler={onChangeHandler}
+								onClickInput={onClickInput}
+							/>
+						</section>
+					</article>
+				</S.RecruitDetailPage>
+			)}
 			<S.Footer>
 				<section className='container-btn'>
-					{tempData.isWriter ? <ApplierFooter /> : <WriterFooter />}
+					{detailedData?.isWriter ? <WriterFooter /> : <ApplierFooter />}
 				</section>
 			</S.Footer>
 		</>
