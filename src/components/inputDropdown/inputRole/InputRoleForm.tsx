@@ -239,7 +239,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 							<article className='tags' key={index}>
 								<span>{tagItem}</span>
 								<button type='button' onClick={deleteTagItem}>
-									<img src={XBtn} id={index.toString()} />
+									<img src={XBtn as any} id={index.toString()} />
 								</button>
 							</article>
 						);
@@ -255,7 +255,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 							onClick={() => setDropdown(prev => ({ ...prev, skill: true }))}
 						/>
 					)}
-					{userRole.skill.length === 0 && <img src={Search} className='icon-search' />}
+					{userRole.skill.length === 0 && <img src={Search as any} className='icon-search' />}
 				</section>
 				{dropdown.skill && (
 					<section className='dropdown skill'>
@@ -270,7 +270,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 			</article>
 			<article className='add-btn'>
 				<button type='button' onClick={onClickHandler}>
-					<img src={Plus} />
+					<img src={Plus as any} />
 				</button>
 			</article>
 		</S.InputRoleForm>
