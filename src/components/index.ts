@@ -87,7 +87,6 @@ import RecruitCard from './meeteam/card/RecruitCard';
 import Pagination from './pagination/Pagination';
 import NaverLogin from './naver/NaverLogin';
 import Create from './header/Create';
-import InputContainer from './inputDropdown/inputContainer/InputContainer';
 import RecruitOptions from './optionMenu/recruitOptions/RecruitOptions';
 import Comment from './comment/comment/Comment';
 import CommentInput from './comment/commentInput/CommentInput';
@@ -95,8 +94,6 @@ import ReplyInput from './comment/replyInput/ReplyInput';
 import ReplyComment from './comment/comment/ReplyComment';
 import Skill from './skills/Skill';
 import PortfolioCard from './portfolio/card/PortfolioCard';
-import InputCourse from './inputDropdown/inputCourse/InputCourse';
-import InputProfessor from './inputDropdown/inputCourse/InputProfessor';
 import InputRole from './inputDropdown/inputRole/InputRole';
 import InputRoleForm from './inputDropdown/inputRole/InputRoleForm';
 import Description from './recruit/create/Description';
@@ -193,7 +190,6 @@ export {
 	Pagination,
 	Create,
 	DateSelect,
-	InputContainer,
 	RecruitOptions,
 	CommentInput,
 	ReplyInput,
@@ -201,8 +197,6 @@ export {
 	ReplyComment,
 	Skill,
 	PortfolioCard,
-	InputCourse,
-	InputProfessor,
 	InputRole,
 	InputRoleForm,
 	Description,
