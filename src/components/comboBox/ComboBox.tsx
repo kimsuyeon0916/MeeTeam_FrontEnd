@@ -1,7 +1,14 @@
 import React, { useState, useRef, useEffect, useImperativeHandle } from 'react';
 import S from './ComboBox.styled';
 import { OptionList } from '../index';
-import { FieldValues, UseFormRegister, UseFormSetValue, FormState, Path } from 'react-hook-form';
+import {
+	FieldValues,
+	UseFormRegister,
+	UseFormSetValue,
+	FormState,
+	Path,
+	PathValue,
+} from 'react-hook-form';
 
 interface Option {
 	id: string;
@@ -10,7 +17,7 @@ interface Option {
 
 interface ComboBox<T extends FieldValues> {
 	register: UseFormRegister<T>;
-	setValue: (...rest: string[]) => UseFormSetValue<T>;
+	setValue: UseFormSetValue<T>;
 	formState?: FormState<T>;
 	name: Path<T>;
 	label?: string;
@@ -59,7 +66,7 @@ const ComboBox = <T extends FieldValues>({
 		setIsOpen(true);
 	};
 
-	const handleOptionClick = (name: string, title: string, id?: string) => {
+	const handleOptionClick = (name: Path<T>, title: PathValue<T, Path<T>>, id?: string) => {
 		setValue(name, title);
 		id && sessionStorage.setItem(name, id);
 		clickOption?.(name);
@@ -73,7 +80,11 @@ const ComboBox = <T extends FieldValues>({
 				{icon}
 			</S.ComboBoxLabel>
 			{optionList && isOpen && (
-				<OptionList name={name} optionList={optionList} handleOptionClick={handleOptionClick} />
+				<OptionList
+					name={name}
+					optionList={optionList}
+					handleOptionClick={handleOptionClick as VoidFunction}
+				/>
 			)}
 		</S.ComboBoxLayout>
 	);
