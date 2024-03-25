@@ -139,7 +139,7 @@ const DeadlineSelect = styled.div<DeadlineControl>`
 	}
 	.react-datepicker__month {
 		margin: 0.4rem;
-		margin-bottom: 1rem;
+		margin-bottom: 2rem;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
