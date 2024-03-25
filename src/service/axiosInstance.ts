@@ -29,6 +29,7 @@ axiosAuthInstance.interceptors.response.use(onResponse, onError);
 
 const onRequest = (config: InternalAxiosRequestConfig) => {
 	const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
+	config.headers['Content-Type'] = 'application/json';
 
 	if (accessToken) {
 		config.headers.Authorization = `Bearer ${accessToken}`;
