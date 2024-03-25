@@ -15,10 +15,8 @@ import {
 import { tempData } from './data';
 import { simpleDate } from '../../../utils';
 import { Comment as CommentForm } from '../../../types';
-import { Edit, FilledBookmark, TrashCan, UnfilledBookmark } from '../../../assets';
 
 const RecruitDetailPage = () => {
-	const [isMarked, setIsMarked] = useState<boolean>(false);
 	const [contents, setContents] = useState<string>('');
 	const [commentsList, setCommentsList] = useState<CommentForm[]>(tempData.comments);
 	const username = 'yeom';
@@ -27,8 +25,6 @@ const RecruitDetailPage = () => {
 	const diffDate = Math.ceil(
 		Math.abs((new Date(tempData.deadline).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
 	).toString();
-
-	const tempApplied = true;
 
 	const addComment = () => {
 		if (contents !== '' && contents.trim() !== '') {
