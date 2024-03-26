@@ -79,9 +79,9 @@ import Dropdown from './dropdown/Dropdown';
 import DateSelect from './dateSelect/DateSelect';
 import DeadlineSelect from './dateSelect/DeadlineSelect';
 import Icon from './meeteam/icon/Icon';
-import ApplyInfomation from '../pages/recruit/RecruitDetailPage/steps/ApplyInfomation';
-import ApplyInput from '../pages/recruit/RecruitDetailPage/steps/ApplyInput';
-import ApplySubmit from '../pages/recruit/RecruitDetailPage/steps/ApplySubmit';
+import ApplyModal from './recruit/recruitDetail/modal/ApplyModal';
+import ConfirmModal from './recruit/recruitDetail/modal/ConfirmModal';
+import FinalModal from './recruit/recruitDetail/modal/FinalModal';
 import Content from './meeteam/Content';
 import RecruitCard from './meeteam/card/RecruitCard';
 import Pagination from './pagination/Pagination';
@@ -182,9 +182,6 @@ export {
 	MemberInviteModal,
 	MemberTest,
 	NaverLogin,
-	ApplyInfomation,
-	ApplyInput,
-	ApplySubmit,
 	Content,
 	PortpolioCard,
 	informationList,
@@ -219,4 +216,7 @@ export {
 	ComboBox,
 	WriterFooter,
 	ApplierFooter,
+	ApplyModal,
+	ConfirmModal,
+	FinalModal,
 };

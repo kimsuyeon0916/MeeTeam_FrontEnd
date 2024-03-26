@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import S from './RecruitDetailPage.styled';
 import {
 	CommentInput,
@@ -11,18 +11,31 @@ import {
 	LinkToList,
 	WriterFooter,
 	ApplierFooter,
+	ApplyModal,
+	ConfirmModal,
+	FinalModal,
 } from '../../../components';
 import { tempData } from './data';
-import { simpleDate } from '../../../utils';
-import { Comment as CommentForm } from '../../../types';
+import { fixModalBackground, simpleDate } from '../../../utils';
+import { Comment as CommentForm, JsxElementComponentProps } from '../../../types';
 import { useQuery } from '@tanstack/react-query';
 import { getPostingData } from '../../../service/recruit/detail';
+import { useRecoilValue } from 'recoil';
+import { applyModalState } from '../../../atom';
+
+const FIRST_STEP = 0;
 
 const RecruitDetailPage = () => {
 	const [contents, setContents] = useState<string>('');
 	const [commentsList, setCommentsList] = useState<CommentForm[]>(tempData.comments);
 	const username = 'yeom';
 	const createAt = simpleDate(new Date());
+	const isModal = useRecoilValue(applyModalState);
+	const stepLists: JsxElementComponentProps = {
+		0: <ApplyModal />,
+		1: <ConfirmModal />,
+		2: <FinalModal />,
+	};
 
 	const pageNumber = 2;
 
@@ -74,6 +87,10 @@ const RecruitDetailPage = () => {
 	const onClickInput = () => {};
 
 	const onClickApply = () => {};
+
+	useEffect(() => {
+		fixModalBackground(isModal);
+	}, [isModal]);
 
 	return (
 		<>
@@ -136,11 +153,17 @@ const RecruitDetailPage = () => {
 							/>
 						</section>
 					</article>
+					{isModal && (
+						<form>
+							<section className='modal-background'>{stepLists[FIRST_STEP]}</section>
+						</form>
+					)}
 				</S.RecruitDetailPage>
 			)}
+
 			<S.Footer>
 				<section className='container-btn'>
-					{detailedData?.isWriter ? <WriterFooter /> : <ApplierFooter />}
+					{!detailedData?.isWriter ? <WriterFooter /> : <ApplierFooter />}
 				</section>
 			</S.Footer>
 		</>

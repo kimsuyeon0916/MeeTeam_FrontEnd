@@ -46,6 +46,11 @@ export const deadlineState = atom({
 	default: new Date(),
 });
 
+export const applyModalState = atom({
+	key: 'applyModalState',
+	default: false,
+});
+
 export const recruitInputState = atom<InputState>({
 	key: 'recruitInputState',
 	default: {

@@ -8,6 +8,11 @@ const Modal = styled.section`
 	background-color: #f8fafb;
 	padding: 3rem;
 	box-sizing: border-box;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 501;
 
 	h1 {
 		color: #000;
@@ -62,7 +67,7 @@ const Modal = styled.section`
 		padding: 1.8rem;
 
 		h3 {
-			color: #8e8e8e;
+			color: #151515;
 			font-size: 1.35rem;
 			font-weight: 400;
 			line-height: 1.8rem;
@@ -190,9 +195,8 @@ const Modal = styled.section`
 
 		button {
 			display: flex;
-			width: 12.15rem;
 			height: 3.6rem;
-			padding: 0.75rem;
+			padding: 1.2rem 3.2rem;
 			justify-content: center;
 			align-items: center;
 			gap: 0.75rem;
@@ -203,7 +207,6 @@ const Modal = styled.section`
 
 		.confirm {
 			background-color: #5877fc;
-			font-weight: 700;
 			color: #fff;
 		}
 	}

@@ -1,5 +1,7 @@
 import React, { useState, useRef } from 'react';
 import S from './ApplyModal.styled';
+import { useSetRecoilState } from 'recoil';
+import { applyModalState } from '../../../../atom';
 
 const temp = {
 	name: '송유진',
@@ -11,8 +13,8 @@ const temp = {
 };
 
 const ApplyModal = () => {
-	const controlRef = useRef(null);
 	const [isChecked, setIsChecked] = useState<boolean>(false);
+	const setIsModal = useSetRecoilState(applyModalState);
 	const isSelected = true; // 임시
 	const isValid = isChecked && isSelected;
 	const onClickCheckbox = () => {
@@ -47,20 +49,20 @@ const ApplyModal = () => {
 							<span>이메일</span>
 						</section>
 						<section>
-							<span>{temp.name}</span>
-							<span>{temp.school}</span>
-							<span>{temp.major}</span>
-							<span>{temp.email}</span>
+							<span className='value'>{temp.name}</span>
+							<span className='value'>{temp.school}</span>
+							<span className='value'>{temp.major}</span>
+							<span className='value'>{temp.email}</span>
 						</section>
 					</section>
 					<section className='user-info__section'>
 						<section>
-							<span>평점</span>
+							<span>학점</span>
 							<span>입학년도</span>
 						</section>
 						<section>
-							<span>{temp.score}</span>
-							<span>{temp.enrolledYear}</span>
+							<span className='value'>{temp.score}</span>
+							<span className='value'>{temp.enrolledYear}</span>
 						</section>
 					</section>
 				</section>
@@ -72,9 +74,11 @@ const ApplyModal = () => {
 				<textarea placeholder='전할 말을 20자 이내로 입력해주세요.' />
 			</article>
 			<article className='container-buttons'>
-				<button type='button'>취소하기</button>
+				<button type='button' onClick={() => setIsModal(false)}>
+					취소하기
+				</button>
 				<button className='confirm' type='button' onClick={onClickConfirm}>
-					확인
+					다음
 				</button>
 			</article>
 		</S.Modal>

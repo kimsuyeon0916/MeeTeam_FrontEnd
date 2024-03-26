@@ -27,6 +27,16 @@ const RecruitDetailPage = styled.section`
 		background: #e0e6ff;
 	}
 
+	.modal-background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		z-index: 105;
+		background-color: rgba(0, 0, 0, 0.35);
+	}
+
 	.wrapper-comments {
 		.container-title {
 			display: flex;
