@@ -42,7 +42,7 @@ const RecruitCreatePage = () => {
 			validCheck.isTitle;
 
 		if (postAvailable) {
-			uploadPost.mutate(formData as any);
+			uploadPost.mutate(formData);
 			navigate(`/recruit/${uploadPost}`);
 		}
 	};
