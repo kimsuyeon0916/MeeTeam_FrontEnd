@@ -162,6 +162,10 @@ const DateSelect = styled.div<DateControl>`
 		border-radius: 1rem;
 		border: 1px solid #e3e3e3;
 		box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+
+		.react-datepicker__day--outside-month {
+			color: #e3e3e3;
+		}
 	}
 	.react-datepicker__header {
 		text-align: center;

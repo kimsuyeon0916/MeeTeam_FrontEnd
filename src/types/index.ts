@@ -6,7 +6,6 @@ import type { InputState, RoleForPost, InputCourse, InputRoleForm, Role } from '
 import type { Comment, CommentInputFunctions } from './comment';
 import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
-import type { WeekdayMap } from './recruit/others';
 
 export type {
 	SignUpPayload,
@@ -32,7 +31,6 @@ export type {
 	RoleForPost,
 	University,
 	Department,
-	WeekdayMap,
 	Keyword,
 	StringElementProps,
 };
