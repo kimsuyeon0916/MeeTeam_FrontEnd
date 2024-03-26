@@ -21,9 +21,7 @@ import { Comment as CommentForm, JsxElementComponentProps } from '../../../types
 import { useQuery } from '@tanstack/react-query';
 import { getPostingData } from '../../../service/recruit/detail';
 import { useRecoilValue } from 'recoil';
-import { applyModalState } from '../../../atom';
-
-const FIRST_STEP = 0;
+import { applyModalState, applyStepState } from '../../../atom';
 
 const RecruitDetailPage = () => {
 	const [contents, setContents] = useState<string>('');
@@ -31,6 +29,7 @@ const RecruitDetailPage = () => {
 	const username = 'yeom';
 	const createAt = simpleDate(new Date());
 	const isModal = useRecoilValue(applyModalState);
+	const step = useRecoilValue(applyStepState);
 	const stepLists: JsxElementComponentProps = {
 		0: <ApplyModal />,
 		1: <ConfirmModal />,
@@ -155,7 +154,7 @@ const RecruitDetailPage = () => {
 					</article>
 					{isModal && (
 						<form>
-							<section className='modal-background'>{stepLists[FIRST_STEP]}</section>
+							<section className='modal-background'>{stepLists[step]}</section>
 						</form>
 					)}
 				</S.RecruitDetailPage>

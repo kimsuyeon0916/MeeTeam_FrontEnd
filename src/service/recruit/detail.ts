@@ -9,3 +9,5 @@ export const getPostingData = async (id: number) => {
 		console.error(error);
 	}
 };
+
+export const getApplyData = async (id: number) => {};

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 const Modal = styled.section`
-	width: 39rem;
-	height: 52.2rem;
-	border-radius: 0.75rem;
-	border: 0.075rem solid #dcdcdc;
-	background-color: #f8fafb;
-	padding: 3rem;
+	width: 52rem;
+	height: 68rem;
+	border-radius: 1rem;
+	border: 1px solid #e3e3e3;
+	background: #f8fafb;
+	padding: 4rem;
 	box-sizing: border-box;
 	position: fixed;
 	top: 50%;
@@ -16,62 +16,71 @@ const Modal = styled.section`
 
 	h1 {
 		color: #000;
-		font-size: 1.8rem;
+		font-size: 2.4rem;
 		font-style: normal;
-		font-weight: 500;
-		line-height: 1.8rem;
-		letter-spacing: -0.036rem;
+		font-weight: 700;
+		line-height: 2.9rem;
+		letter-spacing: 0.0048rem;
 	}
 
 	.description {
 		display: flex;
 		flex-direction: column;
-		margin-top: 1.5rem;
+		margin-top: 1.6rem;
 
-		span:nth-child(1) {
+		.description-subtitle {
 			color: #151515;
-			font-size: 1.35rem;
+			font-size: 1.8rem;
 			font-weight: 600;
-			line-height: 1.8rem;
-			letter-spacing: 0.0027rem;
+			line-height: 2.1rem;
+			letter-spacing: 0.0036rem;
 		}
-		span:nth-child(2) {
+
+		.description-subinfo {
 			color: #373f41;
-			font-size: 1.05rem;
-			font-weight: 400;
-			line-height: 1.8rem;
-			letter-spacing: 0.0021rem;
-			margin-top: 0.3rem;
+			font-size: 1.4rem;
+			font-weight: 500;
+			line-height: 1.7rem;
+			letter-spacing: 0.0028rem;
+			margin-top: 0.7rem;
 		}
 
 		.agreement {
 			display: flex;
 			align-items: center;
-			margin-top: 0.9rem;
+			margin-top: 1.6rem;
 			padding: 0;
 			gap: 0.6rem;
 
 			input {
-				margin-top: 0.5rem;
+				margin: 0;
 				padding: 0;
+			}
+
+			span {
+				color: #373f41;
+				font-size: 1.4rem;
+				line-height: 1.7rem;
+				letter-spacing: 0.0028rem;
 			}
 		}
 	}
 
 	.container-user__info {
-		width: 33rem;
-		border-radius: 0.6rem;
-		border: 0.075rem solid #e3e3e3;
+		width: 44rem;
+		border-radius: 0.8rem;
+		border: 1px solid #e3e3e3;
 		background-color: #fff;
-		margin-top: 1.5rem;
-		padding: 1.8rem;
+		margin-top: 2.7rem;
+		padding: 1.8rem 2rem;
+		box-sizing: border-box;
 
 		h3 {
 			color: #151515;
-			font-size: 1.35rem;
-			font-weight: 400;
-			line-height: 1.8rem;
-			letter-spacing: 0.0027rem;
+			font-size: 1.8rem;
+			font-weight: 600;
+			line-height: 2.1rem;
+			letter-spacing: 0.0036rem;
 		}
 
 		.confirm-title {
@@ -81,15 +90,14 @@ const Modal = styled.section`
 		.user-info {
 			display: flex;
 			justify-content: flex-start;
-			margin-top: 0.9rem;
-			gap: 5rem;
+			margin-top: 1.6rem;
+			gap: 6.26rem;
 
 			span {
 				color: #8e8e8e;
-				font-size: 1.05rem;
-				font-weight: 400;
-				line-height: 140%;
-				letter-spacing: 0.015rem;
+				font-size: 1.4rem;
+				line-height: 1.7rem;
+				letter-spacing: 0.0028rem;
 			}
 
 			.value {
@@ -98,7 +106,7 @@ const Modal = styled.section`
 
 			.user-info__section {
 				display: flex;
-				gap: 0.6rem;
+				gap: 3.14rem;
 
 				section {
 					display: flex;
@@ -133,76 +141,115 @@ const Modal = styled.section`
 		}
 	}
 
-	.confirm-info {
-		margin-top: 3.92rem;
-	}
-
 	.container-role {
-		margin-top: 0.9rem;
+		margin-top: 1.2rem;
 
-		input {
+		.container-select__box {
+			position: relative;
 			display: flex;
-			width: 33rem;
-			height: 3.6rem;
+			width: 44rem;
+			height: 4.8rem;
+			padding: 1.2rem 1.6rem;
+			flex-direction: column;
+			justify-content: center;
 			box-sizing: border-box;
-			padding: 1.2rem 1.5rem;
-			align-items: center;
-			border-radius: 0.75rem;
-			border: 0.075rem solid #e3e3e3;
+			border-radius: 1rem;
+			border: 1px solid #e3e3e3;
 			background: #fff;
 			color: #8e8e8e;
-			font-size: 1.35rem;
-			font-weight: 400;
+			font-size: 1.6rem;
+			font-weight: 500;
 			line-height: 1.35rem;
 			letter-spacing: 0.015rem;
+
+			&:hover {
+				border-color: #5877fc;
+				transition: 0.2s ease-in-out;
+			}
+
+			ul {
+				position: absolute;
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				top: 4.7rem;
+				left: 0;
+				display: flex;
+				width: 100%;
+				padding: 1.2rem 1.6rem;
+				flex-direction: column;
+				align-items: flex-start;
+				gap: 1rem;
+				border-radius: 1rem;
+				border: 1px solid #e3e3e3;
+				background: #fff;
+				z-index: 601;
+				box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+			}
+
+			img {
+				position: absolute;
+				right: 1rem;
+				top: 1.2rem;
+			}
 		}
 	}
 
 	.container-message {
-		margin-top: 0.9rem;
+		margin-top: 1.2rem;
 
 		textarea {
 			display: flex;
-			width: 33rem;
-			height: 7.5rem;
-			padding: 1.2rem 1.5rem;
+			width: 44rem;
+			height: 10rem;
+			padding: 1.4rem 1.6rem;
 			align-items: flex-start;
+			gap: 1rem;
 			resize: none;
 			box-sizing: border-box;
-			border-radius: 0.75rem;
-			border: 0.075rem solid #e3e3e3;
+			border-radius: 1rem;
+			border: 1px solid #e3e3e3;
 			background: #fff;
 			color: #8e8e8e;
-			font-family: Pretendard;
-			font-size: 1.35rem;
+			font-size: 1.6rem;
 			font-weight: 400;
 			line-height: 1.35rem;
 			letter-spacing: 0.015rem;
+
+			&:hover {
+				border-color: #5877fc;
+				transition: 0.2s ease-in-out;
+			}
+
+			&:focus {
+				outline: none;
+				border: 1px solid var(--main-color, #5877fc);
+			}
 		}
 	}
 
 	.container-buttons {
-		margin-top: 4.2rem;
+		margin-top: 6rem;
 		display: flex;
 		justify-content: center;
 		gap: 1.35rem;
 
-		color: #373f41;
-		font-size: 1.35rem;
-		font-weight: 400;
-		line-height: 1.35rem;
-		letter-spacing: 0.015rem;
-
 		button {
-			display: flex;
-			height: 3.6rem;
 			padding: 1.2rem 3.2rem;
-			justify-content: center;
-			align-items: center;
-			gap: 0.75rem;
-			flex-shrink: 0;
 			border-radius: 0.6rem;
-			background-color: #ededed;
+			color: #373f41;
+			font-size: 1.6rem;
+			line-height: 1.9rem;
+			letter-spacing: 0.0032rem;
+		}
+
+		.cancel {
+			height: 4.8rem;
+			padding: 1.2rem 3.2rem;
+			box-sizing: border-box;
+			border-radius: 0.6rem;
+			border: 1px solid #e3e3e3;
+			background: #fff;
 		}
 
 		.confirm {
@@ -224,17 +271,21 @@ const Modal = styled.section`
 `;
 
 const FinalModal = styled.section`
-	width: 39rem;
-	height: 19.8rem;
+	width: 52rem;
 	border-radius: 0.75rem;
 	border: 0.075rem solid #dcdcdc;
 	background-color: #f8fafb;
-	padding: 3rem;
+	padding: 4rem;
 	box-sizing: border-box;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 501;
 
 	h1 {
 		color: #000;
-		font-size: 1.8rem;
+		font-size: 2.4rem;
 		font-style: normal;
 		font-weight: 500;
 		line-height: 1.8rem;
@@ -244,22 +295,22 @@ const FinalModal = styled.section`
 	.description {
 		display: flex;
 		flex-direction: column;
-		margin-top: 1.5rem;
+		margin-top: 1.6rem;
 
 		span:nth-child(1) {
 			color: #151515;
-			font-size: 1.35rem;
+			font-size: 1.8rem;
 			font-weight: 600;
 			line-height: 1.8rem;
 			letter-spacing: 0.0027rem;
 		}
 		span:nth-child(2) {
 			color: #373f41;
-			font-size: 1.05rem;
+			font-size: 1.4rem;
 			font-weight: 400;
 			line-height: 1.8rem;
 			letter-spacing: 0.0021rem;
-			margin-top: 0.3rem;
+			margin-top: 0.7rem;
 		}
 
 		.agreement {
@@ -278,21 +329,19 @@ const FinalModal = styled.section`
 
 	.container-button {
 		display: flex;
-		justify-content: center;
-		margin-top: 3rem;
+		justify-content: flex-end;
+		margin-top: 6.2rem;
 
 		button {
 			display: flex;
-			width: 12.15rem;
-			height: 3.6rem;
-			padding: 0.75rem;
+			height: 4.8rem;
+			padding: 1.2rem 3.2rem;
 			justify-content: center;
 			align-items: center;
 			gap: 0.75rem;
 			flex-shrink: 0;
 			border-radius: 0.6rem;
 			background-color: #5877fc;
-			font-weight: 700;
 			color: #fff;
 		}
 	}

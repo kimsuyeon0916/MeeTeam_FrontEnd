@@ -1,5 +1,7 @@
 import React from 'react';
 import S from './ApplyModal.styled';
+import { useSetRecoilState } from 'recoil';
+import { applyStepState } from '../../../../atom';
 
 const temp = {
 	name: '송유진',
@@ -13,6 +15,13 @@ const temp = {
 };
 
 const ConfirmModal = () => {
+	const setApplyStepState = useSetRecoilState(applyStepState);
+	const onClickBack = () => {
+		setApplyStepState(prev => prev - 1);
+	};
+	const onClickNext = () => {
+		setApplyStepState(prev => prev + 1);
+	};
 	return (
 		<S.Modal>
 			<article>
@@ -20,9 +29,10 @@ const ConfirmModal = () => {
 				<section className='description'>
 					<span>멤버들에게 다음과 같이 공개됩니다.</span>
 					<span>멤버들이 지원자의 프로필을 열람할 수 있습니다.</span>
+					<span>신청자 정보는 프로필 편집을 통해 수정할 수 있습니다.</span>
 				</section>
 			</article>
-			<article className='container-user__info confirm-info'>
+			<article className='container-user__info'>
 				<h3 className='value'>지원자 정보</h3>
 				<section className='user-info'>
 					<section className='user-info__section'>
@@ -57,8 +67,10 @@ const ConfirmModal = () => {
 				</section>
 			</article>
 			<article className='container-buttons confirm-btn'>
-				<button type='button'>뒤로가기</button>
-				<button type='button' className='confirm'>
+				<button type='button' onClick={onClickBack}>
+					뒤로가기
+				</button>
+				<button type='button' className='confirm' onClick={onClickNext}>
 					제출하기
 				</button>
 			</article>
