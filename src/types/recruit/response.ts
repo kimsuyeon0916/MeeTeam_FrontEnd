@@ -64,3 +64,13 @@ export interface RecruitPostings {
 	content: string;
 	comments: [];
 }
+
+export interface ApplyInfo {
+	name: string;
+	score: number;
+	universityName: string;
+	departmentName: string;
+	year: number;
+	email: string;
+	recruitmentRoles: RecruitTags[];
+}

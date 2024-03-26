@@ -3,6 +3,8 @@ import S from './ApplyModal.styled';
 import { useSetRecoilState } from 'recoil';
 import { applyModalState, applyStepState } from '../../../../atom';
 import { DropdownArrow } from '../../../../assets';
+import { useQuery } from '@tanstack/react-query';
+import { getApplyData } from '../../../../service/recruit/detail';
 
 const temp = {
 	name: '송유진',
@@ -21,6 +23,15 @@ const ApplyModal = () => {
 	const [value, setValue] = useState<string>('신청 역할을 선택해주세요.');
 	const isSelected = true; // 임시
 	const isValid = isChecked && isSelected;
+	const pageNumber = 2;
+
+	const { data, isLoading } = useQuery({
+		queryKey: ['applyInfoNumber', pageNumber],
+		queryFn: () => getApplyData(pageNumber),
+	});
+
+	console.log(data);
+
 	const onClickCheckbox = () => {
 		setIsChecked(prev => !prev);
 	};

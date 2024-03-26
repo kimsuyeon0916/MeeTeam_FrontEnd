@@ -11,6 +11,7 @@ import type {
 	RoleInfo,
 	RecruitTags,
 	RecruitPostings,
+	ApplyInfo,
 } from './recruit/response';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
 
@@ -42,4 +43,5 @@ export type {
 	University,
 	Department,
 	RecruitPostings,
+	ApplyInfo,
 };

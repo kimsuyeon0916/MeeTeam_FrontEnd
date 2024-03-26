@@ -1,5 +1,5 @@
 import { EndPoint, axiosInstance } from '..';
-import { RecruitPostings } from '../../types';
+import { RecruitPostings, ApplyInfo } from '../../types';
 
 export const getPostingData = async (id: number) => {
 	try {
@@ -10,4 +10,11 @@ export const getPostingData = async (id: number) => {
 	}
 };
 
-export const getApplyData = async (id: number) => {};
+export const getApplyData = async (id: number) => {
+	try {
+		const response = await axiosInstance.get<ApplyInfo>(EndPoint.RECRUIT_DETAIL.applyInfo(id));
+		return response;
+	} catch (error) {
+		console.error(error);
+	}
+};
