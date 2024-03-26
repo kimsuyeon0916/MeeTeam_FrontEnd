@@ -23,6 +23,14 @@ const Modal = styled.section`
 		letter-spacing: 0.0048rem;
 	}
 
+	h4 {
+		color: #151515;
+		font-size: 1.8rem;
+		font-weight: 600;
+		line-height: 2.1rem;
+		letter-spacing: 0.0036rem;
+	}
+
 	.description {
 		display: flex;
 		flex-direction: column;
@@ -40,6 +48,14 @@ const Modal = styled.section`
 			color: #373f41;
 			font-size: 1.4rem;
 			font-weight: 500;
+			line-height: 1.7rem;
+			letter-spacing: 0.0028rem;
+			margin-top: 0.7rem;
+		}
+
+		.description-confirm {
+			color: #373f41;
+			font-size: 1.4rem;
 			line-height: 1.7rem;
 			letter-spacing: 0.0028rem;
 			margin-top: 0.7rem;
@@ -74,14 +90,6 @@ const Modal = styled.section`
 		margin-top: 2.7rem;
 		padding: 1.8rem 2rem;
 		box-sizing: border-box;
-
-		h3 {
-			color: #151515;
-			font-size: 1.8rem;
-			font-weight: 600;
-			line-height: 2.1rem;
-			letter-spacing: 0.0036rem;
-		}
 
 		.confirm-title {
 			font-size: 1.8rem;
@@ -124,19 +132,12 @@ const Modal = styled.section`
 			margin-top: 1.8rem;
 			color: #373f41;
 
-			h2 {
-				font-size: 1.35rem;
-				font-weight: 400;
-				line-height: 1.8rem;
-				letter-spacing: 0.0027rem;
-			}
-
 			p {
-				font-size: 1.05rem;
-				font-weight: 400;
-				line-height: 1.8rem;
-				letter-spacing: 0.0021rem;
-				margin-top: 0.9rem;
+				color: #373f41;
+				font-size: 1.4rem;
+				margin-top: 1.5rem;
+				line-height: 1.7rem;
+				letter-spacing: 0.0028rem;
 			}
 		}
 	}
@@ -241,12 +242,11 @@ const Modal = styled.section`
 			font-size: 1.6rem;
 			line-height: 1.9rem;
 			letter-spacing: 0.0032rem;
+			box-sizing: border-box;
 		}
 
 		.cancel {
 			height: 4.8rem;
-			padding: 1.2rem 3.2rem;
-			box-sizing: border-box;
 			border-radius: 0.6rem;
 			border: 1px solid #e3e3e3;
 			background: #fff;
@@ -254,12 +254,13 @@ const Modal = styled.section`
 
 		.confirm {
 			background-color: #5877fc;
+			font-weight: 400;
 			color: #fff;
 		}
 	}
 
 	.confirm-btn {
-		margin-top: 8.94rem;
+		margin-top: 14.7rem;
 	}
 
 	hr {

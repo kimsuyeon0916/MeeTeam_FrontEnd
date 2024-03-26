@@ -27,13 +27,17 @@ const ConfirmModal = () => {
 			<article>
 				<h1>신청 정보</h1>
 				<section className='description'>
-					<span>멤버들에게 다음과 같이 공개됩니다.</span>
-					<span>멤버들이 지원자의 프로필을 열람할 수 있습니다.</span>
-					<span>신청자 정보는 프로필 편집을 통해 수정할 수 있습니다.</span>
+					<h4>멤버들에게 다음과 같이 공개됩니다.</h4>
+					<span className='description-confirm'>
+						멤버들이 지원자의 프로필을 열람할 수 있습니다.
+					</span>
+					<span className='description-confirm'>
+						신청자 정보는 프로필 편집을 통해 수정할 수 있습니다.
+					</span>
 				</section>
 			</article>
 			<article className='container-user__info'>
-				<h3 className='value'>지원자 정보</h3>
+				<h4>지원자 정보</h4>
 				<section className='user-info'>
 					<section className='user-info__section'>
 						<section>
@@ -62,12 +66,12 @@ const ConfirmModal = () => {
 				</section>
 				<hr />
 				<section className='role-info'>
-					<h2>{temp.role}</h2>
+					<h4>{temp.role}</h4>
 					<p>{temp.message}</p>
 				</section>
 			</article>
 			<article className='container-buttons confirm-btn'>
-				<button type='button' onClick={onClickBack}>
+				<button type='button' className='cancel' onClick={onClickBack}>
 					뒤로가기
 				</button>
 				<button type='button' className='confirm' onClick={onClickNext}>

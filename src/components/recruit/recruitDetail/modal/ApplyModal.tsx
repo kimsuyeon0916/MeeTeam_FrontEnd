@@ -63,32 +63,34 @@ const ApplyModal = () => {
 			</article>
 			<article className='container-user__info'>
 				<h3>내 정보</h3>
-				<section className='user-info'>
-					<section className='user-info__section'>
-						<section>
-							<span>이름</span>
-							<span>학교</span>
-							<span>학과</span>
-							<span>이메일</span>
+				{!isLoading && data && (
+					<section className='user-info'>
+						<section className='user-info__section'>
+							<section>
+								<span>이름</span>
+								<span>학교</span>
+								<span>학과</span>
+								<span>이메일</span>
+							</section>
+							<section>
+								<span className='value'>{data.name}</span>
+								<span className='value'>{data.universityName}</span>
+								<span className='value'>{data.departmentName}</span>
+								<span className='value'>{data.email}</span>
+							</section>
 						</section>
-						<section>
-							<span className='value'>{temp.name}</span>
-							<span className='value'>{temp.school}</span>
-							<span className='value'>{temp.major}</span>
-							<span className='value'>{temp.email}</span>
+						<section className='user-info__section'>
+							<section>
+								<span>학점</span>
+								<span>입학년도</span>
+							</section>
+							<section>
+								<span className='value'>{data.score}</span>
+								<span className='value'>{data.year}</span>
+							</section>
 						</section>
 					</section>
-					<section className='user-info__section'>
-						<section>
-							<span>학점</span>
-							<span>입학년도</span>
-						</section>
-						<section>
-							<span className='value'>{temp.score}</span>
-							<span className='value'>{temp.enrolledYear}</span>
-						</section>
-					</section>
-				</section>
+				)}
 			</article>
 			<article className='container-role'>
 				<article className='container-select__box' onClick={() => setIsOpen(prev => !prev)}>
