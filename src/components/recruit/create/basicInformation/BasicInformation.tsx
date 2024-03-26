@@ -20,7 +20,7 @@ const BasicInformation = () => {
 	};
 
 	return (
-		<S.BasicInformation>
+		<S.BasicInformation $isTitled={formData.title}>
 			<section className='container-basic'>
 				<section className='subtitle'>
 					<h4>기본 정보</h4>

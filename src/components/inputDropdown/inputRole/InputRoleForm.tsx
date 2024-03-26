@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Plus, Search, XBtn } from '../../../assets';
 import S from './InputRoleForm.styled';
-import { Role, InputRoleForm, RoleForPost, InputState } from '../../../types';
+import { Role, InputRoleForm, RoleForPost, InputState, Keyword } from '../../../types';
 import { useDebounce } from '../../../hooks';
 import { getRoleKeyword, getSkillKeyword } from '../../../service';
 import { useRecoilState } from 'recoil';
@@ -53,11 +53,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 	const keywordSkill = useDebounce(tagItem, 500);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-	const {
-		data: dataRole,
-		isLoading: isLoadingRole,
-		refetch: refetchRole,
-	} = useQuery({
+	const { data: dataRole, isLoading: isLoadingRole } = useQuery({
 		queryKey: ['searchRole', keywordRole],
 		queryFn: () => getRoleKeyword(keywordRole),
 		staleTime: 10000,
@@ -260,8 +256,8 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 				{dropdown.skill && (
 					<section className='dropdown skill'>
 						{!isLoadingSkill &&
-							dataSkill?.map((keyword: any) => (
-								<span key={keyword.id} onClick={onClickSkill} id={keyword.id}>
+							dataSkill?.map((keyword: Keyword) => (
+								<span key={keyword.id} onClick={onClickSkill} id={keyword.id.toString()}>
 									{keyword.name}
 								</span>
 							))}

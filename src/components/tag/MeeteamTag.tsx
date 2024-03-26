@@ -6,6 +6,7 @@ import { useDebounce } from '../../hooks';
 import { useQuery } from '@tanstack/react-query';
 import { getTagKeyword } from '../../service';
 import { Search, XBtn } from '../../assets';
+import { Keyword } from '../../types';
 
 interface IMeeteamTag {
 	tags?: string[];
@@ -20,7 +21,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const keywordTag = useDebounce(tagItem, 500);
 
-	const { data, isLoading } = useQuery({
+	const { data, isSuccess } = useQuery({
 		queryKey: ['keywordTag', keywordTag],
 		queryFn: () => getTagKeyword(keywordTag),
 	});
@@ -98,7 +99,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 		<S.MeeteamTag ref={dropdownRef}>
 			{!tags ? (
 				<div className='tag__box' onClick={onClickInput}>
-					{tagList.map((tagItem, index) => {
+					{tagList.map((tagItem, _) => {
 						return (
 							<div className='tag__item' key={tagItem}>
 								<span>{tagItem}</span>
@@ -120,8 +121,8 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 					{tagList.length === 0 && <img src={Search} className='icon-search' />}
 					{isDropdownVisible && (
 						<div className='tag-dropdown'>
-							{!isLoading &&
-								data?.map((tag: any) => (
+							{isSuccess &&
+								data?.map((tag: Keyword) => (
 									<div
 										className='tag__item option'
 										key={tag.id}

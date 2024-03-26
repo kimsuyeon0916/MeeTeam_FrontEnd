@@ -4,7 +4,11 @@ interface Course {
 	$isChecked: boolean;
 }
 
-const BasicInformation = styled.section`
+interface Basic {
+	$isTitled: string;
+}
+
+const BasicInformation = styled.section<Basic>`
 	.container-basic {
 		display: flex;
 		width: 100%;
@@ -32,7 +36,7 @@ const BasicInformation = styled.section`
 					border: 0.1rem solid #e3e3e3;
 					background: #fff;
 					margin-top: 0.8rem;
-					color: #8e8e8e;
+					color: ${props => (props.$isTitled !== '' ? '#000' : '#8e8e8e')};
 					font-size: 1.6rem;
 					line-height: 1.9rem;
 					letter-spacing: 0.0032rem;
