@@ -1,4 +1,4 @@
-import { WeekdayMap } from '../../types';
+import { StringElementProps } from '../../types';
 
 const MONTH = [
 	'1월',
@@ -15,7 +15,7 @@ const MONTH = [
 	'12월',
 ];
 
-const WEEKDAY: WeekdayMap = {
+const WEEKDAY: StringElementProps = {
 	Sunday: '일',
 	Monday: '월',
 	Tuesday: '화',
