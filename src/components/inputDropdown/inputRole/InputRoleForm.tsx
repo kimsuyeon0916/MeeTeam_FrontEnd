@@ -4,7 +4,7 @@ import { Plus, Search, XBtn } from '../../../assets';
 import S from './InputRoleForm.styled';
 import { Role, InputRoleForm, RoleForPost, InputState } from '../../../types';
 import { useDebounce } from '../../../hooks';
-import { getRoleKeyword, getSkillKeyword } from '../../../api';
+import { getRoleKeyword, getSkillKeyword } from '../../../service';
 import { useRecoilState } from 'recoil';
 import { recruitInputState } from '../../../atom';
 import { isNotNumber } from '../../../utils';

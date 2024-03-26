@@ -1,7 +1,7 @@
 import type { SignUpPayload, UpdateProfilePayload } from './payload';
 import type { UserReponse, University, Department } from './response';
 import type { CustomInstance } from './api';
-import type { TitleInfo, Option, OptionList } from './recruit/response';
+import type { TitleInfo, Option, OptionList, Keyword } from './recruit/response';
 import type { InputState, RoleForPost, InputCourse, InputRoleForm, Role } from './recruit/payload';
 import type { Comment, CommentInputFunctions } from './comment';
 import type { JsxElementComponentProps } from './indexSigniture';
@@ -33,4 +33,5 @@ export type {
 	University,
 	Department,
 	WeekdayMap,
+	Keyword,
 };

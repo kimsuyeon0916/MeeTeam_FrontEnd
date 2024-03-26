@@ -15,7 +15,12 @@ export const EndPoint = {
 	},
 
 	/* recruit */
-	POSTING: {
+	RECRUITMENT: {
 		post: '/recruitment/postings',
+		role: (keyword: string) => `/role/search?keyword=${keyword}&limit=5`,
+		skill: (keyword: string) => `/skill/search?keyword=${keyword}&limit=5`,
+		course: (keyword: string) => `/tag/search/course?keyword=${keyword}&limit=5`,
+		professor: (keyword: string) => `/tag/search/professor?keyword=${keyword}&limit=5`,
+		tag: (keyword: string) => `/tag/search?keyword=${keyword}&limit=5`,
 	},
 };

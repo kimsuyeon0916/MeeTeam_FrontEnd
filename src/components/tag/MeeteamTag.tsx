@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import { recruitInputState } from '../../atom';
 import { useDebounce } from '../../hooks';
 import { useQuery } from '@tanstack/react-query';
-import { getTagKeyword } from '../../api';
+import { getTagKeyword } from '../../service';
 import { Search, XBtn } from '../../assets';
 
 interface IMeeteamTag {
@@ -121,7 +121,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 					{isDropdownVisible && (
 						<div className='tag-dropdown'>
 							{!isLoading &&
-								data.map((tag: any) => (
+								data?.map((tag: any) => (
 									<div
 										className='tag__item option'
 										key={tag.id}

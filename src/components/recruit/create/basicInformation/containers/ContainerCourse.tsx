@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import S from '../BasicInformation.styled';
 import { useQuery } from '@tanstack/react-query';
 import { useDebounce, useValid } from '../../../../../hooks';
-import { getCourseKeyword, getProfessorKeyword } from '../../../../../api';
+import { getCourseKeyword, getProfessorKeyword } from '../../../../../service';
 import { useSetRecoilState } from 'recoil';
 import { recruitInputState } from '../../../../../atom';
 

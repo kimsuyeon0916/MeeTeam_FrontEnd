@@ -14,3 +14,8 @@ export interface Option {
 	isScope?: boolean;
 	isCategory?: boolean;
 }
+
+export interface Keyword {
+	id: number;
+	name: string;
+}
