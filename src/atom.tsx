@@ -124,16 +124,11 @@ export const applyUserInfo = atom<ApplyRole>({
 		departmentName: '',
 		email: '',
 		year: 0,
-		role: '',
+		role: {
+			applyRoleId: 0,
+			name: '',
+		},
 		message: '' as string | undefined,
-	},
-});
-
-export const applyRoleInfo = atom({
-	key: 'applyRoleInfo',
-	default: {
-		applyRoleId: 0,
-		message: '',
 	},
 });
 

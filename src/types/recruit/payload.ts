@@ -5,6 +5,14 @@ export interface ApplyRole {
 	departmentName: string;
 	year: number;
 	email: string;
-	role: string;
+	role: {
+		applyRoleId: number;
+		name: string;
+	};
+	message: string | undefined;
+}
+
+export interface ApplyForm {
+	applyRoleId: number;
 	message: string | undefined;
 }

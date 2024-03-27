@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import { applyUserInfo, applyModalState, applyStepState } from '../../../../atom';
 import { DropdownArrow } from '../../../../assets';
 import { useQuery } from '@tanstack/react-query';
-import { getApplyData } from '../../../../service/recruit/detail';
+import { getApplyData } from '../../../../service';
 
 const pageNumber = 2; // 임시
 const isSelected = true; // 임시
@@ -38,8 +38,10 @@ const ApplyModal = () => {
 	const onClickOption = (event: React.MouseEvent<HTMLLIElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		setValue(innerText);
-		setUserInfo(prev => ({ ...prev, role: innerText }));
-		console.log(event);
+		setUserInfo(prev => ({
+			...prev,
+			role: { applyRoleId: +(event.target as HTMLLIElement).id, name: innerText },
+		}));
 	};
 
 	useEffect(() => {

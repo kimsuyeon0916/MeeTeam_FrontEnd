@@ -19,7 +19,7 @@ import { tempData } from './data';
 import { fixModalBackground, simpleDate } from '../../../utils';
 import { Comment as CommentForm, JsxElementComponentProps } from '../../../types';
 import { useQuery } from '@tanstack/react-query';
-import { getPostingData } from '../../../service/recruit/detail';
+import { getPostingData } from '../../../service';
 import { useRecoilValue } from 'recoil';
 import { applyModalState, applyStepState } from '../../../atom';
 

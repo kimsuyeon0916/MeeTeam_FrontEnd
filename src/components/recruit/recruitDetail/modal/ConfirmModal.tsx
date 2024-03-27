@@ -2,16 +2,39 @@ import React from 'react';
 import S from './ApplyModal.styled';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { applyStepState, applyUserInfo } from '../../../../atom';
+import { useMutation } from '@tanstack/react-query';
+import { applyRole } from '../../../../service';
+import { ApplyForm } from '../../../../types';
+
+const PAGE_NUMBER = 2;
+
+interface ApplyArgs {
+	PAGE_NUMBER: number;
+	formApply: ApplyForm;
+}
 
 const ConfirmModal = () => {
 	const setApplyStepState = useSetRecoilState(applyStepState);
 	const userInfo = useRecoilValue(applyUserInfo);
+	const formApply = {
+		applyRoleId: userInfo.role.applyRoleId,
+		message: userInfo.message,
+	};
+
+	const apply = useMutation({
+		mutationFn: ({ PAGE_NUMBER, formApply }: ApplyArgs) => applyRole(PAGE_NUMBER, formApply),
+		onSuccess: () => {
+			setApplyStepState(prev => prev + 1);
+		},
+	});
+
 	const onClickBack = () => {
 		setApplyStepState(prev => prev - 1);
 	};
 	const onClickNext = () => {
-		setApplyStepState(prev => prev + 1);
+		apply.mutate({ PAGE_NUMBER, formApply });
 	};
+
 	return (
 		<S.Modal>
 			<article>
@@ -56,7 +79,7 @@ const ConfirmModal = () => {
 				</section>
 				<hr />
 				<section className='role-info'>
-					<h4>{userInfo.role}</h4>
+					<h4>{userInfo.role.name}</h4>
 					<p>{userInfo.message}</p>
 				</section>
 			</article>

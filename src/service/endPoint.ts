@@ -17,5 +17,6 @@ export const EndPoint = {
 	RECRUIT_DETAIL: {
 		posting: (id: number) => `/recruitment/postings/${id}`,
 		applyInfo: (id: number) => `/recruitment/postings/${id}/apply-info`,
+		apply: (id: number) => `/recruitment/postings/${id}/apply`,
 	},
 };
