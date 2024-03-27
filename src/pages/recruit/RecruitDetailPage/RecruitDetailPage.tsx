@@ -159,7 +159,6 @@ const RecruitDetailPage = () => {
 					)}
 				</S.RecruitDetailPage>
 			)}
-
 			<S.Footer>
 				<section className='container-btn'>
 					{!detailedData?.isWriter ? <WriterFooter /> : <ApplierFooter />}

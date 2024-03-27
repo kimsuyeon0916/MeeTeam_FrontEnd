@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { SessionStorageEffect, simpleDate } from './utils';
-import { User, InputState } from './types';
+import { User, InputState, ApplyRole } from './types';
 import { LocalStorageEffect } from './utils';
 import { Account } from './pages';
 
@@ -115,10 +115,24 @@ export const applyStepState = atom({
 	default: 0,
 });
 
-export const applyInfoState = atom({
-	key: 'applyInfoState',
+export const applyUserInfo = atom<ApplyRole>({
+	key: 'applyUserInfo',
 	default: {
+		name: '',
+		score: 0,
+		universityName: '',
+		departmentName: '',
+		email: '',
+		year: 0,
 		role: '',
+		message: '' as string | undefined,
+	},
+});
+
+export const applyRoleInfo = atom({
+	key: 'applyRoleInfo',
+	default: {
+		applyRoleId: 0,
 		message: '',
 	},
 });

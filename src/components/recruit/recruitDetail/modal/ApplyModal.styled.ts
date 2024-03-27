@@ -99,6 +99,7 @@ const Modal = styled.section`
 			display: flex;
 			justify-content: flex-start;
 			margin-top: 1.6rem;
+			height: 8.4rem;
 			gap: 6.26rem;
 
 			span {
@@ -131,6 +132,7 @@ const Modal = styled.section`
 		.role-info {
 			margin-top: 1.8rem;
 			color: #373f41;
+			height: 5.3rem;
 
 			p {
 				color: #373f41;

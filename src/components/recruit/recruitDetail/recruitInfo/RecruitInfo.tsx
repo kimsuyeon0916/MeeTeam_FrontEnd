@@ -12,24 +12,6 @@ const RecruitInfo = ({
 	courseProfessor,
 	dDay,
 }: RecruitInfo) => {
-	const translateValue = (value: string) => {
-		switch (value) {
-			case 'PROJECT':
-				return '프로젝트';
-			case 'STUDY':
-				return '스터디';
-			case 'ON_LINE':
-				return '온라인';
-			case 'OFF_LINE':
-				return '오프라인';
-			case 'ON_CAMPUS':
-				return '교내';
-			case 'OFF_CAMPUS':
-				return '교외';
-			default:
-				return value;
-		}
-	};
 	return (
 		<S.RecruitInfo className='wrapper-info'>
 			<section className='container-info'>
@@ -44,7 +26,7 @@ const RecruitInfo = ({
 						<span>{deadline}</span>
 						<span>{`마감 ${dDay}일 전`}</span>
 					</section>
-					<span>{translateValue(scope)}</span>
+					<span>{scope}</span>
 					<span>{period}</span>
 					<span>{courseName ? courseName : '-'}</span>
 				</section>
@@ -56,8 +38,8 @@ const RecruitInfo = ({
 					<span>교수명</span>
 				</section>
 				<section className='values'>
-					<span>{translateValue(category)}</span>
-					<span>{translateValue(proceedType)}</span>
+					<span>{category}</span>
+					<span>{proceedType}</span>
 					<span>{courseProfessor !== null ? courseProfessor : '-'}</span>
 				</section>
 			</section>

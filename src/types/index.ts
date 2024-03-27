@@ -13,6 +13,7 @@ import type {
 	RecruitPostings,
 	ApplyInfo,
 } from './recruit/response';
+import type { ApplyRole } from './recruit/payload';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
 
 export type {
@@ -44,4 +45,5 @@ export type {
 	Department,
 	RecruitPostings,
 	ApplyInfo,
+	ApplyRole,
 };

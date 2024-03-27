@@ -1,21 +1,11 @@
 import React from 'react';
 import S from './ApplyModal.styled';
-import { useSetRecoilState } from 'recoil';
-import { applyStepState } from '../../../../atom';
-
-const temp = {
-	name: '송유진',
-	school: '광운대학교',
-	major: '소프트웨어학부',
-	email: 'jiminni_01@kw.ac.kr',
-	score: '4.3',
-	enrolledYear: '2018',
-	role: '백엔드 개발자',
-	message: '백엔드 개발자로 참여하고 싶어요!',
-};
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { applyStepState, applyUserInfo } from '../../../../atom';
 
 const ConfirmModal = () => {
 	const setApplyStepState = useSetRecoilState(applyStepState);
+	const userInfo = useRecoilValue(applyUserInfo);
 	const onClickBack = () => {
 		setApplyStepState(prev => prev - 1);
 	};
@@ -47,27 +37,27 @@ const ConfirmModal = () => {
 							<span>이메일</span>
 						</section>
 						<section>
-							<span className='value'>{temp.name}</span>
-							<span className='value'>{temp.school}</span>
-							<span className='value'>{temp.major}</span>
-							<span className='value'>{temp.email}</span>
+							<span className='value'>{userInfo.name}</span>
+							<span className='value'>{userInfo.universityName}</span>
+							<span className='value'>{userInfo.departmentName}</span>
+							<span className='value'>{userInfo.email}</span>
 						</section>
 					</section>
 					<section className='user-info__section'>
 						<section>
-							<span>평점</span>
+							<span>학점</span>
 							<span>입학년도</span>
 						</section>
 						<section>
-							<span className='value'>{temp.score}</span>
-							<span className='value'>{temp.enrolledYear}</span>
+							<span className='value'>{userInfo.score}</span>
+							<span className='value'>{userInfo.year}</span>
 						</section>
 					</section>
 				</section>
 				<hr />
 				<section className='role-info'>
-					<h4>{temp.role}</h4>
-					<p>{temp.message}</p>
+					<h4>{userInfo.role}</h4>
+					<p>{userInfo.message}</p>
 				</section>
 			</article>
 			<article className='container-buttons confirm-btn'>

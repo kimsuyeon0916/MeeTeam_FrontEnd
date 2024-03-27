@@ -1,50 +1,59 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import S from './ApplyModal.styled';
 import { useSetRecoilState } from 'recoil';
-import { applyModalState, applyStepState } from '../../../../atom';
+import { applyUserInfo, applyModalState, applyStepState } from '../../../../atom';
 import { DropdownArrow } from '../../../../assets';
 import { useQuery } from '@tanstack/react-query';
 import { getApplyData } from '../../../../service/recruit/detail';
 
-const temp = {
-	name: '송유진',
-	school: '광운대학교',
-	major: '소프트웨어학부',
-	email: 'jiminni_01@kw.ac.kr',
-	score: '4.3',
-	enrolledYear: '2018',
-};
+const pageNumber = 2; // 임시
+const isSelected = true; // 임시
 
 const ApplyModal = () => {
-	const [isChecked, setIsChecked] = useState<boolean>(false);
+	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 	const setIsModal = useSetRecoilState(applyModalState);
-	const setAppleStepState = useSetRecoilState(applyStepState);
+	const setApplyStep = useSetRecoilState(applyStepState);
+	const setUserInfo = useSetRecoilState(applyUserInfo);
+
+	const [isChecked, setIsChecked] = useState<boolean>(false);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [value, setValue] = useState<string>('신청 역할을 선택해주세요.');
-	const isSelected = true; // 임시
 	const isValid = isChecked && isSelected;
-	const pageNumber = 2;
 
 	const { data, isLoading } = useQuery({
 		queryKey: ['applyInfoNumber', pageNumber],
 		queryFn: () => getApplyData(pageNumber),
 	});
 
-	console.log(data);
-
 	const onClickCheckbox = () => {
 		setIsChecked(prev => !prev);
 	};
 	const onClickConfirm = () => {
 		if (isValid) {
-			setAppleStepState(prev => prev + 1);
+			setUserInfo(prev => ({ ...prev, message: textAreaRef.current?.value }));
+			setApplyStep(prev => prev + 1);
 		}
 	};
 
 	const onClickOption = (event: React.MouseEvent<HTMLLIElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		setValue(innerText);
+		setUserInfo(prev => ({ ...prev, role: innerText }));
+		console.log(event);
 	};
+
+	useEffect(() => {
+		if (data) {
+			setUserInfo(prev => ({
+				...prev,
+				name: data.name,
+				score: data.score,
+				universityName: data.universityName,
+				departmentName: data.departmentName,
+				year: data.year,
+			}));
+		}
+	}, [data]);
 
 	return (
 		<S.Modal>
@@ -63,7 +72,9 @@ const ApplyModal = () => {
 			</article>
 			<article className='container-user__info'>
 				<h3>내 정보</h3>
-				{!isLoading && data && (
+				{isLoading ? (
+					<section className='user-info'>사용자 정보를 불러오고 있습니다...</section>
+				) : (
 					<section className='user-info'>
 						<section className='user-info__section'>
 							<section>
@@ -73,10 +84,10 @@ const ApplyModal = () => {
 								<span>이메일</span>
 							</section>
 							<section>
-								<span className='value'>{data.name}</span>
-								<span className='value'>{data.universityName}</span>
-								<span className='value'>{data.departmentName}</span>
-								<span className='value'>{data.email}</span>
+								<span className='value'>{data?.name}</span>
+								<span className='value'>{data?.universityName}</span>
+								<span className='value'>{data?.departmentName}</span>
+								<span className='value'>{data?.email}</span>
 							</section>
 						</section>
 						<section className='user-info__section'>
@@ -85,8 +96,8 @@ const ApplyModal = () => {
 								<span>입학년도</span>
 							</section>
 							<section>
-								<span className='value'>{data.score}</span>
-								<span className='value'>{data.year}</span>
+								<span className='value'>{data?.score}</span>
+								<span className='value'>{data?.year}</span>
 							</section>
 						</section>
 					</section>
@@ -97,16 +108,18 @@ const ApplyModal = () => {
 					<span>{value}</span>
 					{isOpen && (
 						<ul>
-							<li onClick={onClickOption}>1</li>
-							<li onClick={onClickOption}>2</li>
-							<li onClick={onClickOption}>3</li>
+							{data?.recruitmentRoles.map(role => (
+								<li key={role.id} onClick={onClickOption} id={role.id.toString()}>
+									{role.name}
+								</li>
+							))}
 						</ul>
 					)}
 					<img src={DropdownArrow} />
 				</article>
 			</article>
 			<article className='container-message'>
-				<textarea placeholder='전할 말을 20자 이내로 입력해주세요.' />
+				<textarea placeholder='전할 말을 20자 이내로 입력해주세요.' ref={textAreaRef} />
 			</article>
 			<article className='container-buttons'>
 				<button type='button' className='cancel' onClick={() => setIsModal(false)}>
