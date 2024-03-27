@@ -87,19 +87,24 @@ import RecruitCard from './meeteam/card/RecruitCard';
 import Pagination from './pagination/Pagination';
 import NaverLogin from './naver/NaverLogin';
 import Create from './header/Create';
-import TitleAndIntro from './title/titleAndIntro/TitleAndIntro';
-import InputContainer from './inputDropdown/inputContainer/InputContainer';
-import RecruitOptions from './optionMenu/recruitOptions/RecruitOptions';
 import Comment from './comment/comment/Comment';
 import CommentInput from './comment/commentInput/CommentInput';
 import ReplyInput from './comment/replyInput/ReplyInput';
 import ReplyComment from './comment/comment/ReplyComment';
 import Skill from './skills/Skill';
 import PortfolioCard from './portfolio/card/PortfolioCard';
-import InputCourse from './inputDropdown/inputCourse/InputCourse';
-import InputProfessor from './inputDropdown/inputCourse/InputProfessor';
 import InputRole from './inputDropdown/inputRole/InputRole';
 import InputRoleForm from './inputDropdown/inputRole/InputRoleForm';
+import Description from './recruit/create/Description';
+import BasicInformation from './recruit/create/basicInformation/BasicInformation';
+import DetailedInformation from './recruit/create/detailedInformation/DetailedInformation';
+import RecruitRoles from './recruit/create/recruitRoles/RecruitRoles';
+import ControlButtons from './recruit/create/ControlButtons';
+import ContainerScope from './recruit/create/basicInformation/containers/ContainerScope';
+import ContainerCategory from './recruit/create/basicInformation/containers/ContainerCategory';
+import ContainerProcedure from './recruit/create/basicInformation/containers/ContainerProcedure';
+import WrapperScopeCategory from './recruit/create/basicInformation/wrappers/WrapperScopeCategory';
+import ContainerCourse from './recruit/create/basicInformation/containers/ContainerCourse';
 import OptionList from './optionList/OptionList';
 import ComboBox from './comboBox/ComboBox';
 
@@ -183,20 +188,25 @@ export {
 	RecruitCard,
 	Pagination,
 	Create,
-	TitleAndIntro,
 	DateSelect,
-	InputContainer,
-	RecruitOptions,
 	CommentInput,
 	ReplyInput,
 	Comment,
 	ReplyComment,
 	Skill,
 	PortfolioCard,
-	InputCourse,
-	InputProfessor,
 	InputRole,
 	InputRoleForm,
+	Description,
+	BasicInformation,
+	DetailedInformation,
+	RecruitRoles,
+	ControlButtons,
+	ContainerScope,
+	ContainerCategory,
+	ContainerProcedure,
+	WrapperScopeCategory,
+	ContainerCourse,
 	OptionList,
 	ComboBox,
 };
