@@ -6,7 +6,8 @@ export interface User {
 	interest?: string;
 	introduction?: string;
 	aboutMe?: string;
-	email?: Contact[]; // 논의 필요
+	universityEmail: Contact;
+	subEmail: Contact;
 	phone?: Contact;
 	university?: string;
 	department?: string;
