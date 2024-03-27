@@ -3,6 +3,7 @@ import { ProfileImage } from '../../..';
 import { TitleAndEtc } from '../../../../types';
 import S from './TitleInfo.styled';
 import { FilledBookmark, UnfilledBookmark } from '../../../../assets';
+import { useBookmark } from '../../../../hooks';
 
 type scores = {
 	[key: number]: string;
@@ -15,10 +16,11 @@ const scoreObj: scores = {
 	3.0: 'B',
 };
 
+const PAGE_NUMBER = 2;
+
 const TitleInfo = ({
 	nickname,
 	responseRate,
-	score,
 	createdAt,
 	title,
 	writerProfileImg,
@@ -26,6 +28,11 @@ const TitleInfo = ({
 	writerScore,
 }: TitleAndEtc) => {
 	const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
+	const { mutate } = useBookmark(PAGE_NUMBER);
+	const onClickBookmark = () => {
+		setIsBookmarked(prev => !prev);
+		mutate(PAGE_NUMBER);
+	};
 	return (
 		<S.TitleInfo>
 			<section className='container-header'>
@@ -37,10 +44,7 @@ const TitleInfo = ({
 				<span className='bubble'>평점 {writerScore.toFixed(1)}</span>
 				<span className='date'>{createdAt}</span>
 				<section className='container-bookmark'>
-					<img
-						src={isBookmarked ? FilledBookmark : UnfilledBookmark}
-						onClick={() => setIsBookmarked(prev => !prev)}
-					/>
+					<img src={isBookmarked ? FilledBookmark : UnfilledBookmark} onClick={onClickBookmark} />
 					<span className='count-bookmark'>{bookmarkCount}</span>
 				</section>
 			</section>

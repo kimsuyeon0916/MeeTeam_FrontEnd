@@ -27,3 +27,12 @@ export const applyRole = async (id: number, data: ApplyForm) => {
 		console.error(error);
 	}
 };
+
+export const bookmarkPost = async (id: number) => {
+	try {
+		const response = await axiosAuthInstance.post(EndPoint.RECRUIT_DETAIL.bookmark(id));
+		return response;
+	} catch (error) {
+		console.error(error);
+	}
+};

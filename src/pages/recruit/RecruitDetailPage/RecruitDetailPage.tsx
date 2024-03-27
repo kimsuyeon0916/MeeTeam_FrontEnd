@@ -85,8 +85,6 @@ const RecruitDetailPage = () => {
 
 	const onClickInput = () => {};
 
-	const onClickApply = () => {};
-
 	useEffect(() => {
 		fixModalBackground(isModal);
 	}, [isModal]);
