@@ -4,6 +4,9 @@ import { TitleAndEtc } from '../../../../types';
 import S from './TitleInfo.styled';
 import { FilledBookmark, UnfilledBookmark } from '../../../../assets';
 import { useBookmark } from '../../../../hooks';
+import { useDelBookmark } from '../../../../hooks/useBookMark';
+import { useMutation } from '@tanstack/react-query';
+import { bookmarkDelete } from '../../../../service/recruit/detail';
 
 type scores = {
 	[key: number]: string;
@@ -28,10 +31,20 @@ const TitleInfo = ({
 	writerScore,
 }: TitleAndEtc) => {
 	const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
-	const { mutate } = useBookmark(PAGE_NUMBER);
+	const { mutate: bookmarked } = useBookmark();
+	// const { mutate: unBookmarked } = useDelBookmark();
+	const delBookmark = useMutation({
+		mutationFn: (id: number) => bookmarkDelete(id),
+	});
+
 	const onClickBookmark = () => {
+		if (!isBookmarked) {
+			bookmarked(PAGE_NUMBER);
+		} else {
+			// unBookmarked(PAGE_NUMBER);
+			delBookmark.mutate(PAGE_NUMBER);
+		}
 		setIsBookmarked(prev => !prev);
-		mutate(PAGE_NUMBER);
 	};
 	return (
 		<S.TitleInfo>

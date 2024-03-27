@@ -36,3 +36,12 @@ export const bookmarkPost = async (id: number) => {
 		console.error(error);
 	}
 };
+
+export const bookmarkDelete = async (id: number) => {
+	try {
+		const response = await axiosAuthInstance.delete(EndPoint.RECRUIT_DETAIL.bookmark(id));
+		return response;
+	} catch (error) {
+		console.error(error);
+	}
+};
