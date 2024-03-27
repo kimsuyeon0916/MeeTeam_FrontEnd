@@ -14,6 +14,12 @@ import XBtn from './XBtn.svg';
 import DefaultProfileImage from './DefaultProfileImage.svg';
 import DefaultPortfolioImage from './DefaultPortfolioImage.svg';
 import Search from './Search.svg';
+import ArrowBottom from './ArrowBottom.svg';
+import ArrowTop from './ArrowTop.svg';
+import GrayPhone from './GrayPhone.svg';
+import BlackPhone from './BlackPhone.svg';
+import GrayEmail from './GrayEmail.svg';
+import BlackEmail from './BlackEmail.svg';
 
 export {
 	Exit,
@@ -31,5 +37,11 @@ export {
 	XBtn,
 	DefaultProfileImage,
 	DefaultPortfolioImage,
-  Search,
+	Search,
+	ArrowBottom,
+	ArrowTop,
+	GrayPhone,
+	BlackPhone,
+	GrayEmail,
+	BlackEmail,
 };
