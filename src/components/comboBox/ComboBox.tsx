@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect, useImperativeHandle } from 'react';
 import S from './ComboBox.styled';
 import { OptionList } from '../index';
+import { Icon } from '../input/Input';
+
 import {
 	FieldValues,
 	UseFormRegister,
@@ -8,20 +10,24 @@ import {
 	FormState,
 	Path,
 	PathValue,
+	RegisterOptions,
 } from 'react-hook-form';
+import { Input } from '../index';
 
 interface Option {
-	id: string;
+	id?: string;
 	title: string;
 }
 
 interface ComboBox<T extends FieldValues> {
+	width?: string;
 	register: UseFormRegister<T>;
 	setValue: UseFormSetValue<T>;
 	formState?: FormState<T>;
-	name: Path<T>;
+	name: string;
+	validation?: RegisterOptions;
 	label?: string;
-	icon?: JSX.Element;
+	icon?: Icon;
 	placeholder?: string;
 	optionList?: Option[];
 	clickInput?: (name: T | string) => void;
@@ -29,20 +35,17 @@ interface ComboBox<T extends FieldValues> {
 }
 
 const ComboBox = <T extends FieldValues>({
+	width,
 	register,
 	setValue,
-	formState,
 	name,
-	label,
-	icon,
+	validation,
 	optionList,
 	clickInput,
 	clickOption,
 	...props
 }: ComboBox<T>) => {
-	const inputErrorMessage = formState?.errors[name]?.message;
-
-	const { ref, ...rest } = register(name);
+	const { ref, ...rest } = register(name as Path<T>, validation);
 
 	const [isOpen, setIsOpen] = useState(false);
 	const dropdownRef = useRef<HTMLInputElement>(null);
@@ -74,11 +77,15 @@ const ComboBox = <T extends FieldValues>({
 
 	return (
 		<S.ComboBoxLayout>
-			<S.ComboBoxLabel>
-				<h6>{label}</h6>
-				<S.ComboBoxInput {...rest} {...props} ref={dropdownRef} onClick={handleInputClick} />
-				{icon}
-			</S.ComboBoxLabel>
+			<Input
+				width={width}
+				register={register}
+				name={name}
+				validation={validation}
+				{...props}
+				inputRef={dropdownRef}
+				handleInputClick={handleInputClick}
+			/>
 			{optionList && isOpen && (
 				<OptionList
 					name={name}
