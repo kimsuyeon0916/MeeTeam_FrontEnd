@@ -1,11 +1,11 @@
 import React from 'react';
 import S from './Toggle.styled';
 
-interface Toggle {
-	state: boolean;
-	setState: React.Dispatch<React.SetStateAction<boolean>>;
+interface Toggle<T> {
+	state: T;
+	setState: React.Dispatch<React.SetStateAction<T>>;
 }
-const Toggle = ({ state, setState }: Toggle) => {
+const Toggle = ({ state, setState }: Toggle<boolean | undefined>) => {
 	const handleToggle = () => {
 		setState(prev => !prev);
 	};
