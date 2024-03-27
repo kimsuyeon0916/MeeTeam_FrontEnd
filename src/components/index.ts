@@ -101,6 +101,7 @@ import InputProfessor from './inputDropdown/inputCourse/InputProfessor';
 import InputRole from './inputDropdown/inputRole/InputRole';
 import InputRoleForm from './inputDropdown/inputRole/InputRoleForm';
 import OptionList from './optionList/OptionList';
+import Input from './input/Input';
 import ComboBox from './comboBox/ComboBox';
 
 export {
@@ -198,5 +199,6 @@ export {
 	InputRole,
 	InputRoleForm,
 	OptionList,
+	Input,
 	ComboBox,
 };
