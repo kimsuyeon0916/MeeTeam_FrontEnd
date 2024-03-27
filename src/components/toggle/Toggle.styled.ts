@@ -58,6 +58,7 @@ const ToggleCheckBox = styled.input`
 `;
 
 const ToggleDescription = styled.span`
+	width: 4.2rem;
 	color: var(--Text-textColor2, var(--text-color-2, #373f41));
 
 	/* Body/body1/medium */
