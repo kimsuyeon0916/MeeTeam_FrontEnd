@@ -58,22 +58,18 @@ export const recruitInputState = atom<InputState>({
 		category: '',
 		fieldId: 1,
 		deadline: simple,
-		period: [simple, simple],
-		courseTagDto: {
+		proceedType: '',
+		proceedingStart: simpleDate(new Date()),
+		proceedingEnd: simpleDate(new Date()),
+		courseTag: {
 			isCourse: false,
 			courseTagName: '',
-			courseTagProfessor: '',
+			courseProfessor: '',
 		},
-		recruitmentRoleDto: [
-			{
-				role: '', // id로 변경
-				count: 0,
-				skill: [], // id를 담는 배열로 변경
-			},
-		],
-		tag: [],
+		recruitmentRoles: [],
+		tags: [],
 		title: '',
-		contents: '',
+		content: '',
 	},
 });
 
@@ -84,6 +80,7 @@ export const validMessageState = atom({
 		category: '',
 		deadline: '',
 		endDate: '',
+		procedure: '',
 		courseTagDto: {
 			courseTagName: '',
 			courseTagProfessor: '',
@@ -101,10 +98,7 @@ export const validState = atom({
 		isCategory: false,
 		isDeadline: false,
 		isEndDate: false,
-		isCourseTagDto: {
-			courseTagName: false,
-			courseTagProfessor: false,
-		},
+		isProcedure: false,
 		isTag: false,
 		isTitle: false,
 	},

@@ -12,6 +12,7 @@ import CancelBtn from './CancelBtn.svg';
 import XBtn from './XBtn.svg';
 import Reply from './Reply.svg';
 import LogoName from './LogoName.svg';
+import { DATE_ICON } from './DateIcon';
 import DefaultProfileImage from './DefaultProfileImage.svg';
 import DefaultPortfolioImage from './DefaultPortfolioImage.svg';
 import Search from './Search.svg';
@@ -42,4 +43,5 @@ export {
 	Search,
 	FilledBookmark,
 	UnfilledBookmark,
+	DATE_ICON,
 };
