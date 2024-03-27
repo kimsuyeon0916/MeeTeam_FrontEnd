@@ -1,13 +1,6 @@
-interface schoolCertification {
-	label: string;
-	type: string;
-	placeholder: string;
-	name: 'year' | 'university' | 'department' | 'email';
-	required: boolean;
-	isNext: boolean;
-}
+import { ArrowBottom, ArrowTop, Search } from '../../../assets';
 
-const SCHOOL_CERTIFICATION_DATA: schoolCertification[] = [
+const SCHOOL_CERTIFICATION_DATA = [
 	{
 		label: '입학년도',
 		type: 'text',
@@ -15,6 +8,11 @@ const SCHOOL_CERTIFICATION_DATA: schoolCertification[] = [
 		name: 'year',
 		required: true,
 		isNext: false,
+		icon: {
+			default: ArrowBottom,
+			focus: ArrowTop,
+			arrow: 'right',
+		},
 	},
 	{
 		label: '학교',
@@ -23,6 +21,10 @@ const SCHOOL_CERTIFICATION_DATA: schoolCertification[] = [
 		name: 'university',
 		required: true,
 		isNext: false,
+		icon: {
+			default: Search,
+			arrow: 'right',
+		},
 	},
 	{
 		label: '학과',
