@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 const ComboBoxLayout = styled.div`
+	min-width: 0;
+	flex: 1;
 	display: flex;
 	flex-direction: column;
-	flex: 1;
 
 	h6 {
 		/* Body/body2/semibold */
