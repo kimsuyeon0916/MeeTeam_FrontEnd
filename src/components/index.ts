@@ -103,6 +103,7 @@ import InputRoleForm from './inputDropdown/inputRole/InputRoleForm';
 import OptionList from './optionList/OptionList';
 import Input from './input/Input';
 import ComboBox from './comboBox/ComboBox';
+import Textarea from './textarea/Textarea';
 
 export {
 	Header,
@@ -201,4 +202,5 @@ export {
 	OptionList,
 	Input,
 	ComboBox,
+	Textarea,
 };
