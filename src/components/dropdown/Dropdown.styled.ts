@@ -17,23 +17,13 @@ const Dropdown = styled.div<IDropdown>`
 		box-sizing: border-box;
 		border-radius: 0.6rem;
 		min-width: ${props => (props.scope ? '15rem' : '13rem')};
-		justify-content: space-between;
-		color: #373f41;
-		font-size: 1.8rem;
-		font-weight: 400;
-		line-height: 2.1rem;
-		letter-spacing: 0.015rem;
-		box-sizing: border-box;
 		cursor: pointer;
 
 		.temp {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			gap: 6rem;
-			cursor: pointer;
 			color: #373f41;
-			font-size: 3rem;
 			width: 100%;
 
 			.value {
