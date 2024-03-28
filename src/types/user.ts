@@ -1,4 +1,5 @@
 export interface User {
+	userId?: string;
 	imageUrl?: string;
 	nickname?: string;
 	userName?: string;
@@ -6,8 +7,8 @@ export interface User {
 	interest?: string;
 	introduction?: string;
 	aboutMe?: string;
-	universityEmail: Contact;
-	subEmail: Contact;
+	universityEmail?: Contact;
+	subEmail?: Contact;
 	phone?: Contact;
 	university?: string;
 	department?: string;
