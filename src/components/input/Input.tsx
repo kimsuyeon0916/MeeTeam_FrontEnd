@@ -23,7 +23,6 @@ interface Input<T extends FieldValues> {
 }
 
 const Input = <T extends FieldValues>({
-	defaultValue,
 	width,
 	register,
 	formState,
@@ -43,10 +42,10 @@ const Input = <T extends FieldValues>({
 		<S.InputLabel $width={width}>
 			{label && <h6>{label}</h6>}
 			<S.Input
+				maxLength={validation?.maxLength as number} // 타입 선언 -> 타입 단언으로 추후 수정
 				{...rest}
 				{...props}
 				{...icon}
-				defaultValue={defaultValue}
 				ref={e => {
 					ref(e);
 					if (inputRef) inputRef.current = e;
