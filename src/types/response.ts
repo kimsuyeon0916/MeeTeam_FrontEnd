@@ -1,4 +1,5 @@
 export interface UserReponse {
+	userId?: string;
 	nickname?: string;
 	imageUrl?: string;
 	accessToken?: string;
