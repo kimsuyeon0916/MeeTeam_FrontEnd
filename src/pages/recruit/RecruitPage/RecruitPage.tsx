@@ -15,10 +15,12 @@ const START_PAGE_NUM = 1;
 
 const RecruitPage = () => {
 	const postsNum = 150;
+	const [fieldValue, setFieldValue] = useState<string>('분야를 선택해주세요');
 	const [tagItem, setTagItem] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(START_PAGE_NUM);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [isRoleOpen, setIsRoleOpen] = useState<boolean>(false);
+	const [isFieldOpen, setIsFieldOpen] = useState<boolean>(false);
 
 	const onClickDetailed = () => {
 		setIsOpen(true);
@@ -30,10 +32,24 @@ const RecruitPage = () => {
 				<section className='wrapper-title'>
 					<h2>분야 전체</h2>
 					<div className='sep'> | </div>
-					<div className='container-field'>
-						<h3>분야를 선택해주세요</h3>
+					<div className='container-field' onClick={() => setIsFieldOpen(true)}>
+						<h3>{fieldValue}</h3>
 						<img src={DropdownArrow} />
 					</div>
+					{isFieldOpen && (
+						<article className='dropdown-field'>
+							<section className='container-keys'>
+								<span className='field-key'>개발</span>
+							</section>
+							<article className='container-btns'>
+								<section className='clear'>
+									<img src={Clear} />
+									<span>초기화</span>
+								</section>
+								<button>적용</button>
+							</article>
+						</article>
+					)}
 				</section>
 				<section className='wrapper-filters'>
 					<section className='container-filters'>

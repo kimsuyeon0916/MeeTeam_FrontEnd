@@ -73,8 +73,8 @@ const RecruitCard = styled.div`
 	cursor: pointer;
 
 	&:hover {
-		transition: 0.7s;
-		border: 1.5px solid var(--main-color, #5877fc);
+		transition: 0.3s;
+		border-color: #5877fc;
 	}
 
 	.content-tags {
