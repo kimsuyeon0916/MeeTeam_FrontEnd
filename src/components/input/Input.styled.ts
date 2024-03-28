@@ -9,10 +9,9 @@ interface InputStyle {
 
 const InputLabel = styled.label<{ $width?: string }>`
 	min-width: 0;
-	flex: 1;
 	display: flex;
 	flex-direction: column;
-	width: ${props => props.$width};
+	${props => (props.$width ? `width: ${props.$width}` : `flex: 1;`)};
 
 	color: var(--Text-textColor2, #373f41);
 
@@ -35,7 +34,9 @@ const InputLabel = styled.label<{ $width?: string }>`
 	}
 
 	small {
-		margin-bottom: 0.4rem;
+		margin-top: 0.4rem;
+		margin-left: auto;
+		color: var(--State-unactive, #8e8e8e);
 	}
 `;
 
