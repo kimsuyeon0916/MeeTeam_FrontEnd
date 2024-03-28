@@ -5,20 +5,16 @@ import { useDebounce } from '../../hooks';
 import { useQuery } from '@tanstack/react-query';
 import { getCourseKeyword, getProfessorKeyword } from '../../service';
 
-interface IDropdown {
+interface Dropdown {
 	data: string[];
 	initialData?: string;
 	$showDropdown?: boolean;
-	scope?: boolean;
+	scope: boolean;
 }
 
-interface Event {
-	event: React.MouseEvent<HTMLInputElement> | React.MouseEvent<HTMLLabelElement>;
-}
-
-const Dropdown = ({ data, initialData, scope }: IDropdown) => {
+const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 	const [currentValue, setCurrentValue] = useState(`${initialData}`);
-	const [showDropdown, setShowDropdown] = useState(false);
+	const [showDropdown, setShowDropdown] = useState<boolean>(false);
 	const [dropdown, setDropdown] = useState({
 		course: false,
 		professor: false,
@@ -47,6 +43,7 @@ const Dropdown = ({ data, initialData, scope }: IDropdown) => {
 	};
 
 	const onClickList = (event: React.MouseEvent<HTMLElement>) => {
+		event.stopPropagation();
 		const { innerText } = event.target as HTMLElement;
 		setCurrentValue(innerText);
 		setShowDropdown(false);
@@ -54,6 +51,7 @@ const Dropdown = ({ data, initialData, scope }: IDropdown) => {
 
 	const onClickRadio = (event: any) => {
 		setCurrentValue(event.target.value);
+		setShowDropdown(true);
 	};
 
 	const onClickCheckbox = () => {
@@ -97,17 +95,11 @@ const Dropdown = ({ data, initialData, scope }: IDropdown) => {
 		return () => {
 			document.removeEventListener('mousedown', outsideClick);
 		};
-	}, [dropdownRef.current, showDropdown, dropdown.course, dropdown.professor, insideRef.current]);
+	}, [dropdownRef.current, showDropdown, dropdown.course, dropdown.professor]);
 
 	return (
-		<S.Dropdown
-			$showDropdown={showDropdown}
-			onClick={onClickDropdown}
-			ref={dropdownRef}
-			scope={scope}
-			$isCheck={isChecked}
-		>
-			<article className='wrapper'>
+		<S.Dropdown $showDropdown={showDropdown} ref={dropdownRef} scope={scope} $isCheck={isChecked}>
+			<article className='wrapper' onClick={onClickDropdown}>
 				<div className='temp'>
 					<div className='value'>{currentValue}</div>
 					<div className='icon'>
@@ -136,7 +128,7 @@ const Dropdown = ({ data, initialData, scope }: IDropdown) => {
 												<label htmlFor={`${index}`}>{e}</label>
 											</section>
 											{currentValue === '교내' && (
-												<section className='inside' ref={insideRef}>
+												<section className='inside'>
 													<section className='intro'>
 														<span className='description'>
 															수업이신 경우 오른쪽의 “수업” 체크박스를 눌러주세요.
@@ -148,7 +140,7 @@ const Dropdown = ({ data, initialData, scope }: IDropdown) => {
 															</label>
 														</section>
 													</section>
-													<section className='wrapper-inputs'>
+													<section className='wrapper-inputs' ref={insideRef}>
 														<section className='container-inputs'>
 															<input
 																type='text'
