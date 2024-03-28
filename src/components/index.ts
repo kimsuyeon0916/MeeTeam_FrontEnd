@@ -104,6 +104,7 @@ import OptionList from './optionList/OptionList';
 import Input from './input/Input';
 import ComboBox from './comboBox/ComboBox';
 import Textarea from './textarea/Textarea';
+import Radio from './radio/Radio';
 
 export {
 	Header,
@@ -203,4 +204,5 @@ export {
 	Input,
 	ComboBox,
 	Textarea,
+	Radio,
 };
