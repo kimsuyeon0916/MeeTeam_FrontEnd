@@ -62,8 +62,8 @@ const PortpolioCard = styled.div`
 const RecruitCard = styled.div`
 	display: flex;
 	flex-direction: column;
-	width: 25.65rem;
-	height: 18.375rem;
+	width: 22.8rem;
+	height: 18.8rem;
 	flex-shrink: 0;
 	border-radius: 0.75rem;
 	border: 1.5px solid var(--main-color, #ababab);

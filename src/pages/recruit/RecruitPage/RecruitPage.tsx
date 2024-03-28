@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dropdown, Subtitle, RecruitCard, Pagination } from '../../../components';
 import S from './RecruitPage.styled';
-import { SearchIcon } from '../../../assets';
+import { DropdownArrow, SearchIcon } from '../../../assets';
 
 const START_PAGE_NUM = 1;
 
@@ -24,70 +24,37 @@ const RecruitPage = () => {
 
 	return (
 		<S.RecruitPage>
-			<div>
-				<div className='container-filter_area'>
-					<div className={`area ${isFiltered.isInside ? '' : 'no'}`} onClick={onClickHandler}>
-						교내
+			<section>
+				<section className='wrapper-title'>
+					<h2>분야 전체</h2>
+					<div className='sep'> | </div>
+					<div className='container-field'>
+						<h3>분야를 선택해주세요</h3>
+						<img src={DropdownArrow as any} />
 					</div>
-					<div className={`area ${isFiltered.isOutside ? 'out' : 'no'}`} onClick={onClickHandler}>
-						교외
-					</div>
-				</div>
-				<div className='container-filter_menu'>
-					<Dropdown
-						data={['프로젝트', '스터디', '동아리', '공모전']}
-						initialData='프로젝트'
-						$arrowNeed={true}
-					/>
-					<Dropdown data={['개발']} initialData='카테고리' $arrowNeed={true} />
-					<div className='dropdown-spec'>
+				</section>
+				<section className='wrapper-filters'>
+					<section className='container-filters'>
+						<Dropdown data={['전체 보기', '교내', '교외']} initialData='범위' scope={true} />
 						<Dropdown
-							data={['React', 'JavaScript', 'Node.js', 'Spring', 'Figma']}
-							initialData='기술 스택'
-							$arrowNeed={true}
+							data={['전체', '프로젝트', '공모전', '스터디']}
+							initialData='유형'
+							scope={false}
 						/>
-						<Dropdown
-							data={['기획', '디자인', '프론트엔드', '백엔드']}
-							initialData='👤 포지션'
-							$arrowNeed={true}
-						/>
-					</div>
-				</div>
-			</div>
-			<hr />
-			<div>
-				<div className='container-options'>
-					<div className='container-options__filters'>
-						<div className='filter bookmark'>☑️ 수업만 보기</div>
-					</div>
-					<div className='container-options__search'>
+					</section>
+					<section className='container-options__search'>
 						<div>
-							<img src={SearchIcon} />
+							<img src={SearchIcon as any} />
 						</div>
 						<div>
 							<input placeholder='제목, 글, 내용으로 검색해보세요.' />
 						</div>
-					</div>
-				</div>
+					</section>
+				</section>
+			</section>
+			<hr />
+			<div>
 				<div className='container-contents'>
-					<div className='container-contents__row'>
-						<div className='container-subtitle'>
-							<div className='subtitle'>👀 내가 관심 있을 만한 구인 글</div>
-							<div className='container-sort'>
-								<select name='sorted-by'>
-									<option value='recent'>최신순</option>
-									<option value='deadline'>마감일순</option>
-									<option value='bookmark'>북마크순</option>
-								</select>
-							</div>
-						</div>
-						<div className='contents'>
-							<RecruitCard />
-							<RecruitCard />
-							<RecruitCard />
-							<RecruitCard />
-						</div>
-					</div>
 					<div>
 						<Subtitle>전체 구인 글</Subtitle>
 						<div className='container-contents__grid'>
