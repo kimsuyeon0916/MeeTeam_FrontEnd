@@ -112,6 +112,7 @@ const Dropdown = styled.div<IDropdown>`
 					background: #fff;
 					box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 					padding: 2.8rem 3.2rem 2.8rem 2.5rem;
+					z-index: 501;
 
 					.intro {
 						display: flex;
@@ -172,7 +173,7 @@ const Dropdown = styled.div<IDropdown>`
 								border-radius: 1rem;
 								font-size: 1.6rem;
 								border: 1px solid #8e8e8e;
-								background: ${props => (props.$isChecked ? 'transparent' : '#e3e3e3')};
+								background: ${props => (props.$isCheck ? 'transparent' : '#e3e3e3')};
 
 								&:hover {
 									border: 1px solid #5877fc;
