@@ -1,14 +1,16 @@
 import React from 'react';
 import S from './Textarea.styled';
-import { FieldValues, UseFormRegister, FormState, Path, RegisterOptions } from 'react-hook-form';
+import { FieldValues, UseFormRegister, Path, RegisterOptions, FormState } from 'react-hook-form';
 
 interface Textarea<T extends FieldValues> {
+	defaultValue?: string;
 	register: UseFormRegister<T>;
 	formState?: FormState<T>;
 	name: string;
 	validation?: RegisterOptions;
 	label?: string;
 	placeholder?: string;
+	maxLength?: number;
 }
 
 const Textarea = <T extends FieldValues>({
@@ -24,7 +26,7 @@ const Textarea = <T extends FieldValues>({
 	return (
 		<S.TextareaLayout>
 			<S.TextareaLabel>
-				<h6>{label}</h6>
+				{label && <h6>{label}</h6>}
 				<S.Textarea {...register(name as Path<T>, validation)} {...props}></S.Textarea>
 				{textareaErrorMessage && <small>{textareaErrorMessage}</small>}
 			</S.TextareaLabel>
