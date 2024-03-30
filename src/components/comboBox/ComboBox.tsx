@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useImperativeHandle } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import S from './ComboBox.styled';
 import { OptionList } from '../index';
 import { Icon } from '../input/Input';
@@ -20,6 +20,7 @@ interface Option {
 }
 
 interface ComboBox<T extends FieldValues> {
+	defaultValue?: string;
 	width?: string;
 	register: UseFormRegister<T>;
 	setValue: UseFormSetValue<T>;
@@ -45,12 +46,8 @@ const ComboBox = <T extends FieldValues>({
 	clickOption,
 	...props
 }: ComboBox<T>) => {
-	const { ref, ...rest } = register(name as Path<T>, validation);
-
 	const [isOpen, setIsOpen] = useState(false);
 	const dropdownRef = useRef<HTMLInputElement>(null);
-
-	useImperativeHandle(ref, () => dropdownRef.current);
 
 	useEffect(() => {
 		const handleOutsideClick = (e: MouseEvent) => {
@@ -76,9 +73,8 @@ const ComboBox = <T extends FieldValues>({
 	};
 
 	return (
-		<S.ComboBoxLayout>
+		<S.ComboBoxLayout $width={width}>
 			<Input
-				width={width}
 				register={register}
 				name={name}
 				validation={validation}
