@@ -1,3 +1,5 @@
+import { FieldValues } from 'react-hook-form';
+
 const REGEXP = {
 	nickname: /^[a-zA-Z0-9가-힣._]{4,16}$/,
 };
@@ -16,6 +18,17 @@ export const INPUT_VALIDATION = {
 		maxLength: {
 			value: 16,
 			message: '최대 16자리 이하 입력해 주세요',
+		},
+	},
+};
+
+export const TEXTAREA_VALIDATION = {
+	aboutMe: {
+		maxLength: 150,
+		validate: {
+			countingLetters: (fieldValue: FieldValues) => {
+				return fieldValue?.length + '/150';
+			},
 		},
 	},
 };
