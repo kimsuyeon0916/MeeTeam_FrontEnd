@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-const ComboBoxLayout = styled.div`
+const ComboBoxLayout = styled.div<{ $width?: string }>`
 	min-width: 0;
-	flex: 1;
 	display: flex;
 	flex-direction: column;
+	${props => (props.$width ? `width: ${props.$width}` : `flex: 1;`)};
 
 	h6 {
 		/* Body/body2/semibold */
