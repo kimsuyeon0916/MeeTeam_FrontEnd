@@ -3,7 +3,7 @@ import type { UserReponse, University, Department } from './response';
 import type { CustomInstance } from './api';
 import type { TitleInfo, OptionList, Option, Role, InputRoleForm, InputState } from './information';
 import type { Comment, CommentInputFunctions } from './comment';
-import type { JsxElementComponentProps } from './indexSigniture';
+import type { JsxElementComponentProps, stringSignature } from './indexSigniture';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
 
 export type {
@@ -13,13 +13,14 @@ export type {
 	CustomInstance,
 	Comment,
 	JsxElementComponentProps,
+	stringSignature,
 	CommentInputFunctions,
 	Contact,
 	Skill,
 	Award,
 	Link,
 	Portfolio,
-  UpdateProfilePayload,
+	UpdateProfilePayload,
 	TitleInfo,
 	OptionList,
 	Option,
