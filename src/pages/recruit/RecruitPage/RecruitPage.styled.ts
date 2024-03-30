@@ -49,6 +49,7 @@ const RecruitPage = styled.div`
 		.container-field {
 			display: flex;
 			align-items: center;
+			cursor: pointer;
 		}
 
 		.dropdown-field {
@@ -88,6 +89,12 @@ const RecruitPage = styled.div`
 					color: #8e8e8e;
 					font-size: 1.6rem;
 					letter-spacing: 0.0032rem;
+					cursor: pointer;
+
+					&:focus {
+						border-color: #5877fc;
+						color: #373f41;
+					}
 				}
 			}
 
@@ -377,6 +384,7 @@ const RecruitPage = styled.div`
 			display: flex;
 			align-items: center;
 			gap: 0.8rem;
+			cursor: pointer;
 
 			img {
 				width: 1.4rem;

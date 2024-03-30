@@ -4,6 +4,8 @@ import DropdownArrow from './DropdownArrow';
 import { useDebounce } from '../../hooks';
 import { useQuery } from '@tanstack/react-query';
 import { getCourseKeyword, getProfessorKeyword } from '../../service';
+import { useSetRecoilState } from 'recoil';
+import { recruitFilterState } from '../../atom';
 
 interface Dropdown {
 	data: string[];
@@ -11,6 +13,21 @@ interface Dropdown {
 	$showDropdown?: boolean;
 	scope: boolean;
 }
+
+type keyObj = {
+	[key: string]: number;
+};
+
+const scopeObj: keyObj = {
+	교내: 1,
+	교외: 2,
+};
+
+const categoryObj: keyObj = {
+	프로젝트: 1,
+	스터디: 2,
+	공모전: 3,
+};
 
 const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 	const [currentValue, setCurrentValue] = useState(`${initialData}`);
@@ -28,6 +45,7 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 	});
 	const keywordCourse = useDebounce(name.course, 500);
 	const keywordProfessor = useDebounce(name.professor, 500);
+	const setFilterState = useSetRecoilState(recruitFilterState);
 
 	const { data: dataCourse, isLoading: isLoadingCourse } = useQuery({
 		queryKey: ['searchCourse', keywordCourse],
@@ -46,12 +64,18 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 		event.stopPropagation();
 		const { innerText } = event.target as HTMLElement;
 		setCurrentValue(innerText);
+		setFilterState(prev => ({ ...prev, category: categoryObj[innerText] }));
 		setShowDropdown(false);
 	};
 
-	const onClickRadio = (event: any) => {
-		setCurrentValue(event.target.value);
-		setShowDropdown(true);
+	const onClickRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
+		event.stopPropagation();
+		const value = event.target.value;
+		setCurrentValue(value);
+		setFilterState(prev => ({ ...prev, scope: scopeObj[value] }));
+		if (value !== '교내') {
+			setShowDropdown(false);
+		}
 	};
 
 	const onClickCheckbox = () => {
@@ -113,17 +137,14 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 								<ul className='menu-container'>
 									{data.map((e: string, index: number) => (
 										<>
-											<section
-												key={index}
-												className={`menu-scope ${e === '교내' && 'in'}`}
-												onClick={onClickRadio}
-											>
+											<section key={index} className={`menu-scope ${e === '교내' && 'in'}`}>
 												<input
 													type='radio'
 													id={`${index}`}
 													name='scope'
 													value={e}
 													checked={e === currentValue}
+													onChange={onClickRadio}
 												/>
 												<label htmlFor={`${index}`}>{e}</label>
 											</section>

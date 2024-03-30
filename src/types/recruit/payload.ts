@@ -60,3 +60,13 @@ export interface InputCourse {
 	isChecked: boolean;
 	onClickHandler: () => void;
 }
+
+export interface RecruitFilter {
+	scope: number | null;
+	category: number | null;
+	field: number | null;
+	skill: number[];
+	role: number[];
+	tag: number[];
+	keyword: string;
+}

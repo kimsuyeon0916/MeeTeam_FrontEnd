@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ProfileImage } from '../../..';
 import { TitleAndEtc } from '../../../../types';
 import S from './TitleInfo.styled';
@@ -32,20 +32,20 @@ const TitleInfo = ({
 }: TitleAndEtc) => {
 	const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
 	const { mutate: bookmarked } = useBookmark();
-	// const { mutate: unBookmarked } = useDelBookmark();
-	const delBookmark = useMutation({
-		mutationFn: (id: number) => bookmarkDelete(id),
-	});
+	const { mutate: unBookmarked } = useDelBookmark();
 
 	const onClickBookmark = () => {
 		if (!isBookmarked) {
 			bookmarked(PAGE_NUMBER);
+			setIsBookmarked(true);
 		} else {
-			// unBookmarked(PAGE_NUMBER);
-			delBookmark.mutate(PAGE_NUMBER);
+			unBookmarked(PAGE_NUMBER);
+			setIsBookmarked(false);
 		}
 		setIsBookmarked(prev => !prev);
 	};
+
+	useEffect(() => {}, [bookmarkCount]);
 	return (
 		<S.TitleInfo>
 			<section className='container-header'>

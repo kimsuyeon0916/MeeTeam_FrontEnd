@@ -1,30 +1,41 @@
 import React, { useState } from 'react';
-import { Dropdown, Subtitle, RecruitCard, Pagination } from '../../../components';
+import { Dropdown, RecruitCard, Pagination, DetailedInput } from '../../../components';
 import S from './RecruitPage.styled';
-import {
-	BookmarkRight,
-	Clear,
-	DropdownArrow,
-	FilledBookmark,
-	Search,
-	SearchIcon,
-	XBtn,
-} from '../../../assets';
+import { Clear, DropdownArrow, FilledBookmark, Search, SearchIcon, XBtn } from '../../../assets';
+import { useRecoilState } from 'recoil';
+import { recruitFilterState } from '../../../atom';
 
 const START_PAGE_NUM = 1;
 
 const RecruitPage = () => {
 	const postsNum = 150;
-	const [fieldValue, setFieldValue] = useState<string>('분야를 선택해주세요');
+	const [fieldValue, setFieldValue] = useState({
+		applied: false,
+		value: '분야를 선택해주세요',
+	});
 	const [tagItem, setTagItem] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(START_PAGE_NUM);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [isRoleOpen, setIsRoleOpen] = useState<boolean>(false);
 	const [isFieldOpen, setIsFieldOpen] = useState<boolean>(false);
+	const [filterState, setFilterState] = useRecoilState(recruitFilterState);
 
 	const onClickDetailed = () => {
 		setIsOpen(true);
 	};
+
+	const onClickField = (event: React.MouseEvent<HTMLSpanElement>) => {
+		const { innerText } = event.target as HTMLElement;
+		setFieldValue(prev => ({ ...prev, value: innerText }));
+		setFilterState(prev => ({ ...prev, field: Number(event.currentTarget.id) }));
+	};
+
+	const submitField = () => {
+		setFieldValue(prev => ({ ...prev, applied: true }));
+		setIsFieldOpen(false);
+	};
+
+	// console.log(filterState);
 
 	return (
 		<S.RecruitPage>
@@ -32,21 +43,25 @@ const RecruitPage = () => {
 				<section className='wrapper-title'>
 					<h2>분야 전체</h2>
 					<div className='sep'> | </div>
-					<div className='container-field' onClick={() => setIsFieldOpen(true)}>
-						<h3>{fieldValue}</h3>
+					<div className='container-field' onClick={() => setIsFieldOpen(prev => !prev)}>
+						<h3>{fieldValue.applied ? fieldValue.value : '분야를 선택해주세요'}</h3>
 						<img src={DropdownArrow} />
 					</div>
 					{isFieldOpen && (
 						<article className='dropdown-field'>
 							<section className='container-keys'>
-								<span className='field-key'>개발</span>
+								<span className='field-key' id={'1'} onClick={onClickField}>
+									개발
+								</span>
 							</section>
 							<article className='container-btns'>
 								<section className='clear'>
 									<img src={Clear} />
 									<span>초기화</span>
 								</section>
-								<button>적용</button>
+								<button type='button' onClick={submitField}>
+									적용
+								</button>
 							</article>
 						</article>
 					)}
@@ -55,7 +70,7 @@ const RecruitPage = () => {
 					<section className='container-filters'>
 						<Dropdown data={['전체 보기', '교내', '교외']} initialData='범위' scope={true} />
 						<Dropdown
-							data={['전체', '프로젝트', '공모전', '스터디']}
+							data={['전체', '프로젝트', '스터디', '공모전']}
 							initialData='유형'
 							scope={false}
 						/>
@@ -71,40 +86,7 @@ const RecruitPage = () => {
 										<span className='body1 sidebar-elem'>역할</span>
 										<span className='body1 sidebar-elem'>태그</span>
 									</section>
-									<section className='dropdown-search'>
-										<span className='body1'>
-											원하는 역할을 검색해보세요. 역할은 최대 n개까지 선택 가능합니다.
-										</span>
-										<article className='search' onClick={() => setIsRoleOpen(prev => !prev)}>
-											<input type='text' placeholder='역할을 검색하세요.' />
-											<img src={Search} />
-										</article>
-										{isRoleOpen && (
-											<section className='role-menu'>
-												<ul>
-													<li className='body1'>역1</li>
-													<li className='body1'>역2</li>
-													<li className='body1'>역3</li>
-													<li className='body1'>역4</li>
-												</ul>
-											</section>
-										)}
-										<article className='container-tag'>
-											<article className='tags'>
-												<span>{'tagItem'}</span>
-												<button type='button'>
-													<img src={XBtn} />
-												</button>
-											</article>
-										</article>
-										<article className='container-btns'>
-											<section className='clear'>
-												<img src={Clear} />
-												<span>초기화</span>
-											</section>
-											<button>적용</button>
-										</article>
-									</section>
+									{/* <DetailedInput /> */}
 								</section>
 							)}
 						</article>

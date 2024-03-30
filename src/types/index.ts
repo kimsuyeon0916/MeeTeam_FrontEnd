@@ -13,7 +13,7 @@ import type {
 	RecruitPostings,
 	ApplyInfo,
 } from './recruit/response';
-import type { ApplyRole, ApplyForm } from './recruit/payload';
+import type { ApplyRole, ApplyForm, RecruitFilter } from './recruit/payload';
 import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
 
@@ -52,4 +52,5 @@ export type {
 	RoleForPost,
 	Keyword,
 	StringElementProps,
+	RecruitFilter,
 };
