@@ -20,6 +20,8 @@ import GrayPhone from './GrayPhone.svg';
 import BlackPhone from './BlackPhone.svg';
 import GrayEmail from './GrayEmail.svg';
 import BlackEmail from './BlackEmail.svg';
+import Add from './Add.svg';
+import Delete from './Delete.svg';
 
 export {
 	Exit,
@@ -44,4 +46,6 @@ export {
 	BlackPhone,
 	GrayEmail,
 	BlackEmail,
+	Add,
+	Delete,
 };
