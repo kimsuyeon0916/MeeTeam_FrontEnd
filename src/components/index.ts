@@ -23,7 +23,7 @@ import {
 	STATUS_CLOSE_ICON,
 	STATUS_RIGHT_ARROW_ICON,
 } from './meeteam/progressStatus/StatusData';
-import Link from './meeteam/main/link/Link';
+import MeeteamLink from './meeteam/main/link/Link';
 import DashBoardLink from './meeteam/main/dashBoard/dashBoardLink/DashBoardLink';
 import {
 	memberList,
@@ -105,6 +105,8 @@ import Input from './input/Input';
 import ComboBox from './comboBox/ComboBox';
 import Textarea from './textarea/Textarea';
 import Radio from './radio/Radio';
+import AddBtn from './button/AddBtn';
+import DeleteBtn from './button/DeleteBtn';
 
 export {
 	Header,
@@ -130,7 +132,7 @@ export {
 	STATUS_DONE_ICON,
 	STATUS_RIGHT_ARROW_ICON,
 	STATUS_CLOSE_ICON,
-	Link,
+	MeeteamLink,
 	DashBoardLink,
 	memberList,
 	MeeTeamMember,
@@ -205,4 +207,6 @@ export {
 	ComboBox,
 	Textarea,
 	Radio,
+	AddBtn,
+	DeleteBtn,
 };

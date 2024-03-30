@@ -3,7 +3,7 @@ import S from './Link.styled';
 import { KebabMenu, linkList, LINK_SHORTCUTS_BUTTON } from '../../..';
 import { CopyClipBoard } from '../../../../utils';
 
-const Link = () => {
+const MeeteamLink = () => {
 	const optionList = [
 		{
 			title: '편집', // 해당 옵션 이름 부여
@@ -77,4 +77,4 @@ const Link = () => {
 	);
 };
 
-export default Link;
+export default MeeteamLink;
