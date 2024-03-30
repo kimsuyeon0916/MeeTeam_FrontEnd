@@ -107,6 +107,7 @@ import Textarea from './textarea/Textarea';
 import Radio from './radio/Radio';
 import AddBtn from './button/AddBtn';
 import DeleteBtn from './button/DeleteBtn';
+import Link from './link/Link';
 
 export {
 	Header,
@@ -209,4 +210,5 @@ export {
 	Radio,
 	AddBtn,
 	DeleteBtn,
+	Link,
 };
