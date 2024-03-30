@@ -35,8 +35,9 @@ const TextareaLabel = styled.label<{ $width?: string }>`
 	}
 
 	small {
-		margin-bottom: 0.4rem;
+		margin-top: 0.4rem;
 		margin-left: auto;
+		color: var(--State-unactive, #8e8e8e);
 	}
 `;
 
