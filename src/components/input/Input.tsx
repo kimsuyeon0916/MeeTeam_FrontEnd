@@ -17,6 +17,7 @@ interface Input<T extends FieldValues> {
 	validation?: RegisterOptions;
 	label?: string;
 	icon?: Icon;
+	maxLength?: number;
 	placeholder?: string;
 	inputRef?: React.MutableRefObject<HTMLInputElement | null>; // RefObject
 	handleInputClick?: React.MouseEventHandler<HTMLInputElement>;
@@ -42,7 +43,6 @@ const Input = <T extends FieldValues>({
 		<S.InputLabel $width={width}>
 			{label && <h6>{label}</h6>}
 			<S.Input
-				maxLength={validation?.maxLength as number} // 타입 선언 -> 타입 단언으로 추후 수정
 				{...rest}
 				{...props}
 				{...icon}
