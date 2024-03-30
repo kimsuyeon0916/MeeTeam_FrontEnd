@@ -7,7 +7,7 @@ import SignInPage from './account/signIn/SignInPage';
 import SignUpPage from './account/signUp/SignUpPage';
 import SchoolCertificationPage from './account/schoolCertification/SchoolCertificationPage';
 import { SCHOOL_CERTIFICATION_DATA } from './account/schoolCertification/SchoolCertificationData';
-import { INPUT_VALIDATION } from './account/validation';
+import { INPUT_VALIDATION } from '../../validation';
 import { SIGN_UP_DATA } from './account/signUp/SignUpData';
 import NicknameSettingPage from './account/signUp/nicknameSetting/NicknameSettingPage';
 import type { Account, User } from './account/signUp/SignUpData';

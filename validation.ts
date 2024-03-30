@@ -20,6 +20,14 @@ export const INPUT_VALIDATION = {
 			message: '최대 16자리 이하 입력해 주세요',
 		},
 	},
+	introduction: {
+		maxLength: 20,
+		validate: {
+			countingLetters: (fieldValue: FieldValues) => {
+				return fieldValue?.length + '/20';
+			},
+		},
+	},
 };
 
 export const TEXTAREA_VALIDATION = {
