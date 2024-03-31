@@ -31,11 +31,7 @@ const RecruitPage = () => {
 	});
 
 	const onClickDetailed = () => {
-		setIsOpen(true);
-	};
-
-	const onClickApplyDetailed = () => {
-		setIsOpen(false);
+		setIsOpen(prev => !prev);
 	};
 
 	const onClickField = (event: React.MouseEvent<HTMLSpanElement>) => {
@@ -62,6 +58,7 @@ const RecruitPage = () => {
 	};
 
 	const onClickDetails = (event: React.MouseEvent<HTMLSpanElement>) => {
+		event.stopPropagation();
 		const { innerText } = event.target as HTMLElement;
 		if (innerText === '기술') {
 			setIsOpenDetail({ skill: true, role: false, tag: false, message: innerText });
@@ -72,11 +69,10 @@ const RecruitPage = () => {
 		}
 	};
 
+	console.log(filterState);
 	useEffect(() => {
 		refetch();
 	}, [filterState]);
-
-	console.log(data);
 
 	return (
 		<S.RecruitPage>
@@ -133,7 +129,7 @@ const RecruitPage = () => {
 											태그
 										</span>
 									</section>
-									<DetailedInput type={isOpenDetail.message} onSubmit={onClickApplyDetailed} />
+									<DetailedInput type={isOpenDetail.message} />
 								</section>
 							)}
 						</article>

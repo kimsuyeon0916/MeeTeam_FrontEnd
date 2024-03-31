@@ -1,3 +1,5 @@
+import { Keyword } from '..';
+
 export interface ApplyRole {
 	name: string;
 	score: number;
@@ -69,4 +71,14 @@ export interface RecruitFilter {
 	role: number[];
 	tag: number[];
 	keyword: string;
+}
+
+export interface DetailedInfo {
+	type: string;
+}
+
+export interface Array {
+	skill: Keyword[];
+	role: Keyword[];
+	tag: Keyword[];
 }

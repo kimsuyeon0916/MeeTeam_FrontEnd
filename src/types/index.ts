@@ -15,7 +15,7 @@ import type {
 	ListResult,
 	Post,
 } from './recruit/response';
-import type { ApplyRole, ApplyForm, RecruitFilter } from './recruit/payload';
+import type { ApplyRole, ApplyForm, RecruitFilter, DetailedInfo, Array } from './recruit/payload';
 import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
 
@@ -57,4 +57,6 @@ export type {
 	RecruitFilter,
 	ListResult,
 	Post,
+	DetailedInfo,
+	Array,
 };

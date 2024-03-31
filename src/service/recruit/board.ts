@@ -16,11 +16,11 @@ export const getPostList = async (filterData: FilterData) => {
 		const queryString = Object.entries(filterData)
 			.filter(([key, value]) => {
 				if (key === 'keyword') {
-					return value !== null && value !== undefined && value !== ''; // keyword가 비어있지 않은 경우만 유지
+					return value !== null && value !== undefined && value !== '';
 				} else if (Array.isArray(value)) {
-					return value.length > 0; // 배열이 비어있지 않은 경우만 유지
+					return value.length > 0;
 				} else {
-					return value !== null && value !== undefined; // null 또는 undefined가 아닌 경우만 유지
+					return value !== null && value !== undefined;
 				}
 			})
 			.map(([key, value]) => {
@@ -33,7 +33,7 @@ export const getPostList = async (filterData: FilterData) => {
 			.join('&');
 
 		const url = `${EndPoint.RECRUITMENT_BOARD.list}${queryString ? `?${queryString}` : ''}`;
-		console.log(url);
+
 		const response = await axiosInstance.get<ListResult>(url);
 		return response;
 	} catch (error) {
