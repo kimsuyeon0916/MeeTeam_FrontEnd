@@ -37,9 +37,9 @@ export {
 	XBtn,
 	Reply,
 	LogoName,
+	FilledBookmark,
+	UnfilledBookmark,
 	DefaultProfileImage,
 	DefaultPortfolioImage,
 	Search,
-	FilledBookmark,
-	UnfilledBookmark,
 };

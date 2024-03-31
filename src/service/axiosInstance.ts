@@ -3,6 +3,9 @@ import { CustomInstance } from '../types';
 
 const axiosConfig = {
 	baseURL: import.meta.env.VITE_BASE_URL,
+	headers: {
+		'Content-Type': 'application/json',
+	},
 };
 
 const ACCESS_TOKEN_KEY = import.meta.env.VITE_ACCESS_TOKEN_KEY;

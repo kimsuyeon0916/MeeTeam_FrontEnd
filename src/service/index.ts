@@ -10,6 +10,14 @@ import {
 } from './auth/auth';
 import { readProfile } from './user/Profile';
 import { getPostingData, getApplyData, applyRole } from './recruit/detail';
+import {
+	postingRecruit,
+	getRoleKeyword,
+	getSkillKeyword,
+	getCourseKeyword,
+	getProfessorKeyword,
+	getTagKeyword,
+} from './recruit/posting';
 
 export {
 	EndPoint,
@@ -25,4 +33,10 @@ export {
 	getPostingData,
 	getApplyData,
 	applyRole,
+	postingRecruit,
+	getRoleKeyword,
+	getSkillKeyword,
+	getCourseKeyword,
+	getProfessorKeyword,
+	getTagKeyword,
 };

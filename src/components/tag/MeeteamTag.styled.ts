@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const MeeteamTag = styled.div`
 	height: auto;
 	position: relative;
-	margin-top: 1.2rem;
 
 	.tag__box {
 		position: relative;
@@ -13,14 +12,24 @@ const MeeteamTag = styled.div`
 		min-height: 4.875rem;
 		width: 100%;
 		padding: 0.5rem 1.3rem;
-		border-radius: 0.75rem;
-		border: 0.75px solid #e3e3e3;
+		border-radius: 1rem;
+		border: 1px solid #e3e3e3;
 		background-color: #fff;
 		box-sizing: border-box;
 		z-index: 101;
 
 		&:focus-within {
-			border-color: #00a8ff;
+			border-color: #5877fc;
+		}
+
+		&:hover {
+			border: 1px solid #5877fc;
+			transition: 0.2s ease-in-out;
+		}
+
+		.icon-search {
+			position: absolute;
+			right: 2rem;
 		}
 
 		input {
@@ -40,10 +49,13 @@ const MeeteamTag = styled.div`
 			width: 15px;
 			height: 15px;
 			margin-left: 5px;
-			background-color: white;
-			border-radius: 50%;
+			background-color: transparent;
 			color: #54a0ff;
 			border: none;
+
+			img {
+				width: 2rem;
+			}
 		}
 	}
 
