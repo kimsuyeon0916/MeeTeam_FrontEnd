@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dropdown, RecruitCard, Pagination, DetailedInput } from '../../../components';
 import S from './RecruitPage.styled';
 import { Clear, DropdownArrow, FilledBookmark, Search, SearchIcon, XBtn } from '../../../assets';
@@ -10,7 +10,6 @@ import { useQuery } from '@tanstack/react-query';
 const START_PAGE_NUM = 1;
 
 const RecruitPage = () => {
-	const postsNum = 150;
 	const [fieldValue, setFieldValue] = useState({
 		applied: false,
 		value: '분야를 선택해주세요',
@@ -26,7 +25,7 @@ const RecruitPage = () => {
 		message: '기술',
 	});
 
-	const { data, isLoading } = useQuery({
+	const { data, isLoading, refetch } = useQuery({
 		queryKey: ['recruit_board'],
 		queryFn: () => getPostList(filterState),
 	});
@@ -72,6 +71,10 @@ const RecruitPage = () => {
 			setIsOpenDetail({ skill: false, role: false, tag: true, message: innerText });
 		}
 	};
+
+	useEffect(() => {
+		refetch();
+	}, [filterState]);
 
 	console.log(data);
 
@@ -150,31 +153,45 @@ const RecruitPage = () => {
 				</section>
 			</section>
 			<hr />
-			<div>
+			<section>
 				<div className='container-contents'>
 					<div>
 						<article className='bookmark-intro'>
 							<img src={FilledBookmark} />
 							<span className='body2'>북마크 모아보기 {'❯'}</span>
 						</article>
-						<div className='container-contents__grid'>
-							<RecruitCard />
-							<RecruitCard />
-							<RecruitCard />
-							<RecruitCard />
-							<RecruitCard />
-						</div>
+						{isLoading || !data ? (
+							<section>로딩중...</section>
+						) : (
+							<section className='container-contents__grid'>
+								{data.posts.map(post => (
+									<RecruitCard
+										id={post.id}
+										title={post.title}
+										category={post.category}
+										writerNickname={post.writerNickname}
+										writerProfileImg={post.writerProfileImg}
+										deadline={post.deadline}
+										scope={post.scope}
+										isBookmarked={post.isBookmarked}
+										key={post.id}
+									/>
+								))}
+							</section>
+						)}
 					</div>
 				</div>
-			</div>
-			<div className='container-pagination'>
-				<Pagination
-					postsNum={postsNum}
-					postsPerPage={20}
-					currentPage={currentPage}
-					setCurrentPage={setCurrentPage}
-				/>
-			</div>
+			</section>
+			<article className='container-pagination'>
+				{data && (
+					<Pagination
+						postsNum={data.pageInfo.totalContents + 100}
+						postsPerPage={data.pageInfo.size}
+						currentPage={currentPage}
+						setCurrentPage={setCurrentPage}
+					/>
+				)}
+			</article>
 		</S.RecruitPage>
 	);
 };

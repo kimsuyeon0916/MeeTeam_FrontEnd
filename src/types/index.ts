@@ -13,6 +13,7 @@ import type {
 	RecruitPostings,
 	ApplyInfo,
 	ListResult,
+	Post,
 } from './recruit/response';
 import type { ApplyRole, ApplyForm, RecruitFilter } from './recruit/payload';
 import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
@@ -55,4 +56,5 @@ export type {
 	StringElementProps,
 	RecruitFilter,
 	ListResult,
+	Post,
 };

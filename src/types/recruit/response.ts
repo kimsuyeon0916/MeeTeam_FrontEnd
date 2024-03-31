@@ -101,7 +101,7 @@ export interface Post {
 	title: string;
 	category: string;
 	writerNickname: string;
-	writerProfileImg: string | null;
+	writerProfileImg: string | undefined;
 	deadline: string;
 	scope: string;
 	isBookmarked: boolean;
