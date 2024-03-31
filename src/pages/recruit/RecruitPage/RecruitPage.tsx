@@ -4,6 +4,8 @@ import S from './RecruitPage.styled';
 import { Clear, DropdownArrow, FilledBookmark, Search, SearchIcon, XBtn } from '../../../assets';
 import { useRecoilState } from 'recoil';
 import { recruitFilterState } from '../../../atom';
+import { getPostList } from '../../../service/recruit/board';
+import { useQuery } from '@tanstack/react-query';
 
 const START_PAGE_NUM = 1;
 
@@ -13,15 +15,28 @@ const RecruitPage = () => {
 		applied: false,
 		value: '분야를 선택해주세요',
 	});
-	const [tagItem, setTagItem] = useState<string>('');
 	const [currentPage, setCurrentPage] = useState<number>(START_PAGE_NUM);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const [isRoleOpen, setIsRoleOpen] = useState<boolean>(false);
 	const [isFieldOpen, setIsFieldOpen] = useState<boolean>(false);
 	const [filterState, setFilterState] = useRecoilState(recruitFilterState);
+	const [isOpenDetail, setIsOpenDetail] = useState({
+		skill: false,
+		role: false,
+		tag: false,
+		message: '기술',
+	});
+
+	const { data, isLoading } = useQuery({
+		queryKey: ['recruit_board'],
+		queryFn: () => getPostList(filterState),
+	});
 
 	const onClickDetailed = () => {
 		setIsOpen(true);
+	};
+
+	const onClickApplyDetailed = () => {
+		setIsOpen(false);
 	};
 
 	const onClickField = (event: React.MouseEvent<HTMLSpanElement>) => {
@@ -35,7 +50,30 @@ const RecruitPage = () => {
 		setIsFieldOpen(false);
 	};
 
-	// console.log(filterState);
+	const onClickClear = () => {
+		setFilterState({
+			scope: null,
+			category: null,
+			field: null,
+			skill: [],
+			role: [],
+			tag: [],
+			keyword: '',
+		});
+	};
+
+	const onClickDetails = (event: React.MouseEvent<HTMLSpanElement>) => {
+		const { innerText } = event.target as HTMLElement;
+		if (innerText === '기술') {
+			setIsOpenDetail({ skill: true, role: false, tag: false, message: innerText });
+		} else if (innerText === '역할') {
+			setIsOpenDetail({ skill: false, role: true, tag: false, message: innerText });
+		} else if (innerText === '태그') {
+			setIsOpenDetail({ skill: false, role: false, tag: true, message: innerText });
+		}
+	};
+
+	console.log(data);
 
 	return (
 		<S.RecruitPage>
@@ -82,13 +120,23 @@ const RecruitPage = () => {
 							{isOpen && (
 								<section className='container-dropdown'>
 									<section className='sidebar'>
-										<span className='body1 sidebar-elem'>기술</span>
-										<span className='body1 sidebar-elem'>역할</span>
-										<span className='body1 sidebar-elem'>태그</span>
+										<span className='body1 sidebar-elem' onClick={onClickDetails}>
+											기술
+										</span>
+										<span className='body1 sidebar-elem' onClick={onClickDetails}>
+											역할
+										</span>
+										<span className='body1 sidebar-elem' onClick={onClickDetails}>
+											태그
+										</span>
 									</section>
-									{/* <DetailedInput /> */}
+									<DetailedInput type={isOpenDetail.message} onSubmit={onClickApplyDetailed} />
 								</section>
 							)}
+						</article>
+						<article className='clear' onClick={onClickClear}>
+							<img src={Clear} />
+							<span>초기화</span>
 						</article>
 					</section>
 					<section className='container-options__search'>

@@ -335,6 +335,20 @@ const RecruitPage = styled.div`
 					}
 				}
 			}
+
+			.clear {
+				display: flex;
+				align-items: center;
+				gap: 0.4rem;
+				cursor: pointer;
+
+				span {
+					margin-top: 0.2rem;
+					font-size: 1.4rem;
+					letter-spacing: 0.0028rem;
+					color: #8e8e8e;
+				}
+			}
 		}
 
 		.container-options__search {

@@ -4,7 +4,7 @@ import DropdownArrow from './DropdownArrow';
 import { useDebounce } from '../../hooks';
 import { useQuery } from '@tanstack/react-query';
 import { getCourseKeyword, getProfessorKeyword } from '../../service';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { recruitFilterState } from '../../atom';
 
 interface Dropdown {
@@ -45,7 +45,7 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 	});
 	const keywordCourse = useDebounce(name.course, 500);
 	const keywordProfessor = useDebounce(name.professor, 500);
-	const setFilterState = useSetRecoilState(recruitFilterState);
+	const [filterState, setFilterState] = useRecoilState(recruitFilterState);
 
 	const { data: dataCourse, isLoading: isLoadingCourse } = useQuery({
 		queryKey: ['searchCourse', keywordCourse],
@@ -120,6 +120,14 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 			document.removeEventListener('mousedown', outsideClick);
 		};
 	}, [dropdownRef.current, showDropdown, dropdown.course, dropdown.professor]);
+
+	useEffect(() => {
+		if (scope && filterState.scope === null) {
+			setCurrentValue('범위');
+		} else if (!scope && filterState.category === null) {
+			setCurrentValue('유형');
+		}
+	}, [filterState.scope, filterState.category]);
 
 	return (
 		<S.Dropdown $showDropdown={showDropdown} ref={dropdownRef} scope={scope} $isCheck={isChecked}>

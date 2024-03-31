@@ -29,4 +29,7 @@ export const EndPoint = {
 		professor: (keyword: string) => `/tag/search/professor?keyword=${keyword}&limit=5`,
 		tag: (keyword: string) => `/tag/search?keyword=${keyword}&limit=5`,
 	},
+	RECRUITMENT_BOARD: {
+		list: '/recruitment/postings/search',
+	},
 };
