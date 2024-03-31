@@ -1,8 +1,8 @@
 import React from 'react';
 import S from './RecruitManagePage.styled';
-import { ScrollToTop } from '../../utils';
+import { ScrollToTop } from '../../../utils';
 import { Outlet } from 'react-router-dom';
-import { Sidebar } from '../../components';
+import { Sidebar } from '../../../components';
 
 const RecruitManageWrapper = () => {
 	const manageMenu = [
@@ -20,13 +20,13 @@ const RecruitManageWrapper = () => {
 		},
 	];
 	return (
-		<S.MyActivityWrapper>
+		<S.RecruitManageWrapper>
 			<Sidebar menus={manageMenu} title='구인글 관리' />
 			<main>
 				<ScrollToTop />
 				<Outlet />
 			</main>
-		</S.MyActivityWrapper>
+		</S.RecruitManageWrapper>
 	);
 };
 

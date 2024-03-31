@@ -9,17 +9,16 @@ import {
 	RecruitCreatePage,
 	OutputCreatePage,
 	RecruitDetailPage,
-	MyActivityLike,
 	SignInPage,
 	SchoolCertificationPage,
 	NicknameSettingPage,
 	SignUpPage,
 	PassWordFindingPage,
 	RecruitManageWrapper,
-	MyActivityInvited,
-	MyActivityApply,
 	RecruitPostingBookmark,
 	ProfileDetailsPage,
+	RecruitPostingApply,
+	RecruitMyPostings,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -70,11 +69,11 @@ const router = createBrowserRouter([
 					},
 					{
 						path: 'apply',
-						element: <MyActivityApply />,
+						element: <RecruitPostingApply />,
 					},
 					{
 						path: 'my',
-						element: <MyActivityInvited />,
+						element: <RecruitMyPostings />,
 					},
 				],
 			},

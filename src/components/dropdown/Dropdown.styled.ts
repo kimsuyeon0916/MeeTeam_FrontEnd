@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 interface IDropdown {
 	$showDropdown?: boolean;
-	scope?: boolean;
+	$scope?: boolean;
 	$isCheck?: boolean;
+	$normalVersion?: boolean;
 }
 
 const Dropdown = styled.div<IDropdown>`
@@ -16,7 +17,7 @@ const Dropdown = styled.div<IDropdown>`
 		border: 0.75px solid ${props => (props.$showDropdown ? '#5877FC' : '#e0e6ff')};
 		box-sizing: border-box;
 		border-radius: 0.6rem;
-		min-width: ${props => (props.scope ? '15rem' : '13rem')};
+		min-width: ${props => (!props.$scope || props.$normalVersion ? '13rem' : '15rem')};
 		cursor: pointer;
 
 		.temp {

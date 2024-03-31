@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { UnfilledBookmark, FilledBookmark } from '../../../../assets';
-import { tempData } from '../../../../pages/recruit/RecruitDetailPage/data';
+import { tempData } from '../../../../pages/recruit/recruitDetailPage/data';
 import { useSetRecoilState } from 'recoil';
 import { applyModalState } from '../../../../atom';
 

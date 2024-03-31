@@ -1,5 +1,5 @@
 import MainPage from './MainPage';
-import RecruitPage from './recruit/RecruitPage/RecruitPage';
+import RecruitPage from './recruit/recruitPage/RecruitPage';
 import GalaryPage from './GalaryPage';
 import RecruitCreatePage from './create/recruitCreatePage/RecruitCreatePage';
 import OutputCreatePage from './create/outputCreatePage/OutputCreatePage';
@@ -13,15 +13,13 @@ import NicknameSettingPage from './account/signUp/nicknameSetting/NicknameSettin
 import type { Account, User } from './account/signUp/SignUpData';
 import PassWordFindingPage from './account/passWordFindingPage/PassWordFindingPage';
 import { PASSWORD_DATA } from './account/passWordFindingPage/PassWordData';
-import RecruitDetailPage from './recruit/RecruitDetailPage/RecruitDetailPage';
-import MyActivityManagePage from './activity/MyActivityManagePage';
-import MyActivityInvited from './activity/MyActivityInvited';
-import RecruitManageWrapper from './activity/RecruitManageWrapper';
-import MyActivityLike from './activity/MyActivityLike';
-import MyActivityApply from './activity/MyActivityApply';
-import RecruitPostingBookmark from './activity/RecruitPostingBookmark';
+import RecruitDetailPage from './recruit/recruitDetailPage/RecruitDetailPage';
+import RecruitManageWrapper from './recruit/recruitManagePage/RecruitManageWrapper';
+import RecruitPostingBookmark from './recruit/recruitManagePage/RecruitPostingBookmark';
 import ProfileDetailsPage from './profile/ProfileDetailsPage';
 import { userData } from './profile/userData';
+import RecruitPostingApply from './recruit/recruitManagePage/RecruitPostingApply';
+import RecruitMyPostings from './recruit/recruitManagePage/RecruitMyPostings';
 
 export {
 	MainPage,
@@ -41,12 +39,10 @@ export {
 	PassWordFindingPage,
 	PASSWORD_DATA,
 	RecruitDetailPage,
-	MyActivityManagePage,
-	MyActivityInvited,
 	RecruitManageWrapper,
-	MyActivityLike,
-	MyActivityApply,
 	RecruitPostingBookmark,
 	ProfileDetailsPage,
 	userData,
+	RecruitPostingApply,
+	RecruitMyPostings,
 };

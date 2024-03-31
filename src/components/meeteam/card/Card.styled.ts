@@ -69,6 +69,7 @@ const RecruitCard = styled.div`
 	border-radius: 1rem;
 	border: 1px solid #e3e3e3;
 	background: #fff;
+	justify-content: space-between;
 
 	cursor: pointer;
 
@@ -79,31 +80,35 @@ const RecruitCard = styled.div`
 
 	.content-tags {
 		display: flex;
-		justify-content: space-between;
+		flex-direction: column;
 
-		.tags {
+		.header {
 			display: flex;
-			gap: 0.6rem;
+			justify-content: space-between;
+			.tags {
+				display: flex;
+				gap: 0.6rem;
 
-			.tag {
-				display: inline-flex;
-				padding: 0.4rem;
-				align-items: center;
-				gap: 0.4rem;
-				border-radius: 0.4rem;
-				font-size: 1.2rem;
-				line-height: 1.4rem;
-				letter-spacing: 0.0024rem;
-			}
+				.tag {
+					display: inline-flex;
+					padding: 0.4rem;
+					align-items: center;
+					gap: 0.4rem;
+					border-radius: 0.4rem;
+					font-size: 1.2rem;
+					line-height: 1.4rem;
+					letter-spacing: 0.0024rem;
+				}
 
-			.scope {
-				background: #ffe7fe;
-				color: #f979dd;
-			}
+				.scope {
+					background: #ffe7fe;
+					color: #f979dd;
+				}
 
-			.category {
-				background: #c9deff;
-				color: #5877fc;
+				.category {
+					background: #c9deff;
+					color: #5877fc;
+				}
 			}
 		}
 	}
