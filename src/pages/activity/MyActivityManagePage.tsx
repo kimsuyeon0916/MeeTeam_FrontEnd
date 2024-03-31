@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card } from '../../components';
-import S from './MyActivityManagePage.styled';
+import S from './RecruitManagePage.styled';
 
 const MyActivityManagePage = () => {
 	return (

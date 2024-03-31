@@ -16,10 +16,10 @@ import { PASSWORD_DATA } from './account/passWordFindingPage/PassWordData';
 import RecruitDetailPage from './recruit/RecruitDetailPage/RecruitDetailPage';
 import MyActivityManagePage from './activity/MyActivityManagePage';
 import MyActivityInvited from './activity/MyActivityInvited';
-import MyActivityWrapper from './activity/MyActivityWrapper';
+import RecruitManageWrapper from './activity/RecruitManageWrapper';
 import MyActivityLike from './activity/MyActivityLike';
 import MyActivityApply from './activity/MyActivityApply';
-import MyActivityBookmark from './activity/MyActivityBookmark';
+import RecruitPostingBookmark from './activity/RecruitPostingBookmark';
 import ProfileDetailsPage from './profile/ProfileDetailsPage';
 import { userData } from './profile/userData';
 
@@ -43,10 +43,10 @@ export {
 	RecruitDetailPage,
 	MyActivityManagePage,
 	MyActivityInvited,
-	MyActivityWrapper,
+	RecruitManageWrapper,
 	MyActivityLike,
 	MyActivityApply,
-	MyActivityBookmark,
+	RecruitPostingBookmark,
 	ProfileDetailsPage,
 	userData,
 };

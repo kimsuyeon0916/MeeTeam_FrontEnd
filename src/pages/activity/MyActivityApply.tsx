@@ -1,5 +1,5 @@
 import React from 'react';
-import S from './MyActivityManagePage.styled';
+import S from './RecruitManagePage.styled';
 import { ManageRecruitCard } from '../../components/index';
 import { RecruitInformation } from '../../components/recruit/ManageRecruitCard';
 

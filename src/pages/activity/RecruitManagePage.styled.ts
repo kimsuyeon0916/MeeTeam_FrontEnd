@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const MyActivityWrapper = styled.div`
-	width: clamp(45%, 108rem, 75%);
+	width: clamp(45%, 96rem, 75%);
 	margin: 0 auto;
 	display: flex;
 	main {
@@ -111,46 +111,60 @@ const MyActivityLike = styled.div`
 	}
 `;
 
-const MyActivityRecruit = styled.div`
-	margin-top: 7.83rem;
+const MyActivityRecruit = styled.article`
+	margin-top: 8rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
 
-	.container {
+	h2 {
+		color: #151515;
+		font-size: 2.4rem;
+		font-weight: 700;
+		line-height: 2.9rem;
+		letter-spacing: 0.0048rem;
+	}
+
+	.body1 {
+		color: #373f41;
+		text-align: center;
+		font-size: 1.6rem;
+		font-weight: 600;
+		line-height: 1.9rem;
+		letter-spacing: 0.0032rem;
+	}
+
+	.wrapper {
 		display: flex;
 		flex-direction: column;
-		gap: 1.8rem;
-		margin-top: 3.9rem;
+		width: 100%;
 
-		.container-recruits {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			width: 80.55rem;
-			height: 9rem;
-			flex-shrink: 0;
-			border-radius: 0.75rem;
-			border: 1.125px solid var(--main-2, #5f5cec);
-			background: #f9f9f9;
-			padding: 0 1.8rem;
-			box-sizing: border-box;
-		}
+		.container-filter {
+			width: 100%;
+			height: 2.85rem;
+			border-bottom: 1px solid #8e8e8e;
 
-		.container-recruits_info {
-			display: flex;
-			flex-direction: column;
-
-			.container-tags {
-				display: flex;
-				gap: 0.68rem;
+			.menu {
+				width: 11.6rem;
+				height: 3.6rem;
+				padding: 0.85rem 4.4rem;
+				box-sizing: border-box;
+				border-radius: 0.4rem 0.4rem 0rem 0rem;
+				border-top: 1px solid #8e8e8e;
+				border-right: 1px solid#8e8e8e;
+				border-left: 1px solid #8e8e8e;
+				border-bottom: 1px solid #8e8e8e;
+				background: #f6f6f6;
+				cursor: pointer;
 			}
 
-			.container-title {
-				color: #000;
-				text-align: center;
-				font-size: 1.8rem;
-				font-style: normal;
-				font-weight: 400;
-				line-height: 4.2rem;
-				letter-spacing: 0.015rem;
+			.active {
+				border-top: 1px solid #373f41;
+				border-right: 1px solid #373f41;
+				border-left: 1px solid #373f41;
+				border-bottom: 1px solid #fff;
+				background: #fff;
+				z-index: 101;
 			}
 		}
 	}

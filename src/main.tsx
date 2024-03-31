@@ -15,10 +15,10 @@ import {
 	NicknameSettingPage,
 	SignUpPage,
 	PassWordFindingPage,
-	MyActivityWrapper,
+	RecruitManageWrapper,
 	MyActivityInvited,
 	MyActivityApply,
-	MyActivityBookmark,
+	RecruitPostingBookmark,
 	ProfileDetailsPage,
 } from './pages/index.ts';
 import './globalStyle.css';
@@ -61,24 +61,20 @@ const router = createBrowserRouter([
 				],
 			},
 			{
-				path: 'activity',
-				element: <MyActivityWrapper />,
+				path: 'recruit/manage',
+				element: <RecruitManageWrapper />,
 				children: [
 					{
-						path: 'invited',
-						element: <MyActivityInvited />,
-					},
-					{
-						path: 'like',
-						element: <MyActivityLike />,
+						path: 'bookmark',
+						element: <RecruitPostingBookmark />,
 					},
 					{
 						path: 'apply',
 						element: <MyActivityApply />,
 					},
 					{
-						path: 'bookmark',
-						element: <MyActivityBookmark />,
+						path: 'my',
+						element: <MyActivityInvited />,
 					},
 				],
 			},
