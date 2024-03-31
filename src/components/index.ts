@@ -106,7 +106,7 @@ import RecruitTag from './recruit/recruitDetail/recruitTag/RecruitTag';
 import Description from './recruit/create/Description';
 import BasicInformation from './recruit/create/basicInformation/BasicInformation';
 import DetailedInformation from './recruit/create/detailedInformation/DetailedInformation';
-import RecruitRole from './recruit/create/recruitRoles/RecruitRole';
+import RecruitRole from './recruit/create/recruitRoles/RecruitRoles';
 import ControlButtons from './recruit/create/ControlButtons';
 import ContainerScope from './recruit/create/basicInformation/containers/ContainerScope';
 import ContainerCategory from './recruit/create/basicInformation/containers/ContainerCategory';
@@ -117,6 +117,7 @@ import OptionList from './optionList/OptionList';
 import ComboBox from './comboBox/ComboBox';
 import WriterFooter from './recruit/recruitDetail/footer/WriterFooter';
 import ApplierFooter from './recruit/recruitDetail/footer/ApplierFooter';
+import DetailedInput from './recruit/recruitBoard/detailedFilter/DetailedInput';
 
 export {
 	Header,
@@ -229,4 +230,5 @@ export {
 	ApplyModal,
 	ConfirmModal,
 	FinalModal,
+	DetailedInput,
 };

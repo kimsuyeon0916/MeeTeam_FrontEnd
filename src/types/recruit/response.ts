@@ -95,3 +95,26 @@ export interface Keyword {
 	id: number;
 	name: string;
 }
+
+export interface Post {
+	id: number;
+	title: string;
+	category: string;
+	writerNickname: string;
+	writerProfileImg: string | undefined;
+	deadline: string;
+	scope: string;
+	isBookmarked: boolean;
+}
+
+export interface Page {
+	page: number;
+	size: number;
+	totalContents: number;
+	totalPages: number;
+}
+
+export interface ListResult {
+	posts: Post[];
+	pageInfo: Page;
+}

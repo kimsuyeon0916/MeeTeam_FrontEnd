@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ProfileImage } from '../../..';
 import { TitleAndEtc } from '../../../../types';
 import S from './TitleInfo.styled';
 import { FilledBookmark, UnfilledBookmark } from '../../../../assets';
 import { useBookmark } from '../../../../hooks';
+import { useDelBookmark } from '../../../../hooks/useBookMark';
+import { useMutation } from '@tanstack/react-query';
+import { bookmarkDelete } from '../../../../service/recruit/detail';
 
 type scores = {
 	[key: number]: string;
@@ -28,11 +31,21 @@ const TitleInfo = ({
 	writerScore,
 }: TitleAndEtc) => {
 	const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
-	const { mutate } = useBookmark(PAGE_NUMBER);
+	const { mutate: bookmarked } = useBookmark();
+	const { mutate: unBookmarked } = useDelBookmark();
+
 	const onClickBookmark = () => {
+		if (!isBookmarked) {
+			bookmarked(PAGE_NUMBER);
+			setIsBookmarked(true);
+		} else {
+			unBookmarked(PAGE_NUMBER);
+			setIsBookmarked(false);
+		}
 		setIsBookmarked(prev => !prev);
-		mutate(PAGE_NUMBER);
 	};
+
+	useEffect(() => {}, [bookmarkCount]);
 	return (
 		<S.TitleInfo>
 			<section className='container-header'>

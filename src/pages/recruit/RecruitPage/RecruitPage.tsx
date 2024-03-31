@@ -1,113 +1,193 @@
-import React, { useState } from 'react';
-import { Dropdown, Subtitle, RecruitCard, Pagination } from '../../../components';
+import React, { useEffect, useState } from 'react';
+import { Dropdown, RecruitCard, Pagination, DetailedInput } from '../../../components';
 import S from './RecruitPage.styled';
-import { SearchIcon } from '../../../assets';
+import { Clear, DropdownArrow, FilledBookmark, Search, SearchIcon, XBtn } from '../../../assets';
+import { useRecoilState } from 'recoil';
+import { recruitFilterState } from '../../../atom';
+import { getPostList } from '../../../service/recruit/board';
+import { useQuery } from '@tanstack/react-query';
 
 const START_PAGE_NUM = 1;
 
 const RecruitPage = () => {
-	const postsNum = 150;
-	const [currentPage, setCurrentPage] = useState<number>(START_PAGE_NUM);
-	const [isFiltered, setIsFiltered] = useState({
-		isInside: true,
-		isOutside: false,
+	const [fieldValue, setFieldValue] = useState({
+		applied: false,
+		value: '분야를 선택해주세요',
 	});
-	const onClickHandler = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-		const target = event.currentTarget;
-		if (target.innerText === '교내') {
-			setIsFiltered({ isInside: true, isOutside: false });
-		}
-		if (target.innerText === '교외') {
-			setIsFiltered({ isInside: false, isOutside: true });
+	const [currentPage, setCurrentPage] = useState<number>(START_PAGE_NUM);
+	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [isFieldOpen, setIsFieldOpen] = useState<boolean>(false);
+	const [filterState, setFilterState] = useRecoilState(recruitFilterState);
+	const [isOpenDetail, setIsOpenDetail] = useState({
+		skill: false,
+		role: false,
+		tag: false,
+		message: '기술',
+	});
+
+	const { data, isLoading, refetch } = useQuery({
+		queryKey: ['recruit_board'],
+		queryFn: () => getPostList(filterState),
+	});
+
+	const onClickDetailed = () => {
+		setIsOpen(prev => !prev);
+	};
+
+	const onClickField = (event: React.MouseEvent<HTMLSpanElement>) => {
+		const { innerText } = event.target as HTMLElement;
+		setFieldValue(prev => ({ ...prev, value: innerText }));
+		setFilterState(prev => ({ ...prev, field: Number(event.currentTarget.id) }));
+	};
+
+	const submitField = () => {
+		setFieldValue(prev => ({ ...prev, applied: true }));
+		setIsFieldOpen(false);
+	};
+
+	const onClickClear = () => {
+		setFilterState({
+			scope: null,
+			category: null,
+			field: null,
+			skill: [],
+			role: [],
+			tag: [],
+			keyword: '',
+		});
+	};
+
+	const onClickDetails = (event: React.MouseEvent<HTMLSpanElement>) => {
+		event.stopPropagation();
+		const { innerText } = event.target as HTMLElement;
+		if (innerText === '기술') {
+			setIsOpenDetail({ skill: true, role: false, tag: false, message: innerText });
+		} else if (innerText === '역할') {
+			setIsOpenDetail({ skill: false, role: true, tag: false, message: innerText });
+		} else if (innerText === '태그') {
+			setIsOpenDetail({ skill: false, role: false, tag: true, message: innerText });
 		}
 	};
 
+	console.log(filterState);
+	useEffect(() => {
+		refetch();
+	}, [filterState]);
+
 	return (
 		<S.RecruitPage>
-			<div>
-				<div className='container-filter_area'>
-					<div className={`area ${isFiltered.isInside ? '' : 'no'}`} onClick={onClickHandler}>
-						교내
+			<section>
+				<section className='wrapper-title'>
+					<h2>분야 전체</h2>
+					<div className='sep'> | </div>
+					<div className='container-field' onClick={() => setIsFieldOpen(prev => !prev)}>
+						<h3>{fieldValue.applied ? fieldValue.value : '분야를 선택해주세요'}</h3>
+						<img src={DropdownArrow} />
 					</div>
-					<div className={`area ${isFiltered.isOutside ? 'out' : 'no'}`} onClick={onClickHandler}>
-						교외
-					</div>
-				</div>
-				<div className='container-filter_menu'>
-					<Dropdown
-						data={['프로젝트', '스터디', '동아리', '공모전']}
-						initialData='프로젝트'
-						$arrowNeed={true}
-					/>
-					<Dropdown data={['개발']} initialData='카테고리' $arrowNeed={true} />
-					<div className='dropdown-spec'>
+					{isFieldOpen && (
+						<article className='dropdown-field'>
+							<section className='container-keys'>
+								<span className='field-key' id={'1'} onClick={onClickField}>
+									개발
+								</span>
+							</section>
+							<article className='container-btns'>
+								<section className='clear'>
+									<img src={Clear} />
+									<span>초기화</span>
+								</section>
+								<button type='button' onClick={submitField}>
+									적용
+								</button>
+							</article>
+						</article>
+					)}
+				</section>
+				<section className='wrapper-filters'>
+					<section className='container-filters'>
+						<Dropdown data={['전체 보기', '교내', '교외']} initialData='범위' scope={true} />
 						<Dropdown
-							data={['React', 'JavaScript', 'Node.js', 'Spring', 'Figma']}
-							initialData='기술 스택'
-							$arrowNeed={true}
+							data={['전체', '프로젝트', '스터디', '공모전']}
+							initialData='유형'
+							scope={false}
 						/>
-						<Dropdown
-							data={['기획', '디자인', '프론트엔드', '백엔드']}
-							initialData='👤 포지션'
-							$arrowNeed={true}
-						/>
-					</div>
-				</div>
-			</div>
-			<hr />
-			<div>
-				<div className='container-options'>
-					<div className='container-options__filters'>
-						<div className='filter bookmark'>☑️ 수업만 보기</div>
-					</div>
-					<div className='container-options__search'>
+						<article className='dropdown-detailed' onClick={onClickDetailed}>
+							<section className='dropdown-box'>
+								<label>{'상세정보'}</label>
+								<img src={DropdownArrow} />
+							</section>
+							{isOpen && (
+								<section className='container-dropdown'>
+									<section className='sidebar'>
+										<span className='body1 sidebar-elem' onClick={onClickDetails}>
+											기술
+										</span>
+										<span className='body1 sidebar-elem' onClick={onClickDetails}>
+											역할
+										</span>
+										<span className='body1 sidebar-elem' onClick={onClickDetails}>
+											태그
+										</span>
+									</section>
+									<DetailedInput type={isOpenDetail.message} />
+								</section>
+							)}
+						</article>
+						<article className='clear' onClick={onClickClear}>
+							<img src={Clear} />
+							<span>초기화</span>
+						</article>
+					</section>
+					<section className='container-options__search'>
 						<div>
 							<img src={SearchIcon} />
 						</div>
 						<div>
 							<input placeholder='제목, 글, 내용으로 검색해보세요.' />
 						</div>
-					</div>
-				</div>
+					</section>
+				</section>
+			</section>
+			<hr />
+			<section>
 				<div className='container-contents'>
-					<div className='container-contents__row'>
-						<div className='container-subtitle'>
-							<div className='subtitle'>👀 내가 관심 있을 만한 구인 글</div>
-							<div className='container-sort'>
-								<select name='sorted-by'>
-									<option value='recent'>최신순</option>
-									<option value='deadline'>마감일순</option>
-									<option value='bookmark'>북마크순</option>
-								</select>
-							</div>
-						</div>
-						<div className='contents'>
-							<RecruitCard />
-							<RecruitCard />
-							<RecruitCard />
-							<RecruitCard />
-						</div>
-					</div>
 					<div>
-						<Subtitle>전체 구인 글</Subtitle>
-						<div className='container-contents__grid'>
-							<RecruitCard />
-							<RecruitCard />
-							<RecruitCard />
-							<RecruitCard />
-							<RecruitCard />
-						</div>
+						<article className='bookmark-intro'>
+							<img src={FilledBookmark} />
+							<span className='body2'>북마크 모아보기 {'❯'}</span>
+						</article>
+						{isLoading || !data ? (
+							<section>로딩중...</section>
+						) : (
+							<section className='container-contents__grid'>
+								{data.posts.map(post => (
+									<RecruitCard
+										id={post.id}
+										title={post.title}
+										category={post.category}
+										writerNickname={post.writerNickname}
+										writerProfileImg={post.writerProfileImg}
+										deadline={post.deadline}
+										scope={post.scope}
+										isBookmarked={post.isBookmarked}
+										key={post.id}
+									/>
+								))}
+							</section>
+						)}
 					</div>
 				</div>
-			</div>
-			<div className='container-pagination'>
-				<Pagination
-					postsNum={postsNum}
-					postsPerPage={20}
-					currentPage={currentPage}
-					setCurrentPage={setCurrentPage}
-				/>
-			</div>
+			</section>
+			<article className='container-pagination'>
+				{data && (
+					<Pagination
+						postsNum={data.pageInfo.totalContents + 100}
+						postsPerPage={data.pageInfo.size}
+						currentPage={currentPage}
+						setCurrentPage={setCurrentPage}
+					/>
+				)}
+			</article>
 		</S.RecruitPage>
 	);
 };
