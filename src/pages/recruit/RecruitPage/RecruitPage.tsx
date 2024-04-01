@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Dropdown, RecruitCard, Pagination, DetailedInput } from '../../../components';
 import S from './RecruitPage.styled';
-import { Clear, DropdownArrow, FilledBookmark, Search, SearchIcon, XBtn } from '../../../assets';
+import { Clear, DropdownArrow, FilledBookmark, SearchIcon } from '../../../assets';
 import { useRecoilState } from 'recoil';
 import { recruitFilterState } from '../../../atom';
 import { getPostList } from '../../../service/recruit/board';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 const START_PAGE_NUM = 1;
 
@@ -25,9 +25,13 @@ const RecruitPage = () => {
 		message: '기술',
 	});
 
-	const { data, isLoading, refetch } = useQuery({
-		queryKey: ['recruit_board'],
+	const queryClient = useQueryClient();
+
+	const { data, isSuccess, refetch, isFetchedAfterMount } = useQuery({
+		queryKey: ['recruit_board', filterState],
 		queryFn: () => getPostList(filterState),
+		staleTime: 5 * 60 * 1000,
+		gcTime: 10 * 60 * 1000,
 	});
 
 	const onClickDetailed = () => {
@@ -69,10 +73,11 @@ const RecruitPage = () => {
 		}
 	};
 
-	console.log(filterState);
 	useEffect(() => {
 		refetch();
 	}, [filterState]);
+
+	console.log(data, isFetchedAfterMount);
 
 	return (
 		<S.RecruitPage>
@@ -156,23 +161,22 @@ const RecruitPage = () => {
 							<img src={FilledBookmark} />
 							<span className='body2'>북마크 모아보기 {'❯'}</span>
 						</article>
-						{isLoading || !data ? (
-							<section>로딩중...</section>
-						) : (
+						{isSuccess && data && (
 							<section className='container-contents__grid'>
-								{data.posts.map(post => (
-									<RecruitCard
-										id={post.id}
-										title={post.title}
-										category={post.category}
-										writerNickname={post.writerNickname}
-										writerProfileImg={post.writerProfileImg}
-										deadline={post.deadline}
-										scope={post.scope}
-										isBookmarked={post.isBookmarked}
-										key={post.id}
-									/>
-								))}
+								{isFetchedAfterMount &&
+									data.posts.map(post => (
+										<RecruitCard
+											id={post.id}
+											title={post.title}
+											category={post.category}
+											writerNickname={post.writerNickname}
+											writerProfileImg={post.writerProfileImg}
+											deadline={post.deadline}
+											scope={post.scope}
+											isBookmarked={post.isBookmarked}
+											key={post.id}
+										/>
+									))}
 							</section>
 						)}
 					</div>

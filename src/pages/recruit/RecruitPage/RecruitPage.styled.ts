@@ -390,9 +390,18 @@ const RecruitPage = styled.div`
 	.container-contents {
 		margin-top: 2rem;
 		display: flex;
+		min-height: 110rem;
 		flex-direction: column;
 		gap: 3.75rem;
 		margin-bottom: 5rem;
+
+		.loading {
+			margin-top: 2rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 3rem;
+		}
 
 		.bookmark-intro {
 			display: flex;

@@ -1,15 +1,5 @@
-import { EndPoint, axiosInstance } from '..';
-import { ListResult } from '../../types';
-
-interface FilterData {
-	field?: number | null;
-	scope?: number | null;
-	category?: number | null;
-	keyword?: string | null;
-	skill?: number[];
-	role?: number[];
-	tag?: number[];
-}
+import { EndPoint, axiosInstance, axiosAuthInstance } from '..';
+import { ListResult, FilterData } from '../../types';
 
 export const getPostList = async (filterData: FilterData) => {
 	try {
@@ -33,8 +23,8 @@ export const getPostList = async (filterData: FilterData) => {
 			.join('&');
 
 		const url = `${EndPoint.RECRUITMENT_BOARD.list}${queryString ? `?${queryString}` : ''}`;
-
-		const response = await axiosInstance.get<ListResult>(url);
+		console.log(url);
+		const response = await axiosAuthInstance.get<ListResult>(url);
 		return response;
 	} catch (error) {
 		console.error(error);

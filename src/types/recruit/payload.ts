@@ -82,3 +82,13 @@ export interface Array {
 	role: Keyword[];
 	tag: Keyword[];
 }
+
+export interface FilterData {
+	field?: number | null;
+	scope?: number | null;
+	category?: number | null;
+	keyword?: string | null;
+	skill?: number[];
+	role?: number[];
+	tag?: number[];
+}

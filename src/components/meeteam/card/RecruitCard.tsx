@@ -19,7 +19,7 @@ const RecruitCard = ({
 	const [isMarked, setIsMarked] = useState<boolean>(isBookmarked);
 
 	const onClickContent = () => {
-		navigate('/recruit/1');
+		navigate(`/recruit/${id}`);
 	};
 
 	const onClickBookmark = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -29,15 +29,17 @@ const RecruitCard = ({
 	return (
 		<S.RecruitCard onClick={onClickContent}>
 			<section className='content-tags'>
-				<section className='tags'>
-					<article className='tag scope'>{scope}</article>
-					<article className='tag category'>{category}</article>
+				<section className='header'>
+					<section className='tags'>
+						<article className='tag scope'>{scope}</article>
+						<article className='tag category'>{category}</article>
+					</section>
+					<section onClick={onClickBookmark}>
+						{isMarked ? <img src={FilledBookmark} /> : <img src={UnfilledBookmark} />}
+					</section>
 				</section>
-				<section onClick={onClickBookmark}>
-					{isMarked ? <img src={FilledBookmark} /> : <img src={UnfilledBookmark} />}
-				</section>
+				<article className='content-title'>{title}</article>
 			</section>
-			<article className='content-title'>{title}</article>
 			<section className='content-info'>
 				<section className='user'>
 					<ProfileImage nickname='Minji_98' size='2.31rem' url={writerProfileImg} />

@@ -1,10 +1,25 @@
 import type { SignUpPayload, UpdateProfilePayload } from './payload';
 import type { UserReponse, University, Department } from './response';
 import type { CustomInstance } from './api';
-import type { TitleInfo, Option, OptionList, Keyword } from './recruit/response';
-import type { InputState, RoleForPost, InputCourse, InputRoleForm, Role } from './recruit/payload';
+import type {
+	InputState,
+	RoleForPost,
+	InputCourse,
+	InputRoleForm,
+	Role,
+	ApplyRole,
+	ApplyForm,
+	RecruitFilter,
+	DetailedInfo,
+	Array,
+	FilterData,
+} from './recruit/payload';
 import type { Comment, CommentInputFunctions } from './comment';
 import type {
+	TitleInfo,
+	Option,
+	OptionList,
+	Keyword,
 	TitleAndEtc,
 	RecruitInfo,
 	RecruitDescription,
@@ -15,7 +30,6 @@ import type {
 	ListResult,
 	Post,
 } from './recruit/response';
-import type { ApplyRole, ApplyForm, RecruitFilter, DetailedInfo, Array } from './recruit/payload';
 import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
 
@@ -59,4 +73,5 @@ export type {
 	Post,
 	DetailedInfo,
 	Array,
+	FilterData,
 };
