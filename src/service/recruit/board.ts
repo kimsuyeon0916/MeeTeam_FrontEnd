@@ -2,12 +2,12 @@ import { EndPoint, axiosInstance, axiosAuthInstance } from '..';
 import { useLogin } from '../../hooks';
 import { ListResult, FilterData } from '../../types';
 
-interface Temp {
+interface FilterItem {
 	filterState: FilterData;
 	isLoggedIn: boolean;
 }
 
-export const getPostList = async ({ filterState, isLoggedIn }: Temp) => {
+export const getPostList = async ({ filterState, isLoggedIn }: FilterItem) => {
 	try {
 		const queryString = Object.entries(filterState)
 			.filter(([key, value]) => {

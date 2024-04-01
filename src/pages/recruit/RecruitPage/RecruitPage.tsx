@@ -5,7 +5,7 @@ import { Clear, DropdownArrow, FilledBookmark, SearchIcon } from '../../../asset
 import { useRecoilState } from 'recoil';
 import { recruitFilterState } from '../../../atom';
 import { getPostList } from '../../../service/recruit/board';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useLogin } from '../../../hooks';
 
 const START_PAGE_NUM = 1;
