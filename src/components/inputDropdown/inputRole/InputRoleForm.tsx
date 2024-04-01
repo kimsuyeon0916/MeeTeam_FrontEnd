@@ -235,7 +235,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 							<article className='tags' key={index}>
 								<span>{tagItem}</span>
 								<button type='button' onClick={deleteTagItem}>
-									<img src={XBtn as any} id={index.toString()} />
+									<img src={XBtn} id={index.toString()} />
 								</button>
 							</article>
 						);
@@ -266,7 +266,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
 			</article>
 			<article className='add-btn'>
 				<button type='button' onClick={onClickHandler}>
-					<img src={Plus as any} />
+					<img src={Plus} />
 				</button>
 			</article>
 		</S.InputRoleForm>
