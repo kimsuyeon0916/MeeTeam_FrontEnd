@@ -48,7 +48,7 @@ export interface RecruitPostings {
 	isWriter: boolean;
 	category: string;
 	writerId: string;
-	isClose: boolean;
+	isClosed: boolean;
 	isBookmarked: boolean;
 	title: string;
 	createdAt: string;

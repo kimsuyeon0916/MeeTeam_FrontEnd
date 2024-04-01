@@ -117,6 +117,7 @@ import OptionList from './optionList/OptionList';
 import ComboBox from './comboBox/ComboBox';
 import WriterFooter from './recruit/recruitDetail/footer/WriterFooter';
 import ApplierFooter from './recruit/recruitDetail/footer/ApplierFooter';
+import ClosedFooter from './recruit/recruitDetail/footer/ClosedFooter';
 import DetailedInput from './recruit/recruitBoard/detailedFilter/DetailedInput';
 
 export {
@@ -231,4 +232,5 @@ export {
 	ConfirmModal,
 	FinalModal,
 	DetailedInput,
+	ClosedFooter,
 };

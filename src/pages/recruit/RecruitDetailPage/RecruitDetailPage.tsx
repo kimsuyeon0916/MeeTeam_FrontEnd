@@ -14,6 +14,7 @@ import {
 	ApplyModal,
 	ConfirmModal,
 	FinalModal,
+	ClosedFooter,
 } from '../../../components';
 import { tempData } from './data';
 import { fixModalBackground, simpleDate } from '../../../utils';
@@ -92,7 +93,7 @@ const RecruitDetailPage = () => {
 		fixModalBackground(isModal);
 	}, [isModal]);
 
-	useEffect(() => {}, []);
+	console.log(detailedData?.isClosed);
 
 	return (
 		<>
@@ -165,12 +166,13 @@ const RecruitDetailPage = () => {
 				</S.RecruitDetailPage>
 			)}
 			<S.Footer>
-				<section className='container-btn'>
-					{detailedData && detailedData.isWriter && <WriterFooter />}
-					{detailedData && !detailedData.isWriter && (
-						<ApplierFooter deadline={detailedData.deadline} />
-					)}
-				</section>
+				{detailedData && (
+					<section className='container-btn'>
+						{detailedData.isWriter && !detailedData.isClosed && <WriterFooter />}
+						{!detailedData.isWriter && <ApplierFooter deadline={detailedData.deadline} />}
+						{detailedData.isClosed && <ClosedFooter />}
+					</section>
+				)}
 			</S.Footer>
 		</>
 	);
