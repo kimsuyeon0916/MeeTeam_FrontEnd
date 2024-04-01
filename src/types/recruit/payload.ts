@@ -1,3 +1,5 @@
+import { Keyword } from '..';
+
 export interface ApplyRole {
 	name: string;
 	score: number;
@@ -59,4 +61,34 @@ export interface InputRoleForm {
 export interface InputCourse {
 	isChecked: boolean;
 	onClickHandler: () => void;
+}
+
+export interface RecruitFilter {
+	scope: number | null;
+	category: number | null;
+	field: number | null;
+	skill: number[];
+	role: number[];
+	tag: number[];
+	keyword: string;
+}
+
+export interface DetailedInfo {
+	type: string;
+}
+
+export interface Array {
+	skill: Keyword[];
+	role: Keyword[];
+	tag: Keyword[];
+}
+
+export interface FilterData {
+	field?: number | null;
+	scope?: number | null;
+	category?: number | null;
+	keyword?: string | null;
+	skill?: number[];
+	role?: number[];
+	tag?: number[];
 }

@@ -20,6 +20,8 @@ import FilledBookmark from './FilledBookmark.svg';
 import UnfilledBookmark from './UnfilledBookmark.svg';
 import Edit from './Edit.svg';
 import TrashCan from './TrashCan.svg';
+import Clear from './Clear.svg';
+import BookmarkRight from './BookmarkRight.svg';
 
 export {
 	Exit,
@@ -44,4 +46,6 @@ export {
 	FilledBookmark,
 	UnfilledBookmark,
 	DATE_ICON,
+	Clear,
+	BookmarkRight,
 };

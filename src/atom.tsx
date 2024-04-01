@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { SessionStorageEffect, simpleDate } from './utils';
-import { User, InputState, ApplyRole } from './types';
+import { User, InputState, ApplyRole, RecruitFilter } from './types';
 import { LocalStorageEffect } from './utils';
 import { Account } from './pages';
 
@@ -129,4 +129,17 @@ export const applyUserInfo = atom<ApplyRole>({
 export const searchPageState = atom({
 	key: 'searchPageState',
 	default: false,
+});
+
+export const recruitFilterState = atom<RecruitFilter>({
+	key: 'recruitFilter',
+	default: {
+		scope: null,
+		category: null,
+		field: 1,
+		skill: [],
+		role: [],
+		tag: [],
+		keyword: '',
+	},
 });

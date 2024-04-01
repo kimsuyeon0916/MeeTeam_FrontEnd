@@ -22,8 +22,11 @@ import { useQuery } from '@tanstack/react-query';
 import { getPostingData } from '../../../service';
 import { useRecoilValue } from 'recoil';
 import { applyModalState, applyStepState } from '../../../atom';
+import { useParams } from 'react-router-dom';
 
 const RecruitDetailPage = () => {
+	const { id } = useParams();
+
 	const [contents, setContents] = useState<string>('');
 	const [commentsList, setCommentsList] = useState<CommentForm[]>(tempData.comments);
 	const username = 'yeom';
@@ -36,11 +39,9 @@ const RecruitDetailPage = () => {
 		2: <FinalModal />,
 	};
 
-	const pageNumber = 2;
-
 	const { data: detailedData, isLoading } = useQuery({
-		queryKey: ['detailedPage', pageNumber],
-		queryFn: () => getPostingData(pageNumber),
+		queryKey: ['detailedPage', Number(id)],
+		queryFn: () => getPostingData(Number(id)),
 	});
 
 	const period = detailedData?.proceedingStart + '-' + detailedData?.proceedingEnd;
