@@ -32,8 +32,6 @@ const RecruitPage = () => {
 	const { data, isSuccess, refetch, isFetchedAfterMount } = useQuery({
 		queryKey: ['recruit_board', { filterState, isLoggedIn }],
 		queryFn: () => getPostList({ filterState, isLoggedIn }),
-		staleTime: 5 * 60 * 1000,
-		gcTime: 10 * 60 * 1000,
 	});
 
 	const onClickDetailed = () => {
