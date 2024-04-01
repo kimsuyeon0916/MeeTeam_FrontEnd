@@ -6,10 +6,12 @@ import { useRecoilState } from 'recoil';
 import { recruitFilterState } from '../../../atom';
 import { getPostList } from '../../../service/recruit/board';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useLogin } from '../../../hooks';
 
 const START_PAGE_NUM = 1;
 
 const RecruitPage = () => {
+	const [searchKeyword, setSearchKeyword] = useState<string>('');
 	const [fieldValue, setFieldValue] = useState({
 		applied: false,
 		value: '분야를 선택해주세요',
@@ -25,11 +27,11 @@ const RecruitPage = () => {
 		message: '기술',
 	});
 
-	const queryClient = useQueryClient();
+	const { isLoggedIn } = useLogin();
 
 	const { data, isSuccess, refetch, isFetchedAfterMount } = useQuery({
-		queryKey: ['recruit_board', filterState],
-		queryFn: () => getPostList(filterState),
+		queryKey: ['recruit_board', { filterState, isLoggedIn }],
+		queryFn: () => getPostList({ filterState, isLoggedIn }),
 		staleTime: 5 * 60 * 1000,
 		gcTime: 10 * 60 * 1000,
 	});
@@ -73,11 +75,24 @@ const RecruitPage = () => {
 		}
 	};
 
+	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		const target = event.currentTarget;
+		if (target.value.length !== 0 && event.key === 'Enter') {
+			event.preventDefault();
+			submitTagItem();
+		}
+		if (event.key === 'Enter') {
+			event.preventDefault();
+		}
+	};
+
+	const submitTagItem = () => {
+		setFilterState(prev => ({ ...prev, keyword: searchKeyword }));
+	};
+
 	useEffect(() => {
 		refetch();
 	}, [filterState]);
-
-	console.log(data, isFetchedAfterMount);
 
 	return (
 		<S.RecruitPage>
@@ -110,7 +125,9 @@ const RecruitPage = () => {
 				</section>
 				<section className='wrapper-filters'>
 					<section className='container-filters'>
-						<Dropdown data={['전체 보기', '교내', '교외']} initialData='범위' scope={true} />
+						{isLoggedIn && (
+							<Dropdown data={['전체 보기', '교내', '교외']} initialData='범위' scope={true} />
+						)}
 						<Dropdown
 							data={['전체', '프로젝트', '스터디', '공모전']}
 							initialData='유형'
@@ -148,7 +165,13 @@ const RecruitPage = () => {
 							<img src={SearchIcon} />
 						</div>
 						<div>
-							<input placeholder='제목, 글, 내용으로 검색해보세요.' />
+							<input
+								placeholder='제목, 글, 내용으로 검색해보세요.'
+								type='text'
+								onChange={event => setSearchKeyword(event.target.value)}
+								value={searchKeyword}
+								onKeyPress={onKeyPress}
+							/>
 						</div>
 					</section>
 				</section>
@@ -177,6 +200,11 @@ const RecruitPage = () => {
 											key={post.id}
 										/>
 									))}
+							</section>
+						)}
+						{data?.posts.length === 0 && (
+							<section className='no-results'>
+								<span>일치하는 결과가 없습니다.</span>
 							</section>
 						)}
 					</div>

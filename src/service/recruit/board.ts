@@ -1,9 +1,15 @@
 import { EndPoint, axiosInstance, axiosAuthInstance } from '..';
+import { useLogin } from '../../hooks';
 import { ListResult, FilterData } from '../../types';
 
-export const getPostList = async (filterData: FilterData) => {
+interface Temp {
+	filterState: FilterData;
+	isLoggedIn: boolean;
+}
+
+export const getPostList = async ({ filterState, isLoggedIn }: Temp) => {
 	try {
-		const queryString = Object.entries(filterData)
+		const queryString = Object.entries(filterState)
 			.filter(([key, value]) => {
 				if (key === 'keyword') {
 					return value !== null && value !== undefined && value !== '';
@@ -23,9 +29,13 @@ export const getPostList = async (filterData: FilterData) => {
 			.join('&');
 
 		const url = `${EndPoint.RECRUITMENT_BOARD.list}${queryString ? `?${queryString}` : ''}`;
-		console.log(url);
-		const response = await axiosAuthInstance.get<ListResult>(url);
-		return response;
+		if (isLoggedIn) {
+			const response = await axiosAuthInstance.get<ListResult>(url);
+			return response;
+		} else {
+			const response = await axiosInstance.get<ListResult>(url);
+			return response;
+		}
 	} catch (error) {
 		console.error(error);
 	}

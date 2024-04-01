@@ -390,18 +390,10 @@ const RecruitPage = styled.div`
 	.container-contents {
 		margin-top: 2rem;
 		display: flex;
-		min-height: 110rem;
+		min-height: 40rem;
 		flex-direction: column;
 		gap: 3.75rem;
 		margin-bottom: 5rem;
-
-		.loading {
-			margin-top: 2rem;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font-size: 3rem;
-		}
 
 		.bookmark-intro {
 			display: flex;
@@ -420,6 +412,16 @@ const RecruitPage = styled.div`
 			display: grid;
 			grid-template-columns: repeat(4, 1fr);
 			gap: 1.8rem 1.8rem;
+		}
+
+		.no-results {
+			margin-top: 15rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 2rem;
+			font-weight: 600;
+			color: #8e8e8e;
 		}
 	}
 
