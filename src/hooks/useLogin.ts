@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+// 임시
 const useLogin = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const token = localStorage.getItem('ACCESS_TOKEN_KEY');
@@ -15,7 +16,6 @@ const useLogin = () => {
 		localStorage.removeItem('ACCESS_TOKEN_KEY');
 	};
 
-	// 임시
 	useEffect(() => {
 		if (token) {
 			setIsLoggedIn(true);

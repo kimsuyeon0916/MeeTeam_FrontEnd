@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import { UnfilledBookmark, FilledBookmark } from '../../../../assets';
-import { tempData } from '../../../../pages/recruit/RecruitDetailPage/data';
 import { useSetRecoilState } from 'recoil';
 import { applyModalState } from '../../../../atom';
 
-const ApplierFooter = () => {
+const ApplierFooter = ({ deadline }: { deadline: string }) => {
 	const tempApplied = true;
 	const [isMarked, setIsMarked] = useState<boolean>(false);
 	const setIsModal = useSetRecoilState(applyModalState);
 
 	const diffDate = Math.ceil(
-		Math.abs((new Date(tempData.deadline).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
+		Math.abs((new Date(deadline).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
 	).toString();
 
 	const onClickApply = () => {

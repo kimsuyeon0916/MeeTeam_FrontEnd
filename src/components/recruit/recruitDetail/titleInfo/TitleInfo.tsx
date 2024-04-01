@@ -7,6 +7,7 @@ import { useBookmark } from '../../../../hooks';
 import { useDelBookmark } from '../../../../hooks/useBookMark';
 import { useMutation } from '@tanstack/react-query';
 import { bookmarkDelete } from '../../../../service/recruit/detail';
+import { useNavigate, useParams } from 'react-router-dom';
 
 type scores = {
 	[key: number]: string;
@@ -29,27 +30,35 @@ const TitleInfo = ({
 	writerProfileImg,
 	bookmarkCount,
 	writerScore,
+	writerId,
+	isBookmarked,
 }: TitleAndEtc) => {
-	const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
+	const { id } = useParams();
+	const navigate = useNavigate();
+	const [isMarked, setIsMarked] = useState<boolean>(isBookmarked);
 	const { mutate: bookmarked } = useBookmark();
 	const { mutate: unBookmarked } = useDelBookmark();
 
 	const onClickBookmark = () => {
-		if (!isBookmarked) {
-			bookmarked(PAGE_NUMBER);
-			setIsBookmarked(true);
+		if (!isMarked) {
+			bookmarked(Number(id));
+			setIsMarked(true);
 		} else {
-			unBookmarked(PAGE_NUMBER);
-			setIsBookmarked(false);
+			unBookmarked(Number(id));
+			setIsMarked(false);
 		}
-		setIsBookmarked(prev => !prev);
+		setIsMarked(prev => !prev);
+	};
+
+	const onClickProfile = () => {
+		navigate(`/user/profile/${writerId}`);
 	};
 
 	useEffect(() => {}, [bookmarkCount]);
 	return (
 		<S.TitleInfo>
 			<section className='container-header'>
-				<section className='container-header__profile'>
+				<section className='container-header__profile' onClick={onClickProfile}>
 					<ProfileImage size='3.3075rem' nickname={nickname} url={writerProfileImg} />
 					<span>{nickname}</span>
 				</section>
@@ -57,7 +66,7 @@ const TitleInfo = ({
 				<span className='bubble'>평점 {writerScore.toFixed(1)}</span>
 				<span className='date'>{createdAt}</span>
 				<section className='container-bookmark'>
-					<img src={isBookmarked ? FilledBookmark : UnfilledBookmark} onClick={onClickBookmark} />
+					<img src={isMarked ? FilledBookmark : UnfilledBookmark} onClick={onClickBookmark} />
 					<span className='count-bookmark'>{bookmarkCount}</span>
 				</section>
 			</section>

@@ -96,12 +96,14 @@ const RecruitDetailPage = () => {
 				<S.RecruitDetailPage>
 					<TitleInfo
 						nickname={detailedData.writerNickname}
+						writerId={detailedData.writerId}
 						responseRate={detailedData.responseRate}
 						score={detailedData.writerScore}
 						createdAt={detailedData.createdAt.slice(0, -9)}
 						title={detailedData.title}
 						writerProfileImg={detailedData.writerProfileImg}
 						bookmarkCount={detailedData.bookmarkCount}
+						isBookmarked={detailedData.isBookmarked}
 						writerScore={detailedData.writerScore}
 					/>
 					<RecruitInfo
@@ -160,7 +162,10 @@ const RecruitDetailPage = () => {
 			)}
 			<S.Footer>
 				<section className='container-btn'>
-					{detailedData?.isWriter ? <WriterFooter /> : <ApplierFooter />}
+					{detailedData && detailedData.isWriter && <WriterFooter />}
+					{detailedData && !detailedData.isWriter && (
+						<ApplierFooter deadline={detailedData.deadline} />
+					)}
 				</section>
 			</S.Footer>
 		</>

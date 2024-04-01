@@ -45,3 +45,12 @@ export const bookmarkDelete = async (id: number) => {
 		console.error(error);
 	}
 };
+
+export const editRecruitPost = async (id: number) => {
+	try {
+		const response = await axiosAuthInstance.patch(EndPoint.RECRUIT_DETAIL.edit(id));
+		return response;
+	} catch (error) {
+		console.error(error);
+	}
+};

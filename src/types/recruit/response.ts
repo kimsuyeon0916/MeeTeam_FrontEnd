@@ -7,6 +7,8 @@ export interface TitleAndEtc {
 	writerProfileImg: string;
 	bookmarkCount: number;
 	writerScore: number;
+	writerId: string;
+	isBookmarked: boolean;
 }
 
 export interface RecruitInfo {
@@ -45,6 +47,9 @@ export interface RecruitTags {
 export interface RecruitPostings {
 	isWriter: boolean;
 	category: string;
+	writerId: string;
+	isClose: boolean;
+	isBookmarked: boolean;
 	title: string;
 	createdAt: string;
 	bookmarkCount: number;

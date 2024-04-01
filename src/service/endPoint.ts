@@ -20,6 +20,7 @@ export const EndPoint = {
 		applyInfo: (id: number) => `/recruitment/postings/${id}/apply-info`,
 		apply: (id: number) => `/recruitment/postings/${id}/apply`,
 		bookmark: (id: number) => `/recruitment/postings/${id}/bookmark`,
+		edit: (id: number) => `/recruitment/postings/${id}/close`,
 	},
 	RECRUITMENT: {
 		post: '/recruitment/postings',

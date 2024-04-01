@@ -5,15 +5,16 @@ import { applyStepState, applyUserInfo } from '../../../../atom';
 import { useMutation } from '@tanstack/react-query';
 import { applyRole } from '../../../../service';
 import { ApplyForm } from '../../../../types';
-
-const PAGE_NUMBER = 2;
+import { useParams } from 'react-router-dom';
 
 interface ApplyArgs {
-	PAGE_NUMBER: number;
+	pageNumber: number;
 	formApply: ApplyForm;
 }
 
 const ConfirmModal = () => {
+	const { id } = useParams();
+	const pageNumber = Number(id);
 	const setApplyStepState = useSetRecoilState(applyStepState);
 	const userInfo = useRecoilValue(applyUserInfo);
 	const formApply = {
@@ -22,7 +23,7 @@ const ConfirmModal = () => {
 	};
 
 	const apply = useMutation({
-		mutationFn: ({ PAGE_NUMBER, formApply }: ApplyArgs) => applyRole(PAGE_NUMBER, formApply),
+		mutationFn: ({ pageNumber, formApply }: ApplyArgs) => applyRole(pageNumber, formApply),
 		onSuccess: () => {
 			setApplyStepState(prev => prev + 1);
 		},
@@ -32,7 +33,9 @@ const ConfirmModal = () => {
 		setApplyStepState(prev => prev - 1);
 	};
 	const onClickNext = () => {
-		apply.mutate({ PAGE_NUMBER, formApply });
+		if (id) {
+			apply.mutate({ pageNumber, formApply });
+		}
 	};
 
 	return (

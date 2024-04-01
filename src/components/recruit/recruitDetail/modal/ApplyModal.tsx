@@ -5,11 +5,12 @@ import { applyUserInfo, applyModalState, applyStepState } from '../../../../atom
 import { DropdownArrow } from '../../../../assets';
 import { useQuery } from '@tanstack/react-query';
 import { getApplyData } from '../../../../service';
+import { useParams } from 'react-router-dom';
 
-const pageNumber = 2; // 임시
 const isSelected = true; // 임시
 
 const ApplyModal = () => {
+	const { id } = useParams();
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 	const setIsModal = useSetRecoilState(applyModalState);
 	const setApplyStep = useSetRecoilState(applyStepState);
@@ -21,8 +22,8 @@ const ApplyModal = () => {
 	const isValid = isChecked && isSelected;
 
 	const { data, isLoading } = useQuery({
-		queryKey: ['applyInfoNumber', pageNumber],
-		queryFn: () => getApplyData(pageNumber),
+		queryKey: ['applyInfoNumber', Number(id)],
+		queryFn: () => getApplyData(Number(id)),
 	});
 
 	const onClickCheckbox = () => {
