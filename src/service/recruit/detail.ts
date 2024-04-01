@@ -1,10 +1,24 @@
 import { EndPoint, axiosInstance, axiosAuthInstance } from '..';
 import { RecruitPostings, ApplyInfo, ApplyForm } from '../../types';
 
-export const getPostingData = async (id: number) => {
+interface PostingData {
+	pageNum: number;
+	isLoggedIn: boolean;
+}
+
+export const getPostingData = async ({ pageNum, isLoggedIn }: PostingData) => {
 	try {
-		const response = await axiosInstance.get<RecruitPostings>(EndPoint.RECRUIT_DETAIL.posting(id));
-		return response;
+		if (isLoggedIn) {
+			const response = await axiosAuthInstance.get<RecruitPostings>(
+				EndPoint.RECRUIT_DETAIL.posting(pageNum)
+			);
+			return response;
+		} else {
+			const response = await axiosInstance.get<RecruitPostings>(
+				EndPoint.RECRUIT_DETAIL.posting(pageNum)
+			);
+			return response;
+		}
 	} catch (error) {
 		console.error(error);
 	}

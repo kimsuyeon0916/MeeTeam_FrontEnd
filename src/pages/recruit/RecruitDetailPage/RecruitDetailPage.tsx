@@ -23,10 +23,11 @@ import { getPostingData } from '../../../service';
 import { useRecoilValue } from 'recoil';
 import { applyModalState, applyStepState } from '../../../atom';
 import { useParams } from 'react-router-dom';
+import { useLogin } from '../../../hooks';
 
 const RecruitDetailPage = () => {
 	const { id } = useParams();
-
+	const pageNum = Number(id);
 	const [contents, setContents] = useState<string>('');
 	const [commentsList, setCommentsList] = useState<CommentForm[]>(tempData.comments);
 	const username = 'yeom';
@@ -38,13 +39,14 @@ const RecruitDetailPage = () => {
 		1: <ConfirmModal />,
 		2: <FinalModal />,
 	};
+	const { isLoggedIn } = useLogin();
 
 	const { data: detailedData, isLoading } = useQuery({
-		queryKey: ['detailedPage', Number(id)],
-		queryFn: () => getPostingData(Number(id)),
+		queryKey: ['detailedPage', { pageNum, isLoggedIn }],
+		queryFn: () => getPostingData({ pageNum, isLoggedIn }),
 	});
 
-	const period = detailedData?.proceedingStart + '-' + detailedData?.proceedingEnd;
+	const period = detailedData?.proceedingStart + ' ~ ' + detailedData?.proceedingEnd;
 	const diffDate = Math.ceil(
 		Math.abs(
 			(new Date(detailedData?.deadline as any).getTime() - new Date().getTime()) /
@@ -89,6 +91,8 @@ const RecruitDetailPage = () => {
 	useEffect(() => {
 		fixModalBackground(isModal);
 	}, [isModal]);
+
+	useEffect(() => {}, []);
 
 	return (
 		<>

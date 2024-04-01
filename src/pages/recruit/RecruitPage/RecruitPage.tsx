@@ -28,8 +28,7 @@ const RecruitPage = () => {
 	});
 
 	const { isLoggedIn } = useLogin();
-
-	const { data, isSuccess, refetch, isFetchedAfterMount } = useQuery({
+	const { data, isLoading, refetch, isFetchedAfterMount } = useQuery({
 		queryKey: ['recruit_board', { filterState, isLoggedIn }],
 		queryFn: () => getPostList({ filterState, isLoggedIn }),
 	});
@@ -182,7 +181,7 @@ const RecruitPage = () => {
 							<img src={FilledBookmark} />
 							<span className='body2'>북마크 모아보기 {'❯'}</span>
 						</article>
-						{isSuccess && data && (
+						{!isLoading && data && (
 							<section className='container-contents__grid'>
 								{isFetchedAfterMount &&
 									data.posts.map(post => (

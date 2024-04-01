@@ -51,7 +51,12 @@ const TitleInfo = styled.article`
 			right: 0rem;
 			display: flex;
 			align-items: center;
-			gap: 0.8rem;
+			gap: 1rem;
+
+			.icon-bookmark {
+				position: absolute;
+				right: 2rem;
+			}
 
 			.count-bookmark {
 				color: #373f41;
