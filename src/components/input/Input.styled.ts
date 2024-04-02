@@ -73,6 +73,10 @@ const Input = styled.input<InputStyle>`
 		&:focus {
 			border-color: var(--Form-border-focus, #5877fc);
 		}`}
+
+	&::placeholder {
+		color: #8e8e8e;
+	}
 `;
 
 const S = { InputLabel, Input };
