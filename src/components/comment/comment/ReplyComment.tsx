@@ -64,7 +64,8 @@ const ReplyComment = ({
 						<div>
 							<ProfileImage url='' nickname={nickname} size='2.31rem' />
 						</div>
-						<span>{nickname}</span>
+						<span className='nickname'>{nickname}</span>
+						<span className='createAt'>{createAt}</span>
 					</section>
 					<section className='comment-info'>
 						<span>{value}</span>

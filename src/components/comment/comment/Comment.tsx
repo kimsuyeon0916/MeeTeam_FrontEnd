@@ -23,7 +23,6 @@ const Comment = ({
 	const [value, setValue] = useState<string>(content);
 	const [contents, setContents] = useState<string>('');
 	const [showKebab, setShowKebab] = useState<boolean>(true);
-	const isUser = isLogin && nickname === 'yeom';
 	const [repliesList, setRepliesList] = useState<Comment[] | undefined>(replies);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
 	const optionLists = [
@@ -111,7 +110,8 @@ const Comment = ({
 						<div>
 							<ProfileImage url='' nickname={nickname} size='2.31rem' />
 						</div>
-						<span>{nickname}</span>
+						<span className='nickname'>{nickname}</span>
+						<span className='createAt'>{createAt.slice(0, -9)}</span>
 					</section>
 					<section className='comment-info'>
 						<span>{value}</span>
@@ -129,7 +129,7 @@ const Comment = ({
 								userId={reply.userId}
 								nickname={reply.nickname}
 								content={reply.content}
-								createAt={reply.createAt}
+								createAt={reply.createAt.slice(0, -9)}
 								profileImg={reply.profileImg}
 								isWriter={isWriter}
 								groupOrder={reply.groupOrder}

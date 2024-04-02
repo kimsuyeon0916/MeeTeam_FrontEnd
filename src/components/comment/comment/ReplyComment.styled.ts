@@ -33,10 +33,15 @@ const ReplyComment = styled.div`
 			align-items: center;
 			gap: 0.6rem;
 
-			span {
+			.nickname {
 				color: #373f41;
 				font-size: 1.2rem;
 				font-weight: 600;
+			}
+
+			.createAt {
+				color: #8e8e8e;
+				font-size: 1.2rem;
 			}
 		}
 
