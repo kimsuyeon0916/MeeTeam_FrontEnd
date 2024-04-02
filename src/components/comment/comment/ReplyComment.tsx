@@ -61,11 +61,13 @@ const ReplyComment = ({
 				<img className='reply-icon' src={Reply} />
 				<article className='container'>
 					<section className='comment-icon'>
-						<div>
+						<section>
 							<ProfileImage url='' nickname={nickname} size='2.31rem' />
-						</div>
+						</section>
 						<span className='nickname'>{nickname}</span>
-						<span className='createAt'>{createAt}</span>
+						<span className='createAt'>
+							{createAt.length > 10 ? createAt.slice(0, -9) : createAt}
+						</span>
 					</section>
 					<section className='comment-info'>
 						<span>{value}</span>

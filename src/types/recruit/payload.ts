@@ -92,3 +92,14 @@ export interface FilterData {
 	role?: number[];
 	tag?: number[];
 }
+
+export interface CommentContents {
+	content: string;
+	isParent: boolean;
+	groupNumber?: number;
+}
+
+export interface PostingComment {
+	pageNum: number;
+	comment: CommentContents;
+}

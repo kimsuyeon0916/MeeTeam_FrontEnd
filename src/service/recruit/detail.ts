@@ -1,14 +1,9 @@
 import { EndPoint, axiosInstance, axiosAuthInstance } from '..';
-import { RecruitPostings, ApplyInfo, ApplyForm } from '../../types';
+import { RecruitPostings, ApplyInfo, ApplyForm, PostingComment } from '../../types';
 
 interface PostingData {
 	pageNum: number;
 	isLoggedIn: boolean;
-}
-
-interface PostingComment {
-	pageNum: number;
-	comment: any;
 }
 
 export const getPostingData = async ({ pageNum, isLoggedIn }: PostingData) => {
@@ -76,7 +71,20 @@ export const editRecruitPost = async (id: number) => {
 
 export const postComment = async ({ pageNum, comment }: PostingComment) => {
 	try {
-		const response = await axiosAuthInstance;
+		const response = await axiosAuthInstance.post(
+			EndPoint.RECRUIT_DETAIL.postComment(pageNum),
+			comment
+		);
+		return response;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const deleteComment = async (pageNum: number) => {
+	try {
+		const response = await axiosAuthInstance.delete(EndPoint.RECRUIT_DETAIL.postComment(pageNum));
+		return response;
 	} catch (error) {
 		console.error(error);
 	}

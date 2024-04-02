@@ -5,6 +5,8 @@ const simpleDate = (date: Date | null) => {
 		const day: string = date.getDate().toString().padStart(2, '0');
 		const total: string = year + '-' + month + '-' + day;
 		return total;
+	} else {
+		return;
 	}
 };
 

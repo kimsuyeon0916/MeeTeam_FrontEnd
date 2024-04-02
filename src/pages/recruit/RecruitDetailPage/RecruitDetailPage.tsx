@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import S from './RecruitDetailPage.styled';
 import {
 	CommentInput,
@@ -28,9 +28,9 @@ import { useLogin } from '../../../hooks';
 const RecruitDetailPage = () => {
 	const { id } = useParams();
 	const pageNum = Number(id);
-	const [contents, setContents] = useState<string>('');
 	const isModal = useRecoilValue(applyModalState);
 	const step = useRecoilValue(applyStepState);
+	const createAt = simpleDate(new Date());
 	const stepLists: JsxElementComponentProps = {
 		0: <ApplyModal />,
 		1: <ConfirmModal />,
@@ -53,39 +53,20 @@ const RecruitDetailPage = () => {
 		)
 	).toString();
 
-	const addComment = () => {
-		// if (contents !== '' && contents.trim() !== '') {
-		// 	const newComment = {
-		// 		id: tempData.comments.length + 1,
-		// 		nickname: 'yeom',
-		// 		content: contents,
-		// 		replies: [],
-		// 		isWriter: true,
-		// 		createAt: createAt?.toString(),
-		// 		profileImg: '',
-		// 	};
-		// 	setCommentsList([...commentsList, newComment]);
-		// 	setContents('');
-		// }
-	};
+	const totalCommentsCount = useMemo(() => {
+		let count = commentsList.length;
+		commentsList.forEach(comment => {
+			if (comment.replies) {
+				count += comment.replies.length;
+			}
+		});
+
+		return count;
+	}, [commentsList]);
 
 	const deleteComment = (id: number) => {
 		setCommentsList(prevComments => prevComments.filter(v => v.id !== id));
 	};
-
-	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		const target = event.currentTarget;
-		if (target.value.length !== 0 && event.key === 'Enter') {
-			event.preventDefault();
-			addComment();
-		}
-	};
-
-	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setContents(event.target.value);
-	};
-
-	const onClickInput = () => {};
 
 	useEffect(() => {
 		fixModalBackground(isModal);
@@ -130,7 +111,7 @@ const RecruitDetailPage = () => {
 					<article className='wrapper-comments'>
 						<section className='container-title'>
 							<h3>댓글</h3>
-							<span>{'4'}</span>
+							<span>{totalCommentsCount}</span>
 						</section>
 						<hr />
 						<section className='container-comments'>
@@ -155,13 +136,7 @@ const RecruitDetailPage = () => {
 										);
 									})}
 							</ul>
-							<CommentInput
-								contents={contents}
-								addComment={addComment}
-								onKeyPress={onKeyPress}
-								onChangeHandler={onChangeHandler}
-								onClickInput={onClickInput}
-							/>
+							<CommentInput />
 						</section>
 					</article>
 					{isModal && (

@@ -1,19 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ProfileImage } from '../..';
-import { CommentInputFunctions } from '../../../types';
 import S from './CommentInput.styled';
+import { useComment } from '../../../hooks';
+import { useParams } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 
-const CommentInput = ({
-	contents,
-	addComment,
-	onKeyPress,
-	onChangeHandler,
-	onClickInput,
-}: CommentInputFunctions) => {
+const CommentInput = () => {
 	const isLogin = true; // 임시 코드
+	const postComment = useComment();
+	const { id } = useParams();
+	const pageNum = Number(id);
+	const [contents, setContents] = useState<string>('');
+	const queryClient = useQueryClient();
 
 	const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+	};
+
+	const addComment = () => {
+		if (contents.trim() !== '') {
+			const comment = {
+				content: contents,
+				isParent: true,
+			};
+
+			setContents('');
+			postComment.mutate(
+				{ pageNum, comment },
+				{
+					onSuccess: () => {
+						queryClient.invalidateQueries({ queryKey: ['detailedPage'] });
+					},
+				}
+			);
+		}
+	};
+	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setContents(event.target.value);
+	};
+	const onClickInput = () => {};
+
+	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		const target = event.currentTarget;
+		if (target.value.length !== 0 && event.key === 'Enter') {
+			event.preventDefault();
+			addComment();
+		}
 	};
 
 	return (
@@ -24,7 +56,7 @@ const CommentInput = ({
 						<div>
 							<ProfileImage url='' nickname={'yeom'} size='2.31rem' />
 						</div>
-						<span>{'nayeahyo'}</span>
+						<span>{'johnyeom24'}</span>
 					</section>
 					<section className='container-user__input'>
 						<input

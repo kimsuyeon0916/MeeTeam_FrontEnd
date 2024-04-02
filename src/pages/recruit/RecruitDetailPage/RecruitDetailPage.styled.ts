@@ -42,11 +42,11 @@ const RecruitDetailPage = styled.section`
 			display: flex;
 			align-items: flex-end;
 			gap: 0.4rem;
+
 			span {
 				color: #5877fc;
-				font-size: 1.2rem;
+				font-size: 1.5rem;
 				font-weight: 600;
-				line-height: 1.4rem;
 			}
 		}
 

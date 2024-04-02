@@ -13,8 +13,10 @@ import type {
 	DetailedInfo,
 	Array,
 	FilterData,
+	PostingComment,
+	CommentContents,
 } from './recruit/payload';
-import type { Comment, CommentInputFunctions } from './comment';
+import type { Comment } from './comment';
 import type {
 	TitleInfo,
 	Option,
@@ -40,7 +42,6 @@ export type {
 	CustomInstance,
 	Comment,
 	JsxElementComponentProps,
-	CommentInputFunctions,
 	Contact,
 	Skill,
 	Award,
@@ -74,4 +75,6 @@ export type {
 	DetailedInfo,
 	Array,
 	FilterData,
+	PostingComment,
+	CommentContents,
 };

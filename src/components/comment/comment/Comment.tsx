@@ -107,11 +107,13 @@ const Comment = ({
 			<section className='wrapper'>
 				<article className='container'>
 					<section className='comment-icon'>
-						<div>
+						<section>
 							<ProfileImage url='' nickname={nickname} size='2.31rem' />
-						</div>
+						</section>
 						<span className='nickname'>{nickname}</span>
-						<span className='createAt'>{createAt.slice(0, -9)}</span>
+						<span className='createAt'>
+							{createAt.length > 10 ? createAt.slice(0, -9) : createAt}
+						</span>
 					</section>
 					<section className='comment-info'>
 						<span>{value}</span>
@@ -129,7 +131,7 @@ const Comment = ({
 								userId={reply.userId}
 								nickname={reply.nickname}
 								content={reply.content}
-								createAt={reply.createAt.slice(0, -9)}
+								createAt={reply.createAt}
 								profileImg={reply.profileImg}
 								isWriter={isWriter}
 								groupOrder={reply.groupOrder}
