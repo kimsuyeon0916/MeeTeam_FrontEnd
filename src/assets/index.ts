@@ -22,6 +22,8 @@ import GrayEmail from './GrayEmail.svg';
 import BlackEmail from './BlackEmail.svg';
 import Add from './Add.svg';
 import Delete from './Delete.svg';
+import GrayCalendar from './GrayCalendar.svg';
+import BlackCalendar from './BlackCalendar.svg';
 
 export {
 	Exit,
@@ -48,4 +50,6 @@ export {
 	BlackEmail,
 	Add,
 	Delete,
+	GrayCalendar,
+	BlackCalendar,
 };
