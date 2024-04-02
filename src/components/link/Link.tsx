@@ -56,7 +56,6 @@ const Link = <T extends FieldValues>({
 	...props
 }: Link<T>) => {
 	const addLink = () => {
-		console.log(getValues(`links.${index}.url` as Path<T>));
 		if (!getValues(`links.${index}.url` as Path<T>)) return;
 		prepend({ description: 'Link', url: '' } as FieldArray<T, ArrayPath<T>>);
 	};
