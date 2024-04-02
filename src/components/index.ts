@@ -108,6 +108,7 @@ import Radio from './radio/Radio';
 import AddBtn from './button/AddBtn';
 import DeleteBtn from './button/DeleteBtn';
 import Link from './link/Link';
+import MuiDatepicker from './muiDatepicker/MuiDatepicker';
 
 export {
 	Header,
@@ -211,4 +212,5 @@ export {
 	AddBtn,
 	DeleteBtn,
 	Link,
+	MuiDatepicker,
 };
