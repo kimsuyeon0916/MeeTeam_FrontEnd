@@ -6,6 +6,11 @@ interface PostingData {
 	isLoggedIn: boolean;
 }
 
+interface PostingComment {
+	pageNum: number;
+	comment: any;
+}
+
 export const getPostingData = async ({ pageNum, isLoggedIn }: PostingData) => {
 	try {
 		if (isLoggedIn) {
@@ -64,6 +69,14 @@ export const editRecruitPost = async (id: number) => {
 	try {
 		const response = await axiosAuthInstance.patch(EndPoint.RECRUIT_DETAIL.edit(id));
 		return response;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const postComment = async ({ pageNum, comment }: PostingComment) => {
+	try {
+		const response = await axiosAuthInstance;
 	} catch (error) {
 		console.error(error);
 	}

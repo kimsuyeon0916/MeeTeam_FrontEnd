@@ -6,12 +6,14 @@ import { Reply } from '../../../assets';
 
 const ReplyComment = ({
 	id,
+	userId,
 	nickname,
 	content,
 	deleteComment,
 	isWriter,
 	createAt,
 	profileImg,
+	groupOrder,
 }: Comment) => {
 	const isLogin = true; // 임시 코드
 	const [value, setValue] = useState<string>(content);

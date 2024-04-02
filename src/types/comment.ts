@@ -2,12 +2,15 @@ import React from 'react';
 
 export interface Comment {
 	id: number;
+	userId: string;
 	nickname: string;
 	profileImg: string;
 	content: string;
-	createAt: string | undefined;
+	createAt: string;
+	isWriter: true;
+	groupNumber?: number;
+	groupOrder: number;
 	replies?: Comment[];
-	isWriter: boolean;
 	deleteComment?: (id: number) => void;
 }
 

@@ -16,7 +16,6 @@ import {
 	FinalModal,
 	ClosedFooter,
 } from '../../../components';
-import { tempData } from './data';
 import { fixModalBackground, simpleDate } from '../../../utils';
 import { Comment as CommentForm, JsxElementComponentProps } from '../../../types';
 import { useQuery } from '@tanstack/react-query';
@@ -30,9 +29,6 @@ const RecruitDetailPage = () => {
 	const { id } = useParams();
 	const pageNum = Number(id);
 	const [contents, setContents] = useState<string>('');
-	const [commentsList, setCommentsList] = useState<CommentForm[]>(tempData.comments);
-	const username = 'yeom';
-	const createAt = simpleDate(new Date());
 	const isModal = useRecoilValue(applyModalState);
 	const step = useRecoilValue(applyStepState);
 	const stepLists: JsxElementComponentProps = {
@@ -42,12 +38,14 @@ const RecruitDetailPage = () => {
 	};
 	const { isLoggedIn } = useLogin();
 
-	const { data: detailedData, isLoading } = useQuery({
+	const { data: detailedData, isSuccess } = useQuery({
 		queryKey: ['detailedPage', { pageNum, isLoggedIn }],
 		queryFn: () => getPostingData({ pageNum, isLoggedIn }),
 	});
-
+	const [commentsList, setCommentsList] = useState<CommentForm[]>([]);
 	const period = detailedData?.proceedingStart + ' ~ ' + detailedData?.proceedingEnd;
+
+	// 함수로 변경 후 -> useMemo 사용하기
 	const diffDate = Math.ceil(
 		Math.abs(
 			(new Date(detailedData?.deadline as any).getTime() - new Date().getTime()) /
@@ -56,19 +54,19 @@ const RecruitDetailPage = () => {
 	).toString();
 
 	const addComment = () => {
-		if (contents !== '' && contents.trim() !== '') {
-			const newComment = {
-				id: tempData.comments.length + 1,
-				nickname: 'yeom',
-				content: contents,
-				replies: [],
-				isWriter: true,
-				createAt: createAt?.toString(),
-				profileImg: '',
-			};
-			setCommentsList([...commentsList, newComment]);
-			setContents('');
-		}
+		// if (contents !== '' && contents.trim() !== '') {
+		// 	const newComment = {
+		// 		id: tempData.comments.length + 1,
+		// 		nickname: 'yeom',
+		// 		content: contents,
+		// 		replies: [],
+		// 		isWriter: true,
+		// 		createAt: createAt?.toString(),
+		// 		profileImg: '',
+		// 	};
+		// 	setCommentsList([...commentsList, newComment]);
+		// 	setContents('');
+		// }
 	};
 
 	const deleteComment = (id: number) => {
@@ -93,11 +91,15 @@ const RecruitDetailPage = () => {
 		fixModalBackground(isModal);
 	}, [isModal]);
 
-	console.log(detailedData?.isClosed);
+	useEffect(() => {
+		if (isSuccess) {
+			setCommentsList(detailedData?.comments as any); // 타입 에러를 수정하기 힘드네요..
+		}
+	}, [isSuccess, detailedData]);
 
 	return (
 		<>
-			{!isLoading && detailedData && (
+			{isSuccess && detailedData && (
 				<S.RecruitDetailPage>
 					<TitleInfo
 						nickname={detailedData.writerNickname}
@@ -133,21 +135,25 @@ const RecruitDetailPage = () => {
 						<hr />
 						<section className='container-comments'>
 							<ul className='container-comments__lists'>
-								{commentsList.map((comment, _) => {
-									return (
-										<Comment
-											key={comment.id}
-											id={comment.id}
-											nickname={comment.nickname}
-											content={comment.content}
-											replies={comment.replies}
-											isWriter={comment.nickname === username}
-											createAt={comment.createAt}
-											profileImg={comment.profileImg}
-											deleteComment={() => deleteComment(comment.id)}
-										/>
-									);
-								})}
+								{isSuccess &&
+									commentsList.map((comment, _) => {
+										return (
+											<Comment
+												key={comment.id}
+												id={comment.id}
+												userId={comment.userId}
+												nickname={comment.nickname}
+												content={comment.content}
+												replies={comment.replies}
+												isWriter={comment.isWriter}
+												createAt={comment.createAt}
+												profileImg={comment.profileImg}
+												groupNumber={comment.groupNumber}
+												groupOrder={comment.groupOrder}
+												deleteComment={() => deleteComment(comment.id)}
+											/>
+										);
+									})}
 							</ul>
 							<CommentInput
 								contents={contents}

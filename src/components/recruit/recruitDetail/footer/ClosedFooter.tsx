@@ -1,9 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ClosedFooter = () => {
+	const navigate = useNavigate();
+	const onClickToList = () => {
+		navigate('/recruit');
+	};
+
 	return (
 		<>
-			<button type='button' className='btn-list btn-txt__big'>
+			<button type='button' className='btn-list btn-txt__big' onClick={onClickToList}>
 				목록보기
 			</button>
 			<button type='button' className='btn-closed btn-txt__big' disabled>

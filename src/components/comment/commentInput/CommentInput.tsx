@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, ProfileImage } from '../..';
+import { ProfileImage } from '../..';
 import { CommentInputFunctions } from '../../../types';
 import S from './CommentInput.styled';
 

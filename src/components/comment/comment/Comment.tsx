@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Comment = ({
 	id,
+	userId,
 	nickname,
 	content,
 	replies,
@@ -13,6 +14,8 @@ const Comment = ({
 	isWriter,
 	createAt,
 	profileImg,
+	groupOrder,
+	groupNumber,
 }: Comment) => {
 	const navigate = useNavigate();
 	const isLogin = true; // 임시 코드
@@ -50,19 +53,19 @@ const Comment = ({
 	};
 
 	const addReply = () => {
-		if (contents !== '' && contents.trim() !== '' && repliesList) {
-			const newComment = {
-				id: id,
-				nickname: 'yeom',
-				content: contents,
-				isWriter: isUser,
-				createAt: '',
-				profileImg: '',
-			};
-			setRepliesList([...repliesList, newComment]);
-			setContents('');
-			setReplyClicked(false);
-		}
+		// if (contents !== '' && contents.trim() !== '' && repliesList) {
+		// 	const newComment = {
+		// 		id: id,
+		// 		nickname: 'yeom',
+		// 		content: contents,
+		// 		isWriter: isUser,
+		// 		createAt: '',
+		// 		profileImg: '',
+		// 	};
+		// 	setRepliesList([...repliesList, newComment]);
+		// 	setContents('');
+		// 	setReplyClicked(false);
+		// }
 	};
 	const editComment = () => {
 		setIsEdit(false);
@@ -123,11 +126,13 @@ const Comment = ({
 							<ReplyComment
 								key={reply.id}
 								id={reply.id}
+								userId={reply.userId}
 								nickname={reply.nickname}
 								content={reply.content}
-								createAt={''}
-								profileImg={''}
-								isWriter={isUser}
+								createAt={reply.createAt}
+								profileImg={reply.profileImg}
+								isWriter={isWriter}
+								groupOrder={reply.groupOrder}
 								deleteComment={() => deleteReply(reply.id)}
 							/>
 						);

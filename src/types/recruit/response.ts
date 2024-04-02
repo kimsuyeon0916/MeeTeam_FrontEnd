@@ -1,3 +1,5 @@
+import { Comment } from '..';
+
 export interface TitleAndEtc {
 	nickname: string;
 	responseRate: number;
@@ -67,7 +69,7 @@ export interface RecruitPostings {
 	tags: RecruitTags[];
 	recruitmentRoles: RoleInfo[];
 	content: string;
-	comments: [];
+	comments: Comment[];
 }
 
 export interface ApplyInfo {
