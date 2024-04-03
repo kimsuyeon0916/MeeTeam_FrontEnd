@@ -17,6 +17,7 @@ const OptionList = styled.ul`
 
 const OptionItem = styled.li`
 	color: var(--Form-txtIcon-default, #8e8e8e);
+	cursor: pointer;
 
 	/* Body/body1/medium */
 	font-family: Pretendard;
