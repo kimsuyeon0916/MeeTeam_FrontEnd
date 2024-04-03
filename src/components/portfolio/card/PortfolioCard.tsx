@@ -9,9 +9,21 @@ interface PortfolioCard {
 	imageUrl?: string;
 	field: string;
 	role: string;
+	isEditable?: boolean;
+	clickNumber?: number;
+	handleClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const PortfolioCard = ({ id, title, imageUrl, field, role }: PortfolioCard) => {
+const PortfolioCard = ({
+	id,
+	title,
+	imageUrl,
+	field,
+	role,
+	isEditable,
+	clickNumber,
+	handleClick,
+}: PortfolioCard) => {
 	const navigate = useNavigate();
 
 	return (
@@ -25,6 +37,15 @@ const PortfolioCard = ({ id, title, imageUrl, field, role }: PortfolioCard) => {
 					<S.PortfolioCardTag>{field}</S.PortfolioCardTag>
 					<S.PortfolioCardTag>{role}</S.PortfolioCardTag>
 				</S.PortfolioTagRow>
+				{isEditable && (
+					<S.PortfolioCardButton
+						type='button'
+						$checked={clickNumber ? true : false}
+						onClick={handleClick}
+					>
+						{clickNumber}
+					</S.PortfolioCardButton>
+				)}
 			</S.PortfolioCardBox>
 			<S.PortfolioCardTitle>{title}</S.PortfolioCardTitle>
 		</S.PortfolioCardLayout>
