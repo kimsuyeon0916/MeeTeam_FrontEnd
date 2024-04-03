@@ -111,5 +111,5 @@ export interface GroupContents {
 
 export interface DeleteComment {
 	pageNum: number;
-	groupInfo: GroupContents;
+	commentId: { commentId: number };
 }

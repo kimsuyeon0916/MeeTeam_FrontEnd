@@ -4,7 +4,7 @@ const Comment = styled.li`
 	.wrapper {
 		display: flex;
 		justify-content: space-between;
-		align-items: flex-start;
+		align-items: center;
 	}
 
 	.container {

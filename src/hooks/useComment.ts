@@ -10,6 +10,6 @@ export const useComment = () => {
 
 export const useCommentDelete = () => {
 	return useMutation({
-		mutationFn: ({ pageNum, groupInfo }: DeleteComment) => deleteComment({ pageNum, groupInfo }),
+		mutationFn: ({ pageNum, commentId }: DeleteComment) => deleteComment({ pageNum, commentId }),
 	});
 };

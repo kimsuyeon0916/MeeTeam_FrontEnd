@@ -19,8 +19,11 @@ const ReplyComment = ({
 	const [value, setValue] = useState<string>(content);
 	const [showKebab, setShowKebab] = useState<boolean>(true);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
-	const isValid = isLogin && nickname === 'yeom' && showKebab;
 	const optionLists = [
+		{
+			title: '답글',
+			optionClickHandler: () => {},
+		},
 		{
 			title: '수정',
 			optionClickHandler: () => {
@@ -55,6 +58,7 @@ const ReplyComment = ({
 			editComment();
 		}
 	};
+
 	return (
 		<S.ReplyComment>
 			<section className='wrapper'>
@@ -73,6 +77,7 @@ const ReplyComment = ({
 						<span>{value}</span>
 					</section>
 				</article>
+				{isWriter && showKebab && <KebabMenu options={optionLists} />}
 			</section>
 			<hr />
 		</S.ReplyComment>

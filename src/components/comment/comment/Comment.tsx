@@ -4,6 +4,7 @@ import S from './Comment.styled';
 import { Comment as CommentType } from '../../../types';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useCommentDelete } from '../../../hooks';
+import { useQueryClient } from '@tanstack/react-query';
 
 const Comment = ({
 	id,
@@ -18,8 +19,7 @@ const Comment = ({
 	groupNumber,
 }: CommentType) => {
 	const navigate = useNavigate();
-	const { recruitId } = useParams();
-
+	const { id: recruitId } = useParams();
 	const pageNum = Number(recruitId);
 	const isLogin = true; // 임시 코드
 	const [replyClicked, setReplyClicked] = useState<boolean>(false);
@@ -29,8 +29,16 @@ const Comment = ({
 	const [repliesList, setRepliesList] = useState<CommentType[] | undefined>(replies);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
 	const deleteComment = useCommentDelete();
+	const queryClient = useQueryClient();
 
 	const optionLists = [
+		{
+			title: '답글',
+			optionClickHandler: () => {
+				setShowKebab(false);
+				setReplyClicked(true);
+			},
+		},
 		{
 			title: '수정',
 			optionClickHandler: () => {
@@ -42,13 +50,19 @@ const Comment = ({
 			title: '삭제',
 			optionClickHandler: () => {
 				setShowKebab(false);
-				if (groupNumber && groupOrder) {
-					const groupInfo = { groupNumber, groupOrder };
-					deleteComment.mutate({ pageNum, groupInfo });
-				}
+				const commentId = { commentId: id };
+				deleteComment.mutate(
+					{ pageNum, commentId },
+					{
+						onSuccess: () => {
+							queryClient.invalidateQueries({ queryKey: ['detailedPage'] });
+						},
+					}
+				);
 			},
 		},
 	];
+
 	const deleteReply = (id: number) => {
 		setRepliesList(prevReplies => prevReplies?.filter(v => v.id !== id));
 	};
@@ -113,7 +127,7 @@ const Comment = ({
 				<article className='container'>
 					<section className='comment-icon'>
 						<section>
-							<ProfileImage url='' nickname={nickname} size='2.31rem' />
+							<ProfileImage url={profileImg} nickname={nickname} size='2.31rem' />
 						</section>
 						<span className='nickname'>{nickname}</span>
 						<span className='createAt'>
@@ -121,7 +135,7 @@ const Comment = ({
 						</span>
 					</section>
 					<section className='comment-info'>
-						<span>{value}</span>
+						<span>{value === null ? '삭제된 메세지입니다.' : value}</span>
 					</section>
 				</article>
 				{isWriter && showKebab && <KebabMenu options={optionLists} />}
@@ -139,7 +153,7 @@ const Comment = ({
 								content={reply.content}
 								createAt={reply.createAt}
 								profileImg={reply.profileImg}
-								isWriter={isWriter}
+								isWriter={reply.isWriter}
 								groupOrder={reply.groupOrder}
 								deleteComment={() => deleteReply(reply.id)}
 							/>

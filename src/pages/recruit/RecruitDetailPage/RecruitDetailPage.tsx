@@ -22,12 +22,11 @@ import { useQuery } from '@tanstack/react-query';
 import { getPostingData } from '../../../service';
 import { useRecoilValue } from 'recoil';
 import { applyModalState, applyStepState } from '../../../atom';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useLogin } from '../../../hooks';
 
 const RecruitDetailPage = () => {
 	const { id } = useParams();
-	const location = useLocation();
 	const pageNum = Number(id);
 	const isModal = useRecoilValue(applyModalState);
 	const step = useRecoilValue(applyStepState);
@@ -61,7 +60,6 @@ const RecruitDetailPage = () => {
 				count += comment.replies.length;
 			}
 		});
-
 		return count;
 	}, [commentsList]);
 
@@ -74,8 +72,6 @@ const RecruitDetailPage = () => {
 			setCommentsList(detailedData?.comments as any); // 타입 에러를 수정하기 힘드네요..
 		}
 	}, [isSuccess, detailedData]);
-
-	console.log(location);
 
 	return (
 		<>

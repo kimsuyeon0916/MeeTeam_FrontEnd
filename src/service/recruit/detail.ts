@@ -81,11 +81,12 @@ export const postComment = async ({ pageNum, comment }: PostingComment) => {
 	}
 };
 
-export const deleteComment = async ({ pageNum, groupInfo }: DeleteComment) => {
+export const deleteComment = async ({ pageNum, commentId }: DeleteComment) => {
+	console.log(commentId);
 	try {
 		const response = await axiosAuthInstance.delete(
-			EndPoint.RECRUIT_DETAIL.postComment(pageNum),
-			groupInfo
+			EndPoint.RECRUIT_DETAIL.deleteComment(pageNum),
+			{ data: commentId }
 		);
 		return response;
 	} catch (error) {
