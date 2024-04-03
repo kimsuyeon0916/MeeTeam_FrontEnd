@@ -161,6 +161,14 @@ const ProfileDescription = styled.blockquote`
 	letter-spacing: 0.02rem;
 `;
 
+const ProfileButtonBox = styled.div`
+	display: flex;
+	flex-direction: row;
+	column-gap: 1.6rem;
+	margin-top: 12rem;
+	margin-left: auto;
+`;
+
 const S = {
 	ProfileLayout,
 	ProfileTitle,
@@ -171,6 +179,7 @@ const S = {
 	ProfileRow,
 	ProfileGrid,
 	ProfileDescription,
+	ProfileButtonBox,
 };
 
 export default S;
