@@ -1,44 +1,48 @@
 import React from 'react';
 import S from '../Profile.styled';
-import { userData } from '../../index';
-import { PortfolioCard, ProfileImage, Skill } from '../../../components';
+import { PortfolioCard, ProfileImage, SkillTag } from '../../../components';
 import { useReadProfile } from '../../../hooks';
 import { useParams } from 'react-router';
+import { useSetRecoilState } from 'recoil';
+import { userState } from '../../../atom';
 
 const ProfileDetailsPage = () => {
-	const { nickname } = useParams() as { nickname: string };
+	const { userId } = useParams() as { userId: string };
 
-	const { data: user } = useReadProfile(nickname);
+	const setUserState = useSetRecoilState(userState);
+
+	const { data: user, isSuccess } = useReadProfile(userId);
+	if (isSuccess) {
+		user && setUserState(user); // 본인인지 아닌지 확인 로직 필요
+	}
 
 	return (
 		<S.ProfileLayout>
 			<S.ProfileHeader>
-				<ProfileImage nickname={nickname} size='14rem' url={userData.imageUrl} />
+				<ProfileImage nickname={user?.nickname as string} size='14rem' url={user?.imageUrl} />
 				<S.ProfileColumn>
 					<div className='profile-header__row'>
-						<h2>{userData.nickname}</h2>
-						<h3>{userData.userName}</h3>
+						<h2>{user?.nickname}</h2>
+						<h3>{user?.userName}</h3>
 					</div>
-					<h4>{userData.interest}</h4>
-					<h6>{userData.introduction}</h6>
+					<h4>{user?.interest}</h4>
+					<h6>{user?.introduction}</h6>
 				</S.ProfileColumn>
 			</S.ProfileHeader>
 
 			<S.ProfileColumn $gap='5rem'>
 				<S.ProfileArticle>
 					<S.ProfileTitle>자기 소개</S.ProfileTitle>
-					<div>{userData.aboutMe}</div>
+					<div>{user?.aboutMe}</div>
 					<hr />
 				</S.ProfileArticle>
 
 				<S.ProfileArticle>
 					<S.ProfileTitle>연락 수단</S.ProfileTitle>
 					<S.ProfileColumn $gap='1rem'>
-						{userData.email &&
-							userData.email.map(({ isPublic, content }, index) => (
-								<div key={index}>{isPublic && content}</div>
-							))}
-						<div>{userData.phone?.isPublic && userData.phone?.content}</div>
+						{user?.universityEmail?.isPublic && <div>{user?.universityEmail?.content}</div>}
+						{user?.subEmail?.isPublic && <div>{user?.subEmail?.content}</div>}
+						{user?.phone?.isPublic && <div>{user?.phone?.content}</div>}
 					</S.ProfileColumn>
 					<hr />
 				</S.ProfileArticle>
@@ -46,15 +50,15 @@ const ProfileDetailsPage = () => {
 				<S.ProfileArticle>
 					<S.ProfileTitle>교육</S.ProfileTitle>
 					<div>
-						<S.ProfileDate>{userData.year}년도 입학</S.ProfileDate>
+						<S.ProfileDate>{user?.year}년도 입학</S.ProfileDate>
 						<S.ProfileRow>
 							<S.ProfileColumn $gap='1.5rem'>
-								<h4>{userData.university}</h4>
+								<h4>{user?.university}</h4>
 							</S.ProfileColumn>
 							<S.ProfileColumn $gap='1.5rem'>
-								<div>{userData.department}</div>
+								<div>{user?.department}</div>
 								<div>
-									{userData.gpa}/{userData.maxGpa}
+									{user?.gpa}/{user?.maxGpa}
 								</div>
 							</S.ProfileColumn>
 						</S.ProfileRow>
@@ -65,7 +69,7 @@ const ProfileDetailsPage = () => {
 				<S.ProfileArticle>
 					<S.ProfileTitle>스킬</S.ProfileTitle>
 					<S.ProfileRow $gap='1.05rem'>
-						{userData.skills?.map(({ ...props }, index) => <Skill key={index} {...props} />)}
+						{user?.skills?.map(({ ...props }, index) => <SkillTag key={index} {...props} />)}
 					</S.ProfileRow>
 					<hr />
 				</S.ProfileArticle>
@@ -73,7 +77,7 @@ const ProfileDetailsPage = () => {
 				<S.ProfileArticle>
 					<S.ProfileTitle>수상/활동</S.ProfileTitle>
 					<S.ProfileColumn $gap='2.4rem'>
-						{userData.awards?.map(({ title, startDate, endDate, description }, index) => (
+						{user?.awards?.map(({ title, startDate, endDate, description }, index) => (
 							<S.ProfileColumn key={index}>
 								<S.ProfileDate>
 									{startDate} ~ {endDate}
@@ -93,7 +97,7 @@ const ProfileDetailsPage = () => {
 				<S.ProfileArticle>
 					<S.ProfileTitle>링크</S.ProfileTitle>
 					<S.ProfileColumn>
-						{userData.links?.map(({ url, description }, index) => (
+						{user?.links?.map(({ url, description }, index) => (
 							<S.ProfileRow key={index} $gap='3.65rem'>
 								<span>{description}</span>
 								<a href={url} target='_blank' title={description} rel='noreferrer noopener'>
@@ -108,8 +112,8 @@ const ProfileDetailsPage = () => {
 				<S.ProfileArticle>
 					<S.ProfileTitle>포트폴리오</S.ProfileTitle>
 					<S.ProfileGrid>
-						{userData.portfolios &&
-							userData.portfolios.map(({ ...props }, index) => (
+						{user?.portfolios &&
+							user?.portfolios.map(({ ...props }, index) => (
 								<PortfolioCard key={index} {...props} />
 							))}
 					</S.ProfileGrid>
