@@ -24,6 +24,7 @@ import Add from './Add.svg';
 import Delete from './Delete.svg';
 import GrayCalendar from './GrayCalendar.svg';
 import BlackCalendar from './BlackCalendar.svg';
+import Close from './Close.svg';
 
 export {
 	Exit,
@@ -52,4 +53,5 @@ export {
 	Delete,
 	GrayCalendar,
 	BlackCalendar,
+	Close,
 };
