@@ -8,9 +8,9 @@ const DeleteBtn = ({
 	handleClick?: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
 	return (
-		<S.ButtonLayout type='button' $add={false} onClick={handleClick}>
+		<S.IconButtonLayout type='button' $add={false} onClick={handleClick}>
 			<img src={Delete} alt='deleteButton' />
-		</S.ButtonLayout>
+		</S.IconButtonLayout>
 	);
 };
 

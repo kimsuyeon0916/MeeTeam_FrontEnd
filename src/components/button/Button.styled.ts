@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ButtonLayout = styled.button<{ $add?: boolean }>`
+const IconButtonLayout = styled.button<{ $add?: boolean }>`
 	all: unset;
 	display: flex;
 	width: 4.8rem;
@@ -16,6 +16,6 @@ const ButtonLayout = styled.button<{ $add?: boolean }>`
 			: `border: 1px solid #8E8E8E; background: #F6F6F6;`}
 `;
 
-const S = { ButtonLayout };
+const S = { IconButtonLayout };
 
 export default S;
