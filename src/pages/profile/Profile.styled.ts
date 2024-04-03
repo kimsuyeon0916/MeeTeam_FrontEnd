@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-const ProfileLayout = styled.div`
+interface ProfileBoxStyle {
+	$gap?: string;
+	$width?: string;
+}
+
+const ProfileLayout = styled.form`
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
@@ -113,18 +118,20 @@ const ProfileArticle = styled.article`
 	}
 `;
 
-const ProfileColumn = styled.div<{ $gap?: string }>`
+const ProfileColumn = styled.div<ProfileBoxStyle>`
 	flex: 1;
-
 	display: flex;
 	flex-direction: column;
 	row-gap: ${props => props.$gap};
+	width: ${props => props.$width};
 `;
 
-const ProfileRow = styled.div<{ $gap?: string }>`
+const ProfileRow = styled.div<ProfileBoxStyle>`
+	flex: 1;
 	display: flex;
 	flex-direction: row;
 	column-gap: ${props => props.$gap};
+	width: ${props => props.$width};
 
 	/* 반응형 대비 */
 	flex-wrap: wrap;
@@ -139,6 +146,21 @@ const ProfileGrid = styled.div`
 	column-gap: 2.4rem;
 `;
 
+const ProfileDescription = styled.blockquote`
+	display: flex;
+	margin-bottom: 2.4rem;
+	padding: 1.6rem 2rem;
+	align-items: center;
+	background: var(--Purplescale-100, #f3f5ff);
+	color: #747b7f;
+
+	font-size: 1.4rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 2.1rem
+	letter-spacing: 0.02rem;
+`;
+
 const S = {
 	ProfileLayout,
 	ProfileTitle,
@@ -148,6 +170,7 @@ const S = {
 	ProfileArticle,
 	ProfileRow,
 	ProfileGrid,
+	ProfileDescription,
 };
 
 export default S;
