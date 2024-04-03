@@ -37,6 +37,8 @@ const Input = <T extends FieldValues>({
 	handleKeyDown,
 	...props
 }: Input<T>) => {
+	const inputError = formState?.errors[name];
+	const inputErrorType = formState?.errors[name]?.type;
 	const inputErrorMessage = formState?.errors[name]?.message as string;
 
 	const { ref, ...rest } = register(name as Path<T>, validation);
@@ -48,14 +50,19 @@ const Input = <T extends FieldValues>({
 				{...rest}
 				{...props}
 				{...icon}
-				ref={e => {
+				invalid={inputErrorType !== 'countingLetters' && inputError}
+				ref={(e: HTMLInputElement) => {
 					ref(e);
 					if (inputRef) inputRef.current = e;
 				}}
 				onClick={handleInputClick}
 				onKeyDown={handleKeyDown}
 			/>
-			{inputErrorMessage && <small>{inputErrorMessage}</small>}
+			{inputErrorType === 'countingLetters' ? (
+				<span>{inputErrorMessage}</span>
+			) : (
+				<small>{inputErrorMessage}</small>
+			)}
 		</S.InputLabel>
 	);
 };
