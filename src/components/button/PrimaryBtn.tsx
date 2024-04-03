@@ -2,14 +2,15 @@ import React from 'react';
 import S from './Button.styled';
 
 interface Button {
+	type: 'button' | 'submit';
+	title: string;
 	small?: boolean;
-	title?: string;
 	handleClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const PrimaryBtn = ({ small, title, handleClick }: Button) => {
+const PrimaryBtn = ({ type, title, small, handleClick }: Button) => {
 	return (
-		<S.PrimaryButtonLayout type='button' $small={small} onClick={handleClick}>
+		<S.PrimaryButtonLayout type={type} $small={small} onClick={handleClick}>
 			{title}
 		</S.PrimaryButtonLayout>
 	);
