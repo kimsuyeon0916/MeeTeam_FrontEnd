@@ -109,6 +109,8 @@ import AddBtn from './button/AddBtn';
 import DeleteBtn from './button/DeleteBtn';
 import Link from './link/Link';
 import MuiDatepicker from './muiDatepicker/MuiDatepicker';
+import DefaultBtn from './button/DefaultBtn';
+import PrimaryBtn from './button/PrimaryBtn';
 
 export {
 	Header,
@@ -213,4 +215,6 @@ export {
 	DeleteBtn,
 	Link,
 	MuiDatepicker,
+	DefaultBtn,
+	PrimaryBtn,
 };
