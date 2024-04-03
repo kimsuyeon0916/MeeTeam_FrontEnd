@@ -9,13 +9,11 @@ export const userData: User = {
 	interest: '프론트엔드',
 	introduction: '복잡한 문제를 단순하게 바라보는 것을 즐깁니다:-)',
 	aboutMe: `안녕하세요. 저는 성장을 꿈꾸는 김민지입니다!\n현재 ~한 개발을 하며 ~를 공부하고 있습니다.`,
-	email: [
-		{
-			content: 'Minji_03@kw.ac.kr',
-			isPublic: true,
-			isDefault: true,
-		},
-	],
+	universityEmail: {
+		content: 'Minji_03@kw.ac.kr',
+		isPublic: true,
+		isDefault: true,
+	},
 	phone: {
 		content: '010-8888-8888',
 		isPublic: true,
