@@ -15,6 +15,8 @@ import type {
 	FilterData,
 	PostingComment,
 	CommentContents,
+	GroupContents,
+	DeleteComment,
 } from './recruit/payload';
 import type { Comment } from './comment';
 import type {
@@ -77,4 +79,6 @@ export type {
 	FilterData,
 	PostingComment,
 	CommentContents,
+	GroupContents,
+	DeleteComment,
 };

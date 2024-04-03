@@ -103,3 +103,13 @@ export interface PostingComment {
 	pageNum: number;
 	comment: CommentContents;
 }
+
+export interface GroupContents {
+	groupNumber: number;
+	groupOrder: number;
+}
+
+export interface DeleteComment {
+	pageNum: number;
+	groupInfo: GroupContents;
+}

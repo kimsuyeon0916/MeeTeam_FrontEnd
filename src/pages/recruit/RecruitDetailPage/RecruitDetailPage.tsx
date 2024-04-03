@@ -64,10 +64,6 @@ const RecruitDetailPage = () => {
 		return count;
 	}, [commentsList]);
 
-	const deleteComment = (id: number) => {
-		setCommentsList(prevComments => prevComments.filter(v => v.id !== id));
-	};
-
 	useEffect(() => {
 		fixModalBackground(isModal);
 	}, [isModal]);
@@ -131,7 +127,6 @@ const RecruitDetailPage = () => {
 												profileImg={comment.profileImg}
 												groupNumber={comment.groupNumber}
 												groupOrder={comment.groupOrder}
-												deleteComment={() => deleteComment(comment.id)}
 											/>
 										);
 									})}

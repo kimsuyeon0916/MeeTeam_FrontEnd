@@ -11,7 +11,7 @@ import useDebounce from './useDebounce';
 import useValid from './useValid';
 import { useBookmark } from './useBookMark';
 import useLogin from './useLogin';
-import { useComment } from './useComment';
+import { useComment, useCommentDelete } from './useComment';
 
 export {
 	useCheckExist,
@@ -26,4 +26,5 @@ export {
 	useBookmark,
 	useLogin,
 	useComment,
+	useCommentDelete,
 };

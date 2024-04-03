@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import S from './ReplyComment.styled';
 import { KebabMenu, ProfileImage } from '../..';
-import { Comment } from '../../../types';
+import { Comment as CommentType } from '../../../types';
 import { Reply } from '../../../assets';
 
 const ReplyComment = ({
@@ -14,7 +14,7 @@ const ReplyComment = ({
 	createAt,
 	profileImg,
 	groupOrder,
-}: Comment) => {
+}: CommentType) => {
 	const isLogin = true; // 임시 코드
 	const [value, setValue] = useState<string>(content);
 	const [showKebab, setShowKebab] = useState<boolean>(true);

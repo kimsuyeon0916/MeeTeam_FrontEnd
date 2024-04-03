@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { KebabMenu, ProfileImage, ReplyComment, ReplyInput } from '../..';
 import S from './Comment.styled';
-import { Comment } from '../../../types';
-import { useNavigate } from 'react-router-dom';
+import { Comment as CommentType } from '../../../types';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useCommentDelete } from '../../../hooks';
 
 const Comment = ({
 	id,
@@ -10,21 +11,25 @@ const Comment = ({
 	nickname,
 	content,
 	replies,
-	deleteComment,
 	isWriter,
 	createAt,
 	profileImg,
 	groupOrder,
 	groupNumber,
-}: Comment) => {
+}: CommentType) => {
 	const navigate = useNavigate();
+	const { recruitId } = useParams();
+
+	const pageNum = Number(recruitId);
 	const isLogin = true; // 임시 코드
 	const [replyClicked, setReplyClicked] = useState<boolean>(false);
 	const [value, setValue] = useState<string>(content);
 	const [contents, setContents] = useState<string>('');
 	const [showKebab, setShowKebab] = useState<boolean>(true);
-	const [repliesList, setRepliesList] = useState<Comment[] | undefined>(replies);
+	const [repliesList, setRepliesList] = useState<CommentType[] | undefined>(replies);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
+	const deleteComment = useCommentDelete();
+
 	const optionLists = [
 		{
 			title: '수정',
@@ -37,8 +42,9 @@ const Comment = ({
 			title: '삭제',
 			optionClickHandler: () => {
 				setShowKebab(false);
-				if (deleteComment) {
-					deleteComment(id);
+				if (groupNumber && groupOrder) {
+					const groupInfo = { groupNumber, groupOrder };
+					deleteComment.mutate({ pageNum, groupInfo });
 				}
 			},
 		},
@@ -93,7 +99,6 @@ const Comment = ({
 
 	const onClickInput = () => {
 		if (!isLogin) {
-			// 로그인 페이지로 이동
 			navigate('/signin');
 		}
 	};
@@ -119,6 +124,7 @@ const Comment = ({
 						<span>{value}</span>
 					</section>
 				</article>
+				{isWriter && showKebab && <KebabMenu options={optionLists} />}
 			</section>
 			<hr />
 			<section className='wrapper-replies'>

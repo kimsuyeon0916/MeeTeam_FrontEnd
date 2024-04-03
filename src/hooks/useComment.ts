@@ -1,9 +1,15 @@
 import { useMutation } from '@tanstack/react-query';
-import { postComment } from '../service/recruit/detail';
-import { PostingComment } from '../types';
+import { deleteComment, postComment } from '../service/recruit/detail';
+import { DeleteComment, PostingComment } from '../types';
 
 export const useComment = () => {
 	return useMutation({
 		mutationFn: ({ pageNum, comment }: PostingComment) => postComment({ pageNum, comment }),
+	});
+};
+
+export const useCommentDelete = () => {
+	return useMutation({
+		mutationFn: ({ pageNum, groupInfo }: DeleteComment) => deleteComment({ pageNum, groupInfo }),
 	});
 };
