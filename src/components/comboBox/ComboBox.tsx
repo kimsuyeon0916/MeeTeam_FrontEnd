@@ -11,6 +11,7 @@ import {
 	Path,
 	PathValue,
 	RegisterOptions,
+	UseFormSetFocus,
 } from 'react-hook-form';
 import { Input } from '../index';
 
@@ -24,6 +25,7 @@ interface ComboBox<T extends FieldValues> {
 	width?: string;
 	register: UseFormRegister<T>;
 	setValue: UseFormSetValue<T>;
+	setFocus?: UseFormSetFocus<T>;
 	formState?: FormState<T>;
 	name: string;
 	validation?: RegisterOptions;
@@ -33,17 +35,20 @@ interface ComboBox<T extends FieldValues> {
 	optionList?: Option[];
 	clickInput?: (name: T | string) => void;
 	clickOption?: (name: T | string) => void;
+	downKey?: (name?: T | string) => void;
 }
 
 const ComboBox = <T extends FieldValues>({
 	width,
 	register,
 	setValue,
+	setFocus,
 	name,
 	validation,
 	optionList,
 	clickInput,
 	clickOption,
+	downKey,
 	...props
 }: ComboBox<T>) => {
 	const [isOpen, setIsOpen] = useState(false);
@@ -70,6 +75,14 @@ const ComboBox = <T extends FieldValues>({
 		setValue(name, title);
 		id && sessionStorage.setItem(name, id);
 		clickOption?.(name);
+		setFocus?.(name);
+	};
+
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === 'Enter') {
+			downKey?.(name);
+			setIsOpen(true);
+		}
 	};
 
 	return (
@@ -81,6 +94,7 @@ const ComboBox = <T extends FieldValues>({
 				{...props}
 				inputRef={dropdownRef}
 				handleInputClick={handleInputClick}
+				handleKeyDown={handleKeyDown}
 			/>
 			{optionList && isOpen && (
 				<OptionList
