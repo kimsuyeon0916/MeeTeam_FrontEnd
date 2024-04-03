@@ -94,7 +94,7 @@ import Comment from './comment/comment/Comment';
 import CommentInput from './comment/commentInput/CommentInput';
 import ReplyInput from './comment/replyInput/ReplyInput';
 import ReplyComment from './comment/comment/ReplyComment';
-import Skill from './skills/Skill';
+import SkillTag from './skills/SkillTag';
 import PortfolioCard from './portfolio/card/PortfolioCard';
 import InputCourse from './inputDropdown/inputCourse/InputCourse';
 import InputProfessor from './inputDropdown/inputCourse/InputProfessor';
@@ -198,7 +198,7 @@ export {
 	ReplyInput,
 	Comment,
 	ReplyComment,
-	Skill,
+	SkillTag,
 	PortfolioCard,
 	InputCourse,
 	InputProfessor,
