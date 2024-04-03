@@ -3,17 +3,17 @@ import S from '../Profile.styled';
 import { PortfolioCard, ProfileImage, SkillTag } from '../../../components';
 import { useReadProfile } from '../../../hooks';
 import { useParams } from 'react-router';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { userState } from '../../../atom';
 
 const ProfileDetailsPage = () => {
+	const [userInfo, setUserState] = useRecoilState(userState);
+
 	const { userId } = useParams() as { userId: string };
-
-	const setUserState = useSetRecoilState(userState);
-
 	const { data: user, isSuccess } = useReadProfile(userId);
+
 	if (isSuccess) {
-		user && setUserState(user); // 본인인지 아닌지 확인 로직 필요
+		userInfo?.nickname === user?.nickname && setUserState({ ...user, userId }); // 본인인지 아닌지 확인 로직 필요
 	}
 
 	return (
