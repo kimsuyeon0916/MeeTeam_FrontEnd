@@ -21,6 +21,7 @@ interface Input<T extends FieldValues> {
 	placeholder?: string;
 	inputRef?: React.MutableRefObject<HTMLInputElement | null>; // RefObject
 	handleInputClick?: React.MouseEventHandler<HTMLInputElement>;
+	handleKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
 }
 
 const Input = <T extends FieldValues>({
@@ -33,6 +34,7 @@ const Input = <T extends FieldValues>({
 	icon,
 	inputRef,
 	handleInputClick,
+	handleKeyDown,
 	...props
 }: Input<T>) => {
 	const inputErrorMessage = formState?.errors[name]?.message as string;
@@ -51,6 +53,7 @@ const Input = <T extends FieldValues>({
 					if (inputRef) inputRef.current = e;
 				}}
 				onClick={handleInputClick}
+				onKeyDown={handleKeyDown}
 			/>
 			{inputErrorMessage && <small>{inputErrorMessage}</small>}
 		</S.InputLabel>
