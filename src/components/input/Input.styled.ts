@@ -5,6 +5,7 @@ interface InputStyle {
 	focus?: string;
 	arrow?: string;
 	disabled?: boolean;
+	invalid?: boolean;
 }
 
 const InputLabel = styled.label<{ $width?: string }>`
@@ -33,10 +34,23 @@ const InputLabel = styled.label<{ $width?: string }>`
 		letter-spacing: 0.0028rem;
 	}
 
-	small {
+	span {
 		margin-top: 0.4rem;
 		margin-left: auto;
 		color: var(--State-unactive, #8e8e8e);
+	}
+
+	small {
+		margin-top: 0.4rem;
+		margin-left: 1rem;
+		color: var(--ButtonColors-Caution-outline-defaultLine, #f85858);
+
+		/* Text/t4 */
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 1.2rem; /* 120% */
+		letter-spacing: 0.002rem;
 	}
 `;
 
@@ -71,7 +85,11 @@ const Input = styled.input<InputStyle>`
 		!props.disabled &&
 		`&:hover,
 		&:focus {
-			border-color: var(--Form-border-focus, #5877fc);
+			border-color: ${
+				props.invalid
+					? 'var(--ButtonColors-Caution-outline-defaultLine, #F85858)'
+					: 'var(--Form-border-focus, #5877fc)'
+			};
 		}`}
 
 	&::placeholder {
