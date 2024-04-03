@@ -38,6 +38,7 @@ const RecruitDetailPage = styled.section`
 	}
 
 	.wrapper-comments {
+		width: 100%;
 		.container-title {
 			display: flex;
 			align-items: flex-end;
@@ -51,13 +52,13 @@ const RecruitDetailPage = styled.section`
 		}
 
 		hr {
-			margin-top: 1.18rem;
 			background: #e3e3e3;
 			border: none;
 			height: 0.075rem;
 		}
 
 		.container-comments {
+			width: 100%;
 			padding: 1.6rem 3rem;
 			box-sizing: border-box;
 		}

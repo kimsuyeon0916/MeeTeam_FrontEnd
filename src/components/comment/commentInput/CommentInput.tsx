@@ -23,7 +23,6 @@ const CommentInput = () => {
 				content: contents,
 				isParent: true,
 			};
-
 			setContents('');
 			postComment.mutate(
 				{ pageNum, comment },
@@ -65,7 +64,7 @@ const CommentInput = () => {
 							value={contents}
 							onChange={onChangeHandler}
 							onClick={onClickInput}
-							placeholder={isLogin ? '댓글쓰기' : '로그인이 필요합니다.'}
+							placeholder={isLogin ? '댓글 쓰기' : '로그인이 필요합니다.'}
 						/>
 					</section>
 					<section className='container-btn'>

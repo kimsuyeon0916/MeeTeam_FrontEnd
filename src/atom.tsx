@@ -126,11 +126,6 @@ export const applyUserInfo = atom<ApplyRole>({
 	},
 });
 
-export const searchPageState = atom({
-	key: 'searchPageState',
-	default: false,
-});
-
 export const recruitFilterState = atom<RecruitFilter>({
 	key: 'recruitFilter',
 	default: {

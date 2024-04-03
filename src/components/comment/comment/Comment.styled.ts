@@ -67,7 +67,6 @@ const Comment = styled.li`
 		.container-reply__lists {
 			display: flex;
 			flex-direction: column;
-			gap: 2rem;
 		}
 	}
 `;

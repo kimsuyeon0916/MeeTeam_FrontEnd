@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { KebabMenu, ProfileImage, ReplyComment, ReplyInput } from '../..';
 import S from './Comment.styled';
 import { Comment as CommentType } from '../../../types';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useCommentDelete } from '../../../hooks';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -18,24 +18,19 @@ const Comment = ({
 	groupOrder,
 	groupNumber,
 }: CommentType) => {
-	const navigate = useNavigate();
 	const { id: recruitId } = useParams();
 	const pageNum = Number(recruitId);
-	const isLogin = true; // 임시 코드
 	const [replyClicked, setReplyClicked] = useState<boolean>(false);
 	const [value, setValue] = useState<string>(content);
-	const [contents, setContents] = useState<string>('');
 	const [showKebab, setShowKebab] = useState<boolean>(true);
 	const [repliesList, setRepliesList] = useState<CommentType[] | undefined>(replies);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
 	const deleteComment = useCommentDelete();
 	const queryClient = useQueryClient();
-
 	const optionLists = [
 		{
 			title: '답글',
 			optionClickHandler: () => {
-				setShowKebab(false);
 				setReplyClicked(true);
 			},
 		},
@@ -67,58 +62,17 @@ const Comment = ({
 		setRepliesList(prevReplies => prevReplies?.filter(v => v.id !== id));
 	};
 
-	const handleReplyClick = () => {
-		setReplyClicked(true);
-	};
-
-	const addReply = () => {
-		// if (contents !== '' && contents.trim() !== '' && repliesList) {
-		// 	const newComment = {
-		// 		id: id,
-		// 		nickname: 'yeom',
-		// 		content: contents,
-		// 		isWriter: isUser,
-		// 		createAt: '',
-		// 		profileImg: '',
-		// 	};
-		// 	setRepliesList([...repliesList, newComment]);
-		// 	setContents('');
-		// 	setReplyClicked(false);
-		// }
-	};
 	const editComment = () => {
 		setIsEdit(false);
 		setShowKebab(true);
 	};
 
-	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		const target = event.currentTarget;
-		if (target.value.length !== 0 && event.key === 'Enter') {
-			event.preventDefault();
-			addReply();
-		}
-	};
-
-	const onKeyPressEdit = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		const target = event.currentTarget;
-		if (target.value.length !== 0 && event.key === 'Enter') {
-			event.preventDefault();
-			editComment();
-		}
-	};
-
-	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setContents(event.target.value);
-	};
-
-	const onClickInput = () => {
-		if (!isLogin) {
-			navigate('/signin');
-		}
-	};
-
 	const onChangeEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(event.target.value);
+	};
+
+	const onClickCancel = () => {
+		setReplyClicked(false);
 	};
 
 	return (
@@ -160,14 +114,12 @@ const Comment = ({
 						);
 					})}
 				</ul>
-				{replyClicked && (
+				{replyClicked && groupNumber && (
 					<ReplyInput
 						key={id}
-						contents={contents}
-						addComment={addReply}
-						onKeyPress={onKeyPress}
-						onChangeHandler={onChangeHandler}
-						onClickInput={onClickInput}
+						onClickCancel={onClickCancel}
+						groupNumber={groupNumber}
+						pageNum={pageNum}
 					/>
 				)}
 			</section>
