@@ -11,7 +11,7 @@ interface PortfolioCard {
 	role: string;
 	isEditable?: boolean;
 	clickNumber?: number;
-	handleClick?: React.MouseEventHandler<HTMLButtonElement>;
+	handleClick?: (id: string) => void;
 }
 
 const PortfolioCard = ({
@@ -27,7 +27,9 @@ const PortfolioCard = ({
 	const navigate = useNavigate();
 
 	return (
-		<S.PortfolioCardLayout onClick={() => navigate(`/portfolio/${id}`)}>
+		<S.PortfolioCardLayout
+			onClick={() => (isEditable ? handleClick?.(id) : navigate(`/portfolio/${id}`))}
+		>
 			<S.PortfolioCardBox>
 				<S.PortfolioCardImage
 					src={mainImageUrl ? mainImageUrl : DefaultPortfolioImage}
@@ -41,9 +43,9 @@ const PortfolioCard = ({
 					<S.PortfolioCardButton
 						type='button'
 						$checked={clickNumber ? true : false}
-						onClick={handleClick}
+						onClick={() => handleClick?.(id)}
 					>
-						{clickNumber}
+						{clickNumber !== 0 && clickNumber}
 					</S.PortfolioCardButton>
 				)}
 			</S.PortfolioCardBox>
