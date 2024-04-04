@@ -6,13 +6,13 @@ import {
 	Description,
 	DetailedInformation,
 	RecruitRole,
+	RecruitTags,
 } from '../../../components/index';
 import { useMutation } from '@tanstack/react-query';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { recruitInputState, validState } from '../../../atom';
 import { postingRecruit } from '../../../service/recruit/posting';
 import { useNavigate } from 'react-router-dom';
-import RecruitTags from '../../../components/recruit/create/RecruitTags';
 import { InputState } from '../../../types';
 
 const RecruitCreatePage = () => {

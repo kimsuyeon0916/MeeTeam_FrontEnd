@@ -60,6 +60,10 @@ const router = createBrowserRouter([
 				element: <RecruitCreatePage />,
 			},
 			{
+				path: 'edit/recruit',
+				element: <RecruitCreatePage />,
+			},
+			{
 				path: 'create/output',
 				element: <OutputCreatePage />,
 			},

@@ -119,6 +119,7 @@ import WriterFooter from './recruit/recruitDetail/footer/WriterFooter';
 import ApplierFooter from './recruit/recruitDetail/footer/ApplierFooter';
 import ClosedFooter from './recruit/recruitDetail/footer/ClosedFooter';
 import DetailedInput from './recruit/recruitBoard/detailedFilter/DetailedInput';
+import RecruitTags from './recruit/create/RecruitTags';
 
 export {
 	Header,
@@ -233,4 +234,5 @@ export {
 	FinalModal,
 	DetailedInput,
 	ClosedFooter,
+	RecruitTags,
 };

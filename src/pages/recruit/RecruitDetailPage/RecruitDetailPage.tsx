@@ -16,7 +16,7 @@ import {
 	FinalModal,
 	ClosedFooter,
 } from '../../../components';
-import { fixModalBackground, simpleDate } from '../../../utils';
+import { fixModalBackground } from '../../../utils';
 import { Comment as CommentForm, JsxElementComponentProps } from '../../../types';
 import { useQuery } from '@tanstack/react-query';
 import { getPostingData } from '../../../service';
@@ -30,7 +30,6 @@ const RecruitDetailPage = () => {
 	const pageNum = Number(id);
 	const isModal = useRecoilValue(applyModalState);
 	const step = useRecoilValue(applyStepState);
-	const createAt = simpleDate(new Date());
 	const stepLists: JsxElementComponentProps = {
 		0: <ApplyModal />,
 		1: <ConfirmModal />,
@@ -38,14 +37,11 @@ const RecruitDetailPage = () => {
 	};
 	const { isLoggedIn } = useLogin();
 
-	const {
-		data: detailedData,
-		isSuccess,
-		refetch,
-	} = useQuery({
+	const { data: detailedData, isSuccess } = useQuery({
 		queryKey: ['detailedPage', { pageNum, isLoggedIn }],
 		queryFn: () => getPostingData({ pageNum, isLoggedIn }),
 	});
+
 	const [commentsList, setCommentsList] = useState<CommentForm[]>([]);
 	const period = detailedData?.proceedingStart + ' ~ ' + detailedData?.proceedingEnd;
 
