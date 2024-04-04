@@ -11,20 +11,22 @@ export interface SignUpPayload {
 }
 
 export interface UpdateProfilePayload {
-	imageUrl?: string;
+	imageFileName?: string;
 	nickname: string;
-	userName?: string;
 	isUserNamePublic: boolean;
 	interest?: string;
 	introduction?: string;
 	aboutMe?: string;
 	email: Contact[]; // 논의 필요
-	phone?: Contact;
-	university: string;
+	phone: string;
+	isPhonePublic: boolean;
+	isUniversityMain: boolean;
+	isUniversityEmailPublic: boolean;
+	subEmail: string;
+	isSubEmailPublic: boolean;
 	department: string;
 	maxGpa?: string;
 	gpa?: string;
-	year: string;
 	skills?: string[];
 	awards?: Award[];
 	links?: Link[];
