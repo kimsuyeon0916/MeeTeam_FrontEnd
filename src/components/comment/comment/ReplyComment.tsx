@@ -16,6 +16,7 @@ const ReplyComment = ({
 	createAt,
 	profileImg,
 	groupOrder,
+	replyComment,
 }: CommentType) => {
 	const { id: recruitId } = useParams();
 	const pageNum = Number(recruitId);
@@ -28,7 +29,11 @@ const ReplyComment = ({
 	const optionLists = [
 		{
 			title: '답글',
-			optionClickHandler: () => {},
+			optionClickHandler: () => {
+				if (replyComment) {
+					replyComment(nickname);
+				}
+			},
 		},
 		{
 			title: '수정',
@@ -122,7 +127,10 @@ const ReplyComment = ({
 									<button
 										type='button'
 										className='txt-small cancel'
-										onClick={() => setIsEdit(false)}
+										onClick={() => {
+											setIsEdit(false);
+											setShowKebab(true);
+										}}
 									>
 										취소
 									</button>

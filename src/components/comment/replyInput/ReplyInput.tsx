@@ -1,25 +1,21 @@
 import React, { useState } from 'react';
 import { ProfileImage } from '../..';
-import { useNavigate, useParams } from 'react-router-dom';
 import S from './ReplyInput.styled';
 import { Reply } from '../../../assets';
 import { useComment } from '../../../hooks';
 import { useQueryClient } from '@tanstack/react-query';
 
 interface ReplyHandler {
-	pageNum?: number;
+	mention?: string;
+	pageNum: number;
 	groupNumber: number;
 	onClickCancel: () => void;
 }
 
-const ReplyInput = ({ groupNumber, onClickCancel }: ReplyHandler) => {
-	const navigate = useNavigate();
-	const { id } = useParams();
-	const pageNum = Number(id);
+const ReplyInput = ({ mention, pageNum, groupNumber, onClickCancel }: ReplyHandler) => {
 	const postComment = useComment();
-	const isLogin = true; // 임시 코드
 	const queryClient = useQueryClient();
-	const [contents, setContents] = useState<string>('');
+	const [contents, setContents] = useState<string>(mention ? `@${mention + ' '}` : '');
 	const userState = JSON.parse(localStorage.getItem('userState') as any);
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -56,12 +52,6 @@ const ReplyInput = ({ groupNumber, onClickCancel }: ReplyHandler) => {
 		setContents(event.target.value);
 	};
 
-	const onClickInput = () => {
-		if (!isLogin) {
-			navigate('/signin');
-		}
-	};
-
 	return (
 		<S.ReplyInput className='reply-container'>
 			<section className='wrapper'>
@@ -75,8 +65,7 @@ const ReplyInput = ({ groupNumber, onClickCancel }: ReplyHandler) => {
 						onKeyPress={onKeyPress}
 						value={contents}
 						onChange={onChangeHandler}
-						onClick={onClickInput}
-						placeholder={isLogin ? '답글 쓰기' : '로그인이 필요합니다.'}
+						placeholder={'답글 쓰기'}
 						className='reply-input'
 					/>
 				</section>

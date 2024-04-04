@@ -11,5 +11,5 @@ export interface Comment {
 	groupNumber?: number;
 	groupOrder?: number;
 	replies?: Comment[];
-	deleteComment?: (id: number) => void;
+	replyComment?: (nickname: string) => void;
 }

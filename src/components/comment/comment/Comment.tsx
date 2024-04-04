@@ -23,8 +23,8 @@ const Comment = ({
 	const [replyClicked, setReplyClicked] = useState<boolean>(false);
 	const [value, setValue] = useState<string>(content);
 	const [showKebab, setShowKebab] = useState<boolean>(true);
-	const [repliesList, setRepliesList] = useState<CommentType[] | undefined>(replies);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
+	const [mention, setMention] = useState<string>('');
 	const deleteComment = useCommentDelete();
 	const queryClient = useQueryClient();
 	const editComment = useCommentEdit();
@@ -98,6 +98,11 @@ const Comment = ({
 		);
 	};
 
+	const replyHandler = (nickname: string) => {
+		setReplyClicked(true);
+		setMention(nickname);
+	};
+
 	return (
 		<S.Comment>
 			<section className='wrapper'>
@@ -145,7 +150,7 @@ const Comment = ({
 			<hr />
 			<section className='wrapper-replies'>
 				<ul className='container-reply__lists'>
-					{repliesList?.map(reply => {
+					{replies?.map(reply => {
 						return (
 							<ReplyComment
 								key={reply.id}
@@ -157,6 +162,7 @@ const Comment = ({
 								profileImg={reply.profileImg}
 								isWriter={reply.isWriter}
 								groupOrder={reply.groupOrder}
+								replyComment={replyHandler}
 							/>
 						);
 					})}
@@ -167,6 +173,7 @@ const Comment = ({
 						onClickCancel={onClickCancel}
 						groupNumber={groupNumber}
 						pageNum={pageNum}
+						mention={mention}
 					/>
 				)}
 			</section>
