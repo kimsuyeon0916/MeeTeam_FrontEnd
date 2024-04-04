@@ -16,8 +16,8 @@ import {
 	FinalModal,
 	ClosedFooter,
 } from '../../../components';
-import { fixModalBackground, simpleDate } from '../../../utils';
-import { Comment as CommentForm, JsxElementComponentProps } from '../../../types';
+import { fixModalBackground } from '../../../utils';
+import { JsxElementComponentProps } from '../../../types';
 import { useQuery } from '@tanstack/react-query';
 import { getPostingData } from '../../../service';
 import { useRecoilValue } from 'recoil';
@@ -30,7 +30,6 @@ const RecruitDetailPage = () => {
 	const pageNum = Number(id);
 	const isModal = useRecoilValue(applyModalState);
 	const step = useRecoilValue(applyStepState);
-	const createAt = simpleDate(new Date());
 	const stepLists: JsxElementComponentProps = {
 		0: <ApplyModal />,
 		1: <ConfirmModal />,
@@ -38,15 +37,10 @@ const RecruitDetailPage = () => {
 	};
 	const { isLoggedIn } = useLogin();
 
-	const {
-		data: detailedData,
-		isSuccess,
-		refetch,
-	} = useQuery({
+	const { data: detailedData, isSuccess } = useQuery({
 		queryKey: ['detailedPage', { pageNum, isLoggedIn }],
 		queryFn: () => getPostingData({ pageNum, isLoggedIn }),
 	});
-	const [commentsList, setCommentsList] = useState<CommentForm[]>([]);
 	const period = detailedData?.proceedingStart + ' ~ ' + detailedData?.proceedingEnd;
 
 	// 함수로 변경 후 -> useMemo 사용하기
@@ -58,24 +52,20 @@ const RecruitDetailPage = () => {
 	).toString();
 
 	const totalCommentsCount = useMemo(() => {
-		let count = commentsList.length;
-		commentsList.forEach(comment => {
-			if (comment.replies) {
-				count += comment.replies.length;
-			}
-		});
-		return count;
-	}, [commentsList]);
+		if (detailedData) {
+			let count = detailedData?.comments.length;
+			detailedData?.comments.forEach(comment => {
+				if (comment.replies) {
+					count += comment.replies.length;
+				}
+			});
+			return count;
+		}
+	}, [detailedData?.comments]);
 
 	useEffect(() => {
 		fixModalBackground(isModal);
 	}, [isModal]);
-
-	useEffect(() => {
-		if (isSuccess) {
-			setCommentsList(detailedData?.comments as any); // 타입 에러를 수정하기 힘드네요..
-		}
-	}, [isSuccess, detailedData?.comments]);
 
 	return (
 		<>
@@ -116,7 +106,7 @@ const RecruitDetailPage = () => {
 						<section className='container-comments'>
 							<ul className='container-comments__lists'>
 								{isSuccess &&
-									commentsList.map((comment, _) => {
+									detailedData.comments.map((comment, _) => {
 										return (
 											<Comment
 												key={comment.id}
