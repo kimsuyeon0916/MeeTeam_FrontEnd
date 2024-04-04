@@ -6,7 +6,7 @@ import {
 	useReadUniversityList,
 	useReadDepartmentList,
 } from './useAuth';
-import { useReadProfile } from './useProfile';
+import { useReadProfile, useUpdateProfile } from './useProfile';
 import useDebounce from './useDebounce';
 import useValid from './useValid';
 
@@ -15,9 +15,10 @@ export {
 	useNaverSignUp,
 	useCertificateSchool,
 	useCheckDuplicateNickname,
-  useReadProfile,
+	useReadProfile,
 	useDebounce,
 	useValid,
 	useReadUniversityList,
 	useReadDepartmentList,
+	useUpdateProfile,
 };
