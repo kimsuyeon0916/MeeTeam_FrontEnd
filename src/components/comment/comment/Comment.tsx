@@ -103,6 +103,10 @@ const Comment = ({
 		setMention(nickname);
 	};
 
+	const replyInputHandler = () => {
+		setReplyClicked(false);
+	};
+
 	return (
 		<S.Comment>
 			<section className='wrapper'>
@@ -174,6 +178,7 @@ const Comment = ({
 						groupNumber={groupNumber}
 						pageNum={pageNum}
 						mention={mention}
+						replyInputHandler={replyInputHandler}
 					/>
 				)}
 			</section>

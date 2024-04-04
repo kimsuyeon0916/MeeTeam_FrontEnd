@@ -4,15 +4,23 @@ import S from './ReplyInput.styled';
 import { Reply } from '../../../assets';
 import { useComment } from '../../../hooks';
 import { useQueryClient } from '@tanstack/react-query';
+import { realpath } from 'fs/promises';
 
 interface ReplyHandler {
 	mention?: string;
 	pageNum: number;
 	groupNumber: number;
 	onClickCancel: () => void;
+	replyInputHandler: () => void;
 }
 
-const ReplyInput = ({ mention, pageNum, groupNumber, onClickCancel }: ReplyHandler) => {
+const ReplyInput = ({
+	mention,
+	pageNum,
+	groupNumber,
+	onClickCancel,
+	replyInputHandler,
+}: ReplyHandler) => {
 	const postComment = useComment();
 	const queryClient = useQueryClient();
 	const [contents, setContents] = useState<string>(mention ? `@${mention + ' '}` : '');
@@ -41,6 +49,7 @@ const ReplyInput = ({ mention, pageNum, groupNumber, onClickCancel }: ReplyHandl
 				},
 				{
 					onSuccess: () => {
+						replyInputHandler();
 						queryClient.invalidateQueries({ queryKey: ['detailedPage'] });
 					},
 				}
