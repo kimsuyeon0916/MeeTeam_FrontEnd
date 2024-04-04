@@ -1,11 +1,14 @@
 import React from 'react';
 import { Edit, TrashCan } from '../../../../assets';
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { editRecruitPost } from '../../../../service';
 
-const WriterFooter = () => {
-	const navigate = useNavigate();
+interface WriterFooter {
+	onClickEditPage: () => void;
+}
+
+const WriterFooter = ({ onClickEditPage }: WriterFooter) => {
 	const { id } = useParams();
 	const pageNumber = Number(id);
 	const close = useMutation({
@@ -19,7 +22,7 @@ const WriterFooter = () => {
 	};
 	return (
 		<>
-			<button type='button' className='btn-edit' onClick={() => navigate('/edit/recruit')}>
+			<button type='button' className='btn-edit' onClick={onClickEditPage}>
 				<img src={Edit} />
 			</button>
 			<button type='button' className='btn-delete'>

@@ -12,19 +12,20 @@ import { useMutation } from '@tanstack/react-query';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { recruitInputState, validState } from '../../../atom';
 import { postingRecruit } from '../../../service/recruit/posting';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { InputState } from '../../../types';
 
 const RecruitCreatePage = () => {
+	const location = useLocation();
 	const navigate = useNavigate();
 	const setIsSubmit = useSetRecoilState(validState);
 	const formData = useRecoilValue<InputState>(recruitInputState);
 	const validCheck = useRecoilValue(validState);
 
 	const uploadPost = useMutation({
-		mutationFn: (formData: any) => postingRecruit(formData),
+		mutationFn: (formData: InputState) => postingRecruit(formData),
 		onSuccess: () => {
-			navigate(`/recruit/${uploadPost}`);
+			navigate(`/recruit/${uploadPost.data}`);
 		},
 	});
 

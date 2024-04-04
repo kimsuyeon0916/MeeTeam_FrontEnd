@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import S from '../BasicInformation.styled';
 import { useQuery } from '@tanstack/react-query';
-import { useDebounce, useValid } from '../../../../../hooks';
+import { useDebounce } from '../../../../../hooks';
 import { getCourseKeyword, getProfessorKeyword } from '../../../../../service';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { recruitInputState } from '../../../../../atom';
 
 const ContainerCourse = () => {
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
-	const [isChecked, setIsChecked] = useState<boolean>(false);
-	const setFormData = useSetRecoilState(recruitInputState);
+	const [formData, setFormData] = useRecoilState(recruitInputState);
+	const [isChecked, setIsChecked] = useState<boolean>(formData.courseTag.isCourse);
 	const [name, setName] = useState({
-		course: '',
-		professor: '',
+		course: formData.courseTag.courseTagName as string,
+		professor: formData.courseTag.courseProfessor as string,
 	});
 	const [dropdown, setDropdown] = useState({
 		course: false,
@@ -84,13 +84,11 @@ const ContainerCourse = () => {
 
 	return (
 		<S.ContainerCourse $isChecked={isChecked} ref={dropdownRef}>
-			<span className='input-subtitle'>
-				수업 <span>{'*'}</span>
-			</span>
+			<span className='input-subtitle'>수업</span>
 			<section className='intro'>
 				<span className='description'>수업이신 경우 오른쪽의 “수업” 체크박스를 눌러주세요.</span>
 				<section>
-					<input type='checkbox' id='course' onClick={onClickCheckbox} />
+					<input type='checkbox' id='course' onClick={onClickCheckbox} checked={isChecked} />
 					<label className='course-label' htmlFor='course'>
 						수업
 					</label>

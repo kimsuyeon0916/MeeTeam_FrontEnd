@@ -17,19 +17,21 @@ import {
 	ClosedFooter,
 } from '../../../components';
 import { fixModalBackground } from '../../../utils';
-import { Comment as CommentForm, JsxElementComponentProps } from '../../../types';
+import { JsxElementComponentProps } from '../../../types';
 import { useQuery } from '@tanstack/react-query';
 import { getPostingData } from '../../../service';
-import { useRecoilValue } from 'recoil';
-import { applyModalState, applyStepState } from '../../../atom';
-import { useParams } from 'react-router-dom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { applyModalState, applyStepState, recruitInputState } from '../../../atom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useLogin } from '../../../hooks';
 
 const RecruitDetailPage = () => {
 	const { id } = useParams();
+	const navigate = useNavigate();
 	const pageNum = Number(id);
 	const isModal = useRecoilValue(applyModalState);
 	const step = useRecoilValue(applyStepState);
+	const setFormData = useSetRecoilState(recruitInputState);
 	const stepLists: JsxElementComponentProps = {
 		0: <ApplyModal />,
 		1: <ConfirmModal />,
@@ -41,8 +43,6 @@ const RecruitDetailPage = () => {
 		queryKey: ['detailedPage', { pageNum, isLoggedIn }],
 		queryFn: () => getPostingData({ pageNum, isLoggedIn }),
 	});
-
-	const [commentsList, setCommentsList] = useState<CommentForm[]>([]);
 	const period = detailedData?.proceedingStart + ' ~ ' + detailedData?.proceedingEnd;
 
 	// 함수로 변경 후 -> useMemo 사용하기
@@ -54,24 +54,45 @@ const RecruitDetailPage = () => {
 	).toString();
 
 	const totalCommentsCount = useMemo(() => {
-		let count = commentsList.length;
-		commentsList.forEach(comment => {
-			if (comment.replies) {
-				count += comment.replies.length;
-			}
-		});
-		return count;
-	}, [commentsList]);
+		if (detailedData) {
+			let count = detailedData?.comments.length;
+			detailedData?.comments.forEach(comment => {
+				if (comment.replies) {
+					count += comment.replies.length;
+				}
+			});
+			return count;
+		}
+	}, [detailedData?.comments]);
+
+	const onClickEditPage = async () => {
+		if (detailedData) {
+			setFormData({
+				scope: detailedData.scope,
+				category: detailedData.category,
+				deadline: detailedData.deadline,
+				proceedingStart: detailedData.proceedingStart,
+				proceedingEnd: detailedData.proceedingEnd,
+				fieldId: 1,
+				proceedType: detailedData.proceedType,
+				courseTag: {
+					courseTagName: detailedData.courseName,
+					courseProfessor: detailedData.courseProfessor,
+					isCourse: detailedData.courseName || detailedData.courseProfessor ? true : false,
+				},
+				tags: detailedData.tags.map(e => e.name),
+				title: detailedData.title,
+				content: detailedData.content,
+			});
+		}
+		navigate('/edit/recruit');
+	};
+
+	console.log(detailedData?.tags.map(e => e.name));
 
 	useEffect(() => {
 		fixModalBackground(isModal);
 	}, [isModal]);
-
-	useEffect(() => {
-		if (isSuccess) {
-			setCommentsList(detailedData?.comments as any); // 타입 에러를 수정하기 힘드네요..
-		}
-	}, [isSuccess, detailedData?.comments]);
 
 	return (
 		<>
@@ -112,7 +133,7 @@ const RecruitDetailPage = () => {
 						<section className='container-comments'>
 							<ul className='container-comments__lists'>
 								{isSuccess &&
-									commentsList.map((comment, _) => {
+									detailedData.comments.map((comment, _) => {
 										return (
 											<Comment
 												key={comment.id}
@@ -143,7 +164,9 @@ const RecruitDetailPage = () => {
 			<S.Footer>
 				{detailedData && (
 					<section className='container-btn'>
-						{detailedData.isWriter && !detailedData.isClosed && <WriterFooter />}
+						{detailedData.isWriter && !detailedData.isClosed && (
+							<WriterFooter onClickEditPage={onClickEditPage} />
+						)}
 						{!detailedData.isWriter && <ApplierFooter deadline={detailedData.deadline} />}
 						{detailedData.isClosed && <ClosedFooter />}
 					</section>

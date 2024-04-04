@@ -37,7 +37,7 @@ export interface InputState {
 		courseTagName: string | null;
 		courseProfessor: string | null;
 	};
-	recruitmentRoles: RoleForPost[];
+	recruitmentRoles?: RoleForPost[];
 	tags: string[];
 	title: string;
 	content: string;

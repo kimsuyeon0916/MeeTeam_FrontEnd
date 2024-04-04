@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	DeadlineSelect,
 	DateSelect,
@@ -14,6 +14,7 @@ import { useValid } from '../../../../hooks';
 const BasicInformation = () => {
 	const [formData, setFormData] = useRecoilState(recruitInputState);
 	const { validMessage, isValid } = useValid(formData);
+	const [isClicked, setIsClicked] = useState<boolean>(false);
 
 	const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setFormData(prev => ({ ...prev, title: event.target.value }));
@@ -35,10 +36,9 @@ const BasicInformation = () => {
 							placeholder='40자 이내로 제목을 작성해주세요.'
 							value={formData.title}
 							onChange={onChangeTitle}
+							onClick={() => setIsClicked(true)}
 						/>
-						{isValid.isSubmitted && !isValid.isTitle && (
-							<p className='valid-msg'>{validMessage.title}</p>
-						)}
+						{isClicked && !isValid.isTitle && <p className='valid-msg'>{validMessage.title}</p>}
 					</article>
 					<article className='inputs-deadline'>
 						<span className='input-subtitle'>

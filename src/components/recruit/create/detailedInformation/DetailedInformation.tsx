@@ -7,13 +7,14 @@ import S from './DetailedInformation.styled';
 
 const DetailedInformation = () => {
 	const quillRef = useRef<ReactQuill | null>(null);
-	const [posting, setPosting] = useState('');
 	const [info, setInfo] = useRecoilState(recruitInputState);
+	const [posting, setPosting] = useState(info.content);
 
 	const onChangeContents = (contents: string) => {
 		setPosting(contents);
 		setInfo({ ...info, content: contents });
 	};
+
 	return (
 		<S.DetailedInformation>
 			<section className='container-details'>

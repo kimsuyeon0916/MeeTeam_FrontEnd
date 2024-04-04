@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import S from './MeeteamTag.styled';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { recruitInputState } from '../../atom';
 import { useDebounce } from '../../hooks';
 import { useQuery } from '@tanstack/react-query';
@@ -13,14 +13,15 @@ interface IMeeteamTag {
 }
 
 const MeeteamTag = ({ tags }: IMeeteamTag) => {
-	const setInfos = useSetRecoilState(recruitInputState);
+	const [formData, setFormData] = useRecoilState(recruitInputState);
 	const [tagItem, setTagItem] = useState<string>('');
-	const [tagList, setTagList] = useState<string[]>([]);
+	const [tagList, setTagList] = useState<string[]>(formData.tags);
 	const [isTouched, setIsTouched] = useState<boolean>(false);
 	const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const keywordTag = useDebounce(tagItem, 500);
 
+	console.log(tagList);
 	const { data, isSuccess } = useQuery({
 		queryKey: ['keywordTag', keywordTag],
 		queryFn: () => getTagKeyword(keywordTag),
@@ -42,7 +43,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 			const trimmedTagItem = tagItem.trim();
 			if (!prev.includes(trimmedTagItem)) {
 				const updatedList = [...prev, trimmedTagItem];
-				setInfos(prev => ({ ...prev, tags: updatedList }));
+				setFormData(prev => ({ ...prev, tags: updatedList }));
 				return updatedList;
 			}
 			return prev;
@@ -55,7 +56,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 		setTagList(prev => {
 			const updatedList = prev.filter(elem => elem !== id);
 
-			setInfos(prev => ({ ...prev, tags: updatedList }));
+			setFormData(prev => ({ ...prev, tags: updatedList }));
 			return updatedList;
 		});
 	};
@@ -69,7 +70,7 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 		if (!tagList.includes(selectedTag) && tagList.length < 6) {
 			setTagList(prev => {
 				const updatedList = [...prev, selectedTag];
-				setInfos(prev => ({ ...prev, tags: updatedList }));
+				setFormData(prev => ({ ...prev, tags: updatedList }));
 				return updatedList;
 			});
 			setIsDropdownVisible(false);
