@@ -6,7 +6,7 @@ import { DefaultPortfolioImage } from '../../../assets';
 interface PortfolioCard {
 	id: string;
 	title: string;
-	imageUrl?: string;
+	mainImageUrl?: string;
 	field: string;
 	role: string;
 	isEditable?: boolean;
@@ -17,7 +17,7 @@ interface PortfolioCard {
 const PortfolioCard = ({
 	id,
 	title,
-	imageUrl,
+	mainImageUrl,
 	field,
 	role,
 	isEditable,
@@ -30,7 +30,7 @@ const PortfolioCard = ({
 		<S.PortfolioCardLayout onClick={() => navigate(`/portfolio/${id}`)}>
 			<S.PortfolioCardBox>
 				<S.PortfolioCardImage
-					src={imageUrl ? imageUrl : DefaultPortfolioImage}
+					src={mainImageUrl ? mainImageUrl : DefaultPortfolioImage}
 					alt='포트폴리오이미지'
 				/>
 				<S.PortfolioTagRow>
