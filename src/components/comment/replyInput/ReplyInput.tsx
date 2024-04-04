@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { ProfileImage } from '../..';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import S from './ReplyInput.styled';
 import { Reply } from '../../../assets';
 import { useComment } from '../../../hooks';
 import { useQueryClient } from '@tanstack/react-query';
 
 interface ReplyHandler {
-	pageNum: number;
+	pageNum?: number;
 	groupNumber: number;
 	onClickCancel: () => void;
 }
 
-const ReplyInput = ({ groupNumber, onClickCancel, pageNum }: ReplyHandler) => {
+const ReplyInput = ({ groupNumber, onClickCancel }: ReplyHandler) => {
 	const navigate = useNavigate();
+	const { id } = useParams();
+	const pageNum = Number(id);
 	const postComment = useComment();
 	const isLogin = true; // 임시 코드
 	const queryClient = useQueryClient();
@@ -87,6 +89,7 @@ const ReplyInput = ({ groupNumber, onClickCancel, pageNum }: ReplyHandler) => {
 					답글
 				</button>
 			</section>
+			<hr />
 		</S.ReplyInput>
 	);
 };

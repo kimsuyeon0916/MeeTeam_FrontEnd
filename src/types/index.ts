@@ -17,6 +17,8 @@ import type {
 	CommentContents,
 	GroupContents,
 	DeleteComment,
+	EditContents,
+	EditingComment,
 } from './recruit/payload';
 import type { Comment } from './comment';
 import type {
@@ -81,4 +83,6 @@ export type {
 	CommentContents,
 	GroupContents,
 	DeleteComment,
+	EditContents,
+	EditingComment,
 };

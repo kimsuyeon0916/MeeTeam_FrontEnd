@@ -1,5 +1,12 @@
 import { EndPoint, axiosInstance, axiosAuthInstance } from '..';
-import { RecruitPostings, ApplyInfo, ApplyForm, PostingComment, DeleteComment } from '../../types';
+import {
+	RecruitPostings,
+	ApplyInfo,
+	ApplyForm,
+	PostingComment,
+	DeleteComment,
+	EditingComment,
+} from '../../types';
 
 interface PostingData {
 	pageNum: number;
@@ -72,7 +79,7 @@ export const editRecruitPost = async (id: number) => {
 export const postComment = async ({ pageNum, comment }: PostingComment) => {
 	try {
 		const response = await axiosAuthInstance.post(
-			EndPoint.RECRUIT_DETAIL.postComment(pageNum),
+			EndPoint.RECRUIT_DETAIL.comment(pageNum),
 			comment
 		);
 		return response;
@@ -83,9 +90,20 @@ export const postComment = async ({ pageNum, comment }: PostingComment) => {
 
 export const deleteComment = async ({ pageNum, commentId }: DeleteComment) => {
 	try {
-		const response = await axiosAuthInstance.delete(
-			EndPoint.RECRUIT_DETAIL.deleteComment(pageNum),
-			{ data: commentId }
+		const response = await axiosAuthInstance.delete(EndPoint.RECRUIT_DETAIL.comment(pageNum), {
+			data: commentId,
+		});
+		return response;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const editComment = async ({ pageNum, comment }: EditingComment) => {
+	try {
+		const response = await axiosAuthInstance.patch(
+			EndPoint.RECRUIT_DETAIL.comment(pageNum),
+			comment
 		);
 		return response;
 	} catch (error) {

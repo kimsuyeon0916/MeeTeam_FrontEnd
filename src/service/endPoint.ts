@@ -21,8 +21,7 @@ export const EndPoint = {
 		apply: (id: number) => `/recruitment/postings/${id}/apply`,
 		bookmark: (id: number) => `/recruitment/postings/${id}/bookmark`,
 		edit: (id: number) => `/recruitment/postings/${id}/close`,
-		postComment: (id: number) => `/recruitment/postings/${id}/comment`,
-		deleteComment: (id: number) => `/recruitment/postings/${id}/comment`,
+		comment: (id: number) => `/recruitment/postings/${id}/comment`,
 	},
 	RECRUITMENT: {
 		post: '/recruitment/postings',

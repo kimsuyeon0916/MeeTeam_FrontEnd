@@ -113,3 +113,13 @@ export interface DeleteComment {
 	pageNum: number;
 	commentId: { commentId: number };
 }
+
+export interface EditContents {
+	commentId: number;
+	content: string;
+}
+
+export interface EditingComment {
+	pageNum: number;
+	comment: EditContents;
+}

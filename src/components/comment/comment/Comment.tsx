@@ -3,8 +3,8 @@ import { KebabMenu, ProfileImage, ReplyComment, ReplyInput } from '../..';
 import S from './Comment.styled';
 import { Comment as CommentType } from '../../../types';
 import { useParams } from 'react-router-dom';
-import { useCommentDelete } from '../../../hooks';
-import { useQueryClient } from '@tanstack/react-query';
+import { useCommentDelete, useCommentEdit } from '../../../hooks';
+import { QueryClientProvider, useQueryClient } from '@tanstack/react-query';
 
 const Comment = ({
 	id,
@@ -27,6 +27,8 @@ const Comment = ({
 	const [isEdit, setIsEdit] = useState<boolean>(false);
 	const deleteComment = useCommentDelete();
 	const queryClient = useQueryClient();
+	const editComment = useCommentEdit();
+
 	const optionLists = [
 		{
 			title: '답글',
@@ -58,21 +60,42 @@ const Comment = ({
 		},
 	];
 
-	const deleteReply = (id: number) => {
-		setRepliesList(prevReplies => prevReplies?.filter(v => v.id !== id));
-	};
-
-	const editComment = () => {
-		setIsEdit(false);
-		setShowKebab(true);
-	};
-
 	const onChangeEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(event.target.value);
 	};
 
 	const onClickCancel = () => {
 		setReplyClicked(false);
+	};
+
+	const editingComment = () => {
+		setIsEdit(false);
+		setShowKebab(true);
+		onClickSave();
+	};
+
+	const onKeyPressEdit = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		const target = event.currentTarget;
+		if (target.value.length !== 0 && event.key === 'Enter') {
+			event.preventDefault();
+			editingComment();
+		}
+	};
+
+	const onClickSave = () => {
+		const comment = {
+			commentId: id,
+			content: value,
+		};
+		editComment.mutate(
+			{ pageNum, comment },
+			{
+				onSuccess: () => {
+					queryClient.invalidateQueries({ queryKey: ['detailedPage'] });
+					setIsEdit(false);
+				},
+			}
+		);
 	};
 
 	return (
@@ -84,12 +107,37 @@ const Comment = ({
 							<ProfileImage url={profileImg} nickname={nickname} size='2.31rem' />
 						</section>
 						<span className='nickname'>{nickname}</span>
-						<span className='createAt'>
-							{createAt.length > 10 ? createAt.slice(0, -9) : createAt}
-						</span>
+						{!isEdit && (
+							<span className='createAt'>
+								{createAt.length > 10 ? createAt.slice(0, -9) : createAt}
+							</span>
+						)}
 					</section>
 					<section className='comment-info'>
-						<span>{value === null ? '삭제된 메세지입니다.' : value}</span>
+						{!isEdit ? (
+							<span>{value === null ? '삭제된 메세지입니다.' : value}</span>
+						) : (
+							<section className='edit-container'>
+								<input
+									className='edit-input'
+									value={value}
+									onChange={onChangeEdit}
+									onKeyPress={onKeyPressEdit}
+								/>
+								<section className='btn-container'>
+									<button
+										type='button'
+										className='txt-small cancel'
+										onClick={() => setIsEdit(false)}
+									>
+										취소
+									</button>
+									<button type='button' className='txt-small save' onClick={onClickSave}>
+										저장
+									</button>
+								</section>
+							</section>
+						)}
 					</section>
 				</article>
 				{isWriter && showKebab && <KebabMenu options={optionLists} />}
@@ -109,7 +157,6 @@ const Comment = ({
 								profileImg={reply.profileImg}
 								isWriter={reply.isWriter}
 								groupOrder={reply.groupOrder}
-								deleteComment={() => deleteReply(reply.id)}
 							/>
 						);
 					})}

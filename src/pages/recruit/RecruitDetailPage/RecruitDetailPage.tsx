@@ -38,7 +38,11 @@ const RecruitDetailPage = () => {
 	};
 	const { isLoggedIn } = useLogin();
 
-	const { data: detailedData, isSuccess } = useQuery({
+	const {
+		data: detailedData,
+		isSuccess,
+		refetch,
+	} = useQuery({
 		queryKey: ['detailedPage', { pageNum, isLoggedIn }],
 		queryFn: () => getPostingData({ pageNum, isLoggedIn }),
 	});
@@ -71,7 +75,7 @@ const RecruitDetailPage = () => {
 		if (isSuccess) {
 			setCommentsList(detailedData?.comments as any); // 타입 에러를 수정하기 힘드네요..
 		}
-	}, [isSuccess, detailedData]);
+	}, [isSuccess, detailedData?.comments]);
 
 	return (
 		<>
