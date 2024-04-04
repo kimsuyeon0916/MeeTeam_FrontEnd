@@ -58,14 +58,16 @@ export interface Link {
 
 export interface Portfolio {
 	id: string;
+	mainImageUrl?: string;
 	title: string;
-	imageUrl?: string;
 	description: string;
 	startDate: string;
 	endDate: string;
 	field: string;
 	role: string;
 	skills: Skill[];
+	pinOrder: string;
+	pinned: boolean;
 }
 
 // interface Meeteam {}
