@@ -22,6 +22,8 @@ import MyActivityApply from './activity/MyActivityApply';
 import MyActivityBookmark from './activity/MyActivityBookmark';
 import ProfileDetailsPage from './profile/details/ProfileDetailsPage';
 import { userData } from './profile/userData';
+import ProfileEditPage from './profile/edit/ProfileEditPage';
+import PROFILE_EDIT_DATA from './profile/edit/ProfileEditData';
 
 export {
 	MainPage,
@@ -49,4 +51,6 @@ export {
 	MyActivityBookmark,
 	ProfileDetailsPage,
 	userData,
+	ProfileEditPage,
+	PROFILE_EDIT_DATA,
 };
