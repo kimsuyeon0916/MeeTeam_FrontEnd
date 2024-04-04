@@ -12,5 +12,6 @@ export const EndPoint = {
 	/* profile */
 	PROFILE: {
 		read: (userId: string) => `/user/profile/${userId}`,
+		update: '/user/profile',
 	},
 };
