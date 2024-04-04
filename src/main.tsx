@@ -20,6 +20,7 @@ import {
 	MyActivityApply,
 	MyActivityBookmark,
 	ProfileDetailsPage,
+	ProfileEditPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -93,6 +94,10 @@ const router = createBrowserRouter([
 			{
 				path: 'profile/:userId?',
 				element: <ProfileDetailsPage />,
+			},
+			{
+				path: 'profile/edit',
+				element: <ProfileEditPage />,
 			},
 		],
 	},
