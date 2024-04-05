@@ -24,23 +24,20 @@ const RecruitCreatePage = () => {
 
 	const uploadPost = useMutation({
 		mutationFn: (formData: InputState) => postingRecruit(formData),
-		onSuccess: () => {
-			navigate(`/recruit/${uploadPost.data}`);
+		onSuccess: (data: { recruitmentPostId: number } | undefined) => {
+			navigate(`/recruit/${data?.recruitmentPostId}`);
 		},
 	});
 
 	const editPost = useMutation({
 		mutationFn: ({ pageNum, formData }: EditPosting) => editPostingRecruit({ pageNum, formData }),
+		onSuccess: () => {
+			navigate(`/recruit/${editPost.data}`);
+		},
 	});
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-
-		setIsSubmit(prev => ({
-			...prev,
-			isSubmitted: true,
-		}));
-
 		const postAvailable =
 			validCheck.isCategory &&
 			validCheck.isDeadline &&
@@ -48,9 +45,19 @@ const RecruitCreatePage = () => {
 			validCheck.isScope &&
 			validCheck.isTag &&
 			validCheck.isTitle;
+		const pageNum = formData.pageNum;
+
+		setIsSubmit(prev => ({
+			...prev,
+			isSubmitted: true,
+		}));
 
 		if (postAvailable && location.pathname.includes('create')) {
 			uploadPost.mutate(formData);
+		}
+
+		if (postAvailable && location.pathname.includes('edit') && pageNum) {
+			editPost.mutate({ pageNum, formData });
 		}
 	};
 

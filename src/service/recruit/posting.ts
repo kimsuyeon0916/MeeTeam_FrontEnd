@@ -2,10 +2,17 @@ import { EditPosting, InputState, Keyword } from '../../types';
 import { axiosAuthInstance, axiosInstance } from '..';
 import { EndPoint } from '..';
 
+interface Result {
+	recruitmentPostId: number;
+}
+
 export const postingRecruit = async (formData: InputState) => {
 	try {
-		const id = await axiosAuthInstance.post(EndPoint.RECRUITMENT.post, formData);
-		return id;
+		const response: Result | undefined = await axiosAuthInstance.post(
+			EndPoint.RECRUITMENT.post,
+			formData
+		);
+		return response;
 	} catch (error) {
 		console.error(error);
 	}

@@ -1,12 +1,13 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const ControlButtons = () => {
 	const location = useLocation();
+	const navigate = useNavigate();
 
 	return (
 		<section className='container-btns'>
-			<button type='button' className='cancel-btn'>
+			<button type='button' className='cancel-btn' onClick={() => navigate(-1)}>
 				취소
 			</button>
 			<button type='submit' className='submit-btn'>
