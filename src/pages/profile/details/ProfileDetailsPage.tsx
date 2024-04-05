@@ -90,10 +90,11 @@ const ProfileDetailsPage = () => {
 									</S.ProfileColumn>
 									<S.ProfileColumn $gap='1.5rem'>{description}</S.ProfileColumn>
 								</S.ProfileRow>
-								<hr />
+								{index + 1 !== user?.awards?.length && <hr />}
 							</S.ProfileColumn>
 						))}
 					</S.ProfileColumn>
+					<hr />
 				</S.ProfileArticle>
 
 				<S.ProfileArticle>
