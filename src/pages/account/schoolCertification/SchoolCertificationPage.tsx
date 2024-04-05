@@ -39,7 +39,6 @@ const SchoolCertificationPage = () => {
 	const { mutate } = useCertificateSchool({ onSuccess: checkCertificationInSuccess });
 
 	const certificateHandler: SubmitHandler<FormValues> = data => {
-		console.log(localStorage.PLATFORM_ID);
 		mutate({
 			platformId: localStorage.PLATFORM_ID,
 			year: data.year,
