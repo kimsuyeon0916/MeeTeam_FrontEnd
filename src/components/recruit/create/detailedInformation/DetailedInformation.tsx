@@ -31,6 +31,7 @@ const DetailedInformation = () => {
 						theme='snow'
 						modules={modules}
 						onChange={onChangeContents}
+						value={posting}
 					/>
 				</section>
 			</section>

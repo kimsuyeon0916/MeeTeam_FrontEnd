@@ -88,8 +88,6 @@ const RecruitDetailPage = () => {
 		navigate('/edit/recruit');
 	};
 
-	console.log(detailedData?.tags.map(e => e.name));
-
 	useEffect(() => {
 		fixModalBackground(isModal);
 	}, [isModal]);

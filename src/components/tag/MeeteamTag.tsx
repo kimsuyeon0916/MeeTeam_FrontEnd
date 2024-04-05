@@ -8,11 +8,11 @@ import { getTagKeyword } from '../../service';
 import { Search, XBtn } from '../../assets';
 import { Keyword } from '../../types';
 
-interface IMeeteamTag {
+interface MeeteamTag {
 	tags?: string[];
 }
 
-const MeeteamTag = ({ tags }: IMeeteamTag) => {
+const MeeteamTag = ({ tags }: MeeteamTag) => {
 	const [formData, setFormData] = useRecoilState(recruitInputState);
 	const [tagItem, setTagItem] = useState<string>('');
 	const [tagList, setTagList] = useState<string[]>(formData.tags);
@@ -21,7 +21,6 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const keywordTag = useDebounce(tagItem, 500);
 
-	console.log(tagList);
 	const { data, isSuccess } = useQuery({
 		queryKey: ['keywordTag', keywordTag],
 		queryFn: () => getTagKeyword(keywordTag),
