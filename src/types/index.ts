@@ -19,6 +19,7 @@ import type {
 	DeleteComment,
 	EditContents,
 	EditingComment,
+	EditPosting,
 } from './recruit/payload';
 import type { Comment } from './comment';
 import type {
@@ -85,4 +86,5 @@ export type {
 	DeleteComment,
 	EditContents,
 	EditingComment,
+	EditPosting,
 };

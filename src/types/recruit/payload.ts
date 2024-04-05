@@ -25,6 +25,7 @@ export interface RoleForPost {
 }
 
 export interface InputState {
+	pageNum?: number;
 	scope: string;
 	category: string;
 	fieldId: number;
@@ -122,4 +123,9 @@ export interface EditContents {
 export interface EditingComment {
 	pageNum: number;
 	comment: EditContents;
+}
+
+export interface EditPosting {
+	pageNum: number;
+	formData: InputState;
 }

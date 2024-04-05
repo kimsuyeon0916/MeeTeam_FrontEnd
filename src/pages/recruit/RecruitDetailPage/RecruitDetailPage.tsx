@@ -68,6 +68,7 @@ const RecruitDetailPage = () => {
 	const onClickEditPage = async () => {
 		if (detailedData) {
 			setFormData({
+				pageNum: pageNum,
 				scope: detailedData.scope,
 				category: detailedData.category,
 				deadline: detailedData.deadline,

@@ -17,6 +17,7 @@ import {
 	getCourseKeyword,
 	getProfessorKeyword,
 	getTagKeyword,
+	editPostingRecruit,
 } from './recruit/posting';
 
 export {
@@ -40,4 +41,5 @@ export {
 	getProfessorKeyword,
 	getTagKeyword,
 	editRecruitPost,
+	editPostingRecruit,
 };

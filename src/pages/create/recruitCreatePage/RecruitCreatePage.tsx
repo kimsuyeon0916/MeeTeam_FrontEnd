@@ -11,9 +11,9 @@ import {
 import { useMutation } from '@tanstack/react-query';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { recruitInputState, validState } from '../../../atom';
-import { postingRecruit } from '../../../service/recruit/posting';
+import { editPostingRecruit, postingRecruit } from '../../../service/recruit/posting';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { InputState } from '../../../types';
+import { EditPosting, InputState } from '../../../types';
 
 const RecruitCreatePage = () => {
 	const location = useLocation();
@@ -27,6 +27,10 @@ const RecruitCreatePage = () => {
 		onSuccess: () => {
 			navigate(`/recruit/${uploadPost.data}`);
 		},
+	});
+
+	const editPost = useMutation({
+		mutationFn: ({ pageNum, formData }: EditPosting) => editPostingRecruit({ pageNum, formData }),
 	});
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -45,7 +49,7 @@ const RecruitCreatePage = () => {
 			validCheck.isTag &&
 			validCheck.isTitle;
 
-		if (postAvailable) {
+		if (postAvailable && location.pathname.includes('create')) {
 			uploadPost.mutate(formData);
 		}
 	};

@@ -1,4 +1,4 @@
-import { InputState, Keyword } from '../../types';
+import { EditPosting, InputState, Keyword } from '../../types';
 import { axiosAuthInstance, axiosInstance } from '..';
 import { EndPoint } from '..';
 
@@ -50,6 +50,18 @@ export const getProfessorKeyword = async (keyword: string) => {
 export const getTagKeyword = async (keyword: string) => {
 	try {
 		const response = await axiosInstance.get<Keyword[]>(EndPoint.RECRUITMENT.tag(keyword));
+		return response;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const editPostingRecruit = async ({ pageNum, formData }: EditPosting) => {
+	try {
+		const response = await axiosAuthInstance.put(
+			EndPoint.RECRUIT_DETAIL.posting(pageNum),
+			formData
+		);
 		return response;
 	} catch (error) {
 		console.error(error);
