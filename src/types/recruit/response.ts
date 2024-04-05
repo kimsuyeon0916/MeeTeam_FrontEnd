@@ -22,6 +22,7 @@ export interface RecruitInfo {
 	proceedType: string;
 	courseProfessor: string | null;
 	dDay: string;
+	isClosed: boolean;
 }
 
 export interface RecruitDescription {

@@ -1,24 +1,17 @@
 import React from 'react';
 import { Edit, TrashCan } from '../../../../assets';
-import { useMutation } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
-import { editRecruitPost } from '../../../../service';
+import { useSetRecoilState } from 'recoil';
+import { applyCloseModalState } from '../../../../atom';
 
 interface WriterFooter {
 	onClickEditPage: () => void;
 }
 
 const WriterFooter = ({ onClickEditPage }: WriterFooter) => {
-	const { id } = useParams();
-	const pageNumber = Number(id);
-	const close = useMutation({
-		mutationFn: (pageNumber: number) => editRecruitPost(pageNumber),
-	});
+	const setIsClose = useSetRecoilState(applyCloseModalState);
 
 	const onClickClose = () => {
-		if (id) {
-			close.mutate(pageNumber);
-		}
+		setIsClose(true);
 	};
 	return (
 		<>
