@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const LinkLayout = styled.div`
+const LinkFormLayout = styled.div`
 	flex: 1;
 	display: flex;
 	flex-direction: row;
@@ -11,6 +11,6 @@ const LinkLayout = styled.div`
 	row-gap: 1rem;
 `;
 
-const S = { LinkLayout };
+const S = { LinkFormLayout };
 
 export default S;

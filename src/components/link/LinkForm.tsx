@@ -1,5 +1,5 @@
 import React from 'react';
-import S from './Link.styled';
+import S from './LinkForm.styled';
 import { AddBtn, ComboBox, DeleteBtn, Input } from '..';
 import {
 	FieldValues,
@@ -22,7 +22,7 @@ export interface Option {
 	title: string;
 }
 
-interface Link<T extends FieldValues> {
+interface LinkForm<T extends FieldValues> {
 	index?: number;
 	defaultValue?: string;
 	width?: string;
@@ -42,7 +42,7 @@ interface Link<T extends FieldValues> {
 	handleInputClick?: React.MouseEventHandler<HTMLInputElement>;
 }
 
-const Link = <T extends FieldValues>({
+const LinkForm = <T extends FieldValues>({
 	index,
 	width,
 	prepend,
@@ -54,7 +54,7 @@ const Link = <T extends FieldValues>({
 	clickOption,
 	handleInputClick,
 	...props
-}: Link<T>) => {
+}: LinkForm<T>) => {
 	const addLink = () => {
 		if (!getValues(`links.${index}.url` as Path<T>)) return;
 		prepend({ description: 'Link', url: '' } as FieldArray<T, ArrayPath<T>>);
@@ -65,7 +65,7 @@ const Link = <T extends FieldValues>({
 	};
 
 	return (
-		<S.LinkLayout>
+		<S.LinkFormLayout>
 			<ComboBox
 				width={width}
 				name={`links.${index}.description`}
@@ -83,8 +83,8 @@ const Link = <T extends FieldValues>({
 				{...PROFILE_EDIT_DATA.linkUrl}
 			/>
 			{index === 0 ? <AddBtn handleClick={addLink} /> : <DeleteBtn handleClick={deleteLink} />}
-		</S.LinkLayout>
+		</S.LinkFormLayout>
 	);
 };
 
-export default Link;
+export default LinkForm;

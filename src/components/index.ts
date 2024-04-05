@@ -107,7 +107,7 @@ import Textarea from './textarea/Textarea';
 import Radio from './radio/Radio';
 import AddBtn from './button/AddBtn';
 import DeleteBtn from './button/DeleteBtn';
-import Link from './link/Link';
+import LinkForm from './link/LinkForm';
 import MuiDatepicker from './muiDatepicker/MuiDatepicker';
 import DefaultBtn from './button/DefaultBtn';
 import PrimaryBtn from './button/PrimaryBtn';
@@ -213,7 +213,7 @@ export {
 	Radio,
 	AddBtn,
 	DeleteBtn,
-	Link,
+	LinkForm,
 	MuiDatepicker,
 	DefaultBtn,
 	PrimaryBtn,
