@@ -32,7 +32,7 @@ const RecruitCreatePage = () => {
 	const editPost = useMutation({
 		mutationFn: ({ pageNum, formData }: EditPosting) => editPostingRecruit({ pageNum, formData }),
 		onSuccess: () => {
-			navigate(`/recruit/${editPost.data}`);
+			navigate(`/recruit/${formData.pageNum}`);
 		},
 	});
 

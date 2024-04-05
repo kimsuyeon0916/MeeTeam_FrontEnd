@@ -81,6 +81,7 @@ const RecruitDetailPage = () => {
 					courseProfessor: detailedData.courseProfessor,
 					isCourse: detailedData.courseName || detailedData.courseProfessor ? true : false,
 				},
+				recruitmentRoles: [],
 				tags: detailedData.tags.map(e => e.name),
 				title: detailedData.title,
 				content: detailedData.content,
