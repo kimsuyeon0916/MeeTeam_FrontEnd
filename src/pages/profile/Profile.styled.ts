@@ -140,8 +140,8 @@ const ProfileRow = styled.div<ProfileBoxStyle>`
 
 const ProfileGrid = styled.div`
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(18.3rem, 1fr));
-	grid-auto-rows: minmax(11.4rem, auto);
+	grid-template-columns: repeat(auto-fill, minmax(18.3rem, 1fr));
+	grid-auto-rows: minmax(10.3rem, auto);
 	row-gap: 2.4rem;
 	column-gap: 2.4rem;
 `;
