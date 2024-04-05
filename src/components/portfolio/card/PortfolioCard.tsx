@@ -36,8 +36,8 @@ const PortfolioCard = ({
 					alt='포트폴리오이미지'
 				/>
 				<S.PortfolioTagRow>
-					<S.PortfolioCardTag>{field}</S.PortfolioCardTag>
-					<S.PortfolioCardTag>{role}</S.PortfolioCardTag>
+					<S.PortfolioCardTag $color='#E0E6FF'>{field}</S.PortfolioCardTag>
+					<S.PortfolioCardTag $color='#C9DEFF'>{role}</S.PortfolioCardTag>
 				</S.PortfolioTagRow>
 				{isEditable && (
 					<S.PortfolioCardButton

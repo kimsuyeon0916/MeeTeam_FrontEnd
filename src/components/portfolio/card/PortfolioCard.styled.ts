@@ -49,20 +49,23 @@ const PortfolioTagRow = styled.div`
 	column-gap: 0.8rem;
 `;
 
-const PortfolioCardTag = styled.span`
+const PortfolioCardTag = styled.span<{ $color: string }>`
 	align-items: center;
 
 	display: flex;
-	padding: 0.6rem 0.8rem;
+	padding: 0.4rem 0.8rem;
 	border-radius: 0.4rem;
 
-	background: #eaf7ff;
-	color: #000;
+	background: ${props => props.$color};
+	color: var(--Text-textColor1, var(--text-color, #151515));
 
-	font-size: 1.4rem;
+	/* Text/t2 */
+	font-family: Pretendard;
+	font-size: 1.2rem;
+	font-style: normal;
 	font-weight: 500;
-	line-height: 1.4rem;
-	letter-spacing: 0.02rem;
+	line-height: 1.4rem; /* 116.667% */
+	letter-spacing: 0.0024rem;
 `;
 
 const PortfolioCardButton = styled.button<{ $checked?: boolean }>`
