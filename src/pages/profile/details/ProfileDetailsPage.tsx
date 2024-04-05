@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import S from '../Profile.styled';
 import { PortfolioCard, ProfileImage, SkillTag } from '../../../components';
 import { useReadProfile } from '../../../hooks';
@@ -12,9 +12,11 @@ const ProfileDetailsPage = () => {
 	const { userId } = useParams() as { userId: string };
 	const { data: user, isSuccess } = useReadProfile(userId);
 
-	if (isSuccess) {
-		userInfo?.nickname === user?.nickname && setUserState({ ...user, userId }); // 본인인지 아닌지 확인 로직 필요
-	}
+	useEffect(() => {
+		if (isSuccess) {
+			userInfo?.userId === userId && setUserState({ ...user, userId }); // 본인인지 아닌지 확인 로직 필요
+		}
+	}, [isSuccess]);
 
 	return (
 		<S.ProfileLayout>
