@@ -33,6 +33,12 @@ const InputLabel = styled.label<{ $width?: string }>`
 		line-height: 1.7rem; /* 121.429% */
 		letter-spacing: 0.0028rem;
 	}
+`;
+
+const InputContainer = styled.div`
+	position: relative;
+	display: flex;
+	flex-direction: column;
 
 	span {
 		margin-top: 0.4rem;
@@ -41,8 +47,10 @@ const InputLabel = styled.label<{ $width?: string }>`
 	}
 
 	small {
-		margin-top: 0.4rem;
-		margin-left: 1rem;
+		position: absolute;
+		top: 5.4rem;
+		left: 1rem;
+		white-space: nowrap; // 줄바꿈 방지
 		color: var(--ButtonColors-Caution-outline-defaultLine, #f85858);
 
 		/* Text/t4 */
@@ -97,6 +105,6 @@ const Input = styled.input<InputStyle>`
 	}
 `;
 
-const S = { InputLabel, Input };
+const S = { InputLabel, InputContainer, Input };
 
 export default S;
