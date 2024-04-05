@@ -7,8 +7,6 @@ import { useQuery } from '@tanstack/react-query';
 import { getApplyData } from '../../../../service';
 import { useParams } from 'react-router-dom';
 
-const isSelected = true; // 임시
-
 const ApplyModal = () => {
 	const { id } = useParams();
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -19,7 +17,7 @@ const ApplyModal = () => {
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [value, setValue] = useState<string>('신청 역할을 선택해주세요.');
-	const isValid = isChecked && isSelected;
+	const isValid = isChecked && value !== '신청 역할을 선택해주세요.';
 
 	const { data, isLoading } = useQuery({
 		queryKey: ['applyInfoNumber', Number(id)],
@@ -59,7 +57,7 @@ const ApplyModal = () => {
 	}, [data]);
 
 	return (
-		<S.Modal>
+		<S.Modal $isChecked={isValid}>
 			<article>
 				<h1>신청 정보</h1>
 				<section className='description'>

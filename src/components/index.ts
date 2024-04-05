@@ -120,6 +120,7 @@ import ApplierFooter from './recruit/recruitDetail/footer/ApplierFooter';
 import ClosedFooter from './recruit/recruitDetail/footer/ClosedFooter';
 import DetailedInput from './recruit/recruitBoard/detailedFilter/DetailedInput';
 import RecruitTags from './recruit/create/RecruitTags';
+import ApplyCancel from './recruit/recruitDetail/modal/applyCancel/ApplyCancel';
 
 export {
 	Header,
@@ -235,4 +236,5 @@ export {
 	DetailedInput,
 	ClosedFooter,
 	RecruitTags,
+	ApplyCancel,
 };

@@ -51,6 +51,11 @@ export const applyModalState = atom({
 	default: false,
 });
 
+export const applyCancelModalState = atom({
+	key: 'applyCancelModalState',
+	default: false,
+});
+
 export const recruitInputState = atom<InputState>({
 	key: 'recruitInputState',
 	default: {

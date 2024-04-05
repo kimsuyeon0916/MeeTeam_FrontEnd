@@ -15,13 +15,19 @@ import {
 	ConfirmModal,
 	FinalModal,
 	ClosedFooter,
+	ApplyCancel,
 } from '../../../components';
 import { fixModalBackground } from '../../../utils';
 import { JsxElementComponentProps } from '../../../types';
 import { useQuery } from '@tanstack/react-query';
 import { getPostingData } from '../../../service';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { applyModalState, applyStepState, recruitInputState } from '../../../atom';
+import {
+	applyCancelModalState,
+	applyModalState,
+	applyStepState,
+	recruitInputState,
+} from '../../../atom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLogin } from '../../../hooks';
 
@@ -30,6 +36,7 @@ const RecruitDetailPage = () => {
 	const navigate = useNavigate();
 	const pageNum = Number(id);
 	const isModal = useRecoilValue(applyModalState);
+	const isCancel = useRecoilValue(applyCancelModalState);
 	const step = useRecoilValue(applyStepState);
 	const setFormData = useSetRecoilState(recruitInputState);
 	const stepLists: JsxElementComponentProps = {
@@ -91,8 +98,13 @@ const RecruitDetailPage = () => {
 	};
 
 	useEffect(() => {
-		fixModalBackground(isModal);
-	}, [isModal]);
+		if (isModal) {
+			fixModalBackground(isModal);
+		}
+		if (isCancel) {
+			fixModalBackground(isCancel);
+		}
+	}, [isModal, isCancel]);
 
 	return (
 		<>
@@ -159,15 +171,20 @@ const RecruitDetailPage = () => {
 							<section className='modal-background'>{stepLists[step]}</section>
 						</form>
 					)}
+					{isCancel && (
+						<section className='modal-background'>
+							<ApplyCancel />
+						</section>
+					)}
 				</S.RecruitDetailPage>
 			)}
 			<S.Footer>
 				{detailedData && (
 					<section className='container-btn'>
-						{detailedData.isWriter && !detailedData.isClosed && (
+						{!detailedData.isWriter && !detailedData.isClosed && (
 							<WriterFooter onClickEditPage={onClickEditPage} />
 						)}
-						{!detailedData.isWriter && <ApplierFooter deadline={detailedData.deadline} />}
+						{detailedData.isWriter && <ApplierFooter deadline={detailedData.deadline} />}
 						{detailedData.isClosed && <ClosedFooter />}
 					</section>
 				)}
