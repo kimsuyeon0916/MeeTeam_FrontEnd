@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import S from '../Profile.styled';
-import { useForm, SubmitHandler, useFieldArray, UseFieldArrayPrepend, Path } from 'react-hook-form';
+import { useForm, SubmitHandler, useFieldArray, UseFieldArrayPrepend } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { PROFILE_EDIT_DATA, userData } from '../../index';
 import {
@@ -18,14 +18,13 @@ import {
 	PrimaryBtn,
 } from '../../../components';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../../../atom';
-import { ProfileImage, Link } from '../../../components';
-import { stringSignature, Skill, Portfolio } from '../../../types';
-import { useReadProfile } from '../../../hooks';
+import { imageNameState, userState } from '../../../atom';
+import { ProfileImage, LinkForm } from '../../../components';
+import { Skill, Portfolio, Award, Link } from '../../../types';
+import { useReadProfile, useUpdateProfile } from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
 
 interface FormValues {
-	imageUrl?: string;
 	nickname?: string;
 	userName?: string;
 	interest?: string;
@@ -40,15 +39,16 @@ interface FormValues {
 	gpa?: string;
 	maxGpa?: string;
 	skills?: string | null;
-	links?: stringSignature[];
+	links?: Link[];
 	linkUrl?: string;
 	linkDescription?: string;
-	awards?: stringSignature[];
+	awards?: Award[];
 	awardTitle?: string;
 	awardDescription?: string;
 }
 
 const DESCRIPTION = {
+	contact: `대표 메일로 구인과 관련된 정보를 받을 수 있습니다.\n자주 사용하는 이메일을 대표 메일로 설정해주세요.`,
 	skills: `개발 , 디자인 툴 등 가지고 있는 직무와 관련된 스킬을 추가해보세요.\n최대 10개까지 입력할 수 있습니다.`,
 	awards: `수상 이력, 수료한 교육이나 참석한 외부활동 등이 있다면 간단히 작성해주세요.`,
 	links: ` 깃헙, 노션으로 작성한 포트폴리오, 구글 드라이브 파일 등 업무 성과를 보여줄 수 있는 링크가 있다면 작성해주세요.`,
@@ -59,10 +59,39 @@ const linkDescriptionList = [{ title: 'Link' }, { title: 'Blog' }, { title: 'Git
 
 const ProfileEditPage = () => {
 	const userId = useRecoilValue(userState)?.userId as string;
-	const { data: user } = useReadProfile(userId); // 새로고침 시, 렌더링 지연 및 콘솔 에러
+	const { data: user, isSuccess } = useReadProfile(userId); // 새로고침 시, 렌더링 지연 및 콘솔 에러
 	// const user = useRecoilValue(userState);
+	const profileImageName = useRecoilValue(imageNameState);
 
-	const { register, formState, handleSubmit, control, getValues, setValue, setFocus } =
+	const navigate = useNavigate();
+
+	const updateProfileInSuccess = () => {
+		return navigate(`/profile/${userId}`);
+	};
+
+	const { mutate } = useUpdateProfile({
+		onSuccess: updateProfileInSuccess,
+	});
+
+	const submitHandler: SubmitHandler<FormValues> = data => {
+		mutate({
+			...data,
+			imageFileName: profileImageName,
+			isUserNamePublic: isUserNamePublic,
+			phone: data['phone.content'],
+			isPhonePublic: isPhonePublic,
+			isUniversityMain: isUniversityMain,
+			isUniversityEmailPublic: isUniversityEmailPublic,
+			subEmail: data['subEmail.content'],
+			isSubEmailPublic: isSubEmailPublic,
+			skills: skillList.map(skill => skill.id),
+			awards: awards.filter((award, index) => index !== 0),
+			links: links.filter((link, index) => index !== 0),
+			portfolios: pinnedPortfolioList,
+		});
+	};
+
+	const { register, formState, handleSubmit, control, watch, getValues, setValue, setFocus } =
 		useForm<FormValues>({
 			mode: 'onChange',
 			values: {
@@ -81,6 +110,25 @@ const ProfileEditPage = () => {
 		user?.universityEmail?.isPublic
 	);
 	const [isSubEmailPublic, setIsSubEmailPublic] = useState(user?.subEmail?.isPublic);
+	const [isUniversityMain, setIsUniversityMain] = useState(user?.universityEmail?.isDefault); // 대표 메일
+
+	useEffect(() => {
+		if (isSuccess) {
+			setIsUserNamePublic(user?.isUserNamePublic);
+			setIsPhonePublic(user?.phone?.isPublic);
+			setIsUniversityEmailPublic(user?.universityEmail?.isPublic);
+			setIsSubEmailPublic(user?.subEmail?.isPublic);
+			setIsUniversityMain(user?.universityEmail?.isDefault);
+		}
+	}, [isSuccess]);
+
+	const handleRadioClick = (id: string) => {
+		if (id === 'universityEmail') {
+			setIsUniversityMain(true);
+		} else if (id === 'subEmail') {
+			setIsUniversityMain(false);
+		}
+	};
 
 	// 스킬
 	const [skillList, setSkillList] = useState(user?.skills ? user?.skills : []);
@@ -135,8 +183,8 @@ const ProfileEditPage = () => {
 
 	// 포트폴리오
 	const sortedPortfolioList =
-		userData?.portfolios &&
-		[...userData.portfolios]?.sort((a, b) =>
+		user?.portfolios &&
+		[...user.portfolios]?.sort((a, b) =>
 			a.pinOrder > b.pinOrder ? 1 : a.pinOrder < b.pinOrder ? -1 : 0
 		); // userData -> user로 변경
 
@@ -162,11 +210,9 @@ const ProfileEditPage = () => {
 		return pinnedPortfolioList.findIndex(portfolioId => portfolioId === id);
 	};
 
-	const navigate = useNavigate();
-
 	return (
 		<>
-			<S.ProfileLayout>
+			<S.ProfileLayout onSubmit={handleSubmit(submitHandler)}>
 				<S.ProfileHeader>
 					<ProfileImage
 						isEditable={true}
@@ -204,6 +250,7 @@ const ProfileEditPage = () => {
 							width='clamp(50%, 39.2rem, 100%)'
 							// defaultValue={user?.introduction}
 							register={register}
+							watch={watch}
 							formState={formState}
 							{...PROFILE_EDIT_DATA.introduction}
 						/>
@@ -216,6 +263,7 @@ const ProfileEditPage = () => {
 						<Textarea
 							// defaultValue={user?.aboutMe}
 							register={register}
+							watch={watch}
 							formState={formState}
 							{...PROFILE_EDIT_DATA.aboutMe}
 						/>
@@ -224,6 +272,7 @@ const ProfileEditPage = () => {
 
 					<S.ProfileArticle>
 						<S.ProfileTitle>연락 수단</S.ProfileTitle>
+						<S.ProfileDescription>{DESCRIPTION.contact}</S.ProfileDescription>
 						<S.ProfileColumn $gap='2.84rem'>
 							<S.ProfileRow $width='clamp(50%, 51.8rem, 100%)' $gap='1rem'>
 								<Input
@@ -237,7 +286,12 @@ const ProfileEditPage = () => {
 							<S.ProfileColumn $width='clamp(50%, 51.8rem, 100%)' $gap='1rem'>
 								<label style={{ color: 'var(--Form-txtIcon-default,  #8E8E8E)' }}>대표 메일</label>
 								<S.ProfileRow $gap='1rem'>
-									<Radio name='email' id={PROFILE_EDIT_DATA.universityEmail.name}>
+									<Radio
+										name='email'
+										id={PROFILE_EDIT_DATA.universityEmail.name}
+										state={isUniversityMain}
+										handleClick={handleRadioClick}
+									>
 										<Input
 											// defaultValue={user?.universityEmail?.content}
 											register={register}
@@ -248,7 +302,12 @@ const ProfileEditPage = () => {
 									<Toggle state={isUniversityEmailPublic} setState={setIsUniversityEmailPublic} />
 								</S.ProfileRow>
 								<S.ProfileRow $gap='1rem'>
-									<Radio name='email' id={PROFILE_EDIT_DATA.subEmail.name}>
+									<Radio
+										name='email'
+										id={PROFILE_EDIT_DATA.subEmail.name}
+										state={!isUniversityMain}
+										handleClick={handleRadioClick}
+									>
 										<Input
 											// defaultValue={user?.subEmail?.content}
 											register={register}
@@ -366,7 +425,7 @@ const ProfileEditPage = () => {
 						<S.ProfileDescription>{DESCRIPTION.links}</S.ProfileDescription>
 						<S.ProfileColumn $gap='2.4rem'>
 							{links?.map((link, index) => (
-								<Link
+								<LinkForm
 									key={link.id}
 									index={index}
 									width='clamp(10%, 11.8rem, 100%)'
@@ -387,8 +446,8 @@ const ProfileEditPage = () => {
 						<S.ProfileTitle>포트폴리오</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.portfolio}</S.ProfileDescription>
 						<S.ProfileGrid>
-							{userData?.portfolios &&
-								userData?.portfolios.map(({ ...props }: Portfolio, index) => (
+							{user?.portfolios &&
+								user?.portfolios.map(({ ...props }: Portfolio, index) => (
 									<PortfolioCard
 										key={index}
 										{...props}
