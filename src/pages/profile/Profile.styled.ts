@@ -84,16 +84,15 @@ const ProfileHeader = styled.header`
 	flex-wrap: wrap;
 	column-gap: 5.6rem;
 
-	row-gap: 2rem; // 반응형 위해 추가
+	row-gap: 2.4rem; // 반응형 위해 추가
 
 	margin-top: 7.4rem;
 	margin-bottom: 9.6rem;
 
-	align-items: center;
-
 	.profile-header__row {
 		display: flex;
 		column-gap: 2rem;
+		margin-top: 2rem;
 		margin-bottom: 1.62rem;
 
 		align-items: end;
