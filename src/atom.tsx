@@ -122,3 +122,8 @@ export const searchPageState = atom({
 	key: 'searchPageState',
 	default: false,
 });
+
+export const imageNameState = atom({
+	key: 'imageNameState',
+	default: '',
+});
