@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 
-const TextareaLayout = styled.div`
+const TextareaLabel = styled.label<{ $width?: string }>`
+	min-width: 0;
 	display: flex;
 	flex-direction: column;
-	flex: 1;
+	${props => (props.$width ? `width: ${props.$width}` : `flex: 1;`)};
+
+	color: var(--Text-textColor2, #373f41);
 
 	/* Body/body1/medium */
 	font-size: 1.6rem;
@@ -13,6 +16,8 @@ const TextareaLayout = styled.div`
 	letter-spacing: 0.0032rem;
 
 	h6 {
+		margin-bottom: 0.8rem;
+
 		/* Body/body2/semibold */
 		font-size: 1.4rem;
 		font-style: normal;
@@ -22,22 +27,30 @@ const TextareaLayout = styled.div`
 	}
 `;
 
-const TextareaLabel = styled.label<{ $width?: string }>`
+const TextareaContainer = styled.div`
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	width: ${props => props.$width};
 
-	color: var(--Text-textColor2, #373f41);
-
-	h6 {
-		margin-bottom: 0.8rem;
-	}
-
-	small {
+	span {
 		margin-top: 0.4rem;
 		margin-left: auto;
 		color: var(--State-unactive, #8e8e8e);
+	}
+
+	small {
+		position: absolute;
+		top: 5.4rem;
+		left: 1rem;
+		white-space: nowrap; // 줄바꿈 방지
+		color: var(--ButtonColors-Caution-outline-defaultLine, #f85858);
+
+		/* Text/t4 */
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 1.2rem; /* 120% */
+		letter-spacing: 0.002rem;
 	}
 `;
 
@@ -60,6 +73,6 @@ const Textarea = styled.textarea`
 	}
 `;
 
-const S = { TextareaLayout, TextareaLabel, Textarea };
+const S = { TextareaLabel, TextareaContainer, Textarea };
 
 export default S;
