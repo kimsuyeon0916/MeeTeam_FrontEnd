@@ -1,5 +1,3 @@
-import { FieldValues } from 'react-hook-form';
-
 const REGEXP = {
 	nickname: /^[a-zA-Z0-9가-힣._]{4,16}$/,
 };
@@ -22,21 +20,11 @@ export const INPUT_VALIDATION = {
 	},
 	introduction: {
 		maxLength: 20,
-		validate: {
-			countingLetters: (fieldValue: FieldValues) => {
-				return fieldValue?.length + '/20';
-			},
-		},
 	},
 };
 
 export const TEXTAREA_VALIDATION = {
 	aboutMe: {
 		maxLength: 150,
-		validate: {
-			countingLetters: (fieldValue: FieldValues) => {
-				return fieldValue?.length + '/150';
-			},
-		},
 	},
 };
