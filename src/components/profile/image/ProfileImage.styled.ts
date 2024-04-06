@@ -29,7 +29,7 @@ const ProfileImage = styled.img`
 const ProfileAddIcon = styled.img`
 	position: absolute;
 	right: 0;
-	bottom: -1.2rem;
+	top: 10.6rem;
 `;
 
 const ProfileImageInput = styled.input`
