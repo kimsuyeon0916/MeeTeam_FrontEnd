@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-const ApplyClose = styled.section`
+const CommentDeleteModal = styled.section`
 	display: flex;
 	width: 30rem;
-	height: 23.2rem;
+	height: 20rem;
 	padding: 1.8rem 2rem;
 	flex-direction: column;
 	align-items: center;
@@ -66,6 +66,6 @@ const ApplyClose = styled.section`
 	}
 `;
 
-const S = { ApplyClose };
+const S = { CommentDeleteModal };
 
 export default S;

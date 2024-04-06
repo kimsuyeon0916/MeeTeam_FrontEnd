@@ -113,6 +113,7 @@ export interface GroupContents {
 export interface DeleteComment {
 	pageNum: number;
 	commentId: { commentId: number };
+	type?: string;
 }
 
 export interface EditContents {

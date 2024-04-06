@@ -28,6 +28,7 @@ import {
 	applyCloseModalState,
 	applyModalState,
 	applyStepState,
+	commentDeleteModalState,
 	recruitInputState,
 } from '../../../atom';
 import { useParams, useNavigate } from 'react-router-dom';

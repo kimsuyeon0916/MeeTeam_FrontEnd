@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { KebabMenu, ProfileImage, ReplyComment, ReplyInput } from '../..';
+import { CommentDeleteModal, KebabMenu, ProfileImage, ReplyComment, ReplyInput } from '../..';
 import S from './Comment.styled';
 import { Comment as CommentType } from '../../../types';
 import { useParams } from 'react-router-dom';
-import { useCommentDelete, useCommentEdit } from '../../../hooks';
-import { QueryClientProvider, useQueryClient } from '@tanstack/react-query';
+import { useCommentEdit } from '../../../hooks';
+import { useQueryClient } from '@tanstack/react-query';
+import { useRecoilState } from 'recoil';
+import { commentDeleteModalState } from '../../../atom';
 
 const Comment = ({
 	id,
@@ -25,7 +27,7 @@ const Comment = ({
 	const [showKebab, setShowKebab] = useState<boolean>(true);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
 	const [mention, setMention] = useState<string>('');
-	const deleteComment = useCommentDelete();
+	const [isDelete, setIsDelete] = useRecoilState(commentDeleteModalState);
 	const queryClient = useQueryClient();
 	const editComment = useCommentEdit();
 
@@ -46,16 +48,7 @@ const Comment = ({
 		{
 			title: '삭제',
 			optionClickHandler: () => {
-				setShowKebab(false);
-				const commentId = { commentId: id };
-				deleteComment.mutate(
-					{ pageNum, commentId },
-					{
-						onSuccess: () => {
-							queryClient.invalidateQueries({ queryKey: ['detailedPage'] });
-						},
-					}
-				);
+				setIsDelete(true);
 			},
 		},
 	];
@@ -177,6 +170,11 @@ const Comment = ({
 					/>
 				)}
 			</section>
+			{isDelete && (
+				<section className='modal-background'>
+					<CommentDeleteModal pageNum={pageNum} commentId={{ commentId: id }} />
+				</section>
+			)}
 		</S.Comment>
 	);
 };

@@ -122,6 +122,7 @@ import DetailedInput from './recruit/recruitBoard/detailedFilter/DetailedInput';
 import RecruitTags from './recruit/create/RecruitTags';
 import ApplyCancel from './recruit/recruitDetail/modal/applyCancel/ApplyCancel';
 import ApplyClose from './recruit/recruitDetail/modal/applyClose/ApplyClose';
+import CommentDeleteModal from './recruit/recruitDetail/modal/commentDelete/CommentDeleteModal';
 
 export {
 	Header,
@@ -239,4 +240,5 @@ export {
 	RecruitTags,
 	ApplyCancel,
 	ApplyClose,
+	CommentDeleteModal,
 };
