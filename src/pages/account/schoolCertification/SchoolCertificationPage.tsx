@@ -63,12 +63,12 @@ const SchoolCertificationPage = () => {
 		if (name === 'university') {
 			return universityList?.map(university => ({
 				id: university.universityId,
-				title: university.universityName,
+				name: university.universityName,
 			}));
 		} else if (name === 'department') {
 			return departmentList?.map((department: Department) => ({
 				id: department.departmentId,
-				title: department.departmentName,
+				name: department.departmentName,
 			}));
 		}
 	};

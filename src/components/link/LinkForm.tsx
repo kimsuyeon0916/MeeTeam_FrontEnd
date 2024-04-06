@@ -19,7 +19,7 @@ import { PROFILE_EDIT_DATA } from '../../pages';
 
 export interface Option {
 	id?: string;
-	title: string;
+	name: string;
 }
 
 interface LinkForm<T extends FieldValues> {

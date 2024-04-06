@@ -17,7 +17,7 @@ import { Input } from '../index';
 
 interface Option {
 	id?: string;
-	title: string;
+	name: string;
 }
 
 interface ComboBox<T extends FieldValues> {
@@ -71,8 +71,8 @@ const ComboBox = <T extends FieldValues>({
 		setIsOpen(true);
 	};
 
-	const handleOptionClick = (name: Path<T>, title: PathValue<T, Path<T>>, id?: string) => {
-		setValue(name, title);
+	const handleOptionClick = (name: Path<T>, optionName: PathValue<T, Path<T>>, id?: string) => {
+		setValue(name, optionName);
 		id && sessionStorage.setItem(name, id);
 		clickOption?.(name);
 		setFocus?.(name);
