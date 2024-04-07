@@ -1,3 +1,5 @@
+import { ApplicantPageInfo } from '../types';
+
 export const EndPoint = {
 	/* auth */
 	SIGN_IN: '/auth/social/login-or-signup',
@@ -33,5 +35,9 @@ export const EndPoint = {
 	},
 	RECRUITMENT_BOARD: {
 		list: '/recruitment/postings/search',
+	},
+	RECRUITMENT_APPLICANT: {
+		list: ({ pageNum, role }: ApplicantPageInfo) =>
+			`/recruitment/applicants/${pageNum}${role && '?role=' + role}`,
 	},
 };

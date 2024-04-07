@@ -2,10 +2,17 @@ import React, { useState, useEffect } from 'react';
 import S from './ApplierManagePage.styled';
 import { DropdownArrow, LinkIcon } from '../../../assets';
 import { ApplicantCard, ApplyRole, Dropdown } from '../../../components';
+import { useQuery } from '@tanstack/react-query';
+import { getApplicantsList } from '../../../service';
 
-const ApplierManagePage = () => {
+const ApplierManagePage = (pageNum: number) => {
 	const [isOpenChat, setIsOpenChat] = useState(false);
 	const [linkUrl, setLinkUrl] = useState<string>('');
+	const role = null;
+	const { data, isLoading, isSuccess } = useQuery({
+		queryKey: ['applicantsList', {}],
+		queryFn: () => getApplicantsList({ pageNum, role }),
+	});
 
 	const onClickSetting = () => {
 		setIsOpenChat(prev => !prev);
@@ -14,6 +21,8 @@ const ApplierManagePage = () => {
 	const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setLinkUrl(event.target.value);
 	};
+
+	console.log(data);
 
 	return (
 		<S.ApplierManagePage>

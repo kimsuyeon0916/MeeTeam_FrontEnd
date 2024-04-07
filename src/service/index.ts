@@ -19,6 +19,7 @@ import {
 	getTagKeyword,
 	editPostingRecruit,
 } from './recruit/posting';
+import { getApplicantsList } from './recruit/applicant';
 
 export {
 	EndPoint,
@@ -42,4 +43,5 @@ export {
 	getTagKeyword,
 	closeRecruitPost,
 	editPostingRecruit,
+	getApplicantsList,
 };

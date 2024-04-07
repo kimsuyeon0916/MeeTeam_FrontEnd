@@ -36,6 +36,7 @@ import type {
 	ApplyInfo,
 	ListResult,
 	Post,
+	ApplicantPageInfo,
 } from './recruit/response';
 import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
@@ -87,4 +88,5 @@ export type {
 	EditContents,
 	EditingComment,
 	EditPosting,
+	ApplicantPageInfo,
 };

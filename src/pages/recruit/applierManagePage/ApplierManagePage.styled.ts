@@ -4,7 +4,6 @@ const ApplierManagePage = styled.section`
 	width: clamp(45%, 96rem, 75%);
 	margin: 0 auto;
 	display: flex;
-	height: 100%;
 	justify-content: center;
 	gap: 5.4rem;
 	margin-bottom: 20rem;
@@ -72,6 +71,7 @@ const ApplierManagePage = styled.section`
 
 	.wrapper-applicants {
 		margin-top: 8rem;
+		position: relative;
 
 		.container-title {
 			position: relative;
@@ -131,6 +131,14 @@ const ApplierManagePage = styled.section`
 
 		.container-applicants {
 			margin-top: 6rem;
+
+			.header-applicants {
+				padding-top: 2rem;
+				position: sticky;
+				top: 0rem;
+				z-index: 301;
+				background-color: #fff;
+			}
 
 			.header-title {
 				display: flex;

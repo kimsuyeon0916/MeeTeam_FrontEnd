@@ -126,3 +126,8 @@ export interface ListResult {
 	posts: Post[];
 	pageInfo: Page;
 }
+
+export interface ApplicantPageInfo {
+	pageNum: number;
+	role: number | null;
+}

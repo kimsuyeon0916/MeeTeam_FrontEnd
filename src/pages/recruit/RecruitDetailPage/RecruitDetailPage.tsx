@@ -194,7 +194,7 @@ const RecruitDetailPage = () => {
 				{detailedData && (
 					<section className='container-btn'>
 						{detailedData.isWriter && !detailedData.isClosed && (
-							<WriterFooter onClickEditPage={onClickEditPage} />
+							<WriterFooter onClickEditPage={onClickEditPage} pageNum={pageNum} />
 						)}
 						{!detailedData.isWriter && <ApplierFooter deadline={detailedData.deadline} />}
 						{detailedData.isClosed && <ClosedFooter />}
