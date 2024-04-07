@@ -71,6 +71,11 @@ export const replyDeleteModalState = atom({
 	default: false,
 });
 
+export const waitModalState = atom({
+	key: 'waitModalState',
+	default: false,
+});
+
 export const recruitInputState = atom<InputState>({
 	key: 'recruitInputState',
 	default: {

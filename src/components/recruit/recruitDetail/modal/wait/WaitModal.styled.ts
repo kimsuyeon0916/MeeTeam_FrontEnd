@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
-const CommentDeleteModal = styled.section`
+const WaitModal = styled.section`
 	display: flex;
 	width: 30rem;
 	height: 20rem;
 	padding: 1.8rem 2rem;
 	flex-direction: column;
 	align-items: center;
+	justify-content: space-between;
 	border-radius: 1rem;
 	border: 1px solid #e3e3e3;
 	background: #f8fafb;
@@ -62,18 +63,13 @@ const CommentDeleteModal = styled.section`
 			border-radius: 0.6rem;
 		}
 
-		.cancel {
-			border: 1px solid #e3e3e3;
-			background: #fff;
-		}
-
 		.confirm {
-			background: #f85858;
+			background: #5877fc;
 			color: #f8fafb;
 		}
 	}
 `;
 
-const S = { CommentDeleteModal };
+const S = { WaitModal };
 
 export default S;

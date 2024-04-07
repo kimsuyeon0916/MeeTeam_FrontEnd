@@ -123,6 +123,7 @@ import RecruitTags from './recruit/create/RecruitTags';
 import ApplyCancel from './recruit/recruitDetail/modal/applyCancel/ApplyCancel';
 import ApplyClose from './recruit/recruitDetail/modal/applyClose/ApplyClose';
 import CommentDeleteModal from './recruit/recruitDetail/modal/commentDelete/CommentDeleteModal';
+import WaitModal from './recruit/recruitDetail/modal/wait/WaitModal';
 
 export {
 	Header,
@@ -241,4 +242,5 @@ export {
 	ApplyCancel,
 	ApplyClose,
 	CommentDeleteModal,
+	WaitModal,
 };

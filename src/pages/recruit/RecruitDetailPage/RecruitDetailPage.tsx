@@ -17,6 +17,7 @@ import {
 	ClosedFooter,
 	ApplyCancel,
 	ApplyClose,
+	WaitModal,
 } from '../../../components';
 import { fixModalBackground } from '../../../utils';
 import { JsxElementComponentProps } from '../../../types';
@@ -28,8 +29,8 @@ import {
 	applyCloseModalState,
 	applyModalState,
 	applyStepState,
-	commentDeleteModalState,
 	recruitInputState,
+	waitModalState,
 } from '../../../atom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLogin } from '../../../hooks';
@@ -41,6 +42,7 @@ const RecruitDetailPage = () => {
 	const isModal = useRecoilValue(applyModalState);
 	const isCancel = useRecoilValue(applyCancelModalState);
 	const isClose = useRecoilValue(applyCloseModalState);
+	const isWait = useRecoilValue(waitModalState);
 	const step = useRecoilValue(applyStepState);
 	const setFormData = useSetRecoilState(recruitInputState);
 	const stepLists: JsxElementComponentProps = {
@@ -102,16 +104,8 @@ const RecruitDetailPage = () => {
 	};
 
 	useEffect(() => {
-		if (isModal) {
-			fixModalBackground(isModal);
-		}
-		if (isCancel) {
-			fixModalBackground(isCancel);
-		}
-		if (isClose) {
-			fixModalBackground(isClose);
-		}
-	}, [isModal, isCancel, isClose]);
+		fixModalBackground(isModal || isCancel || isClose || isWait);
+	}, [isModal, isCancel, isClose, isWait]);
 
 	return (
 		<>
@@ -187,6 +181,11 @@ const RecruitDetailPage = () => {
 					{isClose && (
 						<section className='modal-background'>
 							<ApplyClose />
+						</section>
+					)}
+					{isWait && (
+						<section className='modal-background'>
+							<WaitModal />
 						</section>
 					)}
 				</S.RecruitDetailPage>

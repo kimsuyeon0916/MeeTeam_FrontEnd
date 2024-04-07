@@ -1,7 +1,7 @@
 import React from 'react';
 import { Edit, TrashCan } from '../../../../assets';
 import { useSetRecoilState } from 'recoil';
-import { applyCloseModalState } from '../../../../atom';
+import { applyCloseModalState, waitModalState } from '../../../../atom';
 
 interface WriterFooter {
 	onClickEditPage: () => void;
@@ -9,16 +9,21 @@ interface WriterFooter {
 
 const WriterFooter = ({ onClickEditPage }: WriterFooter) => {
 	const setIsClose = useSetRecoilState(applyCloseModalState);
+	const setIsWait = useSetRecoilState(waitModalState);
 
 	const onClickClose = () => {
 		setIsClose(true);
+	};
+
+	const onClickDelete = () => {
+		setIsWait(true);
 	};
 	return (
 		<>
 			<button type='button' className='btn-edit' onClick={onClickEditPage}>
 				<img src={Edit} />
 			</button>
-			<button type='button' className='btn-delete'>
+			<button type='button' className='btn-delete' onClick={onClickDelete}>
 				<img src={TrashCan} />
 			</button>
 			<button type='button' className='btn-navigate_appliers'>
