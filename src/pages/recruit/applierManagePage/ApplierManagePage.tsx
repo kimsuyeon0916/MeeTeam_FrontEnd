@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import S from './ApplierManagePage.styled';
 import { DropdownArrow, LinkIcon } from '../../../assets';
 import { ApplicantCard, ApplyRole, Dropdown } from '../../../components';
 
 const ApplierManagePage = () => {
+	const [isOpenChat, setIsOpenChat] = useState(false);
+	const [linkUrl, setLinkUrl] = useState<string>('');
+
+	const onClickSetting = () => {
+		setIsOpenChat(prev => !prev);
+	};
+
+	const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setLinkUrl(event.target.value);
+	};
+
 	return (
 		<S.ApplierManagePage>
 			<article className='wrapper-applicants'>
@@ -15,12 +26,24 @@ const ApplierManagePage = () => {
 					<h4>오픈채팅방 설정</h4>
 					<span className='body1-medium'>멤버를 초대할 오픈채팅방 주소를 설정해보세요!</span>
 					<article className='input-link'>
-						<section className='container-input__link'>
-							<img src={LinkIcon} />
-							<span className='body1-medium input-prev'>오픈채팅방 주소를 입력해주세요.</span>
-						</section>
-						<button type='button' className='btn-setting text-small'>
-							설정
+						{!isOpenChat ? (
+							<section className='container-input__link'>
+								<img src={LinkIcon} />
+								<span className='body1-medium input-prev'>
+									{!linkUrl ? '오픈채팅방 주소를 입력해주세요.' : linkUrl}
+								</span>
+							</section>
+						) : (
+							<input
+								type='text'
+								className='input-chat body1-medium'
+								placeholder='오픈채팅방 주소를 입력해주세요.'
+								value={linkUrl}
+								onChange={onChangeInput}
+							/>
+						)}
+						<button type='button' className='btn-setting text-small' onClick={onClickSetting}>
+							{isOpenChat ? '저장' : '설정'}
 						</button>
 					</article>
 				</section>
@@ -57,6 +80,9 @@ const ApplierManagePage = () => {
 					<img src={DropdownArrow} />
 				</section>
 				<section className='container-roles'>
+					<ApplyRole />
+					<ApplyRole />
+					<ApplyRole />
 					<ApplyRole />
 				</section>
 			</article>

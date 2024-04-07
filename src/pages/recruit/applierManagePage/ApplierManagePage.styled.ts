@@ -4,9 +4,11 @@ const ApplierManagePage = styled.section`
 	width: clamp(45%, 96rem, 75%);
 	margin: 0 auto;
 	display: flex;
+	height: 100%;
 	justify-content: center;
 	gap: 5.4rem;
 	margin-bottom: 20rem;
+	position: relative;
 
 	h1 {
 		color: #151515;
@@ -91,16 +93,32 @@ const ApplierManagePage = styled.section`
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
+				gap: 2rem;
+				width: 100%;
 
 				.container-input__link {
 					display: flex;
 					align-items: center;
 					gap: 0.8rem;
 				}
+
+				.input-chat {
+					display: flex;
+					width: 100%;
+					height: 4.8rem;
+					padding: 1.2rem 1.6rem;
+					align-items: center;
+					gap: 1rem;
+					box-sizing: border-box;
+					border-radius: 1rem;
+					border: 1px solid #e3e3e3;
+					background: #fff;
+				}
 			}
 
 			.btn-setting {
 				display: flex;
+				width: 7rem;
 				height: 3.6rem;
 				padding: 1.2rem 2rem;
 				justify-content: center;
@@ -155,11 +173,14 @@ const ApplierManagePage = styled.section`
 	.current-recruit {
 		width: 34rem;
 		height: 41.1rem;
+		overflow-y: scroll;
 		margin-top: 9rem;
 		border-radius: 0.8rem;
 		border: 1px solid #e3e3e3;
 		background: #fff;
 		box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+		position: sticky;
+		top: 5rem;
 
 		.container-title {
 			display: flex;

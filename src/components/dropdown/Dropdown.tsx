@@ -126,8 +126,6 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 			setCurrentValue('범위');
 		} else if (!scope && filterState.category === null && initialData !== '역할') {
 			setCurrentValue('유형');
-		} else {
-			setCurrentValue(initialData);
 		}
 	}, [filterState.scope, filterState.category]);
 
