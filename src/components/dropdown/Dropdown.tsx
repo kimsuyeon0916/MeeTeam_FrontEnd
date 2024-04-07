@@ -11,7 +11,7 @@ interface Dropdown {
 	data: string[];
 	initialData?: string;
 	$showDropdown?: boolean;
-	scope: boolean;
+	scope?: boolean;
 }
 
 type keyObj = {
@@ -30,7 +30,7 @@ const categoryObj: keyObj = {
 };
 
 const Dropdown = ({ data, initialData, scope }: Dropdown) => {
-	const [currentValue, setCurrentValue] = useState(`${initialData}`);
+	const [currentValue, setCurrentValue] = useState<string | undefined>(`${initialData}`);
 	const [showDropdown, setShowDropdown] = useState<boolean>(false);
 	const [dropdown, setDropdown] = useState({
 		course: false,
@@ -124,8 +124,10 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 	useEffect(() => {
 		if (scope && filterState.scope === null) {
 			setCurrentValue('범위');
-		} else if (!scope && filterState.category === null) {
+		} else if (!scope && filterState.category === null && initialData !== '역할') {
 			setCurrentValue('유형');
+		} else {
+			setCurrentValue(initialData);
 		}
 	}, [filterState.scope, filterState.category]);
 

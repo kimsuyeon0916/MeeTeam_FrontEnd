@@ -22,6 +22,9 @@ import Edit from './Edit.svg';
 import TrashCan from './TrashCan.svg';
 import Clear from './Clear.svg';
 import BookmarkRight from './BookmarkRight.svg';
+import LinkIcon from './LinkIcon.svg';
+import User from './User.svg';
+import School from './School.svg';
 
 export {
 	Exit,
@@ -48,4 +51,7 @@ export {
 	DATE_ICON,
 	Clear,
 	BookmarkRight,
+	LinkIcon,
+	User,
+	School,
 };
