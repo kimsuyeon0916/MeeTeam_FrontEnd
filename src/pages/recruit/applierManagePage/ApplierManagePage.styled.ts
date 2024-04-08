@@ -74,6 +74,7 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 	}
 
 	.wrapper-applicants {
+		width: 100%;
 		margin-top: 8rem;
 		position: relative;
 

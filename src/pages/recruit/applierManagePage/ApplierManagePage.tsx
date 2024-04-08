@@ -21,7 +21,7 @@ const ApplierManagePage = () => {
 
 	const { data: recruitManageInfo, isSuccess: manageSuccess } = useQuery({
 		queryKey: ['recruitManageInfo'],
-		queryFn: () => getRecruitInfo(pageNum),
+		queryFn: () => getRecruitInfo(7),
 	});
 
 	const onClickSetting = () => {
@@ -32,41 +32,41 @@ const ApplierManagePage = () => {
 		setLinkUrl(event.target.value);
 	};
 
-	console.log(recruitManageInfo);
-
 	return (
 		<S.ApplierManagePage $isChecked={checkList.length !== 0}>
 			<article className='wrapper-applicants'>
-				{manageSuccess && (
-					<section className='container-title'>
-						<h1>{recruitManageInfo?.title}</h1>
-						<h4 className='page-link'>구인글 바로가기 ⟩</h4>
-					</section>
-				)}
+				<section className='container-title'>
+					<h1>{recruitManageInfo?.title}</h1>
+					<h4 className='page-link'>구인글 바로가기 ⟩</h4>
+				</section>
 				<section className='container-link'>
 					<h4>오픈채팅방 설정</h4>
 					<span className='body1-medium'>멤버를 초대할 오픈채팅방 주소를 설정해보세요!</span>
-					<article className='input-link'>
-						{!isOpenChat ? (
-							<section className='container-input__link'>
-								<img src={LinkIcon} />
-								<span className='body1-medium input-prev'>
-									{!linkUrl ? '오픈채팅방 주소를 입력해주세요.' : linkUrl}
-								</span>
-							</section>
-						) : (
-							<input
-								type='text'
-								className='input-chat body1-medium'
-								placeholder='오픈채팅방 주소를 입력해주세요.'
-								value={linkUrl}
-								onChange={onChangeInput}
-							/>
-						)}
-						<button type='button' className='btn-setting text-small' onClick={onClickSetting}>
-							{isOpenChat ? '저장' : '설정'}
-						</button>
-					</article>
+					{manageSuccess && recruitManageInfo && (
+						<article className='input-link'>
+							{!isOpenChat ? (
+								<section className='container-input__link'>
+									<img src={LinkIcon} />
+									<span className='body1-medium input-prev'>
+										{!recruitManageInfo.link
+											? '오픈채팅방 주소를 입력해주세요.'
+											: recruitManageInfo.link}
+									</span>
+								</section>
+							) : (
+								<input
+									type='text'
+									className='input-chat body1-medium'
+									placeholder='오픈채팅방 주소를 입력해주세요.'
+									value={recruitManageInfo.link}
+									onChange={onChangeInput}
+								/>
+							)}
+							<button type='button' className='btn-setting text-small' onClick={onClickSetting}>
+								{isOpenChat ? '저장' : '설정'}
+							</button>
+						</article>
+					)}
 				</section>
 				<section className='container-applicants'>
 					<section className='header-applicants'>
@@ -76,13 +76,15 @@ const ApplierManagePage = () => {
 								○○님의 구인글에 신청한 (유저명)입니다. 다양한 정보들을 확인하고 멤버로 영입해보세요!
 							</span>
 						</section>
-						<section className='header-control'>
-							<Dropdown data={['프론트엔드', '백엔드']} initialData='역할' />
-							<section className='btn-container'>
-								<button className='text-big refused'>거절</button>
-								<button className='text-big approved'>승인</button>
+						{recruitManageInfo && manageSuccess && (
+							<section className='header-control'>
+								<Dropdown data={recruitManageInfo.roles.map(e => e.title)} initialData='역할' />
+								<section className='btn-container'>
+									<button className='text-big refused'>거절</button>
+									<button className='text-big approved'>승인</button>
+								</section>
 							</section>
-						</section>
+						)}
 						<hr className='header-border' />
 					</section>
 					<section className='list-applicants'>
@@ -113,10 +115,15 @@ const ApplierManagePage = () => {
 					<img src={DropdownArrow} />
 				</section>
 				<section className='container-roles'>
-					<ApplyRole />
-					<ApplyRole />
-					<ApplyRole />
-					<ApplyRole />
+					{recruitManageInfo &&
+						manageSuccess &&
+						recruitManageInfo.recruitmentStatus.map(elem => (
+							<ApplyRole
+								approvedMemberCount={elem.approvedMemberCount}
+								recruitMemberCount={elem.recruitMemberCount}
+								roleName={elem.roleName}
+							/>
+						))}
 				</section>
 			</article>
 		</S.ApplierManagePage>
