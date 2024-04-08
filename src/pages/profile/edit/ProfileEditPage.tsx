@@ -16,12 +16,19 @@ import {
 	PortfolioCard,
 	DefaultBtn,
 	PrimaryBtn,
+	ProfileImage,
+	LinkForm,
 } from '../../../components';
 import { useRecoilValue } from 'recoil';
 import { imageNameState, userState } from '../../../atom';
-import { ProfileImage, LinkForm } from '../../../components';
 import { Skill, Portfolio, Award, Link } from '../../../types';
-import { useReadProfile, useUpdateProfile } from '../../../hooks';
+import {
+	useDebounce,
+	useReadProfile,
+	useUpdateProfile,
+	useReadRoleList,
+	useReadSkillList,
+} from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
 
 interface FormValues {
@@ -54,8 +61,7 @@ const DESCRIPTION = {
 	links: ` 깃헙, 노션으로 작성한 포트폴리오, 구글 드라이브 파일 등 업무 성과를 보여줄 수 있는 링크가 있다면 작성해주세요.`,
 	portfolio: `밋팀에서 작성한 포트폴리오가 있다면 선택해주세요!\n프로필에서 최대 8개까지 보여집니다.`,
 };
-const gpaList = [{ title: '4.5' }, { title: '4.3' }];
-const linkDescriptionList = [{ title: 'Link' }, { title: 'Blog' }, { title: 'Github' }];
+const gpaList = [{ name: '4.5' }, { name: '4.3' }];
 
 const ProfileEditPage = () => {
 	const userId = useRecoilValue(userState)?.userId as string;
@@ -78,6 +84,7 @@ const ProfileEditPage = () => {
 			...data,
 			imageFileName: profileImageName,
 			isUserNamePublic: isUserNamePublic,
+			interestId: sessionStorage.interest,
 			phone: data['phone.content'],
 			isPhonePublic: isPhonePublic,
 			isUniversityMain: isUniversityMain,
@@ -102,6 +109,12 @@ const ProfileEditPage = () => {
 				awards: user?.awards && [{ startDate: '', endDate: '', title: '', description: '' }],
 			},
 		});
+
+	const role = useDebounce(watch('interest')) as string;
+	const { data: roles } = useReadRoleList(role);
+
+	const skill = useDebounce(watch('skills')) as string;
+	const { data: skills } = useReadSkillList(skill);
 
 	// 공개 여부
 	const [isUserNamePublic, setIsUserNamePublic] = useState(user?.isUserNamePublic);
@@ -210,9 +223,13 @@ const ProfileEditPage = () => {
 		return pinnedPortfolioList.findIndex(portfolioId => portfolioId === id);
 	};
 
+	const checkKeyDown = (e: React.KeyboardEvent) => {
+		if (e.key === 'Enter') e.preventDefault();
+	};
+
 	return (
 		<>
-			<S.ProfileLayout onSubmit={handleSubmit(submitHandler)}>
+			<S.ProfileLayout onSubmit={handleSubmit(submitHandler)} onKeyDown={e => checkKeyDown(e)}>
 				<S.ProfileHeader>
 					<ProfileImage
 						isEditable={true}
@@ -243,7 +260,9 @@ const ProfileEditPage = () => {
 							// defaultValue={user?.interest}
 							register={register}
 							setValue={setValue}
+							getValues={getValues}
 							formState={formState}
+							optionList={roles}
 							{...PROFILE_EDIT_DATA.interest}
 						/>
 						<Input
@@ -351,6 +370,7 @@ const ProfileEditPage = () => {
 									<ComboBox
 										register={register}
 										setValue={setValue}
+										getValues={getValues}
 										formState={formState}
 										optionList={gpaList}
 										{...PROFILE_EDIT_DATA.maxGpa}
@@ -369,9 +389,10 @@ const ProfileEditPage = () => {
 								register={register}
 								setValue={setValue}
 								formState={formState}
-								optionList={gpaList}
+								getValues={getValues}
+								optionList={skills}
 								setFocus={setFocus}
-								downKey={addSkill}
+								clickOption={addSkill}
 								{...PROFILE_EDIT_DATA.skills}
 							/>
 							<S.ProfileRow $gap='1.05rem'>
@@ -435,7 +456,6 @@ const ProfileEditPage = () => {
 									setValue={setValue}
 									prepend={prependLink as UseFieldArrayPrepend<FormValues>}
 									remove={removeLink}
-									optionList={linkDescriptionList}
 								/>
 							))}
 						</S.ProfileColumn>
