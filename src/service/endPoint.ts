@@ -14,4 +14,10 @@ export const EndPoint = {
 		read: (userId: string) => `/user/profile/${userId}`,
 		update: '/user/profile',
 	},
+
+	/* search */
+	SEARCH: {
+		role: '/role/search',
+		skill: '/skill/search',
+	},
 };
