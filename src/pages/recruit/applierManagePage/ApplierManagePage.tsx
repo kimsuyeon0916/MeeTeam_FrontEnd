@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import S from './ApplierManagePage.styled';
-import { DropdownArrow, LinkIcon } from '../../../assets';
+import { ArrowTop, DropdownArrow, FloatingBackground, LinkIcon } from '../../../assets';
 import { ApplicantCard, ApplyRole, Dropdown } from '../../../components';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getApplicantsList } from '../../../service';
@@ -14,6 +14,7 @@ import {
 } from '../../../service/recruit/applicant';
 import { ApplicantsLink, ApplicantsList } from '../../../types';
 import { useNavigate } from 'react-router-dom';
+import { useScrollToTop } from '../../../hooks';
 
 const ApplierManagePage = () => {
 	const navigate = useNavigate();
@@ -21,6 +22,7 @@ const ApplierManagePage = () => {
 	const [isOpenChat, setIsOpenChat] = useState(false);
 	const [linkUrl, setLinkUrl] = useState<string>('');
 	const role = null;
+	const scrollToTop = useScrollToTop();
 	const [checkList, setCheckList] = useRecoilState(applicantHolder);
 	const { data: applicantList, isSuccess: listSuccess } = useQuery({
 		queryKey: ['applicantsList', { pageNum, role }],
@@ -172,6 +174,15 @@ const ApplierManagePage = () => {
 								roleName={elem.roleName}
 							/>
 						))}
+				</section>
+			</article>
+			<article className='btn-floating' onClick={scrollToTop}>
+				<section className='background'>
+					<img src={FloatingBackground} />
+					<section className='arrow'>
+						<img src={ArrowTop} />
+						<span>TOP</span>
+					</section>
 				</section>
 			</article>
 		</S.ApplierManagePage>

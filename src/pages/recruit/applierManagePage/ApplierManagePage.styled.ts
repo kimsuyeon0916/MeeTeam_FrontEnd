@@ -8,6 +8,7 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 	width: clamp(45%, 96rem, 75%);
 	margin: 0 auto;
 	display: flex;
+	height: 200vh;
 	justify-content: center;
 	gap: 5.4rem;
 	margin-bottom: 20rem;
@@ -220,6 +221,35 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 		}
 
 		.container-roles {
+		}
+	}
+
+	.btn-floating {
+		position: fixed;
+		z-index: 101;
+		width: 5.6rem;
+		height: 5.6rem;
+		bottom: 5rem;
+		right: 4rem;
+		border-radius: 50%;
+		box-shadow:
+			0px 4px 20px 0px rgba(0, 0, 0, 0.1),
+			0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+		cursor: pointer;
+
+		.background {
+			position: relative;
+
+			.arrow {
+				display: flex;
+				flex-direction: column;
+				position: absolute;
+				top: 1.2rem;
+				right: 1.9rem;
+				span {
+					margin-top: 0.5rem;
+				}
+			}
 		}
 	}
 `;
