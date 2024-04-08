@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 
-const OptionList = styled.ul`
+const OptionList = styled.ul<{ $label?: string }>`
+	position: absolute;
+	width: 100%;
+	z-index: 5;
+	top: ${props => (props.$label ? '7.9rem' : '5.4rem')};
+
 	display: flex;
 	flex-direction: column;
 	row-gap: 1.2rem;
+	max-height: 16.9rem;
 	padding: 1.2rem 1.6rem;
-	margin-top: 0.4rem;
 
 	border-radius: 1rem;
 	border: 1px solid var(--Form-border-default, #e3e3e3);
@@ -13,6 +18,18 @@ const OptionList = styled.ul`
 
 	/* form_shadow */
 	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+
+	/* 스크롤바 스타일링 */
+	overflow-y: auto;
+	&::-webkit-scrollbar {
+		width: 1.8rem;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: #e3e3e3;
+		border-radius: 1rem;
+		background-clip: padding-box;
+		border: 0.5rem solid transparent;
+	}
 `;
 
 const OptionItem = styled.li`
