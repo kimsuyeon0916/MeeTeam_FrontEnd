@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import S from './ApplierManagePage.styled';
 import { DropdownArrow, LinkIcon } from '../../../assets';
 import { ApplicantCard, ApplyRole, Dropdown } from '../../../components';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getApplicantsList } from '../../../service';
 import { useRecoilValue } from 'recoil';
 import { applicantHolder, applicantPageNum } from '../../../atom';
@@ -24,6 +24,7 @@ const ApplierManagePage = () => {
 		queryKey: ['applicantsList', { pageNum, role }],
 		queryFn: () => getApplicantsList({ pageNum, role }),
 	});
+	const queryClient = useQueryClient();
 
 	const { data: recruitManageInfo, isSuccess: manageSuccess } = useQuery({
 		queryKey: ['recruitManageInfo'],
@@ -33,15 +34,22 @@ const ApplierManagePage = () => {
 	const approved = useMutation({
 		mutationFn: ({ pageNum, applicantIds }: ApplicantsList) =>
 			approveApplicant({ pageNum, applicantIds }),
-		onSuccess: () => {},
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['applicantsList'] });
+		},
 	});
 	const refused = useMutation({
 		mutationFn: ({ pageNum, applicantIds }: ApplicantsList) =>
 			refusedApplicant({ pageNum, applicantIds }),
-		onSuccess: () => {},
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['applicantsList'] });
+		},
 	});
 	const openLink = useMutation({
 		mutationFn: ({ pageNum, link }: ApplicantsLink) => setOpenChatLink({ pageNum, link }),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['recruitManageInfo'] });
+		},
 	});
 
 	const onClickSetting = () => {
@@ -88,7 +96,7 @@ const ApplierManagePage = () => {
 									type='text'
 									className='input-chat body1-medium'
 									placeholder='오픈채팅방 주소를 입력해주세요.'
-									value={recruitManageInfo.link}
+									value={linkUrl}
 									onChange={onChangeInput}
 								/>
 							)}
