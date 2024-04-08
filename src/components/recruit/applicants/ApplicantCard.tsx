@@ -5,6 +5,7 @@ import { DropdownArrow, School, User } from '../../../assets';
 import { ApplicantInfo } from '../../../types';
 import { useSetRecoilState } from 'recoil';
 import { applicantHolder } from '../../../atom';
+import { useNavigate } from 'react-router-dom';
 
 const ApplicantCard = ({
 	applicantId,
@@ -19,8 +20,10 @@ const ApplicantCard = ({
 	userId,
 	year,
 }: ApplicantInfo) => {
+	const navigate = useNavigate();
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 	const setIsHold = useSetRecoilState(applicantHolder);
+	const [isOpen, setIsOpen] = useState<boolean>(false);
 
 	const onClickCheckbox = () => {
 		setIsChecked(prev => !prev);
@@ -56,9 +59,9 @@ const ApplicantCard = ({
 						</section>
 						<section className='user-element'>
 							<img src={School} />
-							<span className='body2-medium'>{score}</span>
+							<span className='body2-medium score'>{score !== 0 ? score : '-'}</span>
 						</section>
-						<section className='user-element'>
+						<section className='user-element more'>
 							<span className='body2-medium'>더보기</span>
 							<img src={DropdownArrow} />
 						</section>
@@ -69,7 +72,11 @@ const ApplicantCard = ({
 						<h4>{applyRoleName}</h4>
 						<span className='body2-medium message'>{message}</span>
 					</section>
-					<button type='button' className='btn-profile'>
+					<button
+						type='button'
+						className='btn-profile'
+						onClick={() => window.open(`/profile/${userId}`)}
+					>
 						프로필 보러가기
 					</button>
 				</section>

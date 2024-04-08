@@ -46,6 +46,14 @@ const ApplicantCard = styled.article`
 						margin-top: 0.3rem;
 					}
 				}
+
+				.score {
+					margin-left: 0.3rem;
+				}
+
+				.more {
+					cursor: pointer;
+				}
 			}
 		}
 

@@ -4,7 +4,7 @@ import { DropdownArrow, LinkIcon } from '../../../assets';
 import { ApplicantCard, ApplyRole, Dropdown } from '../../../components';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getApplicantsList } from '../../../service';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import { applicantHolder, applicantPageNum } from '../../../atom';
 import {
 	approveApplicant,
@@ -19,7 +19,7 @@ const ApplierManagePage = () => {
 	const [isOpenChat, setIsOpenChat] = useState(false);
 	const [linkUrl, setLinkUrl] = useState<string>('');
 	const role = null;
-	const checkList = useRecoilValue(applicantHolder);
+	const [checkList, setCheckList] = useRecoilState(applicantHolder);
 	const { data: applicantList, isSuccess: listSuccess } = useQuery({
 		queryKey: ['applicantsList', { pageNum, role }],
 		queryFn: () => getApplicantsList({ pageNum, role }),
@@ -35,6 +35,7 @@ const ApplierManagePage = () => {
 		mutationFn: ({ pageNum, applicantIds }: ApplicantsList) =>
 			approveApplicant({ pageNum, applicantIds }),
 		onSuccess: () => {
+			setCheckList([]);
 			queryClient.invalidateQueries({ queryKey: ['applicantsList'] });
 		},
 	});
@@ -42,6 +43,7 @@ const ApplierManagePage = () => {
 		mutationFn: ({ pageNum, applicantIds }: ApplicantsList) =>
 			refusedApplicant({ pageNum, applicantIds }),
 		onSuccess: () => {
+			setCheckList([]);
 			queryClient.invalidateQueries({ queryKey: ['applicantsList'] });
 		},
 	});
@@ -55,7 +57,7 @@ const ApplierManagePage = () => {
 	const onClickSetting = () => {
 		setIsOpenChat(prev => !prev);
 		if (isOpenChat) {
-			openLink.mutate({ pageNum: 7, link: linkUrl });
+			openLink.mutate({ pageNum, link: linkUrl });
 		}
 	};
 
@@ -64,10 +66,10 @@ const ApplierManagePage = () => {
 	};
 
 	const onClickRefused = () => {
-		refused.mutate({ pageNum: 7, applicantIds: checkList });
+		refused.mutate({ pageNum, applicantIds: checkList });
 	};
 	const onClickApproved = () => {
-		approved.mutate({ pageNum: 7, applicantIds: [4] });
+		approved.mutate({ pageNum, applicantIds: checkList });
 	};
 
 	return (
