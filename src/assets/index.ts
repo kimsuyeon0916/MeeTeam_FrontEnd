@@ -26,6 +26,7 @@ import GrayCalendar from './GrayCalendar.svg';
 import BlackCalendar from './BlackCalendar.svg';
 import Close from './Close.svg';
 import AddProfile from './AddProfile.svg';
+import BluePlus from './BluePlus.svg';
 
 export {
 	Exit,
@@ -56,4 +57,5 @@ export {
 	BlackCalendar,
 	Close,
 	AddProfile,
+	BluePlus,
 };
