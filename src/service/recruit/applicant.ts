@@ -1,3 +1,4 @@
+import { applicantList } from '../../components';
 import { ApplicantInfo, ApplicantPageInfo, ApplicantsList, ApplyManageInfo } from '../../types';
 import { axiosAuthInstance } from '../axiosInstance';
 import { EndPoint } from '../endPoint';
@@ -28,7 +29,19 @@ export const approveApplicant = async ({ pageNum, applicantIds }: ApplicantsList
 	try {
 		const response = await axiosAuthInstance.patch(
 			EndPoint.RECRUITMENT_APPLICANT.approved(pageNum),
-			applicantIds
+			{ applicantIds }
+		);
+		return response;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const refusedApplicant = async ({ pageNum, applicantIds }: ApplicantsList) => {
+	try {
+		const response = await axiosAuthInstance.patch(
+			EndPoint.RECRUITMENT_APPLICANT.refused(pageNum),
+			{ applicantIds }
 		);
 		return response;
 	} catch (error) {

@@ -2,11 +2,16 @@ import React, { useState, useEffect } from 'react';
 import S from './ApplierManagePage.styled';
 import { DropdownArrow, LinkIcon } from '../../../assets';
 import { ApplicantCard, ApplyRole, Dropdown } from '../../../components';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { getApplicantsList } from '../../../service';
 import { useRecoilValue } from 'recoil';
 import { applicantHolder, applicantPageNum } from '../../../atom';
-import { getRecruitInfo } from '../../../service/recruit/applicant';
+import {
+	approveApplicant,
+	getRecruitInfo,
+	refusedApplicant,
+} from '../../../service/recruit/applicant';
+import { ApplicantsList } from '../../../types';
 
 const ApplierManagePage = () => {
 	const pageNum = useRecoilValue(applicantPageNum);
@@ -24,12 +29,30 @@ const ApplierManagePage = () => {
 		queryFn: () => getRecruitInfo(7),
 	});
 
+	const approved = useMutation({
+		mutationFn: ({ pageNum, applicantIds }: ApplicantsList) =>
+			approveApplicant({ pageNum, applicantIds }),
+		onSuccess: () => {},
+	});
+	const refused = useMutation({
+		mutationFn: ({ pageNum, applicantIds }: ApplicantsList) =>
+			refusedApplicant({ pageNum, applicantIds }),
+		onSuccess: () => {},
+	});
+
 	const onClickSetting = () => {
 		setIsOpenChat(prev => !prev);
 	};
 
 	const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setLinkUrl(event.target.value);
+	};
+
+	const onClickRefused = () => {
+		refused.mutate({ pageNum: 7, applicantIds: checkList });
+	};
+	const onClickApproved = () => {
+		approved.mutate({ pageNum: 7, applicantIds: checkList });
 	};
 
 	return (
@@ -80,8 +103,12 @@ const ApplierManagePage = () => {
 							<section className='header-control'>
 								<Dropdown data={recruitManageInfo.roles.map(e => e.title)} initialData='역할' />
 								<section className='btn-container'>
-									<button className='text-big refused'>거절</button>
-									<button className='text-big approved'>승인</button>
+									<button className='text-big refused' onClick={onClickRefused}>
+										거절
+									</button>
+									<button className='text-big approved' onClick={onClickApproved}>
+										승인
+									</button>
 								</section>
 							</section>
 						)}
