@@ -13,7 +13,6 @@ export const readSkillList = async (keyword: string) => {
 		return response;
 	} catch (error) {
 		console.error(error);
-		return null;
 	}
 };
 
@@ -29,6 +28,5 @@ export const readRoleList = async (keyword: string) => {
 		return response;
 	} catch (error) {
 		console.error(error);
-		return null;
 	}
 };
