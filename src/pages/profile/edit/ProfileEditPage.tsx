@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import S from '../Profile.styled';
-import { useForm, SubmitHandler, useFieldArray, UseFieldArrayPrepend } from 'react-hook-form';
+import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { PROFILE_EDIT_DATA, userData } from '../../index';
 import {
@@ -9,7 +9,6 @@ import {
 	ComboBox,
 	Toggle,
 	Radio,
-	AddBtn,
 	DeleteBtn,
 	MuiDatepicker,
 	SkillTag,
@@ -18,6 +17,7 @@ import {
 	PrimaryBtn,
 	ProfileImage,
 	LinkForm,
+	AddFormBtn,
 } from '../../../components';
 import { useRecoilValue } from 'recoil';
 import { imageNameState, userState } from '../../../atom';
@@ -92,21 +92,19 @@ const ProfileEditPage = () => {
 			subEmail: data['subEmail.content'],
 			isSubEmailPublic: isSubEmailPublic,
 			skills: skillList.map(skill => skill.id),
-			awards: awards.filter((award, index) => index !== 0),
-			links: links.filter((link, index) => index !== 0),
 			portfolios: pinnedPortfolioList,
 		});
 	};
 
-	const { register, formState, handleSubmit, control, watch, getValues, setValue, setFocus } =
+	const { register, formState, handleSubmit, control, watch, getValues, setValue } =
 		useForm<FormValues>({
 			mode: 'onChange',
 			values: {
 				...user,
 				year: user?.year + '학년도',
 				skills: null,
-				links: user?.links && [{ description: 'Link', url: '' }],
-				awards: user?.awards && [{ startDate: '', endDate: '', title: '', description: '' }],
+				links: user?.links,
+				awards: user?.awards,
 			},
 		});
 
@@ -169,6 +167,12 @@ const ProfileEditPage = () => {
 		control: control,
 	});
 
+	const addLink = (index: number) => {
+		if (index === -1 || getValues(`links.${index}.url`)) {
+			prependLink({ description: 'Link', url: '' });
+		}
+	};
+
 	// 수상/활동
 	const {
 		fields: awards,
@@ -181,13 +185,14 @@ const ProfileEditPage = () => {
 
 	const addAward = (index: number) => {
 		if (
-			!getValues(`awards.${index}.startDate`) ||
-			!getValues(`awards.${index}.endDate`) ||
-			!getValues(`awards.${index}.title`) ||
-			!getValues(`awards.${index}.description`)
-		)
-			return;
-		prependAward({ startDate: '', endDate: '', title: '', description: '' });
+			index === -1 ||
+			(getValues(`awards.${index}.startDate`) &&
+				getValues(`awards.${index}.endDate`) &&
+				getValues(`awards.${index}.title`) &&
+				getValues(`awards.${index}.description`))
+		) {
+			prependAward({ startDate: '', endDate: '', title: '', description: '' });
+		}
 	};
 
 	const deleteAward = (index: number) => {
@@ -293,16 +298,19 @@ const ProfileEditPage = () => {
 						<S.ProfileTitle>연락 수단</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.contact}</S.ProfileDescription>
 						<S.ProfileColumn $gap='2.84rem'>
-							<S.ProfileRow $width='clamp(50%, 51.8rem, 100%)' $gap='1rem'>
-								<Input
-									// defaultValue={user?.phone?.content}
-									register={register}
-									formState={formState}
-									{...PROFILE_EDIT_DATA.phone}
-								/>
-								<Toggle state={isPhonePublic} setState={setIsPhonePublic} />
-							</S.ProfileRow>
-							<S.ProfileColumn $width='clamp(50%, 51.8rem, 100%)' $gap='1rem'>
+							<S.ProfileColumn $width='clamp(50%, 51.8rem, 100%)' $gap='1.6rem'>
+								<label style={{ color: 'var(--Form-txtIcon-default,  #8E8E8E)' }}>연락처</label>
+								<S.ProfileRow $gap='1rem'>
+									<Input
+										// defaultValue={user?.phone?.content}
+										register={register}
+										formState={formState}
+										{...PROFILE_EDIT_DATA.phone}
+									/>
+									<Toggle state={isPhonePublic} setState={setIsPhonePublic} />
+								</S.ProfileRow>
+							</S.ProfileColumn>
+							<S.ProfileColumn $width='clamp(50%, 51.8rem, 100%)' $gap='1.6rem'>
 								<label style={{ color: 'var(--Form-txtIcon-default,  #8E8E8E)' }}>대표 메일</label>
 								<S.ProfileRow $gap='1rem'>
 									<Radio
@@ -391,7 +399,6 @@ const ProfileEditPage = () => {
 								formState={formState}
 								getValues={getValues}
 								optionList={skills}
-								setFocus={setFocus}
 								clickOption={addSkill}
 								{...PROFILE_EDIT_DATA.skills}
 							/>
@@ -408,6 +415,7 @@ const ProfileEditPage = () => {
 						<S.ProfileTitle>수상/활동</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.awards}</S.ProfileDescription>
 						<S.ProfileColumn $gap='2.4rem'>
+							<AddFormBtn title='수상/활동 추가' handleClick={() => addAward(awards.length - 1)} />
 							{awards?.map((award, index) => (
 								<S.ProfileRow key={award.id} $gap='1rem'>
 									<S.ProfileColumn $gap='1rem'>
@@ -429,11 +437,7 @@ const ProfileEditPage = () => {
 											formState={formState}
 											{...PROFILE_EDIT_DATA.awardDescription}
 										/>
-										{index === 0 ? (
-											<AddBtn handleClick={() => addAward(index)} />
-										) : (
-											<DeleteBtn handleClick={() => deleteAward(index)} />
-										)}
+										<DeleteBtn handleClick={() => deleteAward(index)} />
 									</S.ProfileRow>
 								</S.ProfileRow>
 							))}
@@ -445,6 +449,7 @@ const ProfileEditPage = () => {
 						<S.ProfileTitle>링크</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.links}</S.ProfileDescription>
 						<S.ProfileColumn $gap='2.4rem'>
+							<AddFormBtn title='링크 추가' handleClick={() => addLink(links.length - 1)} />
 							{links?.map((link, index) => (
 								<LinkForm
 									key={link.id}
@@ -454,7 +459,6 @@ const ProfileEditPage = () => {
 									formState={formState}
 									getValues={getValues}
 									setValue={setValue}
-									prepend={prependLink as UseFieldArrayPrepend<FormValues>}
 									remove={removeLink}
 								/>
 							))}
