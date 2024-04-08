@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import S from './ComboBox.styled';
 import { OptionList } from '../index';
 import { Icon } from '../input/Input';
-
 import {
 	FieldValues,
 	UseFormRegister,
@@ -15,6 +14,7 @@ import {
 	UseFormGetValues,
 } from 'react-hook-form';
 import { Input } from '../index';
+import { Search } from '../../types';
 
 interface Option {
 	id?: string;
@@ -34,7 +34,7 @@ interface ComboBox<T extends FieldValues> {
 	label?: string;
 	icon?: Icon;
 	placeholder?: string;
-	optionList?: Option[];
+	optionList?: Option[] | Search[];
 	clickInput?: (name: T | string) => void;
 	clickOption?: (name: T | string) => void;
 	downKey?: (name?: T | string) => void;
