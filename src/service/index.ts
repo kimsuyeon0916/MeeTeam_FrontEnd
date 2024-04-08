@@ -9,6 +9,7 @@ import {
 	readDepartmentList,
 } from './auth/auth';
 import { readProfile, updateProfile } from './user/Profile';
+import { readSkillList, readRoleList } from './search/search';
 
 export {
 	EndPoint,
@@ -22,4 +23,6 @@ export {
 	readDepartmentList,
 	readProfile,
 	updateProfile,
+	readSkillList,
+	readRoleList,
 };
