@@ -12,6 +12,7 @@ import {
 	PathValue,
 	RegisterOptions,
 	UseFormSetFocus,
+	UseFormGetValues,
 } from 'react-hook-form';
 import { Input } from '../index';
 
@@ -25,6 +26,7 @@ interface ComboBox<T extends FieldValues> {
 	width?: string;
 	register: UseFormRegister<T>;
 	setValue: UseFormSetValue<T>;
+	getValues?: UseFormGetValues<T>;
 	setFocus?: UseFormSetFocus<T>;
 	formState?: FormState<T>;
 	name: string;
@@ -42,7 +44,7 @@ const ComboBox = <T extends FieldValues>({
 	width,
 	register,
 	setValue,
-	setFocus,
+	getValues,
 	name,
 	validation,
 	optionList,
@@ -52,19 +54,28 @@ const ComboBox = <T extends FieldValues>({
 	...props
 }: ComboBox<T>) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const dropdownRef = useRef<HTMLInputElement>(null);
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	const clearInput = () => {
+		const inputValue = getValues?.(name as Path<T>);
+		if (!optionList?.find(option => option.name === inputValue)) {
+			setValue(name as Path<T>, '' as PathValue<T, Path<T>>);
+			sessionStorage.removeItem(name);
+		}
+	};
 
 	useEffect(() => {
 		const handleOutsideClick = (e: MouseEvent) => {
 			const target = e.target as HTMLDivElement;
-			if (isOpen && dropdownRef.current && !dropdownRef.current.contains(target)) {
+			if (isOpen && inputRef.current && !inputRef.current.contains(target)) {
 				setIsOpen(false);
+				clearInput();
 			}
 		};
 
 		document.addEventListener('click', handleOutsideClick);
 		return () => document.removeEventListener('click', handleOutsideClick);
-	}, [isOpen]);
+	}, [isOpen, optionList]);
 
 	const handleInputClick = () => {
 		clickInput?.(name);
@@ -75,13 +86,13 @@ const ComboBox = <T extends FieldValues>({
 		setValue(name, optionName);
 		id && sessionStorage.setItem(name, id);
 		clickOption?.(name);
-		setFocus?.(name);
+		// setFocus?.(name);
 	};
 
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === 'Enter') {
 			downKey?.(name);
-			setIsOpen(true);
+			// setIsOpen(true);
 		}
 	};
 
@@ -92,12 +103,13 @@ const ComboBox = <T extends FieldValues>({
 				name={name}
 				validation={validation}
 				{...props}
-				inputRef={dropdownRef}
+				inputRef={inputRef}
 				handleInputClick={handleInputClick}
 				handleKeyDown={handleKeyDown}
 			/>
 			{optionList && isOpen && (
 				<OptionList
+					label={props.label}
 					name={name}
 					optionList={optionList}
 					handleOptionClick={handleOptionClick as VoidFunction}
