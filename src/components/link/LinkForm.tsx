@@ -42,6 +42,8 @@ interface LinkForm<T extends FieldValues> {
 	handleInputClick?: React.MouseEventHandler<HTMLInputElement>;
 }
 
+const LINK_DESCRIPTION_LIST = [{ name: 'Link' }, { name: 'Blog' }, { name: 'Github' }];
+
 const LinkForm = <T extends FieldValues>({
 	index,
 	width,
@@ -49,7 +51,6 @@ const LinkForm = <T extends FieldValues>({
 	remove,
 	getValues,
 	setValue,
-	optionList,
 	clickInput,
 	clickOption,
 	handleInputClick,
@@ -70,7 +71,8 @@ const LinkForm = <T extends FieldValues>({
 				width={width}
 				name={`links.${index}.description`}
 				setValue={setValue}
-				optionList={optionList}
+				getValues={getValues}
+				optionList={LINK_DESCRIPTION_LIST}
 				clickInput={clickInput}
 				clickOption={clickOption}
 				{...props}
