@@ -55,6 +55,25 @@ const PrimaryButtonLayout = styled(DefaultButtonLayout)`
 	color: var(--ButtonColors-Primary-outline-default, #fff);
 `;
 
-const S = { IconButtonLayout, DefaultButtonLayout, PrimaryButtonLayout };
+const FormButtonLayout = styled.button`
+	all: unset;
+	display: flex;
+	flex-direction: row;
+	column-gap: 0.8rem;
+	width: 100%;
+	padding: 1.7rem 0;
+	align-items: center;
+	color: var(--Text-textColor2, var(--text-color-2, #373f41));
+	cursor: pointer;
+
+	/* Headline/h5 */
+	font-size: 1.6rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 1.9rem; /* 118.75% */
+	letter-spacing: 0.0032rem;
+`;
+
+const S = { IconButtonLayout, DefaultButtonLayout, PrimaryButtonLayout, FormButtonLayout };
 
 export default S;
