@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const ApplierManagePage = styled.section`
+interface ApplicantManage {
+	$isChecked: boolean;
+}
+
+const ApplierManagePage = styled.section<ApplicantManage>`
 	width: clamp(45%, 96rem, 75%);
 	margin: 0 auto;
 	display: flex;
@@ -165,6 +169,16 @@ const ApplierManagePage = styled.section`
 						align-items: center;
 						border-radius: 0.6rem;
 						background: #e3e3e3;
+					}
+
+					.refused {
+						background-color: ${props => props.$isChecked && '#F85858'};
+						color: ${props => props.$isChecked && '#F8FAFB'};
+					}
+
+					.approved {
+						background-color: ${props => props.$isChecked && '#5877FC'};
+						color: ${props => props.$isChecked && '#F7FAFF'};
 					}
 				}
 			}

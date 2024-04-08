@@ -37,7 +37,10 @@ export const EndPoint = {
 		list: '/recruitment/postings/search',
 	},
 	RECRUITMENT_APPLICANT: {
+		info: (id: number) => `/recruitment/applicants/${id}/info`,
 		list: ({ pageNum, role }: ApplicantPageInfo) =>
-			`/recruitment/applicants/${pageNum}${role && '?role=' + role}`,
+			`/recruitment/applicants/${pageNum}${role !== null ? '?role=' + role : ''}`,
+		approved: (id: number) => `/recruitment/applicants/${id}/approve`,
+		refused: (id: number) => `/recruitment/applicants/${id}/reject`,
 	},
 };

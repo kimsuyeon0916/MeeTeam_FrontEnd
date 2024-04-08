@@ -4,14 +4,24 @@ import { DropdownArrow, LinkIcon } from '../../../assets';
 import { ApplicantCard, ApplyRole, Dropdown } from '../../../components';
 import { useQuery } from '@tanstack/react-query';
 import { getApplicantsList } from '../../../service';
+import { useRecoilValue } from 'recoil';
+import { applicantHolder, applicantPageNum } from '../../../atom';
+import { getRecruitInfo } from '../../../service/recruit/applicant';
 
-const ApplierManagePage = (pageNum: number) => {
+const ApplierManagePage = () => {
+	const pageNum = useRecoilValue(applicantPageNum);
 	const [isOpenChat, setIsOpenChat] = useState(false);
 	const [linkUrl, setLinkUrl] = useState<string>('');
 	const role = null;
-	const { data, isLoading, isSuccess } = useQuery({
-		queryKey: ['applicantsList', {}],
+	const checkList = useRecoilValue(applicantHolder);
+	const { data: applicantList, isSuccess: listSuccess } = useQuery({
+		queryKey: ['applicantsList', { pageNum, role }],
 		queryFn: () => getApplicantsList({ pageNum, role }),
+	});
+
+	const { data: recruitManageInfo, isSuccess: manageSuccess } = useQuery({
+		queryKey: ['recruitManageInfo'],
+		queryFn: () => getRecruitInfo(pageNum),
 	});
 
 	const onClickSetting = () => {
@@ -22,15 +32,17 @@ const ApplierManagePage = (pageNum: number) => {
 		setLinkUrl(event.target.value);
 	};
 
-	console.log(data);
+	console.log(recruitManageInfo);
 
 	return (
-		<S.ApplierManagePage>
+		<S.ApplierManagePage $isChecked={checkList.length !== 0}>
 			<article className='wrapper-applicants'>
-				<section className='container-title'>
-					<h1>응용소프트웨어실습ㅇ프론트엔드ㅇ백엔드ㅇ게임ㅇ분야ㅇ개발자ㅇ구합니다ㅇ작성자본인</h1>
-					<h4 className='page-link'>구인글 바로가기 ⟩</h4>
-				</section>
+				{manageSuccess && (
+					<section className='container-title'>
+						<h1>{recruitManageInfo?.title}</h1>
+						<h4 className='page-link'>구인글 바로가기 ⟩</h4>
+					</section>
+				)}
 				<section className='container-link'>
 					<h4>오픈채팅방 설정</h4>
 					<span className='body1-medium'>멤버를 초대할 오픈채팅방 주소를 설정해보세요!</span>
@@ -67,19 +79,31 @@ const ApplierManagePage = (pageNum: number) => {
 						<section className='header-control'>
 							<Dropdown data={['프론트엔드', '백엔드']} initialData='역할' />
 							<section className='btn-container'>
-								<button className='text-big'>거절</button>
-								<button className='text-big'>승인</button>
+								<button className='text-big refused'>거절</button>
+								<button className='text-big approved'>승인</button>
 							</section>
 						</section>
 						<hr className='header-border' />
 					</section>
 					<section className='list-applicants'>
-						<ApplicantCard />
-						<ApplicantCard />
-						<ApplicantCard />
-						<ApplicantCard />
-						<ApplicantCard />
-						<ApplicantCard />
+						{listSuccess &&
+							applicantList &&
+							applicantList.map(info => (
+								<ApplicantCard
+									key={info.applicantId}
+									applicantId={info.applicantId}
+									applyRoleName={info.applyRoleName}
+									departmentName={info.departmentName}
+									message={info.message}
+									name={info.name}
+									nickname={info.nickname}
+									profileImg={info.profileImg}
+									score={info.score}
+									universityName={info.universityName}
+									userId={info.userId}
+									year={info.year}
+								/>
+							))}
 					</section>
 				</section>
 			</article>

@@ -20,6 +20,7 @@ import type {
 	EditContents,
 	EditingComment,
 	EditPosting,
+	ApplicantsList,
 } from './recruit/payload';
 import type { Comment } from './comment';
 import type {
@@ -37,6 +38,10 @@ import type {
 	ListResult,
 	Post,
 	ApplicantPageInfo,
+	ApplicantInfo,
+	ManageRole,
+	RecruitmentStatus,
+	ApplyManageInfo,
 } from './recruit/response';
 import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
@@ -89,4 +94,9 @@ export type {
 	EditingComment,
 	EditPosting,
 	ApplicantPageInfo,
+	ApplicantInfo,
+	ApplicantsList,
+	ManageRole,
+	RecruitmentStatus,
+	ApplyManageInfo,
 };

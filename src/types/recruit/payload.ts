@@ -130,3 +130,8 @@ export interface EditPosting {
 	pageNum: number;
 	formData: InputState;
 }
+
+export interface ApplicantsList {
+	pageNum: number;
+	applicantIds: number[];
+}

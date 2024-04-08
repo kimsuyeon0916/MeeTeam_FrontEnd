@@ -131,3 +131,35 @@ export interface ApplicantPageInfo {
 	pageNum: number;
 	role: number | null;
 }
+
+export interface ApplicantInfo {
+	applicantId: number;
+	applyRoleName: string;
+	departmentName: string;
+	message: string;
+	name: string;
+	nickname: string;
+	profileImg: string;
+	score: number;
+	universityName: string;
+	userId: string;
+	year: number;
+}
+
+export interface ManageRole {
+	id: number;
+	title: string;
+}
+
+export interface RecruitmentStatus {
+	roleName: string;
+	recruitMemberCount: number;
+	approvedMemberCount: number;
+}
+
+export interface ApplyManageInfo {
+	title: string;
+	link: string;
+	recruitmentStatus: RecruitmentStatus[];
+	roles: ManageRole[];
+}
