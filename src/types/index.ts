@@ -5,6 +5,7 @@ import type { TitleInfo, OptionList, Option, Role, InputRoleForm, InputState } f
 import type { Comment, CommentInputFunctions } from './comment';
 import type { JsxElementComponentProps, stringSignature } from './indexSigniture';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
+import type { Search } from './search';
 
 export type {
 	SignUpPayload,
@@ -29,4 +30,5 @@ export type {
 	InputState,
 	University,
 	Department,
+	Search,
 };
