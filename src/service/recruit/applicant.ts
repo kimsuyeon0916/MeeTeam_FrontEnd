@@ -1,5 +1,11 @@
 import { applicantList } from '../../components';
-import { ApplicantInfo, ApplicantPageInfo, ApplicantsList, ApplyManageInfo } from '../../types';
+import {
+	ApplicantInfo,
+	ApplicantPageInfo,
+	ApplicantsLink,
+	ApplicantsList,
+	ApplyManageInfo,
+} from '../../types';
 import { axiosAuthInstance } from '../axiosInstance';
 import { EndPoint } from '../endPoint';
 
@@ -43,6 +49,17 @@ export const refusedApplicant = async ({ pageNum, applicantIds }: ApplicantsList
 			EndPoint.RECRUITMENT_APPLICANT.refused(pageNum),
 			{ applicantIds }
 		);
+		return response;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const setOpenChatLink = async ({ pageNum, link }: ApplicantsLink) => {
+	try {
+		const response = await axiosAuthInstance.put(EndPoint.RECRUITMENT_APPLICANT.set(pageNum), {
+			link,
+		});
 		return response;
 	} catch (error) {
 		console.error(error);

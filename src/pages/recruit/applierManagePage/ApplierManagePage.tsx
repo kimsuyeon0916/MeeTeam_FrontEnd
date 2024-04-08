@@ -10,8 +10,9 @@ import {
 	approveApplicant,
 	getRecruitInfo,
 	refusedApplicant,
+	setOpenChatLink,
 } from '../../../service/recruit/applicant';
-import { ApplicantsList } from '../../../types';
+import { ApplicantsLink, ApplicantsList } from '../../../types';
 
 const ApplierManagePage = () => {
 	const pageNum = useRecoilValue(applicantPageNum);
@@ -39,9 +40,15 @@ const ApplierManagePage = () => {
 			refusedApplicant({ pageNum, applicantIds }),
 		onSuccess: () => {},
 	});
+	const openLink = useMutation({
+		mutationFn: ({ pageNum, link }: ApplicantsLink) => setOpenChatLink({ pageNum, link }),
+	});
 
 	const onClickSetting = () => {
 		setIsOpenChat(prev => !prev);
+		if (isOpenChat) {
+			openLink.mutate({ pageNum: 7, link: linkUrl });
+		}
 	};
 
 	const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +59,7 @@ const ApplierManagePage = () => {
 		refused.mutate({ pageNum: 7, applicantIds: checkList });
 	};
 	const onClickApproved = () => {
-		approved.mutate({ pageNum: 7, applicantIds: checkList });
+		approved.mutate({ pageNum: 7, applicantIds: [4] });
 	};
 
 	return (

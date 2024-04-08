@@ -42,5 +42,6 @@ export const EndPoint = {
 			`/recruitment/applicants/${pageNum}${role !== null ? '?role=' + role : ''}`,
 		approved: (id: number) => `/recruitment/applicants/${id}/approve`,
 		refused: (id: number) => `/recruitment/applicants/${id}/reject`,
+		set: (id: number) => `/recruitment/applicants/${id}/link`,
 	},
 };

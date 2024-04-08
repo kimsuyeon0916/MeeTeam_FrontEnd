@@ -21,6 +21,7 @@ import type {
 	EditingComment,
 	EditPosting,
 	ApplicantsList,
+	ApplicantsLink,
 } from './recruit/payload';
 import type { Comment } from './comment';
 import type {
@@ -99,4 +100,5 @@ export type {
 	ManageRole,
 	RecruitmentStatus,
 	ApplyManageInfo,
+	ApplicantsLink,
 };

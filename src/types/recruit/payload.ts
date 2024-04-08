@@ -135,3 +135,8 @@ export interface ApplicantsList {
 	pageNum: number;
 	applicantIds: number[];
 }
+
+export interface ApplicantsLink {
+	pageNum: number;
+	link: string;
+}
