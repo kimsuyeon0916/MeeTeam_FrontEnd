@@ -13,8 +13,10 @@ import {
 	setOpenChatLink,
 } from '../../../service/recruit/applicant';
 import { ApplicantsLink, ApplicantsList } from '../../../types';
+import { useNavigate } from 'react-router-dom';
 
 const ApplierManagePage = () => {
+	const navigate = useNavigate();
 	const pageNum = useRecoilValue(applicantPageNum);
 	const [isOpenChat, setIsOpenChat] = useState(false);
 	const [linkUrl, setLinkUrl] = useState<string>('');
@@ -77,7 +79,9 @@ const ApplierManagePage = () => {
 			<article className='wrapper-applicants'>
 				<section className='container-title'>
 					<h1>{recruitManageInfo?.title}</h1>
-					<h4 className='page-link'>구인글 바로가기 ⟩</h4>
+					<h4 className='page-link' onClick={() => navigate(-1)}>
+						구인글 바로가기 ⟩
+					</h4>
 				</section>
 				<section className='container-link'>
 					<h4>오픈채팅방 설정</h4>

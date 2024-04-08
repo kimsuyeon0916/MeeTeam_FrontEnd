@@ -85,6 +85,13 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 				position: absolute;
 				right: 1rem;
 				top: 4.8rem;
+				cursor: pointer;
+
+				&:hover {
+					transform: 0.2s;
+					transition: 0.2s ease-in-out;
+					color: #5877fc;
+				}
 			}
 		}
 
