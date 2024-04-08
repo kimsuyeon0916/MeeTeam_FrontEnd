@@ -25,6 +25,7 @@ import BookmarkRight from './BookmarkRight.svg';
 import LinkIcon from './LinkIcon.svg';
 import User from './User.svg';
 import School from './School.svg';
+import DropdownArrowUp from './DropdownArrowUp.svg';
 
 export {
 	Exit,
@@ -54,4 +55,5 @@ export {
 	LinkIcon,
 	User,
 	School,
+	DropdownArrowUp,
 };

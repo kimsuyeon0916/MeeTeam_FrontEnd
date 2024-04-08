@@ -15,6 +15,10 @@ const ApplicantCard = styled.article`
 		}
 	}
 
+	.value {
+		color: #373f41;
+	}
+
 	.container-user {
 		width: 100%;
 		display: flex;
@@ -54,6 +58,35 @@ const ApplicantCard = styled.article`
 				.more {
 					cursor: pointer;
 				}
+			}
+		}
+
+		.wrapper-detailed {
+			display: flex;
+			flex-direction: column;
+			gap: 1.6rem;
+
+			.container-detailed {
+				display: flex;
+				gap: 10rem;
+			}
+
+			.container-detailed__row {
+				display: flex;
+				gap: 4rem;
+			}
+
+			.container-detailed__column {
+				display: flex;
+				flex-direction: column;
+				gap: 1.1rem;
+			}
+
+			.detailed-hr {
+				width: 100%;
+				border: none;
+				height: 0.1rem;
+				background: #e3e3e3;
 			}
 		}
 

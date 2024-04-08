@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import S from './ApplicantCard.styled';
 import ProfileImage from '../../profile/image/ProfileImage';
-import { DropdownArrow, School, User } from '../../../assets';
+import { DropdownArrow, DropdownArrowUp, School, User } from '../../../assets';
 import { ApplicantInfo } from '../../../types';
 import { useSetRecoilState } from 'recoil';
 import { applicantHolder } from '../../../atom';
-import { useNavigate } from 'react-router-dom';
 
 const ApplicantCard = ({
 	applicantId,
@@ -20,13 +19,16 @@ const ApplicantCard = ({
 	userId,
 	year,
 }: ApplicantInfo) => {
-	const navigate = useNavigate();
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 	const setIsHold = useSetRecoilState(applicantHolder);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 
 	const onClickCheckbox = () => {
 		setIsChecked(prev => !prev);
+	};
+
+	const onClickView = () => {
+		setIsOpen(prev => !prev);
 	};
 
 	useEffect(() => {
@@ -49,24 +51,60 @@ const ApplicantCard = ({
 						<span className='body1-semibold'>{nickname}</span>
 					</section>
 					<section className='user-info'>
-						<section className='user-element'>
-							<img src={User} />
-							<span className='body2-medium'>{name}</span>
-						</section>
-						<section className='user-element'>
-							<img src={School} />
-							<span className='body2-medium'>{universityName}</span>
-						</section>
-						<section className='user-element'>
-							<img src={School} />
-							<span className='body2-medium score'>{score !== 0 ? score : '-'}</span>
-						</section>
-						<section className='user-element more'>
-							<span className='body2-medium'>더보기</span>
-							<img src={DropdownArrow} />
+						{!isOpen && (
+							<>
+								<section className='user-element'>
+									<img src={User} />
+									<span className='body2-medium'>{name}</span>
+								</section>
+								<section className='user-element'>
+									<img src={School} />
+									<span className='body2-medium'>{universityName}</span>
+								</section>
+								<section className='user-element'>
+									<img src={School} />
+									<span className='body2-medium score'>{score !== 0 ? score : '-'}</span>
+								</section>
+							</>
+						)}
+						<section className='user-element more' onClick={onClickView}>
+							<span className='body2-medium'>{!isOpen ? '더보기' : '접기'}</span>
+							<img src={!isOpen ? DropdownArrow : DropdownArrowUp} />
 						</section>
 					</section>
 				</section>
+				{isOpen && (
+					<section className='wrapper-detailed'>
+						<h4>신청자 정보</h4>
+						<section className='container-detailed'>
+							<section className='container-detailed__row'>
+								<section className='container-detailed__column'>
+									<span className='body2-medium'>이름</span>
+									<span className='body2-medium'>학교</span>
+									<span className='body2-medium'>학과</span>
+									<span className='body2-medium'>이메일</span>
+								</section>
+								<section className='container-detailed__column'>
+									<span className='body2-medium value'>{name}</span>
+									<span className='body2-medium value'>{universityName}</span>
+									<span className='body2-medium value'>{departmentName}</span>
+									<span className='body2-medium value'>{'mingi123@naver.com'}</span>
+								</section>
+							</section>
+							<section className='container-detailed__row'>
+								<section className='container-detailed__column'>
+									<span className='body2-medium'>학점</span>
+									<span className='body2-medium'>입학년도</span>
+								</section>
+								<section className='container-detailed__column'>
+									<span className='body2-medium value'>{score !== 0 ? score : '-'}</span>
+									<span className='body2-medium value'>{year}</span>
+								</section>
+							</section>
+						</section>
+						<hr className='detailed-hr' />
+					</section>
+				)}
 				<section className='footer'>
 					<section className='apply-info'>
 						<h4>{applyRoleName}</h4>
