@@ -1,18 +1,14 @@
 import React from 'react';
 import S from './LinkForm.styled';
-import { AddBtn, ComboBox, DeleteBtn, Input } from '..';
+import { ComboBox, DeleteBtn, Input } from '..';
 import {
 	FieldValues,
 	UseFormRegister,
-	UseFieldArrayPrepend,
 	UseFieldArrayRemove,
 	UseFormGetValues,
 	UseFormSetValue,
 	FormState,
 	RegisterOptions,
-	Path,
-	FieldArray,
-	ArrayPath,
 } from 'react-hook-form';
 import { Icon } from '../input/Input';
 import { PROFILE_EDIT_DATA } from '../../pages';
@@ -27,7 +23,6 @@ interface LinkForm<T extends FieldValues> {
 	defaultValue?: string;
 	width?: string;
 	register: UseFormRegister<T>;
-	prepend: UseFieldArrayPrepend<T>;
 	remove: UseFieldArrayRemove;
 	getValues: UseFormGetValues<T>;
 	setValue: UseFormSetValue<T>;
@@ -47,7 +42,6 @@ const LINK_DESCRIPTION_LIST = [{ name: 'Link' }, { name: 'Blog' }, { name: 'Gith
 const LinkForm = <T extends FieldValues>({
 	index,
 	width,
-	prepend,
 	remove,
 	getValues,
 	setValue,
@@ -56,11 +50,6 @@ const LinkForm = <T extends FieldValues>({
 	handleInputClick,
 	...props
 }: LinkForm<T>) => {
-	const addLink = () => {
-		if (!getValues(`links.${index}.url` as Path<T>)) return;
-		prepend({ description: 'Link', url: '' } as FieldArray<T, ArrayPath<T>>);
-	};
-
 	const deleteLink = () => {
 		remove(index);
 	};
@@ -84,7 +73,7 @@ const LinkForm = <T extends FieldValues>({
 				{...props}
 				{...PROFILE_EDIT_DATA.linkUrl}
 			/>
-			{index === 0 ? <AddBtn handleClick={addLink} /> : <DeleteBtn handleClick={deleteLink} />}
+			<DeleteBtn handleClick={deleteLink} />
 		</S.LinkFormLayout>
 	);
 };
