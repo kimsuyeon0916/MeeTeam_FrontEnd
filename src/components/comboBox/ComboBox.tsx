@@ -26,7 +26,7 @@ interface ComboBox<T extends FieldValues> {
 	width?: string;
 	register: UseFormRegister<T>;
 	setValue: UseFormSetValue<T>;
-	getValues?: UseFormGetValues<T>;
+	getValues: UseFormGetValues<T>;
 	setFocus?: UseFormSetFocus<T>;
 	formState?: FormState<T>;
 	name: string;
