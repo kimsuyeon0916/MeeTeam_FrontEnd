@@ -38,8 +38,8 @@ export const EndPoint = {
 	},
 	RECRUITMENT_APPLICANT: {
 		info: (id: number) => `/recruitment/applicants/${id}/info`,
-		list: ({ pageNum, role }: ApplicantPageInfo) =>
-			`/recruitment/applicants/${pageNum}${role !== null ? '?role=' + role : ''}`,
+		list: ({ pageNum, role, page }: ApplicantPageInfo) =>
+			`/recruitment/applicants/${pageNum}?page=${page}&size=8${role !== null ? '&role=' + role : ''}`,
 		approved: (id: number) => `/recruitment/applicants/${id}/approve`,
 		refused: (id: number) => `/recruitment/applicants/${id}/reject`,
 		set: (id: number) => `/recruitment/applicants/${id}/link`,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import S from './ApplierManagePage.styled';
 import { ArrowTop, DropdownArrow, FloatingBackground, LinkIcon } from '../../../assets';
 import { ApplicantCard, ApplyRole, Dropdown } from '../../../components';
@@ -12,24 +12,32 @@ import {
 	refusedApplicant,
 	setOpenChatLink,
 } from '../../../service/recruit/applicant';
-import { ApplicantsLink, ApplicantsList } from '../../../types';
+import { ApplicantInfo, ApplicantsLink, ApplicantsList } from '../../../types';
 import { useNavigate } from 'react-router-dom';
 import { useScrollToTop } from '../../../hooks';
 
 const ApplierManagePage = () => {
+	const role = 2;
+	const targetRef = useRef<HTMLDivElement | null>(null);
 	const navigate = useNavigate();
+	const queryClient = useQueryClient();
+	const scrollToTop = useScrollToTop();
+	const [page, setPage] = useState<number>(1);
 	const pageNum = useRecoilValue(applicantPageNum);
 	const [isOpenChat, setIsOpenChat] = useState(false);
 	const [linkUrl, setLinkUrl] = useState<string>('');
-	const role = null;
-	const scrollToTop = useScrollToTop();
 	const [checkList, setCheckList] = useRecoilState(applicantHolder);
-	const { data: applicantList, isSuccess: listSuccess } = useQuery({
-		queryKey: ['applicantsList', { pageNum, role }],
-		queryFn: () => getApplicantsList({ pageNum, role }),
-	});
-	const queryClient = useQueryClient();
+	const [applicantsArr, setApplicantsArr] = useState<ApplicantInfo[]>([]);
 
+	const {
+		data: applicantList,
+		isSuccess: listSuccess,
+		refetch,
+	} = useQuery({
+		queryKey: ['applicantsList', { pageNum, role }],
+		queryFn: () => getApplicantsList({ pageNum: 7, role, page }),
+	});
+	console.log(applicantList);
 	const { data: recruitManageInfo, isSuccess: manageSuccess } = useQuery({
 		queryKey: ['recruitManageInfo'],
 		queryFn: () => getRecruitInfo(7),
@@ -75,6 +83,31 @@ const ApplierManagePage = () => {
 	const onClickApproved = () => {
 		approved.mutate({ pageNum, applicantIds: checkList });
 	};
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(entries => {
+			if (entries[0].isIntersecting) {
+				setPage(prev => prev + 1);
+			}
+		});
+
+		if (targetRef.current) {
+			observer.observe(targetRef.current);
+		}
+
+		return () => {
+			if (targetRef.current) {
+				observer.unobserve(targetRef.current);
+			}
+		};
+	}, []);
+
+	useEffect(() => {
+		refetch();
+		if (applicantList) {
+			setApplicantsArr(prev => [...prev, ...applicantList?.applicants]);
+		}
+	}, [page]);
 
 	return (
 		<S.ApplierManagePage $isChecked={checkList.length !== 0}>
@@ -139,24 +172,9 @@ const ApplierManagePage = () => {
 					</section>
 					<section className='list-applicants'>
 						{listSuccess &&
-							applicantList &&
-							applicantList.map(info => (
-								<ApplicantCard
-									key={info.applicantId}
-									applicantId={info.applicantId}
-									applyRoleName={info.applyRoleName}
-									departmentName={info.departmentName}
-									message={info.message}
-									name={info.name}
-									nickname={info.nickname}
-									profileImg={info.profileImg}
-									score={info.score}
-									universityName={info.universityName}
-									userId={info.userId}
-									year={info.year}
-								/>
-							))}
+							applicantsArr.map(info => <ApplicantCard key={info.applicantId} {...info} />)}
 					</section>
+					<section ref={targetRef}></section>
 				</section>
 			</article>
 			<article className='current-recruit'>

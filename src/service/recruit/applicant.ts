@@ -1,6 +1,5 @@
-import { applicantList } from '../../components';
 import {
-	ApplicantInfo,
+	ApplicantList,
 	ApplicantPageInfo,
 	ApplicantsLink,
 	ApplicantsList,
@@ -20,10 +19,10 @@ export const getRecruitInfo = async (pageNum: number) => {
 	}
 };
 
-export const getApplicantsList = async ({ pageNum, role }: ApplicantPageInfo) => {
+export const getApplicantsList = async ({ pageNum, role, page }: ApplicantPageInfo) => {
 	try {
-		const response = await axiosAuthInstance.get<ApplicantInfo[]>(
-			EndPoint.RECRUITMENT_APPLICANT.list({ pageNum, role })
+		const response = await axiosAuthInstance.get<ApplicantList>(
+			EndPoint.RECRUITMENT_APPLICANT.list({ pageNum, role, page })
 		);
 		return response;
 	} catch (error) {

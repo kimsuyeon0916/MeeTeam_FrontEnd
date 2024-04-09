@@ -130,6 +130,7 @@ export interface ListResult {
 export interface ApplicantPageInfo {
 	pageNum: number;
 	role: number | null;
+	page: number;
 }
 
 export interface ApplicantInfo {
@@ -144,6 +145,17 @@ export interface ApplicantInfo {
 	universityName: string;
 	userId: string;
 	year: number;
+}
+
+export interface PageInfo {
+	page: number;
+	size: number;
+	hasNextPage: boolean;
+}
+
+export interface ApplicantList {
+	applicants: ApplicantInfo[];
+	pageInfo: PageInfo;
 }
 
 export interface ManageRole {
