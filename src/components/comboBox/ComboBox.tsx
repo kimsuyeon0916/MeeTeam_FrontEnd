@@ -65,6 +65,12 @@ const ComboBox = <T extends FieldValues>({
 	};
 
 	useEffect(() => {
+		const inputValue = getValues?.(name as Path<T>);
+		const defaultOptionId = optionList?.find(option => option.name === inputValue)?.id;
+		defaultOptionId && sessionStorage.setItem(name, defaultOptionId);
+	}, []);
+
+	useEffect(() => {
 		const handleOutsideClick = (e: MouseEvent) => {
 			const target = e.target as HTMLDivElement;
 			if (isOpen && inputRef.current && !inputRef.current.contains(target)) {
