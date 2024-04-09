@@ -86,7 +86,6 @@ import Content from './meeteam/Content';
 import RecruitCard from './meeteam/card/RecruitCard';
 import Pagination from './pagination/Pagination';
 import NaverLogin from './naver/NaverLogin';
-import Create from './header/Create';
 import Comment from './comment/comment/Comment';
 import CommentInput from './comment/commentInput/CommentInput';
 import ReplyInput from './comment/replyInput/ReplyInput';
@@ -99,14 +98,13 @@ import Progress from './progressBar/Progress';
 import TitleInfo from './recruit/recruitDetail/titleInfo/TitleInfo';
 import RecruitInfo from './recruit/recruitDetail/recruitInfo/RecruitInfo';
 import RecruitDescription from './recruit/recruitDetail/recruitDescription/RecruitDescription';
-import RecruitComments from './recruit/recruitDetail/recruitComments/RecruitComments';
 import RecruitRoles from './recruit/recruitDetail/recruitRoles/RecruitRoles';
 import LinkToList from './recruit/recruitDetail/linktoList/LinkToList';
 import RecruitTag from './recruit/recruitDetail/recruitTag/RecruitTag';
 import Description from './recruit/create/Description';
 import BasicInformation from './recruit/create/basicInformation/BasicInformation';
 import DetailedInformation from './recruit/create/detailedInformation/DetailedInformation';
-import RecruitRole from './recruit/create/recruitRoles/RecruitRoles';
+import RecruitRoleForm from './recruit/create/recruitRoles/RecruitRolesForm';
 import ControlButtons from './recruit/create/ControlButtons';
 import ContainerScope from './recruit/create/basicInformation/containers/ContainerScope';
 import ContainerCategory from './recruit/create/basicInformation/containers/ContainerCategory';
@@ -196,7 +194,6 @@ export {
 	CONTENT,
 	RecruitCard,
 	Pagination,
-	Create,
 	DateSelect,
 	CommentInput,
 	ReplyInput,
@@ -210,14 +207,13 @@ export {
 	TitleInfo,
 	RecruitInfo,
 	RecruitDescription,
-	RecruitComments,
 	RecruitRoles,
 	LinkToList,
 	RecruitTag,
 	Description,
 	BasicInformation,
 	DetailedInformation,
-	RecruitRole,
+	RecruitRoleForm,
 	ControlButtons,
 	ContainerScope,
 	ContainerCategory,

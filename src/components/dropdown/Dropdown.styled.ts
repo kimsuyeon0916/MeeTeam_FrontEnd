@@ -13,11 +13,15 @@ const Dropdown = styled.div<IDropdown>`
 		display: flex;
 		align-items: center;
 		padding: 1.2rem 1rem 1.2rem 1.6rem;
-		border: 0.75px solid ${props => (props.$showDropdown ? '#5877FC' : '#e0e6ff')};
+		border: 1px solid ${props => (props.$showDropdown ? '#5877FC' : '#e0e6ff')};
 		box-sizing: border-box;
 		border-radius: 0.6rem;
 		min-width: ${props => (props.scope ? '15rem' : '13rem')};
 		cursor: pointer;
+
+		&:hover {
+			border: 1px solid #5877fc;
+		}
 
 		.temp {
 			display: flex;

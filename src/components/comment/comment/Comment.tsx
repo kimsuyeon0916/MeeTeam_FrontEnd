@@ -47,7 +47,7 @@ const Comment = ({
 			title: '삭제',
 			optionClickHandler: () => {
 				setShowKebab(false);
-				const commentId = { commentId: id };
+				const commentId = id;
 				deleteComment.mutate(
 					{ pageNum, commentId },
 					{
@@ -131,7 +131,7 @@ const Comment = ({
 									className='edit-input'
 									value={value}
 									onChange={onChangeEdit}
-									onKeyPress={onKeyPressEdit}
+									onKeyUp={onKeyPressEdit}
 								/>
 								<section className='btn-container'>
 									<button
@@ -155,20 +155,7 @@ const Comment = ({
 			<section className='wrapper-replies'>
 				<ul className='container-reply__lists'>
 					{replies?.map(reply => {
-						return (
-							<ReplyComment
-								key={reply.id}
-								id={reply.id}
-								userId={reply.userId}
-								nickname={reply.nickname}
-								content={reply.content}
-								createAt={reply.createAt}
-								profileImg={reply.profileImg}
-								isWriter={reply.isWriter}
-								groupOrder={reply.groupOrder}
-								replyComment={replyHandler}
-							/>
-						);
+						return <ReplyComment key={reply.id} {...reply} replyComment={replyHandler} />;
 					})}
 				</ul>
 				{replyClicked && groupNumber && (

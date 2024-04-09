@@ -1,3 +1,5 @@
+import { DeleteComment } from '../types';
+
 export const EndPoint = {
 	/* auth */
 	SIGN_IN: '/auth/social/login-or-signup',
@@ -22,6 +24,8 @@ export const EndPoint = {
 		bookmark: (id: number) => `/recruitment/postings/${id}/bookmark`,
 		edit: (id: number) => `/recruitment/postings/${id}/close`,
 		comment: (id: number) => `/recruitment/postings/${id}/comment`,
+		deleteComment: ({ pageNum, commentId }: DeleteComment) =>
+			`/recruitment/postings/${pageNum}/comment/${commentId}`,
 	},
 	RECRUITMENT: {
 		post: '/recruitment/postings',

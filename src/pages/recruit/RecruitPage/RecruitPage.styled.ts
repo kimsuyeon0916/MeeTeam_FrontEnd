@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-const RecruitPage = styled.div`
+interface RecruitPage {
+	$isFieldClick: boolean;
+	$isDetailedClick: boolean;
+}
+
+const RecruitPage = styled.div<RecruitPage>`
 	width: clamp(45%, 96rem, 75%);
 	margin: 0 auto;
 
@@ -84,16 +89,21 @@ const RecruitPage = styled.div`
 					justify-content: center;
 					align-items: center;
 					border-radius: 1rem;
-					border: 1px solid #e3e3e3;
+					border: 1px solid ${props => (props.$isFieldClick ? '#5877fc' : '#e3e3e3')};
 					background: #fff;
-					color: #8e8e8e;
+					color: ${props => (props.$isFieldClick ? '#373F41' : '#8e8e8e')};
 					font-size: 1.6rem;
 					letter-spacing: 0.0032rem;
 					cursor: pointer;
 
-					&:focus {
+					&:focus-within {
 						border-color: #5877fc;
 						color: #373f41;
+					}
+
+					&:hover {
+						border-color: #5877fc;
+						transition: 0.2s ease-in-out;
 					}
 				}
 			}
@@ -151,13 +161,17 @@ const RecruitPage = styled.div`
 				display: flex;
 				align-items: center;
 				padding: 1.2rem 1rem 1.2rem 1.6rem;
-				border: 0.75px solid #e0e6ff;
+				border: 1px solid #e0e6ff;
 				box-sizing: border-box;
 				border-radius: 0.6rem;
 				font-size: 1.5rem;
 				color: #373f41;
 				font-weight: 400;
 				width: 13rem;
+
+				&:hover {
+					border: 1px solid #5877fc;
+				}
 
 				.dropdown-box {
 					width: 100%;
@@ -191,6 +205,10 @@ const RecruitPage = styled.div`
 
 						.sidebar-elem {
 							cursor: pointer;
+						}
+
+						.active {
+							color: #151515;
 						}
 					}
 

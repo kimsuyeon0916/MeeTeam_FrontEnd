@@ -7,13 +7,13 @@ import { editRecruitPost } from '../../../../service';
 const WriterFooter = () => {
 	const { id } = useParams();
 	const pageNumber = Number(id);
-	const close = useMutation({
+	const closeRecruitment = useMutation({
 		mutationFn: (pageNumber: number) => editRecruitPost(pageNumber),
 	});
 
 	const onClickClose = () => {
 		if (id) {
-			close.mutate(pageNumber);
+			closeRecruitment.mutate(pageNumber);
 		}
 	};
 	return (

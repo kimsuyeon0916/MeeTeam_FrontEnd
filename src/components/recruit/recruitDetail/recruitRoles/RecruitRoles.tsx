@@ -10,14 +10,7 @@ const RecruitRoles = (props: { roles: RoleInfo[] }) => {
 			<section className='scroll'>
 				<section className='container-roles'>
 					{props.roles.map((role, index) => (
-						<RoleCard
-							key={index}
-							roleName={role.roleName}
-							skills={role.skills}
-							recruitCount={role.recruitCount}
-							applicantCount={role.applicantCount}
-							recruitedCount={role.recruitedCount}
-						/>
+						<RoleCard key={index} {...role} />
 					))}
 				</section>
 			</section>

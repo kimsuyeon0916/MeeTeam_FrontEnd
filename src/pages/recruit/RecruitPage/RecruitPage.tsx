@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Dropdown, RecruitCard, Pagination, DetailedInput } from '../../../components';
 import S from './RecruitPage.styled';
 import { Clear, DropdownArrow, FilledBookmark, SearchIcon } from '../../../assets';
@@ -11,6 +11,7 @@ import { useLogin } from '../../../hooks';
 const START_PAGE_NUM = 1;
 
 const RecruitPage = () => {
+	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [searchKeyword, setSearchKeyword] = useState<string>('');
 	const [fieldValue, setFieldValue] = useState({
 		applied: false,
@@ -21,7 +22,7 @@ const RecruitPage = () => {
 	const [isFieldOpen, setIsFieldOpen] = useState<boolean>(false);
 	const [filterState, setFilterState] = useRecoilState(recruitFilterState);
 	const [isOpenDetail, setIsOpenDetail] = useState({
-		skill: false,
+		skill: true,
 		role: false,
 		tag: false,
 		message: '기술',
@@ -83,6 +84,10 @@ const RecruitPage = () => {
 		}
 	};
 
+	const onClickClearField = () => {
+		setFieldValue({ applied: false, value: '분야를 선택해주세요' });
+	};
+
 	const submitTagItem = () => {
 		setFilterState(prev => ({ ...prev, keyword: searchKeyword }));
 	};
@@ -91,8 +96,24 @@ const RecruitPage = () => {
 		refetch();
 	}, [filterState]);
 
+	useEffect(() => {
+		const outsideClick = (event: MouseEvent) => {
+			const { target } = event;
+			if (isOpen && dropdownRef.current && !dropdownRef.current.contains(target as Node)) {
+				setIsOpen(false);
+			}
+		};
+		document.addEventListener('mousedown', outsideClick);
+		return () => {
+			document.removeEventListener('mousedown', outsideClick);
+		};
+	}, [dropdownRef.current, isOpen]);
+
 	return (
-		<S.RecruitPage>
+		<S.RecruitPage
+			$isFieldClick={fieldValue.value !== '분야를 선택해주세요'}
+			$isDetailedClick={isOpen}
+		>
 			<section>
 				<section className='wrapper-title'>
 					<h2>분야 전체</h2>
@@ -109,7 +130,7 @@ const RecruitPage = () => {
 								</span>
 							</section>
 							<article className='container-btns'>
-								<section className='clear'>
+								<section className='clear' onClick={onClickClearField}>
 									<img src={Clear} />
 									<span>초기화</span>
 								</section>
@@ -130,7 +151,7 @@ const RecruitPage = () => {
 							initialData='유형'
 							scope={false}
 						/>
-						<article className='dropdown-detailed' onClick={onClickDetailed}>
+						<article className='dropdown-detailed' onClick={onClickDetailed} ref={dropdownRef}>
 							<section className='dropdown-box'>
 								<label>{'상세정보'}</label>
 								<img src={DropdownArrow} />
@@ -138,13 +159,22 @@ const RecruitPage = () => {
 							{isOpen && (
 								<section className='container-dropdown'>
 									<section className='sidebar'>
-										<span className='body1 sidebar-elem' onClick={onClickDetails}>
+										<span
+											className={`body1 sidebar-elem ${isOpenDetail.skill ? 'active' : ''}`}
+											onClick={onClickDetails}
+										>
 											기술
 										</span>
-										<span className='body1 sidebar-elem' onClick={onClickDetails}>
+										<span
+											className={`body1 sidebar-elem ${isOpenDetail.role ? 'active' : ''}`}
+											onClick={onClickDetails}
+										>
 											역할
 										</span>
-										<span className='body1 sidebar-elem' onClick={onClickDetails}>
+										<span
+											className={`body1 sidebar-elem ${isOpenDetail.tag ? 'active' : ''}`}
+											onClick={onClickDetails}
+										>
 											태그
 										</span>
 									</section>
@@ -183,20 +213,9 @@ const RecruitPage = () => {
 						</article>
 						{!isLoading && data && (
 							<section className='container-contents__grid'>
-								{isFetchedAfterMount &&
-									data.posts.map(post => (
-										<RecruitCard
-											id={post.id}
-											title={post.title}
-											category={post.category}
-											writerNickname={post.writerNickname}
-											writerProfileImg={post.writerProfileImg}
-											deadline={post.deadline}
-											scope={post.scope}
-											isBookmarked={post.isBookmarked}
-											key={post.id}
-										/>
-									))}
+								{data.posts.map(post => (
+									<RecruitCard {...post} key={post.id} />
+								))}
 							</section>
 						)}
 						{data?.posts.length === 0 && (

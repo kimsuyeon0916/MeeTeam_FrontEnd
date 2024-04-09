@@ -5,7 +5,7 @@ import {
 	ControlButtons,
 	Description,
 	DetailedInformation,
-	RecruitRole,
+	RecruitRoleForm,
 } from '../../../components/index';
 import { useMutation } from '@tanstack/react-query';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
@@ -55,7 +55,7 @@ const RecruitCreatePage = () => {
 				<Description />
 				<BasicInformation />
 				<DetailedInformation />
-				<RecruitRole />
+				<RecruitRoleForm />
 				<RecruitTags />
 				<ControlButtons />
 			</form>

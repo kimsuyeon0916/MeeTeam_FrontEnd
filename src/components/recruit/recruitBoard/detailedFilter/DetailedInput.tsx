@@ -7,26 +7,26 @@ import { Keyword, DetailedInfo, Array } from '../../../../types';
 import { useSetRecoilState } from 'recoil';
 import { recruitFilterState } from '../../../../atom';
 
-const SKILL_MESSAGE_OBJ = {
-	intro: '보유하신 기술 스택을 검색해보세요. 기술 스택은 최대 5개까지 선택 가능합니다.',
-	message: '기술 스택을 검색하세요.',
-};
-
-const ROLE_MESSAGE_OBJ = {
-	intro: '원하는 역할을 검색해보세요. 역할은 최대 5개까지 선택 가능합니다.',
-	message: '역할을 검색하세요.',
-};
-
-const TAG_MESSAGE_OBJ = {
-	intro: '알아보고 싶은 내용을 태그로 검색해보세요. 태그는 최대 5개까지 선택 가능합니다.',
-	message: '태그를 검색하세요.',
+const MESSAGE = {
+	SKILL: {
+		INTRO: '보유하신 기술 스택을 검색해보세요. 기술 스택은 최대 5개까지 선택 가능합니다.',
+		MESSAGE: '기술 스택을 검색하세요.',
+	},
+	ROLE: {
+		INTRO: '원하는 역할을 검색해보세요. 역할은 최대 5개까지 선택 가능합니다.',
+		MESSAGE: '역할을 검색하세요.',
+	},
+	TAG: {
+		INTRO: '알아보고 싶은 내용을 태그로 검색해보세요. 태그는 최대 5개까지 선택 가능합니다.',
+		MESSAGE: '태그를 검색하세요.',
+	},
 };
 
 const DetailedInput = ({ type }: DetailedInfo) => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [message, setMessage] = useState({
-		intro: SKILL_MESSAGE_OBJ.intro,
-		message: SKILL_MESSAGE_OBJ.message,
+		intro: MESSAGE.SKILL.INTRO,
+		message: MESSAGE.SKILL.MESSAGE,
 	});
 	const [array, setArray] = useState<Array>({
 		skill: [],
@@ -127,11 +127,11 @@ const DetailedInput = ({ type }: DetailedInfo) => {
 
 	useEffect(() => {
 		if (type === '기술') {
-			setMessage({ intro: SKILL_MESSAGE_OBJ.intro, message: SKILL_MESSAGE_OBJ.message });
+			setMessage({ intro: MESSAGE.SKILL.INTRO, message: MESSAGE.SKILL.MESSAGE });
 		} else if (type === '역할') {
-			setMessage({ intro: ROLE_MESSAGE_OBJ.intro, message: ROLE_MESSAGE_OBJ.message });
+			setMessage({ intro: MESSAGE.ROLE.INTRO, message: MESSAGE.ROLE.MESSAGE });
 		} else if (type === '태그') {
-			setMessage({ intro: TAG_MESSAGE_OBJ.intro, message: TAG_MESSAGE_OBJ.message });
+			setMessage({ intro: MESSAGE.TAG.INTRO, message: MESSAGE.TAG.MESSAGE });
 		}
 	}, [type]);
 

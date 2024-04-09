@@ -5,6 +5,8 @@ import { Reply } from '../../../assets';
 import { useComment } from '../../../hooks';
 import { useQueryClient } from '@tanstack/react-query';
 import { realpath } from 'fs/promises';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../../atom';
 
 interface ReplyHandler {
 	mention?: string;
@@ -24,7 +26,7 @@ const ReplyInput = ({
 	const postComment = useComment();
 	const queryClient = useQueryClient();
 	const [contents, setContents] = useState<string>(mention ? `@${mention + ' '}` : '');
-	const userState = JSON.parse(localStorage.getItem('userState') as any);
+	const userInfo = useRecoilValue(userState);
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		const target = event.currentTarget;
@@ -66,7 +68,7 @@ const ReplyInput = ({
 			<section className='wrapper'>
 				<img className='reply-icon' src={Reply} />
 				<section className='user-input__icon'>
-					<ProfileImage url={userState.imageUrl} size='2.31rem' nickname={userState.nickname} />
+					<ProfileImage url={userInfo?.imageUrl} size='2.31rem' nickname={userInfo?.nickname} />
 				</section>
 				<section className='user-input__container'>
 					<input
