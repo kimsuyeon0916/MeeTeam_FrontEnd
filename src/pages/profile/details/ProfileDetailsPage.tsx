@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import S from '../Profile.styled';
-import { PortfolioCard, ProfileImage, SkillTag } from '../../../components';
+import { DefaultBtn, PortfolioCard, ProfileImage, SkillTag } from '../../../components';
 import { useReadProfile } from '../../../hooks';
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../../atom';
 
@@ -18,6 +18,8 @@ const ProfileDetailsPage = () => {
 		}
 	}, [isSuccess]);
 
+	const navigate = useNavigate();
+
 	return (
 		<S.ProfileLayout>
 			<S.ProfileHeader>
@@ -30,6 +32,9 @@ const ProfileDetailsPage = () => {
 					<h4>{user?.interest}</h4>
 					<h6>{user?.introduction}</h6>
 				</S.ProfileColumn>
+				{userInfo?.userId === userId && (
+					<DefaultBtn type='button' title='편집' handleClick={() => navigate('/profile/edit')} />
+				)}
 			</S.ProfileHeader>
 
 			<S.ProfileColumn $gap='5rem'>
