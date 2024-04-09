@@ -5,7 +5,7 @@ import { ApplicantCard, ApplyRole, Dropdown } from '../../../components';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getApplicantsList } from '../../../service';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { applicantHolder, applicantPageNum } from '../../../atom';
+import { applicantFilter, applicantHolder } from '../../../atom';
 import {
 	approveApplicant,
 	getRecruitInfo,
@@ -17,16 +17,18 @@ import { useNavigate } from 'react-router-dom';
 import { useScrollToTop } from '../../../hooks';
 
 const ApplierManagePage = () => {
-	const role = 2;
+	const role = useRecoilValue(applicantFilter);
 	const targetRef = useRef<HTMLDivElement | null>(null);
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const scrollToTop = useScrollToTop();
 	const [page, setPage] = useState<number>(1);
-	const pageNum = useRecoilValue(applicantPageNum);
 	const [isOpenChat, setIsOpenChat] = useState(false);
 	const [linkUrl, setLinkUrl] = useState<string>('');
 	const [checkList, setCheckList] = useRecoilState(applicantHolder);
+	const [applicantsArr, setApplicantsArr] = useState<ApplicantInfo[]>([]);
+	const storedNum = sessionStorage.getItem('pageNum');
+	const pageNum = Number(storedNum !== null && storedNum);
 
 	const {
 		data: applicantList,
@@ -34,9 +36,8 @@ const ApplierManagePage = () => {
 		refetch,
 	} = useQuery({
 		queryKey: ['applicantsList', { pageNum, role }],
-		queryFn: () => getApplicantsList({ pageNum: 7, role, page }),
+		queryFn: () => getApplicantsList({ pageNum: pageNum, role, page }),
 	});
-	const [applicantsArr, setApplicantsArr] = useState<ApplicantInfo[]>([]);
 	const { data: recruitManageInfo, isSuccess: manageSuccess } = useQuery({
 		queryKey: ['recruitManageInfo'],
 		queryFn: () => getRecruitInfo(7),
@@ -159,7 +160,11 @@ const ApplierManagePage = () => {
 						</section>
 						{recruitManageInfo && manageSuccess && (
 							<section className='header-control'>
-								<Dropdown data={recruitManageInfo.roles.map(e => e.title)} initialData='역할' />
+								<Dropdown
+									initialData='역할'
+									applicant
+									roleObj={[{ id: null, title: '전체' }, ...recruitManageInfo.roles]}
+								/>
 								<section className='btn-container'>
 									<button className='text-big refused' onClick={onClickRefused}>
 										거절

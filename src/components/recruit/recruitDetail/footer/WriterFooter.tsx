@@ -1,7 +1,7 @@
 import React from 'react';
 import { Edit, TrashCan } from '../../../../assets';
 import { useSetRecoilState } from 'recoil';
-import { applicantPageNum, applyCloseModalState, waitModalState } from '../../../../atom';
+import { applyCloseModalState, waitModalState } from '../../../../atom';
 import { useNavigate } from 'react-router-dom';
 
 interface WriterFooter {
@@ -13,7 +13,7 @@ const WriterFooter = ({ pageNum, onClickEditPage }: WriterFooter) => {
 	const navigate = useNavigate();
 	const setIsClose = useSetRecoilState(applyCloseModalState);
 	const setIsWait = useSetRecoilState(waitModalState);
-	const setPageNum = useSetRecoilState(applicantPageNum);
+	sessionStorage.setItem('pageNum', pageNum.toString());
 
 	const onClickClose = () => {
 		setIsClose(true);
@@ -24,7 +24,6 @@ const WriterFooter = ({ pageNum, onClickEditPage }: WriterFooter) => {
 	};
 
 	const onClickApplicant = () => {
-		setPageNum(pageNum);
 		navigate('/recruitment/applicants');
 	};
 	return (

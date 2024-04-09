@@ -76,11 +76,6 @@ export const waitModalState = atom({
 	default: false,
 });
 
-export const applicantPageNum = atom({
-	key: 'applicantPageNum',
-	default: 0 as number,
-});
-
 export const recruitInputState = atom<InputState>({
 	key: 'recruitInputState',
 	default: {
@@ -172,4 +167,9 @@ export const recruitFilterState = atom<RecruitFilter>({
 export const applicantHolder = atom({
 	key: 'applicantApproved',
 	default: [] as number[],
+});
+
+export const applicantFilter = atom({
+	key: 'applicantFilter',
+	default: null as number | null,
 });

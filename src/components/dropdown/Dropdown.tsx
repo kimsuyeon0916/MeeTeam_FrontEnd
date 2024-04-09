@@ -4,14 +4,18 @@ import DropdownArrow from './DropdownArrow';
 import { useDebounce } from '../../hooks';
 import { useQuery } from '@tanstack/react-query';
 import { getCourseKeyword, getProfessorKeyword } from '../../service';
-import { useRecoilState } from 'recoil';
-import { recruitFilterState } from '../../atom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { applicantFilter, recruitFilterState } from '../../atom';
+import { ManageRole } from '../../types';
 
 interface Dropdown {
-	data: string[];
+	data?: string[];
 	initialData?: string;
 	$showDropdown?: boolean;
 	scope?: boolean;
+	category?: boolean;
+	applicant?: boolean;
+	roleObj?: ManageRole[];
 }
 
 type keyObj = {
@@ -29,7 +33,7 @@ const categoryObj: keyObj = {
 	공모전: 3,
 };
 
-const Dropdown = ({ data, initialData, scope }: Dropdown) => {
+const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dropdown) => {
 	const [currentValue, setCurrentValue] = useState<string | undefined>(`${initialData}`);
 	const [showDropdown, setShowDropdown] = useState<boolean>(false);
 	const [dropdown, setDropdown] = useState({
@@ -43,6 +47,7 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 		course: '',
 		professor: '',
 	});
+	const setApplicantFilter = useSetRecoilState(applicantFilter);
 	const keywordCourse = useDebounce(name.course, 500);
 	const keywordProfessor = useDebounce(name.professor, 500);
 	const [filterState, setFilterState] = useRecoilState(recruitFilterState);
@@ -60,11 +65,15 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 		setShowDropdown(true);
 	};
 
-	const onClickList = (event: React.MouseEvent<HTMLElement>) => {
+	const onClickList = (event: React.MouseEvent<HTMLElement>, id?: number) => {
 		event.stopPropagation();
 		const { innerText } = event.target as HTMLElement;
 		setCurrentValue(innerText);
-		setFilterState(prev => ({ ...prev, category: categoryObj[innerText] }));
+		if (applicant && id) {
+			setApplicantFilter(id);
+		} else {
+			setFilterState(prev => ({ ...prev, category: categoryObj[innerText] }));
+		}
 		setShowDropdown(false);
 	};
 
@@ -141,9 +150,9 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 				{showDropdown && (
 					<>
 						<div className='dropdown'>
-							{scope ? (
+							{scope && (
 								<ul className='menu-container'>
-									{data.map((e: string, index: number) => (
+									{data?.map((e: string, index: number) => (
 										<>
 											<section key={index} className={`menu-scope ${e === '교내' && 'in'}`}>
 												<input
@@ -216,11 +225,24 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 										</>
 									))}
 								</ul>
-							) : (
+							)}
+							{category && (
 								<ul className='menu-container category'>
-									{data.map((e: string, index: number) => (
+									{data?.map((e: string, index: number) => (
 										<li onClick={onClickList} key={index}>
 											{e}
+										</li>
+									))}
+								</ul>
+							)}
+							{applicant && (
+								<ul className='menu-container category'>
+									{roleObj?.map(e => (
+										<li
+											onClick={event => onClickList(event, e.id as number | undefined)}
+											key={e.id}
+										>
+											{e.title}
 										</li>
 									))}
 								</ul>

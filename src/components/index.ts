@@ -73,7 +73,6 @@ import PortpolioCard from './meeteam/card/PortpolioCard';
 import Tag from './meeteam/tag/Tag';
 import ManageRecruitCard from './recruit/ManageRecruitCard';
 import Status from './meeteam/status/Status';
-import Filter from './meeteam/filter/Filter';
 import Dropdown from './dropdown/Dropdown';
 import DateSelect from './dateSelect/DateSelect';
 import DeadlineSelect from './dateSelect/DeadlineSelect';
@@ -187,7 +186,6 @@ export {
 	Tag,
 	ManageRecruitCard,
 	Status,
-	Filter,
 	Dropdown,
 	DeadlineSelect,
 	Icon,

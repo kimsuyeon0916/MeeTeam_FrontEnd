@@ -123,13 +123,9 @@ const RecruitPage = () => {
 				<section className='wrapper-filters'>
 					<section className='container-filters'>
 						{isLoggedIn && (
-							<Dropdown data={['전체 보기', '교내', '교외']} initialData='범위' scope={true} />
+							<Dropdown data={['전체 보기', '교내', '교외']} initialData='범위' scope />
 						)}
-						<Dropdown
-							data={['전체', '프로젝트', '스터디', '공모전']}
-							initialData='유형'
-							scope={false}
-						/>
+						<Dropdown data={['전체', '프로젝트', '스터디', '공모전']} initialData='유형' category />
 						<article className='dropdown-detailed' onClick={onClickDetailed}>
 							<section className='dropdown-box'>
 								<label>{'상세정보'}</label>

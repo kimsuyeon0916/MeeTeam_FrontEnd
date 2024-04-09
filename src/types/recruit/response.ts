@@ -159,7 +159,7 @@ export interface ApplicantList {
 }
 
 export interface ManageRole {
-	id: number;
+	id: number | null;
 	title: string;
 }
 
