@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import S from './SchoolCertificationPage.styled';
-import { GoBack } from '../../../components';
+import { GoBack, Input } from '../../../components';
 import { SCHOOL_CERTIFICATION_DATA } from '../..';
 import { useCertificateSchool, useReadUniversityList, useReadDepartmentList } from '../../../hooks';
 import { ComboBox } from '../../../components';
@@ -60,6 +60,12 @@ const SchoolCertificationPage = () => {
 	}, [sessionStorage?.university]);
 
 	const optionList = (name: string) => {
+		if (name === 'year') {
+			const currentYear = new Date().getFullYear();
+			return Array.from({ length: currentYear - 1970 + 1 }, (_, index) => ({
+				name: (currentYear - index).toString(),
+			}));
+		}
 		if (name === 'university') {
 			return universityList?.map(university => ({
 				id: university.universityId,
@@ -90,15 +96,20 @@ const SchoolCertificationPage = () => {
 						({ isNext, name, ...props }) =>
 							isNext === next && (
 								<S.SchoolCertificationRow key={name}>
-									<ComboBox
-										register={register}
-										setValue={setValue}
-										optionList={optionList(name)}
-										name={name}
-										{...props}
-									/>
-									{next && name === 'email' && (
-										<S.SchoolCertificationEmailDomain>{`@ ${domain}`}</S.SchoolCertificationEmailDomain>
+									{name !== 'email' ? (
+										<ComboBox
+											register={register}
+											setValue={setValue}
+											getValues={getValues}
+											optionList={optionList(name)}
+											name={name}
+											{...props}
+										/>
+									) : (
+										<>
+											<Input register={register} name={name} {...props} />
+											<S.SchoolCertificationEmailDomain>{`@ ${domain}`}</S.SchoolCertificationEmailDomain>
+										</>
 									)}
 								</S.SchoolCertificationRow>
 							)
