@@ -57,7 +57,7 @@ const aboutMe = {
 const phone = {
 	type: 'text',
 	placeholder: '휴대폰 번호',
-	name: 'phone.content',
+	name: 'phone',
 	icon: {
 		default: GrayPhone,
 		focus: BlackPhone,
@@ -68,7 +68,7 @@ const phone = {
 const universityEmail = {
 	type: 'text',
 	placeholder: '학교 이메일',
-	name: 'universityEmail.content',
+	name: 'universityEmail',
 	icon: {
 		default: GrayEmail,
 		focus: BlackEmail,
@@ -82,7 +82,7 @@ const universityEmail = {
 const subEmail = {
 	type: 'text',
 	placeholder: '이메일',
-	name: 'subEmail.content',
+	name: 'subEmail',
 	icon: {
 		default: GrayEmail,
 		focus: BlackEmail,
