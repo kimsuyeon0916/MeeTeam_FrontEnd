@@ -7,15 +7,15 @@ import { imageNameState } from '../../../atom';
 
 interface ProfileImage {
 	isEditable?: boolean;
-	nickname: string;
+	userId: string;
 	size: string;
 	url?: string;
 }
 
-const ProfileImage = ({ isEditable, nickname, size, url }: ProfileImage) => {
+const ProfileImage = ({ isEditable, userId, size, url }: ProfileImage) => {
 	const navigate = useNavigate();
 	const navigateProfile = () => {
-		navigate(`/profile/${nickname}`);
+		navigate(`/profile/${userId}`);
 	};
 
 	const inputRef = useRef<HTMLInputElement>(null);
