@@ -27,7 +27,6 @@ const ApplierManagePage = () => {
 	const [isOpenChat, setIsOpenChat] = useState(false);
 	const [linkUrl, setLinkUrl] = useState<string>('');
 	const [checkList, setCheckList] = useRecoilState(applicantHolder);
-	const [applicantsArr, setApplicantsArr] = useState<ApplicantInfo[]>([]);
 
 	const {
 		data: applicantList,
@@ -37,7 +36,7 @@ const ApplierManagePage = () => {
 		queryKey: ['applicantsList', { pageNum, role }],
 		queryFn: () => getApplicantsList({ pageNum: 7, role, page }),
 	});
-	console.log(applicantList);
+	const [applicantsArr, setApplicantsArr] = useState<ApplicantInfo[]>([]);
 	const { data: recruitManageInfo, isSuccess: manageSuccess } = useQuery({
 		queryKey: ['recruitManageInfo'],
 		queryFn: () => getRecruitInfo(7),
@@ -103,11 +102,14 @@ const ApplierManagePage = () => {
 	}, []);
 
 	useEffect(() => {
+		if (page === 1 && applicantList) {
+			setApplicantsArr(applicantList.applicants);
+		}
 		refetch();
 		if (applicantList) {
-			setApplicantsArr(prev => [...prev, ...applicantList?.applicants]);
+			setApplicantsArr(prev => [...prev, ...applicantList.applicants]);
 		}
-	}, [page]);
+	}, [page, applicantList]);
 
 	return (
 		<S.ApplierManagePage $isChecked={checkList.length !== 0}>

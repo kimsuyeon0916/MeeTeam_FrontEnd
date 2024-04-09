@@ -8,7 +8,6 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 	width: clamp(45%, 96rem, 75%);
 	margin: 0 auto;
 	display: flex;
-	height: 200vh;
 	justify-content: center;
 	gap: 5.4rem;
 	margin-bottom: 20rem;
