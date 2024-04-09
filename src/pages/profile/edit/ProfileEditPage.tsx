@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import S from '../Profile.styled';
 import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
-import { PROFILE_EDIT_DATA, userData } from '../../index';
+import { PROFILE_EDIT_DATA } from '../../index';
 import {
 	Input,
 	Textarea,
@@ -37,9 +37,9 @@ interface FormValues {
 	interest?: string;
 	introduction?: string;
 	aboutMe?: string;
-	'phone.content'?: string;
-	'universityEmail.content'?: string;
-	'subEmail.content'?: string;
+	phone?: string;
+	universityEmail?: string;
+	subEmail?: string;
 	year?: string;
 	university?: string;
 	department?: string;
@@ -80,20 +80,21 @@ const ProfileEditPage = () => {
 	});
 
 	const submitHandler: SubmitHandler<FormValues> = data => {
+		const { imageUrl, interest, ...updateData } = data;
 		mutate({
-			...data,
+			...updateData,
 			imageFileName: profileImageName,
 			isUserNamePublic: isUserNamePublic,
 			interestId: sessionStorage.interest,
-			phone: data['phone.content'],
 			isPhonePublic: isPhonePublic,
 			isUniversityMain: isUniversityMain,
 			isUniversityEmailPublic: isUniversityEmailPublic,
-			subEmail: data['subEmail.content'],
 			isSubEmailPublic: isSubEmailPublic,
 			skills: skillList.map(skill => skill.id),
 			portfolios: pinnedPortfolioList,
 		});
+		sessionStorage.removeItem('interest');
+		sessionStorage.removeItem('skill');
 	};
 
 	const { register, formState, handleSubmit, control, watch, getValues, setValue } =
@@ -102,9 +103,16 @@ const ProfileEditPage = () => {
 			values: {
 				...user,
 				year: user?.year + '학년도',
+				phone: user?.phone?.content,
+				universityEmail: user?.universityEmail?.content,
+				subEmail: user?.subEmail?.content,
 				skills: null,
 				links: user?.links,
 				awards: user?.awards,
+			},
+			resetOptions: {
+				keepDirtyValues: true, // user-interacted input will be retained
+				keepErrors: true, // input errors will be retained with value update
 			},
 		});
 
@@ -130,6 +138,13 @@ const ProfileEditPage = () => {
 			setIsUniversityEmailPublic(user?.universityEmail?.isPublic);
 			setIsSubEmailPublic(user?.subEmail?.isPublic);
 			setIsUniversityMain(user?.universityEmail?.isDefault);
+
+			setPinnedPortfolioList(
+				sortedPortfolioList
+					? sortedPortfolioList.filter(portfolio => portfolio.pinned).map(portfolio => portfolio.id)
+					: []
+			);
+			setSkillList(user?.skills ? user?.skills : []);
 		}
 	}, [isSuccess]);
 
