@@ -34,7 +34,7 @@ const DashBoardMember = () => {
 			<div className='dash-board-member__row'>
 				<h3>리더</h3>
 				<ProfileImage
-					nickname={leader ? leader.nickname : '리더'}
+					userId={leader ? leader.nickname : '리더'}
 					size='4.3313rem'
 					url={leader?.imageUrl}
 				/>
@@ -44,7 +44,7 @@ const DashBoardMember = () => {
 				{members.map((member, index) => (
 					<S.DashBoardMemberSpan key={index} $index={index}>
 						<ProfileImage
-							nickname={member.nickname}
+							userId={member.nickname}
 							key={index}
 							size='4.3313rem'
 							url={member.imageUrl}

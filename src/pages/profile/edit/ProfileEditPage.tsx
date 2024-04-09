@@ -253,7 +253,7 @@ const ProfileEditPage = () => {
 				<S.ProfileHeader>
 					<ProfileImage
 						isEditable={true}
-						nickname={user?.nickname as string}
+						userId={user?.nickname as string}
 						size='14rem'
 						url={user?.imageUrl}
 					/>
