@@ -5,12 +5,12 @@ import { Skill } from '../../../types';
 import { format } from 'date-fns';
 
 interface PortfolioInformation {
-	field: string;
-	role: string;
-	startDate: string;
-	endDate: string;
-	proceedType: string;
-	skills: Skill[];
+	field?: string;
+	role?: string;
+	startDate?: string;
+	endDate?: string;
+	proceedType?: string;
+	skills?: Skill[];
 }
 
 const PortfolioInformation = ({
