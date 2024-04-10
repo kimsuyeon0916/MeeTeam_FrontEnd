@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import S from '../Profile.styled';
 import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
@@ -21,15 +21,17 @@ import {
 } from '../../../components';
 import { useRecoilValue } from 'recoil';
 import { imageNameState, userState } from '../../../atom';
-import { Skill, Portfolio, Award, Link } from '../../../types';
+import { Skill, Award, Link } from '../../../types';
 import {
 	useDebounce,
 	useReadProfile,
 	useUpdateProfile,
 	useReadRoleList,
 	useReadSkillList,
+	useIntersection,
 } from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
+import { useReadPortfolioList } from '../../../hooks/usePortfolio';
 
 interface FormValues {
 	nickname?: string;
@@ -91,7 +93,7 @@ const ProfileEditPage = () => {
 			isUniversityEmailPublic: isUniversityEmailPublic,
 			isSubEmailPublic: isSubEmailPublic,
 			skills: skillList.map(skill => skill.id),
-			portfolios: pinnedPortfolioList,
+			portfolios: pinnedPortfolioList as string[],
 		});
 		sessionStorage.removeItem('interest');
 		sessionStorage.removeItem('skill');
@@ -141,7 +143,9 @@ const ProfileEditPage = () => {
 
 			setPinnedPortfolioList(
 				sortedPortfolioList
-					? sortedPortfolioList.filter(portfolio => portfolio.pinned).map(portfolio => portfolio.id)
+					? sortedPortfolioList
+							?.filter(portfolio => portfolio?.pinned)
+							?.map(portfolio => portfolio?.id as string)
 					: []
 			);
 			setSkillList(user?.skills ? user?.skills : []);
@@ -215,15 +219,27 @@ const ProfileEditPage = () => {
 	};
 
 	// 포트폴리오
+	const { data, fetchNextPage, hasNextPage, isFetching } = useReadPortfolioList(12);
+	const portfolioList = useMemo(
+		() => (data ? data.pages.flatMap(response => response?.portfolios) : []),
+		[data]
+	);
+
+	const ref = useIntersection((entry, observer) => {
+		observer.unobserve(entry.target);
+
+		if (hasNextPage && !isFetching) fetchNextPage();
+	});
+
 	const sortedPortfolioList =
-		user?.portfolios &&
-		[...user.portfolios]?.sort((a, b) =>
-			a.pinOrder > b.pinOrder ? 1 : a.pinOrder < b.pinOrder ? -1 : 0
+		portfolioList &&
+		[...portfolioList].sort((a, b) =>
+			a && b && a.pinOrder > b.pinOrder ? 1 : a && b && a.pinOrder < b.pinOrder ? -1 : 0
 		); // userData -> user로 변경
 
 	const [pinnedPortfolioList, setPinnedPortfolioList] = useState(
 		sortedPortfolioList
-			? sortedPortfolioList.filter(portfolio => portfolio.pinned).map(portfolio => portfolio.id)
+			? sortedPortfolioList?.filter(portfolio => portfolio?.pinned).map(portfolio => portfolio?.id)
 			: []
 	);
 
@@ -485,22 +501,25 @@ const ProfileEditPage = () => {
 						<S.ProfileTitle>포트폴리오</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.portfolio}</S.ProfileDescription>
 						<S.ProfileGrid>
-							{user?.portfolios &&
-								user?.portfolios.map(({ ...props }: Portfolio, index) => (
-									<PortfolioCard
-										key={index}
-										{...props}
-										isEditable={true}
-										clickNumber={checkPinnedIndex(props.id) + 1}
-										handleClick={
-											checkPinnedIndex(props.id) === -1
-												? addPinnedPortfolioList
-												: deletePinnedPortfolioList
-										}
-									/>
-								))}
+							{portfolioList &&
+								portfolioList?.map(
+									portfolio =>
+										portfolio && (
+											<PortfolioCard
+												key={portfolio.id}
+												{...portfolio}
+												isEditable={true}
+												clickNumber={checkPinnedIndex(portfolio.id) + 1}
+												handleClick={
+													checkPinnedIndex(portfolio.id) === -1
+														? addPinnedPortfolioList
+														: deletePinnedPortfolioList
+												}
+											/>
+										)
+								)}
 						</S.ProfileGrid>
-						<hr />
+						<hr ref={ref} />
 					</S.ProfileArticle>
 				</S.ProfileColumn>
 				<S.ProfileButtonBox>
