@@ -1,13 +1,20 @@
 import { EndPoint, axiosAuthInstance } from '..';
-import { PageInfo, PortfolioListResponse } from '../../types';
+import { PortfolioListResponse } from '../../types';
 
-export const readPortfolioList = async (pageInfo: PageInfo) => {
+export const readPortfolioList = async ({
+	size,
+	pageParam,
+}: {
+	size: number;
+	pageParam: number;
+}) => {
 	try {
 		const response = await axiosAuthInstance.get<PortfolioListResponse>(
 			EndPoint.PROFILE.readPortfolioList,
 			{
 				params: {
-					...pageInfo,
+					size: size,
+					page: pageParam,
 				},
 			}
 		);
