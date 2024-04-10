@@ -1,18 +1,32 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Dropdown, RecruitCard, Pagination, DetailedInput } from '../../../components';
 import S from './RecruitPage.styled';
-import { Clear, DropdownArrow, FilledBookmark, SearchIcon } from '../../../assets';
+import {
+	CancelWhite,
+	Clear,
+	Create,
+	DropdownArrow,
+	FilledBookmark,
+	Plus,
+	PlusWhite,
+	Portpolio,
+	Profile,
+	SearchIcon,
+} from '../../../assets';
 import { useRecoilState } from 'recoil';
 import { recruitFilterState } from '../../../atom';
 import { getPostList } from '../../../service/recruit/board';
 import { useQuery } from '@tanstack/react-query';
 import { useLogin } from '../../../hooks';
+import { useNavigate } from 'react-router-dom';
 
 const START_PAGE_NUM = 1;
 
 const RecruitPage = () => {
+	const navigate = useNavigate();
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [searchKeyword, setSearchKeyword] = useState<string>('');
+	const [isFloatingOpen, setIsFloatingOpen] = useState<boolean>(false);
 	const [fieldValue, setFieldValue] = useState({
 		applied: false,
 		value: '분야를 선택해주세요',
@@ -238,7 +252,33 @@ const RecruitPage = () => {
 					/>
 				)}
 			</article>
-			<article className='btn-floating'></article>
+			<article className='btn-floating' onClick={() => setIsFloatingOpen(prev => !prev)}>
+				{isFloatingOpen && (
+					<section className='floating-menu'>
+						<article className='container-menu'>
+							<span className='nav-info'>내 프로필 작성</span>
+							<section className='menu floating'>
+								<img src={Profile} />
+							</section>
+						</article>
+						<article className='container-menu'>
+							<span className='nav-info'>구인글 작성</span>
+							<section className='menu floating' onClick={() => navigate('/recruitment/postings')}>
+								<img src={Create} />
+							</section>
+						</article>
+						<article className='container-menu'>
+							<span className='nav-info'>포트폴리오 등록</span>
+							<section className='menu floating'>
+								<img src={Portpolio} />
+							</section>
+						</article>
+					</section>
+				)}
+				<section className='container-btn floating'>
+					<img src={isFloatingOpen ? CancelWhite : PlusWhite} />
+				</section>
+			</article>
 		</S.RecruitPage>
 	);
 };

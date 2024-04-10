@@ -22,6 +22,11 @@ import Edit from './Edit.svg';
 import TrashCan from './TrashCan.svg';
 import Clear from './Clear.svg';
 import BookmarkRight from './BookmarkRight.svg';
+import PlusWhite from './PlusWhite.svg';
+import CancelWhite from './CancelWhite.svg';
+import Create from './Create.svg';
+import Profile from './Profile.svg';
+import Portpolio from './Portpolio.svg';
 
 export {
 	Exit,
@@ -48,4 +53,9 @@ export {
 	DATE_ICON,
 	Clear,
 	BookmarkRight,
+	CancelWhite,
+	PlusWhite,
+	Create,
+	Profile,
+	Portpolio,
 };

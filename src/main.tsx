@@ -56,7 +56,7 @@ const router = createBrowserRouter([
 				],
 			},
 			{
-				path: 'create/recruit',
+				path: 'recruitment/postings',
 				element: <RecruitCreatePage />,
 			},
 			{
