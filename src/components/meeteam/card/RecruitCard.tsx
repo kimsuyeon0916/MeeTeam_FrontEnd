@@ -19,7 +19,7 @@ const RecruitCard = ({
 	const [isMarked, setIsMarked] = useState<boolean>(isBookmarked);
 
 	const onClickContent = () => {
-		navigate(`/recruit/${id}`);
+		navigate(`/recruitment/postings/${id}`);
 	};
 
 	const onClickBookmark = (event: React.MouseEvent<HTMLDivElement>) => {

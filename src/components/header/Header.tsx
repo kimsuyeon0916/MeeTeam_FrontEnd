@@ -19,7 +19,7 @@ const Header = () => {
 	});
 
 	const goRecruit = () => {
-		navigate('/recruit');
+		navigate('/recruitment/postings/search');
 	};
 	const goGalary = () => {
 		navigate('/galary');
@@ -42,7 +42,10 @@ const Header = () => {
 	};
 
 	useEffect(() => {
-		if (location.pathname === `/recruit/${id}` || location.pathname === '/recruit') {
+		if (
+			location.pathname === `/recruitment/postings/${id}` ||
+			location.pathname === '/recruitment/postings/search'
+		) {
 			setIsHere({ recruit: true, galary: false, inform: false });
 		}
 		if (location.pathname === '/galary') {

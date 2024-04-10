@@ -28,11 +28,11 @@ const router = createBrowserRouter([
 				element: <MainPage />,
 			},
 			{
-				path: 'recruit',
+				path: 'recruitment/postings/search',
 				element: <RecruitPage />,
 			},
 			{
-				path: 'recruit/:id',
+				path: 'recruitment/postings/:id',
 				element: <RecruitDetailPage />,
 			},
 			{
