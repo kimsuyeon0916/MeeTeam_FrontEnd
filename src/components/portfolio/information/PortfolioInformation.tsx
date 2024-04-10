@@ -2,6 +2,7 @@ import React from 'react';
 import S from './PortfolioInformation.styled';
 import SkillTag from '../../skills/SkillTag';
 import { Skill } from '../../../types';
+import { format } from 'date-fns';
 
 interface PortfolioInformation {
 	field: string;
@@ -33,7 +34,8 @@ const PortfolioInformation = ({
 				</S.PortfolioInformationRow>
 				<S.PortfolioInformationRow>
 					<h5>진행기간</h5>
-					{startDate}-{endDate}
+					{format(new Date(startDate), 'yy년 MM월 dd일')} -{' '}
+					{format(new Date(endDate), 'yy년 MM월 dd일')}
 				</S.PortfolioInformationRow>
 				<S.PortfolioInformationRow>
 					<h5>진행방식</h5>
