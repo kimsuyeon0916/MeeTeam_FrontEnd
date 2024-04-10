@@ -112,6 +112,7 @@ import MuiDatepicker from './muiDatepicker/MuiDatepicker';
 import DefaultBtn from './button/DefaultBtn';
 import PrimaryBtn from './button/PrimaryBtn';
 import AddFormBtn from './button/AddFormBtn';
+import LinkDetails from './link/details/LinkDetails';
 
 export {
 	Header,
@@ -219,4 +220,5 @@ export {
 	DefaultBtn,
 	PrimaryBtn,
 	AddFormBtn,
+	LinkDetails,
 };
