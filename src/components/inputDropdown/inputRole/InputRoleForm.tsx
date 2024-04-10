@@ -2,14 +2,14 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Plus, Search, XBtn } from '../../../assets';
 import S from './InputRoleForm.styled';
-import { Role, InputRoleForm, RoleForPost, InputState, Keyword } from '../../../types';
+import { Role, InputUserRoleForm, RoleForPost, InputState, Keyword } from '../../../types';
 import { useDebounce } from '../../../hooks';
 import { getRoleKeyword, getSkillKeyword } from '../../../service';
 import { useRecoilState } from 'recoil';
 import { recruitInputState } from '../../../atom';
 import { isNotNumber } from '../../../utils';
 
-const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleForm) => {
+const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => {
 	const [tagItem, setTagItem] = useState<string>('');
 	const [info, setInfos] = useRecoilState(recruitInputState);
 	const [dropdown, setDropdown] = useState({

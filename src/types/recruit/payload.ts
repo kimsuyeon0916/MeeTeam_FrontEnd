@@ -53,7 +53,7 @@ export interface Role {
 	skill: string[];
 }
 
-export interface InputRoleForm {
+export interface InputUserRoleForm {
 	userRoleList: Role[];
 	setUserRoleList: (arr: any) => void;
 }
