@@ -4,8 +4,9 @@ import type { CustomInstance } from './api';
 import type { TitleInfo, OptionList, Option, Role, InputRoleForm, InputState } from './information';
 import type { Comment, CommentInputFunctions } from './comment';
 import type { JsxElementComponentProps, stringSignature } from './indexSigniture';
-import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
+import type { User, Contact, Skill, Award, Link } from './user';
 import type { Search } from './search';
+import type { Portfolio } from './portfolio';
 
 export type {
 	SignUpPayload,
