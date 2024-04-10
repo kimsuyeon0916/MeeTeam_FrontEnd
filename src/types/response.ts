@@ -22,12 +22,12 @@ export interface Department {
 }
 
 export interface PortfolioListResponse {
-	portfolois: Portfolio[];
+	portfolios: Portfolio[];
 	pageInfo: PageInfo;
 }
 
 export interface PageInfo {
-	page: string;
-	size: string;
-	hasNextPage?: string;
+	page: number;
+	size: number;
+	hasNextPage?: boolean;
 }
