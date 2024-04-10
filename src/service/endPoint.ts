@@ -20,4 +20,9 @@ export const EndPoint = {
 		role: '/role/search',
 		skill: '/skill/search',
 	},
+
+	/* portfolio */
+	PORTFOLIO: {
+		read: (portfolioId: string) => `/profile/${portfolioId}`,
+	},
 };
