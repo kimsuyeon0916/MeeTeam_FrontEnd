@@ -115,6 +115,7 @@ import AddFormBtn from './button/AddFormBtn';
 import LinkDetails from './link/details/LinkDetails';
 import PortfolioInformation from './portfolio/information/PortfolioInformation';
 import PortfolioList from './portfolio/list/PortfolioList';
+import ImageCarousel from './carousel/ImageCarousel';
 
 export {
 	Header,
@@ -225,4 +226,5 @@ export {
 	LinkDetails,
 	PortfolioInformation,
 	PortfolioList,
+	ImageCarousel,
 };
