@@ -1,3 +1,5 @@
+import { Portfolio } from './index';
+
 export interface UserReponse {
 	userId?: string;
 	nickname?: string;
@@ -17,4 +19,15 @@ export interface University {
 export interface Department {
 	departmentId: string;
 	departmentName: string;
+}
+
+export interface PortfolioListResponse {
+	portfolois: Portfolio[];
+	pageInfo: PageInfo;
+}
+
+export interface PageInfo {
+	page: string;
+	size: string;
+	hasNextPage: string;
 }
