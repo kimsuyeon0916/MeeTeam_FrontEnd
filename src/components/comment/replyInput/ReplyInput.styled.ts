@@ -1,49 +1,70 @@
 import styled from 'styled-components';
 
 const ReplyInput = styled.div`
-	display: flex;
-	gap: 2rem;
-	margin-left: 5rem;
-	margin-top: 2rem;
-	margin: 2rem 0 2rem 5rem;
+	width: 100%;
 
-	.user-input__icon {
+	.wrapper {
 		display: flex;
-		width: 2.5rem;
+		gap: 1rem;
+		width: 100%;
+		margin: 1rem 2rem 1.6rem 0;
+
+		.user-input__icon {
+			display: flex;
+			margin-left: -0.45rem;
+		}
+
+		.user-input__container {
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+			position: relative;
+			margin-right: 4.8rem;
+
+			.reply-input {
+				width: 100%;
+				box-sizing: border-box;
+				height: 3.75rem;
+				border-radius: 0.75rem;
+				border: 0.75px solid #bebebe;
+				background: #fff;
+				outline: none;
+				padding-left: 1.3rem;
+			}
+		}
 	}
 
-	.user-input__container {
+	.btn-container {
 		display: flex;
-		width: 86%;
+		justify-content: flex-end;
+		align-items: center;
+		margin: 0 4.8rem 1.6rem 0;
+		gap: 1.2rem;
 
-		.reply-input {
-			width: 100%;
-			box-sizing: border-box;
-			height: 3.75rem;
-			flex-shrink: 0;
-			border-radius: 0.75rem;
-			border: 0.75px solid #bebebe;
+		.txt-small {
+			color: #f7faff;
+			font-size: 1.4rem;
+			line-height: 1.7rem;
+			letter-spacing: 0.0028rem;
+		}
+
+		button {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 3.6rem;
+			padding: 1.2rem 2rem;
+			border-radius: 0.6rem;
+		}
+
+		.cancel-btn {
+			color: #373f41;
+			border: 1px solid #e3e3e3;
 			background: #fff;
-			outline: none;
-			padding-left: 1.3rem;
 		}
 
 		.reply-btn {
-			display: flex;
-			width: 6.7rem;
-			height: 3.75rem;
-			padding: 0.75rem;
-			justify-content: center;
-			align-items: center;
-			gap: 0.75rem;
-			flex-shrink: 0;
-			border-radius: 0.6rem;
-			background: #000;
-			border: none;
-			outline: none;
-			color: #fff;
-			margin-left: 1rem;
-			cursor: pointer;
+			background: #5877fc;
 		}
 	}
 `;

@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { SessionStorageEffect, simpleDate } from './utils';
-import { User, InputState } from './types';
+import { User, InputState, ApplyRole, RecruitFilter, DetailedFilter } from './types';
 import { LocalStorageEffect } from './utils';
 import { Account } from './pages';
 
@@ -44,6 +44,11 @@ export const recruitmentInformationEditState = atom({
 export const deadlineState = atom({
 	key: 'deadlineState',
 	default: new Date(),
+});
+
+export const applyModalState = atom({
+	key: 'applyModalState',
+	default: false,
 });
 
 export const recruitInputState = atom<InputState>({
@@ -104,15 +109,41 @@ export const applyStepState = atom({
 	default: 0,
 });
 
-export const applyInfoState = atom({
-	key: 'applyInfoState',
+export const applyUserInfo = atom<ApplyRole>({
+	key: 'applyUserInfo',
 	default: {
-		role: '',
-		message: '',
+		name: '',
+		score: 0,
+		universityName: '',
+		departmentName: '',
+		email: '',
+		year: 0,
+		role: {
+			applyRoleId: 0,
+			name: '',
+		},
+		message: '' as string | undefined,
 	},
 });
 
-export const searchPageState = atom({
-	key: 'searchPageState',
-	default: false,
+export const detailedFilterState = atom<DetailedFilter>({
+	key: 'detailedFilterState',
+	default: {
+		skill: [],
+		role: [],
+		tag: [],
+	},
+});
+
+export const recruitFilterState = atom<RecruitFilter>({
+	key: 'recruitFilter',
+	default: {
+		scope: null,
+		category: null,
+		field: 1,
+		skill: [],
+		role: [],
+		tag: [],
+		keyword: '',
+	},
 });

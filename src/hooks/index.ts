@@ -9,16 +9,23 @@ import {
 import { useReadProfile } from './useProfile';
 import useDebounce from './useDebounce';
 import useValid from './useValid';
-
+import { useBookmark } from './useBookMark';
+import useLogin from './useLogin';
+import { useComment, useCommentDelete, useCommentEdit } from './useComment';
 
 export {
 	useCheckExist,
 	useNaverSignUp,
 	useCertificateSchool,
 	useCheckDuplicateNickname,
-  	useReadProfile,
+	useReadProfile,
 	useDebounce,
 	useValid,
 	useReadUniversityList,
 	useReadDepartmentList,
+	useBookmark,
+	useLogin,
+	useComment,
+	useCommentDelete,
+	useCommentEdit,
 };

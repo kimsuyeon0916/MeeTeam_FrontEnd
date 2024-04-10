@@ -9,16 +9,11 @@ import {
 	RecruitCreatePage,
 	OutputCreatePage,
 	RecruitDetailPage,
-	MyActivityLike,
 	SignInPage,
 	SchoolCertificationPage,
 	NicknameSettingPage,
 	SignUpPage,
 	PassWordFindingPage,
-	MyActivityWrapper,
-	MyActivityInvited,
-	MyActivityApply,
-	MyActivityBookmark,
 	ProfileDetailsPage,
 } from './pages/index.ts';
 import './globalStyle.css';
@@ -37,7 +32,7 @@ const router = createBrowserRouter([
 				element: <RecruitPage />,
 			},
 			{
-				path: 'recruit/:recruitId?',
+				path: 'recruit/:id',
 				element: <RecruitDetailPage />,
 			},
 			{
@@ -58,28 +53,6 @@ const router = createBrowserRouter([
 					{ path: '', element: <SignUpPage /> },
 					{ path: 'school?', element: <SchoolCertificationPage /> },
 					{ path: 'nickname', element: <NicknameSettingPage /> },
-				],
-			},
-			{
-				path: 'activity',
-				element: <MyActivityWrapper />,
-				children: [
-					{
-						path: 'invited',
-						element: <MyActivityInvited />,
-					},
-					{
-						path: 'like',
-						element: <MyActivityLike />,
-					},
-					{
-						path: 'apply',
-						element: <MyActivityApply />,
-					},
-					{
-						path: 'bookmark',
-						element: <MyActivityBookmark />,
-					},
 				],
 			},
 			{

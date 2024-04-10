@@ -87,7 +87,7 @@ const BasicInformation = styled.section<Basic>`
 					gap: 0.8rem;
 
 					input:checked + label {
-						color: #000;
+						color: #373f41;
 					}
 
 					label {

@@ -1,9 +1,42 @@
 import type { SignUpPayload, UpdateProfilePayload } from './payload';
 import type { UserReponse, University, Department } from './response';
 import type { CustomInstance } from './api';
-import type { TitleInfo, Option, OptionList, Keyword } from './recruit/response';
-import type { InputState, RoleForPost, InputCourse, InputRoleForm, Role } from './recruit/payload';
-import type { Comment, CommentInputFunctions } from './comment';
+import type {
+	InputState,
+	RoleForPost,
+	InputCourse,
+	InputRoleForm,
+	Role,
+	ApplyRole,
+	ApplyForm,
+	RecruitFilter,
+	DetailedInfo,
+	Array,
+	FilterData,
+	PostingComment,
+	CommentContents,
+	GroupContents,
+	DeleteComment,
+	EditContents,
+	EditingComment,
+} from './recruit/payload';
+import type { Comment } from './comment';
+import type {
+	TitleInfo,
+	Option,
+	OptionList,
+	Keyword,
+	TitleAndEtc,
+	RecruitInfo,
+	RecruitDescription,
+	RoleInfo,
+	RecruitTags,
+	RecruitPostings,
+	ApplyInfo,
+	ListResult,
+	Post,
+	DetailedFilter,
+} from './recruit/response';
 import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
 
@@ -14,7 +47,6 @@ export type {
 	CustomInstance,
 	Comment,
 	JsxElementComponentProps,
-	CommentInputFunctions,
 	Contact,
 	Skill,
 	Award,
@@ -27,10 +59,32 @@ export type {
 	Role,
 	InputRoleForm,
 	InputState,
-	InputCourse,
-	RoleForPost,
+	TitleAndEtc,
+	RecruitInfo,
+	RecruitDescription,
+	RoleInfo,
+	RecruitTags,
 	University,
 	Department,
+	RecruitPostings,
+	ApplyInfo,
+	ApplyRole,
+	ApplyForm,
+	InputCourse,
+	RoleForPost,
 	Keyword,
 	StringElementProps,
+	RecruitFilter,
+	ListResult,
+	Post,
+	DetailedInfo,
+	Array,
+	FilterData,
+	PostingComment,
+	CommentContents,
+	GroupContents,
+	DeleteComment,
+	EditContents,
+	EditingComment,
+	DetailedFilter,
 };

@@ -1,3 +1,23 @@
+import { Keyword } from '..';
+
+export interface ApplyRole {
+	name: string;
+	score: number;
+	universityName: string;
+	departmentName: string;
+	year: number;
+	email: string;
+	role: {
+		applyRoleId: number;
+		name: string;
+	};
+	message: string | undefined;
+}
+
+export interface ApplyForm {
+	applyRoleId: number;
+	message: string | undefined;
+}
 export interface RoleForPost {
 	roleId: number | null;
 	count: number | null;
@@ -41,4 +61,65 @@ export interface InputRoleForm {
 export interface InputCourse {
 	isChecked: boolean;
 	onClickHandler: () => void;
+}
+
+export interface RecruitFilter {
+	scope: number | null;
+	category: number | null;
+	field: number | null;
+	skill: number[];
+	role: number[];
+	tag: number[];
+	keyword: string;
+}
+
+export interface DetailedInfo {
+	type: string;
+}
+
+export interface Array {
+	skill: Keyword[];
+	role: Keyword[];
+	tag: Keyword[];
+}
+
+export interface FilterData {
+	field?: number | null;
+	scope?: number | null;
+	category?: number | null;
+	keyword?: string | null;
+	skill?: number[];
+	role?: number[];
+	tag?: number[];
+}
+
+export interface CommentContents {
+	content: string;
+	isParent: boolean;
+	groupNumber?: number;
+}
+
+export interface PostingComment {
+	pageNum: number;
+	comment: CommentContents;
+}
+
+export interface GroupContents {
+	groupNumber: number;
+	groupOrder: number;
+}
+
+export interface DeleteComment {
+	pageNum: number;
+	commentId: number;
+}
+
+export interface EditContents {
+	commentId: number;
+	content: string;
+}
+
+export interface EditingComment {
+	pageNum: number;
+	comment: EditContents;
 }

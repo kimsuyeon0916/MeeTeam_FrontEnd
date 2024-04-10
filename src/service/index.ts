@@ -9,6 +9,7 @@ import {
 	readDepartmentList,
 } from './auth/auth';
 import { readProfile } from './user/Profile';
+import { getPostingData, getApplyData, applyRole, editRecruitPost } from './recruit/detail';
 import {
 	postingRecruit,
 	getRoleKeyword,
@@ -29,10 +30,14 @@ export {
 	readUniversityList,
 	readDepartmentList,
 	readProfile,
+	getPostingData,
+	getApplyData,
+	applyRole,
 	postingRecruit,
 	getRoleKeyword,
 	getSkillKeyword,
 	getCourseKeyword,
 	getProfessorKeyword,
 	getTagKeyword,
+	editRecruitPost,
 };

@@ -21,7 +21,7 @@ export default function useValid(data: InputState) {
 		if (convertedStart > convertedEnd) {
 			setValidMessage(prev => ({
 				...prev,
-				endDate: '* 종료일을 시작일보다 일찍 설정할 수 없습니다.',
+				endDate: '종료일을 시작일보다 일찍 설정할 수 없습니다.',
 			}));
 		} else {
 			setValidMessage(prev => ({
@@ -42,7 +42,7 @@ export default function useValid(data: InputState) {
 		if (endDateCheck) {
 			setValidMessage(prev => ({
 				...prev,
-				deadline: '* 마감일을 종료일보다 늦게 설정할 수 없습니다.',
+				deadline: '마감일을 종료일보다 늦게 설정할 수 없습니다.',
 			}));
 		} else {
 			setValidMessage(prev => ({
@@ -58,7 +58,7 @@ export default function useValid(data: InputState) {
 
 	useEffect(() => {
 		if (data.tags.length === 0) {
-			setValidMessage(prev => ({ ...prev, tag: '* 태그를 하나 이상 선택해주세요.' }));
+			setValidMessage(prev => ({ ...prev, tag: '태그를 하나 이상 선택해주세요.' }));
 		} else {
 			setValidMessage({ ...validMessage, tag: '' });
 		}
@@ -67,9 +67,9 @@ export default function useValid(data: InputState) {
 
 	useEffect(() => {
 		if (data.title === '') {
-			setValidMessage(prev => ({ ...prev, title: '* 제목을 입력해주세요.' }));
+			setValidMessage(prev => ({ ...prev, title: '제목을 입력해주세요.' }));
 		} else if (data.title.length < 10) {
-			setValidMessage(prev => ({ ...prev, title: '* 제목을 10자 이상 입력해주세요.' }));
+			setValidMessage(prev => ({ ...prev, title: '제목을 10자 이상 입력해주세요.' }));
 		} else {
 			setValidMessage(prev => ({ ...prev, title: '' }));
 		}
@@ -78,7 +78,7 @@ export default function useValid(data: InputState) {
 
 	useEffect(() => {
 		if (data.scope === '') {
-			setValidMessage(prev => ({ ...prev, scope: '* 범위를 선택해주세요.' }));
+			setValidMessage(prev => ({ ...prev, scope: '범위를 선택해주세요.' }));
 		} else {
 			setValidMessage(prev => ({ ...prev, scope: '' }));
 		}
@@ -87,7 +87,7 @@ export default function useValid(data: InputState) {
 
 	useEffect(() => {
 		if (data.category === '') {
-			setValidMessage(prev => ({ ...prev, category: '* 유형을 선택해주세요.' }));
+			setValidMessage(prev => ({ ...prev, category: '유형을 선택해주세요.' }));
 		} else {
 			setValidMessage(prev => ({ ...prev, category: '' }));
 		}
@@ -96,7 +96,7 @@ export default function useValid(data: InputState) {
 
 	useEffect(() => {
 		if (data.proceedType === '') {
-			setValidMessage(prev => ({ ...prev, procedure: '* 진행방식을 선택해주세요.' }));
+			setValidMessage(prev => ({ ...prev, procedure: '진행방식을 선택해주세요.' }));
 		} else {
 			setValidMessage(prev => ({ ...prev, procedure: '' }));
 		}
