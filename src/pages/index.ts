@@ -25,6 +25,7 @@ import { userData } from './profile/userData';
 import ProfileEditPage from './profile/edit/ProfileEditPage';
 import PROFILE_EDIT_DATA from './profile/edit/ProfileEditData';
 import { portfolioData } from './portfolio/portfolioData';
+import PortfolioDetailsPage from './portfolio/details/PortfolioDetailsPage';
 
 export {
 	MainPage,
@@ -55,4 +56,5 @@ export {
 	ProfileEditPage,
 	PROFILE_EDIT_DATA,
 	portfolioData,
+	PortfolioDetailsPage,
 };
