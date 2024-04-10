@@ -1,3 +1,5 @@
+import { Portfolio } from './index';
+
 export interface User {
 	userId?: string;
 	imageUrl?: string;
@@ -54,16 +56,6 @@ export interface Award {
 export interface Link {
 	url: string;
 	description: string;
-}
-
-export interface Portfolio {
-	id: string;
-	mainImageUrl?: string;
-	title: string;
-	field: string;
-	role: string;
-	pinOrder: string;
-	pinned: boolean;
 }
 
 // interface Meeteam {}
