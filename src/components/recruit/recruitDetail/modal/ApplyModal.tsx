@@ -19,7 +19,7 @@ const ApplyModal = () => {
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [value, setValue] = useState<string>('신청 역할을 선택해주세요.');
-	const isValid = isChecked && isSelected;
+	const isValid = isChecked && value !== '신청 역할을 선택해주세요.';
 
 	const { data, isLoading } = useQuery({
 		queryKey: ['applyInfoNumber', Number(id)],
