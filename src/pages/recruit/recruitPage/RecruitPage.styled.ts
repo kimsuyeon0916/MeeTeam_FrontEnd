@@ -8,6 +8,7 @@ interface RecruitPage {
 const RecruitPage = styled.div<RecruitPage>`
 	width: clamp(45%, 96rem, 75%);
 	margin: 0 auto;
+	position: relative;
 
 	h2 {
 		color: #373f41;
@@ -452,6 +453,15 @@ const RecruitPage = styled.div<RecruitPage>`
 			list-style: none;
 			display: flex;
 		}
+	}
+
+	.btn-floating {
+		position: fixed;
+		width: 5.6rem;
+		height: 5.6rem;
+		bottom: 5rem;
+		right: 5rem;
+		border-radius: 50%;
 	}
 `;
 

@@ -238,6 +238,7 @@ const RecruitPage = () => {
 					/>
 				)}
 			</article>
+			<article className='btn-floating'></article>
 		</S.RecruitPage>
 	);
 };
