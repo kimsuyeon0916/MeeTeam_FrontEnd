@@ -4,6 +4,8 @@ import S from './CommentInput.styled';
 import { useComment } from '../../../hooks';
 import { useParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../../atom';
 
 const CommentInput = () => {
 	const isLogin = true; // 임시 코드
@@ -12,6 +14,7 @@ const CommentInput = () => {
 	const pageNum = Number(id);
 	const [contents, setContents] = useState<string>('');
 	const queryClient = useQueryClient();
+	const userInfo = useRecoilValue(userState);
 
 	const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -53,14 +56,14 @@ const CommentInput = () => {
 				<article className='wrapper'>
 					<section className='container-user__icon'>
 						<div>
-							<ProfileImage url='' nickname={'yeom'} size='2.31rem' />
+							<ProfileImage url={userInfo?.imageUrl} nickname={userInfo?.nickname} size='2.31rem' />
 						</div>
-						<span>{'johnyeom24'}</span>
+						<span>{userInfo?.nickname}</span>
 					</section>
 					<section className='container-user__input'>
 						<input
 							type='text'
-							onKeyPress={onKeyPress}
+							onKeyUp={onKeyPress}
 							value={contents}
 							onChange={onChangeHandler}
 							onClick={onClickInput}

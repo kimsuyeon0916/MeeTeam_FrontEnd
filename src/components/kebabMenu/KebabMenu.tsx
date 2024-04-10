@@ -22,8 +22,8 @@ const KebabMenu = ({ options }: { options: Option[] }) => {
 			}
 		};
 
-		document.addEventListener('mousedown', outSideClickHandler);
-		return () => document.removeEventListener('mousedown', outSideClickHandler);
+		document.addEventListener('click', outSideClickHandler);
+		return () => document.removeEventListener('click', outSideClickHandler);
 	}, [showModal, modalRef.current]);
 
 	const onClickMenu = () => {

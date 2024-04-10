@@ -68,13 +68,9 @@ const RecruitDetailPage = () => {
 
 	const totalCommentsCount = useMemo(() => {
 		if (detailedData) {
-			let count = detailedData?.comments.length;
-			detailedData?.comments.forEach(comment => {
-				if (comment.replies) {
-					count += comment.replies.length;
-				}
-			});
-			return count;
+			return detailedData.comments.reduce((total, comment) => {
+				return total + 1 + (comment.replies ? comment.replies.length : 0);
+			}, 0);
 		}
 	}, [detailedData?.comments]);
 
@@ -148,21 +144,7 @@ const RecruitDetailPage = () => {
 							<ul className='container-comments__lists'>
 								{isSuccess &&
 									detailedData.comments.map((comment, _) => {
-										return (
-											<Comment
-												key={comment.id}
-												id={comment.id}
-												userId={comment.userId}
-												nickname={comment.nickname}
-												content={comment.content}
-												replies={comment.replies}
-												isWriter={comment.isWriter}
-												createAt={comment.createAt}
-												profileImg={comment.profileImg}
-												groupNumber={comment.groupNumber}
-												groupOrder={comment.groupOrder}
-											/>
-										);
+										return <Comment key={comment.id} {...comment} />;
 									})}
 							</ul>
 							<CommentInput />

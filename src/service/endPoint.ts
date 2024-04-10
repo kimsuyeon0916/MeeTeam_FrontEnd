@@ -1,4 +1,5 @@
 import { ApplicantPageInfo } from '../types';
+import { DeleteComment } from '../types';
 
 export const EndPoint = {
 	/* auth */
@@ -24,6 +25,8 @@ export const EndPoint = {
 		bookmark: (id: number) => `/recruitment/postings/${id}/bookmark`,
 		close: (id: number) => `/recruitment/postings/${id}/close`,
 		comment: (id: number) => `/recruitment/postings/${id}/comment`,
+		deleteComment: ({ pageNum, commentId }: DeleteComment) =>
+			`/recruitment/postings/${pageNum}/comment/${commentId}`,
 	},
 	RECRUITMENT: {
 		post: '/recruitment/postings',

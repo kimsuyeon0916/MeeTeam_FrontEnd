@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Role } from '../../../../types';
-import S from './RecruitRoles.styled';
+import S from './RecruitRolesForm.styled';
 import { recruitInputState } from '../../../../atom';
 import { useRecoilState } from 'recoil';
 import { InputRole, InputRoleForm } from '../../../index';
 
-const RecruitRole = () => {
+const RecruitRoleForm = () => {
 	const [userRoleList, setUserRoleList] = useState<Role[]>([]);
 	const [info, setInfo] = useRecoilState(recruitInputState);
 
@@ -43,4 +43,4 @@ const RecruitRole = () => {
 	);
 };
 
-export default RecruitRole;
+export default RecruitRoleForm;

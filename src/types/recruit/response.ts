@@ -104,6 +104,12 @@ export interface Keyword {
 	name: string;
 }
 
+export interface DetailedFilter {
+	skill: Keyword[];
+	role: Keyword[];
+	tag: Keyword[];
+}
+
 export interface Post {
 	id: number;
 	title: string;

@@ -97,11 +97,7 @@ const ReplyComment = ({
 							<ProfileImage url={profileImg} nickname={nickname} size='2.31rem' />
 						</section>
 						<span className='nickname'>{nickname}</span>
-						{!isEdit && (
-							<span className='createAt'>
-								{createAt.length > 10 ? createAt.slice(0, -9) : createAt}
-							</span>
-						)}
+						{!isEdit && <span className='createAt'>{createAt.slice(0, -9)}</span>}
 					</section>
 					<section className='comment-info'>
 						{!isEdit ? (
@@ -112,7 +108,7 @@ const ReplyComment = ({
 									className='edit-input'
 									value={value}
 									onChange={onChangeEdit}
-									onKeyPress={onKeyPressEdit}
+									onKeyUp={onKeyPressEdit}
 								/>
 								<section className='btn-container'>
 									<button

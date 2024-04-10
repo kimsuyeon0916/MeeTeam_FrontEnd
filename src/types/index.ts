@@ -44,6 +44,7 @@ import type {
 	RecruitmentStatus,
 	ApplyManageInfo,
 	ApplicantList,
+	DetailedFilter,
 } from './recruit/response';
 import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
@@ -103,4 +104,5 @@ export type {
 	ApplyManageInfo,
 	ApplicantsLink,
 	ApplicantList,
+	DetailedFilter,
 };

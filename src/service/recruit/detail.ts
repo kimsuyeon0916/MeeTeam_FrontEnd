@@ -90,9 +90,9 @@ export const postComment = async ({ pageNum, comment }: PostingComment) => {
 
 export const deleteComment = async ({ pageNum, commentId }: DeleteComment) => {
 	try {
-		const response = await axiosAuthInstance.delete(EndPoint.RECRUIT_DETAIL.comment(pageNum), {
-			data: commentId,
-		});
+		const response = await axiosAuthInstance.delete(
+			EndPoint.RECRUIT_DETAIL.deleteComment({ pageNum, commentId })
+		);
 		return response;
 	} catch (error) {
 		console.error(error);
