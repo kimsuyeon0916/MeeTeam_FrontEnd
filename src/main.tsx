@@ -21,6 +21,7 @@ import {
 	MyActivityBookmark,
 	ProfileDetailsPage,
 	ProfileEditPage,
+	PortfolioDetailsPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -98,6 +99,10 @@ const router = createBrowserRouter([
 			{
 				path: 'profile/edit',
 				element: <ProfileEditPage />,
+			},
+			{
+				path: 'portfolio/:portfolioId?',
+				element: <PortfolioDetailsPage />,
 			},
 		],
 	},
