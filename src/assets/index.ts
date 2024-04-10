@@ -30,6 +30,10 @@ import BluePlus from './BluePlus.svg';
 import LinkIcon from './LinkIcon.svg';
 import ArrowLeft from './ArrowLeft.svg';
 import ArrowRight from './ArrowRight.svg';
+import Test1 from './Test1.png';
+import Test2 from './Test2.png';
+import Test3 from './Test3.png';
+import Test4 from './Test4.png';
 
 export {
 	Exit,
@@ -64,4 +68,8 @@ export {
 	LinkIcon,
 	ArrowLeft,
 	ArrowRight,
+	Test1,
+	Test2,
+	Test3,
+	Test4,
 };
