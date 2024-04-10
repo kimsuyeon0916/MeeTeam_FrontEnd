@@ -113,6 +113,7 @@ import DefaultBtn from './button/DefaultBtn';
 import PrimaryBtn from './button/PrimaryBtn';
 import AddFormBtn from './button/AddFormBtn';
 import LinkDetails from './link/details/LinkDetails';
+import PortfolioInformation from './portfolio/information/PortfolioInformation';
 
 export {
 	Header,
@@ -221,4 +222,5 @@ export {
 	PrimaryBtn,
 	AddFormBtn,
 	LinkDetails,
+	PortfolioInformation,
 };
