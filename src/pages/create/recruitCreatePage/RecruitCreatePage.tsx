@@ -23,8 +23,8 @@ const RecruitCreatePage = () => {
 
 	const uploadPost = useMutation({
 		mutationFn: (formData: any) => postingRecruit(formData),
-		onSuccess: () => {
-			navigate(`/recruitment/postings/${uploadPost}`);
+		onSuccess: (data: { recruitmentPostId: number } | undefined) => {
+			navigate(`/recruitment/postings/${data?.recruitmentPostId}`);
 		},
 	});
 

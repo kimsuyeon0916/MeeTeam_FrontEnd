@@ -10,11 +10,39 @@ const InputRoleForm = styled.article<InputRoleForm>`
 	width: 100%;
 	gap: 0.8rem;
 
+	.txt-big {
+		color: #f7faff;
+		font-size: 1.6rem;
+		line-height: 1.9rem;
+		letter-spacing: 0.0032rem;
+	}
+
+	.body1-medium {
+		color: #8e8e8e;
+		font-size: 1.6rem;
+		line-height: 1.9rem;
+		letter-spacing: 0.0032rem;
+	}
+
 	.inputs {
 		display: flex;
+		flex-direction: column;
 		width: 100%;
 		gap: 0.8rem;
 		position: relative;
+
+		.inputs-top {
+			display: flex;
+			width: 100%;
+			gap: 0.8rem;
+		}
+
+		.inputs-bottom {
+			display: flex;
+			width: 100%;
+			gap: 0.8rem;
+			box-sizing: border-box;
+		}
 
 		.dropdown {
 			position: absolute;
@@ -44,7 +72,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 
 		.role-input {
 			width: 30%;
-			height: 4.2rem;
+			height: 4.8rem;
 			padding: 0 1.3rem;
 			box-sizing: border-box;
 			border: 0.1rem solid #e3e3e3;
@@ -62,7 +90,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 
 		.count-input {
 			width: 15%;
-			height: 4.2rem;
+			height: 4.8rem;
 			padding: 0 1.3rem;
 			box-sizing: border-box;
 			border: 0.1rem solid #e3e3e3;
@@ -79,13 +107,13 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		}
 
 		.container-skills {
-			width: 100%;
 			position: relative;
-			height: 4.2rem;
+			width: 66rem;
+			height: 4.8rem;
 			display: flex;
 			align-items: center;
 			flex-wrap: nowrap;
-			padding: 0 1.3rem;
+			padding: 1.2rem 1.6rem;
 			box-sizing: border-box;
 			border: 0.1rem solid #e3e3e3;
 			border-radius: 0.75rem;
@@ -110,7 +138,6 @@ const InputRoleForm = styled.article<InputRoleForm>`
 				padding: 0;
 				height: 4.875rem;
 				border: none;
-				font-size: 1.4rem;
 				background: transparent;
 				box-sizing: border-box;
 				outline: none;
@@ -165,19 +192,20 @@ const InputRoleForm = styled.article<InputRoleForm>`
 	.add-btn {
 		width: 4.2rem;
 		height: 4.2rem;
+
 		button {
-			width: 4.2rem;
-			height: 4.2rem;
-			border-radius: 0.75rem;
-			background: #fff;
-			border: 0.1rem solid #e3e3e3;
+			display: flex;
+			width: 9.2rem;
+			height: 4.8rem;
+			padding: 1.2rem 3.2rem;
+			justify-content: center;
+			align-items: center;
+			gap: 0.75rem;
 			display: flex;
 			justify-content: center;
 			align-items: center;
-
-			img {
-				width: 2rem;
-			}
+			border-radius: 0.6rem;
+			background: #5877fc;
 		}
 	}
 `;

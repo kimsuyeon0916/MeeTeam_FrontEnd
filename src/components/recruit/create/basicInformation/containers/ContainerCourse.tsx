@@ -84,9 +84,7 @@ const ContainerCourse = () => {
 
 	return (
 		<S.ContainerCourse $isChecked={isChecked} ref={dropdownRef}>
-			<span className='input-subtitle'>
-				수업 <span>{'*'}</span>
-			</span>
+			<span className='input-subtitle'>수업</span>
 			<section className='intro'>
 				<span className='description'>수업이신 경우 오른쪽의 “수업” 체크박스를 눌러주세요.</span>
 				<section>

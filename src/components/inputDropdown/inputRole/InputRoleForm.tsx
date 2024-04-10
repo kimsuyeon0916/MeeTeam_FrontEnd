@@ -186,70 +186,74 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 	return (
 		<S.InputRoleForm $isRoleClicked={dropdown.role} $isSkillClicked={dropdown.skill}>
 			<article className='inputs' ref={dropdownRef}>
-				<input
-					className='role-input'
-					type='text'
-					placeholder='역할'
-					value={userRole.role.name}
-					onChange={onChangeRole}
-					onClick={() => setDropdown(prev => ({ ...prev, role: true }))}
-				/>
-				{dropdown.role && (
-					<section className='dropdown'>
-						{!isLoadingRole &&
-							dataRole?.map((keyword: any) => (
-								<span key={keyword.id} onClick={onClickRole} id={keyword.id}>
-									{keyword.name}
-								</span>
-							))}
-					</section>
-				)}
-				<input
-					className='count-input'
-					type='text'
-					placeholder='인원'
-					value={userRole.count}
-					onChange={onChangeCount}
-				/>
-				<section className='container-skills'>
-					{userRole.skill.map((tagItem, index) => {
-						return (
-							<article className='tags' key={index}>
-								<span>{tagItem}</span>
-								<button type='button' onClick={deleteTagItem}>
-									<img src={XBtn} id={index.toString()} />
-								</button>
-							</article>
-						);
-					})}
-					{userRole.skill.length !== 5 && (
-						<input
-							type='text'
-							className='skills-input'
-							placeholder={'스킬을 검색해주세요.'}
-							value={tagItem}
-							onChange={onChangeKeyword}
-							onKeyPress={onKeyPress}
-							onClick={() => setDropdown(prev => ({ ...prev, skill: true }))}
-						/>
+				<section className='inputs-top'>
+					<input
+						className='role-input body1-medium'
+						type='text'
+						placeholder='역할'
+						value={userRole.role.name}
+						onChange={onChangeRole}
+						onClick={() => setDropdown(prev => ({ ...prev, role: true }))}
+					/>
+					{dropdown.role && (
+						<section className='dropdown'>
+							{!isLoadingRole &&
+								dataRole?.map((keyword: any) => (
+									<span key={keyword.id} onClick={onClickRole} id={keyword.id}>
+										{keyword.name}
+									</span>
+								))}
+						</section>
 					)}
-					{userRole.skill.length === 0 && <img src={Search as any} className='icon-search' />}
+					<input
+						className='count-input body1-medium'
+						type='text'
+						placeholder='인원'
+						value={userRole.count}
+						onChange={onChangeCount}
+					/>
 				</section>
-				{dropdown.skill && (
-					<section className='dropdown skill'>
-						{!isLoadingSkill &&
-							dataSkill?.map((keyword: Keyword) => (
-								<span key={keyword.id} onClick={onClickSkill} id={keyword.id.toString()}>
-									{keyword.name}
-								</span>
-							))}
+				<section className='inputs-bottom'>
+					<section className='container-skills'>
+						{userRole.skill.map((tagItem, index) => {
+							return (
+								<article className='tags' key={index}>
+									<span>{tagItem}</span>
+									<button type='button' onClick={deleteTagItem}>
+										<img src={XBtn} id={index.toString()} />
+									</button>
+								</article>
+							);
+						})}
+						{userRole.skill.length !== 5 && (
+							<input
+								type='text'
+								className='skills-input body1-medium'
+								placeholder={'스킬을 검색해주세요.'}
+								value={tagItem}
+								onChange={onChangeKeyword}
+								onKeyPress={onKeyPress}
+								onClick={() => setDropdown(prev => ({ ...prev, skill: true }))}
+							/>
+						)}
+						{userRole.skill.length === 0 && <img src={Search} className='icon-search' />}
 					</section>
-				)}
-			</article>
-			<article className='add-btn'>
-				<button type='button' onClick={onClickHandler}>
-					<img src={Plus} />
-				</button>
+					{dropdown.skill && (
+						<section className='dropdown skill'>
+							{!isLoadingSkill &&
+								dataSkill?.map((keyword: Keyword) => (
+									<span key={keyword.id} onClick={onClickSkill} id={keyword.id.toString()}>
+										{keyword.name}
+									</span>
+								))}
+						</section>
+					)}
+					<article className='add-btn'>
+						<button type='button' className='txt-big' onClick={onClickHandler}>
+							추가
+						</button>
+					</article>
+				</section>
 			</article>
 		</S.InputRoleForm>
 	);

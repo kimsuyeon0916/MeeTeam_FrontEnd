@@ -31,8 +31,8 @@ export const EndPoint = {
 		post: '/recruitment/postings',
 		role: (keyword: string) => `/role/search?keyword=${keyword}&limit=5`,
 		skill: (keyword: string) => `/skill/search?keyword=${keyword}&limit=5`,
-		course: (keyword: string) => `/tag/search/course?keyword=${keyword}&limit=5`,
-		professor: (keyword: string) => `/tag/search/professor?keyword=${keyword}&limit=5`,
+		course: (keyword: string) => `/course/search?keyword=${keyword}&limit=5`,
+		professor: (keyword: string) => `/professor/search?keyword=${keyword}&limit=5`,
 		tag: (keyword: string) => `/tag/search?keyword=${keyword}&limit=5`,
 	},
 	RECRUITMENT_BOARD: {
