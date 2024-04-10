@@ -28,6 +28,8 @@ const RecruitPage = () => {
 		message: '기술',
 	});
 
+	console.log(filterState);
+
 	const { isLoggedIn } = useLogin();
 	const { data, isLoading, refetch, isFetchedAfterMount } = useQuery({
 		queryKey: ['recruit_board', { filterState, isLoggedIn }],
