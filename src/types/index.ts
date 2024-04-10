@@ -6,7 +6,7 @@ import type { Comment, CommentInputFunctions } from './comment';
 import type { JsxElementComponentProps, stringSignature } from './indexSigniture';
 import type { User, Contact, Skill, Award, Link } from './user';
 import type { Search } from './search';
-import type { Portfolio } from './portfolio';
+import type { Portfolio, PortfolioDetails } from './portfolio';
 
 export type {
 	SignUpPayload,
@@ -32,4 +32,5 @@ export type {
 	University,
 	Department,
 	Search,
+	PortfolioDetails,
 };
