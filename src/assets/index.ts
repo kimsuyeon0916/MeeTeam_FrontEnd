@@ -28,6 +28,8 @@ import Close from './Close.svg';
 import AddProfile from './AddProfile.svg';
 import BluePlus from './BluePlus.svg';
 import LinkIcon from './LinkIcon.svg';
+import ArrowLeft from './ArrowLeft.svg';
+import ArrowRight from './ArrowRight.svg';
 
 export {
 	Exit,
@@ -60,4 +62,6 @@ export {
 	AddProfile,
 	BluePlus,
 	LinkIcon,
+	ArrowLeft,
+	ArrowRight,
 };
