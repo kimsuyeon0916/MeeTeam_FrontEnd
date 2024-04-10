@@ -29,5 +29,5 @@ export interface PortfolioListResponse {
 export interface PageInfo {
 	page: string;
 	size: string;
-	hasNextPage: string;
+	hasNextPage?: string;
 }
