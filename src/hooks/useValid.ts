@@ -1,15 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { validMessageState, validState } from '../atom';
 import { InputState } from '../types';
-
-// <유효성 검사 목록>
-// 범위(1개 필수) ✅
-// 유형(1개 필수) ✅
-// 마감일(오늘 이전 선택 불가) ✅
-// 진행기간(마감일보다 종료일이 일찍 끝날 수 없음) ✅
-// 진행기간(시작일보다 종료일이 늦을 수 없음) ✅
-// 제목(필수 입력, 몇자 이상(10자)) ✅
 
 export default function useValid(data: InputState) {
 	const [validMessage, setValidMessage] = useRecoilState(validMessageState);
@@ -102,6 +94,8 @@ export default function useValid(data: InputState) {
 		}
 		setIsValid(prev => ({ ...prev, isProcedure: data.proceedType !== '' }));
 	}, [data.proceedType]);
+
+	useEffect(() => {}, [data.recruitmentRoles]);
 
 	return { validMessage, isValid };
 }
