@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Plus, Search, XBtn } from '../../../assets';
+import { DropdownArrow, Plus, Search, XBtn } from '../../../assets';
 import S from './InputRoleForm.styled';
 import { Role, InputUserRoleForm, RoleForPost, InputState, Keyword } from '../../../types';
 import { useDebounce } from '../../../hooks';
@@ -25,12 +25,23 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 		count: '',
 		skill: [],
 	});
-
 	const [roleData, setRoleData] = useState<RoleForPost>({
 		roleId: null,
 		count: null,
 		skillIds: [],
 	});
+
+	const [isValid, setIsValid] = useState({
+		role: {
+			valid: false,
+			message: '',
+		},
+		count: {
+			valid: false,
+			message: '',
+		},
+	});
+
 	const keywordRole = useDebounce(userRole.role.name, 500);
 	const keywordSkill = useDebounce(tagItem, 500);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -78,13 +89,15 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 	const onClickHandler = () => {
 		if (
 			roleData.roleId !== null &&
+			roleData.count &&
 			roleData.skillIds.length === userRole.skill.length &&
 			!info.recruitmentRoles.some(obj => obj.roleId === roleData.roleId)
 		) {
 			setUserRoleList((prev: any) => [...prev, userRole]);
-			if (roleData.count === null) {
-				roleData.count = 0;
-			}
+			setIsValid({
+				role: { valid: true, message: '' },
+				count: { valid: true, message: '' },
+			});
 			setInfos((prev: InputState) => ({
 				...prev,
 				recruitmentRoles: [...prev.recruitmentRoles, roleData],
@@ -101,6 +114,21 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 				skillIds: [],
 			});
 			setTagItem('');
+		} else if (!roleData.roleId && roleData.count) {
+			setIsValid({
+				role: { valid: false, message: '해당 역할명을 입력해주세요.' },
+				count: { valid: true, message: '' },
+			});
+		} else if (!roleData.roleId && !roleData.count) {
+			setIsValid({
+				role: { valid: false, message: '모집하는 역할을 입력해주세요.' },
+				count: { valid: true, message: '' },
+			});
+		} else if (roleData.roleId && !roleData.count) {
+			setIsValid({
+				role: { valid: true, message: '' },
+				count: { valid: false, message: '모집 인원 수를 입력해주세요.' },
+			});
 		}
 	};
 	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,6 +141,13 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 
 	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const countValue = event.target.value;
+
+		if (countValue.length) {
+			setIsValid(prev => ({
+				...prev,
+				count: { valid: true, message: '' },
+			}));
+		}
 
 		if (isNotNumber(countValue)) {
 			setUserRole(prev => ({
@@ -144,6 +179,10 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 		setRoleData(prev => ({
 			...prev,
 			roleId: Number(target.id),
+		}));
+		setIsValid(prev => ({
+			...prev,
+			role: { valid: true, message: '' },
 		}));
 	};
 
@@ -184,26 +223,32 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 	}, [dropdownRef.current, dropdown.role, dropdown.skill]);
 
 	return (
-		<S.InputRoleForm $isRoleClicked={dropdown.role} $isSkillClicked={dropdown.skill}>
+		<S.InputRoleForm $isRoleClicked={dropdown.role} $isSkillClicked={dropdown.skill} $isNotValid>
 			<article className='inputs' ref={dropdownRef}>
 				<section className='inputs-top'>
-					<input
-						className='role-input body1-medium'
-						type='text'
-						placeholder='역할'
-						value={userRole.role.name}
-						onChange={onChangeRole}
-						onClick={() => setDropdown(prev => ({ ...prev, role: true }))}
-					/>
-					{dropdown.role && (
-						<section className='dropdown'>
-							{!isLoadingRole &&
-								dataRole?.map((keyword: any) => (
-									<span key={keyword.id} onClick={onClickRole} id={keyword.id}>
-										{keyword.name}
-									</span>
-								))}
-						</section>
+					<section className='container-role__input'>
+						<input
+							className='role-input body1-medium'
+							type='text'
+							placeholder='역할'
+							value={userRole.role.name}
+							onChange={onChangeRole}
+							onClick={() => setDropdown(prev => ({ ...prev, role: true }))}
+						/>
+						{dropdown.role && (
+							<section className='dropdown'>
+								{!isLoadingRole &&
+									dataRole?.map((keyword: any) => (
+										<span key={keyword.id} onClick={onClickRole} id={keyword.id}>
+											{keyword.name}
+										</span>
+									))}
+							</section>
+						)}
+						<img src={DropdownArrow} />
+					</section>
+					{!isValid.role.valid && (
+						<p className='valid-message__role txt4'>{isValid.role.message}</p>
 					)}
 					<input
 						className='count-input body1-medium'
@@ -212,6 +257,9 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 						value={userRole.count}
 						onChange={onChangeCount}
 					/>
+					{!isValid.count.valid && (
+						<p className='valid-message__count txt4'>{isValid.count.message}</p>
+					)}
 				</section>
 				<section className='inputs-bottom'>
 					<section className='container-skills'>

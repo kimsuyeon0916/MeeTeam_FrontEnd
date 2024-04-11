@@ -57,10 +57,11 @@ const InputRole = styled.article`
 				padding: 1.5rem 1.125rem 1.5rem 1.125rem;
 				justify-content: center;
 				align-items: center;
+				margin: 5px;
 				border-radius: 1.5rem;
 				background: #e0e6ff;
 				color: #373f41;
-				font-size: 1.5rem;
+				font-size: 1.2rem;
 				font-weight: 400;
 				line-height: 1.8rem;
 				letter-spacing: 0.02rem;

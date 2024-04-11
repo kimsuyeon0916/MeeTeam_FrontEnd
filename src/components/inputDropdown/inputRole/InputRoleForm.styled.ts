@@ -3,6 +3,7 @@ import styled from 'styled-components';
 interface InputRoleForm {
 	$isRoleClicked: boolean;
 	$isSkillClicked: boolean;
+	$isNotValid: boolean;
 }
 
 const InputRoleForm = styled.article<InputRoleForm>`
@@ -17,6 +18,13 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		letter-spacing: 0.0032rem;
 	}
 
+	.txt4 {
+		color: #f85858;
+		font-size: 1rem;
+		line-height: 1.2rem;
+		letter-spacing: 0.002rem;
+	}
+
 	.body1-medium {
 		color: #8e8e8e;
 		font-size: 1.6rem;
@@ -28,13 +36,26 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		display: flex;
 		flex-direction: column;
 		width: 100%;
-		gap: 0.8rem;
+		gap: 2.4rem;
 		position: relative;
 
 		.inputs-top {
 			display: flex;
 			width: 100%;
 			gap: 0.8rem;
+			position: relative;
+
+			.valid-message__role {
+				position: absolute;
+				top: 5.3rem;
+				left: 1rem;
+			}
+
+			.valid-message__count {
+				position: absolute;
+				top: 5.3rem;
+				left: 26.4rem;
+			}
 		}
 
 		.inputs-bottom {
@@ -44,11 +65,41 @@ const InputRoleForm = styled.article<InputRoleForm>`
 			box-sizing: border-box;
 		}
 
+		.container-role__input {
+			width: 24.8rem;
+			height: 4.8rem;
+			padding: 1.2rem 1.6rem;
+			box-sizing: border-box;
+			border: 0.1rem solid #e3e3e3;
+			border-radius: 0.75rem;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			position: relative;
+
+			.role-input {
+				width: 100%;
+				border: none;
+				outline: none;
+			}
+
+			&:hover {
+				border: 1px solid #5877fc;
+				transition: 0.2s ease-in-out;
+			}
+
+			&:focus-within {
+				outline: none;
+				border: 1px solid #5877fc;
+			}
+		}
+
 		.dropdown {
 			position: absolute;
-			top: 4.5rem;
+			top: 5rem;
+			left: 0;
 			border: ${props => (props.$isRoleClicked || props.$isSkillClicked) && '0.1rem solid #e3e3e3'};
-			width: 20.6%;
+			width: 24.8rem;
 			display: flex;
 			flex-direction: column;
 			font-size: 1.4rem;
@@ -70,28 +121,10 @@ const InputRoleForm = styled.article<InputRoleForm>`
 			width: 65.7%;
 		}
 
-		.role-input {
-			width: 30%;
-			height: 4.8rem;
-			padding: 0 1.3rem;
-			box-sizing: border-box;
-			border: 0.1rem solid #e3e3e3;
-			border-radius: 0.75rem;
-
-			&:hover {
-				border: 1px solid #5877fc;
-				transition: 0.2s ease-in-out;
-			}
-			&:focus {
-				outline: none;
-				border: 1px solid #5877fc;
-			}
-		}
-
 		.count-input {
-			width: 15%;
+			width: 16rem;
 			height: 4.8rem;
-			padding: 0 1.3rem;
+			padding: 1.2rem 1.6rem;
 			box-sizing: border-box;
 			border: 0.1rem solid #e3e3e3;
 			border-radius: 0.75rem;

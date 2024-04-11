@@ -95,7 +95,5 @@ export default function useValid(data: InputState) {
 		setIsValid(prev => ({ ...prev, isProcedure: data.proceedType !== '' }));
 	}, [data.proceedType]);
 
-	useEffect(() => {}, [data.recruitmentRoles]);
-
 	return { validMessage, isValid };
 }
