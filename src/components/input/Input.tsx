@@ -11,8 +11,8 @@ import {
 
 export interface Icon {
 	default: string;
-	focus?: string;
-	arrow: string;
+	$focus?: string;
+	$arrow: string;
 }
 
 interface Input<T extends FieldValues> {

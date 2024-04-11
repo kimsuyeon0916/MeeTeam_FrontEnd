@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 interface InputStyle {
 	default?: string;
-	focus?: string;
-	arrow?: string;
+	$focus?: string;
+	$arrow?: string;
 	disabled?: boolean;
 	invalid?: boolean;
 }
@@ -67,7 +67,7 @@ const Input = styled.input<InputStyle>`
 	display: flex;
 	padding: 0 1.6rem;
 	${props =>
-		props.arrow && (props.arrow === 'left' ? 'padding-left: 5rem;' : 'padding-right: 5rem;')};
+		props.$arrow && (props.$arrow === 'left' ? 'padding-left: 5rem;' : 'padding-right: 5rem;')};
 	height: 4.8rem;
 
 	border-radius: 1rem;
@@ -78,7 +78,7 @@ const Input = styled.input<InputStyle>`
 	${props => props.default && `background-image: url(${props.default}); `}
 	background-repeat: no-repeat; // 배경 아이콘 반복 X
 	background-position: ${props =>
-		props.arrow === 'left' ? 'center left 1.6rem' : 'center right 1.6rem'};
+		props.$arrow === 'left' ? 'center left 1.6rem' : 'center right 1.6rem'};
 	color: ${props =>
 		props.disabled
 			? 'var(--Form-txtIcon-disabled, #8E8E8E)'
@@ -86,7 +86,7 @@ const Input = styled.input<InputStyle>`
 	cursor: text;
 
 	&:focus {
-		${props => props.focus && `background-image: url(${props.focus}); `}
+		${props => props.$focus && `background-image: url(${props.$focus}); `}
 	}
 
 	${props =>
