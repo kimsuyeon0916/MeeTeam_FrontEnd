@@ -10,7 +10,7 @@ import {
 	Toggle,
 	Radio,
 	DeleteBtn,
-	MuiDatepicker,
+	MuiDatepickerController,
 	SkillTag,
 	PortfolioCard,
 	DefaultBtn,
@@ -460,8 +460,11 @@ const ProfileEditPage = () => {
 								<S.ProfileRow key={award.id} $gap='1rem'>
 									<S.ProfileColumn $gap='1rem'>
 										<S.ProfileRow $gap='1rem'>
-											<MuiDatepicker name={`awards.${index}.startDate`} control={control} />
-											<MuiDatepicker name={`awards.${index}.endDate`} control={control} />
+											<MuiDatepickerController
+												name={`awards.${index}.startDate`}
+												control={control}
+											/>
+											<MuiDatepickerController name={`awards.${index}.endDate`} control={control} />
 										</S.ProfileRow>
 										<Input
 											name={`awards.${index}.title`}
