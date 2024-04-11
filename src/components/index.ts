@@ -109,6 +109,7 @@ import AddBtn from './button/AddBtn';
 import DeleteBtn from './button/DeleteBtn';
 import LinkForm from './link/LinkForm';
 import MuiDatepicker from './muiDatepicker/MuiDatepicker';
+import MuiDatepickerController from './muiDatepicker/MuiDatepickerController';
 import DefaultBtn from './button/DefaultBtn';
 import PrimaryBtn from './button/PrimaryBtn';
 import AddFormBtn from './button/AddFormBtn';
@@ -216,6 +217,7 @@ export {
 	DeleteBtn,
 	LinkForm,
 	MuiDatepicker,
+	MuiDatepickerController,
 	DefaultBtn,
 	PrimaryBtn,
 	AddFormBtn,
