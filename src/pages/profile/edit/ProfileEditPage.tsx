@@ -67,7 +67,7 @@ const gpaList = [{ name: '4.5' }, { name: '4.3' }];
 
 const ProfileEditPage = () => {
 	const userId = useRecoilValue(userState)?.userId as string;
-	const { data: user, isSuccess } = useReadProfile(userId); // 새로고침 시, 렌더링 지연 및 콘솔 에러
+	const { data: user, isSuccess: isUserSuccess } = useReadProfile(userId); // 새로고침 시, 렌더링 지연 및 콘솔 에러
 	// const user = useRecoilValue(userState);
 	const profileImageName = useRecoilValue(imageNameState);
 
@@ -134,23 +134,16 @@ const ProfileEditPage = () => {
 	const [isUniversityMain, setIsUniversityMain] = useState(user?.universityEmail?.isDefault); // 대표 메일
 
 	useEffect(() => {
-		if (isSuccess) {
+		if (isUserSuccess) {
 			setIsUserNamePublic(user?.isUserNamePublic);
 			setIsPhonePublic(user?.phone?.isPublic);
 			setIsUniversityEmailPublic(user?.universityEmail?.isPublic);
 			setIsSubEmailPublic(user?.subEmail?.isPublic);
 			setIsUniversityMain(user?.universityEmail?.isDefault);
 
-			setPinnedPortfolioList(
-				sortedPortfolioList
-					? sortedPortfolioList
-							?.filter(portfolio => portfolio?.pinned)
-							?.map(portfolio => portfolio?.id as string)
-					: []
-			);
 			setSkillList(user?.skills ? user?.skills : []);
 		}
-	}, [isSuccess]);
+	}, [isUserSuccess]);
 
 	const handleRadioClick = (id: string) => {
 		if (id === 'universityEmail') {
@@ -219,7 +212,13 @@ const ProfileEditPage = () => {
 	};
 
 	// 포트폴리오
-	const { data, fetchNextPage, hasNextPage, isFetching } = useReadPortfolioList(12);
+	const {
+		data,
+		fetchNextPage,
+		hasNextPage,
+		isFetching,
+		isSuccess: isPortfolioSuccess,
+	} = useReadPortfolioList(12);
 	const portfolioList = useMemo(
 		() => (data ? data.pages.flatMap(response => response?.portfolios) : []),
 		[data]
@@ -235,13 +234,23 @@ const ProfileEditPage = () => {
 		portfolioList &&
 		[...portfolioList].sort((a, b) =>
 			a && b && a.pinOrder > b.pinOrder ? 1 : a && b && a.pinOrder < b.pinOrder ? -1 : 0
-		); // userData -> user로 변경
+		);
 
 	const [pinnedPortfolioList, setPinnedPortfolioList] = useState(
 		sortedPortfolioList
 			? sortedPortfolioList?.filter(portfolio => portfolio?.pinned).map(portfolio => portfolio?.id)
 			: []
 	);
+
+	useEffect(() => {
+		setPinnedPortfolioList(
+			sortedPortfolioList
+				? sortedPortfolioList
+						?.filter(portfolio => portfolio?.pinned)
+						?.map(portfolio => portfolio?.id as string)
+				: []
+		);
+	}, [isPortfolioSuccess]);
 
 	const addPinnedPortfolioList = (id: string) => {
 		if (pinnedPortfolioList.length < 8) {
@@ -283,7 +292,7 @@ const ProfileEditPage = () => {
 							/>
 							<S.ProfileRow $gap='1rem'>
 								<Input
-									defaultValue={user?.userName}
+									// defaultValue={user?.userName}
 									register={register}
 									formState={formState}
 									{...PROFILE_EDIT_DATA.userName}
