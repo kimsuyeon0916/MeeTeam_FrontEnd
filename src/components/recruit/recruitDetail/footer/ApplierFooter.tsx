@@ -3,7 +3,7 @@ import { UnfilledBookmark, FilledBookmark } from '../../../../assets';
 import { useSetRecoilState } from 'recoil';
 import { applyModalState } from '../../../../atom';
 import { calculateDate } from '../../../../utils';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { cancelApply } from '../../../../service';
 
@@ -13,6 +13,7 @@ const ApplierFooter = ({ deadline, isApplied }: { deadline: string; isApplied: b
 	const [isMarked, setIsMarked] = useState<boolean>(false);
 	const setIsModal = useSetRecoilState(applyModalState);
 	const diffDate = calculateDate(deadline);
+	const queryClient = useQueryClient();
 
 	const cancelApplyTeam = useMutation({
 		mutationFn: (pageNum: number) => cancelApply(pageNum),
@@ -23,7 +24,11 @@ const ApplierFooter = ({ deadline, isApplied }: { deadline: string; isApplied: b
 	};
 
 	const onClickCancel = () => {
-		cancelApplyTeam.mutate();
+		cancelApplyTeam.mutate(pageNum, {
+			onSuccess: () => {
+				queryClient.invalidateQueries({ queryKey: ['detailedPage'] });
+			},
+		});
 	};
 
 	return (

@@ -119,8 +119,8 @@ const RecruitDetailPage = () => {
 			<S.Footer>
 				{detailedData && (
 					<section className='container-btn'>
-						{detailedData.isWriter && !detailedData.isClosed && <WriterFooter />}
-						{!detailedData.isWriter && (
+						{!detailedData.isWriter && !detailedData.isClosed && <WriterFooter />}
+						{detailedData.isWriter && (
 							<ApplierFooter deadline={detailedData.deadline} isApplied={detailedData.isApplied} />
 						)}
 						{detailedData.isClosed && <ClosedFooter />}
