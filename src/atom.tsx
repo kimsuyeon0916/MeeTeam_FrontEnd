@@ -4,9 +4,6 @@ import { User, InputState, ApplyRole, RecruitFilter, DetailedFilter } from './ty
 import { LocalStorageEffect } from './utils';
 import { Account } from './pages';
 
-const date = new Date();
-const simple = simpleDate(date);
-
 export const userState = atom<User | null>({
 	key: 'userState',
 	default: null,
@@ -57,7 +54,7 @@ export const recruitInputState = atom<InputState>({
 		scope: '',
 		category: '',
 		fieldId: 1,
-		deadline: simple,
+		deadline: simpleDate(new Date()),
 		proceedType: '',
 		proceedingStart: simpleDate(new Date()),
 		proceedingEnd: simpleDate(new Date()),
