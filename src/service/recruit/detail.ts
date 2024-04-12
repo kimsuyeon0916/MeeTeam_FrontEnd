@@ -49,6 +49,15 @@ export const applyRole = async (id: number, data: ApplyForm) => {
 	}
 };
 
+export const cancelApply = async (pageNum: number) => {
+	try {
+		const response = await axiosAuthInstance.delete(EndPoint.RECRUIT_DETAIL.apply(pageNum));
+		return response;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
 export const bookmarkPost = async (id: number) => {
 	try {
 		const response = await axiosAuthInstance.post(EndPoint.RECRUIT_DETAIL.bookmark(id));

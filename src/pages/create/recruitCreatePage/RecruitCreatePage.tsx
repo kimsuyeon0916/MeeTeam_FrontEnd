@@ -34,7 +34,7 @@ const RecruitCreatePage = () => {
 		setFormData({
 			scope: '',
 			category: '',
-			fieldId: 1,
+			fieldId: null,
 			deadline: simpleDate(new Date()),
 			proceedType: '',
 			proceedingStart: simpleDate(new Date()),

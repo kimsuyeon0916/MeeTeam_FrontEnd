@@ -27,7 +27,7 @@ export interface RoleForPost {
 export interface InputState {
 	scope: string;
 	category: string;
-	fieldId: number;
+	fieldId: number | null;
 	deadline: string | undefined;
 	proceedType: string;
 	proceedingStart: string | undefined;

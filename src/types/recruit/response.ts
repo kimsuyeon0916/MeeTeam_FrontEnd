@@ -48,6 +48,7 @@ export interface RecruitTags {
 
 export interface RecruitPostings {
 	isWriter: boolean;
+	isApplied: boolean;
 	category: string;
 	writerId: string;
 	isClosed: boolean;
