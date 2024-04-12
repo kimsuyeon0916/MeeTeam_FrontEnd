@@ -18,8 +18,6 @@ import {
 	ApplierManagePage,
 } from './pages/index.ts';
 import './globalStyle.css';
-import { useRecoilValue } from 'recoil';
-import { applicantPageNum } from './atom.tsx';
 
 const router = createBrowserRouter([
 	{
