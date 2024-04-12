@@ -38,7 +38,7 @@ export const getSkillKeyword = async (keyword: string) => {
 
 export const getCourseKeyword = async (keyword: string) => {
 	try {
-		const response = await axiosInstance.get<Keyword[]>(EndPoint.RECRUITMENT.course(keyword));
+		const response = await axiosAuthInstance.get<Keyword[]>(EndPoint.RECRUITMENT.course(keyword));
 		return response;
 	} catch (error) {
 		console.error(error);
@@ -47,7 +47,9 @@ export const getCourseKeyword = async (keyword: string) => {
 
 export const getProfessorKeyword = async (keyword: string) => {
 	try {
-		const response = await axiosInstance.get<Keyword[]>(EndPoint.RECRUITMENT.professor(keyword));
+		const response = await axiosAuthInstance.get<Keyword[]>(
+			EndPoint.RECRUITMENT.professor(keyword)
+		);
 		return response;
 	} catch (error) {
 		console.error(error);

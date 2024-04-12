@@ -22,6 +22,7 @@ const ApplierManagePage = () => {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const scrollToTop = useScrollToTop();
+
 	const [page, setPage] = useState<number>(1);
 	const [isOpenChat, setIsOpenChat] = useState(false);
 	const [linkUrl, setLinkUrl] = useState<string>('');
@@ -40,7 +41,7 @@ const ApplierManagePage = () => {
 	});
 	const { data: recruitManageInfo, isSuccess: manageSuccess } = useQuery({
 		queryKey: ['recruitManageInfo'],
-		queryFn: () => getRecruitInfo(7),
+		queryFn: () => getRecruitInfo(pageNum),
 	});
 
 	const approved = useMutation({

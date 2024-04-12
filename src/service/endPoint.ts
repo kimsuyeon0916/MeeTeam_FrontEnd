@@ -32,8 +32,8 @@ export const EndPoint = {
 		post: '/recruitment/postings',
 		role: (keyword: string) => `/role/search?keyword=${keyword}&limit=5`,
 		skill: (keyword: string) => `/skill/search?keyword=${keyword}&limit=5`,
-		course: (keyword: string) => `/tag/search/course?keyword=${keyword}&limit=5`,
-		professor: (keyword: string) => `/tag/search/professor?keyword=${keyword}&limit=5`,
+		course: (keyword: string) => `/course/search?keyword=${keyword}&limit=5`,
+		professor: (keyword: string) => `/professor/search?keyword=${keyword}&limit=5`,
 		tag: (keyword: string) => `/tag/search?keyword=${keyword}&limit=5`,
 	},
 	RECRUITMENT_BOARD: {
@@ -42,7 +42,9 @@ export const EndPoint = {
 	RECRUITMENT_APPLICANT: {
 		info: (id: number) => `/recruitment/applicants/${id}/info`,
 		list: ({ pageNum, role, page }: ApplicantPageInfo) =>
-			`/recruitment/applicants/${pageNum}?page=${page}&size=8${role !== null ? '&role=' + role : ''}`,
+			`/recruitment/applicants/${pageNum}?page=${page}&size=8${
+				role !== null ? '&role=' + role : ''
+			}`,
 		approved: (id: number) => `/recruitment/applicants/${id}/approve`,
 		refused: (id: number) => `/recruitment/applicants/${id}/reject`,
 		set: (id: number) => `/recruitment/applicants/${id}/link`,
