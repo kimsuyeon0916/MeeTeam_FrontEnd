@@ -42,7 +42,6 @@ const ReplyComment = ({
 			title: '수정',
 			optionClickHandler: () => {
 				setIsEdit(true);
-				setShowKebab(false);
 			},
 		},
 		{
@@ -134,7 +133,7 @@ const ReplyComment = ({
 			<hr />
 			{isDelete && (
 				<section className='modal-background'>
-					<CommentDeleteModal pageNum={pageNum} commentId={{ commentId: id }} type='reply' />
+					<CommentDeleteModal pageNum={pageNum} commentId={id} type='reply' />
 				</section>
 			)}
 		</S.ReplyComment>

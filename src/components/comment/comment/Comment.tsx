@@ -42,7 +42,6 @@ const Comment = ({
 			title: '수정',
 			optionClickHandler: () => {
 				setIsEdit(true);
-				setShowKebab(false);
 			},
 		},
 		{
@@ -164,7 +163,7 @@ const Comment = ({
 			</section>
 			{isDelete && (
 				<section className='modal-background'>
-					<CommentDeleteModal pageNum={pageNum} commentId={{ commentId: id }} />
+					<CommentDeleteModal pageNum={pageNum} commentId={id} />
 				</section>
 			)}
 		</S.Comment>
