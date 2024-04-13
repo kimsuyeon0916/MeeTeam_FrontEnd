@@ -113,6 +113,12 @@ const ApplierManagePage = () => {
 		}
 	}, [page, applicantList]);
 
+	useEffect(() => {
+		if (recruitManageInfo) {
+			setLinkUrl(recruitManageInfo.link);
+		}
+	}, [recruitManageInfo?.link]);
+
 	return (
 		<S.ApplierManagePage $isChecked={checkList.length !== 0}>
 			<article className='wrapper-applicants'>
