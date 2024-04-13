@@ -135,7 +135,7 @@ export interface ListResult {
 
 export interface ApplicantPageInfo {
 	pageNum: number;
-	role: number | null;
+	role: number;
 	page: number;
 }
 

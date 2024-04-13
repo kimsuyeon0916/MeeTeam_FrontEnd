@@ -193,8 +193,9 @@ const ApplierManagePage = () => {
 				<section className='container-roles'>
 					{recruitManageInfo &&
 						manageSuccess &&
-						recruitManageInfo.recruitmentStatus.map(elem => (
+						recruitManageInfo.recruitmentStatus.map((elem, index) => (
 							<ApplyRole
+								key={index}
 								approvedMemberCount={elem.approvedMemberCount}
 								recruitMemberCount={elem.recruitMemberCount}
 								roleName={elem.roleName}

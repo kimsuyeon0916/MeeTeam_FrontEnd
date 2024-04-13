@@ -8,13 +8,18 @@ interface Result {
 
 export const postingRecruit = async (formData: InputState) => {
 	try {
-		const response: Result | undefined = await axiosAuthInstance.post(
+		const response: { recruitmentPostId: number } = await axiosAuthInstance.post(
 			EndPoint.RECRUITMENT.post,
 			formData
 		);
-		return response;
+		if (response) {
+			return response;
+		} else {
+			throw new Error('구인글 생성에 오류가 있습니다.');
+		}
 	} catch (error) {
 		console.error(error);
+		throw error;
 	}
 };
 
