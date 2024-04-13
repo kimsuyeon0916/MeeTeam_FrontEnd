@@ -34,7 +34,7 @@ const RecruitDetailPage = styled.section`
 		width: 100vw;
 		height: 100vh;
 		z-index: 105;
-		background-color: rgba(0, 0, 0, 0.35);
+		background-color: rgba(0, 0, 0, 0.15);
 	}
 
 	.wrapper-comments {

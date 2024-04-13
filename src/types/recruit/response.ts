@@ -22,6 +22,7 @@ export interface RecruitInfo {
 	proceedType: string;
 	courseProfessor: string | null;
 	dDay: string;
+	isClosed: boolean;
 }
 
 export interface RecruitDescription {
@@ -131,4 +132,53 @@ export interface Page {
 export interface ListResult {
 	posts: Post[];
 	pageInfo: Page;
+}
+
+export interface ApplicantPageInfo {
+	pageNum: number;
+	role: number | null;
+	page: number;
+}
+
+export interface ApplicantInfo {
+	applicantId: number;
+	applyRoleName: string;
+	departmentName: string;
+	message: string;
+	name: string;
+	nickname: string;
+	profileImg: string;
+	score: number;
+	universityName: string;
+	userId: string;
+	year: number;
+}
+
+export interface PageInfo {
+	page: number;
+	size: number;
+	hasNextPage: boolean;
+}
+
+export interface ApplicantList {
+	applicants: ApplicantInfo[];
+	pageInfo: PageInfo;
+}
+
+export interface ManageRole {
+	id: number | null;
+	title: string;
+}
+
+export interface RecruitmentStatus {
+	roleName: string;
+	recruitMemberCount: number;
+	approvedMemberCount: number;
+}
+
+export interface ApplyManageInfo {
+	title: string;
+	link: string;
+	recruitmentStatus: RecruitmentStatus[];
+	roles: ManageRole[];
 }

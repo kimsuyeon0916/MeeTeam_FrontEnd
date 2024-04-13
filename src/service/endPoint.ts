@@ -1,3 +1,4 @@
+import { ApplicantPageInfo } from '../types';
 import { DeleteComment } from '../types';
 
 export const EndPoint = {
@@ -22,7 +23,7 @@ export const EndPoint = {
 		applyInfo: (id: number) => `/recruitment/postings/${id}/apply-info`,
 		apply: (id: number) => `/recruitment/postings/${id}/apply`,
 		bookmark: (id: number) => `/recruitment/postings/${id}/bookmark`,
-		edit: (id: number) => `/recruitment/postings/${id}/close`,
+		close: (id: number) => `/recruitment/postings/${id}/close`,
 		comment: (id: number) => `/recruitment/postings/${id}/comment`,
 		deleteComment: ({ pageNum, commentId }: DeleteComment) =>
 			`/recruitment/postings/${pageNum}/comment/${commentId}`,
@@ -37,5 +38,15 @@ export const EndPoint = {
 	},
 	RECRUITMENT_BOARD: {
 		list: '/recruitment/postings/search',
+	},
+	RECRUITMENT_APPLICANT: {
+		info: (id: number) => `/recruitment/applicants/${id}/info`,
+		list: ({ pageNum, role, page }: ApplicantPageInfo) =>
+			`/recruitment/applicants/${pageNum}?page=${page}&size=8${
+				role !== null ? '&role=' + role : ''
+			}`,
+		approved: (id: number) => `/recruitment/applicants/${id}/approve`,
+		refused: (id: number) => `/recruitment/applicants/${id}/reject`,
+		set: (id: number) => `/recruitment/applicants/${id}/link`,
 	},
 };

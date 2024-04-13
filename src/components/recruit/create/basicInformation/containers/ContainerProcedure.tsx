@@ -27,7 +27,7 @@ const ContainerProcedure = () => {
 						id='offline'
 						name='procedure'
 						value='오프라인'
-						checked={isSelected === '오프라인'}
+						checked={formData.proceedType === '오프라인'}
 						onChange={handleProcedureChange}
 					/>
 					<label htmlFor='offline'>오프라인</label>
@@ -39,7 +39,7 @@ const ContainerProcedure = () => {
 						id='online'
 						name='procedure'
 						value='온라인'
-						checked={isSelected === '온라인'}
+						checked={formData.proceedType === '온라인'}
 						onChange={handleProcedureChange}
 					/>
 					<label htmlFor='online'>온라인</label>
@@ -51,7 +51,7 @@ const ContainerProcedure = () => {
 						id='any'
 						name='procedure'
 						value='상관없음'
-						checked={isSelected === '상관없음'}
+						checked={formData.proceedType === '상관없음'}
 						onChange={handleProcedureChange}
 					/>
 					<label htmlFor='any'>상관없음</label>

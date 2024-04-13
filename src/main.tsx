@@ -15,6 +15,7 @@ import {
 	SignUpPage,
 	PassWordFindingPage,
 	ProfileDetailsPage,
+	ApplierManagePage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
 			{
 				path: 'recruitment/postings/:id',
 				element: <RecruitDetailPage />,
+			},
+			{
+				path: '/recruitment/applicants',
+				element: <ApplierManagePage />,
 			},
 			{
 				path: 'galary',
@@ -57,6 +62,10 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'recruitment/postings',
+				element: <RecruitCreatePage />,
+			},
+			{
+				path: 'edit/recruit',
 				element: <RecruitCreatePage />,
 			},
 			{

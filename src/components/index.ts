@@ -54,7 +54,6 @@ import {
 	SMALL_TOP_ARROW_BUTTON,
 } from './meeteam/main/recruitment/applicantView/ApplicantViewData';
 import type { Applicant } from './meeteam/main/recruitment/applicantView/ApplicantViewData';
-import ApplicantCard from './meeteam/main/recruitment/applicantView/applicantCard/ApplicantCard';
 import RecruitmentDeadLine from './meeteam/main/recruitment/RecruitmentDeadLine';
 import Toggle from './toggle/Toggle';
 import GoBack from './goBack/GoBack';
@@ -116,6 +115,13 @@ import WriterFooter from './recruit/recruitDetail/footer/WriterFooter';
 import ApplierFooter from './recruit/recruitDetail/footer/ApplierFooter';
 import ClosedFooter from './recruit/recruitDetail/footer/ClosedFooter';
 import DetailedInput from './recruit/recruitBoard/detailedFilter/DetailedInput';
+import RecruitTags from './recruit/create/RecruitTags';
+import ApplyCancel from './recruit/recruitDetail/modal/applyCancel/ApplyCancel';
+import ApplyClose from './recruit/recruitDetail/modal/applyClose/ApplyClose';
+import CommentDeleteModal from './recruit/recruitDetail/modal/commentDelete/CommentDeleteModal';
+import WaitModal from './recruit/recruitDetail/modal/wait/WaitModal';
+import ApplicantCard from './recruit/applicants/ApplicantCard';
+import ApplyRole from './recruit/role/ApplyRole';
 
 export {
 	Header,
@@ -161,7 +167,6 @@ export {
 	SMALL_BOTTOM_ARROW_ICON,
 	SMALL_TOP_ARROW_BUTTON,
 	Applicant,
-	ApplicantCard,
 	RecruitmentDeadLine,
 	Toggle,
 	GoBack,
@@ -227,4 +232,11 @@ export {
 	FinalModal,
 	DetailedInput,
 	ClosedFooter,
+	RecruitTags,
+	ApplyCancel,
+	ApplyClose,
+	CommentDeleteModal,
+	WaitModal,
+	ApplicantCard,
+	ApplyRole,
 };

@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const Modal = styled.section`
+interface Modal {
+	$isChecked?: boolean;
+}
+
+const Modal = styled.section<Modal>`
 	width: 52rem;
 	height: 68rem;
 	border-radius: 1rem;
@@ -240,7 +244,7 @@ const Modal = styled.section`
 		button {
 			padding: 1.2rem 3.2rem;
 			border-radius: 0.6rem;
-			color: #373f41;
+			color: '#373f41';
 			font-size: 1.6rem;
 			line-height: 1.9rem;
 			letter-spacing: 0.0032rem;
@@ -255,9 +259,9 @@ const Modal = styled.section`
 		}
 
 		.confirm {
-			background-color: #5877fc;
+			background-color: ${props => (props.$isChecked ? '#5877fc' : '#E3E3E3')};
 			font-weight: 400;
-			color: #fff;
+			color: ${props => (props.$isChecked ? '#fff' : '#8E8E8E')};
 		}
 	}
 

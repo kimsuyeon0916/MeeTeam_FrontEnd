@@ -12,6 +12,7 @@ const Dropdown = styled.div<IDropdown>`
 		position: relative;
 		display: flex;
 		align-items: center;
+		height: 4.8rem;
 		padding: 1.2rem 1rem 1.2rem 1.6rem;
 		border: 1px solid ${props => (props.$showDropdown ? '#5877FC' : '#e0e6ff')};
 		box-sizing: border-box;
@@ -23,7 +24,7 @@ const Dropdown = styled.div<IDropdown>`
 			border: 1px solid #5877fc;
 		}
 
-		.temp {
+		.dropdown-box {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -32,13 +33,6 @@ const Dropdown = styled.div<IDropdown>`
 
 			.value {
 				font-size: 1.5rem;
-			}
-
-			.icon {
-				display: flex;
-				justify-content: flex-end;
-				align-items: center;
-				font-size: 1.1rem;
 			}
 		}
 

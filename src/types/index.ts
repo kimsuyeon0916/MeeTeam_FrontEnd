@@ -19,6 +19,9 @@ import type {
 	DeleteComment,
 	EditContents,
 	EditingComment,
+	EditPosting,
+	ApplicantsList,
+	ApplicantsLink,
 } from './recruit/payload';
 import type { Comment } from './comment';
 import type {
@@ -35,6 +38,12 @@ import type {
 	ApplyInfo,
 	ListResult,
 	Post,
+	ApplicantPageInfo,
+	ApplicantInfo,
+	ManageRole,
+	RecruitmentStatus,
+	ApplyManageInfo,
+	ApplicantList,
 	DetailedFilter,
 } from './recruit/response';
 import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
@@ -86,5 +95,14 @@ export type {
 	DeleteComment,
 	EditContents,
 	EditingComment,
+	EditPosting,
+	ApplicantPageInfo,
+	ApplicantInfo,
+	ApplicantsList,
+	ManageRole,
+	RecruitmentStatus,
+	ApplyManageInfo,
+	ApplicantsLink,
+	ApplicantList,
 	DetailedFilter,
 };

@@ -7,8 +7,6 @@ import { useQuery } from '@tanstack/react-query';
 import { getApplyData } from '../../../../service';
 import { useParams } from 'react-router-dom';
 
-const isSelected = true; // 임시
-
 const ApplyModal = () => {
 	const { id } = useParams();
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -59,7 +57,7 @@ const ApplyModal = () => {
 	}, [data]);
 
 	return (
-		<S.Modal>
+		<S.Modal $isChecked={isValid}>
 			<article>
 				<h1>신청 정보</h1>
 				<section className='description'>

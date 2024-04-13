@@ -22,6 +22,7 @@ import MyActivityApply from './activity/MyActivityApply';
 import MyActivityBookmark from './activity/MyActivityBookmark';
 import ProfileDetailsPage from './profile/ProfileDetailsPage';
 import { userData } from './profile/userData';
+import ApplierManagePage from './recruit/applierManagePage/ApplierManagePage';
 
 export {
 	MainPage,
@@ -49,4 +50,5 @@ export {
 	MyActivityBookmark,
 	ProfileDetailsPage,
 	userData,
+	ApplierManagePage,
 };

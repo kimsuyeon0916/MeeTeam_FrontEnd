@@ -48,6 +48,31 @@ export const applyModalState = atom({
 	default: false,
 });
 
+export const applyCancelModalState = atom({
+	key: 'applyCancelModalState',
+	default: false,
+});
+
+export const applyCloseModalState = atom({
+	key: 'applyCloseModalState',
+	default: false,
+});
+
+export const commentDeleteModalState = atom({
+	key: 'commentDeleteModalState',
+	default: false,
+});
+
+export const replyDeleteModalState = atom({
+	key: 'replyDeleteModalState',
+	default: false,
+});
+
+export const waitModalState = atom({
+	key: 'waitModalState',
+	default: false,
+});
+
 export const recruitInputState = atom<InputState>({
 	key: 'recruitInputState',
 	default: {
@@ -145,4 +170,14 @@ export const recruitFilterState = atom<RecruitFilter>({
 		course: null,
 		professor: null,
 	},
+});
+
+export const applicantHolder = atom({
+	key: 'applicantApproved',
+	default: [] as number[],
+});
+
+export const applicantFilter = atom({
+	key: 'applicantFilter',
+	default: null as number | null,
 });

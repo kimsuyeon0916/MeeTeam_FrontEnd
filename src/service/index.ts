@@ -13,8 +13,8 @@ import {
 	getPostingData,
 	getApplyData,
 	applyRole,
-	editRecruitPost,
 	cancelApply,
+	closeRecruitPost,
 } from './recruit/detail';
 import {
 	postingRecruit,
@@ -23,7 +23,9 @@ import {
 	getCourseKeyword,
 	getProfessorKeyword,
 	getTagKeyword,
+	editPostingRecruit,
 } from './recruit/posting';
+import { getApplicantsList } from './recruit/applicant';
 
 export {
 	EndPoint,
@@ -45,6 +47,8 @@ export {
 	getCourseKeyword,
 	getProfessorKeyword,
 	getTagKeyword,
-	editRecruitPost,
+	closeRecruitPost,
 	cancelApply,
+	editPostingRecruit,
+	getApplicantsList,
 };

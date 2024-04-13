@@ -1,18 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react';
 import S from './Dropdown.styled';
-import DropdownArrow from './DropdownArrow';
 import { useDebounce } from '../../hooks';
 import { useQuery } from '@tanstack/react-query';
 import { getCourseKeyword, getProfessorKeyword } from '../../service';
-import { useRecoilState } from 'recoil';
-import { recruitFilterState } from '../../atom';
-import { Keyword } from '../../types';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { applicantFilter, recruitFilterState } from '../../atom';
+import { ManageRole, Keyword } from '../../types';
+import { DropdownArrowUp, DropdownArrow } from '../../assets';
 
 interface Dropdown {
-	data: string[];
+	data?: string[];
 	initialData?: string;
 	$showDropdown?: boolean;
-	scope: boolean;
+	scope?: boolean;
+	category?: boolean;
+	applicant?: boolean;
+	roleObj?: ManageRole[];
 }
 
 type keyObj = {
@@ -30,8 +33,8 @@ const categoryObj: keyObj = {
 	공모전: 3,
 };
 
-const Dropdown = ({ data, initialData, scope }: Dropdown) => {
-	const [currentValue, setCurrentValue] = useState(`${initialData}`);
+const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dropdown) => {
+	const [currentValue, setCurrentValue] = useState<string | undefined>(`${initialData}`);
 	const [showDropdown, setShowDropdown] = useState<boolean>(false);
 	const [dropdown, setDropdown] = useState({
 		course: false,
@@ -44,6 +47,7 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 		course: '',
 		professor: '',
 	});
+	const setApplicantFilter = useSetRecoilState(applicantFilter);
 	const keywordCourse = useDebounce(name.course, 500);
 	const keywordProfessor = useDebounce(name.professor, 500);
 	const [filterState, setFilterState] = useRecoilState(recruitFilterState);
@@ -58,14 +62,22 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 	});
 
 	const onClickDropdown = () => {
-		setShowDropdown(true);
+		if (scope) {
+			setShowDropdown(true);
+		} else {
+			setShowDropdown(prev => !prev);
+		}
 	};
 
-	const onClickList = (event: React.MouseEvent<HTMLElement>) => {
+	const onClickList = (event: React.MouseEvent<HTMLElement>, id?: number) => {
 		event.stopPropagation();
 		const { innerText } = event.target as HTMLElement;
 		setCurrentValue(innerText);
-		setFilterState(prev => ({ ...prev, category: categoryObj[innerText] }));
+		if (applicant && id) {
+			setApplicantFilter(id);
+		} else {
+			setFilterState(prev => ({ ...prev, category: categoryObj[innerText] }));
+		}
 		setShowDropdown(false);
 	};
 
@@ -130,7 +142,7 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 	useEffect(() => {
 		if (scope && filterState.scope === null) {
 			setCurrentValue('범위');
-		} else if (!scope && filterState.category === null) {
+		} else if (!scope && filterState.category === null && initialData !== '역할') {
 			setCurrentValue('유형');
 		}
 	}, [filterState.scope, filterState.category]);
@@ -138,18 +150,16 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 	return (
 		<S.Dropdown $showDropdown={showDropdown} ref={dropdownRef} scope={scope} $isCheck={isChecked}>
 			<article className='wrapper' onClick={onClickDropdown}>
-				<div className='temp'>
+				<div className='dropdown-box'>
 					<div className='value'>{currentValue}</div>
-					<div className='icon'>
-						<DropdownArrow />
-					</div>
+					<img src={showDropdown ? DropdownArrowUp : DropdownArrow} />
 				</div>
 				{showDropdown && (
 					<>
 						<div className='dropdown'>
-							{scope ? (
+							{scope && (
 								<ul className='menu-container'>
-									{data.map((e: string, index: number) => (
+									{data?.map((e: string, index: number) => (
 										<>
 											<section key={index} className={`menu-scope ${e === '교내' && 'in'}`}>
 												<input
@@ -230,11 +240,24 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 										</>
 									))}
 								</ul>
-							) : (
+							)}
+							{category && (
 								<ul className='menu-container category'>
-									{data.map((e: string, index: number) => (
+									{data?.map((e: string, index: number) => (
 										<li onClick={onClickList} key={index}>
 											{e}
+										</li>
+									))}
+								</ul>
+							)}
+							{applicant && (
+								<ul className='menu-container category'>
+									{roleObj?.map(e => (
+										<li
+											onClick={event => onClickList(event, e.id as number | undefined)}
+											key={e.id}
+										>
+											{e.title}
 										</li>
 									))}
 								</ul>

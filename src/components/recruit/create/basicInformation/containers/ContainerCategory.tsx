@@ -26,7 +26,7 @@ const ContainerCategory = () => {
 						id='project'
 						name='category'
 						value='프로젝트'
-						checked={isSelected === '프로젝트'}
+						checked={formData.category === '프로젝트'}
 						onChange={handleCategoryChange}
 					/>
 					<label htmlFor='project'>프로젝트</label>
@@ -38,7 +38,7 @@ const ContainerCategory = () => {
 						id='study'
 						name='category'
 						value='스터디'
-						checked={isSelected === '스터디'}
+						checked={formData.category === '스터디'}
 						onChange={handleCategoryChange}
 					/>
 					<label htmlFor='study'>스터디</label>
@@ -50,7 +50,7 @@ const ContainerCategory = () => {
 						id='contest'
 						name='category'
 						value='공모전'
-						checked={isSelected === '공모전'}
+						checked={formData.category === '공모전'}
 						onChange={handleCategoryChange}
 					/>
 					<label htmlFor='contest'>공모전</label>

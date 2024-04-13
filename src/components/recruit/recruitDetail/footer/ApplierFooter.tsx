@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { UnfilledBookmark, FilledBookmark } from '../../../../assets';
 import { useSetRecoilState } from 'recoil';
-import { applyModalState } from '../../../../atom';
+import { applyModalState, applyCancelModalState } from '../../../../atom';
 import { calculateDate } from '../../../../utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
@@ -18,6 +18,7 @@ const ApplierFooter = ({ deadline, isApplied }: { deadline: string; isApplied: b
 	const cancelApplyTeam = useMutation({
 		mutationFn: (pageNum: number) => cancelApply(pageNum),
 	});
+	const setIsCancel = useSetRecoilState(applyCancelModalState);
 
 	const onClickApply = () => {
 		setIsModal(true);
@@ -26,6 +27,7 @@ const ApplierFooter = ({ deadline, isApplied }: { deadline: string; isApplied: b
 	const onClickCancel = () => {
 		cancelApplyTeam.mutate(pageNum, {
 			onSuccess: () => {
+				setIsCancel(true);
 				queryClient.invalidateQueries({ queryKey: ['detailedPage'] });
 			},
 		});
@@ -39,7 +41,7 @@ const ApplierFooter = ({ deadline, isApplied }: { deadline: string; isApplied: b
 			</button>
 			{isApplied ? (
 				<button type='button' className='apply' onClick={onClickApply}>
-					<span>신청하기 {Number(diffDate) < 8 && `D-${diffDate}`}</span>
+					<span>신청하기 {Number(diffDate) < 8 && Number(diffDate) > 0 && `D-${diffDate}`}</span>
 				</button>
 			) : (
 				<button type='button' className='cancel' onClick={onClickCancel}>

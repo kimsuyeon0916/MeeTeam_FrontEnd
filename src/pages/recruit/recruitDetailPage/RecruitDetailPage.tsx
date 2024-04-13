@@ -15,21 +15,38 @@ import {
 	ConfirmModal,
 	FinalModal,
 	ClosedFooter,
+	ApplyCancel,
+	ApplyClose,
+	WaitModal,
 } from '../../../components';
 import { fixModalBackground } from '../../../utils';
 import { JsxElementComponentProps } from '../../../types';
 import { useQuery } from '@tanstack/react-query';
 import { getPostingData } from '../../../service';
-import { useRecoilValue } from 'recoil';
-import { applyModalState, applyStepState } from '../../../atom';
-import { useParams } from 'react-router-dom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+	applyCancelModalState,
+	applyCloseModalState,
+	applyModalState,
+	applyStepState,
+	commentDeleteModalState,
+	recruitInputState,
+	waitModalState,
+} from '../../../atom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useLogin } from '../../../hooks';
 
 const RecruitDetailPage = () => {
 	const { id } = useParams();
+	const navigate = useNavigate();
 	const pageNum = Number(id);
 	const isModal = useRecoilValue(applyModalState);
+	const isCancel = useRecoilValue(applyCancelModalState);
+	const isClose = useRecoilValue(applyCloseModalState);
+	const isWait = useRecoilValue(waitModalState);
+	const isDelete = useRecoilValue(commentDeleteModalState);
 	const step = useRecoilValue(applyStepState);
+	const setFormData = useSetRecoilState(recruitInputState);
 	const stepLists: JsxElementComponentProps = {
 		0: <ApplyModal />,
 		1: <ConfirmModal />,
@@ -59,9 +76,34 @@ const RecruitDetailPage = () => {
 		}
 	}, [detailedData?.comments]);
 
+	const onClickEditPage = async () => {
+		if (detailedData) {
+			setFormData({
+				pageNum: pageNum,
+				scope: detailedData.scope,
+				category: detailedData.category,
+				deadline: detailedData.deadline,
+				proceedingStart: detailedData.proceedingStart,
+				proceedingEnd: detailedData.proceedingEnd,
+				fieldId: 1,
+				proceedType: detailedData.proceedType,
+				courseTag: {
+					courseTagName: detailedData.courseName,
+					courseProfessor: detailedData.courseProfessor,
+					isCourse: detailedData.courseName || detailedData.courseProfessor ? true : false,
+				},
+				recruitmentRoles: [],
+				tags: detailedData.tags.map(e => e.name),
+				title: detailedData.title,
+				content: detailedData.content,
+			});
+		}
+		navigate('/edit/recruit');
+	};
+
 	useEffect(() => {
-		fixModalBackground(isModal);
-	}, [isModal]);
+		fixModalBackground(isModal || isCancel || isClose || isWait || isDelete);
+	}, [isModal, isCancel, isClose, isWait, isDelete]);
 
 	return (
 		<>
@@ -88,6 +130,7 @@ const RecruitDetailPage = () => {
 						proceedType={detailedData.proceedType}
 						courseProfessor={detailedData.courseProfessor}
 						dDay={diffDate}
+						isClosed={detailedData.isClosed}
 					/>
 					<RecruitDescription content={detailedData.content} />
 					<RecruitRoles roles={detailedData.recruitmentRoles} />
@@ -114,13 +157,30 @@ const RecruitDetailPage = () => {
 							<section className='modal-background'>{stepLists[step]}</section>
 						</form>
 					)}
+					{isCancel && (
+						<section className='modal-background'>
+							<ApplyCancel />
+						</section>
+					)}
+					{isClose && (
+						<section className='modal-background'>
+							<ApplyClose />
+						</section>
+					)}
+					{isWait && (
+						<section className='modal-background'>
+							<WaitModal />
+						</section>
+					)}
 				</S.RecruitDetailPage>
 			)}
 			<S.Footer>
 				{detailedData && (
 					<section className='container-btn'>
-						{!detailedData.isWriter && !detailedData.isClosed && <WriterFooter />}
-						{detailedData.isWriter && (
+						{detailedData.isWriter && !detailedData.isClosed && (
+							<WriterFooter onClickEditPage={onClickEditPage} pageNum={pageNum} />
+						)}
+						{!detailedData.isWriter && (
 							<ApplierFooter deadline={detailedData.deadline} isApplied={detailedData.isApplied} />
 						)}
 						{detailedData.isClosed && <ClosedFooter />}

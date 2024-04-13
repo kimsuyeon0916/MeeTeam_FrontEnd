@@ -13,7 +13,7 @@ const RecruitRoleForm = () => {
 		setUserRoleList(prev => prev.filter(elem => elem.role.id !== id));
 		setInfo(prev => ({
 			...prev,
-			recruitmentRoles: prev.recruitmentRoles.filter(elem => elem.roleId !== id),
+			recruitmentRoles: prev.recruitmentRoles?.filter(elem => elem.roleId !== id),
 		}));
 	};
 	return (

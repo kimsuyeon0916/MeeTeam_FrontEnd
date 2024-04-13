@@ -1,4 +1,4 @@
-import { InputState, Keyword } from '../../types';
+import { EditPosting, InputState, Keyword } from '../../types';
 import { axiosAuthInstance, axiosInstance } from '..';
 import { EndPoint } from '..';
 
@@ -8,13 +8,18 @@ interface Result {
 
 export const postingRecruit = async (formData: InputState) => {
 	try {
-		const response: Result | undefined = await axiosAuthInstance.post(
+		const response: { recruitmentPostId: number } = await axiosAuthInstance.post(
 			EndPoint.RECRUITMENT.post,
 			formData
 		);
-		return response;
+		if (response) {
+			return response;
+		} else {
+			throw new Error('구인글 생성에 오류가 있습니다.');
+		}
 	} catch (error) {
 		console.error(error);
+		throw error;
 	}
 };
 
@@ -59,6 +64,18 @@ export const getProfessorKeyword = async (keyword: string) => {
 export const getTagKeyword = async (keyword: string) => {
 	try {
 		const response = await axiosInstance.get<Keyword[]>(EndPoint.RECRUITMENT.tag(keyword));
+		return response;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const editPostingRecruit = async ({ pageNum, formData }: EditPosting) => {
+	try {
+		const response = await axiosAuthInstance.put(
+			EndPoint.RECRUIT_DETAIL.posting(pageNum),
+			formData
+		);
 		return response;
 	} catch (error) {
 		console.error(error);
