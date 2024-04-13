@@ -38,7 +38,7 @@ export interface InputState {
 		courseTagName: string | null;
 		courseProfessor: string | null;
 	};
-	recruitmentRoles?: RoleForPost[];
+	recruitmentRoles: RoleForPost[];
 	tags: string[];
 	title: string;
 	content: string;
@@ -54,7 +54,7 @@ export interface Role {
 	skill: string[];
 }
 
-export interface InputRoleForm {
+export interface InputRoleData {
 	userRoleList: Role[];
 	setUserRoleList: (arr: any) => void;
 }
