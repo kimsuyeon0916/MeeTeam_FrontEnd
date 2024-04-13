@@ -5,6 +5,8 @@ import { Comment as CommentType } from '../../../types';
 import { useParams } from 'react-router-dom';
 import { useCommentDelete, useCommentEdit } from '../../../hooks';
 import { QueryClientProvider, useQueryClient } from '@tanstack/react-query';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../../atom';
 
 const Comment = ({
 	id,
@@ -28,6 +30,8 @@ const Comment = ({
 	const deleteComment = useCommentDelete();
 	const queryClient = useQueryClient();
 	const editComment = useCommentEdit();
+	const userInfo = useRecoilValue(userState);
+	const isCommentWriter = userId === userInfo?.userId;
 
 	const optionLists = [
 		{
@@ -40,13 +44,11 @@ const Comment = ({
 			title: '수정',
 			optionClickHandler: () => {
 				setIsEdit(true);
-				setShowKebab(false);
 			},
 		},
 		{
 			title: '삭제',
 			optionClickHandler: () => {
-				setShowKebab(false);
 				const commentId = id;
 				deleteComment.mutate(
 					{ pageNum, commentId },
@@ -149,7 +151,7 @@ const Comment = ({
 						)}
 					</section>
 				</article>
-				{isWriter && showKebab && <KebabMenu options={optionLists} />}
+				{isCommentWriter && showKebab && <KebabMenu options={optionLists} />}
 			</section>
 			<hr />
 			<section className='wrapper-replies'>

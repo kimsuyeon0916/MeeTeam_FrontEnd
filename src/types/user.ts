@@ -17,6 +17,7 @@ export interface User {
 	awards?: Award[];
 	links?: Link[];
 	portfolios?: Portfolio[];
+	userId: string;
 	// following?: [
 	// 	{
 	// 		_id: string;
