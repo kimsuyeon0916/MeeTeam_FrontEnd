@@ -204,7 +204,7 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 	.current-recruit {
 		width: 34rem;
 		height: 41.1rem;
-		overflow-y: scroll;
+		overflow-y: hidden;
 		margin-top: 9rem;
 		border-radius: 0.8rem;
 		border: 1px solid #e3e3e3;
@@ -221,6 +221,17 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 		}
 
 		.container-roles {
+			overflow-y: auto;
+
+			&::-webkit-scrollbar {
+				width: 1rem;
+			}
+			&::-webkit-scrollbar-thumb {
+				background-color: #e3e3e3;
+				border-radius: 1rem;
+				background-clip: padding-box;
+				border: 0.1rem solid transparent;
+			}
 		}
 	}
 
