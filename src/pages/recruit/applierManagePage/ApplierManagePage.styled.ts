@@ -204,7 +204,7 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 	.current-recruit {
 		width: 34rem;
 		height: 41.1rem;
-		overflow-y: hidden;
+		overflow-y: scroll;
 		margin-top: 9rem;
 		border-radius: 0.8rem;
 		border: 1px solid #e3e3e3;
