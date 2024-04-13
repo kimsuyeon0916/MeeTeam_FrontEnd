@@ -1,30 +1,40 @@
 import React from 'react';
 import { Edit, TrashCan } from '../../../../assets';
-import { useMutation } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
-import { editRecruitPost } from '../../../../service';
+import { useSetRecoilState } from 'recoil';
+import { applyCloseModalState, waitModalState } from '../../../../atom';
+import { useNavigate } from 'react-router-dom';
 
-const WriterFooter = () => {
-	const { id } = useParams();
-	const pageNumber = Number(id);
-	const closeRecruitment = useMutation({
-		mutationFn: (pageNumber: number) => editRecruitPost(pageNumber),
-	});
+interface WriterFooter {
+	pageNum: number;
+	onClickEditPage: () => void;
+}
+
+const WriterFooter = ({ pageNum, onClickEditPage }: WriterFooter) => {
+	const navigate = useNavigate();
+	const setIsClose = useSetRecoilState(applyCloseModalState);
+	const setIsWait = useSetRecoilState(waitModalState);
+	sessionStorage.setItem('pageNum', pageNum.toString());
 
 	const onClickClose = () => {
-		if (id) {
-			closeRecruitment.mutate(pageNumber);
-		}
+		setIsClose(true);
+	};
+
+	const onClickDelete = () => {
+		setIsWait(true);
+	};
+
+	const onClickApplicant = () => {
+		navigate('/recruitment/applicants');
 	};
 	return (
 		<>
-			<button type='button' className='btn-edit'>
+			<button type='button' className='btn-edit' onClick={onClickEditPage}>
 				<img src={Edit} />
 			</button>
-			<button type='button' className='btn-delete'>
+			<button type='button' className='btn-delete' onClick={onClickDelete}>
 				<img src={TrashCan} />
 			</button>
-			<button type='button' className='btn-navigate_appliers'>
+			<button type='button' className='btn-navigate_appliers' onClick={onClickApplicant}>
 				신청자 보러가기
 			</button>
 			<button type='button' className='btn-close' onClick={onClickClose}>

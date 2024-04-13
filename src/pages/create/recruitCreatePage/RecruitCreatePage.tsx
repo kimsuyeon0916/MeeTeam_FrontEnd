@@ -5,37 +5,39 @@ import {
 	ControlButtons,
 	Description,
 	DetailedInformation,
+	RecruitTags,
 	RecruitRoleForm,
 } from '../../../components/index';
 import { useMutation } from '@tanstack/react-query';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { recruitInputState, validState } from '../../../atom';
-import { postingRecruit } from '../../../service/recruit/posting';
-import { useNavigate } from 'react-router-dom';
-import RecruitTags from '../../../components/recruit/create/RecruitTags';
-import { InputState } from '../../../types';
+import { editPostingRecruit, postingRecruit } from '../../../service/recruit/posting';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { EditPosting, InputState } from '../../../types';
 
 const RecruitCreatePage = () => {
+	const location = useLocation();
 	const navigate = useNavigate();
 	const setIsSubmit = useSetRecoilState(validState);
 	const formData = useRecoilValue<InputState>(recruitInputState);
 	const validCheck = useRecoilValue(validState);
 
 	const uploadPost = useMutation({
-		mutationFn: (formData: any) => postingRecruit(formData),
+		mutationFn: (formData: InputState) => postingRecruit(formData),
+		onSuccess: (data: { recruitmentPostId: number }) => {
+			navigate(`/recruit/${data?.recruitmentPostId}`);
+		},
+	});
+
+	const editPost = useMutation({
+		mutationFn: ({ pageNum, formData }: EditPosting) => editPostingRecruit({ pageNum, formData }),
 		onSuccess: () => {
-			navigate(`/recruit/${uploadPost}`);
+			navigate(`/recruit/${formData.pageNum}`);
 		},
 	});
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-
-		setIsSubmit(prev => ({
-			...prev,
-			isSubmitted: true,
-		}));
-
 		const postAvailable =
 			validCheck.isCategory &&
 			validCheck.isDeadline &&
@@ -43,9 +45,19 @@ const RecruitCreatePage = () => {
 			validCheck.isScope &&
 			validCheck.isTag &&
 			validCheck.isTitle;
+		const pageNum = formData.pageNum;
 
-		if (postAvailable) {
+		setIsSubmit(prev => ({
+			...prev,
+			isSubmitted: true,
+		}));
+
+		if (postAvailable && location.pathname.includes('create')) {
 			uploadPost.mutate(formData);
+		}
+
+		if (postAvailable && location.pathname.includes('edit') && pageNum) {
+			editPost.mutate({ pageNum, formData });
 		}
 	};
 

@@ -25,6 +25,7 @@ export interface RoleForPost {
 }
 
 export interface InputState {
+	pageNum?: number;
 	scope: string;
 	category: string;
 	fieldId: number;
@@ -37,7 +38,7 @@ export interface InputState {
 		courseTagName: string | null;
 		courseProfessor: string | null;
 	};
-	recruitmentRoles: RoleForPost[];
+	recruitmentRoles?: RoleForPost[];
 	tags: string[];
 	title: string;
 	content: string;
@@ -112,6 +113,7 @@ export interface GroupContents {
 export interface DeleteComment {
 	pageNum: number;
 	commentId: number;
+	type?: string;
 }
 
 export interface EditContents {
@@ -122,4 +124,19 @@ export interface EditContents {
 export interface EditingComment {
 	pageNum: number;
 	comment: EditContents;
+}
+
+export interface EditPosting {
+	pageNum: number;
+	formData: InputState;
+}
+
+export interface ApplicantsList {
+	pageNum: number;
+	applicantIds: number[];
+}
+
+export interface ApplicantsLink {
+	pageNum: number;
+	link: string;
 }

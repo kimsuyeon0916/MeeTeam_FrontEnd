@@ -34,10 +34,22 @@ const RecruitInfo = styled.article`
 
 			section {
 				display: flex;
+				align-items: center;
 				gap: 2rem;
 
-				span:nth-child(2) {
+				.recruiting {
 					color: #5877fc;
+				}
+
+				.closed {
+					display: flex;
+					/* padding: 0.4rem 0.8rem; */
+					justify-content: center;
+					align-items: center;
+					border-radius: 1.5rem;
+					border: #8e8e8e;
+					background: #e3e3e3;
+					color: #8e8e8e;
 				}
 			}
 		}

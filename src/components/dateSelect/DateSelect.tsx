@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import React, { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import DatePicker from 'react-datepicker';
 import S from './DateSelect.styled';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -11,7 +11,7 @@ import { MONTH, WEEKDAY } from './dateData';
 
 const DateSelect = ({ type }: { type: string }) => {
 	const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-	const setFormdata = useSetRecoilState(recruitInputState);
+	const [formData, setFormData] = useRecoilState(recruitInputState);
 	const [isClickMonth, setIsClickMonth] = useState(false);
 	const [isClicked, setIsClicked] = useState(false);
 
@@ -20,10 +20,10 @@ const DateSelect = ({ type }: { type: string }) => {
 		const convertedDate = simpleDate(date);
 
 		if (type === 'start') {
-			setFormdata(prev => ({ ...prev, proceedingStart: convertedDate }));
+			setFormData(prev => ({ ...prev, proceedingStart: convertedDate }));
 		}
 		if (type === 'end') {
-			setFormdata(prev => ({ ...prev, proceedingEnd: convertedDate }));
+			setFormData(prev => ({ ...prev, proceedingEnd: convertedDate }));
 		}
 		setIsClicked(true);
 	};
@@ -33,7 +33,11 @@ const DateSelect = ({ type }: { type: string }) => {
 			<DatePicker
 				formatWeekDay={nameOfDay => WEEKDAY[nameOfDay]}
 				showIcon
-				selected={selectedDate}
+				selected={
+					type === 'start'
+						? new Date(formData.proceedingStart as any)
+						: new Date(formData.proceedingEnd as any)
+				}
 				dateFormat='yy년 MM월 dd일'
 				onChange={date => onChangeHandler(date)}
 				icon={DATE_ICON}
@@ -44,8 +48,6 @@ const DateSelect = ({ type }: { type: string }) => {
 				}
 				renderCustomHeader={({
 					date,
-					changeYear,
-					changeMonth,
 					decreaseMonth,
 					increaseMonth,
 					prevMonthButtonDisabled,

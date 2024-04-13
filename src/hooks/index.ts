@@ -12,6 +12,7 @@ import useValid from './useValid';
 import { useBookmark } from './useBookMark';
 import useLogin from './useLogin';
 import { useComment, useCommentDelete, useCommentEdit } from './useComment';
+import useScrollToTop from './useScrollToTop';
 
 export {
 	useCheckExist,
@@ -28,4 +29,5 @@ export {
 	useComment,
 	useCommentDelete,
 	useCommentEdit,
+	useScrollToTop,
 };

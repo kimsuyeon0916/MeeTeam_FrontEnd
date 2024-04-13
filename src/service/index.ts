@@ -9,7 +9,7 @@ import {
 	readDepartmentList,
 } from './auth/auth';
 import { readProfile } from './user/Profile';
-import { getPostingData, getApplyData, applyRole, editRecruitPost } from './recruit/detail';
+import { getPostingData, getApplyData, applyRole, closeRecruitPost } from './recruit/detail';
 import {
 	postingRecruit,
 	getRoleKeyword,
@@ -17,7 +17,9 @@ import {
 	getCourseKeyword,
 	getProfessorKeyword,
 	getTagKeyword,
+	editPostingRecruit,
 } from './recruit/posting';
+import { getApplicantsList } from './recruit/applicant';
 
 export {
 	EndPoint,
@@ -39,5 +41,7 @@ export {
 	getCourseKeyword,
 	getProfessorKeyword,
 	getTagKeyword,
-	editRecruitPost,
+	closeRecruitPost,
+	editPostingRecruit,
+	getApplicantsList,
 };

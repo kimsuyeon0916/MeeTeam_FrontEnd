@@ -13,15 +13,10 @@ interface RecruitmentDeadLine {
 	type?: string;
 }
 
-const YEARS = Array.from(
-	{ length: new Date().getFullYear() + 1 - 2000 },
-	(_, i) => new Date().getFullYear() - i
-);
-
 const DeadlineSelect = ({ type }: RecruitmentDeadLine) => {
 	const [endDate, setEndDate] = useState(new Date());
 	const [info, setInfo] = useRecoilState(recruitInputState);
-	const [isClickMonth, setIsClickMonth] = useState(false); // 달을 클릭하면 변경하기 위해 추가했습니다.
+	const [isClickMonth, setIsClickMonth] = useState(false);
 	const [isClicked, setIsClicked] = useState(false);
 
 	const onChangeDate = (date: Date) => {
@@ -39,7 +34,7 @@ const DeadlineSelect = ({ type }: RecruitmentDeadLine) => {
 			<DatePicker
 				formatWeekDay={nameOfDay => WEEKDAY[nameOfDay]}
 				className={!type ? 'date-picker' : 'date-picker date-picker__recruitment-deadline'}
-				selected={endDate}
+				selected={new Date(info.deadline as any)}
 				showPopperArrow={false}
 				onChange={onChangeDate}
 				minDate={new Date()}

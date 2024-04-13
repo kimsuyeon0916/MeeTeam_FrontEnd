@@ -27,7 +27,7 @@ const ContainerScope = () => {
 						id='inside'
 						name='scope'
 						value='교내'
-						checked={isSelected === '교내'}
+						checked={formData.scope === '교내'}
 						onChange={handleScopeChange}
 					/>
 					<label htmlFor='inside'>교내</label>
@@ -39,7 +39,7 @@ const ContainerScope = () => {
 						id='outside'
 						name='scope'
 						value='교외'
-						checked={isSelected === '교외'}
+						checked={formData.scope === '교외'}
 						onChange={handleScopeChange}
 					/>
 					<label htmlFor='outside'>교외</label>

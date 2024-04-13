@@ -1,5 +1,5 @@
 import React from 'react';
-import { RecruitInfo } from '../../../../types';
+import { RecruitInfo as RecruitInformation } from '../../../../types';
 import S from './RecruitInfo.styled';
 
 const RecruitInfo = ({
@@ -11,7 +11,8 @@ const RecruitInfo = ({
 	proceedType,
 	courseProfessor,
 	dDay,
-}: RecruitInfo) => {
+	isClosed,
+}: RecruitInformation) => {
 	return (
 		<S.RecruitInfo className='wrapper-info'>
 			<section className='container-info'>
@@ -24,7 +25,7 @@ const RecruitInfo = ({
 				<section className='values'>
 					<section>
 						<span>{deadline}</span>
-						<span>{`마감 ${dDay}일 전`}</span>
+						{!isClosed && <span className='recruiting'>{`마감 ${dDay}일 전`}</span>}
 					</section>
 					<span>{scope}</span>
 					<span>{period}</span>
