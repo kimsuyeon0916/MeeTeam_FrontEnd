@@ -71,6 +71,8 @@ export interface RecruitFilter {
 	role: number[];
 	tag: number[];
 	keyword: string;
+	course: number | null;
+	professor: number | null;
 }
 
 export interface DetailedInfo {

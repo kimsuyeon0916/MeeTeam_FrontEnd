@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getCourseKeyword, getProfessorKeyword } from '../../service';
 import { useRecoilState } from 'recoil';
 import { recruitFilterState } from '../../atom';
+import { Keyword } from '../../types';
 
 interface Dropdown {
 	data: string[];
@@ -83,14 +84,19 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 	};
 
 	const onClickCourse = (event: React.MouseEvent<HTMLSpanElement>) => {
-		const { innerText } = event.target as HTMLElement;
+		event.stopPropagation();
+		const target = event.target as HTMLSpanElement;
+		const { innerText, id } = target;
 		setName(prev => ({ ...prev, course: innerText }));
 		setDropdown(prev => ({ ...prev, course: false }));
+		setFilterState(prev => ({ ...prev, course: Number(id) }));
 	};
 	const onClickProfessor = (event: React.MouseEvent<HTMLSpanElement>) => {
-		const { innerText } = event.target as HTMLElement;
+		const target = event.target as HTMLSpanElement;
+		const { innerText, id } = target;
 		setName(prev => ({ ...prev, professor: innerText }));
 		setDropdown(prev => ({ ...prev, professor: false }));
+		setFilterState(prev => ({ ...prev, professor: Number(id) }));
 	};
 
 	const onChangeCourse = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -182,8 +188,12 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 															{dropdown.course && (
 																<section className='dropdown'>
 																	{!isLoadingCourse &&
-																		dataCourse?.map((keyword: any) => (
-																			<span key={keyword.id} onClick={onClickCourse}>
+																		dataCourse?.map((keyword: Keyword) => (
+																			<span
+																				key={keyword.id}
+																				onClick={onClickCourse}
+																				id={keyword.id.toString()}
+																			>
 																				{keyword.name}
 																			</span>
 																		))}
@@ -202,8 +212,12 @@ const Dropdown = ({ data, initialData, scope }: Dropdown) => {
 															{dropdown.professor && (
 																<section className='dropdown'>
 																	{!isLoadingProfessor &&
-																		dataProfessor?.map((keyword: any) => (
-																			<span key={keyword.id} onClick={onClickProfessor}>
+																		dataProfessor?.map((keyword: Keyword) => (
+																			<span
+																				key={keyword.id}
+																				onClick={onClickProfessor}
+																				id={keyword.id.toString()}
+																			>
 																				{keyword.name}
 																			</span>
 																		))}

@@ -7,7 +7,6 @@ import {
 	Create,
 	DropdownArrow,
 	FilledBookmark,
-	Plus,
 	PlusWhite,
 	Portpolio,
 	Profile,
@@ -43,7 +42,7 @@ const RecruitPage = () => {
 	});
 
 	const { isLoggedIn } = useLogin();
-	const { data, isLoading, refetch } = useQuery({
+	const { data, isLoading } = useQuery({
 		queryKey: ['recruit_board', { filterState, isLoggedIn }],
 		queryFn: () => getPostList({ filterState, isLoggedIn }),
 	});
@@ -72,6 +71,8 @@ const RecruitPage = () => {
 			role: [],
 			tag: [],
 			keyword: '',
+			course: null,
+			professor: null,
 		});
 	};
 
@@ -105,10 +106,6 @@ const RecruitPage = () => {
 	const submitTagItem = () => {
 		setFilterState(prev => ({ ...prev, keyword: searchKeyword }));
 	};
-
-	useEffect(() => {
-		refetch();
-	}, [filterState]);
 
 	useEffect(() => {
 		const outsideClick = (event: MouseEvent) => {
@@ -247,7 +244,7 @@ const RecruitPage = () => {
 					<article className='container-pagination'>
 						{data && (
 							<Pagination
-								postsNum={data.pageInfo.totalContents + 100}
+								postsNum={data.pageInfo.totalContents}
 								postsPerPage={data.pageInfo.size}
 								currentPage={currentPage}
 								setCurrentPage={setCurrentPage}

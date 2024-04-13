@@ -142,5 +142,7 @@ export const recruitFilterState = atom<RecruitFilter>({
 		role: [],
 		tag: [],
 		keyword: '',
+		course: null,
+		professor: null,
 	},
 });
