@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface ApplicantManage {
 	$isChecked: boolean;
+	$isOpenCurrent: boolean;
 }
 
 const ApplierManagePage = styled.section<ApplicantManage>`
@@ -203,7 +204,7 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 	.current-recruit {
 		width: 34rem;
 		height: 41.1rem;
-		overflow-y: scroll;
+		overflow-y: hidden;
 		margin-top: 9rem;
 		border-radius: 0.8rem;
 		border: 1px solid #e3e3e3;
@@ -221,6 +222,11 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 
 		.container-roles {
 		}
+	}
+
+	.closed {
+		height: 5.25rem;
+		box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 	}
 
 	.btn-floating {

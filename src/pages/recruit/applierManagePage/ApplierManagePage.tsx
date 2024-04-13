@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import S from './ApplierManagePage.styled';
-import { ArrowTop, DropdownArrow, FloatingBackground, LinkIcon } from '../../../assets';
+import {
+	ArrowTop,
+	DropdownArrow,
+	DropdownArrowUp,
+	FloatingBackground,
+	LinkIcon,
+} from '../../../assets';
 import { ApplicantCard, ApplyRole, Dropdown } from '../../../components';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getApplicantsList } from '../../../service';
@@ -24,10 +30,12 @@ const ApplierManagePage = () => {
 	const scrollToTop = useScrollToTop();
 
 	const [page, setPage] = useState<number>(1);
-	const [isOpenChat, setIsOpenChat] = useState(false);
+	const [isOpenChat, setIsOpenChat] = useState<boolean>(false);
+	const [isOpenCurrent, setIsOpenCurrent] = useState<boolean>(true);
 	const [linkUrl, setLinkUrl] = useState<string>('');
 	const [checkList, setCheckList] = useRecoilState(applicantHolder);
 	const [applicantsArr, setApplicantsArr] = useState<ApplicantInfo[]>([]);
+
 	const storedNum = sessionStorage.getItem('pageNum');
 	const pageNum = Number(storedNum !== null && storedNum);
 
@@ -120,7 +128,7 @@ const ApplierManagePage = () => {
 	}, [recruitManageInfo?.link]);
 
 	return (
-		<S.ApplierManagePage $isChecked={checkList.length !== 0}>
+		<S.ApplierManagePage $isChecked={checkList.length !== 0} $isOpenCurrent={isOpenCurrent}>
 			<article className='wrapper-applicants'>
 				<section className='container-title'>
 					<h1>{recruitManageInfo?.title}</h1>
@@ -191,23 +199,25 @@ const ApplierManagePage = () => {
 					<section ref={targetRef}></section>
 				</section>
 			</article>
-			<article className='current-recruit'>
-				<section className='container-title'>
+			<article className={`current-recruit ${!isOpenCurrent && 'closed'}`}>
+				<section className='container-title' onClick={() => setIsOpenCurrent(prev => !prev)}>
 					<span className='body1-semibold'>모집 현황</span>
-					<img src={DropdownArrow} />
+					<img src={isOpenCurrent ? DropdownArrowUp : DropdownArrow} />
 				</section>
-				<section className='container-roles'>
-					{recruitManageInfo &&
-						manageSuccess &&
-						recruitManageInfo.recruitmentStatus.map((elem, index) => (
-							<ApplyRole
-								key={index}
-								approvedMemberCount={elem.approvedMemberCount}
-								recruitMemberCount={elem.recruitMemberCount}
-								roleName={elem.roleName}
-							/>
-						))}
-				</section>
+				{isOpenCurrent && (
+					<section className='container-roles'>
+						{recruitManageInfo &&
+							manageSuccess &&
+							recruitManageInfo.recruitmentStatus.map((elem, index) => (
+								<ApplyRole
+									key={index}
+									approvedMemberCount={elem.approvedMemberCount}
+									recruitMemberCount={elem.recruitMemberCount}
+									roleName={elem.roleName}
+								/>
+							))}
+					</section>
+				)}
 			</article>
 			<article className='btn-floating' onClick={scrollToTop}>
 				<section className='background'>

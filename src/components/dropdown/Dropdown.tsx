@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import S from './Dropdown.styled';
-import DropdownArrow from './DropdownArrow';
 import { useDebounce } from '../../hooks';
 import { useQuery } from '@tanstack/react-query';
 import { getCourseKeyword, getProfessorKeyword } from '../../service';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { applicantFilter, recruitFilterState } from '../../atom';
 import { ManageRole } from '../../types';
+import { DropdownArrowUp, DropdownArrow } from '../../assets';
 
 interface Dropdown {
 	data?: string[];
@@ -62,7 +62,11 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 	});
 
 	const onClickDropdown = () => {
-		setShowDropdown(true);
+		if (scope) {
+			setShowDropdown(true);
+		} else {
+			setShowDropdown(prev => !prev);
+		}
 	};
 
 	const onClickList = (event: React.MouseEvent<HTMLElement>, id?: number) => {
@@ -141,11 +145,9 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 	return (
 		<S.Dropdown $showDropdown={showDropdown} ref={dropdownRef} scope={scope} $isCheck={isChecked}>
 			<article className='wrapper' onClick={onClickDropdown}>
-				<div className='temp'>
+				<div className='dropdown-box'>
 					<div className='value'>{currentValue}</div>
-					<div className='icon'>
-						<DropdownArrow />
-					</div>
+					<img src={showDropdown ? DropdownArrowUp : DropdownArrow} />
 				</div>
 				{showDropdown && (
 					<>
