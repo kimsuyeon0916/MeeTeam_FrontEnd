@@ -1,36 +1,61 @@
 import React, { useState } from 'react';
 import S from './ReplyComment.styled';
-import { Icon, KebabMenu } from '../..';
-import { Comment } from '../../../types';
+import { CommentDeleteModal, KebabMenu, ProfileImage } from '../..';
+import { Comment as CommentType } from '../../../types';
+import { Reply } from '../../../assets';
+import { useParams } from 'react-router-dom';
+import { useCommentDelete, useCommentEdit } from '../../../hooks';
+import { useQueryClient } from '@tanstack/react-query';
+import { useRecoilState } from 'recoil';
+import { commentDeleteModalState, replyDeleteModalState } from '../../../atom';
 
-const ReplyComment = ({ id, username, content, deleteComment }: Comment) => {
-	const isLogin = true; // 임시 코드
+const ReplyComment = ({
+	id,
+	userId,
+	nickname,
+	content,
+	isWriter,
+	createAt,
+	profileImg,
+	groupOrder,
+	replyComment,
+}: CommentType) => {
+	const { id: recruitId } = useParams();
+	const pageNum = Number(recruitId);
 	const [value, setValue] = useState<string>(content);
 	const [showKebab, setShowKebab] = useState<boolean>(true);
 	const [isEdit, setIsEdit] = useState<boolean>(false);
-	const isValid = isLogin && username === 'yeom' && showKebab;
+	const deleteComment = useCommentDelete();
+	const [isDelete, setIsDelete] = useRecoilState(replyDeleteModalState);
+	const queryClient = useQueryClient();
+	const editComment = useCommentEdit();
 	const optionLists = [
+		{
+			title: '답글',
+			optionClickHandler: () => {
+				if (replyComment) {
+					replyComment(nickname);
+				}
+			},
+		},
 		{
 			title: '수정',
 			optionClickHandler: () => {
 				setIsEdit(true);
-				setShowKebab(false);
 			},
 		},
 		{
 			title: '삭제',
 			optionClickHandler: () => {
-				setShowKebab(false);
-				if (deleteComment) {
-					deleteComment(id);
-				}
+				setIsDelete(true);
 			},
 		},
 	];
 
-	const editComment = () => {
+	const editingComment = () => {
 		setIsEdit(false);
 		setShowKebab(true);
+		onClickSave();
 	};
 
 	const onChangeEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -41,39 +66,76 @@ const ReplyComment = ({ id, username, content, deleteComment }: Comment) => {
 		const target = event.currentTarget;
 		if (target.value.length !== 0 && event.key === 'Enter') {
 			event.preventDefault();
-			editComment();
+			editingComment();
 		}
 	};
+
+	const onClickSave = () => {
+		const comment = {
+			commentId: id,
+			content: value,
+		};
+		editComment.mutate(
+			{ pageNum, comment },
+			{
+				onSuccess: () => {
+					queryClient.invalidateQueries({ queryKey: ['detailedPage'] });
+					setIsEdit(false);
+				},
+			}
+		);
+	};
+
 	return (
 		<S.ReplyComment>
 			<section className='wrapper'>
-				<section className='container'>
-					<div className='comment-icon'>
-						<Icon />
-					</div>
-					{!isEdit ? (
-						<div className='comment-info'>
-							<span>{username}</span>
+				<img className='reply-icon' src={Reply} />
+				<article className='container'>
+					<section className='comment-icon'>
+						<section>
+							<ProfileImage url={profileImg} nickname={nickname} size='2.31rem' />
+						</section>
+						<span className='nickname'>{nickname}</span>
+						{!isEdit && <span className='createAt'>{createAt.slice(0, -9)}</span>}
+					</section>
+					<section className='comment-info'>
+						{!isEdit ? (
 							<span>{value}</span>
-						</div>
-					) : (
-						<>
-							<input
-								type='text'
-								className='input-edit'
-								placeholder='댓글 입력'
-								value={value}
-								onChange={onChangeEdit}
-								onKeyPress={onKeyPressEdit}
-							/>
-							<button type='button' onClick={editComment} className='reply-btn'>
-								수정
-							</button>
-						</>
-					)}
-				</section>
-				{isValid && <KebabMenu options={optionLists} />}
+						) : (
+							<section className='edit-container'>
+								<input
+									className='edit-input'
+									value={value}
+									onChange={onChangeEdit}
+									onKeyUp={onKeyPressEdit}
+								/>
+								<section className='btn-container'>
+									<button
+										type='button'
+										className='txt-small cancel'
+										onClick={() => {
+											setIsEdit(false);
+											setShowKebab(true);
+										}}
+									>
+										취소
+									</button>
+									<button type='button' className='txt-small save' onClick={onClickSave}>
+										저장
+									</button>
+								</section>
+							</section>
+						)}
+					</section>
+				</article>
+				{isWriter && showKebab && <KebabMenu options={optionLists} />}
 			</section>
+			<hr />
+			{isDelete && (
+				<section className='modal-background'>
+					<CommentDeleteModal pageNum={pageNum} commentId={id} type='reply' />
+				</section>
+			)}
 		</S.ReplyComment>
 	);
 };

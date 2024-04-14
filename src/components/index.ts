@@ -54,7 +54,6 @@ import {
 	SMALL_TOP_ARROW_BUTTON,
 } from './meeteam/main/recruitment/applicantView/ApplicantViewData';
 import type { Applicant } from './meeteam/main/recruitment/applicantView/ApplicantViewData';
-import ApplicantCard from './meeteam/main/recruitment/applicantView/applicantCard/ApplicantCard';
 import RecruitmentDeadLine from './meeteam/main/recruitment/RecruitmentDeadLine';
 import Toggle from './toggle/Toggle';
 import GoBack from './goBack/GoBack';
@@ -74,32 +73,42 @@ import PortpolioCard from './meeteam/card/PortpolioCard';
 import Tag from './meeteam/tag/Tag';
 import ManageRecruitCard from './recruit/ManageRecruitCard';
 import Status from './meeteam/status/Status';
-import Filter from './meeteam/filter/Filter';
 import Dropdown from './dropdown/Dropdown';
 import DateSelect from './dateSelect/DateSelect';
 import DeadlineSelect from './dateSelect/DeadlineSelect';
 import Icon from './meeteam/icon/Icon';
-import ApplyInfomation from '../pages/recruit/RecruitDetailPage/steps/ApplyInfomation';
-import ApplyInput from '../pages/recruit/RecruitDetailPage/steps/ApplyInput';
-import ApplySubmit from '../pages/recruit/RecruitDetailPage/steps/ApplySubmit';
+import ApplyModal from './recruit/recruitDetail/modal/ApplyModal';
+import ConfirmModal from './recruit/recruitDetail/modal/ConfirmModal';
+import FinalModal from './recruit/recruitDetail/modal/FinalModal';
 import Content from './meeteam/Content';
 import RecruitCard from './meeteam/card/RecruitCard';
 import Pagination from './pagination/Pagination';
 import NaverLogin from './naver/NaverLogin';
-import Create from './header/Create';
-import TitleAndIntro from './title/titleAndIntro/TitleAndIntro';
-import InputContainer from './inputDropdown/inputContainer/InputContainer';
-import RecruitOptions from './optionMenu/recruitOptions/RecruitOptions';
 import Comment from './comment/comment/Comment';
 import CommentInput from './comment/commentInput/CommentInput';
 import ReplyInput from './comment/replyInput/ReplyInput';
 import ReplyComment from './comment/comment/ReplyComment';
 import SkillTag from './skills/SkillTag';
 import PortfolioCard from './portfolio/card/PortfolioCard';
-import InputCourse from './inputDropdown/inputCourse/InputCourse';
-import InputProfessor from './inputDropdown/inputCourse/InputProfessor';
 import InputRole from './inputDropdown/inputRole/InputRole';
 import InputRoleForm from './inputDropdown/inputRole/InputRoleForm';
+import Progress from './progressBar/Progress';
+import TitleInfo from './recruit/recruitDetail/titleInfo/TitleInfo';
+import RecruitInfo from './recruit/recruitDetail/recruitInfo/RecruitInfo';
+import RecruitDescription from './recruit/recruitDetail/recruitDescription/RecruitDescription';
+import RecruitRoles from './recruit/recruitDetail/recruitRoles/RecruitRoles';
+import LinkToList from './recruit/recruitDetail/linktoList/LinkToList';
+import RecruitTag from './recruit/recruitDetail/recruitTag/RecruitTag';
+import Description from './recruit/create/Description';
+import BasicInformation from './recruit/create/basicInformation/BasicInformation';
+import DetailedInformation from './recruit/create/detailedInformation/DetailedInformation';
+import RecruitRoleForm from './recruit/create/recruitRoles/RecruitRolesForm';
+import ControlButtons from './recruit/create/ControlButtons';
+import ContainerScope from './recruit/create/basicInformation/containers/ContainerScope';
+import ContainerCategory from './recruit/create/basicInformation/containers/ContainerCategory';
+import ContainerProcedure from './recruit/create/basicInformation/containers/ContainerProcedure';
+import WrapperScopeCategory from './recruit/create/basicInformation/wrappers/WrapperScopeCategory';
+import ContainerCourse from './recruit/create/basicInformation/containers/ContainerCourse';
 import OptionList from './optionList/OptionList';
 import Input from './input/Input';
 import ComboBox from './comboBox/ComboBox';
@@ -113,6 +122,17 @@ import MuiDatepickerController from './muiDatepicker/MuiDatepickerController';
 import DefaultBtn from './button/DefaultBtn';
 import PrimaryBtn from './button/PrimaryBtn';
 import AddFormBtn from './button/AddFormBtn';
+import WriterFooter from './recruit/recruitDetail/footer/WriterFooter';
+import ApplierFooter from './recruit/recruitDetail/footer/ApplierFooter';
+import ClosedFooter from './recruit/recruitDetail/footer/ClosedFooter';
+import DetailedInput from './recruit/recruitBoard/detailedFilter/DetailedInput';
+import RecruitTags from './recruit/create/RecruitTags';
+import ApplyCancel from './recruit/recruitDetail/modal/applyCancel/ApplyCancel';
+import ApplyClose from './recruit/recruitDetail/modal/applyClose/ApplyClose';
+import CommentDeleteModal from './recruit/recruitDetail/modal/commentDelete/CommentDeleteModal';
+import WaitModal from './recruit/recruitDetail/modal/wait/WaitModal';
+import ApplicantCard from './recruit/applicants/ApplicantCard';
+import ApplyRole from './recruit/role/ApplyRole';
 
 export {
 	Header,
@@ -158,7 +178,6 @@ export {
 	SMALL_BOTTOM_ARROW_ICON,
 	SMALL_TOP_ARROW_BUTTON,
 	Applicant,
-	ApplicantCard,
 	RecruitmentDeadLine,
 	Toggle,
 	GoBack,
@@ -176,16 +195,12 @@ export {
 	Tag,
 	ManageRecruitCard,
 	Status,
-	Filter,
 	Dropdown,
 	DeadlineSelect,
 	Icon,
 	MemberInviteModal,
 	MemberTest,
 	NaverLogin,
-	ApplyInfomation,
-	ApplyInput,
-	ApplySubmit,
 	Content,
 	PortpolioCard,
 	informationList,
@@ -193,21 +208,32 @@ export {
 	CONTENT,
 	RecruitCard,
 	Pagination,
-	Create,
-	TitleAndIntro,
 	DateSelect,
-	InputContainer,
-	RecruitOptions,
 	CommentInput,
 	ReplyInput,
 	Comment,
 	ReplyComment,
 	SkillTag,
 	PortfolioCard,
-	InputCourse,
-	InputProfessor,
 	InputRole,
 	InputRoleForm,
+	Progress,
+	TitleInfo,
+	RecruitInfo,
+	RecruitDescription,
+	RecruitRoles,
+	LinkToList,
+	RecruitTag,
+	Description,
+	BasicInformation,
+	DetailedInformation,
+	RecruitRoleForm,
+	ControlButtons,
+	ContainerScope,
+	ContainerCategory,
+	ContainerProcedure,
+	WrapperScopeCategory,
+	ContainerCourse,
 	OptionList,
 	Input,
 	ComboBox,
@@ -221,4 +247,18 @@ export {
 	DefaultBtn,
 	PrimaryBtn,
 	AddFormBtn,
+	WriterFooter,
+	ApplierFooter,
+	ApplyModal,
+	ConfirmModal,
+	FinalModal,
+	DetailedInput,
+	ClosedFooter,
+	RecruitTags,
+	ApplyCancel,
+	ApplyClose,
+	CommentDeleteModal,
+	WaitModal,
+	ApplicantCard,
+	ApplyRole,
 };

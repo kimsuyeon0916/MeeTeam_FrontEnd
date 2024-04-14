@@ -7,10 +7,12 @@ import SearchIcon from './SearchIcon.svg';
 import LeftBtn from './LeftBtn.svg';
 import RightBtn from './RightBtn.svg';
 import MeeteamLogo from './MeeteamLogo.svg';
-import { CREATE_ICON } from './IconData';
 import Logo from './Logo.svg';
 import CancelBtn from './CancelBtn.svg';
 import XBtn from './XBtn.svg';
+import Reply from './Reply.svg';
+import LogoName from './LogoName.svg';
+import { DATE_ICON } from './DateIcon';
 import DefaultProfileImage from './DefaultProfileImage.svg';
 import DefaultPortfolioImage from './DefaultPortfolioImage.svg';
 import Search from './Search.svg';
@@ -27,9 +29,23 @@ import BlackCalendar from './BlackCalendar.svg';
 import Close from './Close.svg';
 import AddProfile from './AddProfile.svg';
 import BluePlus from './BluePlus.svg';
+import FilledBookmark from './FilledBookmark.svg';
+import UnfilledBookmark from './UnfilledBookmark.svg';
+import Edit from './Edit.svg';
+import TrashCan from './TrashCan.svg';
+import Clear from './Clear.svg';
+import BookmarkRight from './BookmarkRight.svg';
+import LinkIcon from './LinkIcon.svg';
+import User from './User.svg';
+import School from './School.svg';
+import DropdownArrowUp from './DropdownArrowUp.svg';
+import FloatingBackground from './FloatingBackground.svg';
+import ArrowTop from './ArrowTop.svg';
 
 export {
 	Exit,
+	Edit,
+	TrashCan,
 	Alarm,
 	Plus,
 	Upload,
@@ -38,10 +54,11 @@ export {
 	LeftBtn,
 	RightBtn,
 	MeeteamLogo,
-	CREATE_ICON,
 	Logo,
 	CancelBtn,
 	XBtn,
+	Reply,
+	LogoName,
 	DefaultProfileImage,
 	DefaultPortfolioImage,
 	Search,
@@ -58,4 +75,15 @@ export {
 	Close,
 	AddProfile,
 	BluePlus,
+	FilledBookmark,
+	UnfilledBookmark,
+	DATE_ICON,
+	Clear,
+	BookmarkRight,
+	LinkIcon,
+	User,
+	School,
+	DropdownArrowUp,
+	FloatingBackground,
+	ArrowTop,
 };

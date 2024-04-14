@@ -1,10 +1,11 @@
 import MainPage from './MainPage';
-import RecruitPage from './recruit/RecruitPage/RecruitPage';
 import GalaryPage from './GalaryPage';
 import RecruitCreatePage from './create/recruitCreatePage/RecruitCreatePage';
 import OutputCreatePage from './create/outputCreatePage/OutputCreatePage';
 import SignInPage from './account/signIn/SignInPage';
 import SignUpPage from './account/signUp/SignUpPage';
+import RecruitPage from './recruit/recruitPage/RecruitPage';
+import RecruitDetailPage from './recruit/recruitDetailPage/RecruitDetailPage';
 import SchoolCertificationPage from './account/schoolCertification/SchoolCertificationPage';
 import { SCHOOL_CERTIFICATION_DATA } from './account/schoolCertification/SchoolCertificationData';
 import { INPUT_VALIDATION } from '../../validation';
@@ -13,7 +14,6 @@ import NicknameSettingPage from './account/signUp/nicknameSetting/NicknameSettin
 import type { Account, User } from './account/signUp/SignUpData';
 import PassWordFindingPage from './account/passWordFindingPage/PassWordFindingPage';
 import { PASSWORD_DATA } from './account/passWordFindingPage/PassWordData';
-import RecruitDetailPage from './recruit/RecruitDetailPage/RecruitDetailPage';
 import MyActivityManagePage from './activity/MyActivityManagePage';
 import MyActivityInvited from './activity/MyActivityInvited';
 import MyActivityWrapper from './activity/MyActivityWrapper';
@@ -24,6 +24,7 @@ import ProfileDetailsPage from './profile/details/ProfileDetailsPage';
 import { userData } from './profile/userData';
 import ProfileEditPage from './profile/edit/ProfileEditPage';
 import PROFILE_EDIT_DATA from './profile/edit/ProfileEditData';
+import ApplierManagePage from './recruit/applierManagePage/ApplierManagePage';
 
 export {
 	MainPage,
@@ -53,4 +54,5 @@ export {
 	userData,
 	ProfileEditPage,
 	PROFILE_EDIT_DATA,
+	ApplierManagePage,
 };

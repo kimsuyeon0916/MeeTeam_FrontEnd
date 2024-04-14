@@ -24,16 +24,16 @@ const KebabMenu = ({ options }: { options: Option[] }) => {
 
 		document.addEventListener('click', outSideClickHandler);
 		return () => document.removeEventListener('click', outSideClickHandler);
-	}, [showModal]);
+	}, [showModal, modalRef.current]);
 
-	const optionClickHandler = () => {
+	const onClickMenu = () => {
 		setShowModal(prev => !prev);
 	};
 
 	return (
 		<S.KebabMenuLayout ref={modalRef}>
-			<KebabMenuIcon onClick={optionClickHandler} />
-			{showModal && <OptionMenu options={options} />}
+			<KebabMenuIcon onClick={onClickMenu} />
+			{showModal && <OptionMenu options={options} modalRef={modalRef} onClickMenu={onClickMenu} />}
 		</S.KebabMenuLayout>
 	);
 };

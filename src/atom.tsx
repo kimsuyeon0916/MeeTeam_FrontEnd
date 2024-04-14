@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { SessionStorageEffect, simpleDate } from './utils';
-import { User, InputState } from './types';
+import { User, InputState, ApplyRole, RecruitFilter, DetailedFilter } from './types';
 import { LocalStorageEffect } from './utils';
 import { Account } from './pages';
 
@@ -46,29 +46,55 @@ export const deadlineState = atom({
 	default: new Date(),
 });
 
+export const applyModalState = atom({
+	key: 'applyModalState',
+	default: false,
+});
+
+export const applyCancelModalState = atom({
+	key: 'applyCancelModalState',
+	default: false,
+});
+
+export const applyCloseModalState = atom({
+	key: 'applyCloseModalState',
+	default: false,
+});
+
+export const commentDeleteModalState = atom({
+	key: 'commentDeleteModalState',
+	default: false,
+});
+
+export const replyDeleteModalState = atom({
+	key: 'replyDeleteModalState',
+	default: false,
+});
+
+export const waitModalState = atom({
+	key: 'waitModalState',
+	default: false,
+});
+
 export const recruitInputState = atom<InputState>({
 	key: 'recruitInputState',
 	default: {
 		scope: '',
 		category: '',
-		fieldId: 1, // 마지막에 id로 반환 (1로 고정해도 괜찮음)
+		fieldId: 1,
 		deadline: simple,
-		period: [simple, simple],
-		courseTagDto: {
+		proceedType: '',
+		proceedingStart: simpleDate(new Date()),
+		proceedingEnd: simpleDate(new Date()),
+		courseTag: {
 			isCourse: false,
 			courseTagName: '',
-			courseTagProfessor: '',
+			courseProfessor: '',
 		},
-		recruitmentRoleDto: [
-			{
-				role: '', // id로 변경
-				count: 0,
-				skill: [], // id를 담는 배열로 변경
-			},
-		],
-		tag: [],
+		recruitmentRoles: [],
+		tags: [],
 		title: '',
-		contents: '',
+		content: '',
 	},
 });
 
@@ -79,6 +105,7 @@ export const validMessageState = atom({
 		category: '',
 		deadline: '',
 		endDate: '',
+		procedure: '',
 		courseTagDto: {
 			courseTagName: '',
 			courseTagProfessor: '',
@@ -96,10 +123,7 @@ export const validState = atom({
 		isCategory: false,
 		isDeadline: false,
 		isEndDate: false,
-		isCourseTagDto: {
-			courseTagName: false,
-			courseTagProfessor: false,
-		},
+		isProcedure: false,
 		isTag: false,
 		isTitle: false,
 	},
@@ -110,17 +134,53 @@ export const applyStepState = atom({
 	default: 0,
 });
 
-export const applyInfoState = atom({
-	key: 'applyInfoState',
+export const applyUserInfo = atom<ApplyRole>({
+	key: 'applyUserInfo',
 	default: {
-		role: '',
-		message: '',
+		name: '',
+		score: 0,
+		universityName: '',
+		departmentName: '',
+		email: '',
+		year: 0,
+		role: {
+			applyRoleId: 0,
+			name: '',
+		},
+		message: '' as string | undefined,
 	},
 });
 
-export const searchPageState = atom({
-	key: 'searchPageState',
-	default: false,
+export const detailedFilterState = atom<DetailedFilter>({
+	key: 'detailedFilterState',
+	default: {
+		skill: [],
+		role: [],
+		tag: [],
+	},
+});
+
+export const recruitFilterState = atom<RecruitFilter>({
+	key: 'recruitFilter',
+	default: {
+		scope: null,
+		category: null,
+		field: 1,
+		skill: [],
+		role: [],
+		tag: [],
+		keyword: '',
+	},
+});
+
+export const applicantHolder = atom({
+	key: 'applicantApproved',
+	default: [] as number[],
+});
+
+export const applicantFilter = atom({
+	key: 'applicantFilter',
+	default: null as number | null,
 });
 
 export const imageNameState = atom({

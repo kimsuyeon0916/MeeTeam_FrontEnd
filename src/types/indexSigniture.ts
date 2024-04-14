@@ -3,5 +3,9 @@ export interface JsxElementComponentProps {
 }
 
 export interface stringSignature {
+  	[key: string]: string;
+}
+
+export interface StringElementProps {
 	[key: string]: string;
 }

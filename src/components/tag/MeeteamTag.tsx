@@ -1,20 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react';
 import S from './MeeteamTag.styled';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { recruitInputState } from '../../atom';
+import { useDebounce } from '../../hooks';
+import { useQuery } from '@tanstack/react-query';
+import { getTagKeyword } from '../../service';
+import { Search, XBtn } from '../../assets';
+import { Keyword } from '../../types';
 
-interface IMeeteamTag {
+interface MeeteamTag {
 	tags?: string[];
 }
 
-const MeeteamTag = ({ tags }: IMeeteamTag) => {
-	const setInfos = useSetRecoilState(recruitInputState);
+const MeeteamTag = ({ tags }: MeeteamTag) => {
+	const [formData, setFormData] = useRecoilState(recruitInputState);
 	const [tagItem, setTagItem] = useState<string>('');
-	const [tagList, setTagList] = useState<string[]>([]);
+	const [tagList, setTagList] = useState<string[]>(formData.tags);
 	const [isTouched, setIsTouched] = useState<boolean>(false);
 	const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
-	const options = ['UI/UX', 'GUI', 'CX', 'BI', 'Figma', 'React', 'Spring', 'Node.js'];
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
+	const keywordTag = useDebounce(tagItem, 500);
+
+	const { data, isSuccess } = useQuery({
+		queryKey: ['keywordTag', keywordTag],
+		queryFn: () => getTagKeyword(keywordTag),
+	});
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		const target = event.currentTarget;
@@ -29,20 +39,23 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 
 	const submitTagItem = () => {
 		setTagList(prev => {
-			const updatedList = [...prev, tagItem];
-			setInfos(prev => ({ ...prev, tag: updatedList }));
-			return updatedList;
+			const trimmedTagItem = tagItem.trim();
+			if (!prev.includes(trimmedTagItem)) {
+				const updatedList = [...prev, trimmedTagItem];
+				setFormData(prev => ({ ...prev, tags: updatedList }));
+				return updatedList;
+			}
+			return prev;
 		});
 		setTagItem('');
-		setIsDropdownVisible(false);
+		setIsDropdownVisible(true);
 	};
 
-	const deleteTagItem = (event: any) => {
-		const deletedIndex = Number(event.target.id);
+	const deleteTagItem = (id: string) => {
 		setTagList(prev => {
-			const updatedList = [...prev];
-			updatedList.splice(deletedIndex, 1);
-			setInfos(prev => ({ ...prev, tag: updatedList }));
+			const updatedList = prev.filter(elem => elem !== id);
+
+			setFormData(prev => ({ ...prev, tags: updatedList }));
 			return updatedList;
 		});
 	};
@@ -53,14 +66,14 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 	};
 
 	const onClickTagOptions = (selectedTag: string) => {
-		if (tagList.length < 20) {
-			//setTagList([...tagList, selectedTag]);
+		if (!tagList.includes(selectedTag) && tagList.length < 6) {
 			setTagList(prev => {
 				const updatedList = [...prev, selectedTag];
-				setInfos(prev => ({ ...prev, tag: updatedList }));
+				setFormData(prev => ({ ...prev, tags: updatedList }));
 				return updatedList;
 			});
 			setIsDropdownVisible(false);
+			setTagItem('');
 		}
 	};
 
@@ -86,44 +99,38 @@ const MeeteamTag = ({ tags }: IMeeteamTag) => {
 		<S.MeeteamTag ref={dropdownRef}>
 			{!tags ? (
 				<div className='tag__box' onClick={onClickInput}>
-					{tagList.map((tagItem, index) => {
+					{tagList.map((tagItem, _) => {
 						return (
-							<div className='tag__item' key={index}>
+							<div className='tag__item' key={tagItem}>
 								<span>{tagItem}</span>
-								<button type='button' onClick={deleteTagItem} id={'' + index}>
-									X
+								<button type='button' onClick={() => deleteTagItem(tagItem)}>
+									<img src={XBtn} />
 								</button>
 							</div>
 						);
 					})}
 					<input
 						type='text'
-						placeholder={
-							isTouched
-								? isDropdownVisible
-									? tagList.length < 20
-										? '태그를 입력하고 엔터를 누르세요.'
-										: '태그는 20개까지 선택할 수 있습니다.'
-									: ''
-								: '태그를 입력하고 엔터를 누르세요.'
-						}
+						placeholder={isTouched ? '' : '태그를 선택하거나 입력해주세요.'}
 						tabIndex={2}
 						disabled={tagList.length < 20 ? false : true}
 						onChange={event => setTagItem(event.target.value)}
 						value={tagItem}
 						onKeyPress={onKeyPress}
 					/>
+					{tagList.length === 0 && <img src={Search} className='icon-search' />}
 					{isDropdownVisible && (
 						<div className='tag-dropdown'>
-							{options.map((tag, index) => (
-								<div
-									className='tag__item option'
-									key={index}
-									onClick={() => onClickTagOptions(tag)}
-								>
-									{tag}
-								</div>
-							))}
+							{isSuccess &&
+								data?.map((tag: Keyword) => (
+									<div
+										className='tag__item option'
+										key={tag.id}
+										onClick={() => onClickTagOptions(tag.name)}
+									>
+										{tag.name}
+									</div>
+								))}
 						</div>
 					)}
 				</div>

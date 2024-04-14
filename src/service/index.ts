@@ -11,6 +11,18 @@ import {
 import { readProfile, updateProfile } from './user/Profile';
 import { readSkillList, readRoleList } from './search/search';
 import { readPortfolioList } from './portfolio/portfolio';
+import { readProfile } from './user/Profile';
+import { getPostingData, getApplyData, applyRole, closeRecruitPost } from './recruit/detail';
+import {
+	postingRecruit,
+	getRoleKeyword,
+	getSkillKeyword,
+	getCourseKeyword,
+	getProfessorKeyword,
+	getTagKeyword,
+	editPostingRecruit,
+} from './recruit/posting';
+import { getApplicantsList } from './recruit/applicant';
 
 export {
 	EndPoint,
@@ -27,4 +39,16 @@ export {
 	readSkillList,
 	readRoleList,
 	readPortfolioList,
+	getPostingData,
+	getApplyData,
+	applyRole,
+	postingRecruit,
+	getRoleKeyword,
+	getSkillKeyword,
+	getCourseKeyword,
+	getProfessorKeyword,
+	getTagKeyword,
+	closeRecruitPost,
+	editPostingRecruit,
+	getApplicantsList,
 };
