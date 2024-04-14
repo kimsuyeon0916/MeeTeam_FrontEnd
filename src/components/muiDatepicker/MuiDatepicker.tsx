@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import S from './MuiDatepicker.styled';
 import { GrayCalendar } from '../../assets';
@@ -16,10 +16,14 @@ const CalendarIcon = () => {
 };
 
 const MuiDatepicker = ({ handleChange, defaultValue, value, inputRef }: MuiDatepicker) => {
+	const [datePickerOpen, setDatePickerOpen] = useState<boolean>(false);
+
 	return (
 		<DatePicker
 			defaultValue={defaultValue}
 			value={value}
+			open={datePickerOpen}
+			onClose={() => setDatePickerOpen(false)}
 			slots={{
 				popper: S.StyledPopper,
 				textField: S.StyledTextField,
@@ -28,7 +32,13 @@ const MuiDatepicker = ({ handleChange, defaultValue, value, inputRef }: MuiDatep
 			}}
 			slotProps={{
 				textField: {
+					inputProps: { readOnly: true },
 					placeholder: format(new Date(), 'yy년 MM월 dd일'),
+					onClick: () => {
+						if (!datePickerOpen) {
+							setDatePickerOpen(true);
+						}
+					},
 				},
 			}}
 			views={['year', 'month', 'day']}
