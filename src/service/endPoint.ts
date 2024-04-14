@@ -15,6 +15,14 @@ export const EndPoint = {
 	/* profile */
 	PROFILE: {
 		read: (userId: string) => `/user/profile/${userId}`,
+		update: '/user/profile',
+		readPortfolioList: '/user/portfolios',
+	},
+
+	/* search */
+	SEARCH: {
+		role: '/role/search',
+		skill: '/skill/search',
 	},
 
 	/* recruit */

@@ -15,6 +15,7 @@ import {
 	SignUpPage,
 	PassWordFindingPage,
 	ProfileDetailsPage,
+	ProfileEditPage,
 	ApplierManagePage,
 } from './pages/index.ts';
 import './globalStyle.css';
@@ -73,8 +74,12 @@ const router = createBrowserRouter([
 				element: <OutputCreatePage />,
 			},
 			{
-				path: 'profile/:nickname?',
+				path: 'profile/:userId?',
 				element: <ProfileDetailsPage />,
+			},
+			{
+				path: 'profile/edit',
+				element: <ProfileEditPage />,
 			},
 		],
 	},

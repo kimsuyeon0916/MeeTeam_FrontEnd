@@ -28,7 +28,7 @@ const MemberTest = ({ id }: Member) => {
 		<div className='member' id={id}>
 			<S.MemberCardLayout>
 				<div className='member-card__row'>
-					<ProfileImage nickname={memberTemp.nickname} size='5.5125rem' url={memberTemp.imageUrl} />
+					<ProfileImage userId={memberTemp.nickname} size='5.5125rem' url={memberTemp.imageUrl} />
 					<div className='member-card__column'>
 						<div className='member-card__title'>{memberTemp.nickname}</div>
 						<div className='member-card__row'>

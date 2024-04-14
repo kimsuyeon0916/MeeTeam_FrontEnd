@@ -19,7 +19,7 @@ const MemberContact = ({ member }: { member: MeeTeamMember }) => {
 			</div>
 			<div className='member-contact__row'>
 				<div className='member-contact__profile-column'>
-					<ProfileImage nickname={member.nickname} size='7.0873rem' url={member.imageUrl} />
+					<ProfileImage userId={member.nickname} size='7.0873rem' url={member.imageUrl} />
 					<div className='member-contact__title'>{member.nickname}</div>
 					<div className='member-contact__task'>{member.task}</div>
 				</div>

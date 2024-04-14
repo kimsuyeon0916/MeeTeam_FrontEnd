@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const PortfolioCardLayout = styled.article`
 	display: flex;
 	flex-direction: column;
+	row-gap: 0.8rem;
 
 	cursor: pointer;
 `;
@@ -13,7 +14,7 @@ const PortfolioCardBox = styled.div<{ $url?: string }>`
 	border-radius: 0.75rem;
 	overflow: hidden;
 
-	aspect-ratio: 183 / 114;
+	aspect-ratio: 183 / 103; // 포트폴리오 비율
 `;
 
 const PortfolioCardImage = styled.img`
@@ -48,20 +49,46 @@ const PortfolioTagRow = styled.div`
 	column-gap: 0.8rem;
 `;
 
-const PortfolioCardTag = styled.span`
+const PortfolioCardTag = styled.span<{ $color: string }>`
 	align-items: center;
 
 	display: flex;
-	padding: 0.6rem 0.8rem;
+	padding: 0.4rem 0.8rem;
 	border-radius: 0.4rem;
 
-	background: #eaf7ff;
-	color: #000;
+	background: ${props => props.$color};
+	color: var(--Text-textColor1, var(--text-color, #151515));
 
-	font-size: 1.4rem;
+	/* Text/t2 */
+	font-family: Pretendard;
+	font-size: 1.2rem;
+	font-style: normal;
 	font-weight: 500;
-	line-height: 1.4rem;
-	letter-spacing: 0.02rem;
+	line-height: 1.4rem; /* 116.667% */
+	letter-spacing: 0.0024rem;
+`;
+
+const PortfolioCardButton = styled.button<{ $checked?: boolean }>`
+	position: absolute;
+	bottom: 1rem;
+	right: 1rem;
+
+	box-sizing: border-box;
+	display: flex;
+	width: 2.8rem;
+	height: 2.8rem;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10rem;
+	${props => !props.$checked && 'border: 1px solid #fff'};
+	background: ${props =>
+		props.$checked ? 'var(--main-color, #5877FC)' : 'rgba(255, 255, 255, 0.3)'};
+	color: var(--ButtonColors-Primary-outline-default, #fff);
+
+	font-size: 1.6rem;
+	font-weight: 600;
+	line-height: 2.4rem;
+	letter-spacing: 0.0032rem;
 `;
 
 const S = {
@@ -71,6 +98,7 @@ const S = {
 	PortfolioCardTitle,
 	PortfolioTagRow,
 	PortfolioCardTag,
+	PortfolioCardButton,
 };
 
 export default S;

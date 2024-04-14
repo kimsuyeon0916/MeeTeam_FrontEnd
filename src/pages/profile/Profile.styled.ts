@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-const ProfileLayout = styled.div`
+interface ProfileBoxStyle {
+	$gap?: string;
+	$width?: string;
+}
+
+const ProfileLayout = styled.form`
 	display: flex;
 	flex-direction: column;
 	margin: 0 auto;
@@ -79,16 +84,15 @@ const ProfileHeader = styled.header`
 	flex-wrap: wrap;
 	column-gap: 5.6rem;
 
-	row-gap: 2rem; // 반응형 위해 추가
+	row-gap: 2.4rem; // 반응형 위해 추가
 
 	margin-top: 7.4rem;
 	margin-bottom: 9.6rem;
 
-	align-items: center;
-
 	.profile-header__row {
 		display: flex;
 		column-gap: 2rem;
+		margin-top: 2rem;
 		margin-bottom: 1.62rem;
 
 		align-items: end;
@@ -113,18 +117,20 @@ const ProfileArticle = styled.article`
 	}
 `;
 
-const ProfileColumn = styled.div<{ $gap?: string }>`
+const ProfileColumn = styled.div<ProfileBoxStyle>`
 	flex: 1;
-
 	display: flex;
 	flex-direction: column;
 	row-gap: ${props => props.$gap};
+	width: ${props => props.$width};
 `;
 
-const ProfileRow = styled.div<{ $gap?: string }>`
+const ProfileRow = styled.div<ProfileBoxStyle>`
+	flex: 1;
 	display: flex;
 	flex-direction: row;
 	column-gap: ${props => props.$gap};
+	width: ${props => props.$width};
 
 	/* 반응형 대비 */
 	flex-wrap: wrap;
@@ -133,10 +139,42 @@ const ProfileRow = styled.div<{ $gap?: string }>`
 
 const ProfileGrid = styled.div`
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(18.3rem, 1fr));
-	grid-auto-rows: minmax(11.4rem, auto);
+	grid-template-columns: repeat(auto-fill, minmax(18.3rem, 1fr));
+	grid-auto-rows: minmax(10.3rem, auto);
 	row-gap: 2.4rem;
 	column-gap: 2.4rem;
+
+	max-height: 52.5rem; // 무한 스크롤 영역
+	/* 스크롤바 숨기기 */
+	overflow-y: auto;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+	&::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera*/
+	}
+`;
+
+const ProfileDescription = styled.blockquote`
+	display: flex;
+	margin-bottom: 2.4rem;
+	padding: 1.6rem 2rem;
+	align-items: center;
+	background: var(--Purplescale-100, #f3f5ff);
+	color: #747b7f;
+
+	font-size: 1.4rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 2.1rem
+	letter-spacing: 0.02rem;
+`;
+
+const ProfileButtonBox = styled.div`
+	display: flex;
+	flex-direction: row;
+	column-gap: 1.6rem;
+	margin-top: 12rem;
+	margin-left: auto;
 `;
 
 const S = {
@@ -148,6 +186,8 @@ const S = {
 	ProfileArticle,
 	ProfileRow,
 	ProfileGrid,
+	ProfileDescription,
+	ProfileButtonBox,
 };
 
 export default S;

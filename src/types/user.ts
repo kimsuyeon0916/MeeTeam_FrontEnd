@@ -1,4 +1,5 @@
 export interface User {
+	userId?: string;
 	imageUrl?: string;
 	nickname?: string;
 	userName?: string;
@@ -6,7 +7,8 @@ export interface User {
 	interest?: string;
 	introduction?: string;
 	aboutMe?: string;
-	email?: Contact[]; // 논의 필요
+	universityEmail?: Contact;
+	subEmail?: Contact;
 	phone?: Contact;
 	university?: string;
 	department?: string;
@@ -56,14 +58,12 @@ export interface Link {
 
 export interface Portfolio {
 	id: string;
+	mainImageUrl?: string;
 	title: string;
-	imageUrl?: string;
-	description: string;
-	startDate: string;
-	endDate: string;
 	field: string;
 	role: string;
-	skills: Skill[];
+	pinOrder: string;
+	pinned: boolean;
 }
 
 // interface Meeteam {}

@@ -2,10 +2,16 @@ import styled from 'styled-components';
 
 interface ProfileImage {
 	$size: string;
-	$url?: string;
+	$url?: boolean;
 }
 
-const ProfileImageLayout = styled.div<ProfileImage>`
+const ProfileImageLayout = styled.div`
+	position: relative;
+	display: flex;
+	cursor: pointer;
+`;
+
+const ProfileImageWrapper = styled.div<ProfileImage>`
 	width: ${props => props.$size};
 	height: ${props => props.$size};
 	border-radius: 70%;
@@ -20,6 +26,25 @@ const ProfileImage = styled.img`
 	object-fit: cover;
 `;
 
-const S = { ProfileImageLayout, ProfileImage };
+const ProfileAddIcon = styled.img`
+	position: absolute;
+	right: 0;
+	top: 10.6rem;
+`;
+
+const ProfileImageInput = styled.input`
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: none;
+`;
+
+const S = {
+	ProfileImageLayout,
+	ProfileImageWrapper,
+	ProfileImage,
+	ProfileAddIcon,
+	ProfileImageInput,
+};
 
 export default S;

@@ -182,3 +182,8 @@ export const applicantFilter = atom({
 	key: 'applicantFilter',
 	default: null as number | null,
 });
+
+export const imageNameState = atom({
+	key: 'imageNameState',
+	default: '',
+});
