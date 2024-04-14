@@ -5,7 +5,7 @@ import S from './TitleInfo.styled';
 import { FilledBookmark, UnfilledBookmark } from '../../../../assets';
 import { useBookmark } from '../../../../hooks';
 import { useDelBookmark } from '../../../../hooks/useBookMark';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const TitleInfo = ({
 	nickname,
@@ -19,7 +19,6 @@ const TitleInfo = ({
 	isBookmarked,
 }: TitleAndEtc) => {
 	const { id } = useParams();
-	const navigate = useNavigate();
 	const [bookmarkCnt, setBookmarkCnt] = useState<number>(bookmarkCount);
 	const [isMarked, setIsMarked] = useState<boolean>(isBookmarked);
 	const { mutate: bookmarked } = useBookmark();
@@ -36,15 +35,11 @@ const TitleInfo = ({
 		setIsMarked(!isMarked);
 	};
 
-	const onClickProfile = () => {
-		navigate(`/user/profile/${writerId}`);
-	};
-
 	return (
 		<S.TitleInfo>
 			<section className='container-header'>
-				<section className='container-header__profile' onClick={onClickProfile}>
-					<ProfileImage size='3.3075rem' nickname={nickname} url={writerProfileImg} />
+				<section className='container-header__profile'>
+					<ProfileImage size='3.3075rem' userId={writerId} url={writerProfileImg} />
 					<span>{nickname}</span>
 				</section>
 				<span className='bubble first'>응답률 {responseRate}%</span>

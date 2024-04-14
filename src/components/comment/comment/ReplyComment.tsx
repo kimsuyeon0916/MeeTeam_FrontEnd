@@ -93,7 +93,7 @@ const ReplyComment = ({
 				<article className='container'>
 					<section className='comment-icon'>
 						<section>
-							<ProfileImage url={profileImg} nickname={nickname} size='2.31rem' />
+							<ProfileImage url={profileImg} userId={userId} size='2.31rem' />
 						</section>
 						<span className='nickname'>{nickname}</span>
 						{!isEdit && <span className='createAt'>{createAt.slice(0, -9)}</span>}
