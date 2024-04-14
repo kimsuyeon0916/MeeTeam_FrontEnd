@@ -82,9 +82,9 @@ const ProfileEditPage = () => {
 	});
 
 	const submitHandler: SubmitHandler<FormValues> = data => {
-		const { imageUrl, interest, ...updateData } = data;
+		// const { imageUrl, interest, ...updateData } = data;
 		mutate({
-			...updateData,
+			...data, // updateData -> data
 			imageFileName: profileImageName,
 			isUserNamePublic: isUserNamePublic,
 			interestId: sessionStorage.interest,
