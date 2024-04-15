@@ -7,8 +7,6 @@ import type {
 	PageInfo,
 } from './response';
 import type { CustomInstance } from './api';
-import type { TitleInfo, OptionList, Option, Role, InputRoleForm, InputState } from './information';
-import type { Comment, CommentInputFunctions } from './comment';
 import type {
 	InputState,
 	RoleForPost,
@@ -54,7 +52,7 @@ import type {
 	ApplicantList,
 	DetailedFilter,
 } from './recruit/response';
-import type { JsxElementComponentProps, StringElementProps, stringSignature } from './indexSigniture';
+import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
 import type { Search } from './search';
 
@@ -65,8 +63,6 @@ export type {
 	CustomInstance,
 	Comment,
 	JsxElementComponentProps,
-	stringSignature,
-	CommentInputFunctions,
 	Contact,
 	Skill,
 	Award,

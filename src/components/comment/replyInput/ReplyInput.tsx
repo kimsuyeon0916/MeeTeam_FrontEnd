@@ -68,7 +68,9 @@ const ReplyInput = ({
 			<section className='wrapper'>
 				<img className='reply-icon' src={Reply} />
 				<section className='user-input__icon'>
-					<ProfileImage url={userInfo?.imageUrl} size='2.31rem' nickname={userInfo?.nickname} />
+					{userInfo?.userId && (
+						<ProfileImage url={userInfo?.imageUrl} size='2.31rem' userId={userInfo?.userId} />
+					)}
 				</section>
 				<section className='user-input__container'>
 					<input

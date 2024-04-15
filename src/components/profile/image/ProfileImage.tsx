@@ -35,12 +35,6 @@ const ProfileImage = ({ isEditable, userId, size, url }: ProfileImage) => {
 		reader.onload = () => setImageSrc(reader.result as string);
 	};
 
-	const onClickProfile = () => {
-		if (nickname) {
-			navigate(`/profile/${nickname}`);
-		}
-	};
-
 	return (
 		<S.ProfileImageLayout>
 			<S.ProfileImageWrapper

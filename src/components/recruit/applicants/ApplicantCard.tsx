@@ -47,7 +47,7 @@ const ApplicantCard = ({
 			<section className='container-user'>
 				<section className='header'>
 					<section className='user-icon'>
-						<ProfileImage url={profileImg} size='3.3rem' nickname={nickname} />
+						<ProfileImage url={profileImg} size='3.3rem' userId={userId} />
 						<span className='body1-semibold'>{nickname}</span>
 					</section>
 					<section className='user-info'>

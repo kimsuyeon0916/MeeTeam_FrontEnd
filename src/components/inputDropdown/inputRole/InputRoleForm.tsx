@@ -99,7 +99,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleData) => {
 			roleData.skillIds.length === userRole.skill.length &&
 			!info.recruitmentRoles.some(obj => obj.roleId === roleData.roleId)
 		) {
-			setUserRoleList((prev: any) => [...prev, userRole]);
+			setUserRoleList((prev: RoleForPost[]) => [...prev, userRole]);
 			if (roleData.count === null) {
 				roleData.count = 0;
 			}
@@ -215,8 +215,8 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleData) => {
 				{dropdown.role && (
 					<section className='dropdown'>
 						{!isLoadingRole &&
-							dataRole?.map((keyword: any) => (
-								<span key={keyword.id} onClick={onClickRole} id={keyword.id}>
+							dataRole?.map((keyword: Keyword) => (
+								<span key={keyword.id} onClick={onClickRole} id={keyword.id.toString()}>
 									{keyword.name}
 								</span>
 							))}
@@ -251,7 +251,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputRoleData) => {
 							onClick={() => setDropdown(prev => ({ ...prev, skill: true }))}
 						/>
 					)}
-					{userRole.skill.length === 0 && <img src={Search as any} className='icon-search' />}
+					{userRole.skill.length === 0 && <img src={Search} className='icon-search' />}
 				</section>
 				{dropdown.skill && (
 					<section className='dropdown skill'>

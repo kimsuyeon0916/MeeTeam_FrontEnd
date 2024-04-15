@@ -14,6 +14,7 @@ const RecruitCard = ({
 	deadline,
 	scope,
 	isBookmarked,
+	writerId = 'test', // 필요할 듯 합니다!
 }: Post) => {
 	const navigate = useNavigate();
 	const [isMarked, setIsMarked] = useState<boolean>(isBookmarked);
@@ -42,7 +43,8 @@ const RecruitCard = ({
 			</section>
 			<section className='content-info'>
 				<section className='user'>
-					<ProfileImage nickname='Minji_98' size='2.31rem' url={writerProfileImg} />
+					{/* userId 필요 */}
+					<ProfileImage userId={writerId} size='2.31rem' url={writerProfileImg} />
 					<span>{writerNickname}</span>
 				</section>
 				<span className='date'>~ {deadline}</span>

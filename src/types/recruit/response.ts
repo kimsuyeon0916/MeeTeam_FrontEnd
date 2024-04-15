@@ -119,6 +119,7 @@ export interface Post {
 	deadline: string;
 	scope: string;
 	isBookmarked: boolean;
+	writerId: string; // 필요할 듯 합니다..!
 }
 
 export interface Page {
