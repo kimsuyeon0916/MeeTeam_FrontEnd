@@ -1,5 +1,5 @@
 import MainPage from './MainPage';
-import RecruitPage from './recruit/RecruitPage/RecruitPage';
+import RecruitPage from './recruit/recruitPage/RecruitPage';
 import GalaryPage from './GalaryPage';
 import RecruitCreatePage from './create/recruitCreatePage/RecruitCreatePage';
 import OutputCreatePage from './create/outputCreatePage/OutputCreatePage';
@@ -13,7 +13,7 @@ import NicknameSettingPage from './account/signUp/nicknameSetting/NicknameSettin
 import type { Account, User } from './account/signUp/SignUpData';
 import PassWordFindingPage from './account/passWordFindingPage/PassWordFindingPage';
 import { PASSWORD_DATA } from './account/passWordFindingPage/PassWordData';
-import RecruitDetailPage from './recruit/RecruitDetailPage/RecruitDetailPage';
+import RecruitDetailPage from './recruit/recruitDetailPage/RecruitDetailPage';
 import MyActivityManagePage from './activity/MyActivityManagePage';
 import MyActivityInvited from './activity/MyActivityInvited';
 import MyActivityWrapper from './activity/MyActivityWrapper';
