@@ -27,6 +27,7 @@ const RecruitCreatePage = styled.div`
 		line-height: 2.1rem;
 		letter-spacing: 0.0036rem;
 	}
+
 	.body2-semibold {
 		color: #151515;
 		font-size: 1.4rem;
@@ -39,6 +40,12 @@ const RecruitCreatePage = styled.div`
 		color: #151515;
 		font-size: 1.4rem;
 		line-height: 1.6rem;
+		letter-spacing: 0.0028rem;
+	}
+
+	.txt-small {
+		font-size: 1.4rem;
+		line-height: 1.7rem;
 		letter-spacing: 0.0028rem;
 	}
 
@@ -134,6 +141,16 @@ const RecruitCreatePage = styled.div`
 		}
 	}
 
+	.modal-background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 105;
+		background-color: rgba(0, 0, 0, 0.15);
+	}
+
 	.validation-modal {
 		position: fixed;
 		border-radius: 1rem;
@@ -189,6 +206,18 @@ const RecruitCreatePage = styled.div`
 					margin: 0.81rem 0 0.91rem 1.6rem;
 				}
 			}
+		}
+
+		.btn-okay {
+			display: flex;
+			height: 3.6rem;
+			padding: 1.2rem 3.2rem;
+			justify-content: center;
+			align-items: center;
+			gap: 0.75rem;
+			border-radius: 0.6rem;
+			background: #5877fc;
+			color: #f7faff;
 		}
 	}
 `;
