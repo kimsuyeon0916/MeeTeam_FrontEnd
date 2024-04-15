@@ -95,5 +95,14 @@ export default function useValid(data: InputState) {
 		setIsValid(prev => ({ ...prev, isProcedure: data.proceedType !== '' }));
 	}, [data.proceedType]);
 
+	useEffect(() => {
+		if (data.content === '') {
+			setValidMessage(prev => ({ ...prev, content: '상세 내용을 작성해주세요.' }));
+		} else {
+			setValidMessage(prev => ({ ...prev, content: '' }));
+		}
+		setIsValid(prev => ({ ...prev, isContent: data.content !== '' }));
+	}, [data.content]);
+
 	return { validMessage, isValid };
 }

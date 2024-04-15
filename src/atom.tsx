@@ -102,6 +102,7 @@ export const validMessageState = atom({
 		category: '',
 		deadline: '',
 		endDate: '',
+		content: '',
 		procedure: '',
 		courseTagDto: {
 			courseTagName: '',
@@ -123,6 +124,7 @@ export const validState = atom({
 		isProcedure: false,
 		isTag: false,
 		isTitle: false,
+		isContent: false,
 	},
 });
 
