@@ -30,7 +30,7 @@ const PortfolioDetailsPage = () => {
 							<DefaultBtn
 								type='button'
 								title='편집'
-								handleClick={() => navigate(`/portfolio/${portfolioId}/edit`)}
+								handleClick={() => navigate(`/portfolio/edit/${portfolioId}`)}
 							/>
 						)}
 					</S.PortfolioDetailsHeader>
