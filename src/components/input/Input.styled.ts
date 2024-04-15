@@ -41,8 +41,9 @@ const InputContainer = styled.div`
 	flex-direction: column;
 
 	span {
-		margin-top: 0.4rem;
-		margin-left: auto;
+		position: absolute;
+		top: 5.4rem;
+		right: 0;
 		color: var(--State-unactive, #8e8e8e);
 	}
 
