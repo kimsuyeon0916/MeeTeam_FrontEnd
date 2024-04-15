@@ -4,6 +4,13 @@ const MeeteamTag = styled.div`
 	height: auto;
 	position: relative;
 
+	.body1-medium {
+		color: #8e8e8e;
+		font-size: 1.6rem;
+		line-height: 1.9rem;
+		letter-spacing: 0.0032rem;
+	}
+
 	.tag__box {
 		position: relative;
 		display: flex;
@@ -11,7 +18,6 @@ const MeeteamTag = styled.div`
 		flex-wrap: wrap;
 		min-height: 4.875rem;
 		width: 100%;
-		padding: 0.5rem 1.3rem;
 		border-radius: 1rem;
 		border: 1px solid #e3e3e3;
 		background-color: #fff;
@@ -32,14 +38,14 @@ const MeeteamTag = styled.div`
 			right: 2rem;
 		}
 
-		input {
+		.tag-input {
+			width: 100%;
 			display: inline-flex;
-			min-width: 200px;
 			background: transparent;
 			border: none;
 			outline: none;
 			cursor: text;
-			padding: 0.5rem 0 0.5rem 1.3rem;
+			padding: 0.5rem 0 0.5rem 1.6rem;
 		}
 
 		button {
@@ -74,7 +80,7 @@ const MeeteamTag = styled.div`
 		font-size: 1.5rem;
 		font-style: normal;
 		font-weight: 400;
-		line-height: 1.8rem; /* 90% */
+		line-height: 1.8rem;
 		letter-spacing: 0.02rem;
 	}
 
@@ -89,6 +95,7 @@ const MeeteamTag = styled.div`
 		border-radius: 0.75rem;
 		border: 0.75px solid #e7e7e7;
 		background: #fff;
+		color: red;
 		box-shadow: 0px 2.25px 15px 0px rgba(0, 0, 0, 0.1);
 		top: 110%;
 		right: 0rem;

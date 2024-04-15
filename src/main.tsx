@@ -7,7 +7,6 @@ import {
 	RecruitPage,
 	GalaryPage,
 	RecruitCreatePage,
-	OutputCreatePage,
 	RecruitDetailPage,
 	SignInPage,
 	SchoolCertificationPage,
@@ -68,10 +67,6 @@ const router = createBrowserRouter([
 			{
 				path: 'edit/recruit',
 				element: <RecruitCreatePage />,
-			},
-			{
-				path: 'create/output',
-				element: <OutputCreatePage />,
 			},
 			{
 				path: 'profile/:userId?',

@@ -5,6 +5,7 @@ import { modules } from '../../../../utils';
 import { recruitInputState } from '../../../../atom';
 import S from './DetailedInformation.styled';
 import { useValid } from '../../../../hooks';
+import 'react-quill/dist/quill.snow.css';
 
 const DetailedInformation = () => {
 	const quillRef = useRef<ReactQuill | null>(null);

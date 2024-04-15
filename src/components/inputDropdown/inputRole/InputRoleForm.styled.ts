@@ -140,7 +140,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 
 		.dropdown-skill {
 			position: absolute;
-			top: 12.5rem;
+			top: 15rem;
 			width: 66rem;
 			border-radius: 1rem;
 			border: 1px solid #e3e3e3;
@@ -156,6 +156,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 				gap: 1.2rem;
 
 				.skill-element {
+					cursor: pointer;
 				}
 			}
 
