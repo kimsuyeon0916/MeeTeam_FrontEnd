@@ -282,11 +282,21 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 					{dropdown.skill && (
 						<section className='dropdown-skill'>
 							<section className='list-skill'>
-								{dataSkill?.map((elem, _) => (
-									<span key={elem.id} className='skill-element body1-medium' onClick={onClickSkill}>
-										{elem.name}
-									</span>
-								))}
+								{!isLoadingSkill &&
+									dataSkill?.map((elem, _) => (
+										<span
+											key={elem.id}
+											className='skill-element body1-medium'
+											onClick={onClickSkill}
+										>
+											{elem.name}
+										</span>
+									))}
+								{!isLoadingSkill && dataSkill?.length === 0 && (
+									<section className='no-result'>
+										<span className='body1-medium'>검색 결과가 없습니다.</span>
+									</section>
+								)}
 							</section>
 							<hr />
 							<section className='list-selected'>

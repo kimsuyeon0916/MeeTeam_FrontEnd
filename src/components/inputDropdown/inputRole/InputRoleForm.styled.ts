@@ -158,6 +158,16 @@ const InputRoleForm = styled.article<InputRoleForm>`
 				.skill-element {
 					cursor: pointer;
 				}
+
+				.no-result {
+					display: flex;
+					height: 10rem;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					gap: 1.2rem;
+					align-self: stretch;
+				}
 			}
 
 			hr {
