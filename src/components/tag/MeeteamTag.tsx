@@ -35,7 +35,7 @@ const MeeteamTag = () => {
 	const submitTagItem = () => {
 		setTagList(prev => {
 			const trimmedTagItem = tagItem.trim();
-			if (!prev.includes(trimmedTagItem)) {
+			if (!prev.includes(trimmedTagItem) && tagList.length < 5) {
 				const updatedList = [...prev, trimmedTagItem];
 				setFormData(prev => ({ ...prev, tags: updatedList }));
 				return updatedList;
@@ -43,7 +43,7 @@ const MeeteamTag = () => {
 			return prev;
 		});
 		setTagItem('');
-		setIsDropdownVisible(true);
+		setIsDropdownVisible(false);
 	};
 
 	const deleteTagItem = (id: string) => {
@@ -58,8 +58,9 @@ const MeeteamTag = () => {
 		setIsDropdownVisible(true);
 	};
 
-	const onClickTagOptions = (selectedTag: string) => {
-		if (!tagList.includes(selectedTag) && tagList.length < 6) {
+	const onClickTagOptions = (selectedTag: string, event: React.MouseEvent<HTMLSpanElement>) => {
+		event.stopPropagation();
+		if (!tagList.includes(selectedTag) && tagList.length < 5) {
 			setTagList(prev => {
 				const updatedList = [...prev, selectedTag];
 				setFormData(prev => ({ ...prev, tags: updatedList }));
@@ -90,17 +91,7 @@ const MeeteamTag = () => {
 
 	return (
 		<S.MeeteamTag ref={dropdownRef}>
-			<div className='tag__box' onClick={onClickInput}>
-				{tagList.map((tagItem, _) => {
-					return (
-						<div className='tag__item' key={tagItem}>
-							<span>{tagItem}</span>
-							<button type='button' onClick={() => deleteTagItem(tagItem)}>
-								<img src={XBtn} />
-							</button>
-						</div>
-					);
-				})}
+			<section className='tag__box' onClick={onClickInput}>
 				<input
 					type='text'
 					placeholder={'태그를 선택하거나 입력해주세요.'}
@@ -116,17 +107,44 @@ const MeeteamTag = () => {
 					<div className='tag-dropdown'>
 						{isSuccess &&
 							data?.map((tag: Keyword) => (
-								<div
-									className='tag__item option'
+								<span
+									className='body1-medium option'
 									key={tag.id}
-									onClick={() => onClickTagOptions(tag.name)}
+									onClick={event => onClickTagOptions(tag.name, event)}
 								>
 									{tag.name}
-								</div>
+								</span>
 							))}
+						{isSuccess && data?.length === 0 && (
+							<section className='no-result'>
+								<span className='body1-medium'>검색 결과가 없습니다.</span>
+								<span className='body1-medium'>해당 태그를 새로 생성할까요?</span>
+								<section className='container-btn'>
+									<span
+										className='btn-create txt2'
+										onClick={event => onClickTagOptions(tagItem, event)}
+									>
+										생성하기
+									</span>
+									<span className='body1-medium'>{tagItem}</span>
+								</section>
+							</section>
+						)}
 					</div>
 				)}
-			</div>
+			</section>
+			<section className='tags-selected'>
+				{tagList.map((tagItem, _) => {
+					return (
+						<div className='tag__item txt2' key={tagItem}>
+							<span>{tagItem}</span>
+							<button type='button' className='btn-delete' onClick={() => deleteTagItem(tagItem)}>
+								<img src={XBtn} />
+							</button>
+						</div>
+					);
+				})}
+			</section>
 		</S.MeeteamTag>
 	);
 };
