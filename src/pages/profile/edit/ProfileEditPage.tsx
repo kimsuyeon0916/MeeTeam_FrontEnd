@@ -183,7 +183,7 @@ const ProfileEditPage = () => {
 	});
 
 	const addLink = (index: number) => {
-		if (index === -1 || getValues(`links.${index}.url`)) {
+		if (index === -1 || getValues(`links.0.url`)) {
 			prependLink({ description: 'Link', url: '' });
 		}
 	};
@@ -429,8 +429,8 @@ const ProfileEditPage = () => {
 					<S.ProfileArticle>
 						<S.ProfileTitle>수상/활동</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.awards}</S.ProfileDescription>
+						<AddFormBtn title='수상/활동 추가' handleClick={() => addAward(awards.length - 1)} />
 						<S.ProfileColumn $gap='2.4rem'>
-							<AddFormBtn title='수상/활동 추가' handleClick={() => addAward(awards.length - 1)} />
 							{awards?.map((award, index) => (
 								<S.ProfileRow key={award.id} $gap='1rem'>
 									<S.ProfileColumn $gap='1rem'>
@@ -463,8 +463,8 @@ const ProfileEditPage = () => {
 					<S.ProfileArticle>
 						<S.ProfileTitle>링크</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.links}</S.ProfileDescription>
+						<AddFormBtn title='링크 추가' handleClick={() => addLink(links.length - 1)} />
 						<S.ProfileColumn $gap='2.4rem'>
-							<AddFormBtn title='링크 추가' handleClick={() => addLink(links.length - 1)} />
 							{links?.map((link, index) => (
 								<LinkForm
 									key={link.id}
