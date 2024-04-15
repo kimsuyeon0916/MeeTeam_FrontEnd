@@ -61,7 +61,7 @@ const FormButtonLayout = styled.button`
 	flex-direction: row;
 	column-gap: 0.8rem;
 	width: 100%;
-	padding: 1.7rem 0;
+	padding-bottom: 2.7rem;
 	align-items: center;
 	color: var(--Text-textColor2, var(--text-color-2, #373f41));
 	cursor: pointer;
