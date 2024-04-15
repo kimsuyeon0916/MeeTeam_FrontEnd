@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { DropdownArrow, Plus, Search, XBtn } from '../../../assets';
+import { DropdownArrow, Search, XBtn } from '../../../assets';
 import S from './InputRoleForm.styled';
-import { Role, InputUserRoleForm, RoleForPost, InputState, Keyword } from '../../../types';
+import { Role, InputUserRoleForm, RoleForPost, InputState } from '../../../types';
 import { useDebounce } from '../../../hooks';
 import { getRoleKeyword, getSkillKeyword } from '../../../service';
 import { useRecoilState } from 'recoil';
@@ -115,6 +115,10 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 				skillIds: [],
 			});
 			setTagItem('');
+			setDropdown(prev => ({
+				...prev,
+				skill: false,
+			}));
 		} else if (!roleData.roleId && roleData.count) {
 			setIsValid({
 				role: { valid: false, message: '해당 역할명을 입력해주세요.' },
@@ -193,10 +197,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 		if (!userRole.skill.includes(innerText) && userRole.skill.length < 6) {
 			setUserRole(prev => ({ ...prev, skill: [...prev.skill, innerText] }));
 			setRoleData(prev => ({ ...prev, skillIds: [...prev.skillIds, Number(target.id)] }));
-			setDropdown(prev => ({
-				...prev,
-				skill: false,
-			}));
+
 			setTagItem('');
 		}
 	};
@@ -264,37 +265,45 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 				</section>
 				<section className='inputs-bottom'>
 					<section className='container-skills'>
-						{userRole.skill.map((tagItem, index) => {
-							return (
-								<article className='tags' key={index}>
-									<span>{tagItem}</span>
-									<button type='button' onClick={deleteTagItem}>
-										<img src={XBtn} id={index.toString()} />
-									</button>
-								</article>
-							);
-						})}
-						{userRole.skill.length !== 5 && (
-							<input
-								type='text'
-								className='skills-input body1-medium'
-								placeholder={'스킬을 검색해주세요.'}
-								value={tagItem}
-								onChange={onChangeKeyword}
-								onKeyPress={onKeyPress}
-								onClick={() => setDropdown(prev => ({ ...prev, skill: true }))}
-							/>
-						)}
-						{userRole.skill.length === 0 && <img src={Search} className='icon-search' />}
+						<input
+							type='text'
+							className='skills-input body1-medium'
+							placeholder={'스킬을 검색해주세요.'}
+							value={tagItem}
+							onChange={onChangeKeyword}
+							onKeyPress={onKeyPress}
+							onClick={() => setDropdown(prev => ({ ...prev, skill: true }))}
+						/>
+						<img src={Search} className='icon-search' />
 					</section>
 					{dropdown.skill && (
-						<section className='dropdown skill'>
-							{!isLoadingSkill &&
-								dataSkill?.map((keyword: Keyword) => (
-									<span key={keyword.id} onClick={onClickSkill} id={keyword.id.toString()}>
-										{keyword.name}
+						<section className='dropdown-skill'>
+							<section className='list-skill'>
+								{dataSkill?.map((elem, _) => (
+									<span key={elem.id} className='skill-element body1-medium' onClick={onClickSkill}>
+										{elem.name}
 									</span>
 								))}
+							</section>
+							<hr />
+							<section className='list-selected'>
+								<section className='wrapper-selected__skills'>
+									<span className='body1-medium'>보유 스킬</span>
+									<section className='container-selected__skills'>
+										{userRole.skill.map((tagItem, index) => {
+											return (
+												<article className='tags' key={index}>
+													<span className='txt2'>{tagItem}</span>
+													<button type='button' onClick={deleteTagItem} className='btn-delete__tag'>
+														<img src={XBtn} id={index.toString()} />
+													</button>
+												</article>
+											);
+										})}
+									</section>
+								</section>
+								<p className='txt4 mention'>보유 스킬은 최대 5개까지 입력 가능합니다.</p>
+							</section>
 						</section>
 					)}
 					<article className='add-btn'>

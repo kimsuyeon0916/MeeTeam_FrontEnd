@@ -25,6 +25,13 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		letter-spacing: 0.002rem;
 	}
 
+	.txt2 {
+		color: #151515;
+		font-size: 1.2rem;
+		line-height: 1.4rem;
+		letter-spacing: 0.0024rem;
+	}
+
 	.body1-medium {
 		color: #8e8e8e;
 		font-size: 1.6rem;
@@ -116,9 +123,83 @@ const InputRoleForm = styled.article<InputRoleForm>`
 			}
 		}
 
-		.skill {
-			right: 0rem;
-			width: 65.7%;
+		.dropdown-skill {
+			position: absolute;
+			top: 12.5rem;
+			width: 66rem;
+			border-radius: 1rem;
+			border: 1px solid #e3e3e3;
+			background: #fff;
+			box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+			z-index: 201;
+			padding: 1.2rem 1.6rem;
+			box-sizing: border-box;
+
+			.list-skill {
+				display: flex;
+				flex-direction: column;
+				gap: 1.2rem;
+
+				.skill-element {
+				}
+			}
+
+			hr {
+				border: none;
+				height: 0.1rem;
+				background: #e3e3e3;
+				margin-top: 1rem;
+			}
+
+			.list-selected {
+				margin-top: 1rem;
+
+				.wrapper-selected__skills {
+					display: flex;
+					align-items: center;
+					gap: 1.2rem;
+				}
+
+				.container-selected__skills {
+					display: flex;
+					gap: 0.8rem;
+					flex-wrap: wrap;
+				}
+			}
+
+			.mention {
+				color: #8e8e8e;
+				margin-top: 1.35rem;
+			}
+		}
+
+		.tags {
+			display: inline-flex;
+			height: 2.15rem;
+			padding: 0.6rem 0.8rem;
+			justify-content: space-between;
+			align-items: center;
+			flex-shrink: 0;
+			border-radius: 1.5rem;
+			background: #e0e6ff;
+			box-sizing: border-box;
+		}
+
+		.btn-delete__tag {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: transparent;
+			margin-left: 0.6rem;
+			color: #54a0ff;
+			border: none;
+			cursor: pointer;
+			padding: 0;
+
+			img {
+				width: 1.4rem;
+				box-sizing: border-box;
+			}
 		}
 
 		.count-input {
@@ -174,43 +255,6 @@ const InputRoleForm = styled.article<InputRoleForm>`
 				background: transparent;
 				box-sizing: border-box;
 				outline: none;
-			}
-
-			.tags {
-				display: inline-flex;
-				height: 2.15rem;
-				padding: 1.5rem 0 1.5rem 1.125rem;
-				justify-content: center;
-				align-items: center;
-				flex-shrink: 0;
-				margin: 5px;
-				border-radius: 7.5rem;
-				background: #e0e6ff;
-				color: #373f41;
-				font-size: 1.5rem;
-				font-style: normal;
-				font-weight: 400;
-				line-height: 1.8rem;
-				letter-spacing: 0.02rem;
-				box-sizing: border-box;
-			}
-
-			button {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				background-color: transparent;
-				margin-left: 5px;
-				border-radius: 50%;
-				color: #54a0ff;
-				border: none;
-				box-sizing: border-box;
-				cursor: pointer;
-
-				img {
-					width: 2rem;
-					box-sizing: border-box;
-				}
 			}
 
 			.icon-search {
