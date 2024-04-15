@@ -3,24 +3,27 @@ import S from './OptionList.styled';
 
 interface Option {
 	id?: string;
-	title: string;
+	name: string;
 }
 
 interface OptionListProps<T> {
+	label?: T;
 	name: T;
 	handleOptionClick: (...rest: T[]) => void;
 	optionList: Option[];
 }
 
-const OptionList = ({ name, handleOptionClick, optionList }: OptionListProps<string>) => {
+const OptionList = ({ label, name, handleOptionClick, optionList }: OptionListProps<string>) => {
 	return (
-		<S.OptionList>
-			{optionList.map(({ title, id }) => (
+		<S.OptionList $label={label}>
+			{optionList.map(({ name: optionName, id }) => (
 				<S.OptionItem
-					key={title}
-					onClick={() => (id ? handleOptionClick(name, title, id) : handleOptionClick(name, title))}
+					key={optionName}
+					onClick={() =>
+						id ? handleOptionClick(name, optionName, id) : handleOptionClick(name, optionName)
+					}
 				>
-					{title}
+					{optionName}
 				</S.OptionItem>
 			))}
 		</S.OptionList>

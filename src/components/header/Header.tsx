@@ -4,6 +4,8 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { DropdownArrow, Logo, LogoName } from '../../assets';
 import { ProfileImage } from '..';
 import { useLogin } from '../../hooks';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../atom';
 
 const Header = () => {
 	const navigate = useNavigate();
@@ -17,6 +19,7 @@ const Header = () => {
 		galary: false,
 		inform: false,
 	});
+	const userInfo = useRecoilValue(userState);
 
 	const goRecruit = () => {
 		navigate('/recruitment/postings/search');
@@ -103,7 +106,7 @@ const Header = () => {
 							{isLoggedIn ? (
 								<article className='icon-container'>
 									<div className='icon-border'>
-										<ProfileImage url='' size='3rem' />
+										{userInfo?.userId && <ProfileImage userId={userInfo?.userId} size='3rem' />}
 									</div>
 									<img src={DropdownArrow} />
 								</article>

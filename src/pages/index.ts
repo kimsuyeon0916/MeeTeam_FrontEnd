@@ -8,7 +8,7 @@ import RecruitPage from './recruit/recruitPage/RecruitPage';
 import RecruitDetailPage from './recruit/recruitDetailPage/RecruitDetailPage';
 import SchoolCertificationPage from './account/schoolCertification/SchoolCertificationPage';
 import { SCHOOL_CERTIFICATION_DATA } from './account/schoolCertification/SchoolCertificationData';
-import { INPUT_VALIDATION } from './account/validation';
+import { INPUT_VALIDATION } from '../../validation';
 import { SIGN_UP_DATA } from './account/signUp/SignUpData';
 import NicknameSettingPage from './account/signUp/nicknameSetting/NicknameSettingPage';
 import type { Account, User } from './account/signUp/SignUpData';
@@ -20,8 +20,10 @@ import MyActivityWrapper from './activity/MyActivityWrapper';
 import MyActivityLike from './activity/MyActivityLike';
 import MyActivityApply from './activity/MyActivityApply';
 import MyActivityBookmark from './activity/MyActivityBookmark';
-import ProfileDetailsPage from './profile/ProfileDetailsPage';
+import ProfileDetailsPage from './profile/details/ProfileDetailsPage';
 import { userData } from './profile/userData';
+import ProfileEditPage from './profile/edit/ProfileEditPage';
+import PROFILE_EDIT_DATA from './profile/edit/ProfileEditData';
 import ApplierManagePage from './recruit/applierManagePage/ApplierManagePage';
 
 export {
@@ -50,5 +52,7 @@ export {
 	MyActivityBookmark,
 	ProfileDetailsPage,
 	userData,
+	ProfileEditPage,
+	PROFILE_EDIT_DATA,
 	ApplierManagePage,
 };

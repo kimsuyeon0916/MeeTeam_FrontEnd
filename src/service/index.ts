@@ -8,7 +8,6 @@ import {
 	readUniversityList,
 	readDepartmentList,
 } from './auth/auth';
-import { readProfile } from './user/Profile';
 import {
 	getPostingData,
 	getApplyData,
@@ -16,6 +15,9 @@ import {
 	cancelApply,
 	closeRecruitPost,
 } from './recruit/detail';
+import { readProfile, updateProfile } from './user/Profile';
+import { readSkillList, readRoleList } from './search/search';
+import { readPortfolioList } from './portfolio/portfolio';
 import {
 	postingRecruit,
 	getRoleKeyword,
@@ -38,6 +40,10 @@ export {
 	readUniversityList,
 	readDepartmentList,
 	readProfile,
+	updateProfile,
+	readSkillList,
+	readRoleList,
+	readPortfolioList,
 	getPostingData,
 	getApplyData,
 	applyRole,

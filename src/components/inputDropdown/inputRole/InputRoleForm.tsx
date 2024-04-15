@@ -93,11 +93,12 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 			roleData.skillIds.length === userRole.skill.length &&
 			!info.recruitmentRoles.some(obj => obj.roleId === roleData.roleId)
 		) {
-			setUserRoleList((prev: any) => [...prev, userRole]);
+			setUserRoleList((prev: RoleForPost[]) => [...prev, userRole]);
 			setIsValid({
 				role: { valid: true, message: '' },
 				count: { valid: true, message: '' },
 			});
+
 			setInfos((prev: InputState) => ({
 				...prev,
 				recruitmentRoles: [...prev.recruitmentRoles, roleData],

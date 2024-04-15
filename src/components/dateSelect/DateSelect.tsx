@@ -35,8 +35,8 @@ const DateSelect = ({ type }: { type: string }) => {
 				showIcon
 				selected={
 					type === 'start'
-						? new Date(formData.proceedingStart as any)
-						: new Date(formData.proceedingEnd as any)
+						? new Date(formData.proceedingStart as string)
+						: new Date(formData.proceedingEnd as string)
 				}
 				dateFormat='yy년 MM월 dd일'
 				onChange={date => onChangeHandler(date)}

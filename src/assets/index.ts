@@ -16,6 +16,19 @@ import { DATE_ICON } from './DateIcon';
 import DefaultProfileImage from './DefaultProfileImage.svg';
 import DefaultPortfolioImage from './DefaultPortfolioImage.svg';
 import Search from './Search.svg';
+import ArrowBottom from './ArrowBottom.svg';
+import ArrowTop from './ArrowTop.svg';
+import GrayPhone from './GrayPhone.svg';
+import BlackPhone from './BlackPhone.svg';
+import GrayEmail from './GrayEmail.svg';
+import BlackEmail from './BlackEmail.svg';
+import Add from './Add.svg';
+import Delete from './Delete.svg';
+import GrayCalendar from './GrayCalendar.svg';
+import BlackCalendar from './BlackCalendar.svg';
+import Close from './Close.svg';
+import AddProfile from './AddProfile.svg';
+import BluePlus from './BluePlus.svg';
 import FilledBookmark from './FilledBookmark.svg';
 import UnfilledBookmark from './UnfilledBookmark.svg';
 import Edit from './Edit.svg';
@@ -32,7 +45,6 @@ import User from './User.svg';
 import School from './School.svg';
 import DropdownArrowUp from './DropdownArrowUp.svg';
 import FloatingBackground from './FloatingBackground.svg';
-import ArrowTop from './ArrowTop.svg';
 
 export {
 	Exit,
@@ -54,6 +66,19 @@ export {
 	DefaultProfileImage,
 	DefaultPortfolioImage,
 	Search,
+	ArrowBottom,
+	ArrowTop,
+	GrayPhone,
+	BlackPhone,
+	GrayEmail,
+	BlackEmail,
+	Add,
+	Delete,
+	GrayCalendar,
+	BlackCalendar,
+	Close,
+	AddProfile,
+	BluePlus,
 	FilledBookmark,
 	UnfilledBookmark,
 	DATE_ICON,
@@ -69,5 +94,4 @@ export {
 	School,
 	DropdownArrowUp,
 	FloatingBackground,
-	ArrowTop,
 };

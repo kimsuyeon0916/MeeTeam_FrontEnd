@@ -34,7 +34,7 @@ const DeadlineSelect = ({ type }: RecruitmentDeadLine) => {
 			<DatePicker
 				formatWeekDay={nameOfDay => WEEKDAY[nameOfDay]}
 				className={!type ? 'date-picker' : 'date-picker date-picker__recruitment-deadline'}
-				selected={new Date(info.deadline as any)}
+				selected={new Date(info.deadline as string)}
 				showPopperArrow={false}
 				onChange={onChangeDate}
 				minDate={new Date()}

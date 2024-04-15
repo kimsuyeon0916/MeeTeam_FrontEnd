@@ -6,25 +6,48 @@ import { DefaultPortfolioImage } from '../../../assets';
 interface PortfolioCard {
 	id: string;
 	title: string;
-	imageUrl?: string;
+	mainImageUrl?: string;
 	field: string;
 	role: string;
+	isEditable?: boolean;
+	clickNumber?: number;
+	handleClick?: (id: string) => void;
 }
 
-const PortfolioCard = ({ id, title, imageUrl, field, role }: PortfolioCard) => {
+const PortfolioCard = ({
+	id,
+	title,
+	mainImageUrl,
+	field,
+	role,
+	isEditable,
+	clickNumber,
+	handleClick,
+}: PortfolioCard) => {
 	const navigate = useNavigate();
 
 	return (
-		<S.PortfolioCardLayout onClick={() => navigate(`/portfolio/${id}`)}>
+		<S.PortfolioCardLayout
+			onClick={() => (isEditable ? handleClick?.(id) : navigate(`/portfolio/${id}`))}
+		>
 			<S.PortfolioCardBox>
 				<S.PortfolioCardImage
-					src={imageUrl ? imageUrl : DefaultPortfolioImage}
+					src={mainImageUrl ? mainImageUrl : DefaultPortfolioImage}
 					alt='포트폴리오이미지'
 				/>
 				<S.PortfolioTagRow>
-					<S.PortfolioCardTag>{field}</S.PortfolioCardTag>
-					<S.PortfolioCardTag>{role}</S.PortfolioCardTag>
+					<S.PortfolioCardTag $color='#E0E6FF'>{field}</S.PortfolioCardTag>
+					<S.PortfolioCardTag $color='#C9DEFF'>{role}</S.PortfolioCardTag>
 				</S.PortfolioTagRow>
+				{isEditable && (
+					<S.PortfolioCardButton
+						type='button'
+						$checked={clickNumber ? true : false}
+						onClick={() => handleClick?.(id)}
+					>
+						{clickNumber !== 0 && clickNumber}
+					</S.PortfolioCardButton>
+				)}
 			</S.PortfolioCardBox>
 			<S.PortfolioCardTitle>{title}</S.PortfolioCardTitle>
 		</S.PortfolioCardLayout>

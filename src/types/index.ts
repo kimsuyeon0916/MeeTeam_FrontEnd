@@ -1,5 +1,11 @@
 import type { SignUpPayload, UpdateProfilePayload } from './payload';
-import type { UserReponse, University, Department } from './response';
+import type {
+	UserReponse,
+	University,
+	Department,
+	PortfolioListResponse,
+	PageInfo,
+} from './response';
 import type { CustomInstance } from './api';
 import type {
 	InputState,
@@ -48,6 +54,7 @@ import type {
 } from './recruit/response';
 import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
+import type { Search } from './search';
 
 export type {
 	SignUpPayload,
@@ -75,6 +82,9 @@ export type {
 	RecruitTags,
 	University,
 	Department,
+	Search,
+	PortfolioListResponse,
+	PageInfo,
 	RecruitPostings,
 	ApplyInfo,
 	ApplyRole,

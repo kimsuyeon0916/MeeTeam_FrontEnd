@@ -56,7 +56,9 @@ const CommentInput = () => {
 				<article className='wrapper'>
 					<section className='container-user__icon'>
 						<div>
-							<ProfileImage url={userInfo?.imageUrl} nickname={userInfo?.nickname} size='2.31rem' />
+							{userInfo?.userId && (
+								<ProfileImage url={userInfo?.imageUrl} userId={userInfo?.userId} size='2.31rem' />
+							)}
 						</div>
 						<span>{userInfo?.nickname}</span>
 					</section>

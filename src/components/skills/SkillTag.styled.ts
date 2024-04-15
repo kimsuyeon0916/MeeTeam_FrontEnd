@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
-const SkillLayout = styled.span`
+const SkillTagLayout = styled.span`
 	justify-content: center;
 	align-items: center;
 
 	display: flex;
+	flex-direction: row;
+	column-gap: 0.8rem;
 	padding: 0.75rem 1.5rem;
 	border-radius: 3.75rem;
 
@@ -15,8 +17,12 @@ const SkillLayout = styled.span`
 	font-weight: 600;
 	line-height: 2.1rem;
 	letter-spacing: 0.02rem;
+
+	img {
+		cursor: pointer;
+	}
 `;
 
-const S = { SkillLayout };
+const S = { SkillTagLayout };
 
 export default S;

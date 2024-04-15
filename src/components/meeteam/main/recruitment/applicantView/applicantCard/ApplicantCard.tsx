@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import S from './ApplicantCard.styled';
 import { Applicant, ProfileImage } from '../../../../..';
-import { NicknameSettingPage } from '../../../../../../pages';
 
 const ApplicantCard = ({ applicant }: { applicant: Applicant }) => {
 	const APPLICANT_PROFILE_ICON = (
@@ -106,7 +105,7 @@ const ApplicantCard = ({ applicant }: { applicant: Applicant }) => {
 	return (
 		<S.ApplicantCardLayout>
 			<div className='applicant-card__profile-column'>
-				<ProfileImage nickname={applicant.nickname} size='5.5125rem' url={applicant.imageUrl} />
+				<ProfileImage userId={applicant.nickname} size='5.5125rem' url={applicant.imageUrl} />
 				<div>{applicant.nickname}</div>
 				<div className='applicant-card__small-text'>
 					{applicant.year}학번, {applicant.rate}
