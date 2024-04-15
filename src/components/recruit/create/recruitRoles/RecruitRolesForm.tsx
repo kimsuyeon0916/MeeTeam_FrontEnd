@@ -4,10 +4,12 @@ import S from './RecruitRolesForm.styled';
 import { recruitInputState } from '../../../../atom';
 import { useRecoilState } from 'recoil';
 import { InputRole, InputRoleForm } from '../../../index';
+import { useValid } from '../../../../hooks';
 
 const RecruitRoleForm = () => {
 	const [userRoleList, setUserRoleList] = useState<Role[]>([]);
 	const [info, setInfo] = useRecoilState(recruitInputState);
+	const { validMessage, isValid } = useValid(info);
 
 	const deleteObj = (id: number | null) => {
 		setUserRoleList(prev => prev.filter(elem => elem.role.id !== id));
@@ -36,6 +38,9 @@ const RecruitRoleForm = () => {
 							/>
 						))}
 					</article>
+					{isValid.isSubmitted && !isValid.isRole && (
+						<p className='valid-msg'>{validMessage.recruitRole}</p>
+					)}
 				</section>
 			</section>
 			<hr className='under-info' />

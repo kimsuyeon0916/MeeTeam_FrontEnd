@@ -14,7 +14,8 @@ interface ProfileImage {
 
 const ProfileImage = ({ isEditable, userId, size, url }: ProfileImage) => {
 	const navigate = useNavigate();
-	const navigateProfile = () => {
+	const navigateProfile = (event: React.MouseEvent<HTMLDivElement>) => {
+		event.stopPropagation();
 		navigate(`/profile/${userId}`);
 	};
 

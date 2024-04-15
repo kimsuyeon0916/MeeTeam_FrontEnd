@@ -104,5 +104,14 @@ export default function useValid(data: InputState) {
 		setIsValid(prev => ({ ...prev, isContent: data.content !== '' }));
 	}, [data.content]);
 
+	useEffect(() => {
+		if (data.recruitmentRoles.length === 0) {
+			setValidMessage(prev => ({ ...prev, recruitRole: '역할을 하나 이상 선택해주세요.' }));
+		} else {
+			setValidMessage(prev => ({ ...prev, recruitRole: '' }));
+		}
+		setIsValid(prev => ({ ...prev, isRole: data.recruitmentRoles.length > 0 }));
+	}, [data.recruitmentRoles.length]);
+
 	return { validMessage, isValid };
 }

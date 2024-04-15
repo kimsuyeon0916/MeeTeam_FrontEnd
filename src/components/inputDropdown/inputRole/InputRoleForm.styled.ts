@@ -39,12 +39,27 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		letter-spacing: 0.0032rem;
 	}
 
+	.body2-semibold {
+		color: #373f41;
+		font-size: 1.4rem;
+		font-weight: 600;
+		line-height: 1.7rem;
+		letter-spacing: 0.0028rem;
+	}
+
 	.inputs {
 		display: flex;
 		flex-direction: column;
 		width: 100%;
 		gap: 2.4rem;
 		position: relative;
+
+		.inputs-subtitle {
+			margin-bottom: -1.6rem;
+			.dot {
+				color: #f85858;
+			}
+		}
 
 		.inputs-top {
 			display: flex;

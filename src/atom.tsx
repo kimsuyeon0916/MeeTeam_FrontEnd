@@ -104,10 +104,7 @@ export const validMessageState = atom({
 		endDate: '',
 		content: '',
 		procedure: '',
-		courseTagDto: {
-			courseTagName: '',
-			courseTagProfessor: '',
-		},
+		recruitRole: '',
 		tag: '',
 		title: '',
 	},
@@ -125,6 +122,7 @@ export const validState = atom({
 		isTag: false,
 		isTitle: false,
 		isContent: false,
+		isRole: false,
 	},
 });
 
