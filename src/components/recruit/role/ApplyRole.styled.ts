@@ -5,7 +5,6 @@ const RoleCurrentCard = styled.article`
 	flex-direction: column;
 	align-items: flex-start;
 	width: 100%;
-	height: 50rem;
 	border: 0.075rem solid #e3e3e3;
 	background: #fff;
 	padding: 1.8rem 2rem;

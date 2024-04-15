@@ -24,10 +24,10 @@ const RecruitCreatePage = () => {
 	const validCheck = useRecoilValue(validState);
 
 	const uploadPost = useMutation({
-		mutationFn: (formData: any) => postingRecruit(formData),
-		onSuccess: (data: { recruitmentPostId: number } | undefined) => {
-			resetFormData();
+		mutationFn: (formData: InputState) => postingRecruit(formData),
+		onSuccess: (data: { recruitmentPostId: number }) => {
 			navigate(`/recruitment/postings/${data?.recruitmentPostId}`);
+			resetFormData();
 		},
 	});
 	const editPost = useMutation({
@@ -74,7 +74,7 @@ const RecruitCreatePage = () => {
 			isSubmitted: true,
 		}));
 
-		if (postAvailable && location.pathname.includes('create')) {
+		if (postAvailable && location.pathname.includes('recruitment/postings')) {
 			uploadPost.mutate(formData);
 		}
 

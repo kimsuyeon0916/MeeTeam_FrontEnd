@@ -222,6 +222,7 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 
 		.container-roles {
 			overflow-y: auto;
+			height: 85%;
 
 			&::-webkit-scrollbar {
 				width: 1rem;
