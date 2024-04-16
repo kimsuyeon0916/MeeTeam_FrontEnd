@@ -2,30 +2,32 @@ import React, { useEffect, useState, useRef } from 'react';
 import S from './Header.styled';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { DropdownArrow, Logo, LogoName } from '../../assets';
-import { ProfileImage } from '..';
+import { ProfileImage, WaitModal } from '..';
 import { useLogin } from '../../hooks';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../atom';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import { userState, waitModalState } from '../../atom';
+import { fixModalBackground } from '../../utils';
 
 const Header = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const location = useLocation();
 	const { isLoggedIn, logout } = useLogin();
+	const userInfo = useRecoilValue(userState);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [openDrop, setOpenDrop] = useState<boolean>(false);
+	const [isWait, setIsWait] = useRecoilState(waitModalState);
 	const [isHere, setIsHere] = useState({
 		recruit: false,
 		galary: false,
 		inform: false,
 	});
-	const userInfo = useRecoilValue(userState);
 
 	const goRecruit = () => {
 		navigate('/recruitment/postings/search');
 	};
 	const goGalary = () => {
-		navigate('/galary');
+		setIsWait(true);
 	};
 	const goInformationUse = () => {
 		navigate('/information');
@@ -71,6 +73,10 @@ const Header = () => {
 			document.removeEventListener('mousedown', outsideClick);
 		};
 	}, [openDrop]);
+
+	useEffect(() => {
+		fixModalBackground(isWait);
+	}, [isWait]);
 
 	return (
 		<S.Header>
@@ -146,6 +152,11 @@ const Header = () => {
 					</div>
 				</div>
 			</div>
+			{isWait && (
+				<section className='modal-background'>
+					<WaitModal />
+				</section>
+			)}
 		</S.Header>
 	);
 };

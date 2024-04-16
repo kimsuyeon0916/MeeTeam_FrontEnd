@@ -27,7 +27,6 @@ const Header = styled.header`
 		justify-content: flex-end;
 		align-items: center;
 		flex-shrink: 0;
-		/* margin-left: 23.98%; */
 		cursor: pointer;
 
 		.logo,
@@ -153,6 +152,16 @@ const Header = styled.header`
 				margin-top: -1.2rem;
 			}
 		}
+	}
+
+	.modal-background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 105;
+		background-color: rgba(0, 0, 0, 0.15);
 	}
 `;
 
