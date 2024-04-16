@@ -34,6 +34,7 @@ import Test1 from './Test1.png';
 import Test2 from './Test2.png';
 import Test3 from './Test3.png';
 import Test4 from './Test4.png';
+import Refresh from './Refresh.svg';
 
 export {
 	Exit,
@@ -72,4 +73,5 @@ export {
 	Test2,
 	Test3,
 	Test4,
+	Refresh,
 };
