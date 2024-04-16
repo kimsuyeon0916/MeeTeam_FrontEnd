@@ -3,10 +3,17 @@ import styled from 'styled-components';
 const Header = styled.div`
 	position: relative;
 
+	.body2-semibold {
+		color: #8e8e8e;
+		font-size: 1.4rem;
+		font-weight: 600;
+		line-height: 1.7rem;
+		letter-spacing: 0.0028rem;
+	}
+
 	.header {
 		display: flex;
 		height: 6.75rem;
-		justify-content: space-between;
 		align-items: center;
 		flex-shrink: 0;
 		background-color: #fff;
@@ -42,10 +49,12 @@ const Header = styled.div`
 
 	.header__navigation {
 		display: flex;
-		width: 40%;
+		width: 26rem;
 		justify-content: flex-start;
 		align-items: center;
 		gap: 3.2rem;
+		margin-left: 6.05rem;
+		margin-right: 28.7rem;
 
 		.header__navigation--navi-text {
 			color: #8e8e8e;
@@ -69,9 +78,11 @@ const Header = styled.div`
 		display: flex;
 		justify-content: flex-start;
 		align-items: center;
-		margin-right: 5%;
-		width: 15%;
-		gap: 7%;
+		width: 24.2rem;
+		gap: 1.1rem;
+
+		.header__nickname {
+		}
 
 		.header__menu--my {
 			position: relative;

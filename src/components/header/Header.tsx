@@ -101,6 +101,9 @@ const Header = () => {
 					</div>
 				</div>
 				<div className='header__menu'>
+					<span className='header__nickname body2-semibold'>
+						안녕하세요, {userInfo?.nickname}님!
+					</span>
 					<div className='header__menu--my' ref={dropdownRef}>
 						<section onClick={onClickMy}>
 							{isLoggedIn ? (
@@ -129,7 +132,7 @@ const Header = () => {
 									className='menu'
 									onClick={() => {
 										setOpenDrop(false);
-										navigate('/manage/meeteam');
+										navigate('/management/bookmark');
 									}}
 								>
 									구인글 관리
