@@ -10,11 +10,9 @@ import 'react-quill/dist/quill.snow.css';
 const DetailedInformation = () => {
 	const quillRef = useRef<ReactQuill | null>(null);
 	const [formData, setFormData] = useRecoilState(recruitInputState);
-	const [posting, setPosting] = useState(formData.content);
 	const { validMessage, isValid } = useValid(formData);
 
 	const onChangeContents = (contents: string) => {
-		setPosting(contents);
 		setFormData({ ...formData, content: contents });
 	};
 
@@ -35,7 +33,7 @@ const DetailedInformation = () => {
 						theme='snow'
 						modules={modules}
 						onChange={onChangeContents}
-						value={posting}
+						value={formData.content}
 					/>
 					{isValid.isSubmitted && !isValid.isContent && (
 						<p className='valid-msg'>{validMessage.content}</p>
