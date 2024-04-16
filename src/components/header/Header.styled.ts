@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Header = styled.div`
+const Header = styled.header`
 	position: relative;
 
 	.body2-semibold {
@@ -18,6 +18,7 @@ const Header = styled.div`
 		flex-shrink: 0;
 		background-color: #fff;
 		border-bottom: 0.375px solid #e3e3e3;
+		justify-content: center;
 	}
 
 	.header__logo {
@@ -26,7 +27,7 @@ const Header = styled.div`
 		justify-content: flex-end;
 		align-items: center;
 		flex-shrink: 0;
-		margin-left: 23.98rem;
+		/* margin-left: 23.98%; */
 		cursor: pointer;
 
 		.logo,
@@ -54,7 +55,7 @@ const Header = styled.div`
 		align-items: center;
 		gap: 3.2rem;
 		margin-left: 6.05rem;
-		margin-right: 28.7rem;
+		margin-right: 30.7rem;
 
 		.header__navigation--navi-text {
 			color: #8e8e8e;
