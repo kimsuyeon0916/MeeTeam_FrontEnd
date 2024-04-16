@@ -95,7 +95,7 @@ const InputRoleForm = () => {
 			setRoleData({
 				roleName: '',
 				roleId: null,
-				count: null,
+				count: '',
 				skillIds: [],
 				skills: [],
 			});
@@ -239,7 +239,7 @@ const InputRoleForm = () => {
 					)}
 					<input
 						className='count-input body1-medium'
-						type='number'
+						type='text'
 						placeholder='인원'
 						value={roleData.count?.toString()}
 						onChange={onChangeCount}

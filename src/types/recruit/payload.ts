@@ -22,7 +22,7 @@ export interface ApplyForm {
 export interface RoleForPost {
 	roleName?: string;
 	roleId: number | null;
-	count: number | null;
+	count: number | string | null;
 	skillIds: number[];
 	skills?: Skill[];
 }
