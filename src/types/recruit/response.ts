@@ -186,6 +186,7 @@ export interface RecruitmentStatus {
 export interface ApplyManageInfo {
 	title: string;
 	link: string;
+	isFirstAccess: true;
 	recruitmentStatus: RecruitmentStatus[];
 	roles: ManageRole[];
 }

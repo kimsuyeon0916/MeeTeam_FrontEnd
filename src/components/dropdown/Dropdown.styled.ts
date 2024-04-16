@@ -207,7 +207,6 @@ const Dropdown = styled.div<IDropdown>`
 		}
 
 		.category {
-			min-width: 13rem;
 			padding: 0.2rem 0.2rem;
 			box-sizing: border-box;
 		}

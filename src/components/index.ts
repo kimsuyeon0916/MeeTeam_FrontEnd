@@ -133,6 +133,7 @@ import CommentDeleteModal from './recruit/recruitDetail/modal/commentDelete/Comm
 import WaitModal from './recruit/recruitDetail/modal/wait/WaitModal';
 import ApplicantCard from './recruit/applicants/ApplicantCard';
 import ApplyRole from './recruit/role/ApplyRole';
+import OpenChatModal from './recruit/applicants/modal/OpenChatModal';
 
 export {
 	Header,
@@ -261,4 +262,5 @@ export {
 	WaitModal,
 	ApplicantCard,
 	ApplyRole,
+	OpenChatModal,
 };

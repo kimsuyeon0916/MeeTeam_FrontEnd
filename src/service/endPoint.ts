@@ -57,6 +57,7 @@ export const EndPoint = {
 		approved: (id: number) => `/recruitment/applicants/${id}/approve`,
 		refused: (id: number) => `/recruitment/applicants/${id}/reject`,
 		set: (id: number) => `/recruitment/applicants/${id}/link`,
+		access: (id: number) => `/recruitment/applicants/${id}/access`,
 	},
 	MANAGEMENT_RECRUIT: {
 		myPost: '/management/my-post?size=12',

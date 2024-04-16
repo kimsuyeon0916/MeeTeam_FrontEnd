@@ -186,3 +186,8 @@ export const imageNameState = atom({
 	key: 'imageNameState',
 	default: '',
 });
+
+export const openChatModalState = atom({
+	key: 'openChatModalState',
+	default: false,
+});

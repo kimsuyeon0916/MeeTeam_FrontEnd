@@ -7,11 +7,11 @@ import {
 	FloatingBackground,
 	LinkIcon,
 } from '../../../assets';
-import { ApplicantCard, ApplyRole, Dropdown } from '../../../components';
+import { ApplicantCard, ApplyRole, Dropdown, OpenChatModal } from '../../../components';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getApplicantsList } from '../../../service';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { applicantFilter, applicantHolder } from '../../../atom';
+import { applicantFilter, applicantHolder, openChatModalState } from '../../../atom';
 import {
 	approveApplicant,
 	getRecruitInfo,
@@ -21,6 +21,7 @@ import {
 import { ApplicantInfo, ApplicantsLink, ApplicantsList } from '../../../types';
 import { useNavigate } from 'react-router-dom';
 import { useScrollToTop } from '../../../hooks';
+import { fixModalBackground } from '../../../utils';
 
 const ApplierManagePage = () => {
 	const role = useRecoilValue(applicantFilter);
@@ -34,6 +35,7 @@ const ApplierManagePage = () => {
 	const [isOpenCurrent, setIsOpenCurrent] = useState<boolean>(true);
 	const [linkUrl, setLinkUrl] = useState<string>('');
 	const [checkList, setCheckList] = useRecoilState(applicantHolder);
+	const isTutorialOpen = useRecoilValue(openChatModalState);
 	const [applicantsArr, setApplicantsArr] = useState<ApplicantInfo[]>([]);
 
 	const storedNum = sessionStorage.getItem('pageNum');
@@ -93,6 +95,8 @@ const ApplierManagePage = () => {
 		approved.mutate({ pageNum, applicantIds: checkList });
 	};
 
+	console.log(recruitManageInfo);
+
 	useEffect(() => {
 		const observer = new IntersectionObserver(entries => {
 			if (entries[0].isIntersecting) {
@@ -126,6 +130,10 @@ const ApplierManagePage = () => {
 			setLinkUrl(recruitManageInfo.link);
 		}
 	}, [recruitManageInfo?.link]);
+
+	useEffect(() => {
+		fixModalBackground(isTutorialOpen);
+	}, [recruitManageInfo?.isFirstAccess]);
 
 	return (
 		<S.ApplierManagePage $isChecked={checkList.length !== 0} $isOpenCurrent={isOpenCurrent}>
@@ -228,6 +236,11 @@ const ApplierManagePage = () => {
 					</section>
 				</section>
 			</article>
+			{recruitManageInfo?.isFirstAccess && (
+				<section className='modal-background'>
+					<OpenChatModal />
+				</section>
+			)}
 		</S.ApplierManagePage>
 	);
 };
