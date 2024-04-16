@@ -19,7 +19,7 @@ import {
 	ApplyClose,
 	WaitModal,
 } from '../../../components';
-import { fixModalBackground } from '../../../utils';
+import { calculateDate, fixModalBackground } from '../../../utils';
 import { JsxElementComponentProps, RoleInfo, RoleForPost } from '../../../types';
 import { useQuery } from '@tanstack/react-query';
 import { getPostingData } from '../../../service';
@@ -31,7 +31,6 @@ import {
 	applyStepState,
 	commentDeleteModalState,
 	recruitInputState,
-	waitModalState,
 } from '../../../atom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLogin } from '../../../hooks';
@@ -43,7 +42,6 @@ const RecruitDetailPage = () => {
 	const isModal = useRecoilValue(applyModalState);
 	const isCancel = useRecoilValue(applyCancelModalState);
 	const isClose = useRecoilValue(applyCloseModalState);
-	const isWait = useRecoilValue(waitModalState);
 	const isDelete = useRecoilValue(commentDeleteModalState);
 	const step = useRecoilValue(applyStepState);
 	const setFormData = useSetRecoilState(recruitInputState);
@@ -53,19 +51,12 @@ const RecruitDetailPage = () => {
 		2: <FinalModal />,
 	};
 	const { isLoggedIn } = useLogin();
-
 	const { data: detailedData, isSuccess } = useQuery({
 		queryKey: ['detailedPage', { pageNum, isLoggedIn }],
 		queryFn: () => getPostingData({ pageNum, isLoggedIn }),
 	});
 	const period = detailedData?.proceedingStart + ' ~ ' + detailedData?.proceedingEnd;
-
-	// 함수로 변경 후 -> useMemo 사용하기
-	const diffDate = Math.ceil(
-		(new Date(detailedData?.deadline as any).getTime() - new Date().getTime()) /
-			(1000 * 60 * 60 * 24)
-	).toString();
-
+	const diffDate = detailedData && calculateDate(detailedData.deadline);
 	const totalCommentsCount = useMemo(() => {
 		if (detailedData) {
 			return detailedData.comments.reduce((total, comment) => {
@@ -111,8 +102,8 @@ const RecruitDetailPage = () => {
 	};
 
 	useEffect(() => {
-		fixModalBackground(isModal || isCancel || isClose || isWait || isDelete);
-	}, [isModal, isCancel, isClose, isWait, isDelete]);
+		fixModalBackground(isModal || isCancel || isClose || isDelete);
+	}, [isModal, isCancel, isClose, isDelete]);
 
 	return (
 		<>
@@ -174,11 +165,6 @@ const RecruitDetailPage = () => {
 					{isClose && (
 						<section className='modal-background'>
 							<ApplyClose />
-						</section>
-					)}
-					{isWait && (
-						<section className='modal-background'>
-							<WaitModal />
 						</section>
 					)}
 				</S.RecruitDetailPage>

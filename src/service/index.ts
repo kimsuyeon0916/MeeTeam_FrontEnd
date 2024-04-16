@@ -26,6 +26,7 @@ import {
 	getProfessorKeyword,
 	getTagKeyword,
 	editPostingRecruit,
+	deletePostingRecruit,
 } from './recruit/posting';
 import { getApplicantsList } from './recruit/applicant';
 
@@ -57,4 +58,5 @@ export {
 	cancelApply,
 	editPostingRecruit,
 	getApplicantsList,
+	deletePostingRecruit,
 };

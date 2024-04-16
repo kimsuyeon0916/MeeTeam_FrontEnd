@@ -1,8 +1,10 @@
 import React from 'react';
 import { Edit, TrashCan } from '../../../../assets';
 import { useSetRecoilState } from 'recoil';
-import { applyCloseModalState, waitModalState } from '../../../../atom';
+import { applyCloseModalState } from '../../../../atom';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
+import { deletePostingRecruit } from '../../../../service';
 
 interface WriterFooter {
 	pageNum: number;
@@ -12,15 +14,21 @@ interface WriterFooter {
 const WriterFooter = ({ pageNum, onClickEditPage }: WriterFooter) => {
 	const navigate = useNavigate();
 	const setIsClose = useSetRecoilState(applyCloseModalState);
-	const setIsWait = useSetRecoilState(waitModalState);
 	sessionStorage.setItem('pageNum', pageNum.toString());
+
+	const deletePosting = useMutation({
+		mutationFn: (pageNum: number) => deletePostingRecruit(pageNum),
+		onSuccess: () => {
+			navigate('/recruitment/postings/search');
+		},
+	});
 
 	const onClickClose = () => {
 		setIsClose(true);
 	};
 
 	const onClickDelete = () => {
-		setIsWait(true);
+		deletePosting.mutate(pageNum);
 	};
 
 	const onClickApplicant = () => {
