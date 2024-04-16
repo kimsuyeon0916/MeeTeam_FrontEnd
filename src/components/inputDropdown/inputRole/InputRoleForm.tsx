@@ -2,33 +2,26 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { DropdownArrow, Search, XBtn } from '../../../assets';
 import S from './InputRoleForm.styled';
-import { Role, InputUserRoleForm, RoleForPost, InputState } from '../../../types';
+import { RoleForPost, InputState, Skill, Keyword } from '../../../types';
 import { useDebounce } from '../../../hooks';
 import { getRoleKeyword, getSkillKeyword } from '../../../service';
 import { useRecoilState } from 'recoil';
 import { recruitInputState } from '../../../atom';
 import { isNotNumber } from '../../../utils';
 
-const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => {
+const InputRoleForm = () => {
 	const [tagItem, setTagItem] = useState<string>('');
 	const [info, setInfos] = useRecoilState(recruitInputState);
 	const [dropdown, setDropdown] = useState({
 		role: false,
 		skill: false,
 	});
-	const [userRole, setUserRole] = useState<Role>({
-		id: 0,
-		role: {
-			id: null,
-			name: '',
-		},
-		count: '',
-		skill: [],
-	});
 	const [roleData, setRoleData] = useState<RoleForPost>({
 		roleId: null,
 		count: null,
 		skillIds: [],
+		roleName: '',
+		skills: [],
 	});
 
 	const [isValid, setIsValid] = useState({
@@ -42,13 +35,13 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 		},
 	});
 
-	const keywordRole = useDebounce(userRole.role.name, 500);
+	const keywordRole = useDebounce(roleData.roleName, 500);
 	const keywordSkill = useDebounce(tagItem, 500);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 
 	const { data: dataRole, isLoading: isLoadingRole } = useQuery({
 		queryKey: ['searchRole', keywordRole],
-		queryFn: () => getRoleKeyword(keywordRole),
+		queryFn: () => getRoleKeyword(keywordRole as string),
 		staleTime: 10000,
 	});
 
@@ -58,9 +51,9 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 	});
 
 	const submitTagItem = () => {
-		setUserRole(prevState => ({
+		setRoleData((prevState: RoleForPost) => ({
 			...prevState,
-			skill: [...prevState.skill, tagItem],
+			skills: [...(prevState?.skills?.map(e => e.name) as any), tagItem],
 		}));
 		setTagItem('');
 	};
@@ -76,24 +69,20 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 		}
 	};
 
-	const deleteTagItem = (event: React.MouseEvent<HTMLButtonElement>) => {
-		if (event.target instanceof Element) {
-			const deletedIndex = Number(event.target.id);
-			setUserRole(prevState => ({
-				...prevState,
-				skill: prevState.skill.filter((_, index) => index !== deletedIndex),
-			}));
-		}
+	const deleteTagItem = (deletedId: number) => {
+		setRoleData(prevState => ({
+			...prevState,
+			skills: prevState?.skills?.filter(skill => skill.id !== deletedId),
+			skillIds: prevState?.skillIds.filter(id => id !== deletedId),
+		}));
 	};
 
 	const onClickHandler = () => {
 		if (
 			roleData.roleId !== null &&
 			roleData.count &&
-			roleData.skillIds.length === userRole.skill.length &&
 			!info.recruitmentRoles.some(obj => obj.roleId === roleData.roleId)
 		) {
-			setUserRoleList((prev: RoleForPost[]) => [...prev, userRole]);
 			setIsValid({
 				role: { valid: true, message: '' },
 				count: { valid: true, message: '' },
@@ -103,16 +92,12 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 				...prev,
 				recruitmentRoles: [...prev.recruitmentRoles, roleData],
 			}));
-			setUserRole({
-				id: userRoleList.length + 1,
-				role: { id: null, name: '' },
-				count: '',
-				skill: [],
-			});
 			setRoleData({
+				roleName: '',
 				roleId: null,
 				count: null,
 				skillIds: [],
+				skills: [],
 			});
 			setTagItem('');
 			setDropdown(prev => ({
@@ -138,9 +123,9 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 	};
 	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
 		event.preventDefault();
-		setUserRole(prev => ({
+		setRoleData(prev => ({
 			...prev,
-			role: { ...prev.role, name: event.target.value },
+			roleName: event.target.value,
 		}));
 	};
 
@@ -155,16 +140,11 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 		}
 
 		if (isNotNumber(countValue)) {
-			setUserRole(prev => ({
-				...prev,
-				count: countValue,
-			}));
 			setRoleData(prev => ({
 				...prev,
 				count: Number(countValue),
 			}));
 		} else {
-			setUserRole(prev => ({ ...prev, count: countValue.replace(/\D/g, '') }));
 			setRoleData(prev => ({ ...prev, count: Number(countValue.replace(/\D/g, '')) }));
 		}
 	};
@@ -176,7 +156,6 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 	const onClickRole = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		const target = event.target as HTMLElement;
-		setUserRole(prev => ({ ...prev, role: { id: Number(target.id), name: innerText } }));
 		setDropdown(prev => ({
 			...prev,
 			role: false,
@@ -184,6 +163,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 		setRoleData(prev => ({
 			...prev,
 			roleId: Number(target.id),
+			roleName: innerText,
 		}));
 		setIsValid(prev => ({
 			...prev,
@@ -194,10 +174,12 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 	const onClickSkill = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		const target = event.target as HTMLElement;
-		if (!userRole.skill.includes(innerText) && userRole.skill.length < 6) {
-			setUserRole(prev => ({ ...prev, skill: [...prev.skill, innerText] }));
-			setRoleData(prev => ({ ...prev, skillIds: [...prev.skillIds, Number(target.id)] }));
-
+		if (!roleData.skills?.map(e => e.name).includes(innerText) && roleData.skillIds.length < 5) {
+			setRoleData(prev => ({
+				...prev,
+				skillIds: [...prev.skillIds, Number(target.id)],
+				skills: [...(prev.skills as any), { id: Number(target.id), name: innerText }],
+			}));
 			setTagItem('');
 		}
 	};
@@ -236,7 +218,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 							className='role-input body1-medium'
 							type='text'
 							placeholder='역할'
-							value={userRole.role.name}
+							value={roleData.roleName}
 							onChange={onChangeRole}
 							onClick={() => setDropdown(prev => ({ ...prev, role: true }))}
 						/>
@@ -257,9 +239,9 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 					)}
 					<input
 						className='count-input body1-medium'
-						type='text'
+						type='number'
 						placeholder='인원'
-						value={userRole.count}
+						value={roleData.count?.toString()}
 						onChange={onChangeCount}
 					/>
 					{!isValid.count.valid && (
@@ -287,6 +269,7 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 										<span
 											key={elem.id}
 											className='skill-element body1-medium'
+											id={elem.id.toString()}
 											onClick={onClickSkill}
 										>
 											{elem.name}
@@ -303,16 +286,21 @@ const InputRoleForm = ({ userRoleList, setUserRoleList }: InputUserRoleForm) => 
 								<section className='wrapper-selected__skills'>
 									<span className='body1-medium'>보유 스킬</span>
 									<section className='container-selected__skills'>
-										{userRole.skill.map((tagItem, index) => {
-											return (
-												<article className='tags' key={index}>
-													<span className='txt2'>{tagItem}</span>
-													<button type='button' onClick={deleteTagItem} className='btn-delete__tag'>
-														<img src={XBtn} id={index.toString()} />
-													</button>
-												</article>
-											);
-										})}
+										{roleData.skills &&
+											roleData.skills.map((tagItem: Keyword) => {
+												return (
+													<article className='tags' key={tagItem.id}>
+														<span className='txt2'>{tagItem.name}</span>
+														<button
+															type='button'
+															onClick={() => deleteTagItem(tagItem.id)}
+															className='btn-delete__tag'
+														>
+															<img src={XBtn} />
+														</button>
+													</article>
+												);
+											})}
 									</section>
 								</section>
 								<p className='txt4 mention'>보유 스킬은 최대 5개까지 입력 가능합니다.</p>

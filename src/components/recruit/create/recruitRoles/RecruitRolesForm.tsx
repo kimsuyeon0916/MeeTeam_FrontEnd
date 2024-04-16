@@ -7,17 +7,17 @@ import { InputRole, InputRoleForm } from '../../../index';
 import { useValid } from '../../../../hooks';
 
 const RecruitRoleForm = () => {
-	const [userRoleList, setUserRoleList] = useState<Role[]>([]);
+	// const [userRoleList, setUserRoleList] = useState<Role[]>([]);
 	const [info, setInfo] = useRecoilState(recruitInputState);
 	const { validMessage, isValid } = useValid(info);
 
 	const deleteObj = (id: number | null) => {
-		setUserRoleList(prev => prev.filter(elem => elem.role.id !== id));
 		setInfo(prev => ({
 			...prev,
 			recruitmentRoles: prev.recruitmentRoles?.filter(elem => elem.roleId !== id),
 		}));
 	};
+
 	return (
 		<S.RecruitRoles>
 			<section className='container-roles'>
@@ -25,16 +25,16 @@ const RecruitRoleForm = () => {
 					<h4>모집 역할</h4>
 				</section>
 				<section className='wrapper-roles'>
-					<InputRoleForm userRoleList={userRoleList} setUserRoleList={setUserRoleList} />
+					<InputRoleForm />
 					<article className='container-role__list'>
-						{userRoleList.map(userRole => (
+						{info.recruitmentRoles.map(userRole => (
 							<InputRole
-								key={userRole.role.id}
-								role={userRole.role.name}
+								key={userRole.roleId}
+								role={userRole.roleName as any}
 								count={Number(userRole.count)}
-								skill={userRole.skill}
-								onDelete={() => deleteObj(userRole.role.id)}
-								id={userRole.role.id}
+								skill={userRole.skills?.map(e => e.name) as any}
+								onDelete={() => deleteObj(userRole.roleId)}
+								id={userRole.roleId}
 							/>
 						))}
 					</article>

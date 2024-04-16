@@ -29,12 +29,13 @@ export interface RecruitDescription {
 	content: string;
 }
 
-interface Skill {
+export interface Skill {
 	id: number;
 	name: string;
 }
 
 export interface RoleInfo {
+	roleId: number;
 	roleName: string;
 	skills: Skill[];
 	recruitCount: number;

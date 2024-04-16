@@ -20,7 +20,7 @@ import {
 	WaitModal,
 } from '../../../components';
 import { fixModalBackground } from '../../../utils';
-import { JsxElementComponentProps } from '../../../types';
+import { JsxElementComponentProps, RoleInfo, RoleForPost } from '../../../types';
 import { useQuery } from '@tanstack/react-query';
 import { getPostingData } from '../../../service';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -62,10 +62,8 @@ const RecruitDetailPage = () => {
 
 	// 함수로 변경 후 -> useMemo 사용하기
 	const diffDate = Math.ceil(
-		Math.abs(
-			(new Date(detailedData?.deadline as any).getTime() - new Date().getTime()) /
-				(1000 * 60 * 60 * 24)
-		)
+		(new Date(detailedData?.deadline as any).getTime() - new Date().getTime()) /
+			(1000 * 60 * 60 * 24)
 	).toString();
 
 	const totalCommentsCount = useMemo(() => {
@@ -76,8 +74,23 @@ const RecruitDetailPage = () => {
 		}
 	}, [detailedData?.comments]);
 
+	// 상황1: RoleInfo[]를 Detail에서 받고 있어.
+	// 상황2: InputState을 통해서 변경된 역할 정보를 보내야 해.
+	// 상황3: InputState에서 Role 타입과 RecruitPostings에서 Role 타입이 불일치 해.
+
+	const convertRoleInfo = (roleInfo: RoleInfo): RoleForPost => {
+		return {
+			roleId: roleInfo.roleId,
+			count: roleInfo.recruitedCount,
+			skillIds: roleInfo.skills.map(e => e.id),
+			skills: roleInfo.skills,
+			roleName: roleInfo.roleName,
+		};
+	};
+
 	const onClickEditPage = async () => {
-		if (detailedData) {
+		const transformedRoles = detailedData?.recruitmentRoles.map(convertRoleInfo);
+		if (detailedData && transformedRoles) {
 			setFormData({
 				pageNum: pageNum,
 				scope: detailedData.scope,
@@ -92,7 +105,7 @@ const RecruitDetailPage = () => {
 					courseProfessor: detailedData.courseProfessor,
 					isCourse: detailedData.courseName || detailedData.courseProfessor ? true : false,
 				},
-				recruitmentRoles: [],
+				recruitmentRoles: transformedRoles,
 				tags: detailedData.tags.map(e => e.name),
 				title: detailedData.title,
 				content: detailedData.content,

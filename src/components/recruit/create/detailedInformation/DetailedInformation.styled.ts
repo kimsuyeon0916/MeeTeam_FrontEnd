@@ -45,6 +45,10 @@ const DetailedInformation = styled.section`
 				font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 				padding: 0.8rem;
 			}
+
+			.ql-editor {
+				font-size: 1.6rem;
+			}
 		}
 
 		.valid-msg {

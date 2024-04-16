@@ -41,7 +41,7 @@ const RecruitCreatePage = () => {
 	const editPost = useMutation({
 		mutationFn: ({ pageNum, formData }: EditPosting) => editPostingRecruit({ pageNum, formData }),
 		onSuccess: () => {
-			navigate(`/recruit/${formData.pageNum}`);
+			navigate(`/recruitment/postings/${formData.pageNum}`);
 		},
 	});
 

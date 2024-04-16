@@ -1,4 +1,5 @@
 import { Keyword } from '..';
+import { Skill } from './response';
 
 export interface ApplyRole {
 	name: string;
@@ -19,9 +20,11 @@ export interface ApplyForm {
 	message: string | undefined;
 }
 export interface RoleForPost {
+	roleName?: string;
 	roleId: number | null;
 	count: number | null;
 	skillIds: number[];
+	skills?: Skill[];
 }
 
 export interface InputState {
