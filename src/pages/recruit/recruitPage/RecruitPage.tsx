@@ -233,7 +233,7 @@ const RecruitPage = () => {
 										))}
 									</section>
 								)}
-								{data?.posts.length === 0 && (
+								{!isLoading && data && data?.posts.length === 0 && (
 									<section className='no-results'>
 										<span>일치하는 결과가 없습니다.</span>
 									</section>
