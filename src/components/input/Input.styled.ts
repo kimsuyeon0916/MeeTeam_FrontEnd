@@ -8,7 +8,7 @@ interface InputStyle {
 	invalid?: boolean;
 }
 
-const InputLabel = styled.label<{ $width?: string }>`
+const InputLayout = styled.label<{ $width?: string }>`
 	min-width: 0;
 	display: flex;
 	flex-direction: column;
@@ -24,8 +24,6 @@ const InputLabel = styled.label<{ $width?: string }>`
 	letter-spacing: 0.0032rem;
 
 	h6 {
-		margin-bottom: 0.8rem;
-
 		/* Body/body2/semibold */
 		font-size: 1.4rem;
 		font-style: normal;
@@ -33,6 +31,17 @@ const InputLabel = styled.label<{ $width?: string }>`
 		line-height: 1.7rem; /* 121.429% */
 		letter-spacing: 0.0028rem;
 	}
+`;
+
+const InputLabel = styled.h6<{ $required?: boolean }>`
+	margin-bottom: 0.8rem;
+
+	${props =>
+		props.$required &&
+		`&:: after {
+			content: ' *';
+			color: #f85858;
+		}`}
 `;
 
 const InputContainer = styled.div`
@@ -106,6 +115,6 @@ const Input = styled.input<InputStyle>`
 	}
 `;
 
-const S = { InputLabel, InputContainer, Input };
+const S = { InputLayout, InputLabel, InputContainer, Input };
 
 export default S;
