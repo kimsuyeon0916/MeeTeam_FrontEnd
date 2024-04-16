@@ -1,9 +1,9 @@
 import MainPage from './MainPage';
+import RecruitPage from './recruit/recruitPage/RecruitPage';
 import GalaryPage from './GalaryPage';
 import RecruitCreatePage from './create/recruitCreatePage/RecruitCreatePage';
 import SignInPage from './account/signIn/SignInPage';
 import SignUpPage from './account/signUp/SignUpPage';
-import RecruitPage from './recruit/recruitPage/RecruitPage';
 import RecruitDetailPage from './recruit/recruitDetailPage/RecruitDetailPage';
 import SchoolCertificationPage from './account/schoolCertification/SchoolCertificationPage';
 import { SCHOOL_CERTIFICATION_DATA } from './account/schoolCertification/SchoolCertificationData';
@@ -13,17 +13,15 @@ import NicknameSettingPage from './account/signUp/nicknameSetting/NicknameSettin
 import type { Account, User } from './account/signUp/SignUpData';
 import PassWordFindingPage from './account/passWordFindingPage/PassWordFindingPage';
 import { PASSWORD_DATA } from './account/passWordFindingPage/PassWordData';
-import MyActivityManagePage from './activity/MyActivityManagePage';
-import MyActivityInvited from './activity/MyActivityInvited';
-import MyActivityWrapper from './activity/MyActivityWrapper';
-import MyActivityLike from './activity/MyActivityLike';
-import MyActivityApply from './activity/MyActivityApply';
-import MyActivityBookmark from './activity/MyActivityBookmark';
-import ProfileDetailsPage from './profile/details/ProfileDetailsPage';
-import { userData } from './profile/userData';
 import ProfileEditPage from './profile/edit/ProfileEditPage';
 import PROFILE_EDIT_DATA from './profile/edit/ProfileEditData';
 import ApplierManagePage from './recruit/applierManagePage/ApplierManagePage';
+import RecruitManageWrapper from './recruit/recruitManagePage/RecruitManageWrapper';
+import RecruitPostingBookmark from './recruit/recruitManagePage/RecruitPostingBookmark';
+import ProfileDetailsPage from './profile/details/ProfileDetailsPage';
+import { userData } from './profile/userData';
+import RecruitPostingApply from './recruit/recruitManagePage/RecruitPostingApply';
+import RecruitMyPostings from './recruit/recruitManagePage/RecruitMyPostings';
 
 export {
 	MainPage,
@@ -42,15 +40,13 @@ export {
 	PassWordFindingPage,
 	PASSWORD_DATA,
 	RecruitDetailPage,
-	MyActivityManagePage,
-	MyActivityInvited,
-	MyActivityWrapper,
-	MyActivityLike,
-	MyActivityApply,
-	MyActivityBookmark,
+	RecruitManageWrapper,
+	RecruitPostingBookmark,
 	ProfileDetailsPage,
 	userData,
 	ProfileEditPage,
 	PROFILE_EDIT_DATA,
 	ApplierManagePage,
+	RecruitPostingApply,
+	RecruitMyPostings,
 };

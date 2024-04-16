@@ -19,6 +19,7 @@ export interface ApplyForm {
 	applyRoleId: number;
 	message: string | undefined;
 }
+
 export interface RoleForPost {
 	roleName?: string;
 	roleId: number | null;

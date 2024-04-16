@@ -16,6 +16,10 @@ import {
 	ProfileDetailsPage,
 	ProfileEditPage,
 	ApplierManagePage,
+	RecruitManageWrapper,
+	RecruitPostingBookmark,
+	RecruitPostingApply,
+	RecruitMyPostings,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -58,6 +62,24 @@ const router = createBrowserRouter([
 					{ path: '', element: <SignUpPage /> },
 					{ path: 'school?', element: <SchoolCertificationPage /> },
 					{ path: 'nickname', element: <NicknameSettingPage /> },
+				],
+			},
+			{
+				path: 'recruit/manage',
+				element: <RecruitManageWrapper />,
+				children: [
+					{
+						path: 'bookmark',
+						element: <RecruitPostingBookmark />,
+					},
+					{
+						path: 'apply',
+						element: <RecruitPostingApply />,
+					},
+					{
+						path: 'my',
+						element: <RecruitMyPostings />,
+					},
 				],
 			},
 			{

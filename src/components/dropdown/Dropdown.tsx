@@ -16,6 +16,7 @@ interface Dropdown {
 	category?: boolean;
 	applicant?: boolean;
 	roleObj?: ManageRole[];
+	normalVersion?: boolean;
 }
 
 type keyObj = {
@@ -33,7 +34,15 @@ const categoryObj: keyObj = {
 	공모전: 3,
 };
 
-const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dropdown) => {
+const Dropdown = ({
+	data,
+	initialData,
+	scope,
+	category,
+	applicant,
+	roleObj,
+	normalVersion,
+}: Dropdown) => {
 	const [currentValue, setCurrentValue] = useState<string | undefined>(`${initialData}`);
 	const [showDropdown, setShowDropdown] = useState<boolean>(false);
 	const [dropdown, setDropdown] = useState({
@@ -86,7 +95,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		const value = event.target.value;
 		setCurrentValue(value);
 		setFilterState(prev => ({ ...prev, scope: scopeObj[value] }));
-		if (value !== '교내') {
+		if (value !== '교내' || normalVersion) {
 			setShowDropdown(false);
 		}
 	};
@@ -140,7 +149,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 	}, [dropdownRef.current, showDropdown, dropdown.course, dropdown.professor]);
 
 	useEffect(() => {
-		if (scope && filterState.scope === null) {
+		if ((scope && filterState.scope === null) || normalVersion) {
 			setCurrentValue('범위');
 		} else if (!scope && filterState.category === null && initialData !== '역할') {
 			setCurrentValue('유형');
@@ -148,7 +157,13 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 	}, [filterState.scope, filterState.category]);
 
 	return (
-		<S.Dropdown $showDropdown={showDropdown} ref={dropdownRef} scope={scope} $isCheck={isChecked}>
+		<S.Dropdown
+			$showDropdown={showDropdown}
+			$scope={scope}
+			$isCheck={isChecked}
+			$normalVersion={normalVersion}
+			ref={dropdownRef}
+		>
 			<article className='wrapper' onClick={onClickDropdown}>
 				<div className='dropdown-box'>
 					<div className='value'>{currentValue}</div>
@@ -172,7 +187,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 												/>
 												<label htmlFor={`${index}`}>{e}</label>
 											</section>
-											{currentValue === '교내' && (
+											{currentValue === '교내' && !normalVersion && (
 												<section className='inside'>
 													<section className='intro'>
 														<span className='description'>

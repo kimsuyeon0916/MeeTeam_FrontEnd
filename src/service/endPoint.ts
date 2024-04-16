@@ -36,6 +36,7 @@ export const EndPoint = {
 		deleteComment: ({ pageNum, commentId }: DeleteComment) =>
 			`/recruitment/postings/${pageNum}/comment/${commentId}`,
 	},
+	/* recruit */
 	RECRUITMENT: {
 		post: '/recruitment/postings',
 		role: (keyword: string) => `/role/search?keyword=${keyword}&limit=5`,
