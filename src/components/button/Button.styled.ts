@@ -24,6 +24,7 @@ const DefaultButtonLayout = styled.button<{ $small?: boolean }>`
 	padding: ${props => (props.$small ? '1.2rem 2rem' : '1.2rem 3.2rem')};
 	justify-content: center;
 	align-items: center;
+	column-gap: 0.75rem;
 	border: 1px solid var(--ButtonColors-Default-outline-defaultLine, #e3e3e3);
 	border-radius: 0.6rem;
 	color: var(--text-color-2, #373f41);
