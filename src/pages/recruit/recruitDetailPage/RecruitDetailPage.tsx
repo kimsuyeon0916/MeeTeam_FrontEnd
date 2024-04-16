@@ -77,7 +77,7 @@ const RecruitDetailPage = () => {
 	const convertRoleInfo = (roleInfo: RoleInfo): RoleForPost => {
 		return {
 			roleId: roleInfo.roleId,
-			count: roleInfo.recruitedCount,
+			count: roleInfo.recruitCount,
 			skillIds: roleInfo.skills.map(e => e.id),
 			skills: roleInfo.skills,
 			roleName: roleInfo.roleName,

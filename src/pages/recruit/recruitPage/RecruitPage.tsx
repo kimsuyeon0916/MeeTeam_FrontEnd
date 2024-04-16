@@ -30,7 +30,7 @@ const RecruitPage = () => {
 		applied: false,
 		value: '분야를 선택해주세요',
 	});
-	const [currentPage, setCurrentPage] = useState<number>(START_PAGE_NUM);
+	const [page, setPage] = useState<number>(START_PAGE_NUM);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [isFieldOpen, setIsFieldOpen] = useState<boolean>(false);
 	const [filterState, setFilterState] = useRecoilState(recruitFilterState);
@@ -43,8 +43,8 @@ const RecruitPage = () => {
 
 	const { isLoggedIn } = useLogin();
 	const { data, isLoading } = useQuery({
-		queryKey: ['recruit_board', { filterState, isLoggedIn }],
-		queryFn: () => getPostList({ filterState, isLoggedIn }),
+		queryKey: ['recruit_board', { filterState, isLoggedIn, page }],
+		queryFn: () => getPostList({ filterState, isLoggedIn, page }),
 	});
 
 	const onClickDetailed = () => {
@@ -119,6 +119,10 @@ const RecruitPage = () => {
 			document.removeEventListener('mousedown', outsideClick);
 		};
 	}, [dropdownRef.current, isOpen]);
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [page]);
 
 	return (
 		<S.RecruitPage
@@ -246,8 +250,8 @@ const RecruitPage = () => {
 							<Pagination
 								postsNum={data.pageInfo.totalContents}
 								postsPerPage={data.pageInfo.size}
-								currentPage={currentPage}
-								setCurrentPage={setCurrentPage}
+								currentPage={page}
+								setCurrentPage={setPage}
 							/>
 						)}
 					</article>

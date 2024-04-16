@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import S from './RecruitManagePage.styled';
-import { RecruitCard } from '../../../components';
+import { RecruitCard, Pagination } from '../../../components';
 import { useQuery } from '@tanstack/react-query';
 import { getManagementMyPost } from '../../../service/management/recruit';
 
@@ -57,6 +57,16 @@ const RecruitMyPostings = () => {
 						data &&
 						data.data.map((element, index) => <RecruitCard key={index} {...element} />)}
 				</section>
+			</article>
+			<article className='container-pagination'>
+				{data && (
+					<Pagination
+						postsNum={data.pageInfo.totalContents}
+						postsPerPage={data.pageInfo.size}
+						currentPage={page}
+						setCurrentPage={setPage}
+					/>
+				)}
 			</article>
 		</S.RecruitManage>
 	);

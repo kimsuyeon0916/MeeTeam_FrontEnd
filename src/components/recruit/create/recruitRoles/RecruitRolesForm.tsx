@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Role } from '../../../../types';
 import S from './RecruitRolesForm.styled';
 import { recruitInputState } from '../../../../atom';
 import { useRecoilState } from 'recoil';
@@ -7,7 +6,6 @@ import { InputRole, InputRoleForm } from '../../../index';
 import { useValid } from '../../../../hooks';
 
 const RecruitRoleForm = () => {
-	// const [userRoleList, setUserRoleList] = useState<Role[]>([]);
 	const [info, setInfo] = useRecoilState(recruitInputState);
 	const { validMessage, isValid } = useValid(info);
 
@@ -17,6 +15,8 @@ const RecruitRoleForm = () => {
 			recruitmentRoles: prev.recruitmentRoles?.filter(elem => elem.roleId !== id),
 		}));
 	};
+
+	console.log(info);
 
 	return (
 		<S.RecruitRoles>

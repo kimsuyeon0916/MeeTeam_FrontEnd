@@ -4,9 +4,10 @@ import { ListResult, FilterData } from '../../types';
 interface FilterItem {
 	filterState: FilterData;
 	isLoggedIn: boolean;
+	page: number;
 }
 
-export const getPostList = async ({ filterState, isLoggedIn }: FilterItem) => {
+export const getPostList = async ({ filterState, isLoggedIn, page }: FilterItem) => {
 	try {
 		const queryString = Object.entries(filterState)
 			.filter(([key, value]) => {
@@ -29,10 +30,18 @@ export const getPostList = async ({ filterState, isLoggedIn }: FilterItem) => {
 
 		const url = `${EndPoint.RECRUITMENT_BOARD.list}${queryString ? `?${queryString}` : ''}`;
 		if (isLoggedIn) {
-			const response = await axiosAuthInstance.get<ListResult>(url);
+			const response = await axiosAuthInstance.get<ListResult>(url, {
+				params: {
+					page,
+				},
+			});
 			return response;
 		} else {
-			const response = await axiosInstance.get<ListResult>(url);
+			const response = await axiosInstance.get<ListResult>(url, {
+				params: {
+					page,
+				},
+			});
 			return response;
 		}
 	} catch (error) {
