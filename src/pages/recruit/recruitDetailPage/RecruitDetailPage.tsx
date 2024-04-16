@@ -74,10 +74,6 @@ const RecruitDetailPage = () => {
 		}
 	}, [detailedData?.comments]);
 
-	// 상황1: RoleInfo[]를 Detail에서 받고 있어.
-	// 상황2: InputState을 통해서 변경된 역할 정보를 보내야 해.
-	// 상황3: InputState에서 Role 타입과 RecruitPostings에서 Role 타입이 불일치 해.
-
 	const convertRoleInfo = (roleInfo: RoleInfo): RoleForPost => {
 		return {
 			roleId: roleInfo.roleId,

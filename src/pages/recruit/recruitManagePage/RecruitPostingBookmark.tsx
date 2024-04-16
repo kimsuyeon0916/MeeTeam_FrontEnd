@@ -1,24 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import S from './RecruitManagePage.styled';
-import { Dropdown, RecruitCard } from '../../../components';
+import { RecruitCard } from '../../../components';
+import { useQuery } from '@tanstack/react-query';
+import { getManagementBookmark } from '../../../service/management/recruit';
 
 const RecruitPostingBookmark = () => {
+	const [page, setPage] = useState<number>(1);
 	const [menuState, setMenuState] = useState({
 		all: true,
 		doing: false,
 		done: false,
+	});
+	const [isClosed, setIsClosed] = useState<boolean | null>(null);
+
+	const { data, isSuccess, refetch } = useQuery({
+		queryKey: ['managementBookmark'],
+		queryFn: () => getManagementBookmark({ page, isClosed }),
 	});
 
 	const onClickMenu = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		if (innerText === '전체') {
 			setMenuState({ all: true, doing: false, done: false });
+			setIsClosed(null);
 		} else if (innerText === '구인중') {
 			setMenuState({ all: false, doing: true, done: false });
+			setIsClosed(false);
 		} else if (innerText === '마감') {
 			setMenuState({ all: false, doing: false, done: true });
+			setIsClosed(true);
 		}
 	};
+	useEffect(() => {
+		refetch();
+	}, [isClosed]);
 	return (
 		<S.RecruitManage>
 			<article>
@@ -36,55 +51,10 @@ const RecruitPostingBookmark = () => {
 						마감
 					</span>
 				</section>
-				<section className='container-dropdown'>
-					<Dropdown data={['전체', '교내', '교외']} initialData='범위' normalVersion={true} />
-					<Dropdown data={['전체', '프로젝트', '스터디', '공모전']} initialData='유형' />
-				</section>
 				<section className='container-contents'>
-					<RecruitCard
-						id={1}
-						title={'안녕하세요'}
-						category={'프로젝트'}
-						writerNickname={'승준염'}
-						writerProfileImg={''}
-						deadline={'2024-09-27'}
-						scope={'교내'}
-						isBookmarked={false}
-						key={1}
-					/>
-					<RecruitCard
-						id={1}
-						title={'안녕하세요'}
-						category={'프로젝트'}
-						writerNickname={'승준염'}
-						writerProfileImg={''}
-						deadline={'2024-09-27'}
-						scope={'교내'}
-						isBookmarked={false}
-						key={1}
-					/>
-					<RecruitCard
-						id={1}
-						title={'안녕하세요'}
-						category={'프로젝트'}
-						writerNickname={'승준염'}
-						writerProfileImg={''}
-						deadline={'2024-09-27'}
-						scope={'교내'}
-						isBookmarked={false}
-						key={1}
-					/>
-					<RecruitCard
-						id={1}
-						title={'안녕하세요'}
-						category={'프로젝트'}
-						writerNickname={'승준염'}
-						writerProfileImg={''}
-						deadline={'2024-09-27'}
-						scope={'교내'}
-						isBookmarked={false}
-						key={1}
-					/>
+					{isSuccess &&
+						data &&
+						data.data.map((element, index) => <RecruitCard key={index} {...element} />)}
 				</section>
 			</article>
 		</S.RecruitManage>

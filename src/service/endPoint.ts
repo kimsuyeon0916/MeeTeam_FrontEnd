@@ -58,4 +58,9 @@ export const EndPoint = {
 		refused: (id: number) => `/recruitment/applicants/${id}/reject`,
 		set: (id: number) => `/recruitment/applicants/${id}/link`,
 	},
+	MANAGEMENT_RECRUIT: {
+		myPost: '/management/myPost?size=12',
+		bookmark: '/management/bookmark?size=12',
+		applied: '/management/applied?size=12',
+	},
 };

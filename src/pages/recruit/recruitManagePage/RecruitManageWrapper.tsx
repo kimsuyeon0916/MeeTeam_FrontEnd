@@ -12,11 +12,11 @@ const RecruitManageWrapper = () => {
 		},
 		{
 			name: '신청한 구인글',
-			path: 'apply',
+			path: 'applied',
 		},
 		{
 			name: '내가 작성한 구인글',
-			path: 'my',
+			path: 'my-post',
 		},
 	];
 	return (

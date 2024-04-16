@@ -65,7 +65,7 @@ const router = createBrowserRouter([
 				],
 			},
 			{
-				path: 'recruit/manage',
+				path: 'management',
 				element: <RecruitManageWrapper />,
 				children: [
 					{
@@ -73,11 +73,11 @@ const router = createBrowserRouter([
 						element: <RecruitPostingBookmark />,
 					},
 					{
-						path: 'apply',
+						path: 'applied',
 						element: <RecruitPostingApply />,
 					},
 					{
-						path: 'my',
+						path: 'my-post',
 						element: <RecruitMyPostings />,
 					},
 				],

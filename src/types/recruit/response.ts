@@ -121,7 +121,7 @@ export interface Post {
 	deadline: string;
 	scope: string;
 	isBookmarked: boolean;
-	writerId: string; // 필요할 듯 합니다..!
+	writerId: string;
 }
 
 export interface Page {
@@ -133,6 +133,11 @@ export interface Page {
 
 export interface ListResult {
 	posts: Post[];
+	pageInfo: Page;
+}
+
+export interface ManageListResult {
+	data: Post[];
 	pageInfo: Page;
 }
 
