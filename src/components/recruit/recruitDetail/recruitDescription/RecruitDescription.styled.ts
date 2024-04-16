@@ -9,8 +9,12 @@ const RecruitDescription = styled.article`
 		border: none;
 	}
 
+	.container-contents {
+		margin-top: 4.8rem;
+	}
+
 	p {
-		padding: 4.8rem 9.8rem;
+		padding: 0 9.8rem 1rem 9.8rem;
 		color: #373f41;
 		font-size: 1.6rem;
 		font-weight: 500;
