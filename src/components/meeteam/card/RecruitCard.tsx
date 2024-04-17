@@ -14,7 +14,8 @@ const RecruitCard = ({
 	deadline,
 	scope,
 	isBookmarked,
-	writerId = 'test', // 필요할 듯 합니다!
+	writerId,
+	isClosed,
 }: Post) => {
 	const navigate = useNavigate();
 	const [isMarked, setIsMarked] = useState<boolean>(isBookmarked);
@@ -27,8 +28,9 @@ const RecruitCard = ({
 		event.stopPropagation();
 		setIsMarked(prev => !prev);
 	};
+
 	return (
-		<S.RecruitCard onClick={onClickContent}>
+		<S.RecruitCard onClick={onClickContent} $isClosed={isClosed}>
 			<section className='content-tags'>
 				<section className='header'>
 					<section className='tags'>
@@ -43,11 +45,14 @@ const RecruitCard = ({
 			</section>
 			<section className='content-info'>
 				<section className='user'>
-					{/* userId 필요 */}
 					<ProfileImage userId={writerId} size='2.31rem' url={writerProfileImg} />
 					<span>{writerNickname}</span>
 				</section>
-				<span className='date'>~ {deadline}</span>
+				{isClosed ? (
+					<span className='closed txt2'>모집마감</span>
+				) : (
+					<span className='date'>~ {deadline}</span>
+				)}
 			</section>
 		</S.RecruitCard>
 	);

@@ -134,6 +134,7 @@ import WaitModal from './recruit/recruitDetail/modal/wait/WaitModal';
 import ApplicantCard from './recruit/applicants/ApplicantCard';
 import ApplyRole from './recruit/role/ApplyRole';
 import OpenChatModal from './recruit/applicants/modal/OpenChatModal';
+import Toast from './recruit/applicants/toast/Toast';
 
 export {
 	Header,
@@ -263,4 +264,5 @@ export {
 	ApplicantCard,
 	ApplyRole,
 	OpenChatModal,
+	Toast,
 };

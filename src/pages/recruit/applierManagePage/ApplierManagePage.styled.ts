@@ -260,12 +260,11 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 			.arrow {
 				display: flex;
 				flex-direction: column;
+				justify-content: center;
+				align-items: center;
 				position: absolute;
-				top: 1.2rem;
-				right: 1.9rem;
-				span {
-					margin-top: 0.5rem;
-				}
+				top: 1rem;
+				right: 1.6rem;
 			}
 		}
 	}

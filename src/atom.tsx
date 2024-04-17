@@ -191,3 +191,8 @@ export const openChatModalState = atom({
 	key: 'openChatModalState',
 	default: false,
 });
+
+export const toastState = atom({
+	key: 'toastState',
+	default: false,
+});

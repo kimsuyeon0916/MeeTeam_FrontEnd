@@ -122,6 +122,7 @@ export interface Post {
 	scope: string;
 	isBookmarked: boolean;
 	writerId: string;
+	isClosed: boolean;
 }
 
 export interface Page {

@@ -7,11 +7,11 @@ import {
 	FloatingBackground,
 	LinkIcon,
 } from '../../../assets';
-import { ApplicantCard, ApplyRole, Dropdown, OpenChatModal } from '../../../components';
+import { ApplicantCard, ApplyRole, Dropdown, OpenChatModal, Toast } from '../../../components';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getApplicantsList } from '../../../service';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { applicantFilter, applicantHolder, openChatModalState } from '../../../atom';
+import { applicantFilter, applicantHolder, openChatModalState, toastState } from '../../../atom';
 import {
 	approveApplicant,
 	getRecruitInfo,
@@ -35,11 +35,13 @@ const ApplierManagePage = () => {
 	const [isOpenCurrent, setIsOpenCurrent] = useState<boolean>(true);
 	const [linkUrl, setLinkUrl] = useState<string>('');
 	const [checkList, setCheckList] = useRecoilState(applicantHolder);
+	const [isToast, setIsToast] = useRecoilState(toastState);
 	const isTutorialOpen = useRecoilValue(openChatModalState);
 	const [applicantsArr, setApplicantsArr] = useState<ApplicantInfo[]>([]);
 
 	const storedNum = sessionStorage.getItem('pageNum');
 	const pageNum = Number(storedNum !== null && storedNum);
+	const isChecked = checkList.length !== 0 && linkUrl.length !== 0;
 
 	const {
 		data: applicantList,
@@ -89,13 +91,17 @@ const ApplierManagePage = () => {
 	};
 
 	const onClickRefused = () => {
+		if (linkUrl === '') {
+			setIsToast(true);
+		}
 		refused.mutate({ pageNum, applicantIds: checkList });
 	};
 	const onClickApproved = () => {
+		if (linkUrl === '') {
+			setIsToast(true);
+		}
 		approved.mutate({ pageNum, applicantIds: checkList });
 	};
-
-	console.log(recruitManageInfo);
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(entries => {
@@ -136,7 +142,7 @@ const ApplierManagePage = () => {
 	}, [recruitManageInfo?.isFirstAccess]);
 
 	return (
-		<S.ApplierManagePage $isChecked={checkList.length !== 0} $isOpenCurrent={isOpenCurrent}>
+		<S.ApplierManagePage $isChecked={isChecked} $isOpenCurrent={isOpenCurrent}>
 			<article className='wrapper-applicants'>
 				<section className='container-title'>
 					<h1>{recruitManageInfo?.title}</h1>
@@ -241,6 +247,7 @@ const ApplierManagePage = () => {
 					<OpenChatModal />
 				</section>
 			)}
+			{isToast && <Toast message='오픈채팅방 주소를 입력해주세요!' />}
 		</S.ApplierManagePage>
 	);
 };

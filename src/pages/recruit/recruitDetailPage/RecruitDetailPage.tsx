@@ -17,7 +17,6 @@ import {
 	ClosedFooter,
 	ApplyCancel,
 	ApplyClose,
-	WaitModal,
 } from '../../../components';
 import { calculateDate, fixModalBackground } from '../../../utils';
 import { JsxElementComponentProps, RoleInfo, RoleForPost } from '../../../types';

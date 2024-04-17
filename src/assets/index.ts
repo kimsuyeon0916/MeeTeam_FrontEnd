@@ -45,6 +45,7 @@ import User from './User.svg';
 import School from './School.svg';
 import DropdownArrowUp from './DropdownArrowUp.svg';
 import FloatingBackground from './FloatingBackground.svg';
+import Alert from './Alert.svg';
 
 export {
 	Exit,
@@ -94,4 +95,5 @@ export {
 	School,
 	DropdownArrowUp,
 	FloatingBackground,
+	Alert,
 };
