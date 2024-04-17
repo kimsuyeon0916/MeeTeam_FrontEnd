@@ -56,9 +56,6 @@ const Header = () => {
 		if (location.pathname === '/galary') {
 			setIsHere({ recruit: false, galary: true, inform: false });
 		}
-		// if (location.pathname === '/information') {
-		// 	setIsHere({ recruit: false, galary: false, inform: true });
-		// }
 	}, [location]);
 
 	useEffect(() => {
@@ -81,7 +78,7 @@ const Header = () => {
 	return (
 		<S.Header>
 			<div className='header'>
-				<div className='header__logo'>
+				<div className='header__logo' onClick={() => navigate('/recruitment/postings/search')}>
 					<img className='logo' src={Logo} />
 					<img className='logo-name' src={LogoName} />
 					{isLoggedIn && <span className='university'>광운대학교</span>}

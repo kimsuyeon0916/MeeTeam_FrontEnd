@@ -50,5 +50,6 @@
 		"qs": "^6.12.1",
 		"typescript": "^5.0.2",
 		"vite": "^4.4.5"
-	}
+	},
+	"homepage": "/recruitment/postings/search"
 }

@@ -29,10 +29,6 @@ const router = createBrowserRouter([
 		element: <App />,
 		children: [
 			{
-				path: '',
-				element: <MainPage />,
-			},
-			{
 				path: 'recruitment/postings/search',
 				element: <RecruitPage />,
 			},
