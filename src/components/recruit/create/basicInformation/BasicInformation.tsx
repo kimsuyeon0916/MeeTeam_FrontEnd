@@ -35,6 +35,7 @@ const BasicInformation = () => {
 							placeholder='40자 이내로 제목을 작성해주세요.'
 							value={formData.title}
 							onChange={onChangeTitle}
+							maxLength={20}
 						/>
 						{isValid.isSubmitted && !isValid.isTitle && (
 							<p className='valid-msg'>{validMessage.title}</p>
