@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import S from './RecruitDetailPage.styled';
 import {
 	CommentInput,
@@ -17,10 +17,9 @@ import {
 	ClosedFooter,
 	ApplyCancel,
 	ApplyClose,
-	WaitModal,
 } from '../../../components';
-import { fixModalBackground } from '../../../utils';
-import { JsxElementComponentProps } from '../../../types';
+import { calculateDate, fixModalBackground } from '../../../utils';
+import { JsxElementComponentProps, RoleInfo, RoleForPost } from '../../../types';
 import { useQuery } from '@tanstack/react-query';
 import { getPostingData } from '../../../service';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
@@ -31,7 +30,6 @@ import {
 	applyStepState,
 	commentDeleteModalState,
 	recruitInputState,
-	waitModalState,
 } from '../../../atom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLogin } from '../../../hooks';
@@ -43,7 +41,6 @@ const RecruitDetailPage = () => {
 	const isModal = useRecoilValue(applyModalState);
 	const isCancel = useRecoilValue(applyCancelModalState);
 	const isClose = useRecoilValue(applyCloseModalState);
-	const isWait = useRecoilValue(waitModalState);
 	const isDelete = useRecoilValue(commentDeleteModalState);
 	const step = useRecoilValue(applyStepState);
 	const setFormData = useSetRecoilState(recruitInputState);
@@ -53,21 +50,12 @@ const RecruitDetailPage = () => {
 		2: <FinalModal />,
 	};
 	const { isLoggedIn } = useLogin();
-
 	const { data: detailedData, isSuccess } = useQuery({
 		queryKey: ['detailedPage', { pageNum, isLoggedIn }],
 		queryFn: () => getPostingData({ pageNum, isLoggedIn }),
 	});
 	const period = detailedData?.proceedingStart + ' ~ ' + detailedData?.proceedingEnd;
-
-	// 함수로 변경 후 -> useMemo 사용하기
-	const diffDate = Math.ceil(
-		Math.abs(
-			(new Date(detailedData?.deadline as any).getTime() - new Date().getTime()) /
-				(1000 * 60 * 60 * 24)
-		)
-	).toString();
-
+	const diffDate = detailedData && calculateDate(detailedData.deadline);
 	const totalCommentsCount = useMemo(() => {
 		if (detailedData) {
 			return detailedData.comments.reduce((total, comment) => {
@@ -76,8 +64,19 @@ const RecruitDetailPage = () => {
 		}
 	}, [detailedData?.comments]);
 
+	const convertRoleInfo = (roleInfo: RoleInfo): RoleForPost => {
+		return {
+			roleId: roleInfo.roleId,
+			count: roleInfo.recruitCount,
+			skillIds: roleInfo.skills.map(e => e.id),
+			skills: roleInfo.skills,
+			roleName: roleInfo.roleName,
+		};
+	};
+
 	const onClickEditPage = async () => {
-		if (detailedData) {
+		const transformedRoles = detailedData?.recruitmentRoles.map(convertRoleInfo);
+		if (detailedData && transformedRoles) {
 			setFormData({
 				pageNum: pageNum,
 				scope: detailedData.scope,
@@ -92,7 +91,7 @@ const RecruitDetailPage = () => {
 					courseProfessor: detailedData.courseProfessor,
 					isCourse: detailedData.courseName || detailedData.courseProfessor ? true : false,
 				},
-				recruitmentRoles: [],
+				recruitmentRoles: transformedRoles,
 				tags: detailedData.tags.map(e => e.name),
 				title: detailedData.title,
 				content: detailedData.content,
@@ -102,8 +101,8 @@ const RecruitDetailPage = () => {
 	};
 
 	useEffect(() => {
-		fixModalBackground(isModal || isCancel || isClose || isWait || isDelete);
-	}, [isModal, isCancel, isClose, isWait, isDelete]);
+		fixModalBackground(isModal || isCancel || isClose || isDelete.isDelete);
+	}, [isModal, isCancel, isClose, isDelete]);
 
 	return (
 		<>
@@ -167,11 +166,6 @@ const RecruitDetailPage = () => {
 							<ApplyClose />
 						</section>
 					)}
-					{isWait && (
-						<section className='modal-background'>
-							<WaitModal />
-						</section>
-					)}
 				</S.RecruitDetailPage>
 			)}
 			<S.Footer>
@@ -180,7 +174,9 @@ const RecruitDetailPage = () => {
 						{detailedData.isWriter && !detailedData.isClosed && (
 							<WriterFooter onClickEditPage={onClickEditPage} pageNum={pageNum} />
 						)}
-						{!detailedData.isWriter && <ApplierFooter deadline={detailedData.deadline} />}
+						{!detailedData.isWriter && !detailedData.isClosed && (
+							<ApplierFooter deadline={detailedData.deadline} isApplied={detailedData.isApplied} />
+						)}
 						{detailedData.isClosed && <ClosedFooter />}
 					</section>
 				)}

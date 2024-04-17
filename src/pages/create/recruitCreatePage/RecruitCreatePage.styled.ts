@@ -4,6 +4,7 @@ const RecruitCreatePage = styled.div`
 	width: clamp(45%, 96rem, 75%);
 	margin: 0 auto;
 	margin-bottom: 17rem;
+	position: relative;
 
 	h2 {
 		color: #151515;
@@ -12,12 +13,40 @@ const RecruitCreatePage = styled.div`
 		line-height: 2.9rem;
 		letter-spacing: 0.0048rem;
 	}
+	h3 {
+		color: #151515;
+		font-size: 2rem;
+		font-weight: 600;
+		line-height: 2.4rem;
+		letter-spacing: 0.004rem;
+	}
 	h4 {
 		color: #373f41;
 		font-size: 1.8rem;
 		font-weight: 600;
 		line-height: 2.1rem;
 		letter-spacing: 0.0036rem;
+	}
+
+	.body2-semibold {
+		color: #151515;
+		font-size: 1.4rem;
+		font-weight: 600;
+		line-height: 1.7rem;
+		letter-spacing: 0.0028rem;
+	}
+
+	.body2-medium {
+		color: #151515;
+		font-size: 1.4rem;
+		line-height: 1.6rem;
+		letter-spacing: 0.0028rem;
+	}
+
+	.txt-small {
+		font-size: 1.4rem;
+		line-height: 1.7rem;
+		letter-spacing: 0.0028rem;
 	}
 
 	.container-introduction {
@@ -71,6 +100,20 @@ const RecruitCreatePage = styled.div`
 
 		.container-tags__inputs {
 			width: 76.4rem;
+			position: relative;
+		}
+
+		.valid-msg {
+			color: #f85858;
+			font-size: 1rem;
+			line-height: 1.2rem;
+			letter-spacing: 0.002rem;
+		}
+
+		.is-tag {
+			position: absolute;
+			top: 5.4rem;
+			left: 1rem;
 		}
 	}
 
@@ -95,6 +138,86 @@ const RecruitCreatePage = styled.div`
 		.submit-btn {
 			background: #5877fc;
 			color: #fff;
+		}
+	}
+
+	.modal-background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 105;
+		background-color: rgba(0, 0, 0, 0.15);
+	}
+
+	.validation-modal {
+		position: fixed;
+		border-radius: 1rem;
+		border: 1px solid #e3e3e3;
+		background: #f8fafb;
+		display: inline-flex;
+		height: 32.9188rem;
+		padding: 2.8rem 4rem;
+		flex-direction: column;
+		align-items: center;
+		gap: 2.8rem;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 505;
+		width: 58.9516rem;
+
+		.caution {
+			color: #f85858;
+		}
+
+		.wrapper-list__unsatisfied {
+			width: 100%;
+
+			.subtitle {
+				width: 9.877rem;
+				height: 3.3297rem;
+				flex-shrink: 0;
+				border-top: 1px solid #e3e3e3;
+				border-right: 1px solid #e3e3e3;
+				border-bottom: 1px solid #e3e3e3;
+				background: #f6f6f6;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.container-list {
+				display: flex;
+			}
+
+			.list-unsatisfied {
+				width: 41.0746rem;
+				height: 3.3297rem;
+				flex-shrink: 0;
+				border-top: 1px solid #e3e3e3;
+				border-bottom: 1px solid #e3e3e3;
+				background: #fff;
+				display: flex;
+				align-items: center;
+
+				.element {
+					margin: 0.81rem 0 0.91rem 1.6rem;
+				}
+			}
+		}
+
+		.btn-okay {
+			display: flex;
+			height: 3.6rem;
+			padding: 1.2rem 3.2rem;
+			justify-content: center;
+			align-items: center;
+			gap: 0.75rem;
+			border-radius: 0.6rem;
+			background: #5877fc;
+			color: #f7faff;
 		}
 	}
 `;

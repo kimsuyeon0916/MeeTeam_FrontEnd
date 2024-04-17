@@ -35,11 +35,17 @@ import Edit from './Edit.svg';
 import TrashCan from './TrashCan.svg';
 import Clear from './Clear.svg';
 import BookmarkRight from './BookmarkRight.svg';
+import PlusWhite from './PlusWhite.svg';
+import CancelWhite from './CancelWhite.svg';
+import Create from './Create.svg';
+import Profile from './Profile.svg';
+import Portpolio from './Portpolio.svg';
 import LinkIcon from './LinkIcon.svg';
 import User from './User.svg';
 import School from './School.svg';
 import DropdownArrowUp from './DropdownArrowUp.svg';
 import FloatingBackground from './FloatingBackground.svg';
+import Alert from './Alert.svg';
 
 export {
 	Exit,
@@ -58,6 +64,8 @@ export {
 	XBtn,
 	Reply,
 	LogoName,
+	FilledBookmark,
+	UnfilledBookmark,
 	DefaultProfileImage,
 	DefaultPortfolioImage,
 	Search,
@@ -74,14 +82,18 @@ export {
 	Close,
 	AddProfile,
 	BluePlus,
-	FilledBookmark,
-	UnfilledBookmark,
 	DATE_ICON,
 	Clear,
 	BookmarkRight,
+	CancelWhite,
+	PlusWhite,
+	Create,
+	Profile,
+	Portpolio,
 	LinkIcon,
 	User,
 	School,
 	DropdownArrowUp,
 	FloatingBackground,
+	Alert,
 };

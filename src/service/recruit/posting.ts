@@ -81,3 +81,12 @@ export const editPostingRecruit = async ({ pageNum, formData }: EditPosting) => 
 		console.error(error);
 	}
 };
+
+export const deletePostingRecruit = async (pageNum: number) => {
+	try {
+		const response = await axiosAuthInstance.delete(EndPoint.RECRUIT_DETAIL.posting(pageNum));
+		return response;
+	} catch (error) {
+		console.error(error);
+	}
+};

@@ -1,6 +1,6 @@
 describe('template spec', () => {
 	it('passes', () => {
-		cy.visit('create/recruit');
+		cy.visit('recruitment/postings');
 		cy.contains('구인글 작성').should('be.visible');
 		cy.contains('프로젝트').should('be.visible');
 		cy.get('[data-cy="recruit-title-input"]').type('대학생 포트폴리오 기반 구인 플랫폼 서비스');

@@ -1,15 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { validMessageState, validState } from '../atom';
 import { InputState } from '../types';
-
-// <유효성 검사 목록>
-// 범위(1개 필수) ✅
-// 유형(1개 필수) ✅
-// 마감일(오늘 이전 선택 불가) ✅
-// 진행기간(마감일보다 종료일이 일찍 끝날 수 없음) ✅
-// 진행기간(시작일보다 종료일이 늦을 수 없음) ✅
-// 제목(필수 입력, 몇자 이상(10자)) ✅
 
 export default function useValid(data: InputState) {
 	const [validMessage, setValidMessage] = useRecoilState(validMessageState);
@@ -57,6 +49,21 @@ export default function useValid(data: InputState) {
 	}, [data.deadline, data.proceedingEnd]);
 
 	useEffect(() => {
+		if (data.courseTag.isCourse && data.scope === '교외') {
+			setValidMessage(prev => ({
+				...prev,
+				scope: '범위 선택이 잘못되었습니다.',
+			}));
+		} else {
+			setValidMessage(prev => ({ ...prev, scope: '' }));
+		}
+		setIsValid(prev => ({
+			...prev,
+			isScope: data.courseTag.isCourse && data.scope !== '교외',
+		}));
+	}, [data.scope, data.courseTag]);
+
+	useEffect(() => {
 		if (data.tags.length === 0) {
 			setValidMessage(prev => ({ ...prev, tag: '태그를 하나 이상 선택해주세요.' }));
 		} else {
@@ -102,6 +109,24 @@ export default function useValid(data: InputState) {
 		}
 		setIsValid(prev => ({ ...prev, isProcedure: data.proceedType !== '' }));
 	}, [data.proceedType]);
+
+	useEffect(() => {
+		if (data.content === '') {
+			setValidMessage(prev => ({ ...prev, content: '상세 내용을 작성해주세요.' }));
+		} else {
+			setValidMessage(prev => ({ ...prev, content: '' }));
+		}
+		setIsValid(prev => ({ ...prev, isContent: data.content !== '' }));
+	}, [data.content]);
+
+	useEffect(() => {
+		if (data.recruitmentRoles.length === 0) {
+			setValidMessage(prev => ({ ...prev, recruitRole: '역할을 하나 이상 선택해주세요.' }));
+		} else {
+			setValidMessage(prev => ({ ...prev, recruitRole: '' }));
+		}
+		setIsValid(prev => ({ ...prev, isRole: data.recruitmentRoles.length > 0 }));
+	}, [data.recruitmentRoles.length]);
 
 	return { validMessage, isValid };
 }

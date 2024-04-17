@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ProfileImage } from '../../..';
 import { TitleAndEtc } from '../../../../types';
 import S from './TitleInfo.styled';
@@ -32,8 +32,13 @@ const TitleInfo = ({
 			unBookmarked(Number(id));
 			setBookmarkCnt(prev => prev - 1);
 		}
-		setIsMarked(!isMarked);
+		setIsMarked(prev => !prev);
 	};
+
+	useEffect(() => {
+		setIsMarked(isBookmarked);
+		setBookmarkCnt(bookmarkCount);
+	}, [isBookmarked, bookmarkCount]);
 
 	return (
 		<S.TitleInfo>

@@ -21,7 +21,7 @@ export interface RecruitInfo {
 	category: string;
 	proceedType: string;
 	courseProfessor: string | null;
-	dDay: string;
+	dDay: string | undefined;
 	isClosed: boolean;
 }
 
@@ -29,12 +29,13 @@ export interface RecruitDescription {
 	content: string;
 }
 
-interface Skill {
+export interface Skill {
 	id: number;
 	name: string;
 }
 
 export interface RoleInfo {
+	roleId: number;
 	roleName: string;
 	skills: Skill[];
 	recruitCount: number;
@@ -49,6 +50,7 @@ export interface RecruitTags {
 
 export interface RecruitPostings {
 	isWriter: boolean;
+	isApplied: boolean;
 	category: string;
 	writerId: string;
 	isClosed: boolean;
@@ -119,7 +121,8 @@ export interface Post {
 	deadline: string;
 	scope: string;
 	isBookmarked: boolean;
-	writerId: string; // 필요할 듯 합니다..!
+	writerId: string;
+	isClosed: boolean;
 }
 
 export interface Page {
@@ -131,6 +134,11 @@ export interface Page {
 
 export interface ListResult {
 	posts: Post[];
+	pageInfo: Page;
+}
+
+export interface ManageListResult {
+	data: Post[];
 	pageInfo: Page;
 }
 
@@ -179,6 +187,7 @@ export interface RecruitmentStatus {
 export interface ApplyManageInfo {
 	title: string;
 	link: string;
+	isFirstAccess: true;
 	recruitmentStatus: RecruitmentStatus[];
 	roles: ManageRole[];
 }

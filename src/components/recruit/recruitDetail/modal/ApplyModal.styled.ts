@@ -263,6 +263,11 @@ const Modal = styled.section<Modal>`
 			font-weight: 400;
 			color: ${props => (props.$isChecked ? '#fff' : '#8E8E8E')};
 		}
+
+		.submit {
+			background-color: #5877fc;
+			color: #ffffff;
+		}
 	}
 
 	.confirm-btn {

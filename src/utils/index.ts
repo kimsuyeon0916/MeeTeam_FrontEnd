@@ -8,6 +8,7 @@ import LocalStorageEffect from './LocalStorageEffect';
 import fixModalBackground from './fixModalBackground';
 import simpleDate from './simpleDate';
 import isNotNumber from './isNotNumber';
+import calculateDate from './calculateDate';
 
 export {
 	modules,
@@ -21,4 +22,5 @@ export {
 	fixModalBackground,
 	simpleDate,
 	isNotNumber,
+	calculateDate,
 };

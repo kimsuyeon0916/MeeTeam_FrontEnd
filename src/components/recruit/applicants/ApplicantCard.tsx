@@ -23,12 +23,12 @@ const ApplicantCard = ({
 	const setIsHold = useSetRecoilState(applicantHolder);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 
-	const onClickCheckbox = () => {
-		setIsChecked(prev => !prev);
-	};
-
 	const onClickView = () => {
 		setIsOpen(prev => !prev);
+	};
+
+	const onChangeCheck = () => {
+		setIsChecked(prev => !prev);
 	};
 
 	useEffect(() => {
@@ -42,7 +42,7 @@ const ApplicantCard = ({
 	return (
 		<S.ApplicantCard>
 			<section className='container-checkbox'>
-				<input type='checkbox' onClick={onClickCheckbox} checked={isChecked} />
+				<input type='checkbox' checked={isChecked} onChange={onChangeCheck} />
 			</section>
 			<section className='container-user'>
 				<section className='header'>

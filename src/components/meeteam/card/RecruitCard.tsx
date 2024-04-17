@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import S from './Card.styled';
 import { useNavigate } from 'react-router-dom';
 import { FilledBookmark, UnfilledBookmark } from '../../../assets';
 import { ProfileImage } from '../..';
 import { Post } from '../../../types';
+import { useBookmark } from '../../../hooks';
+import { useDelBookmark } from '../../../hooks/useBookMark';
+import { useQueryClient } from '@tanstack/react-query';
 
 const RecruitCard = ({
 	id,
@@ -14,21 +17,38 @@ const RecruitCard = ({
 	deadline,
 	scope,
 	isBookmarked,
-	writerId = 'test', // 필요할 듯 합니다!
+	writerId,
+	isClosed,
 }: Post) => {
 	const navigate = useNavigate();
+	const queryClient = useQueryClient();
 	const [isMarked, setIsMarked] = useState<boolean>(isBookmarked);
+	const onSuccess = () => {
+		queryClient.invalidateQueries({ queryKey: ['recruit_board'] });
+	};
+	const { mutate: bookmarked } = useBookmark();
+	const { mutate: unBookmarked } = useDelBookmark();
 
 	const onClickContent = () => {
-		navigate(`/recruit/${id}`);
+		navigate(`/recruitment/postings/${id}`);
 	};
 
 	const onClickBookmark = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation();
+		if (!isMarked) {
+			bookmarked(Number(id));
+		} else {
+			unBookmarked(Number(id));
+		}
 		setIsMarked(prev => !prev);
 	};
+
+	useEffect(() => {
+		setIsMarked(isBookmarked);
+	}, [isBookmarked]);
+
 	return (
-		<S.RecruitCard onClick={onClickContent}>
+		<S.RecruitCard onClick={onClickContent} $isClosed={isClosed}>
 			<section className='content-tags'>
 				<section className='header'>
 					<section className='tags'>
@@ -43,11 +63,14 @@ const RecruitCard = ({
 			</section>
 			<section className='content-info'>
 				<section className='user'>
-					{/* userId 필요 */}
 					<ProfileImage userId={writerId} size='2.31rem' url={writerProfileImg} />
 					<span>{writerNickname}</span>
 				</section>
-				<span className='date'>~ {deadline}</span>
+				{isClosed ? (
+					<span className='closed txt2'>모집마감</span>
+				) : (
+					<span className='date'>~ {deadline}</span>
+				)}
 			</section>
 		</S.RecruitCard>
 	);

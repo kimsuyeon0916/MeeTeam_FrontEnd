@@ -3,10 +3,10 @@ import { CommentDeleteModal, KebabMenu, ProfileImage, ReplyComment, ReplyInput }
 import S from './Comment.styled';
 import { Comment as CommentType } from '../../../types';
 import { useParams } from 'react-router-dom';
-import { useCommentEdit } from '../../../hooks';
+import { useCommentDelete, useCommentEdit } from '../../../hooks';
 import { useQueryClient } from '@tanstack/react-query';
-import { useRecoilState } from 'recoil';
-import { commentDeleteModalState } from '../../../atom';
+import { useRecoilValue, useRecoilState } from 'recoil';
+import { commentDeleteModalState, userState } from '../../../atom';
 
 const Comment = ({
 	id,
@@ -30,6 +30,8 @@ const Comment = ({
 	const [isDelete, setIsDelete] = useRecoilState(commentDeleteModalState);
 	const queryClient = useQueryClient();
 	const editComment = useCommentEdit();
+	const userInfo = useRecoilValue(userState);
+	const isCommentWriter = userId === userInfo?.userId;
 
 	const optionLists = [
 		{
@@ -47,7 +49,10 @@ const Comment = ({
 		{
 			title: '삭제',
 			optionClickHandler: () => {
-				setIsDelete(true);
+				setIsDelete({
+					id: id,
+					isDelete: true,
+				});
 			},
 		},
 	];
@@ -141,7 +146,7 @@ const Comment = ({
 						)}
 					</section>
 				</article>
-				{isWriter && showKebab && <KebabMenu options={optionLists} />}
+				{isCommentWriter && showKebab && <KebabMenu options={optionLists} />}
 			</section>
 			<hr />
 			<section className='wrapper-replies'>
@@ -161,9 +166,9 @@ const Comment = ({
 					/>
 				)}
 			</section>
-			{isDelete && (
+			{isDelete.isDelete && (
 				<section className='modal-background'>
-					<CommentDeleteModal pageNum={pageNum} commentId={id} />
+					<CommentDeleteModal pageNum={pageNum} commentId={isDelete.id} />
 				</section>
 			)}
 		</S.Comment>

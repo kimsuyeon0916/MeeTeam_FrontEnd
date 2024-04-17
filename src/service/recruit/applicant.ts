@@ -64,3 +64,12 @@ export const setOpenChatLink = async ({ pageNum, link }: ApplicantsLink) => {
 		console.error(error);
 	}
 };
+
+export const patchFirstAccess = async (pageNum: number) => {
+	try {
+		const response = await axiosAuthInstance.patch(EndPoint.RECRUITMENT_APPLICANT.access(pageNum));
+		return response;
+	} catch (error) {
+		console.log(error);
+	}
+};

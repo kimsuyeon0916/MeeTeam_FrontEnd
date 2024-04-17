@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getCourseKeyword, getProfessorKeyword } from '../../service';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { applicantFilter, recruitFilterState } from '../../atom';
-import { ManageRole } from '../../types';
+import { ManageRole, Keyword } from '../../types';
 import { DropdownArrowUp, DropdownArrow } from '../../assets';
 
 interface Dropdown {
@@ -23,8 +23,8 @@ type keyObj = {
 };
 
 const scopeObj: keyObj = {
-	교내: 1,
-	교외: 2,
+	교외: 1,
+	교내: 2,
 };
 
 const categoryObj: keyObj = {
@@ -96,14 +96,19 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 	};
 
 	const onClickCourse = (event: React.MouseEvent<HTMLSpanElement>) => {
-		const { innerText } = event.target as HTMLElement;
+		event.stopPropagation();
+		const target = event.target as HTMLSpanElement;
+		const { innerText, id } = target;
 		setName(prev => ({ ...prev, course: innerText }));
 		setDropdown(prev => ({ ...prev, course: false }));
+		setFilterState(prev => ({ ...prev, course: Number(id) }));
 	};
 	const onClickProfessor = (event: React.MouseEvent<HTMLSpanElement>) => {
-		const { innerText } = event.target as HTMLElement;
+		const target = event.target as HTMLSpanElement;
+		const { innerText, id } = target;
 		setName(prev => ({ ...prev, professor: innerText }));
 		setDropdown(prev => ({ ...prev, professor: false }));
+		setFilterState(prev => ({ ...prev, professor: Number(id) }));
 	};
 
 	const onChangeCourse = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -143,7 +148,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 	}, [filterState.scope, filterState.category]);
 
 	return (
-		<S.Dropdown $showDropdown={showDropdown} ref={dropdownRef} scope={scope} $isCheck={isChecked}>
+		<S.Dropdown $showDropdown={showDropdown} $scope={scope} $isCheck={isChecked} ref={dropdownRef}>
 			<article className='wrapper' onClick={onClickDropdown}>
 				<div className='dropdown-box'>
 					<div className='value'>{currentValue}</div>
@@ -193,8 +198,12 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 															{dropdown.course && (
 																<section className='dropdown'>
 																	{!isLoadingCourse &&
-																		dataCourse?.map((keyword: any) => (
-																			<span key={keyword.id} onClick={onClickCourse}>
+																		dataCourse?.map((keyword: Keyword) => (
+																			<span
+																				key={keyword.id}
+																				onClick={onClickCourse}
+																				id={keyword.id.toString()}
+																			>
 																				{keyword.name}
 																			</span>
 																		))}
@@ -213,8 +222,12 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 															{dropdown.professor && (
 																<section className='dropdown'>
 																	{!isLoadingProfessor &&
-																		dataProfessor?.map((keyword: any) => (
-																			<span key={keyword.id} onClick={onClickProfessor}>
+																		dataProfessor?.map((keyword: Keyword) => (
+																			<span
+																				key={keyword.id}
+																				onClick={onClickProfessor}
+																				id={keyword.id.toString()}
+																			>
 																				{keyword.name}
 																			</span>
 																		))}

@@ -8,15 +8,10 @@ import { getTagKeyword } from '../../service';
 import { Search, XBtn } from '../../assets';
 import { Keyword } from '../../types';
 
-interface MeeteamTag {
-	tags?: string[];
-}
-
-const MeeteamTag = ({ tags }: MeeteamTag) => {
+const MeeteamTag = () => {
 	const [formData, setFormData] = useRecoilState(recruitInputState);
 	const [tagItem, setTagItem] = useState<string>('');
 	const [tagList, setTagList] = useState<string[]>(formData.tags);
-	const [isTouched, setIsTouched] = useState<boolean>(false);
 	const [isDropdownVisible, setIsDropdownVisible] = useState<boolean>(false);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const keywordTag = useDebounce(tagItem, 500);
@@ -40,7 +35,7 @@ const MeeteamTag = ({ tags }: MeeteamTag) => {
 	const submitTagItem = () => {
 		setTagList(prev => {
 			const trimmedTagItem = tagItem.trim();
-			if (!prev.includes(trimmedTagItem)) {
+			if (!prev.includes(trimmedTagItem) && tagList.length < 5) {
 				const updatedList = [...prev, trimmedTagItem];
 				setFormData(prev => ({ ...prev, tags: updatedList }));
 				return updatedList;
@@ -48,13 +43,12 @@ const MeeteamTag = ({ tags }: MeeteamTag) => {
 			return prev;
 		});
 		setTagItem('');
-		setIsDropdownVisible(true);
+		setIsDropdownVisible(false);
 	};
 
 	const deleteTagItem = (id: string) => {
 		setTagList(prev => {
 			const updatedList = prev.filter(elem => elem !== id);
-
 			setFormData(prev => ({ ...prev, tags: updatedList }));
 			return updatedList;
 		});
@@ -62,11 +56,11 @@ const MeeteamTag = ({ tags }: MeeteamTag) => {
 
 	const onClickInput = () => {
 		setIsDropdownVisible(true);
-		setIsTouched(true);
 	};
 
-	const onClickTagOptions = (selectedTag: string) => {
-		if (!tagList.includes(selectedTag) && tagList.length < 6) {
+	const onClickTagOptions = (selectedTag: string, event: React.MouseEvent<HTMLSpanElement>) => {
+		event.stopPropagation();
+		if (!tagList.includes(selectedTag) && tagList.length < 5) {
 			setTagList(prev => {
 				const updatedList = [...prev, selectedTag];
 				setFormData(prev => ({ ...prev, tags: updatedList }));
@@ -97,54 +91,60 @@ const MeeteamTag = ({ tags }: MeeteamTag) => {
 
 	return (
 		<S.MeeteamTag ref={dropdownRef}>
-			{!tags ? (
-				<div className='tag__box' onClick={onClickInput}>
-					{tagList.map((tagItem, _) => {
-						return (
-							<div className='tag__item' key={tagItem}>
-								<span>{tagItem}</span>
-								<button type='button' onClick={() => deleteTagItem(tagItem)}>
-									<img src={XBtn} />
-								</button>
-							</div>
-						);
-					})}
-					<input
-						type='text'
-						placeholder={isTouched ? '' : '태그를 선택하거나 입력해주세요.'}
-						tabIndex={2}
-						disabled={tagList.length < 20 ? false : true}
-						onChange={event => setTagItem(event.target.value)}
-						value={tagItem}
-						onKeyPress={onKeyPress}
-					/>
-					{tagList.length === 0 && <img src={Search} className='icon-search' />}
-					{isDropdownVisible && (
-						<div className='tag-dropdown'>
-							{isSuccess &&
-								data?.map((tag: Keyword) => (
-									<div
-										className='tag__item option'
-										key={tag.id}
-										onClick={() => onClickTagOptions(tag.name)}
+			<section className='tag__box' onClick={onClickInput}>
+				<input
+					type='text'
+					placeholder={'태그를 선택하거나 입력해주세요.'}
+					tabIndex={2}
+					disabled={tagList.length < 20 ? false : true}
+					onChange={event => setTagItem(event.target.value)}
+					value={tagItem}
+					onKeyPress={onKeyPress}
+					className='tag-input body1-medium'
+				/>
+				<img src={Search} className='icon-search' />
+				{isDropdownVisible && (
+					<div className='tag-dropdown'>
+						{isSuccess &&
+							data?.map((tag: Keyword) => (
+								<span
+									className='body1-medium option'
+									key={tag.id}
+									onClick={event => onClickTagOptions(tag.name, event)}
+								>
+									{tag.name}
+								</span>
+							))}
+						{isSuccess && data?.length === 0 && (
+							<section className='no-result'>
+								<span className='body1-medium'>검색 결과가 없습니다.</span>
+								<span className='body1-medium'>해당 태그를 새로 생성할까요?</span>
+								<section className='container-btn'>
+									<span
+										className='btn-create txt2'
+										onClick={event => onClickTagOptions(tagItem, event)}
 									>
-										{tag.name}
-									</div>
-								))}
+										생성하기
+									</span>
+									<span className='body1-medium'>{tagItem}</span>
+								</section>
+							</section>
+						)}
+					</div>
+				)}
+			</section>
+			<section className='tags-selected'>
+				{tagList.map((tagItem, _) => {
+					return (
+						<div className='tag__item txt2' key={tagItem}>
+							<span>{tagItem}</span>
+							<button type='button' className='btn-delete' onClick={() => deleteTagItem(tagItem)}>
+								<img src={XBtn} />
+							</button>
 						</div>
-					)}
-				</div>
-			) : (
-				<div className='tag__box'>
-					{tags.map((tag, index) => {
-						return (
-							<div className='tag__item' key={index}>
-								<span>{tag}</span>
-							</div>
-						);
-					})}
-				</div>
-			)}
+					);
+				})}
+			</section>
 		</S.MeeteamTag>
 	);
 };

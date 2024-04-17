@@ -17,6 +17,10 @@ const DetailedInformation = styled.section`
 				font-weight: 600;
 				line-height: 1.7rem;
 				letter-spacing: 0.0028rem;
+
+				.necessary {
+					color: #f85858;
+				}
 			}
 
 			.editor {
@@ -41,6 +45,18 @@ const DetailedInformation = styled.section`
 				font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 				padding: 0.8rem;
 			}
+
+			.ql-editor {
+				font-size: 1.6rem;
+			}
+		}
+
+		.valid-msg {
+			margin: 0.4rem 0 0 1rem;
+			color: #f85858;
+			font-size: 1rem;
+			line-height: 1.2rem;
+			letter-spacing: 0.002rem;
 		}
 	}
 `;

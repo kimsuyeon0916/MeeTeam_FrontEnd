@@ -11,7 +11,7 @@ import type {
 	InputState,
 	RoleForPost,
 	InputCourse,
-	InputRoleData,
+	InputUserRoleForm,
 	Role,
 	ApplyRole,
 	ApplyForm,
@@ -51,6 +51,7 @@ import type {
 	ApplyManageInfo,
 	ApplicantList,
 	DetailedFilter,
+	ManageListResult,
 } from './recruit/response';
 import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
 import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
@@ -73,7 +74,7 @@ export type {
 	OptionList,
 	Option,
 	Role,
-	InputRoleData,
+	InputUserRoleForm,
 	InputState,
 	TitleAndEtc,
 	RecruitInfo,
@@ -115,4 +116,5 @@ export type {
 	ApplicantsLink,
 	ApplicantList,
 	DetailedFilter,
+	ManageListResult,
 };

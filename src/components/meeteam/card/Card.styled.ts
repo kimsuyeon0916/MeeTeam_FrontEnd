@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface RecruitStyle {
+	$isClosed: boolean;
+}
+
 const Card = styled.div`
 	position: relative;
 	width: 25.65rem;
@@ -59,7 +63,7 @@ const PortpolioCard = styled.div`
 	}
 `;
 
-const RecruitCard = styled.div`
+const RecruitCard = styled.article<RecruitStyle>`
 	display: flex;
 	flex-direction: column;
 	width: 22.8rem;
@@ -68,7 +72,7 @@ const RecruitCard = styled.div`
 	padding: 1.8rem 2rem;
 	border-radius: 1rem;
 	border: 1px solid #e3e3e3;
-	background: #fff;
+	background: ${props => (props.$isClosed ? '#EDEDED' : '#fff')};
 	justify-content: space-between;
 
 	cursor: pointer;
@@ -76,6 +80,13 @@ const RecruitCard = styled.div`
 	&:hover {
 		transition: 0.3s;
 		border-color: #5877fc;
+	}
+
+	.txt2 {
+		color: #8e8e8e;
+		font-size: 1.2rem;
+		line-height: 1.4rem;
+		letter-spacing: 0.0024rem;
 	}
 
 	.content-tags {
@@ -116,7 +127,7 @@ const RecruitCard = styled.div`
 	.content-title {
 		margin-top: 1.6rem;
 		overflow: hidden;
-		color: #373f41;
+		color: ${props => (props.$isClosed ? '#8E8E8E' : '#373f41')};
 		text-overflow: ellipsis;
 		white-space: wrap;
 		-webkit-line-clamp: 3;
@@ -143,6 +154,16 @@ const RecruitCard = styled.div`
 			font-size: 1.2rem;
 			line-height: 1.4rem;
 			letter-spacing: 0.0024rem;
+		}
+
+		.closed {
+			display: flex;
+			padding: 0.4rem 0.8rem;
+			justify-content: center;
+			align-items: center;
+			border-radius: 1.5rem;
+			border: 1px solid #8e8e8e;
+			background: #e3e3e3;
 		}
 	}
 `;

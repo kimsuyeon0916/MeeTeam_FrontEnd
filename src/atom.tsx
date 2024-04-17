@@ -4,9 +4,6 @@ import { User, InputState, ApplyRole, RecruitFilter, DetailedFilter } from './ty
 import { LocalStorageEffect } from './utils';
 import { Account } from './pages';
 
-const date = new Date();
-const simple = simpleDate(date);
-
 export const userState = atom<User | null>({
 	key: 'userState',
 	default: null,
@@ -63,12 +60,18 @@ export const applyCloseModalState = atom({
 
 export const commentDeleteModalState = atom({
 	key: 'commentDeleteModalState',
-	default: false,
+	default: {
+		id: -1,
+		isDelete: false,
+	},
 });
 
 export const replyDeleteModalState = atom({
 	key: 'replyDeleteModalState',
-	default: false,
+	default: {
+		id: -1,
+		isDelete: false,
+	},
 });
 
 export const waitModalState = atom({
@@ -82,7 +85,7 @@ export const recruitInputState = atom<InputState>({
 		scope: '',
 		category: '',
 		fieldId: 1,
-		deadline: simple,
+		deadline: simpleDate(new Date()),
 		proceedType: '',
 		proceedingStart: simpleDate(new Date()),
 		proceedingEnd: simpleDate(new Date()),
@@ -105,11 +108,9 @@ export const validMessageState = atom({
 		category: '',
 		deadline: '',
 		endDate: '',
+		content: '',
 		procedure: '',
-		courseTagDto: {
-			courseTagName: '',
-			courseTagProfessor: '',
-		},
+		recruitRole: '',
 		tag: '',
 		title: '',
 	},
@@ -126,6 +127,8 @@ export const validState = atom({
 		isProcedure: false,
 		isTag: false,
 		isTitle: false,
+		isContent: false,
+		isRole: false,
 	},
 });
 
@@ -170,6 +173,8 @@ export const recruitFilterState = atom<RecruitFilter>({
 		role: [],
 		tag: [],
 		keyword: '',
+		course: null,
+		professor: null,
 	},
 });
 
@@ -186,4 +191,14 @@ export const applicantFilter = atom({
 export const imageNameState = atom({
 	key: 'imageNameState',
 	default: '',
+});
+
+export const openChatModalState = atom({
+	key: 'openChatModalState',
+	default: false,
+});
+
+export const toastState = atom({
+	key: 'toastState',
+	default: false,
 });

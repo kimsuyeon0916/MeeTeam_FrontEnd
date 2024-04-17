@@ -204,7 +204,7 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 	.current-recruit {
 		width: 34rem;
 		height: 41.1rem;
-		overflow-y: scroll;
+		overflow-y: hidden;
 		margin-top: 9rem;
 		border-radius: 0.8rem;
 		border: 1px solid #e3e3e3;
@@ -221,6 +221,18 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 		}
 
 		.container-roles {
+			overflow-y: auto;
+			height: 85%;
+
+			&::-webkit-scrollbar {
+				width: 1rem;
+			}
+			&::-webkit-scrollbar-thumb {
+				background-color: #e3e3e3;
+				border-radius: 1rem;
+				background-clip: padding-box;
+				border: 0.1rem solid transparent;
+			}
 		}
 	}
 
@@ -248,14 +260,23 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 			.arrow {
 				display: flex;
 				flex-direction: column;
+				justify-content: center;
+				align-items: center;
 				position: absolute;
-				top: 1.2rem;
-				right: 1.9rem;
-				span {
-					margin-top: 0.5rem;
-				}
+				top: 1rem;
+				right: 1.6rem;
 			}
 		}
+	}
+
+	.modal-background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 405;
+		background-color: rgba(0, 0, 0, 0.15);
 	}
 `;
 

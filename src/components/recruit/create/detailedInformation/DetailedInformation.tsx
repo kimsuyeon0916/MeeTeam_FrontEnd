@@ -4,15 +4,16 @@ import { useRecoilState } from 'recoil';
 import { modules } from '../../../../utils';
 import { recruitInputState } from '../../../../atom';
 import S from './DetailedInformation.styled';
+import { useValid } from '../../../../hooks';
+import 'react-quill/dist/quill.snow.css';
 
 const DetailedInformation = () => {
 	const quillRef = useRef<ReactQuill | null>(null);
-	const [info, setInfo] = useRecoilState(recruitInputState);
-	const [posting, setPosting] = useState(info.content);
+	const [formData, setFormData] = useRecoilState(recruitInputState);
+	const { validMessage, isValid } = useValid(formData);
 
 	const onChangeContents = (contents: string) => {
-		setPosting(contents);
-		setInfo({ ...info, content: contents });
+		setFormData({ ...formData, content: contents });
 	};
 
 	return (
@@ -23,7 +24,8 @@ const DetailedInformation = () => {
 				</section>
 				<section className='container-details__editor'>
 					<span className='intro'>
-						미래의 멤버들에게 보여줄 자세한 내용을 자유롭게 작성해주세요. *
+						미래의 멤버들에게 보여줄 자세한 내용을 자유롭게 작성해주세요.
+						<span className='necessary'> *</span>
 					</span>
 					<ReactQuill
 						className='editor'
@@ -31,8 +33,11 @@ const DetailedInformation = () => {
 						theme='snow'
 						modules={modules}
 						onChange={onChangeContents}
-						value={posting}
+						value={formData.content}
 					/>
+					{isValid.isSubmitted && !isValid.isContent && (
+						<p className='valid-msg'>{validMessage.content}</p>
+					)}
 				</section>
 			</section>
 			<hr className='under-info' />

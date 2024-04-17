@@ -1,4 +1,5 @@
 import { Keyword } from '..';
+import { Skill } from './response';
 
 export interface ApplyRole {
 	name: string;
@@ -18,17 +19,20 @@ export interface ApplyForm {
 	applyRoleId: number;
 	message: string | undefined;
 }
+
 export interface RoleForPost {
+	roleName?: string;
 	roleId: number | null;
-	count: number | null;
+	count: number | string | null;
 	skillIds: number[];
+	skills?: Skill[];
 }
 
 export interface InputState {
 	pageNum?: number;
 	scope: string;
 	category: string;
-	fieldId: number;
+	fieldId: number | null;
 	deadline: string | undefined;
 	proceedType: string;
 	proceedingStart: string | undefined;
@@ -54,7 +58,7 @@ export interface Role {
 	skill: string[];
 }
 
-export interface InputRoleData {
+export interface InputUserRoleForm {
 	userRoleList: Role[];
 	setUserRoleList: (arr: any) => void;
 }
@@ -72,6 +76,8 @@ export interface RecruitFilter {
 	role: number[];
 	tag: number[];
 	keyword: string;
+	course: number | null;
+	professor: number | null;
 }
 
 export interface DetailedInfo {

@@ -7,7 +7,6 @@ import {
 	RecruitPage,
 	GalaryPage,
 	RecruitCreatePage,
-	OutputCreatePage,
 	RecruitDetailPage,
 	SignInPage,
 	SchoolCertificationPage,
@@ -17,6 +16,10 @@ import {
 	ProfileDetailsPage,
 	ProfileEditPage,
 	ApplierManagePage,
+	RecruitManageWrapper,
+	RecruitPostingBookmark,
+	RecruitPostingApply,
+	RecruitMyPostings,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -26,15 +29,11 @@ const router = createBrowserRouter([
 		element: <App />,
 		children: [
 			{
-				path: '',
-				element: <MainPage />,
-			},
-			{
-				path: 'recruit',
+				path: 'recruitment/postings/search',
 				element: <RecruitPage />,
 			},
 			{
-				path: 'recruit/:id',
+				path: 'recruitment/postings/:id',
 				element: <RecruitDetailPage />,
 			},
 			{
@@ -62,16 +61,30 @@ const router = createBrowserRouter([
 				],
 			},
 			{
-				path: 'create/recruit',
+				path: 'management',
+				element: <RecruitManageWrapper />,
+				children: [
+					{
+						path: 'bookmark',
+						element: <RecruitPostingBookmark />,
+					},
+					{
+						path: 'applied',
+						element: <RecruitPostingApply />,
+					},
+					{
+						path: 'my-post',
+						element: <RecruitMyPostings />,
+					},
+				],
+			},
+			{
+				path: 'recruitment/postings',
 				element: <RecruitCreatePage />,
 			},
 			{
 				path: 'edit/recruit',
 				element: <RecruitCreatePage />,
-			},
-			{
-				path: 'create/output',
-				element: <OutputCreatePage />,
 			},
 			{
 				path: 'profile/:userId?',

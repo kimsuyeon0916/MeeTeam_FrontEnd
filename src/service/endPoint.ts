@@ -36,6 +36,7 @@ export const EndPoint = {
 		deleteComment: ({ pageNum, commentId }: DeleteComment) =>
 			`/recruitment/postings/${pageNum}/comment/${commentId}`,
 	},
+	/* recruit */
 	RECRUITMENT: {
 		post: '/recruitment/postings',
 		role: (keyword: string) => `/role/search?keyword=${keyword}&limit=5`,
@@ -56,5 +57,11 @@ export const EndPoint = {
 		approved: (id: number) => `/recruitment/applicants/${id}/approve`,
 		refused: (id: number) => `/recruitment/applicants/${id}/reject`,
 		set: (id: number) => `/recruitment/applicants/${id}/link`,
+		access: (id: number) => `/recruitment/applicants/${id}/access`,
+	},
+	MANAGEMENT_RECRUIT: {
+		myPost: '/management/my-post?size=12',
+		bookmark: '/management/bookmark?size=12',
+		applied: '/management/applied?size=12',
 	},
 };

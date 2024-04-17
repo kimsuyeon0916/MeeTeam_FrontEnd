@@ -58,7 +58,8 @@ const BasicInformation = styled.section<Basic>`
 					position: absolute;
 					color: red;
 					top: 8rem;
-					font-size: 1.2rem;
+					left: 1rem;
+					font-size: 1rem;
 				}
 			}
 
@@ -69,8 +70,9 @@ const BasicInformation = styled.section<Basic>`
 				.valid-msg {
 					position: absolute;
 					top: 8rem;
+					left: 1rem;
 					color: red;
-					font-size: 1.2rem;
+					font-size: 1rem;
 				}
 			}
 
@@ -127,8 +129,9 @@ const BasicInformation = styled.section<Basic>`
 					.valid-msg {
 						position: absolute;
 						top: 6rem;
+						left: 1rem;
 						color: red;
-						font-size: 1.2rem;
+						font-size: 1rem;
 					}
 				}
 				.container-category {
@@ -138,8 +141,9 @@ const BasicInformation = styled.section<Basic>`
 					.valid-msg {
 						position: absolute;
 						top: 6rem;
+						left: 1rem;
 						color: red;
-						font-size: 1.2rem;
+						font-size: 1rem;
 					}
 				}
 			}
@@ -174,8 +178,9 @@ const BasicInformation = styled.section<Basic>`
 				.valid-msg {
 					position: absolute;
 					top: 6rem;
+					left: 1rem;
 					color: red;
-					font-size: 1.2rem;
+					font-size: 1rem;
 				}
 			}
 		}

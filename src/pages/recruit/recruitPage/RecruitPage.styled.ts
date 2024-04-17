@@ -8,6 +8,7 @@ interface RecruitPage {
 const RecruitPage = styled.div<RecruitPage>`
 	width: clamp(45%, 96rem, 75%);
 	margin: 0 auto;
+	position: relative;
 
 	h2 {
 		color: #373f41;
@@ -37,6 +38,14 @@ const RecruitPage = styled.div<RecruitPage>`
 		font-size: 1.4rem;
 		font-weight: 600;
 		letter-spacing: 0.0028rem;
+	}
+
+	.t1 {
+		color: #373f41;
+		font-size: 1.2rem;
+		font-weight: 600;
+		line-height: 1.4rem;
+		letter-spacing: 0.0024rem;
 	}
 
 	.wrapper-title {
@@ -451,6 +460,58 @@ const RecruitPage = styled.div<RecruitPage>`
 		ul {
 			list-style: none;
 			display: flex;
+		}
+	}
+
+	.floating {
+		border-radius: 50%;
+		box-shadow:
+			0px 4px 20px 0px rgba(0, 0, 0, 0.1),
+			0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+		cursor: pointer;
+		background-color: #5877fc;
+	}
+
+	.btn-floating {
+		position: fixed;
+		width: 5.6rem;
+		height: 5.6rem;
+		bottom: 5rem;
+		right: 5rem;
+		z-index: 101;
+
+		.container-btn {
+			width: 5.6rem;
+			height: 5.6rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.floating-menu {
+			display: flex;
+			flex-direction: column;
+			gap: 1.2rem;
+			position: fixed;
+			bottom: 11.6rem;
+			right: 6.25rem;
+			z-index: 101;
+		}
+
+		.container-menu {
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			gap: 0.6rem;
+		}
+
+		.menu {
+			position: relative;
+			width: 3.2rem;
+			height: 3.2rem;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 	}
 `;
