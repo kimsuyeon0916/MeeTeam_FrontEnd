@@ -49,7 +49,10 @@ const ReplyComment = ({
 		{
 			title: '삭제',
 			optionClickHandler: () => {
-				setIsDelete(true);
+				setIsDelete({
+					id: id,
+					isDelete: true,
+				});
 			},
 		},
 	];
@@ -133,9 +136,9 @@ const ReplyComment = ({
 				{isCommentWriter && showKebab && <KebabMenu options={optionLists} />}
 			</section>
 			<hr />
-			{isDelete && (
+			{isDelete.isDelete && (
 				<section className='modal-background'>
-					<CommentDeleteModal pageNum={pageNum} commentId={id} type='reply' />
+					<CommentDeleteModal pageNum={pageNum} commentId={isDelete.id} type='reply' />
 				</section>
 			)}
 		</S.ReplyComment>

@@ -18,6 +18,8 @@ const RecruitPostingApply = () => {
 		queryFn: () => getManagementApplied({ page, isClosed }),
 	});
 
+	console.log(data);
+
 	const onClickMenu = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		if (innerText === '전체') {

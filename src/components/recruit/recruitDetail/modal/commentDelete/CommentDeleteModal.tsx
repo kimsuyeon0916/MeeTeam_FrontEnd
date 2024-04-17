@@ -1,39 +1,53 @@
 import React from 'react';
 import S from './CommentDeleteModal.styled';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { commentDeleteModalState, replyDeleteModalState } from '../../../../../atom';
 import { useCommentDelete } from '../../../../../hooks';
 import { DeleteComment } from '../../../../../types';
 import { useQueryClient } from '@tanstack/react-query';
 
 const CommentDeleteModal = ({ pageNum, commentId, type }: DeleteComment) => {
-	const setIsDelete = useSetRecoilState(commentDeleteModalState);
-	const setIsReplyDelete = useSetRecoilState(replyDeleteModalState);
+	const [isDelete, setIsDelete] = useRecoilState(commentDeleteModalState);
+	const [isReplyDelete, setIsReplyDelete] = useRecoilState(replyDeleteModalState);
 	const deleteComment = useCommentDelete();
 	const queryClient = useQueryClient();
 
 	const onClickCancel = () => {
 		if (type === 'reply') {
-			setIsReplyDelete(false);
+			setIsReplyDelete({
+				id: -1,
+				isDelete: false,
+			});
 		} else {
-			setIsDelete(false);
+			setIsDelete({
+				id: -1,
+				isDelete: false,
+			});
 		}
 	};
 
 	const onClickDelete = () => {
-		deleteComment.mutate(
-			{ pageNum, commentId },
-			{
-				onSuccess: () => {
-					queryClient.invalidateQueries({ queryKey: ['detailedPage'] });
-					if (type === 'reply') {
-						setIsReplyDelete(false);
-					} else {
-						setIsDelete(false);
-					}
-				},
-			}
-		);
+		if (commentId === isDelete.id || (type === 'reply' && commentId === isReplyDelete.id)) {
+			deleteComment.mutate(
+				{ pageNum, commentId },
+				{
+					onSuccess: () => {
+						queryClient.invalidateQueries({ queryKey: ['detailedPage'] });
+						if (type === 'reply') {
+							setIsReplyDelete({
+								id: -1,
+								isDelete: false,
+							});
+						} else {
+							setIsDelete({
+								id: -1,
+								isDelete: false,
+							});
+						}
+					},
+				}
+			);
+		}
 	};
 	return (
 		<S.CommentDeleteModal>

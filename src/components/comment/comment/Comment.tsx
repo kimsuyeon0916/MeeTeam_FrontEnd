@@ -49,7 +49,10 @@ const Comment = ({
 		{
 			title: '삭제',
 			optionClickHandler: () => {
-				setIsDelete(true);
+				setIsDelete({
+					id: id,
+					isDelete: true,
+				});
 			},
 		},
 	];
@@ -163,9 +166,9 @@ const Comment = ({
 					/>
 				)}
 			</section>
-			{isDelete && (
+			{isDelete.isDelete && (
 				<section className='modal-background'>
-					<CommentDeleteModal pageNum={pageNum} commentId={id} />
+					<CommentDeleteModal pageNum={pageNum} commentId={isDelete.id} />
 				</section>
 			)}
 		</S.Comment>

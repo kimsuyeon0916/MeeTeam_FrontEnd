@@ -35,12 +35,20 @@ const RecruitCreatePage = () => {
 		mutationFn: (formData: InputState) => postingRecruit(formData),
 		onSuccess: (data: { recruitmentPostId: number }) => {
 			resetFormData();
+			setIsSubmit(prev => ({
+				...prev,
+				isSubmitted: false,
+			}));
 			navigate(`/recruitment/postings/${data?.recruitmentPostId}`);
 		},
 	});
 	const editPost = useMutation({
 		mutationFn: ({ pageNum, formData }: EditPosting) => editPostingRecruit({ pageNum, formData }),
 		onSuccess: () => {
+			setIsSubmit(prev => ({
+				...prev,
+				isSubmitted: false,
+			}));
 			navigate(`/recruitment/postings/${formData.pageNum}`);
 		},
 	});

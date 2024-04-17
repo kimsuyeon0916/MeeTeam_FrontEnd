@@ -64,6 +64,7 @@ const RecruitDetailPage = () => {
 		}
 	}, [detailedData?.comments]);
 
+	// console.log(detailedData);
 	const convertRoleInfo = (roleInfo: RoleInfo): RoleForPost => {
 		return {
 			roleId: roleInfo.roleId,
@@ -100,10 +101,8 @@ const RecruitDetailPage = () => {
 		navigate('/edit/recruit');
 	};
 
-	console.log(detailedData);
-
 	useEffect(() => {
-		fixModalBackground(isModal || isCancel || isClose || isDelete);
+		fixModalBackground(isModal || isCancel || isClose || isDelete.isDelete);
 	}, [isModal, isCancel, isClose, isDelete]);
 
 	return (

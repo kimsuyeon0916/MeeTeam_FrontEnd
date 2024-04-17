@@ -60,12 +60,18 @@ export const applyCloseModalState = atom({
 
 export const commentDeleteModalState = atom({
 	key: 'commentDeleteModalState',
-	default: false,
+	default: {
+		id: -1,
+		isDelete: false,
+	},
 });
 
 export const replyDeleteModalState = atom({
 	key: 'replyDeleteModalState',
-	default: false,
+	default: {
+		id: -1,
+		isDelete: false,
+	},
 });
 
 export const waitModalState = atom({
