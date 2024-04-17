@@ -41,7 +41,6 @@ const ApplierManagePage = () => {
 
 	const storedNum = sessionStorage.getItem('pageNum');
 	const pageNum = Number(storedNum !== null && storedNum);
-	const isChecked = checkList.length !== 0 && linkUrl.length !== 0;
 
 	const {
 		data: applicantList,
@@ -55,6 +54,8 @@ const ApplierManagePage = () => {
 		queryKey: ['recruitManageInfo'],
 		queryFn: () => getRecruitInfo(pageNum),
 	});
+
+	const isChecked = checkList.length !== 0 && recruitManageInfo?.link.length !== 0;
 
 	const approved = useMutation({
 		mutationFn: ({ pageNum, applicantIds }: ApplicantsList) =>
@@ -91,16 +92,18 @@ const ApplierManagePage = () => {
 	};
 
 	const onClickRefused = () => {
-		if (linkUrl === '') {
+		if (!recruitManageInfo?.link) {
 			setIsToast(true);
+		} else {
+			refused.mutate({ pageNum, applicantIds: checkList });
 		}
-		refused.mutate({ pageNum, applicantIds: checkList });
 	};
 	const onClickApproved = () => {
-		if (linkUrl === '') {
+		if (!recruitManageInfo?.link) {
 			setIsToast(true);
+		} else {
+			approved.mutate({ pageNum, applicantIds: checkList });
 		}
-		approved.mutate({ pageNum, applicantIds: checkList });
 	};
 
 	useEffect(() => {
