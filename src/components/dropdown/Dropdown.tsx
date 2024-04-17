@@ -16,7 +16,6 @@ interface Dropdown {
 	category?: boolean;
 	applicant?: boolean;
 	roleObj?: ManageRole[];
-	normalVersion?: boolean;
 }
 
 type keyObj = {
@@ -34,15 +33,7 @@ const categoryObj: keyObj = {
 	공모전: 3,
 };
 
-const Dropdown = ({
-	data,
-	initialData,
-	scope,
-	category,
-	applicant,
-	roleObj,
-	normalVersion,
-}: Dropdown) => {
+const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dropdown) => {
 	const [currentValue, setCurrentValue] = useState<string | undefined>(`${initialData}`);
 	const [showDropdown, setShowDropdown] = useState<boolean>(false);
 	const [dropdown, setDropdown] = useState({
@@ -95,7 +86,7 @@ const Dropdown = ({
 		const value = event.target.value;
 		setCurrentValue(value);
 		setFilterState(prev => ({ ...prev, scope: scopeObj[value] }));
-		if (value !== '교내' || normalVersion) {
+		if (value !== '교내') {
 			setShowDropdown(false);
 		}
 	};
@@ -149,7 +140,7 @@ const Dropdown = ({
 	}, [dropdownRef.current, showDropdown, dropdown.course, dropdown.professor]);
 
 	useEffect(() => {
-		if ((scope && filterState.scope === null) || normalVersion) {
+		if (scope && filterState.scope === null) {
 			setCurrentValue('범위');
 		} else if (!scope && filterState.category === null && initialData !== '역할') {
 			setCurrentValue('유형');
@@ -157,13 +148,7 @@ const Dropdown = ({
 	}, [filterState.scope, filterState.category]);
 
 	return (
-		<S.Dropdown
-			$showDropdown={showDropdown}
-			$scope={scope}
-			$isCheck={isChecked}
-			$normalVersion={normalVersion}
-			ref={dropdownRef}
-		>
+		<S.Dropdown $showDropdown={showDropdown} $scope={scope} $isCheck={isChecked} ref={dropdownRef}>
 			<article className='wrapper' onClick={onClickDropdown}>
 				<div className='dropdown-box'>
 					<div className='value'>{currentValue}</div>
@@ -187,7 +172,7 @@ const Dropdown = ({
 												/>
 												<label htmlFor={`${index}`}>{e}</label>
 											</section>
-											{currentValue === '교내' && !normalVersion && (
+											{currentValue === '교내' && (
 												<section className='inside'>
 													<section className='intro'>
 														<span className='description'>
