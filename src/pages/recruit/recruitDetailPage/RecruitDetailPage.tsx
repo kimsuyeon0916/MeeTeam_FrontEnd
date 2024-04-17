@@ -174,7 +174,7 @@ const RecruitDetailPage = () => {
 						{detailedData.isWriter && !detailedData.isClosed && (
 							<WriterFooter onClickEditPage={onClickEditPage} pageNum={pageNum} />
 						)}
-						{!detailedData.isWriter && (
+						{!detailedData.isWriter && !detailedData.isClosed && (
 							<ApplierFooter deadline={detailedData.deadline} isApplied={detailedData.isApplied} />
 						)}
 						{detailedData.isClosed && <ClosedFooter />}
