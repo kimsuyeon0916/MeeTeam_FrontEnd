@@ -64,7 +64,6 @@ const RecruitDetailPage = () => {
 		}
 	}, [detailedData?.comments]);
 
-	// console.log(detailedData);
 	const convertRoleInfo = (roleInfo: RoleInfo): RoleForPost => {
 		return {
 			roleId: roleInfo.roleId,
