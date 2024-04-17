@@ -30,7 +30,7 @@ const Header = () => {
 		setIsWait(true);
 	};
 	const goInformationUse = () => {
-		navigate('/information');
+		setIsWait(true);
 	};
 
 	const onClickMy = () => {
@@ -56,9 +56,9 @@ const Header = () => {
 		if (location.pathname === '/galary') {
 			setIsHere({ recruit: false, galary: true, inform: false });
 		}
-		if (location.pathname === '/information') {
-			setIsHere({ recruit: false, galary: false, inform: true });
-		}
+		// if (location.pathname === '/information') {
+		// 	setIsHere({ recruit: false, galary: false, inform: true });
+		// }
 	}, [location]);
 
 	useEffect(() => {

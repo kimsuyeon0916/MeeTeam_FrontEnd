@@ -51,7 +51,7 @@ const WaitModal = styled.section`
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-top: 4rem;
+		margin-top: 3rem;
 		gap: 1.6rem;
 
 		button {
