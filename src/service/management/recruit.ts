@@ -10,7 +10,13 @@ interface ManagementInfo {
 export const getManagementMyPost = async ({ page, isClosed }: ManagementInfo) => {
 	try {
 		const response = await axiosAuthInstance.get<ManageListResult>(
-			EndPoint.MANAGEMENT_RECRUIT.myPost
+			EndPoint.MANAGEMENT_RECRUIT.myPost,
+			{
+				params: {
+					page: page,
+					'is-closed': isClosed,
+				},
+			}
 		);
 		return response;
 	} catch (error) {
@@ -21,7 +27,13 @@ export const getManagementMyPost = async ({ page, isClosed }: ManagementInfo) =>
 export const getManagementBookmark = async ({ page, isClosed }: ManagementInfo) => {
 	try {
 		const response = await axiosAuthInstance.get<ManageListResult>(
-			EndPoint.MANAGEMENT_RECRUIT.bookmark
+			EndPoint.MANAGEMENT_RECRUIT.bookmark,
+			{
+				params: {
+					page: page,
+					'is-closed': isClosed,
+				},
+			}
 		);
 		return response;
 	} catch (error) {

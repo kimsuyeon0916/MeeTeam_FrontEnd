@@ -100,6 +100,8 @@ const RecruitDetailPage = () => {
 		navigate('/edit/recruit');
 	};
 
+	console.log(detailedData);
+
 	useEffect(() => {
 		fixModalBackground(isModal || isCancel || isClose || isDelete);
 	}, [isModal, isCancel, isClose, isDelete]);
