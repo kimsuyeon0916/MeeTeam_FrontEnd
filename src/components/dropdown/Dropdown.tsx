@@ -23,8 +23,8 @@ type keyObj = {
 };
 
 const scopeObj: keyObj = {
-	교내: 1,
-	교외: 2,
+	교외: 1,
+	교내: 2,
 };
 
 const categoryObj: keyObj = {
