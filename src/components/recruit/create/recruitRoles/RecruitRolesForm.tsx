@@ -16,8 +16,6 @@ const RecruitRoleForm = () => {
 		}));
 	};
 
-	console.log(info);
-
 	return (
 		<S.RecruitRoles>
 			<section className='container-roles'>

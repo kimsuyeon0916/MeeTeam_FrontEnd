@@ -29,8 +29,6 @@ const RecruitCard = ({
 		setIsMarked(prev => !prev);
 	};
 
-	console.log(scope, category);
-
 	return (
 		<S.RecruitCard onClick={onClickContent} $isClosed={isClosed}>
 			<section className='content-tags'>

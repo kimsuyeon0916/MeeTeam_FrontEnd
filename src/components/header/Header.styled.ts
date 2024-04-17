@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-const Header = styled.header`
+const Header = styled.header<{ $isLogin: boolean }>`
 	position: relative;
+	border-bottom: 0.375px solid #e3e3e3;
 
 	.body2-semibold {
 		color: #8e8e8e;
@@ -14,17 +15,21 @@ const Header = styled.header`
 	.header {
 		display: flex;
 		height: 6.75rem;
+		width: clamp(45%, 96rem, 75%);
 		align-items: center;
 		flex-shrink: 0;
 		background-color: #fff;
-		border-bottom: 0.375px solid #e3e3e3;
-		justify-content: center;
+		justify-content: space-between;
+		margin: 0 auto;
+	}
+
+	.header-leftside {
+		display: flex;
 	}
 
 	.header__logo {
 		display: flex;
 		height: 1.29563rem;
-		justify-content: flex-end;
 		align-items: center;
 		flex-shrink: 0;
 		cursor: pointer;
@@ -54,7 +59,6 @@ const Header = styled.header`
 		align-items: center;
 		gap: 3.2rem;
 		margin-left: 6.05rem;
-		margin-right: 30.7rem;
 
 		.header__navigation--navi-text {
 			color: #8e8e8e;
@@ -76,7 +80,7 @@ const Header = styled.header`
 
 	.header__menu {
 		display: flex;
-		justify-content: flex-start;
+		justify-content: flex-end;
 		align-items: center;
 		width: 24.2rem;
 		gap: 1.1rem;
