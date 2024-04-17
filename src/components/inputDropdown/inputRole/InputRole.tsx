@@ -28,6 +28,7 @@ const InputRole = ({ id, role, count, skill, onDelete }: InputRole) => {
 							</article>
 						);
 					})}
+					{skill.length === 0 && <span className='body1-medium no-skill'>기술 미입력</span>}
 				</section>
 			</section>
 			<button type='button' className='add-btn' onClick={onClickDelete}>

@@ -50,19 +50,10 @@ const InputRoleForm = () => {
 		queryFn: () => getSkillKeyword(keywordSkill),
 	});
 
-	const submitTagItem = () => {
-		setRoleData((prevState: RoleForPost) => ({
-			...prevState,
-			skills: [...(prevState?.skills?.map(e => e.name) as any), tagItem],
-		}));
-		setTagItem('');
-	};
-
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		const target = event.currentTarget;
 		if (target.value.length !== 0 && event.key === 'Enter') {
 			event.preventDefault();
-			submitTagItem();
 		}
 		if (event.key === 'Enter') {
 			event.preventDefault();

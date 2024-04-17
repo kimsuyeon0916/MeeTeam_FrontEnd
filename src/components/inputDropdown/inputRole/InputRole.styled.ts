@@ -18,6 +18,10 @@ const InputRole = styled.article`
 		letter-spacing: 0.0032rem;
 	}
 
+	.no-skill {
+		color: #8e8e8e;
+	}
+
 	.inputs {
 		display: flex;
 		justify-content: flex-start;
