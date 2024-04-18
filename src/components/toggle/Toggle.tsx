@@ -13,7 +13,7 @@ const Toggle = ({ state, setState }: Toggle<boolean | undefined>) => {
 	return (
 		<S.ToggleLayout>
 			<S.ToggleLabel>
-				<S.ToggleCheckBox type='checkbox' checked={state} onChange={handleToggle} />
+				<S.ToggleCheckBox type='checkbox' defaultChecked={state} onChange={handleToggle} />
 				<S.ToggleSlider checked={state} />
 			</S.ToggleLabel>
 			<S.ToggleDescription>{state ? '공개' : '비공개'}</S.ToggleDescription>

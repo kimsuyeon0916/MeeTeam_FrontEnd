@@ -10,8 +10,8 @@ const SCHOOL_CERTIFICATION_DATA = [
 		isNext: false,
 		icon: {
 			default: ArrowBottom,
-			focus: ArrowTop,
-			arrow: 'right',
+			$focus: ArrowTop,
+			$arrow: 'right',
 		},
 	},
 	{
@@ -23,7 +23,7 @@ const SCHOOL_CERTIFICATION_DATA = [
 		isNext: false,
 		icon: {
 			default: Search,
-			arrow: 'right',
+			$arrow: 'right',
 		},
 	},
 	{

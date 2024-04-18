@@ -1,11 +1,6 @@
 import React, { useState } from 'react';
 import S from './ApplicantView.styled';
-import {
-	SMALL_BOTTOM_ARROW_ICON,
-	SMALL_TOP_ARROW_BUTTON,
-	applicantList,
-	ApplicantCard,
-} from '../../../..';
+import { SMALL_BOTTOM_ARROW_ICON, SMALL_TOP_ARROW_BUTTON, applicantList } from '../../../..';
 
 const ApplicantView = () => {
 	const decideUniqueRoles = () => {
@@ -49,9 +44,9 @@ const ApplicantView = () => {
 						</S.ApplicantViewRoleBox>
 						{!fold[index] && (
 							<div className='application-view__grid'>
-								{decideApplicants(role).map((applicant, index) => (
+								{/* {decideApplicants(role).map((applicant, index) => (
 									<ApplicantCard applicant={applicant} key={index} />
-								))}
+								))} */}
 							</div>
 						)}
 					</li>

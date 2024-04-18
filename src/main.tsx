@@ -7,21 +7,20 @@ import {
 	RecruitPage,
 	GalaryPage,
 	RecruitCreatePage,
-	OutputCreatePage,
 	RecruitDetailPage,
-	MyActivityLike,
 	SignInPage,
 	SchoolCertificationPage,
 	NicknameSettingPage,
 	SignUpPage,
 	PassWordFindingPage,
-	MyActivityWrapper,
-	MyActivityInvited,
-	MyActivityApply,
-	MyActivityBookmark,
 	ProfileDetailsPage,
 	ProfileEditPage,
 	PortfolioDetailsPage,
+	ApplierManagePage,
+	RecruitManageWrapper,
+	RecruitPostingBookmark,
+	RecruitPostingApply,
+	RecruitMyPostings,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -31,16 +30,16 @@ const router = createBrowserRouter([
 		element: <App />,
 		children: [
 			{
-				path: '',
-				element: <MainPage />,
-			},
-			{
-				path: 'recruit',
+				path: 'recruitment/postings/search',
 				element: <RecruitPage />,
 			},
 			{
-				path: 'recruit/:recruitId?',
+				path: 'recruitment/postings/:id',
 				element: <RecruitDetailPage />,
+			},
+			{
+				path: '/recruitment/applicants',
+				element: <ApplierManagePage />,
 			},
 			{
 				path: 'galary',
@@ -63,34 +62,30 @@ const router = createBrowserRouter([
 				],
 			},
 			{
-				path: 'activity',
-				element: <MyActivityWrapper />,
+				path: 'management',
+				element: <RecruitManageWrapper />,
 				children: [
 					{
-						path: 'invited',
-						element: <MyActivityInvited />,
-					},
-					{
-						path: 'like',
-						element: <MyActivityLike />,
-					},
-					{
-						path: 'apply',
-						element: <MyActivityApply />,
-					},
-					{
 						path: 'bookmark',
-						element: <MyActivityBookmark />,
+						element: <RecruitPostingBookmark />,
+					},
+					{
+						path: 'applied',
+						element: <RecruitPostingApply />,
+					},
+					{
+						path: 'my-post',
+						element: <RecruitMyPostings />,
 					},
 				],
 			},
 			{
-				path: 'create/recruit',
+				path: 'recruitment/postings',
 				element: <RecruitCreatePage />,
 			},
 			{
-				path: 'create/output',
-				element: <OutputCreatePage />,
+				path: 'edit/recruit',
+				element: <RecruitCreatePage />,
 			},
 			{
 				path: 'profile/:userId?',

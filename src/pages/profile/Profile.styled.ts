@@ -143,6 +143,15 @@ const ProfileGrid = styled.div`
 	grid-auto-rows: minmax(10.3rem, auto);
 	row-gap: 2.4rem;
 	column-gap: 2.4rem;
+
+	max-height: 52.5rem; // 무한 스크롤 영역
+	/* 스크롤바 숨기기 */
+	overflow-y: auto;
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+	&::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera*/
+	}
 `;
 
 const ProfileDescription = styled.blockquote`

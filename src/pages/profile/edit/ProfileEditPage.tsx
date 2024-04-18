@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import S from '../Profile.styled';
 import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
@@ -10,7 +10,7 @@ import {
 	Toggle,
 	Radio,
 	DeleteBtn,
-	MuiDatepicker,
+	MuiDatepickerController,
 	SkillTag,
 	PortfolioCard,
 	DefaultBtn,
@@ -21,15 +21,17 @@ import {
 } from '../../../components';
 import { useRecoilValue } from 'recoil';
 import { imageNameState, userState } from '../../../atom';
-import { Skill, Portfolio, Award, Link } from '../../../types';
+import { Skill, Award, Link } from '../../../types';
 import {
 	useDebounce,
 	useReadProfile,
 	useUpdateProfile,
 	useReadRoleList,
 	useReadSkillList,
+	useIntersection,
 } from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
+import { useReadPortfolioList } from '../../../hooks/usePortfolio';
 
 interface FormValues {
 	nickname?: string;
@@ -65,7 +67,7 @@ const gpaList = [{ name: '4.5' }, { name: '4.3' }];
 
 const ProfileEditPage = () => {
 	const userId = useRecoilValue(userState)?.userId as string;
-	const { data: user, isSuccess } = useReadProfile(userId); // 새로고침 시, 렌더링 지연 및 콘솔 에러
+	const { data: user, isSuccess: isUserSuccess } = useReadProfile(userId); // 새로고침 시, 렌더링 지연 및 콘솔 에러
 	// const user = useRecoilValue(userState);
 	const profileImageName = useRecoilValue(imageNameState);
 
@@ -80,9 +82,9 @@ const ProfileEditPage = () => {
 	});
 
 	const submitHandler: SubmitHandler<FormValues> = data => {
-		const { imageUrl, interest, ...updateData } = data;
+		// const { imageUrl, interest, ...updateData } = data;
 		mutate({
-			...updateData,
+			...data, // updateData -> data
 			imageFileName: profileImageName,
 			isUserNamePublic: isUserNamePublic,
 			interestId: sessionStorage.interest,
@@ -91,7 +93,7 @@ const ProfileEditPage = () => {
 			isUniversityEmailPublic: isUniversityEmailPublic,
 			isSubEmailPublic: isSubEmailPublic,
 			skills: skillList.map(skill => skill.id),
-			portfolios: pinnedPortfolioList,
+			portfolios: pinnedPortfolioList as string[],
 		});
 		sessionStorage.removeItem('interest');
 		sessionStorage.removeItem('skill');
@@ -132,21 +134,16 @@ const ProfileEditPage = () => {
 	const [isUniversityMain, setIsUniversityMain] = useState(user?.universityEmail?.isDefault); // 대표 메일
 
 	useEffect(() => {
-		if (isSuccess) {
+		if (isUserSuccess) {
 			setIsUserNamePublic(user?.isUserNamePublic);
 			setIsPhonePublic(user?.phone?.isPublic);
 			setIsUniversityEmailPublic(user?.universityEmail?.isPublic);
 			setIsSubEmailPublic(user?.subEmail?.isPublic);
 			setIsUniversityMain(user?.universityEmail?.isDefault);
 
-			setPinnedPortfolioList(
-				sortedPortfolioList
-					? sortedPortfolioList.filter(portfolio => portfolio.pinned).map(portfolio => portfolio.id)
-					: []
-			);
 			setSkillList(user?.skills ? user?.skills : []);
 		}
-	}, [isSuccess]);
+	}, [isUserSuccess]);
 
 	const handleRadioClick = (id: string) => {
 		if (id === 'universityEmail') {
@@ -215,17 +212,45 @@ const ProfileEditPage = () => {
 	};
 
 	// 포트폴리오
+	const {
+		data,
+		fetchNextPage,
+		hasNextPage,
+		isFetching,
+		isSuccess: isPortfolioSuccess,
+	} = useReadPortfolioList(12);
+	const portfolioList = useMemo(
+		() => (data ? data.pages.flatMap(response => response?.portfolios) : []),
+		[data]
+	);
+
+	const ref = useIntersection((entry, observer) => {
+		observer.unobserve(entry.target);
+
+		if (hasNextPage && !isFetching) fetchNextPage();
+	});
+
 	const sortedPortfolioList =
-		user?.portfolios &&
-		[...user.portfolios]?.sort((a, b) =>
-			a.pinOrder > b.pinOrder ? 1 : a.pinOrder < b.pinOrder ? -1 : 0
-		); // userData -> user로 변경
+		portfolioList &&
+		[...portfolioList].sort((a, b) =>
+			a && b && a.pinOrder > b.pinOrder ? 1 : a && b && a.pinOrder < b.pinOrder ? -1 : 0
+		);
 
 	const [pinnedPortfolioList, setPinnedPortfolioList] = useState(
 		sortedPortfolioList
-			? sortedPortfolioList.filter(portfolio => portfolio.pinned).map(portfolio => portfolio.id)
+			? sortedPortfolioList?.filter(portfolio => portfolio?.pinned).map(portfolio => portfolio?.id)
 			: []
 	);
+
+	useEffect(() => {
+		setPinnedPortfolioList(
+			sortedPortfolioList
+				? sortedPortfolioList
+						?.filter(portfolio => portfolio?.pinned)
+						?.map(portfolio => portfolio?.id as string)
+				: []
+		);
+	}, [isPortfolioSuccess]);
 
 	const addPinnedPortfolioList = (id: string) => {
 		if (pinnedPortfolioList.length < 8) {
@@ -267,7 +292,7 @@ const ProfileEditPage = () => {
 							/>
 							<S.ProfileRow $gap='1rem'>
 								<Input
-									defaultValue={user?.userName}
+									// defaultValue={user?.userName}
 									register={register}
 									formState={formState}
 									{...PROFILE_EDIT_DATA.userName}
@@ -435,8 +460,11 @@ const ProfileEditPage = () => {
 								<S.ProfileRow key={award.id} $gap='1rem'>
 									<S.ProfileColumn $gap='1rem'>
 										<S.ProfileRow $gap='1rem'>
-											<MuiDatepicker name={`awards.${index}.startDate`} control={control} />
-											<MuiDatepicker name={`awards.${index}.endDate`} control={control} />
+											<MuiDatepickerController
+												name={`awards.${index}.startDate`}
+												control={control}
+											/>
+											<MuiDatepickerController name={`awards.${index}.endDate`} control={control} />
 										</S.ProfileRow>
 										<Input
 											name={`awards.${index}.title`}
@@ -485,22 +513,25 @@ const ProfileEditPage = () => {
 						<S.ProfileTitle>포트폴리오</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.portfolio}</S.ProfileDescription>
 						<S.ProfileGrid>
-							{user?.portfolios &&
-								user?.portfolios.map(({ ...props }: Portfolio, index) => (
-									<PortfolioCard
-										key={index}
-										{...props}
-										isEditable={true}
-										clickNumber={checkPinnedIndex(props.id) + 1}
-										handleClick={
-											checkPinnedIndex(props.id) === -1
-												? addPinnedPortfolioList
-												: deletePinnedPortfolioList
-										}
-									/>
-								))}
+							{portfolioList &&
+								portfolioList?.map(
+									portfolio =>
+										portfolio && (
+											<PortfolioCard
+												key={portfolio.id}
+												{...portfolio}
+												isEditable={true}
+												clickNumber={checkPinnedIndex(portfolio.id) + 1}
+												handleClick={
+													checkPinnedIndex(portfolio.id) === -1
+														? addPinnedPortfolioList
+														: deletePinnedPortfolioList
+												}
+											/>
+										)
+								)}
 						</S.ProfileGrid>
-						<hr />
+						<hr ref={ref} />
 					</S.ProfileArticle>
 				</S.ProfileColumn>
 				<S.ProfileButtonBox>

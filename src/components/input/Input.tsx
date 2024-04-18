@@ -11,8 +11,8 @@ import {
 
 export interface Icon {
 	default: string;
-	focus?: string;
-	arrow: string;
+	$focus?: string;
+	$arrow: string;
 }
 
 interface Input<T extends FieldValues> {
@@ -51,13 +51,14 @@ const Input = <T extends FieldValues>({
 	const inputErrorMessage = formState?.errors[name]?.message as string;
 	const inputValue = watch?.(name as Path<T>);
 
-	const { ref, ...rest } = register(name as Path<T>, validation);
+	const { ref, ...rest } = register(name as Path<T>, validation?.disabled ? undefined : validation);
 
 	return (
 		<S.InputLabel $width={width}>
 			{label && <h6>{label}</h6>}
 			<S.InputContainer>
 				<S.Input
+					disabled={validation?.disabled}
 					{...rest}
 					{...props}
 					{...icon}
