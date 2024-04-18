@@ -5,6 +5,14 @@ export const readPortfolio = async (portfolioId: string) => {
 	try {
 		const response = await axiosAuthInstance.get<PortfolioDetails>(
 			EndPoint.PORTFOLIO.read(portfolioId)
+		);
+
+		return response;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+};
 
 export const readPortfolioList = async ({
 	size,

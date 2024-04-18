@@ -47,7 +47,6 @@ import CancelWhite from './CancelWhite.svg';
 import Create from './Create.svg';
 import Profile from './Profile.svg';
 import Portpolio from './Portpolio.svg';
-import LinkIcon from './LinkIcon.svg';
 import User from './User.svg';
 import School from './School.svg';
 import DropdownArrowUp from './DropdownArrowUp.svg';
@@ -104,7 +103,6 @@ export {
 	Create,
 	Profile,
 	Portpolio,
-	LinkIcon,
 	User,
 	School,
 	DropdownArrowUp,
