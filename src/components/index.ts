@@ -116,6 +116,7 @@ import LinkDetails from './link/details/LinkDetails';
 import PortfolioInformation from './portfolio/information/PortfolioInformation';
 import PortfolioList from './portfolio/list/PortfolioList';
 import ImageCarousel from './carousel/ImageCarousel';
+import PortfolioImageUpload from './portfolio/\bimage/PortfolioImageUpload';
 
 export {
 	Header,
@@ -227,4 +228,5 @@ export {
 	PortfolioInformation,
 	PortfolioList,
 	ImageCarousel,
+	PortfolioImageUpload,
 };
