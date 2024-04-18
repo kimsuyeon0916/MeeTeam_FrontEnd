@@ -19,8 +19,9 @@ const MuiDatepicker = ({ name, control }: Date) => {
 		<Controller
 			control={control}
 			name={name}
-			render={({ field: { onChange, ref } }) => (
+			render={({ field: { onChange, ref, value } }) => (
 				<DatePicker
+					value={new Date(value)}
 					slots={{
 						popper: S.StyledPopper,
 						textField: S.StyledTextField,
