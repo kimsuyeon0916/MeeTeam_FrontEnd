@@ -34,8 +34,8 @@ const PortfolioInformation = ({
 				</S.PortfolioInformationRow>
 				<S.PortfolioInformationRow>
 					<h5>진행기간</h5>
-					{format(new Date(startDate), 'yy년 MM월 dd일')} -{' '}
-					{format(new Date(endDate), 'yy년 MM월 dd일')}
+					{startDate && format(new Date(startDate), 'yy년 MM월 dd일')} -{' '}
+					{endDate && format(new Date(endDate), 'yy년 MM월 dd일')}
 				</S.PortfolioInformationRow>
 				<S.PortfolioInformationRow>
 					<h5>진행방식</h5>
