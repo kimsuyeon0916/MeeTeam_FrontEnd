@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router';
 import { DefaultPortfolioImage } from '../../../assets';
 
 interface PortfolioCard {
-	id: string;
-	title: string;
+	id?: string;
+	title?: string;
 	mainImageUrl?: string;
-	field: string;
-	role: string;
+	field?: string;
+	role?: string;
+	isMainImage?: boolean;
 	isEditable?: boolean;
 	clickNumber?: number;
 	handleClick?: (id: string) => void;
@@ -20,6 +21,7 @@ const PortfolioCard = ({
 	mainImageUrl,
 	field,
 	role,
+	isMainImage,
 	isEditable,
 	clickNumber,
 	handleClick,
@@ -28,28 +30,29 @@ const PortfolioCard = ({
 
 	return (
 		<S.PortfolioCardLayout
-			onClick={() => (isEditable ? handleClick?.(id) : navigate(`/portfolio/${id}`))}
+			onClick={() => (isEditable ? () => id && handleClick?.(id) : navigate(`/portfolio/${id}`))}
 		>
-			<S.PortfolioCardBox>
+			<S.PortfolioCardBox $isEditable={isEditable}>
 				<S.PortfolioCardImage
 					src={mainImageUrl ? mainImageUrl : DefaultPortfolioImage}
 					alt='포트폴리오이미지'
 				/>
 				<S.PortfolioTagRow>
-					<S.PortfolioCardTag $color='#E0E6FF'>{field}</S.PortfolioCardTag>
-					<S.PortfolioCardTag $color='#C9DEFF'>{role}</S.PortfolioCardTag>
+					{field && <S.PortfolioCardTag $color='#E0E6FF'>{field}</S.PortfolioCardTag>}
+					{role && <S.PortfolioCardTag $color='#C9DEFF'>{role}</S.PortfolioCardTag>}
+					{isMainImage && <S.PortfolioCardTag className='main-image-tag'>메인</S.PortfolioCardTag>}
 				</S.PortfolioTagRow>
 				{isEditable && (
 					<S.PortfolioCardButton
 						type='button'
 						$checked={clickNumber ? true : false}
-						onClick={() => handleClick?.(id)}
+						onClick={() => id && handleClick?.(id)}
 					>
 						{clickNumber !== 0 && clickNumber}
 					</S.PortfolioCardButton>
 				)}
 			</S.PortfolioCardBox>
-			<S.PortfolioCardTitle>{title}</S.PortfolioCardTitle>
+			{title && <S.PortfolioCardTitle>{title}</S.PortfolioCardTitle>}
 		</S.PortfolioCardLayout>
 	);
 };
