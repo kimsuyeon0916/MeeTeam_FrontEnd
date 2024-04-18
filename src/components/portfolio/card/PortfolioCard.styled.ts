@@ -50,7 +50,7 @@ const PortfolioTagRow = styled.div`
 	column-gap: 0.8rem;
 `;
 
-const PortfolioCardTag = styled.span<{ $color: string }>`
+const PortfolioCardTag = styled.span<{ $color?: string }>`
 	align-items: center;
 
 	display: flex;
@@ -67,6 +67,13 @@ const PortfolioCardTag = styled.span<{ $color: string }>`
 	font-weight: 500;
 	line-height: 1.4rem; /* 116.667% */
 	letter-spacing: 0.0024rem;
+
+	&.main-image-tag {
+		padding: 0.6rem 0.8rem;
+		border-radius: 1.5rem;
+		border: 1px solid var(--Purplescale-200, #e0e6ff);
+		background: var(--Grayscale-000, #fff);
+	}
 `;
 
 const PortfolioCardButton = styled.button<{ $checked?: boolean }>`
