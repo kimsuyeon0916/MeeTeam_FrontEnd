@@ -122,6 +122,10 @@ import MuiDatepickerController from './muiDatepicker/MuiDatepickerController';
 import DefaultBtn from './button/DefaultBtn';
 import PrimaryBtn from './button/PrimaryBtn';
 import AddFormBtn from './button/AddFormBtn';
+import LinkDetails from './link/details/LinkDetails';
+import PortfolioInformation from './portfolio/information/PortfolioInformation';
+import PortfolioList from './portfolio/list/PortfolioList';
+import ImageCarousel from './carousel/ImageCarousel';
 import WriterFooter from './recruit/recruitDetail/footer/WriterFooter';
 import ApplierFooter from './recruit/recruitDetail/footer/ApplierFooter';
 import ClosedFooter from './recruit/recruitDetail/footer/ClosedFooter';
@@ -249,6 +253,10 @@ export {
 	DefaultBtn,
 	PrimaryBtn,
 	AddFormBtn,
+	LinkDetails,
+	PortfolioInformation,
+	PortfolioList,
+	ImageCarousel,
 	WriterFooter,
 	ApplierFooter,
 	ApplyModal,

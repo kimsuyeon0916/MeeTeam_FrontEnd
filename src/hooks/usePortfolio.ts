@@ -1,8 +1,19 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { readPortfolioList } from '../service';
+import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
+import { readPortfolio, readPortfolioList } from '../service';
 
 const portfolioKeys = {
-	readPortfolioList: (size: number) => ['readProfile', size],
+	readPortfolio: (portfolioId: string) => ['readPortfolio', portfolioId],
+  readPortfolioList: (size: number) => ['readProfile', size],
+};
+
+/**
+ * @description 포트폴리오 조회 API를 호출하는 hook입니다.
+ */
+export const useReadPortfolio = (portfolioId: string) => {
+	return useQuery({
+		queryKey: portfolioKeys.readPortfolio(portfolioId),
+		queryFn: () => readPortfolio(portfolioId),
+	});
 };
 
 /**

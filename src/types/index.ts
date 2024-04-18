@@ -7,6 +7,7 @@ import type {
 	PageInfo,
 } from './response';
 import type { CustomInstance } from './api';
+import type { User, Contact, Skill, Award, Link } from './user';
 import type {
 	InputState,
 	RoleForPost,
@@ -54,8 +55,9 @@ import type {
 	ManageListResult,
 } from './recruit/response';
 import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
-import type { User, Contact, Skill, Award, Link, Portfolio } from './user';
 import type { Search } from './search';
+import type { Portfolio, PortfolioDetails } from './portfolio';
+import type { Image } from './image';
 
 export type {
 	SignUpPayload,
@@ -84,6 +86,8 @@ export type {
 	University,
 	Department,
 	Search,
+	PortfolioDetails,
+	Image,
 	PortfolioListResponse,
 	PageInfo,
 	RecruitPostings,

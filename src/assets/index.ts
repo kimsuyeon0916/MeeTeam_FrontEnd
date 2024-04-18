@@ -29,6 +29,13 @@ import BlackCalendar from './BlackCalendar.svg';
 import Close from './Close.svg';
 import AddProfile from './AddProfile.svg';
 import BluePlus from './BluePlus.svg';
+import LinkIcon from './LinkIcon.svg';
+import ArrowLeft from './ArrowLeft.svg';
+import ArrowRight from './ArrowRight.svg';
+import Test1 from './Test1.png';
+import Test2 from './Test2.png';
+import Test3 from './Test3.png';
+import Test4 from './Test4.png';
 import FilledBookmark from './FilledBookmark.svg';
 import UnfilledBookmark from './UnfilledBookmark.svg';
 import Edit from './Edit.svg';
@@ -82,6 +89,13 @@ export {
 	Close,
 	AddProfile,
 	BluePlus,
+	LinkIcon,
+	ArrowLeft,
+	ArrowRight,
+	Test1,
+	Test2,
+	Test3,
+	Test4,
 	DATE_ICON,
 	Clear,
 	BookmarkRight,

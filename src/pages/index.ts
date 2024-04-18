@@ -15,6 +15,8 @@ import PassWordFindingPage from './account/passWordFindingPage/PassWordFindingPa
 import { PASSWORD_DATA } from './account/passWordFindingPage/PassWordData';
 import ProfileEditPage from './profile/edit/ProfileEditPage';
 import PROFILE_EDIT_DATA from './profile/edit/ProfileEditData';
+import { portfolioData } from './portfolio/portfolioData';
+import PortfolioDetailsPage from './portfolio/details/PortfolioDetailsPage';
 import ApplierManagePage from './recruit/applierManagePage/ApplierManagePage';
 import RecruitManageWrapper from './recruit/recruitManagePage/RecruitManageWrapper';
 import RecruitPostingBookmark from './recruit/recruitManagePage/RecruitPostingBookmark';
@@ -46,6 +48,8 @@ export {
 	userData,
 	ProfileEditPage,
 	PROFILE_EDIT_DATA,
+	portfolioData,
+	PortfolioDetailsPage,
 	ApplierManagePage,
 	RecruitPostingApply,
 	RecruitMyPostings,

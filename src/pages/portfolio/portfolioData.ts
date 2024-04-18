@@ -1,0 +1,66 @@
+import { PortfolioDetails } from '../../types';
+
+export const portfolioData: PortfolioDetails = {
+	title: 'Meeteam',
+	description: '대학생 맞춤형 구인 포트폴리오 서비스',
+	content: `밋팀(Meeteam)은 나 자신을 의미하는 Me, 팀을 의미하는 Team, 만남을 의미하는 Meet이 합쳐진 단어입니다.\n대학생들의 보다 원활한 팀프로젝트를 위해 기획하게 되었습니다.\n\n\n밋팀(Meeteam)은 나 자신을 의미하는 Me, 팀을 의미하는 Team, 만남을 의미하는 Meet이 합쳐진 단어입니다.\n대학생들의 보다 원활한 팀프로젝트를 위해 기획하게 되었으며, 그 외에 포토폴리오로서의 기능까지 생각하고 있습니다!\n\n이를 위해 함께 멋진 서비스를 완성할 웹 디자이너를 찾고 있어요!\n밋팀(Meeteam)은 나 자신을 의미하는 Me, 팀을 의미하는 Team, 만남을 의미하는 Meet이 합쳐진 단어입니다.\n대학생들의 보다 원활한 팀프로젝트를 위해 기획하게 되었으며, 그 외에 포토폴리오로서의 기능까지 생각하고 있습니다!\n`,
+	zipFileUrl: 'https://file.zip',
+	fileOrder: ['이미지1.png', '이미지2.jpg'],
+	field: '개발',
+	role: '프론트엔드 개발자',
+	startDate: '2023-11-02',
+	endDate: '2024-03-15',
+	proceedType: '온라인',
+	skills: [
+		{ id: '1', name: 'Figma' },
+		{ id: '2', name: 'Windows Forms' },
+		{ id: '3', name: 'Node.js' },
+		{ id: '4', name: '게임개발' },
+		{ id: '5', name: 'C#' },
+	],
+	links: [
+		{
+			url: 'http://~~',
+			description: 'Github',
+		},
+	],
+	otherPortfolios: [
+		{
+			id: '1',
+			title: 'Meeteam',
+			mainImageUrl: 'https://~~',
+			field: '개발',
+			role: '백엔드 개발자',
+			pinOrder: '1',
+			pinned: true,
+		},
+		{
+			id: '2',
+			title: 'Meeteam',
+			mainImageUrl: 'https://~~',
+			field: '개발',
+			role: '백엔드 개발자',
+			pinOrder: '1',
+			pinned: true,
+		},
+		{
+			id: '3',
+			title: 'Meeteam',
+			mainImageUrl: 'https://~~',
+			field: '개발',
+			role: '백엔드 개발자',
+			pinOrder: '1',
+			pinned: true,
+		},
+		{
+			id: '4',
+			title: 'Meeteam',
+			mainImageUrl: 'https://~~',
+			field: '개발',
+			role: '백엔드 개발자',
+			pinOrder: '1',
+			pinned: true,
+		},
+	],
+	isWriter: true,
+};

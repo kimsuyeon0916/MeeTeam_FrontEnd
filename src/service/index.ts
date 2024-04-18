@@ -17,7 +17,7 @@ import {
 } from './recruit/detail';
 import { readProfile, updateProfile } from './user/Profile';
 import { readSkillList, readRoleList } from './search/search';
-import { readPortfolioList } from './portfolio/portfolio';
+import { readPortfolio, readPortfolioList } from './portfolio/portfolio';
 import {
 	postingRecruit,
 	getRoleKeyword,
@@ -44,6 +44,7 @@ export {
 	updateProfile,
 	readSkillList,
 	readRoleList,
+	readPortfolio,
 	readPortfolioList,
 	getPostingData,
 	getApplyData,

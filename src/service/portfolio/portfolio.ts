@@ -1,5 +1,10 @@
+import { PortfolioDetails, PortfolioListResponse } from '../../types';
 import { EndPoint, axiosAuthInstance } from '..';
-import { PortfolioListResponse } from '../../types';
+
+export const readPortfolio = async (portfolioId: string) => {
+	try {
+		const response = await axiosAuthInstance.get<PortfolioDetails>(
+			EndPoint.PORTFOLIO.read(portfolioId)
 
 export const readPortfolioList = async ({
 	size,

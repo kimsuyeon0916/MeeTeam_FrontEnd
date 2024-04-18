@@ -25,6 +25,10 @@ export const EndPoint = {
 		skill: '/skill/search',
 	},
 
+	/* portfolio */
+	PORTFOLIO: {
+		read: (portfolioId: string) => `/portfolio/${portfolioId}`,
+
 	/* recruit */
 	RECRUIT_DETAIL: {
 		posting: (id: number) => `/recruitment/postings/${id}`,

@@ -15,6 +15,7 @@ import {
 	PassWordFindingPage,
 	ProfileDetailsPage,
 	ProfileEditPage,
+	PortfolioDetailsPage,
 	ApplierManagePage,
 	RecruitManageWrapper,
 	RecruitPostingBookmark,
@@ -93,6 +94,10 @@ const router = createBrowserRouter([
 			{
 				path: 'profile/edit',
 				element: <ProfileEditPage />,
+			},
+			{
+				path: 'portfolio/:portfolioId?',
+				element: <PortfolioDetailsPage />,
 			},
 		],
 	},
