@@ -1,4 +1,4 @@
-import { INPUT_VALIDATION } from '../..';
+import { INPUT_VALIDATION } from '../../../constant';
 
 export interface Account {
 	[key: string]: string;

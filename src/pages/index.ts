@@ -7,7 +7,6 @@ import SignUpPage from './account/signUp/SignUpPage';
 import RecruitDetailPage from './recruit/recruitDetailPage/RecruitDetailPage';
 import SchoolCertificationPage from './account/schoolCertification/SchoolCertificationPage';
 import { SCHOOL_CERTIFICATION_DATA } from './account/schoolCertification/SchoolCertificationData';
-import { INPUT_VALIDATION } from '../../validation';
 import { SIGN_UP_DATA } from './account/signUp/SignUpData';
 import NicknameSettingPage from './account/signUp/nicknameSetting/NicknameSettingPage';
 import type { Account, User } from './account/signUp/SignUpData';
@@ -35,7 +34,6 @@ export {
 	SchoolCertificationPage,
 	SCHOOL_CERTIFICATION_DATA,
 	User,
-	INPUT_VALIDATION,
 	SIGN_UP_DATA,
 	NicknameSettingPage,
 	Account,
