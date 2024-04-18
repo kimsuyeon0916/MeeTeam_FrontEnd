@@ -58,7 +58,7 @@ const PortfolioImageUpload = (portfolioId?: { portfolioId?: string }) => {
 				{[...imageSrcList].map((imageSrc, index) => (
 					<PortfolioCard
 						key={index}
-						field={index === 0 ? '메인' : ''}
+						isMainImage={index === 0}
 						mainImageUrl={imageSrc}
 						isEditable={true}
 						clickNumber={index + 1}
