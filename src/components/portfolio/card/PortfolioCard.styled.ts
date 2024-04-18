@@ -8,10 +8,11 @@ const PortfolioCardLayout = styled.article`
 	cursor: pointer;
 `;
 
-const PortfolioCardBox = styled.div<{ $url?: string }>`
+const PortfolioCardBox = styled.div<{ $isEditable?: boolean }>`
 	position: relative;
 
-	border-radius: 0.75rem;
+	border-radius: 1rem;
+	border: ${props => props.$isEditable && '0.1rem solid var(--Form-border-default, #e3e3e3)'};
 	overflow: hidden;
 
 	aspect-ratio: 183 / 103; // 포트폴리오 비율
