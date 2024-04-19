@@ -20,7 +20,7 @@ const SignInPage = () => {
 
 	const handleNaverSignInSuccess = () => {
 		if (localStorage?.ACCESS_TOKEN_KEY) {
-			return navigate('/recruitment/postings/search');
+			return navigate('/');
 		}
 		return navigate('/signup/school');
 	};
