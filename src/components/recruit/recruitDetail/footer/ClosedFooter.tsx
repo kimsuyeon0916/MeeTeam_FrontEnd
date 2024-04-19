@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 const ClosedFooter = () => {
 	const navigate = useNavigate();
 	const onClickToList = () => {
-		navigate('/recruitment/postings/search');
+		navigate('/');
 	};
 
 	return (

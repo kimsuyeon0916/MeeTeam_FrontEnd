@@ -30,7 +30,7 @@ const router = createBrowserRouter([
 		element: <App />,
 		children: [
 			{
-				path: 'recruitment/postings/search',
+				path: '', // 일단 메인페이지가 생성되기 전까지 해당 url을 사용할 예정입니다.
 				element: <RecruitPage />,
 			},
 			{

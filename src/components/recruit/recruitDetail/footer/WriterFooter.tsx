@@ -19,7 +19,7 @@ const WriterFooter = ({ pageNum, onClickEditPage }: WriterFooter) => {
 	const deletePosting = useMutation({
 		mutationFn: (pageNum: number) => deletePostingRecruit(pageNum),
 		onSuccess: () => {
-			navigate('/recruitment/postings/search');
+			navigate('/');
 		},
 	});
 

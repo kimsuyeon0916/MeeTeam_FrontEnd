@@ -24,7 +24,7 @@ const Header = () => {
 	});
 
 	const goRecruit = () => {
-		navigate('/recruitment/postings/search');
+		navigate('/');
 	};
 	const goGalary = () => {
 		setIsWait(true);
@@ -47,10 +47,7 @@ const Header = () => {
 	};
 
 	useEffect(() => {
-		if (
-			location.pathname === `/recruitment/postings/${id}` ||
-			location.pathname === '/recruitment/postings/search'
-		) {
+		if (location.pathname === `/recruitment/postings/${id}` || location.pathname === '/') {
 			setIsHere({ recruit: true, galary: false, inform: false });
 		}
 		if (location.pathname === '/galary') {
@@ -79,7 +76,7 @@ const Header = () => {
 		<S.Header $isLogin={isLoggedIn}>
 			<div className='header'>
 				<section className='header-leftside'>
-					<div className='header__logo' onClick={() => navigate('/recruitment/postings/search')}>
+					<div className='header__logo' onClick={() => navigate('/')}>
 						<img className='logo' src={Logo} />
 						<img className='logo-name' src={LogoName} />
 						{isLoggedIn && <span className='university'>광운대학교</span>}

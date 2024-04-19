@@ -10,7 +10,7 @@ const LinkToList = () => {
 			<button
 				type='button'
 				onClick={() => {
-					navigate('/recruitment/postings/search');
+					navigate('/');
 				}}
 			>
 				목록보기
