@@ -27,6 +27,7 @@ import PROFILE_EDIT_DATA from './profile/edit/ProfileEditData';
 import { portfolioData } from './portfolio/portfolioData';
 import PortfolioDetailsPage from './portfolio/details/PortfolioDetailsPage';
 import PORTFOLIO_EDIT_DATA from './portfolio/edit/portfolioEditData';
+import PortfolioEditPage from './portfolio/edit/PortfolioEditPage';
 
 export {
 	MainPage,
@@ -59,4 +60,5 @@ export {
 	portfolioData,
 	PortfolioDetailsPage,
 	PORTFOLIO_EDIT_DATA,
+	PortfolioEditPage,
 };
