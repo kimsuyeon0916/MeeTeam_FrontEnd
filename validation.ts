@@ -48,6 +48,9 @@ export const INPUT_VALIDATION = {
 	skill: {
 		required: '스킬을 추가해주세요',
 	},
+	content: {
+		required: true,
+	},
 };
 
 export const TEXTAREA_VALIDATION = {
