@@ -52,6 +52,7 @@ import School from './School.svg';
 import DropdownArrowUp from './DropdownArrowUp.svg';
 import FloatingBackground from './FloatingBackground.svg';
 import Alert from './Alert.svg';
+import NaverIcon from './NaverIcon.png';
 
 export {
 	Exit,
@@ -108,4 +109,5 @@ export {
 	DropdownArrowUp,
 	FloatingBackground,
 	Alert,
+	NaverIcon,
 };
