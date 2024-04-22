@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-const IconButtonLayout = styled.button<{ $add?: boolean }>`
+interface ButtonStyle {
+	$add?: boolean;
+	$small?: boolean;
+	$default?: boolean;
+}
+
+const IconButtonLayout = styled.button<ButtonStyle>`
 	all: unset;
 	display: flex;
 	width: 4.8rem;
@@ -16,7 +22,7 @@ const IconButtonLayout = styled.button<{ $add?: boolean }>`
 			: `border: 1px solid #8E8E8E; background: #F6F6F6;`}
 `;
 
-const DefaultButtonLayout = styled.button<{ $small?: boolean }>`
+const DefaultButtonLayout = styled.button<ButtonStyle>`
 	all: unset;
 	box-sizing: border-box;
 	display: flex;
