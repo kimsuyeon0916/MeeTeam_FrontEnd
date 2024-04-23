@@ -1,5 +1,5 @@
 import { ArrowBottom, ArrowTop, Search } from '../../../assets';
-import { INPUT_VALIDATION } from '../../../../validation';
+import { INPUT_VALIDATION } from '../../../constant';
 
 const title = {
 	label: '포트폴리오 제목',

@@ -9,7 +9,7 @@ import {
 	GrayCalendar,
 	BlackCalendar,
 } from '../../../assets';
-import { INPUT_VALIDATION, TEXTAREA_VALIDATION } from '../../../../validation';
+import { INPUT_VALIDATION, TEXTAREA_VALIDATION } from '../../../constant';
 
 const nickname = {
 	type: 'text',
