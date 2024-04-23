@@ -39,7 +39,7 @@ const SchoolCertificationPage = () => {
 		control,
 		getValues,
 		watch,
-		formState: { errors },
+		formState: { isValid }, // 제거하면 watch 가 적용이 안되는 이슈 존재
 	} = useForm<FormValues>();
 
 	const checkCertificationInSuccess = () => {
@@ -113,7 +113,7 @@ const SchoolCertificationPage = () => {
 	}, [year, university]);
 
 	useEffect(() => {
-		setDisableSubmit(!checkExistDepartment || !getValues('email'));
+		setDisableSubmit(!checkExistDepartment || !getValues('email') || !isValid);
 	}, [department, email]);
 
 	return (
