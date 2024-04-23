@@ -15,9 +15,6 @@ const CommentInput = styled.div`
 		flex-direction: column;
 
 		.container-user__icon {
-			width: 3.15rem;
-			height: 3.15rem;
-			flex-shrink: 0;
 			display: flex;
 			align-items: center;
 			gap: 0.6rem;
