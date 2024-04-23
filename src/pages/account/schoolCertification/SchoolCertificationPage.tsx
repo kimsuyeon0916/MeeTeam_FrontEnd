@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import S from './SchoolCertificationPage.styled';
-import { GoBack, Input } from '../../../components';
+import { GoBack, Input, PrimaryBtn } from '../../../components';
 import { SCHOOL_CERTIFICATION_DATA } from '../..';
-import { useCertificateSchool, useReadUniversityList, useReadDepartmentList } from '../../../hooks';
+import {
+	useCertificateSchool,
+	useReadUniversityList,
+	useReadDepartmentList,
+	useDebounce,
+} from '../../../hooks';
 import { ComboBox } from '../../../components';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
@@ -16,21 +21,26 @@ interface FormValues {
 }
 
 const SchoolCertificationPage = () => {
-	const [next, setNext] = useState(false);
-	const [submitEmail, setSubmitEmail] = useState(false);
-	const [domain, setDomain] = useState<string>();
+	const { data: universityList, refetch: readUniversityList } = useReadUniversityList();
+	const { data: departmentList, refetch: readDepartmentList } = useReadDepartmentList();
 
-	const nextHandler = (e: React.MouseEvent) => {
-		// 학과 리스트 넘겨줄 때 domain 만 따로 넘겨주는 거 변경 요청 시도
-		e.preventDefault();
-		setDomain(
-			universityList?.find(university => university.universityName === getValues('university'))
-				?.universityDomain
-		);
-		setNext(prev => !prev);
-	};
+	useEffect(() => {
+		readUniversityList();
+	}, []);
 
-	const { register, handleSubmit, setValue, control, getValues } = useForm<FormValues>();
+	useEffect(() => {
+		sessionStorage?.university && readDepartmentList();
+	}, [sessionStorage?.university]);
+
+	const {
+		register,
+		handleSubmit,
+		setValue,
+		control,
+		getValues,
+		watch,
+		formState: { errors },
+	} = useForm<FormValues>();
 
 	const checkCertificationInSuccess = () => {
 		setSubmitEmail(() => true);
@@ -48,16 +58,19 @@ const SchoolCertificationPage = () => {
 		});
 	};
 
-	const { data: universityList, refetch: readUniversityList } = useReadUniversityList();
-	const { data: departmentList, refetch: readDepartmentList } = useReadDepartmentList();
+	const [next, setNext] = useState(false);
+	const [submitEmail, setSubmitEmail] = useState(false);
+	const [domain, setDomain] = useState<string>();
 
-	useEffect(() => {
-		readUniversityList();
-	}, []);
-
-	useEffect(() => {
-		sessionStorage?.university && readDepartmentList();
-	}, [sessionStorage?.university]);
+	const nextHandler = (e: React.MouseEvent) => {
+		// 학과 리스트 넘겨줄 때 domain 만 따로 넘겨주는 거 변경 요청 시도
+		e.preventDefault();
+		setDomain(
+			universityList?.find(university => university.universityName === getValues('university'))
+				?.universityDomain
+		);
+		setNext(prev => !prev);
+	};
 
 	const optionList = (name: string) => {
 		if (name === 'year') {
@@ -78,6 +91,30 @@ const SchoolCertificationPage = () => {
 			}));
 		}
 	};
+
+	const checkExistYear = optionList('year')?.find(year => year.name === getValues('year'));
+	const checkExistUniversity = universityList?.find(
+		university => university.universityName === getValues('university')
+	);
+	const checkExistDepartment = departmentList?.find(
+		department => department.departmentName === getValues('department')
+	);
+
+	const [nextDisable, setNextDisable] = useState(true);
+	const [submitDisable, setDisableSubmit] = useState(true);
+
+	const year = useDebounce(watch('year'));
+	const university = useDebounce(watch('university'));
+	const department = useDebounce(watch('department'));
+	const email = useDebounce(watch('email'));
+
+	useEffect(() => {
+		setNextDisable(!checkExistYear || !checkExistUniversity);
+	}, [year, university]);
+
+	useEffect(() => {
+		setDisableSubmit(!checkExistDepartment || !getValues('email'));
+	}, [department, email]);
 
 	return (
 		<S.SchoolCertificationLayout>
@@ -118,13 +155,14 @@ const SchoolCertificationPage = () => {
 				{submitEmail && (
 					<S.SchoolCertificationMark>인증 이메일이 발송되었습니다.</S.SchoolCertificationMark>
 				)}
-				<S.SchoolCertificationButton
-					onClick={e => !next && nextHandler(e)}
-					type={next ? 'submit' : 'button'}
-					value={next ? 'certificate' : 'next'}
-				>
-					{next ? '인증하기' : '다음'}
-				</S.SchoolCertificationButton>
+				<div>
+					<PrimaryBtn
+						title={next ? '인증하기' : '다음'}
+						type={next ? 'submit' : 'button'}
+						handleClick={e => !next && nextHandler(e)}
+						disabled={next ? submitDisable : nextDisable}
+					/>
+				</div>
 			</S.SchoolCertificationPageForm>
 			<DevTool control={control} />
 		</S.SchoolCertificationLayout>
