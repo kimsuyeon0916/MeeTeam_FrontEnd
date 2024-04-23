@@ -55,10 +55,11 @@ const DefaultButtonLayout = styled.button<ButtonStyle>`
 					letter-spacing: 0.0032rem;
 				`}
 
-	${props => props.$disabled && `	background: var(--box_stroke, #E3E3E3);`}
 	${props =>
-		!props.$disabled &&
-		`&:hover {
+		props.$disabled
+			? `background: var(--box_stroke, #E3E3E3);
+			color: var(--ButtonColors-Disabled-borderTxt, #8E8E8E);`
+			: `&:hover {
 			background: var(--ButtonColors-Default-contained-hover, #EDEDED);
 		}
 		&:active {
@@ -70,9 +71,12 @@ const PrimaryButtonLayout = styled(DefaultButtonLayout)`
 	border: 0;
 	background: var(--main-color, #5877fc);
 	color: var(--ButtonColors-Primary-outline-default, #fff);
+
 	${props =>
-		!props.$disabled &&
-		`&:hover {
+		props.$disabled
+			? `background: var(--box_stroke, #E3E3E3);
+			color: var(--ButtonColors-Disabled-borderTxt, #8E8E8E);`
+			: `&:hover {
 			background: var(--ButtonColors-Primary-contained-hover, #2F4FD9);
 		}
 		&:active {
