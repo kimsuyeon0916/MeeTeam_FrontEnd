@@ -8,13 +8,15 @@ const NicknameSettingPageLayout = styled(Account.AccountLayout)`
 	}
 `;
 
-const NicknameSettingPageForm = styled(Account.AccountForm)``;
-
-const NicknameSettingButton = styled(Account.AccountButton)`
-	width: 16.5rem;
-	margin: 0 auto;
+const NicknameSettingPageForm = styled(Account.AccountForm)`
+	align-items: center;
+	justify-content: center;
 `;
 
-const S = { NicknameSettingPageLayout, NicknameSettingPageForm, NicknameSettingButton };
+const NicknameSettingPageContainer = styled.div`
+	width: 100%;
+`;
+
+const S = { NicknameSettingPageLayout, NicknameSettingPageForm, NicknameSettingPageContainer };
 
 export default S;
