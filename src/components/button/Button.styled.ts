@@ -3,7 +3,7 @@ import styled from 'styled-components';
 interface ButtonStyle {
 	$add?: boolean;
 	$small?: boolean;
-	$default?: boolean;
+	$disabled?: boolean;
 }
 
 const IconButtonLayout = styled.button<ButtonStyle>`
@@ -54,11 +54,30 @@ const DefaultButtonLayout = styled.button<ButtonStyle>`
 					line-height: 1.9rem; /* 118.75% */
 					letter-spacing: 0.0032rem;
 				`}
+
+	${props => props.$disabled && `	background: var(--box_stroke, #E3E3E3);`}
+	${props =>
+		!props.$disabled &&
+		`&:hover {
+			background: var(--ButtonColors-Default-contained-hover, #EDEDED);
+		}
+		&:active {
+			background: var(--ButtonColors-Default-contained-onPress, #747B7F);
+		}`}
 `;
+
 const PrimaryButtonLayout = styled(DefaultButtonLayout)`
 	border: 0;
 	background: var(--main-color, #5877fc);
 	color: var(--ButtonColors-Primary-outline-default, #fff);
+	${props =>
+		!props.$disabled &&
+		`&:hover {
+			background: var(--ButtonColors-Primary-contained-hover, #2F4FD9);
+		}
+		&:active {
+			background: var(--ButtonColors-Primary-contained-onPress, #0E2690);
+		}`}
 `;
 
 const FormButtonLayout = styled.button`
