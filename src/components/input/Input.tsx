@@ -26,6 +26,8 @@ interface Input<T extends FieldValues> {
 	label?: string;
 	icon?: Icon;
 	maxLength?: number;
+	duplicated?: boolean;
+	duplicatedMessage?: string;
 	placeholder?: string;
 	inputRef?: React.MutableRefObject<HTMLInputElement | null>; // RefObject
 	handleInputClick?: React.MouseEventHandler<HTMLInputElement>;
@@ -46,9 +48,9 @@ const Input = <T extends FieldValues>({
 	handleKeyDown,
 	...props
 }: Input<T>) => {
-	const inputError = formState?.errors[name];
-	const inputErrorType = formState?.errors[name]?.type;
-	const inputErrorMessage = formState?.errors[name]?.message as string;
+	const inputError = (formState?.errors[name] || props?.duplicated) as boolean;
+	const inputErrorMessage = (formState?.errors[name]?.message ??
+		props?.duplicatedMessage) as string;
 	const inputValue = watch?.(name as Path<T>);
 
 	const { ref, ...rest } = register(name as Path<T>, validation?.disabled ? undefined : validation);
@@ -62,7 +64,7 @@ const Input = <T extends FieldValues>({
 					{...rest}
 					{...props}
 					{...icon}
-					invalid={inputErrorType !== 'countingLetters' && inputError}
+					invalid={inputError}
 					ref={(e: HTMLInputElement) => {
 						ref(e);
 						if (inputRef) inputRef.current = e;
@@ -70,7 +72,7 @@ const Input = <T extends FieldValues>({
 					onClick={handleInputClick}
 					onKeyDown={handleKeyDown}
 				/>
-				<small>{inputErrorMessage}</small>
+				<S.InputErrorMessage invalid={inputError}>{inputErrorMessage}</S.InputErrorMessage>
 				{props?.maxLength && (
 					<span>
 						{inputValue?.length ?? 0}/{props.maxLength}
