@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Account from '../../Account.styled';
+import Account from '../Account.styled';
 
 const NicknameSettingPageLayout = styled(Account.AccountLayout)`
 	h1 {

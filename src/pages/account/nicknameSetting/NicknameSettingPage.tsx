@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import S from './NicknameSettingPage.styled';
-import { SIGN_UP_DATA } from '../SignUpData';
+import { SIGN_UP_DATA } from '../signUp/SignUpData';
 import { useNavigate } from 'react-router-dom';
-import { useNaverSignUp, useCheckDuplicateNickname, useDebounce } from '../../../../hooks';
+import { useNaverSignUp, useCheckDuplicateNickname, useDebounce } from '../../../hooks';
 import { useSetRecoilState } from 'recoil';
-import { userState } from '../../../../atom';
+import { userState } from '../../../atom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
-import { Input, PrimaryBtn } from '../../../../components';
+import { Input, PrimaryBtn } from '../../../components';
 
 interface FormValues {
 	nickname: string;

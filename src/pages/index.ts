@@ -8,7 +8,7 @@ import RecruitDetailPage from './recruit/recruitDetailPage/RecruitDetailPage';
 import SchoolCertificationPage from './account/schoolCertification/SchoolCertificationPage';
 import { SCHOOL_CERTIFICATION_DATA } from './account/schoolCertification/SchoolCertificationData';
 import { SIGN_UP_DATA } from './account/signUp/SignUpData';
-import NicknameSettingPage from './account/signUp/nicknameSetting/NicknameSettingPage';
+import NicknameSettingPage from './account/nicknameSetting/NicknameSettingPage';
 import type { Account, User } from './account/signUp/SignUpData';
 import PassWordFindingPage from './account/passWordFindingPage/PassWordFindingPage';
 import { PASSWORD_DATA } from './account/passWordFindingPage/PassWordData';
