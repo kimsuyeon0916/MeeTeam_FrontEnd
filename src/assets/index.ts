@@ -53,6 +53,7 @@ import DropdownArrowUp from './DropdownArrowUp.svg';
 import FloatingBackground from './FloatingBackground.svg';
 import Alert from './Alert.svg';
 import MeeteamLogoLarge from './MeeteamLogoLarge.svg';
+import Congratulation from './Congratulation.svg';
 
 export {
 	Exit,
@@ -110,4 +111,5 @@ export {
 	FloatingBackground,
 	Alert,
 	MeeteamLogoLarge,
+	Congratulation,
 };
