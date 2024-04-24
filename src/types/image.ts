@@ -1,4 +1,5 @@
 export interface Image {
 	fileName: string;
-	url: string;
+	url?: string;
+	binary?: ArrayBuffer;
 }
