@@ -6,14 +6,24 @@ import { calculateDate } from '../../../../utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { cancelApply } from '../../../../service';
+import { useBookmark } from '../../../../hooks';
+import { useDelBookmark } from '../../../../hooks/useBookMark';
 
-const ApplierFooter = ({ deadline, isApplied }: { deadline: string; isApplied: boolean }) => {
+interface ApplierData {
+	deadline: string;
+	isApplied: boolean;
+	isBookmarked: boolean;
+}
+
+const ApplierFooter = ({ deadline, isApplied, isBookmarked }: ApplierData) => {
 	const { id } = useParams();
 	const pageNum = Number(id);
-	const [isMarked, setIsMarked] = useState<boolean>(false);
 	const setIsModal = useSetRecoilState(applyModalState);
 	const diffDate = calculateDate(deadline);
 	const queryClient = useQueryClient();
+
+	const { mutate: bookmarked } = useBookmark({ queryKey: 'detailedPage' });
+	const { mutate: unBookmarked } = useDelBookmark({ queryKey: 'detailedPage' });
 
 	const cancelApplyTeam = useMutation({
 		mutationFn: (pageNum: number) => cancelApply(pageNum),
@@ -33,10 +43,18 @@ const ApplierFooter = ({ deadline, isApplied }: { deadline: string; isApplied: b
 		});
 	};
 
+	const onClickBookmark = () => {
+		if (!isBookmarked) {
+			bookmarked(pageNum);
+		} else {
+			unBookmarked(pageNum);
+		}
+	};
+
 	return (
 		<>
-			<button type='button' className='btn-bookmark' onClick={() => setIsMarked(prev => !prev)}>
-				<img src={!isMarked ? UnfilledBookmark : FilledBookmark} />
+			<button type='button' className='btn-bookmark' onClick={onClickBookmark}>
+				<img src={isBookmarked ? FilledBookmark : UnfilledBookmark} />
 				<span>북마크</span>
 			</button>
 			{isApplied ? (

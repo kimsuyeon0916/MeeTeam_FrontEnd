@@ -19,26 +19,18 @@ const TitleInfo = ({
 	isBookmarked,
 }: TitleAndEtc) => {
 	const { id } = useParams();
-	const [bookmarkCnt, setBookmarkCnt] = useState<number>(bookmarkCount);
 	const [isMarked, setIsMarked] = useState<boolean>(isBookmarked);
-	const { mutate: bookmarked } = useBookmark();
-	const { mutate: unBookmarked } = useDelBookmark();
+	const { mutate: bookmarked } = useBookmark({ queryKey: 'detailedPage' });
+	const { mutate: unBookmarked } = useDelBookmark({ queryKey: 'detailedPage' });
 
 	const toggleBookmark = () => {
 		if (!isMarked) {
 			bookmarked(Number(id));
-			setBookmarkCnt(prev => prev + 1);
 		} else {
 			unBookmarked(Number(id));
-			setBookmarkCnt(prev => prev - 1);
 		}
 		setIsMarked(prev => !prev);
 	};
-
-	useEffect(() => {
-		setIsMarked(isBookmarked);
-		setBookmarkCnt(bookmarkCount);
-	}, [isBookmarked, bookmarkCount]);
 
 	return (
 		<S.TitleInfo>
@@ -56,7 +48,7 @@ const TitleInfo = ({
 						src={isMarked ? FilledBookmark : UnfilledBookmark}
 						onClick={toggleBookmark}
 					/>
-					<span className='count-bookmark'>{bookmarkCnt}</span>
+					<span className='count-bookmark'>{bookmarkCount}</span>
 				</section>
 			</section>
 			<h1>{title}</h1>
