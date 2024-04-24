@@ -8,7 +8,7 @@ import {
 	imageSrcListState,
 	uploadImageListState,
 } from '../../../../atom';
-import PortfolioCard from '../../card/PortfolioCard';
+import { PortfolioCard } from '../../..';
 import { Image } from '../../../../types';
 
 const MAX_IMAGE_SIZE_BYTES = 30 * 1024 * 1024; // 30MB
@@ -73,10 +73,11 @@ const PortfolioImageUpload = (portfolioId?: { portfolioId?: string }) => {
 			<S.PortfolioImageGrid>
 				{[...uploadImageList].map((uploadImage, index) => (
 					<PortfolioCard
-						key={index}
+						key={uploadImage.fileName}
 						isMainImage={index === 0}
 						mainImageUrl={uploadImage.url}
 						isEditable={true}
+						isImageEditable={true}
 						clickNumber={index + 1}
 					/>
 				))}
