@@ -22,7 +22,7 @@ const OptionList = ({
 	...props
 }: OptionListProps<string>) => {
 	return (
-		<S.OptionList label={label} {...props}>
+		<S.OptionList $label={label} {...props}>
 			{optionList.map(({ name: optionName, id }) => (
 				<S.OptionItem
 					key={optionName}
