@@ -126,6 +126,11 @@ const PortfolioCardIconButton = styled(PortfolioCardNumberButton)`
 	left: -1rem;
 `;
 
+const PortfolioImageInput = styled.input`
+	position: absolute;
+	display: none;
+`;
+
 const S = {
 	PortfolioCardLayout,
 	PortfolioCardBox,
@@ -135,6 +140,7 @@ const S = {
 	PortfolioCardTag,
 	PortfolioCardNumberButton,
 	PortfolioCardIconButton,
+	PortfolioImageInput,
 };
 
 export default S;
