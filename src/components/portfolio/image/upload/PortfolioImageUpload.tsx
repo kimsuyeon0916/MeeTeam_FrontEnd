@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import S from './PortfolioImageUpload.styled';
-import { Plus } from '../../../assets';
+import { Plus } from '../../../../assets';
 import { useRecoilState } from 'recoil';
-import { binaryImageListState, imageNameListState, imageSrcListState } from '../../../atom';
-import PortfolioCard from '../card/PortfolioCard';
+import { binaryImageListState, imageNameListState, imageSrcListState } from '../../../../atom';
+import PortfolioCard from '../../card/PortfolioCard';
 
 const MAX_IMAGE_SIZE_BYTES = 30 * 1024 * 1024; // 30MB
 const MAX_IMAGE_COUNT = 15;
