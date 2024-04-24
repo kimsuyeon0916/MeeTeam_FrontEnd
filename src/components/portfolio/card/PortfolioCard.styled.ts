@@ -1,11 +1,29 @@
 import styled from 'styled-components';
 
-const PortfolioCardLayout = styled.article`
+interface PortfolioCardStyle {
+	$open?: boolean;
+}
+
+const PortfolioCardLayout = styled.article<PortfolioCardStyle>`
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	row-gap: 0.8rem;
 
 	cursor: pointer;
+	${props =>
+		!props.$open &&
+		`
+			button:last-of-type {
+				display: none;
+			}
+
+			&:hover {
+				button:last-of-type {
+					display: flex;
+				}
+			}
+	`}
 `;
 
 const PortfolioCardBox = styled.div<{ $isEditable?: boolean }>`
@@ -16,6 +34,10 @@ const PortfolioCardBox = styled.div<{ $isEditable?: boolean }>`
 	overflow: hidden;
 
 	aspect-ratio: 183 / 103; // 포트폴리오 비율
+
+	button:first-of-type {
+		display: flex;
+	}
 `;
 
 const PortfolioCardImage = styled.img`
@@ -99,6 +121,11 @@ const PortfolioCardNumberButton = styled.button<{ $checked?: boolean }>`
 	letter-spacing: 0.0032rem;
 `;
 
+const PortfolioCardIconButton = styled(PortfolioCardNumberButton)`
+	top: -1rem;
+	left: -1rem;
+`;
+
 const S = {
 	PortfolioCardLayout,
 	PortfolioCardBox,
@@ -107,6 +134,7 @@ const S = {
 	PortfolioTagRow,
 	PortfolioCardTag,
 	PortfolioCardNumberButton,
+	PortfolioCardIconButton,
 };
 
 export default S;
