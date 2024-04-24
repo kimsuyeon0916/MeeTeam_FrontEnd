@@ -117,6 +117,7 @@ import PortfolioInformation from './portfolio/information/PortfolioInformation';
 import PortfolioList from './portfolio/list/PortfolioList';
 import ImageCarousel from './carousel/ImageCarousel';
 import PortfolioImageUpload from './portfolio/image/upload/PortfolioImageUpload';
+import ModalPortal from './modal/ModalPortal';
 
 export {
 	Header,
@@ -229,4 +230,5 @@ export {
 	PortfolioList,
 	ImageCarousel,
 	PortfolioImageUpload,
+	ModalPortal,
 };
