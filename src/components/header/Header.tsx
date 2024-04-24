@@ -4,8 +4,8 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { DropdownArrow, Logo, LogoName } from '../../assets';
 import { ProfileImage, WaitModal } from '..';
 import { useLogin } from '../../hooks';
-import { useRecoilValue, useRecoilState } from 'recoil';
-import { userState, waitModalState } from '../../atom';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { recruitFilterState, userState, waitModalState } from '../../atom';
 import { fixModalBackground } from '../../utils';
 
 const Header = () => {
@@ -16,6 +16,7 @@ const Header = () => {
 	const userInfo = useRecoilValue(userState);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [openDrop, setOpenDrop] = useState<boolean>(false);
+	const setFilterState = useSetRecoilState(recruitFilterState);
 	const [isWait, setIsWait] = useRecoilState(waitModalState);
 	const [isHere, setIsHere] = useState({
 		recruit: false,
@@ -25,6 +26,17 @@ const Header = () => {
 
 	const goRecruit = () => {
 		navigate('/');
+		setFilterState({
+			scope: null,
+			category: null,
+			field: null,
+			skill: [],
+			role: [],
+			tag: [],
+			keyword: '',
+			course: null,
+			professor: null,
+		});
 	};
 	const goGalary = () => {
 		setIsWait(true);
@@ -76,7 +88,7 @@ const Header = () => {
 		<S.Header $isLogin={isLoggedIn}>
 			<div className='header'>
 				<section className='header-leftside'>
-					<div className='header__logo' onClick={() => navigate('/')}>
+					<div className='header__logo' onClick={goRecruit}>
 						<img className='logo' src={Logo} />
 						<img className='logo-name' src={LogoName} />
 						{isLoggedIn && <span className='university'>광운대학교</span>}
@@ -130,6 +142,15 @@ const Header = () => {
 										}}
 									>
 										프로필
+									</div>
+									<div
+										className='menu'
+										onClick={() => {
+											setOpenDrop(false);
+											navigate('/'); // 임시 설정
+										}}
+									>
+										포트폴리오
 									</div>
 									<div
 										className='menu'
