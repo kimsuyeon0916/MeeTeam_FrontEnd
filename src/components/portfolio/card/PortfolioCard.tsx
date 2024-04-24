@@ -43,13 +43,13 @@ const PortfolioCard = ({
 					{isMainImage && <S.PortfolioCardTag className='main-image-tag'>메인</S.PortfolioCardTag>}
 				</S.PortfolioTagRow>
 				{isEditable && (
-					<S.PortfolioCardButton
+					<S.PortfolioCardNumberButton
 						type='button'
 						$checked={clickNumber ? true : false}
 						onClick={() => id && handleClick?.(id)}
 					>
 						{clickNumber !== 0 && clickNumber}
-					</S.PortfolioCardButton>
+					</S.PortfolioCardNumberButton>
 				)}
 			</S.PortfolioCardBox>
 			{title && <S.PortfolioCardTitle>{title}</S.PortfolioCardTitle>}

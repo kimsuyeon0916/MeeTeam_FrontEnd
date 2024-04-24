@@ -76,7 +76,7 @@ const PortfolioCardTag = styled.span<{ $color?: string }>`
 	}
 `;
 
-const PortfolioCardButton = styled.button<{ $checked?: boolean }>`
+const PortfolioCardNumberButton = styled.button<{ $checked?: boolean }>`
 	position: absolute;
 	bottom: 1rem;
 	right: 1rem;
@@ -106,7 +106,7 @@ const S = {
 	PortfolioCardTitle,
 	PortfolioTagRow,
 	PortfolioCardTag,
-	PortfolioCardButton,
+	PortfolioCardNumberButton,
 };
 
 export default S;
