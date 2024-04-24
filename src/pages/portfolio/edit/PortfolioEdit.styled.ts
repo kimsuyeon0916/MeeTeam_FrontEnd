@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import ReactQuill from 'react-quill';
 
-interface ProfileBoxStyle {
+interface PortfolioBoxStyle {
 	$gap?: string;
 	$width?: string;
 }
@@ -59,14 +59,14 @@ const PortfolioEditLayout = styled.form`
 	}
 `;
 
-const PortfolioEditColumn = styled.div<ProfileBoxStyle>`
+const PortfolioEditColumn = styled.div<PortfolioBoxStyle>`
 	display: flex;
 	flex-direction: column;
 	row-gap: ${props => props.$gap};
 	${props => (props.$width ? `width: ${props.$width}` : `flex: 1;`)};
 `;
 
-const PortfolioEditRow = styled.div<ProfileBoxStyle>`
+const PortfolioEditRow = styled.div<PortfolioBoxStyle>`
 	display: flex;
 	flex-direction: row;
 	column-gap: ${props => props.$gap};
