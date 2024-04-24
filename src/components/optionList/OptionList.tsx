@@ -7,15 +7,22 @@ interface Option {
 }
 
 interface OptionListProps<T> {
-	label?: T;
 	name: T;
 	handleOptionClick: (...rest: T[]) => void;
 	optionList: Option[];
+	label?: T;
+	$style?: T;
 }
 
-const OptionList = ({ label, name, handleOptionClick, optionList }: OptionListProps<string>) => {
+const OptionList = ({
+	label,
+	name,
+	handleOptionClick,
+	optionList,
+	...props
+}: OptionListProps<string>) => {
 	return (
-		<S.OptionList $label={label}>
+		<S.OptionList label={label} {...props}>
 			{optionList.map(({ name: optionName, id }) => (
 				<S.OptionItem
 					key={optionName}
