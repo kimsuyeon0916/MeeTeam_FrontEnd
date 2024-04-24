@@ -92,12 +92,14 @@ const SchoolCertificationPage = () => {
 		}
 	};
 
-	const checkExistYear = optionList('year')?.find(year => year.name === getValues('year'));
+	const checkExistYear = optionList('year')?.find(
+		(year: { name: string }) => year.name === getValues('year')
+	);
 	const checkExistUniversity = universityList?.find(
 		university => university.universityName === getValues('university')
 	);
 	const checkExistDepartment = departmentList?.find(
-		department => department.departmentName === getValues('department')
+		(department: Department) => department.departmentName === getValues('department')
 	);
 
 	const [nextDisable, setNextDisable] = useState(true);
