@@ -6,8 +6,8 @@ const CommentInput = styled.div`
 	box-sizing: border-box;
 	margin: 0 auto;
 	border-radius: 0.75rem;
-	border: 0.075rem solid var(--box_stroke, #e3e3e3);
-	background: var(--Grayscale-200, #f6f6f6);
+	border: 0.075rem solid #e3e3e3;
+	background: #f6f6f6;
 
 	.wrapper {
 		display: flex;
