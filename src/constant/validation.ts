@@ -3,6 +3,18 @@ const REGEXP = {
 };
 
 export const INPUT_VALIDATION = {
+	year: {
+		required: true,
+	},
+	university: {
+		required: true,
+	},
+	department: {
+		required: true,
+	},
+	email: {
+		required: true,
+	},
 	nickname: {
 		required: '값이 입력되지 않았습니다',
 		pattern: {
