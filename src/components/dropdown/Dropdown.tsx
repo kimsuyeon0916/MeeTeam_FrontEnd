@@ -61,6 +61,10 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		queryFn: () => getProfessorKeyword(keywordProfessor),
 	});
 
+	const getKeyByValue = (obj: keyObj, value: number) => {
+		return Object.keys(obj).find(key => obj[key] === value);
+	};
+
 	const onClickDropdown = () => {
 		if (scope) {
 			setShowDropdown(true);
@@ -139,19 +143,21 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		};
 	}, [dropdownRef.current, showDropdown, dropdown.course, dropdown.professor]);
 
-	useEffect(() => {
-		if (scope && filterState.scope === null) {
-			setCurrentValue('범위');
-		} else if (!scope && filterState.category === null && initialData !== '역할') {
-			setCurrentValue('유형');
-		}
-	}, [filterState.scope, filterState.category]);
-
 	return (
 		<S.Dropdown $showDropdown={showDropdown} $scope={scope} $isCheck={isChecked} ref={dropdownRef}>
 			<article className='wrapper' onClick={onClickDropdown}>
 				<div className='dropdown-box'>
-					<div className='value'>{currentValue}</div>
+					{scope && (
+						<div className='value'>
+							{filterState.scope ? getKeyByValue(scopeObj, filterState.scope) : '범위'}
+						</div>
+					)}
+					{category && (
+						<div className='value'>
+							{filterState.category ? getKeyByValue(categoryObj, filterState.category) : '유형'}
+						</div>
+					)}
+					{applicant && <div className='value'>{currentValue}</div>}
 					<img src={showDropdown ? DropdownArrowUp : DropdownArrow} />
 				</div>
 				{showDropdown && (
