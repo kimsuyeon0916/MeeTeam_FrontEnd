@@ -112,10 +112,13 @@ const DetailedInput = ({ type }: DetailedInfo) => {
 		event.stopPropagation();
 		if (type === '기술') {
 			setDetailedFilter(prev => ({ ...prev, skill: [] }));
+			setFilterState(prev => ({ ...prev, skill: [] }));
 		} else if (type === '역할') {
 			setDetailedFilter(prev => ({ ...prev, role: [] }));
+			setFilterState(prev => ({ ...prev, role: [] }));
 		} else if (type === '태그') {
 			setDetailedFilter(prev => ({ ...prev, tag: [] }));
+			setFilterState(prev => ({ ...prev, tag: [] }));
 		}
 	};
 

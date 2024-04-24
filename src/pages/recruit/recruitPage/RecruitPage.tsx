@@ -6,14 +6,16 @@ import {
 	Clear,
 	Create,
 	DropdownArrow,
+	DropdownArrowUp,
 	FilledBookmark,
 	PlusWhite,
 	Portpolio,
 	Profile,
 	SearchIcon,
+	XBtn,
 } from '../../../assets';
-import { useRecoilState } from 'recoil';
-import { recruitFilterState } from '../../../atom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { detailedFilterState, recruitFilterState } from '../../../atom';
 import { getPostList } from '../../../service/recruit/board';
 import { useQuery } from '@tanstack/react-query';
 import { useLogin } from '../../../hooks';
@@ -34,6 +36,7 @@ const RecruitPage = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [isFieldOpen, setIsFieldOpen] = useState<boolean>(false);
 	const [filterState, setFilterState] = useRecoilState(recruitFilterState);
+	const setDetailedFilterState = useSetRecoilState(detailedFilterState);
 	const [isOpenDetail, setIsOpenDetail] = useState({
 		skill: true,
 		role: false,
@@ -74,6 +77,9 @@ const RecruitPage = () => {
 			course: null,
 			professor: null,
 		});
+		setSearchKeyword('');
+		setDetailedFilterState({ skill: [], role: [], tag: [] });
+		setIsOpenDetail({ skill: true, role: false, tag: false, message: '기술' });
 	};
 
 	const onClickDetails = (event: React.MouseEvent<HTMLSpanElement>) => {
@@ -100,7 +106,13 @@ const RecruitPage = () => {
 	};
 
 	const onClickClearField = () => {
+		setFilterState(prev => ({ ...prev, field: null }));
 		setFieldValue({ applied: false, value: '분야를 선택해주세요' });
+	};
+
+	const onClickDeleteKeyword = () => {
+		setFilterState(prev => ({ ...prev, keyword: '' }));
+		setSearchKeyword('');
 	};
 
 	const submitTagItem = () => {
@@ -170,7 +182,7 @@ const RecruitPage = () => {
 							<article className='dropdown-detailed' onClick={onClickDetailed} ref={dropdownRef}>
 								<section className='dropdown-box'>
 									<label>{'상세정보'}</label>
-									<img src={DropdownArrow} />
+									<img src={isOpen ? DropdownArrowUp : DropdownArrow} />
 								</section>
 								{isOpen && (
 									<section className='container-dropdown'>
@@ -207,15 +219,18 @@ const RecruitPage = () => {
 							<div>
 								<img src={SearchIcon} />
 							</div>
-							<div>
+							<div className='search-bar'>
 								<input
-									placeholder='제목, 글, 내용으로 검색해보세요.'
+									placeholder='제목을 검색해보세요.'
 									type='text'
 									onChange={event => setSearchKeyword(event.target.value)}
 									value={searchKeyword}
 									onKeyPress={onKeyPress}
 								/>
 							</div>
+							{searchKeyword && (
+								<img className='clear-keyword' src={XBtn} onClick={onClickDeleteKeyword} />
+							)}
 						</section>
 					</section>
 				</section>

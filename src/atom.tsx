@@ -168,7 +168,7 @@ export const recruitFilterState = atom<RecruitFilter>({
 	default: {
 		scope: null,
 		category: null,
-		field: 1,
+		field: null,
 		skill: [],
 		role: [],
 		tag: [],
