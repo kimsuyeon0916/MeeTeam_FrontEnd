@@ -26,7 +26,7 @@ const NicknameSettingPage = () => {
 	const setUserState = useSetRecoilState(userState);
 
 	const checkNaverSignUpInSuccess = () => {
-		navigate('/');
+		navigate('/signup/complete', { replace: true });
 		localStorage.removeItem('naverSignUpState');
 		localStorage.removeItem('submitEmailState');
 	};
