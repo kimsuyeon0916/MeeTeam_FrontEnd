@@ -36,6 +36,7 @@ import Test3 from './Test3.png';
 import Test4 from './Test4.png';
 import Refresh from './Refresh.svg';
 import HambergerMenuIcon from './HamburgerMenuIcon.svg';
+import Pencil from './Pencil.svg';
 
 export {
 	Exit,
@@ -76,4 +77,5 @@ export {
 	Test4,
 	Refresh,
 	HambergerMenuIcon,
+	Pencil,
 };
