@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { SessionStorageEffect, simpleDate } from './utils';
-import { User, InputState } from './types';
+import { User, InputState, Image } from './types';
 import { LocalStorageEffect } from './utils';
 import { Account } from './pages';
 
@@ -140,5 +140,10 @@ export const imageSrcListState = atom<string[]>({
 
 export const binaryImageListState = atom<ArrayBuffer[]>({
 	key: 'binaryImageListState',
+	default: [],
+});
+
+export const uploadImageListState = atom<Image[]>({
+	key: 'uploadImageListState',
 	default: [],
 });
