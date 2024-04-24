@@ -74,7 +74,7 @@ const PortfolioImageList = styled.ul`
 const PortfolioImageItem = styled.li`
 	display: flex;
 	flex-direction: row;
-	min-height: 9.2rem;
+	height: 9.2rem;
 	align-items: center;
 	border-radius: 1rem;
 	border: 0.1rem solid var(--box_stroke, #e3e3e3);
