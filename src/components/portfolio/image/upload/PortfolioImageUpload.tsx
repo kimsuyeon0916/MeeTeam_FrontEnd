@@ -2,8 +2,14 @@ import React, { useRef } from 'react';
 import S from './PortfolioImageUpload.styled';
 import { Plus } from '../../../../assets';
 import { useRecoilState } from 'recoil';
-import { binaryImageListState, imageNameListState, imageSrcListState } from '../../../../atom';
+import {
+	binaryImageListState,
+	imageNameListState,
+	imageSrcListState,
+	uploadImageListState,
+} from '../../../../atom';
 import PortfolioCard from '../../card/PortfolioCard';
+import { Image } from '../../../../types';
 
 const MAX_IMAGE_SIZE_BYTES = 30 * 1024 * 1024; // 30MB
 const MAX_IMAGE_COUNT = 15;
@@ -19,12 +25,11 @@ const PortfolioImageUpload = (portfolioId?: { portfolioId?: string }) => {
 	const [imageNameList, setImageNameList] = useRecoilState(imageNameListState); // 추후에 nameList 받아와서 초기화
 	const [imageSrcList, setImageSrcList] = useRecoilState(imageSrcListState); // 추후에 urlList 받아와서 초기화
 	const [binaryImageList, setBinaryImageList] = useRecoilState(binaryImageListState); // 추후에 binaryList 받아와서 초기화
+	const [uploadImageList, setUploadImageList] = useRecoilState(uploadImageListState); // 추후에 받아온 정보 reduce로 조합해서 초기화
 
 	const changeImageList = (event: React.BaseSyntheticEvent) => {
 		const uploadImageList = event.target?.files;
-		// 이미지 개수 제한
 		for (let i = 0; i < uploadImageList.length && imageNameList.length + i < MAX_IMAGE_COUNT; i++) {
-			// 중복된 이름 제한
 			if (
 				imageNameList.find(imageName => imageName === uploadImageList[i].name) ||
 				[...uploadImageList].find(
@@ -33,20 +38,31 @@ const PortfolioImageUpload = (portfolioId?: { portfolioId?: string }) => {
 			) {
 				continue;
 			}
-			// 이미지 용량 제한
 			if (uploadImageList[i].size > MAX_IMAGE_SIZE_BYTES) {
 				continue;
 			}
+
 			setImageNameList(prev => [...prev, uploadImageList[i].name]);
 
-			const urlReader = new FileReader();
-			urlReader.readAsDataURL(uploadImageList[i]);
-			urlReader.onload = () => setImageSrcList(prev => [...prev, urlReader.result] as string[]);
+			let uploadImage: Image = {
+				fileName: uploadImageList[i].name,
+			};
 
 			const binaryReader = new FileReader();
 			binaryReader.readAsArrayBuffer(uploadImageList[i]);
-			binaryReader.onload = () =>
+			binaryReader.onload = () => {
 				setBinaryImageList(prev => [...prev, binaryReader.result] as ArrayBuffer[]);
+				uploadImage = { ...uploadImage, binary: binaryReader.result as ArrayBuffer };
+			};
+
+			const urlReader = new FileReader();
+			urlReader.readAsDataURL(uploadImageList[i]);
+			urlReader.onload = () => {
+				setImageSrcList(prev => [...prev, urlReader.result] as string[]);
+				uploadImage = { ...uploadImage, url: urlReader.result as string };
+
+				setUploadImageList(prev => [...prev, uploadImage]);
+			};
 		}
 	};
 
@@ -55,11 +71,11 @@ const PortfolioImageUpload = (portfolioId?: { portfolioId?: string }) => {
 	return (
 		<S.PortfolioImageUploadLayout>
 			<S.PortfolioImageGrid>
-				{[...imageSrcList].map((imageSrc, index) => (
+				{[...uploadImageList].map((uploadImage, index) => (
 					<PortfolioCard
 						key={index}
 						isMainImage={index === 0}
-						mainImageUrl={imageSrc}
+						mainImageUrl={uploadImage.url}
 						isEditable={true}
 						clickNumber={index + 1}
 					/>
