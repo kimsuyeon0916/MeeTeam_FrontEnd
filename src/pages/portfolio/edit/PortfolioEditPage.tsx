@@ -12,13 +12,15 @@ import {
 	PrimaryBtn,
 	MuiDatepicker,
 	PortfolioImageUpload,
+	PortfolioImageModal,
+	ModalPortal,
 } from '../../../components';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Link, Skill } from '../../../types';
 import { useDebounce, useReadPortfolio, useReadRoleList, useReadSkillList } from '../../../hooks';
 import PORTFOLIO_EDIT_DATA from './portfolioEditData';
-import { modules, formats } from '../../../utils';
+import { modules, formats, fixModalBackground } from '../../../utils';
 import { Refresh } from '../../../assets';
 import type ReactQuill from 'react-quill';
 
@@ -64,6 +66,13 @@ const PortfolioEditPage = () => {
 				keepErrors: true,
 			},
 		});
+
+	// 이미지 순서
+	const [modalOpen, setModalOpen] = useState(false);
+
+	useEffect(() => {
+		fixModalBackground(modalOpen);
+	}, [modalOpen]);
 
 	// 분야
 	const fields = [{ id: '1', name: '개발' }];
@@ -146,7 +155,17 @@ const PortfolioEditPage = () => {
 							<S.PortfolioEditColumn $width='clamp(50%, 76.4rem, 100%)' $gap='3.6rem'>
 								<S.PortfolioEditRow>
 									<S.PortfolioEditLabel $required={true}>{LABEL.image}</S.PortfolioEditLabel>
-									<PrimaryBtn type='button' title='슬라이드 순서 변경' icon={Refresh} />
+									<PrimaryBtn
+										type='button'
+										title='슬라이드 순서 변경'
+										icon={Refresh}
+										handleClick={() => setModalOpen(true)}
+									/>
+									{modalOpen && (
+										<ModalPortal>
+											<PortfolioImageModal onClose={() => setModalOpen(false)} />
+										</ModalPortal>
+									)}
 								</S.PortfolioEditRow>
 								<PortfolioImageUpload />
 							</S.PortfolioEditColumn>
