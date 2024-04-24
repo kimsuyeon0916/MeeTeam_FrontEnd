@@ -115,9 +115,9 @@ const PortfolioEditPage = () => {
 
 	// 상세 내용
 	const quillRef = useRef<ReactQuill | null>(null);
-	const { ref, ...rest } = register('content', PORTFOLIO_EDIT_DATA.content.validation);
+	const { ref } = register('content', PORTFOLIO_EDIT_DATA.content.validation);
 
-	const handleChangeEditor = value => {
+	const handleChangeEditor = (value: string) => {
 		setValue('content', value);
 	};
 
