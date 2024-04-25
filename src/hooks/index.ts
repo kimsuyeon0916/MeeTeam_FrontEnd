@@ -11,7 +11,7 @@ import useDebounce from './useDebounce';
 import useValid from './useValid';
 import { useReadSkillList, useReadRoleList } from './useSearch';
 import { useReadPortfolio, useCreatePortfolio, useUpdatePortfolio } from './usePortfolio';
-import { useReadImagePresignedUrl } from './useImage';
+import { useReadImagePresignedUrl, useReadImageListPresignedUrl } from './useImage';
 
 export {
 	useCheckExist,
@@ -30,4 +30,5 @@ export {
 	useCreatePortfolio,
 	useUpdatePortfolio,
 	useReadImagePresignedUrl,
+	useReadImageListPresignedUrl,
 };
