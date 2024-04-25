@@ -1,4 +1,4 @@
-import type { SignUpPayload, UpdateProfilePayload } from './payload';
+import type { SignUpPayload, UpdateProfilePayload, PortfolioPayload } from './payload';
 import type { UserReponse, University, Department } from './response';
 import type { CustomInstance } from './api';
 import type { TitleInfo, OptionList, Option, Role, InputRoleForm, InputState } from './information';
@@ -35,4 +35,5 @@ export type {
 	Search,
 	PortfolioDetails,
 	Image,
+	PortfolioPayload,
 };

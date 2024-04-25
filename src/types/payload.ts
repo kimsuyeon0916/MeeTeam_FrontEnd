@@ -1,4 +1,4 @@
-import { Award, Link } from './index';
+import { Award, Link, PortfolioDetails } from './index';
 
 export interface SignUpPayload {
 	platformType?: string;
@@ -31,3 +31,5 @@ export interface UpdateProfilePayload {
 	links?: Link[];
 	portfolios?: string[];
 }
+
+export type PortfolioPayload = Omit<PortfolioDetails, 'otherPortfolios' | 'isWriter'>;
