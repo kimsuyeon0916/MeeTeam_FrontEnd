@@ -24,5 +24,6 @@ export const EndPoint = {
 	/* portfolio */
 	PORTFOLIO: {
 		read: (portfolioId: string) => `/portfolio/${portfolioId}`,
+		create: '/portfolio',
 	},
 };
