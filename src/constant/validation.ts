@@ -45,9 +45,6 @@ export const INPUT_VALIDATION = {
 	proceedType: {
 		required: '진행방식을 설정해주세요',
 	},
-	skill: {
-		required: '스킬을 추가해주세요',
-	},
 	content: {
 		required: true,
 	},
