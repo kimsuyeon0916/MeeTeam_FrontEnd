@@ -10,7 +10,7 @@ import { useReadProfile, useUpdateProfile } from './useProfile';
 import useDebounce from './useDebounce';
 import useValid from './useValid';
 import { useReadSkillList, useReadRoleList } from './useSearch';
-import { useReadPortfolio, useCreatePortfolio } from './usePortfolio';
+import { useReadPortfolio, useCreatePortfolio, useUpdatePortfolio } from './usePortfolio';
 
 export {
 	useCheckExist,
@@ -27,4 +27,5 @@ export {
 	useReadRoleList,
 	useReadPortfolio,
 	useCreatePortfolio,
+	useUpdatePortfolio,
 };
