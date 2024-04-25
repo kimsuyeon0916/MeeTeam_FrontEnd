@@ -27,3 +27,22 @@ export const createPortfolio = async (portfolio: PortfolioPayload) => {
 		return null;
 	}
 };
+
+export const updatePortfolio = async ({
+	portfolioId,
+	portfolio,
+}: {
+	portfolioId: string;
+	portfolio: PortfolioPayload;
+}) => {
+	try {
+		const response = await axiosAuthInstance.put(EndPoint.PORTFOLIO.update(portfolioId), {
+			...portfolio,
+		});
+
+		return response;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+};
