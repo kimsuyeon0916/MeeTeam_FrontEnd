@@ -27,4 +27,9 @@ export const EndPoint = {
 		create: '/portfolio',
 		update: (portfolioId: string) => `/portfolio/${portfolioId}`,
 	},
+
+	/* presignedURL */
+	UPLOAD_IMAGE: {
+		profile: '/profile/pre-signed-url',
+	},
 };
