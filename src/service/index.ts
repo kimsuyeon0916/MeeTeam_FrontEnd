@@ -11,7 +11,7 @@ import {
 import { readProfile, updateProfile } from './user/Profile';
 import { readSkillList, readRoleList } from './search/search';
 import { readPortfolio, createPortfolio, updatePortfolio } from './portfolio/portfolio';
-import { readImagePresignedUrl, readImageListPresignedUrl } from './image/image';
+import { readImagePresignedUrl, readImageListPresignedUrl, uploadImageFile } from './image/image';
 
 export {
 	EndPoint,
@@ -32,4 +32,5 @@ export {
 	updatePortfolio,
 	readImagePresignedUrl,
 	readImageListPresignedUrl,
+	uploadImageFile,
 };

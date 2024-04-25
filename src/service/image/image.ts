@@ -1,6 +1,11 @@
 import { ImageResponse } from '../../types';
-import { axiosAuthInstance } from '../axiosInstance';
+import { axiosAuthInstance, axiosInstance } from '../axiosInstance';
 import { EndPoint } from '../endPoint';
+
+interface UploadImageFile {
+	presignedUrl: string;
+	imageFile: ArrayBuffer;
+}
 
 export const readImagePresignedUrl = async (fileName: string) => {
 	try {
@@ -31,6 +36,29 @@ export const readImageListPresignedUrl = async ({
 				portfolio: portfolioId,
 			},
 		});
+
+		return response;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+};
+
+const axiosConfig = {
+	headers: {
+		'Content-Type': 'application/octet-stream',
+	},
+};
+
+export const uploadImageFile = async ({ presignedUrl, imageFile }: UploadImageFile) => {
+	try {
+		const response = await axiosInstance.put(
+			presignedUrl,
+			{ ...imageFile },
+			{
+				...axiosConfig,
+			}
+		);
 
 		return response;
 	} catch (error) {
