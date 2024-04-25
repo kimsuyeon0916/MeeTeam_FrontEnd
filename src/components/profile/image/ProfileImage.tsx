@@ -2,8 +2,7 @@ import React, { useRef, useState } from 'react';
 import S from './ProfileImage.styled';
 import { AddProfile, DefaultProfileImage } from '../../../assets';
 import { useNavigate } from 'react-router';
-import { useSetRecoilState } from 'recoil';
-import { imageNameState } from '../../../atom';
+import { Image } from '../../../types';
 
 interface ProfileImage {
 	isEditable?: boolean;
@@ -23,26 +22,37 @@ const ProfileImage = ({ isEditable, userId, size, url }: ProfileImage) => {
 		inputRef.current?.click();
 	};
 
-	const [imageSrc, setImageSrc] = useState<string | null>(url ? url : null);
-	const setImageNameState = useSetRecoilState(imageNameState);
+	const [uploadImage, setUploadImage] = useState<Image>({ fileName: '프로필사진', url: url });
 
 	const changeImage = (event: React.BaseSyntheticEvent) => {
-		const uploadImage = event.target?.files[0];
-		setImageNameState(uploadImage.name);
+		const image = event.target?.files[0];
 
-		const reader = new FileReader();
-		reader.readAsDataURL(uploadImage);
-		reader.onload = () => setImageSrc(reader.result as string);
+		let newImage: Image = {
+			fileName: image.name,
+		};
+
+		const binaryReader = new FileReader();
+		binaryReader.readAsArrayBuffer(image);
+		binaryReader.onload = () => {
+			newImage = { ...newImage, binary: binaryReader.result as ArrayBuffer };
+		};
+
+		const urlReader = new FileReader();
+		urlReader.readAsDataURL(image);
+		urlReader.onload = () => {
+			newImage = { ...newImage, url: urlReader.result as string };
+			setUploadImage(newImage);
+		};
 	};
 
 	return (
 		<S.ProfileImageLayout>
 			<S.ProfileImageWrapper
 				$size={size}
-				$url={imageSrc ? true : false}
+				$url={uploadImage?.url ? true : false}
 				onClick={isEditable ? addImage : navigateProfile}
 			>
-				<S.ProfileImage src={imageSrc ? imageSrc : DefaultProfileImage} alt='프로필이미지' />
+				<S.ProfileImage src={uploadImage?.url ?? DefaultProfileImage} alt='프로필이미지' />
 			</S.ProfileImageWrapper>
 			{isEditable && (
 				<>
