@@ -80,7 +80,7 @@ const ProfileEditPage = () => {
 	});
 
 	const submitHandler: SubmitHandler<FormValues> = data => {
-		const { imageUrl, interest, ...updateData } = data;
+		const { interest, ...updateData } = data;
 		mutate({
 			...updateData,
 			imageFileName: profileImageName,

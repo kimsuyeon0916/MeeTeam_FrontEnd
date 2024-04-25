@@ -50,7 +50,6 @@ const skills = {
 	type: 'text',
 	placeholder: '보유 스킬을 검색해주세요',
 	name: 'skills',
-	validation: INPUT_VALIDATION.skill,
 	icon: {
 		default: Search,
 		arrow: 'right',
