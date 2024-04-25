@@ -17,7 +17,7 @@ export const readPortfolio = async (portfolioId: string) => {
 
 export const createPortfolio = async (portfolio: PortfolioPayload) => {
 	try {
-		const response = await axiosAuthInstance.put(EndPoint.PORTFOLIO.create, {
+		const response = await axiosAuthInstance.post(EndPoint.PORTFOLIO.create, {
 			...portfolio,
 		});
 
