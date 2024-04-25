@@ -18,3 +18,9 @@ export interface Department {
 	departmentId: string;
 	departmentName: string;
 }
+
+export interface ImageResponse {
+	serviceType: string;
+	fileName: string;
+	url: string;
+}

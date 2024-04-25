@@ -1,5 +1,5 @@
 import type { SignUpPayload, UpdateProfilePayload, PortfolioPayload } from './payload';
-import type { UserReponse, University, Department } from './response';
+import type { UserReponse, University, Department, ImageResponse } from './response';
 import type { CustomInstance } from './api';
 import type { TitleInfo, OptionList, Option, Role, InputRoleForm, InputState } from './information';
 import type { Comment, CommentInputFunctions } from './comment';
@@ -36,4 +36,5 @@ export type {
 	PortfolioDetails,
 	Image,
 	PortfolioPayload,
+	ImageResponse,
 };
