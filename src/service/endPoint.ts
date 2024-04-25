@@ -31,5 +31,6 @@ export const EndPoint = {
 	/* presignedURL */
 	UPLOAD_IMAGE: {
 		profile: '/profile/pre-signed-url',
+		portfolio: '/portfolio/pre-signed-url',
 	},
 };
