@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-import { readImagePresignedUrl, readImageListPresignedUrl } from '../service';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { readImagePresignedUrl, readImageListPresignedUrl, uploadImageFile } from '../service';
 
 const imageKeys = {
 	readImagePresignedUrl: (fileName: string) => ['readImagePresignedUrl', fileName],
@@ -10,6 +10,7 @@ const imageKeys = {
 		fileName: string;
 		portfolioId?: string;
 	}) => ['readImageListPresignedUrl', fileName, portfolioId],
+	uploadImageFile: ['useUploadImageFile'],
 };
 
 /**
@@ -19,6 +20,7 @@ export const useReadImagePresignedUrl = (fileName: string) => {
 	return useQuery({
 		queryKey: imageKeys.readImagePresignedUrl(fileName),
 		queryFn: () => readImagePresignedUrl(fileName),
+		enabled: false,
 	});
 };
 
@@ -35,5 +37,18 @@ export const useReadImageListPresignedUrl = ({
 	return useQuery({
 		queryKey: imageKeys.readImageListPresignedUrl({ fileName, portfolioId }),
 		queryFn: () => readImageListPresignedUrl({ fileName, portfolioId }),
+		enabled: false,
+	});
+};
+
+/**
+ * @description S3 에 이미지 바이너리 파일 업로드 API를 호출하는 hook입니다.
+ */
+export const useUploadImageFile = ({ onSuccess }: { onSuccess: () => void }) => {
+	return useMutation({
+		mutationFn: uploadImageFile,
+		onSuccess: () => {
+			onSuccess?.();
+		},
 	});
 };
