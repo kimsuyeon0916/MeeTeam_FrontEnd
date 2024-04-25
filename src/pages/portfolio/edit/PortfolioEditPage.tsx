@@ -16,13 +16,22 @@ import {
 	ModalPortal,
 } from '../../../components';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useForm, useFieldArray } from 'react-hook-form';
-import { Link, Skill } from '../../../types';
-import { useDebounce, useReadPortfolio, useReadRoleList, useReadSkillList } from '../../../hooks';
+import { useForm, useFieldArray, SubmitHandler } from 'react-hook-form';
+import { Link, PortfolioPayload, Skill } from '../../../types';
+import {
+	useCreatePortfolio,
+	useDebounce,
+	useReadPortfolio,
+	useReadRoleList,
+	useReadSkillList,
+	useUpdatePortfolio,
+} from '../../../hooks';
 import PORTFOLIO_EDIT_DATA from './portfolioEditData';
 import { modules, formats, fixModalBackground } from '../../../utils';
 import { Refresh } from '../../../assets';
 import type ReactQuill from 'react-quill';
+import { useRecoilValue } from 'recoil';
+import { uploadImageListState } from '../../../atom';
 
 interface FormValues {
 	title?: string;
@@ -46,15 +55,15 @@ const PortfolioEditPage = () => {
 	const { portfolioId } = useParams() as { portfolioId: string }; // undefined 인 경우(생성하는 경우) 로직 필요
 	const navigate = useNavigate();
 
-	const { data: portfolio, isSuccess } = useReadPortfolio(portfolioId);
+	const { data: portfolio, isSuccess: isSuccessReadPortfolio } = useReadPortfolio(portfolioId);
 	// 작성자가 아닌 경우, 편집 방지(상세페이지로 이동)
 	useEffect(() => {
-		if (isSuccess) {
+		if (isSuccessReadPortfolio) {
 			portfolioId && !portfolio?.isWriter && navigate(`/portfolio/${portfolioId}`);
 		}
-	}, [isSuccess]);
+	}, [isSuccessReadPortfolio]);
 
-	const { register, formState, handleSubmit, control, watch, getValues, setValue, trigger } =
+	const { register, formState, handleSubmit, control, watch, getValues, setValue } =
 		useForm<FormValues>({
 			mode: 'onChange',
 			values: {
@@ -67,7 +76,48 @@ const PortfolioEditPage = () => {
 			},
 		});
 
-	// 이미지 순서
+	const createPortfolioInSuccess = (newPortfolioId: string) => {
+		navigate(`/portfolio/${newPortfolioId}`);
+	};
+	const updatePortfolioInSuccess = () => {
+		navigate(`/portfolio/${portfolioId}`);
+	};
+
+	const { mutate: createPortfolio } = useCreatePortfolio({
+		onSuccess: createPortfolioInSuccess,
+	});
+	const { mutate: updatePortfolio } = useUpdatePortfolio({
+		onSuccess: updatePortfolioInSuccess,
+	});
+
+	const uploadImageList = useRecoilValue(uploadImageListState);
+
+	const submitHandler: SubmitHandler<FormValues> = data => {
+		// 이미지 압축
+		// presignedUrl 을 이용해서 S3에 이미지 업로드
+
+		const portfolio = {
+			...data,
+			mainImageFileName: uploadImageList[0].fileName,
+			zipFileName: 'test.zip', // 추후 변경해야 함
+			fileOrder: uploadImageList.map(image => image.fileName),
+			field: sessionStorage.field,
+			role: sessionStorage.role,
+			proceedType: proceedType,
+			skills: skillList.map(skill => skill.id),
+		} as PortfolioPayload;
+
+		if (portfolioId) {
+			updatePortfolio({
+				portfolioId: portfolioId,
+				portfolio: portfolio,
+			});
+		} else {
+			createPortfolio({ ...portfolio });
+		}
+	};
+
+	// 이미지 순서 변경 모달
 	const [modalOpen, setModalOpen] = useState(false);
 
 	useEffect(() => {
@@ -131,15 +181,22 @@ const PortfolioEditPage = () => {
 	};
 
 	useEffect(() => {
-		if (isSuccess) {
+		if (isSuccessReadPortfolio) {
 			setProceedType(portfolio?.proceedType);
 			setSkillList(portfolio?.skills ? portfolio?.skills : []);
 		}
-	}, [isSuccess]);
+	}, [isSuccessReadPortfolio]);
+
+	const checkKeyDown = (e: React.KeyboardEvent) => {
+		if (e.key === 'Enter') e.preventDefault();
+	};
 
 	return (
 		<>
-			<S.PortfolioEditLayout>
+			<S.PortfolioEditLayout
+				onSubmit={handleSubmit(submitHandler)}
+				onKeyDown={e => checkKeyDown(e)}
+			>
 				<S.PortfolioEditColumn $gap='4rem'>
 					<S.PortfolioEditHeader>
 						<h2>포트폴리오 작성</h2>
@@ -167,7 +224,7 @@ const PortfolioEditPage = () => {
 										</ModalPortal>
 									)}
 								</S.PortfolioEditRow>
-								<PortfolioImageUpload />
+								<PortfolioImageUpload portfolioId={portfolioId} />
 							</S.PortfolioEditColumn>
 						</S.PortfolioEditArticle>
 						<hr />
@@ -178,10 +235,16 @@ const PortfolioEditPage = () => {
 							<S.PortfolioEditTitle>기본 정보</S.PortfolioEditTitle>
 							<S.PortfolioEditColumn $width='clamp(50%, 76.4rem, 100%)' $gap='3.6rem'>
 								{/* 포트폴리오 제목 */}
-								<Input register={register} formState={formState} {...PORTFOLIO_EDIT_DATA.title} />
+								<Input
+									register={register}
+									watch={watch}
+									formState={formState}
+									{...PORTFOLIO_EDIT_DATA.title}
+								/>
 								{/* 포트폴리오 한줄 소개 */}
 								<Input
 									register={register}
+									watch={watch}
 									formState={formState}
 									{...PORTFOLIO_EDIT_DATA.description}
 								/>
