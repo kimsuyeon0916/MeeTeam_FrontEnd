@@ -18,11 +18,14 @@ export const useReadPortfolio = (portfolioId: string) => {
 /**
  * @description 포트폴리오 등록 API를 호출하는 hook입니다.
  */
-export const useCreatePortfolio = ({ onSuccess }: { onSuccess: () => void }) => {
+export const useCreatePortfolio = ({ onSuccess }: { onSuccess: (data: string) => void }) => {
 	return useMutation({
 		mutationFn: createPortfolio,
-		onSuccess: () => {
-			onSuccess?.();
+		onSuccess: data => {
+			if (data) {
+				onSuccess?.(data);
+				sessionStorage.clear();
+			}
 		},
 	});
 };
@@ -35,6 +38,7 @@ export const useUpdatePortfolio = ({ onSuccess }: { onSuccess: () => void }) => 
 		mutationFn: updatePortfolio,
 		onSuccess: () => {
 			onSuccess?.();
+			sessionStorage.clear();
 		},
 	});
 };
