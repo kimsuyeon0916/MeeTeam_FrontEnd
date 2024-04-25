@@ -10,7 +10,7 @@ import {
 } from './auth/auth';
 import { readProfile, updateProfile } from './user/Profile';
 import { readSkillList, readRoleList } from './search/search';
-import { readPortfolio } from './portfolio/portfolio';
+import { readPortfolio, createPortfolio } from './portfolio/portfolio';
 
 export {
 	EndPoint,
@@ -27,4 +27,5 @@ export {
 	readSkillList,
 	readRoleList,
 	readPortfolio,
+	createPortfolio,
 };
