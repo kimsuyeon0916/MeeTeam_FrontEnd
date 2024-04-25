@@ -32,4 +32,9 @@ export interface UpdateProfilePayload {
 	portfolios?: string[];
 }
 
-export type PortfolioPayload = Omit<PortfolioDetails, 'otherPortfolios' | 'isWriter'>;
+export interface PortfolioPayload
+	extends Omit<PortfolioDetails, 'zipFileUrl' | 'skills' | 'otherPortfolios' | 'isWriter'> {
+	skills: string[];
+	mainImageFileName: string;
+	zipFileName: string;
+}
