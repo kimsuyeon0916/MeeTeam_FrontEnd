@@ -147,3 +147,8 @@ export const uploadImageListState = atom<Image[]>({
 	key: 'uploadImageListState',
 	default: [],
 });
+
+export const uploadImageState = atom<Image | null>({
+	key: 'uploadImageState',
+	default: null,
+});
