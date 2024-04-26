@@ -4,7 +4,7 @@ import { EndPoint } from '../endPoint';
 
 interface UploadImageFile {
 	presignedUrl: string;
-	imageFile: ArrayBuffer;
+	imageFile: File;
 }
 
 export const readImagePresignedUrl = async (fileName: string) => {
@@ -44,21 +44,13 @@ export const readImageListPresignedUrl = async ({
 	}
 };
 
-const axiosConfig = {
-	headers: {
-		'Content-Type': 'application/octet-stream',
-	},
-};
-
 export const uploadImageFile = async ({ presignedUrl, imageFile }: UploadImageFile) => {
 	try {
-		const response = await axiosInstance.put(
-			presignedUrl,
-			{ ...imageFile },
-			{
-				...axiosConfig,
-			}
-		);
+		const response = await axiosInstance.put(presignedUrl, imageFile, {
+			headers: {
+				'Content-Type': imageFile.type,
+			},
+		});
 
 		return response;
 	} catch (error) {
