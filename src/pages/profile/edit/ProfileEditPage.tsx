@@ -102,7 +102,6 @@ const ProfileEditPage = () => {
 			skills: skillList.map(skill => skill.id),
 			portfolios: pinnedPortfolioList,
 		});
-		sessionStorage.clear();
 	};
 
 	const { mutate: uploadImageFile } = useUploadImageFile({
@@ -135,7 +134,6 @@ const ProfileEditPage = () => {
 				skills: skillList.map(skill => skill.id),
 				portfolios: pinnedPortfolioList,
 			});
-			sessionStorage.clear();
 		}
 	};
 

@@ -23,6 +23,7 @@ export const useUpdateProfile = ({ onSuccess }: { onSuccess: () => void }) => {
 		mutationFn: updateProfile,
 		onSuccess: () => {
 			onSuccess?.();
+			sessionStorage.clear();
 		},
 	});
 };
