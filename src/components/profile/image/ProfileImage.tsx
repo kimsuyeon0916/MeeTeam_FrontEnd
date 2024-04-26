@@ -21,7 +21,7 @@ const ProfileImage = ({ isEditable, userId, size, url }: ProfileImage) => {
 
 	const [uploadImage, setUploadImage] = useRecoilState(uploadImageState);
 	useEffect(() => {
-		setUploadImage({ fileName: '프로필사진', url: url }); // 초기화
+		setUploadImage({ url: url });
 	}, []);
 
 	const inputRef = useRef<HTMLInputElement>(null);
