@@ -32,21 +32,14 @@ const PortfolioImageUpload = (portfolioId?: { portfolioId?: string }) => {
 				continue;
 			}
 
-			let uploadImage: Image = {
-				fileName: imageList[i].name,
-			};
-
-			const binaryReader = new FileReader();
-			binaryReader.readAsArrayBuffer(imageList[i]);
-			binaryReader.onload = () => {
-				uploadImage = { ...uploadImage, binary: binaryReader.result as ArrayBuffer };
-			};
-
 			const urlReader = new FileReader();
 			urlReader.readAsDataURL(imageList[i]);
 			urlReader.onload = () => {
-				uploadImage = { ...uploadImage, url: urlReader.result as string };
-
+				const uploadImage = {
+					fileName: imageList[i].name,
+					url: urlReader.result,
+					file: imageList[i],
+				} as Image;
 				setUploadImageList(prev => [...prev, uploadImage]);
 			};
 		}
