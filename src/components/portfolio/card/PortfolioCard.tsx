@@ -64,21 +64,14 @@ const PortfolioCard = ({
 			return;
 		}
 
-		let uploadImage: Image = {
-			fileName: image.name,
-		};
-
-		const binaryReader = new FileReader();
-		binaryReader.readAsArrayBuffer(image);
-		binaryReader.onload = () => {
-			uploadImage = { ...uploadImage, binary: binaryReader.result as ArrayBuffer };
-		};
-
 		const urlReader = new FileReader();
 		urlReader.readAsDataURL(image);
 		urlReader.onload = () => {
-			uploadImage = { ...uploadImage, url: urlReader.result as string };
-
+			const uploadImage = {
+				fileName: image.name,
+				url: urlReader.result,
+				file: image,
+			} as Image;
 			const imageList = [...uploadImageList];
 			imageList.splice((clickNumber as number) - 1, 1, uploadImage);
 			setUploadImageList(imageList);
