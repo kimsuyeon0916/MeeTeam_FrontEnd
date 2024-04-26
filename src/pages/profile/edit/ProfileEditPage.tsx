@@ -90,6 +90,7 @@ const ProfileEditPage = () => {
 	const uploadImageFileInSuccess = () => {
 		const formData = getValues();
 		updateProfile({
+			// 추후, 수정 시 수정 여부 boolean 값 추가
 			...formData,
 			imageFileName: imageResponse?.fileName,
 			isUserNamePublic: isUserNamePublic,
@@ -118,11 +119,12 @@ const ProfileEditPage = () => {
 	}, [isSuccessReadUrl]);
 
 	const submitHandler: SubmitHandler<FormValues> = data => {
-		if (user?.imageUrl !== profileImage?.url) {
+		if (profileImage?.fileName) {
 			// 이미지를 처음 업로드 및 변경하는 경우에만 S3에 업로드(기존!==지금)
 			readImagePresignedUrl(); // presignedUrl 발급
 		} else {
 			updateProfile({
+				// 추후, 수정 시 수정 여부 boolean 값 추가
 				...data,
 				isUserNamePublic: isUserNamePublic,
 				interestId: sessionStorage.interest,
