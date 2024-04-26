@@ -123,26 +123,6 @@ export const searchPageState = atom({
 	default: false,
 });
 
-export const imageNameState = atom({
-	key: 'imageNameState',
-	default: '',
-});
-
-export const imageNameListState = atom<string[]>({
-	key: 'imageNameListState',
-	default: [],
-});
-
-export const imageSrcListState = atom<string[]>({
-	key: 'imageSrcListState',
-	default: [],
-});
-
-export const binaryImageListState = atom<ArrayBuffer[]>({
-	key: 'binaryImageListState',
-	default: [],
-});
-
 export const uploadImageListState = atom<Image[]>({
 	key: 'uploadImageListState',
 	default: [],
