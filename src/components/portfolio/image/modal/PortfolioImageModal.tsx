@@ -53,32 +53,35 @@ const PortfolioImageModal = ({ onClose }: { onClose: () => void }) => {
 						{provided => (
 							<S.PortfolioImageModalColumn ref={provided.innerRef} {...provided.droppableProps}>
 								<S.PortfolioImageList>
-									{[...changeImageList].map(({ fileName, url }, index) => (
-										<Draggable key={fileName} draggableId={fileName} index={index}>
-											{provided => (
-												<S.PortfolioImageItem
-													ref={provided.innerRef}
-													{...provided.draggableProps}
-													{...provided.dragHandleProps}
-												>
-													<S.PortfolioImageListIcon>
-														<img src={HambergerMenuIcon} alt='햄버거메뉴아이콘' />
-													</S.PortfolioImageListIcon>
-													<S.PortfolioImageModalRow>
-														<S.PortfolioImageWrapper>
-															<PortfolioCard
-																key={index}
-																mainImageUrl={url}
-																clickNumber={index + 1}
-															/>
-														</S.PortfolioImageWrapper>
-														{fileName}
-													</S.PortfolioImageModalRow>
-													<S.PortfolioImageNumberIcon>{index + 1}</S.PortfolioImageNumberIcon>
-												</S.PortfolioImageItem>
-											)}
-										</Draggable>
-									))}
+									{[...changeImageList].map(
+										({ fileName, url }, index) =>
+											fileName && (
+												<Draggable key={fileName} draggableId={fileName} index={index}>
+													{provided => (
+														<S.PortfolioImageItem
+															ref={provided.innerRef}
+															{...provided.draggableProps}
+															{...provided.dragHandleProps}
+														>
+															<S.PortfolioImageListIcon>
+																<img src={HambergerMenuIcon} alt='햄버거메뉴아이콘' />
+															</S.PortfolioImageListIcon>
+															<S.PortfolioImageModalRow>
+																<S.PortfolioImageWrapper>
+																	<PortfolioCard
+																		key={index}
+																		mainImageUrl={url}
+																		clickNumber={index + 1}
+																	/>
+																</S.PortfolioImageWrapper>
+																{fileName}
+															</S.PortfolioImageModalRow>
+															<S.PortfolioImageNumberIcon>{index + 1}</S.PortfolioImageNumberIcon>
+														</S.PortfolioImageItem>
+													)}
+												</Draggable>
+											)
+									)}
 								</S.PortfolioImageList>
 								{provided.placeholder}
 							</S.PortfolioImageModalColumn>
