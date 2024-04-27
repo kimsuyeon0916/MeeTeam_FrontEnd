@@ -21,13 +21,15 @@ import { Link, PortfolioPayload, Skill } from '../../../types';
 import {
 	useCreatePortfolio,
 	useDebounce,
+	useReadImageListPresignedUrl,
 	useReadPortfolio,
 	useReadRoleList,
 	useReadSkillList,
 	useUpdatePortfolio,
+	useUploadImageFile,
 } from '../../../hooks';
 import PORTFOLIO_EDIT_DATA from './portfolioEditData';
-import { modules, formats, fixModalBackground } from '../../../utils';
+import { modules, formats, fixModalBackground, zipFile } from '../../../utils';
 import { Refresh } from '../../../assets';
 import type ReactQuill from 'react-quill';
 import { useRecoilValue } from 'recoil';
@@ -90,16 +92,20 @@ const PortfolioEditPage = () => {
 		onSuccess: updatePortfolioInSuccess,
 	});
 
+	// 이미지 업로드
 	const uploadImageList = useRecoilValue(uploadImageListState);
+	const {
+		data: imageResponse,
+		refetch: readImageListPresignedUrl,
+		isSuccess: isSuccessReadUrl,
+	} = useReadImageListPresignedUrl(uploadImageList[0]?.fileName as string, portfolioId);
 
-	const submitHandler: SubmitHandler<FormValues> = data => {
-		// 이미지 압축
-		// presignedUrl 을 이용해서 S3에 이미지 업로드
-
-		const portfolio = {
-			...data,
-			mainImageFileName: uploadImageList[0].fileName,
-			zipFileName: 'test.zip', // 추후 변경해야 함
+	const uploadImageFileInSuccess = () => {
+		const formData = getValues();
+		const portfolioData = {
+			...formData,
+			mainImageFileName: imageResponse?.[1].fileName,
+			zipFileName: imageResponse?.[0].fileName,
 			fileOrder: uploadImageList.map(image => image.fileName),
 			field: sessionStorage.field,
 			role: sessionStorage.role,
@@ -110,10 +116,54 @@ const PortfolioEditPage = () => {
 		if (portfolioId) {
 			updatePortfolio({
 				portfolioId: portfolioId,
-				portfolio: portfolio,
+				portfolio: portfolioData,
 			});
 		} else {
-			createPortfolio({ ...portfolio });
+			createPortfolio({ ...portfolioData });
+		}
+	};
+
+	const { mutate: uploadImageFile } = useUploadImageFile({
+		onSuccess: uploadImageFileInSuccess,
+	});
+
+	useEffect(() => {
+		if (isSuccessReadUrl && imageResponse) {
+			zipFile(uploadImageList).then(blob => {
+				const imageListZipFile = new File([blob], imageResponse[0].fileName, {
+					type: 'application/zip',
+				});
+				uploadImageFile({
+					presignedUrl: imageResponse[0].url,
+					imageFile: imageListZipFile,
+				});
+			}); // 이미지 압축 및 업로드
+
+			uploadImageFile({
+				presignedUrl: imageResponse[1].url,
+				imageFile: uploadImageList[0].file as File,
+			});
+		}
+	}, [isSuccessReadUrl]);
+
+	const submitHandler: SubmitHandler<FormValues> = data => {
+		const isEditable = true; // 추후, 생성/변경 시 수정 여부 조건 변경
+		if (isEditable) {
+			// 이미지를 처음 업로드 및 변경하는 경우에만 S3에 업로드(기존!==지금)
+			readImageListPresignedUrl(); // presignedUrl 발급
+		} else {
+			updatePortfolio({
+				portfolioId: portfolioId,
+				portfolio: {
+					// 추후, 수정 시 수정 여부 boolean 값 추가
+					...data,
+					fileOrder: uploadImageList.map(image => image.fileName),
+					field: sessionStorage.field,
+					role: sessionStorage.role,
+					proceedType: proceedType,
+					skills: skillList.map(skill => skill.id),
+				} as PortfolioPayload,
+			});
 		}
 	};
 
@@ -224,7 +274,10 @@ const PortfolioEditPage = () => {
 										</ModalPortal>
 									)}
 								</S.PortfolioEditRow>
-								<PortfolioImageUpload portfolioId={portfolioId} />
+								<PortfolioImageUpload
+									zipFileUrl={portfolio?.zipFileUrl}
+									fileOrder={portfolio?.fileOrder}
+								/>
 							</S.PortfolioEditColumn>
 						</S.PortfolioEditArticle>
 						<hr />
