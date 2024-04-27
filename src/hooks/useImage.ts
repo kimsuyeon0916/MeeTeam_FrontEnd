@@ -27,13 +27,7 @@ export const useReadImagePresignedUrl = (fileName: string) => {
 /**
  * @description 다중 이미지 업로드를 위한 presignedURL 조회 API를 호출하는 hook입니다.
  */
-export const useReadImageListPresignedUrl = ({
-	fileName,
-	portfolioId,
-}: {
-	fileName: string;
-	portfolioId?: string;
-}) => {
+export const useReadImageListPresignedUrl = (fileName: string, portfolioId?: string) => {
 	return useQuery({
 		queryKey: imageKeys.readImageListPresignedUrl({ fileName, portfolioId }),
 		queryFn: () => readImageListPresignedUrl({ fileName, portfolioId }),
