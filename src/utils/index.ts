@@ -8,6 +8,7 @@ import LocalStorageEffect from './LocalStorageEffect';
 import fixModalBackground from './fixModalBackground';
 import simpleDate from './simpleDate';
 import zipFile from './zipFile';
+import unzipFile from './unzipFile';
 
 export {
 	modules,
@@ -21,4 +22,5 @@ export {
 	fixModalBackground,
 	simpleDate,
 	zipFile,
+	unzipFile,
 };
