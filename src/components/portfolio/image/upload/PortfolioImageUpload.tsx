@@ -1,23 +1,61 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import S from './PortfolioImageUpload.styled';
 import { Plus } from '../../../../assets';
 import { useRecoilState } from 'recoil';
 import { uploadImageListState } from '../../../../atom';
 import { PortfolioCard } from '../../..';
 import { Image } from '../../../../types';
+import { unzipFile } from '../../../../utils';
 
 const MAX_IMAGE_SIZE_BYTES = 30 * 1024 * 1024; // 30MB
 const MAX_IMAGE_COUNT = 15;
 
-const PortfolioImageUpload = (portfolioId?: { portfolioId?: string }) => {
+interface PortfolioImage {
+	zipFileUrl?: string;
+	fileOrder?: string[];
+}
+
+const PortfolioImageUpload = ({ zipFileUrl, fileOrder }: PortfolioImage) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const addImageList = () => {
 		inputRef.current?.click();
 	};
 
-	// portfolioId 존재하는 경우에 presignedUrl API 호출
-
 	const [uploadImageList, setUploadImageList] = useRecoilState(uploadImageListState); // 추후에 받아온 정보 reduce로 조합해서 초기화
+	const [extractedImageList, setExtractedImageList] = useState<Image[]>([]);
+
+	useEffect(() => {
+		if (fileOrder) {
+			const reorderedImageList: Image[] = [];
+			for (let i = 0; i < fileOrder.length; i++) {
+				const reorderedImage = extractedImageList.find(
+					extractedImage => extractedImage.fileName === fileOrder[i]
+				) as Image;
+				reorderedImageList.push(reorderedImage);
+			}
+			setUploadImageList(reorderedImageList);
+		}
+	}, [extractedImageList]);
+
+	useEffect(() => {
+		if (zipFileUrl && fileOrder) {
+			// 이미지 리사이징 추후 적용
+			unzipFile(zipFileUrl).then(imageList => {
+				for (let i = 0; i < imageList.length; i++) {
+					const urlReader = new FileReader();
+					urlReader.readAsDataURL(imageList[i].blob as Blob);
+					urlReader.onload = () => {
+						const extractedImage = {
+							fileName: imageList[i].fileName,
+							url: urlReader.result,
+							file: imageList[i].blob,
+						} as Image;
+						setExtractedImageList(prev => [...prev, extractedImage]);
+					};
+				}
+			});
+		}
+	}, [zipFileUrl]);
 
 	const changeImageList = (event: React.BaseSyntheticEvent) => {
 		const imageList = event.target?.files;
@@ -44,8 +82,6 @@ const PortfolioImageUpload = (portfolioId?: { portfolioId?: string }) => {
 			};
 		}
 	};
-
-	// 이미지 압축 및 리사이징 적용
 
 	return (
 		<S.PortfolioImageUploadLayout>
