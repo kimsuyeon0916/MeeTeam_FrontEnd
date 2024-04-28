@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { ProfileImage } from '../../..';
+import { NeedLogin, ProfileImage } from '../../..';
 import { TitleAndEtc } from '../../../../types';
 import S from './TitleInfo.styled';
 import { FilledBookmark, UnfilledBookmark } from '../../../../assets';
-import { useBookmark } from '../../../../hooks';
+import { useBookmark, useLogin } from '../../../../hooks';
 import { useDelBookmark } from '../../../../hooks/useBookMark';
 import { useParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { needLoginModalState } from '../../../../atom';
 
 const TitleInfo = ({
 	nickname,
@@ -19,26 +21,22 @@ const TitleInfo = ({
 	isBookmarked,
 }: TitleAndEtc) => {
 	const { id } = useParams();
-	const [bookmarkCnt, setBookmarkCnt] = useState<number>(bookmarkCount);
-	const [isMarked, setIsMarked] = useState<boolean>(isBookmarked);
-	const { mutate: bookmarked } = useBookmark();
-	const { mutate: unBookmarked } = useDelBookmark();
+	const { isLoggedIn } = useLogin();
+	const { mutate: bookmarked } = useBookmark({ queryKey: 'detailedPage' });
+	const { mutate: unBookmarked } = useDelBookmark({ queryKey: 'detailedPage' });
+	const [needLoginModal, setNeedLoginModal] = useRecoilState(needLoginModalState);
 
 	const toggleBookmark = () => {
-		if (!isMarked) {
+		if (!isLoggedIn) {
+			setNeedLoginModal({ isOpen: true, type: 'BOOKMARK' });
+			return;
+		}
+		if (!isBookmarked) {
 			bookmarked(Number(id));
-			setBookmarkCnt(prev => prev + 1);
 		} else {
 			unBookmarked(Number(id));
-			setBookmarkCnt(prev => prev - 1);
 		}
-		setIsMarked(prev => !prev);
 	};
-
-	useEffect(() => {
-		setIsMarked(isBookmarked);
-		setBookmarkCnt(bookmarkCount);
-	}, [isBookmarked, bookmarkCount]);
 
 	return (
 		<S.TitleInfo>
@@ -53,13 +51,18 @@ const TitleInfo = ({
 				<section className='container-bookmark'>
 					<img
 						className='icon-bookmark'
-						src={isMarked ? FilledBookmark : UnfilledBookmark}
+						src={isBookmarked ? FilledBookmark : UnfilledBookmark}
 						onClick={toggleBookmark}
 					/>
-					<span className='count-bookmark'>{bookmarkCnt}</span>
+					<span className='count-bookmark'>{bookmarkCount}</span>
 				</section>
 			</section>
 			<h1>{title}</h1>
+			{needLoginModal.isOpen && (
+				<section className='modal-background'>
+					<NeedLogin type={needLoginModal.type} />
+				</section>
+			)}
 		</S.TitleInfo>
 	);
 };

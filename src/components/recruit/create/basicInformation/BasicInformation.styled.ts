@@ -272,7 +272,7 @@ const ContainerCourse = styled.article<Course>`
 				color: #8e8e8e;
 				gap: 1.2rem;
 				padding: 1.2rem 1.6rem;
-				z-index: 401;
+				z-index: 11;
 				background-color: #fff;
 				border-radius: 1rem;
 				border: 1px solid #e3e3e3;

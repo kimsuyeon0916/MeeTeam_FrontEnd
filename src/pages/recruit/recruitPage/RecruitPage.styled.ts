@@ -177,6 +177,7 @@ const RecruitPage = styled.div<RecruitPage>`
 				color: #373f41;
 				font-weight: 400;
 				width: 13rem;
+				height: 4.8rem;
 
 				&:hover {
 					border: 1px solid #5877fc;
@@ -395,13 +396,23 @@ const RecruitPage = styled.div<RecruitPage>`
 			line-height: 1.35rem;
 			letter-spacing: 0.015rem;
 
+			.search-bar {
+			}
+
 			input {
-				width: 20rem;
+				width: 16.5rem;
 				border: none;
 				outline: none;
 				font-size: 1.2rem;
 				background-color: transparent;
 				font-size: 1.4rem;
+			}
+
+			.clear-keyword {
+				cursor: pointer;
+				padding: 0;
+				margin: 0;
+				width: 2rem;
 			}
 		}
 	}
@@ -513,6 +524,16 @@ const RecruitPage = styled.div<RecruitPage>`
 			justify-content: center;
 			align-items: center;
 		}
+	}
+
+	.modal-background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		z-index: 105;
+		background-color: rgba(0, 0, 0, 0.15);
 	}
 `;
 

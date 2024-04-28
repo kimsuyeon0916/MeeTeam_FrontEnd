@@ -17,7 +17,7 @@ const WaitModal = () => {
 			</section>
 			<section className='btn-container'>
 				<button className='confirm btn-txt' onClick={onClickConfirm}>
-					마감
+					확인
 				</button>
 			</section>
 		</S.WaitModal>

@@ -1,5 +1,6 @@
 import { EndPoint, axiosInstance, axiosAuthInstance } from '..';
 import { ListResult, FilterData } from '../../types';
+import qs from 'qs';
 
 interface FilterItem {
 	filterState: FilterData;
@@ -31,9 +32,7 @@ export const getPostList = async ({ filterState, isLoggedIn, page }: FilterItem)
 		const url = `${EndPoint.RECRUITMENT_BOARD.list}${queryString ? `?${queryString}` : ''}`;
 		if (isLoggedIn) {
 			const response = await axiosAuthInstance.get<ListResult>(url, {
-				params: {
-					page,
-				},
+				params: { page },
 			});
 			return response;
 		} else {

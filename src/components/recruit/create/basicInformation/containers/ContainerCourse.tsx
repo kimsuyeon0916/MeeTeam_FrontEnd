@@ -61,6 +61,11 @@ const ContainerCourse = () => {
 		}));
 		setDropdown(prev => ({ ...prev, professor: false }));
 	};
+	const onKeyDown = (event: React.KeyboardEvent) => {
+		if (event.key === 'Enter') {
+			event.preventDefault();
+		}
+	};
 
 	useEffect(() => {
 		const outsideClick = (event: MouseEvent) => {
@@ -102,6 +107,7 @@ const ContainerCourse = () => {
 						value={name.course}
 						disabled={!isChecked ? true : false}
 						onChange={onChangeCourse}
+						onKeyDown={onKeyDown}
 						onClick={() => setDropdown(prev => ({ ...prev, course: true }))}
 					/>
 					{dropdown.course && (
@@ -122,6 +128,7 @@ const ContainerCourse = () => {
 						value={name.professor}
 						disabled={!isChecked ? true : false}
 						onChange={onChangeProfessor}
+						onKeyDown={onKeyDown}
 						onClick={() => setDropdown(prev => ({ ...prev, professor: true }))}
 					/>
 					{dropdown.professor && (

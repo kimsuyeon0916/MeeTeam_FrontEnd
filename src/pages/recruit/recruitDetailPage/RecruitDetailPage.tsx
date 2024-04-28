@@ -29,6 +29,7 @@ import {
 	applyModalState,
 	applyStepState,
 	commentDeleteModalState,
+	needLoginModalState,
 	recruitInputState,
 } from '../../../atom';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -42,6 +43,7 @@ const RecruitDetailPage = () => {
 	const isCancel = useRecoilValue(applyCancelModalState);
 	const isClose = useRecoilValue(applyCloseModalState);
 	const isDelete = useRecoilValue(commentDeleteModalState);
+	const isNeedLogin = useRecoilValue(needLoginModalState);
 	const step = useRecoilValue(applyStepState);
 	const setFormData = useSetRecoilState(recruitInputState);
 	const stepLists: JsxElementComponentProps = {
@@ -101,8 +103,8 @@ const RecruitDetailPage = () => {
 	};
 
 	useEffect(() => {
-		fixModalBackground(isModal || isCancel || isClose || isDelete.isDelete);
-	}, [isModal, isCancel, isClose, isDelete]);
+		fixModalBackground(isModal || isCancel || isClose || isDelete.isDelete || isNeedLogin.isOpen);
+	}, [isModal, isCancel, isClose, isDelete, isNeedLogin.isOpen]);
 
 	return (
 		<>
@@ -175,7 +177,11 @@ const RecruitDetailPage = () => {
 							<WriterFooter onClickEditPage={onClickEditPage} pageNum={pageNum} />
 						)}
 						{!detailedData.isWriter && !detailedData.isClosed && (
-							<ApplierFooter deadline={detailedData.deadline} isApplied={detailedData.isApplied} />
+							<ApplierFooter
+								deadline={detailedData.deadline}
+								isApplied={detailedData.isApplied}
+								isBookmarked={detailedData.isBookmarked}
+							/>
 						)}
 						{detailedData.isClosed && <ClosedFooter />}
 					</section>

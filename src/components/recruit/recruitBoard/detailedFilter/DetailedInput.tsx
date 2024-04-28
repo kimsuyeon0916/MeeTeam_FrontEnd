@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Search, XBtn, Clear } from '../../../../assets';
 import { useQuery } from '@tanstack/react-query';
 import { getRoleKeyword, getSkillKeyword, getTagKeyword } from '../../../../service';
 import { useDebounce } from '../../../../hooks';
-import { Keyword, DetailedInfo, Array } from '../../../../types';
+import { Keyword, DetailedInfo } from '../../../../types';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import { detailedFilterState, recruitFilterState } from '../../../../atom';
 
@@ -23,7 +23,7 @@ const MESSAGE = {
 };
 
 const DetailedInput = ({ type }: DetailedInfo) => {
-	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
 	const [message, setMessage] = useState({
 		intro: MESSAGE.SKILL.INTRO,
 		message: MESSAGE.SKILL.MESSAGE,
@@ -55,28 +55,31 @@ const DetailedInput = ({ type }: DetailedInfo) => {
 	const onClickItem = (event: React.MouseEvent<HTMLLIElement>, item: Keyword) => {
 		event.stopPropagation();
 		if (type === '기술') {
-			if (!detailedFilter.skill.includes(item) && detailedFilter.skill.length < 6) {
+			if (
+				!detailedFilter.skill.map(e => e.id).includes(item.id) &&
+				detailedFilter.skill.length < 5
+			) {
 				setDetailedFilter(prev => ({
 					...prev,
 					skill: [...prev.skill, { id: item.id, name: item.name }],
 				}));
 			}
 		} else if (type === '역할') {
-			if (!detailedFilter.role.includes(item) && detailedFilter.role.length < 6) {
+			if (!detailedFilter.role.map(e => e.id).includes(item.id) && detailedFilter.role.length < 5) {
 				setDetailedFilter(prev => ({
 					...prev,
 					role: [...prev.role, { id: item.id, name: item.name }],
 				}));
 			}
 		} else if (type === '태그') {
-			if (!detailedFilter.tag.includes(item) && detailedFilter.tag.length < 6) {
+			if (!detailedFilter.tag.map(e => e.id).includes(item.id) && detailedFilter.tag.length < 5) {
 				setDetailedFilter(prev => ({
 					...prev,
 					tag: [...prev.tag, { id: item.id, name: item.name }],
 				}));
 			}
 		}
-		setIsOpen(false);
+		setIsOpenMenu(false);
 		setTagItem('');
 	};
 
@@ -105,17 +108,20 @@ const DetailedInput = ({ type }: DetailedInfo) => {
 
 	const onClickSearchBar = (event: React.MouseEvent<HTMLInputElement>) => {
 		event.stopPropagation();
-		setIsOpen(prev => !prev);
+		setIsOpenMenu(prev => !prev);
 	};
 
 	const onClickErase = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation();
 		if (type === '기술') {
 			setDetailedFilter(prev => ({ ...prev, skill: [] }));
+			setFilterState(prev => ({ ...prev, skill: [] }));
 		} else if (type === '역할') {
 			setDetailedFilter(prev => ({ ...prev, role: [] }));
+			setFilterState(prev => ({ ...prev, role: [] }));
 		} else if (type === '태그') {
 			setDetailedFilter(prev => ({ ...prev, tag: [] }));
+			setFilterState(prev => ({ ...prev, tag: [] }));
 		}
 	};
 
@@ -156,7 +162,7 @@ const DetailedInput = ({ type }: DetailedInfo) => {
 				<input type='text' placeholder={message.message} value={tagItem} onChange={onChangeInput} />
 				<img src={Search} />
 			</article>
-			{isOpen && (
+			{isOpenMenu && (
 				<section className='role-menu'>
 					<ul>
 						{type === '기술' &&
