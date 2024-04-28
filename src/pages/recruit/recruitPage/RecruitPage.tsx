@@ -19,12 +19,13 @@ import { detailedFilterState, needLoginModalState, recruitFilterState } from '..
 import { getPostList } from '../../../service/recruit/board';
 import { useQuery } from '@tanstack/react-query';
 import { useLogin } from '../../../hooks';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 const START_PAGE_NUM = 1;
 
 const RecruitPage = () => {
 	const navigate = useNavigate();
+	const location = useLocation();
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [searchKeyword, setSearchKeyword] = useState<string>('');
 	const [isFloatingOpen, setIsFloatingOpen] = useState<boolean>(false);
@@ -43,6 +44,8 @@ const RecruitPage = () => {
 		tag: false,
 		message: '기술',
 	});
+	const [searchParams, setSearchParams] = useSearchParams();
+
 	const [needLoginModal, setNeedLoginModal] = useRecoilState(needLoginModalState);
 	const { isLoggedIn } = useLogin();
 	const { data, isLoading } = useQuery({
@@ -79,6 +82,9 @@ const RecruitPage = () => {
 		});
 		setSearchKeyword('');
 		setDetailedFilterState({ skill: [], role: [], tag: [] });
+		searchParams.delete('scope');
+		searchParams.delete('category');
+		setSearchParams(searchParams);
 		setIsOpenDetail({ skill: true, role: false, tag: false, message: '기술' });
 	};
 
@@ -159,6 +165,8 @@ const RecruitPage = () => {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [page]);
+
+	console.log(location);
 
 	return (
 		<S.RecruitPage
@@ -260,30 +268,30 @@ const RecruitPage = () => {
 				</section>
 				<hr />
 				<section>
-					{isLoading ? (
-						<section></section>
-					) : (
-						<section className='container-contents'>
-							<div>
-								<article className='bookmark-intro'>
-									<img src={FilledBookmark} />
-									<span className='body2'>북마크 모아보기 {'❯'}</span>
-								</article>
-								{data && (
+					<section className='container-contents'>
+						<div>
+							<article className='bookmark-intro'>
+								<img src={FilledBookmark} />
+								<span className='body2'>북마크 모아보기 {'❯'}</span>
+							</article>
+							{isLoading ? (
+								<section></section>
+							) : (
+								data && (
 									<section className='container-contents__grid'>
 										{data.posts.map(post => (
 											<RecruitCard {...post} key={post.id} />
 										))}
 									</section>
-								)}
-								{data && data.posts.length === 0 && (
-									<section className='no-results'>
-										<span>일치하는 결과가 없습니다.</span>
-									</section>
-								)}
-							</div>
-						</section>
-					)}
+								)
+							)}
+							{data && data.posts.length === 0 && (
+								<section className='no-results'>
+									<span>일치하는 결과가 없습니다.</span>
+								</section>
+							)}
+						</div>
+					</section>
 				</section>
 				<article className='container-pagination'>
 					{data && (
