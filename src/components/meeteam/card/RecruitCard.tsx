@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { FilledBookmark, UnfilledBookmark } from '../../../assets';
 import { ProfileImage } from '../..';
 import { Post } from '../../../types';
-import { useBookmark } from '../../../hooks';
+import { useBookmark, useLogin } from '../../../hooks';
 import { useDelBookmark } from '../../../hooks/useBookMark';
+import { useSetRecoilState } from 'recoil';
+import { needLoginModalState } from '../../../atom';
 
 const RecruitCard = ({
 	id,
@@ -20,9 +22,10 @@ const RecruitCard = ({
 	isClosed,
 }: Post) => {
 	const navigate = useNavigate();
-
+	const { isLoggedIn } = useLogin();
 	const { mutate: bookmarked } = useBookmark({ queryKey: 'recruit_board' });
 	const { mutate: unBookmarked } = useDelBookmark({ queryKey: 'recruit_board' });
+	const setNeedLoginModal = useSetRecoilState(needLoginModalState);
 
 	const onClickContent = () => {
 		navigate(`/recruitment/postings/${id}`);
@@ -30,6 +33,10 @@ const RecruitCard = ({
 
 	const onClickBookmark = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation();
+		if (!isLoggedIn) {
+			setNeedLoginModal({ isOpen: true, type: 'BOOKMARK' });
+			return;
+		}
 		if (!isBookmarked) {
 			bookmarked(Number(id));
 		} else {

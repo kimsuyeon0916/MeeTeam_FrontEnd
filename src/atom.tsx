@@ -202,3 +202,11 @@ export const toastState = atom({
 	key: 'toastState',
 	default: false,
 });
+
+export const needLoginModalState = atom({
+	key: 'needLoginModalState',
+	default: {
+		isOpen: false,
+		type: '',
+	},
+});

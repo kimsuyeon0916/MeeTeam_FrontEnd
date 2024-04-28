@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { ProfileImage } from '../../..';
+import { NeedLogin, ProfileImage } from '../../..';
 import { TitleAndEtc } from '../../../../types';
 import S from './TitleInfo.styled';
 import { FilledBookmark, UnfilledBookmark } from '../../../../assets';
-import { useBookmark } from '../../../../hooks';
+import { useBookmark, useLogin } from '../../../../hooks';
 import { useDelBookmark } from '../../../../hooks/useBookMark';
 import { useParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { needLoginModalState } from '../../../../atom';
 
 const TitleInfo = ({
 	nickname,
@@ -19,11 +21,17 @@ const TitleInfo = ({
 	isBookmarked,
 }: TitleAndEtc) => {
 	const { id } = useParams();
+	const { isLoggedIn } = useLogin();
 	const [isMarked, setIsMarked] = useState<boolean>(isBookmarked);
 	const { mutate: bookmarked } = useBookmark({ queryKey: 'detailedPage' });
 	const { mutate: unBookmarked } = useDelBookmark({ queryKey: 'detailedPage' });
+	const [needLoginModal, setNeedLoginModal] = useRecoilState(needLoginModalState);
 
 	const toggleBookmark = () => {
+		if (!isLoggedIn) {
+			setNeedLoginModal({ isOpen: true, type: 'BOOKMARK' });
+			return;
+		}
 		if (!isMarked) {
 			bookmarked(Number(id));
 		} else {
@@ -52,6 +60,11 @@ const TitleInfo = ({
 				</section>
 			</section>
 			<h1>{title}</h1>
+			{needLoginModal.isOpen && (
+				<section className='modal-background'>
+					<NeedLogin type={needLoginModal.type} />
+				</section>
+			)}
 		</S.TitleInfo>
 	);
 };

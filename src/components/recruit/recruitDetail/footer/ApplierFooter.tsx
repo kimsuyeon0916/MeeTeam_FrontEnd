@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { UnfilledBookmark, FilledBookmark } from '../../../../assets';
-import { useSetRecoilState } from 'recoil';
-import { applyModalState, applyCancelModalState } from '../../../../atom';
+import { useSetRecoilState, useRecoilState } from 'recoil';
+import { applyModalState, applyCancelModalState, needLoginModalState } from '../../../../atom';
 import { calculateDate } from '../../../../utils';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { cancelApply } from '../../../../service';
-import { useBookmark } from '../../../../hooks';
+import { useBookmark, useLogin } from '../../../../hooks';
 import { useDelBookmark } from '../../../../hooks/useBookMark';
 
 interface ApplierData {
@@ -18,9 +18,11 @@ interface ApplierData {
 const ApplierFooter = ({ deadline, isApplied, isBookmarked }: ApplierData) => {
 	const { id } = useParams();
 	const pageNum = Number(id);
+	const { isLoggedIn } = useLogin();
 	const setIsModal = useSetRecoilState(applyModalState);
 	const diffDate = calculateDate(deadline);
 	const queryClient = useQueryClient();
+	const [needLoginModal, setNeedLoginModal] = useRecoilState(needLoginModalState);
 
 	const { mutate: bookmarked } = useBookmark({ queryKey: 'detailedPage' });
 	const { mutate: unBookmarked } = useDelBookmark({ queryKey: 'detailedPage' });
@@ -44,6 +46,10 @@ const ApplierFooter = ({ deadline, isApplied, isBookmarked }: ApplierData) => {
 	};
 
 	const onClickBookmark = () => {
+		if (!isLoggedIn) {
+			setNeedLoginModal({ isOpen: true, type: 'BOOKMARK' });
+			return;
+		}
 		if (!isBookmarked) {
 			bookmarked(pageNum);
 		} else {
