@@ -22,7 +22,6 @@ const TitleInfo = ({
 }: TitleAndEtc) => {
 	const { id } = useParams();
 	const { isLoggedIn } = useLogin();
-	const [isMarked, setIsMarked] = useState<boolean>(isBookmarked);
 	const { mutate: bookmarked } = useBookmark({ queryKey: 'detailedPage' });
 	const { mutate: unBookmarked } = useDelBookmark({ queryKey: 'detailedPage' });
 	const [needLoginModal, setNeedLoginModal] = useRecoilState(needLoginModalState);
@@ -32,12 +31,11 @@ const TitleInfo = ({
 			setNeedLoginModal({ isOpen: true, type: 'BOOKMARK' });
 			return;
 		}
-		if (!isMarked) {
+		if (!isBookmarked) {
 			bookmarked(Number(id));
 		} else {
 			unBookmarked(Number(id));
 		}
-		setIsMarked(prev => !prev);
 	};
 
 	return (
@@ -53,7 +51,7 @@ const TitleInfo = ({
 				<section className='container-bookmark'>
 					<img
 						className='icon-bookmark'
-						src={isMarked ? FilledBookmark : UnfilledBookmark}
+						src={isBookmarked ? FilledBookmark : UnfilledBookmark}
 						onClick={toggleBookmark}
 					/>
 					<span className='count-bookmark'>{bookmarkCount}</span>
