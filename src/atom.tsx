@@ -111,7 +111,6 @@ export const validMessageState = atom({
 		content: '',
 		procedure: '',
 		recruitRole: '',
-		tag: '',
 		title: '',
 	},
 });
@@ -125,7 +124,6 @@ export const validState = atom({
 		isDeadline: false,
 		isEndDate: false,
 		isProcedure: false,
-		isTag: false,
 		isTitle: false,
 		isContent: false,
 		isRole: false,
