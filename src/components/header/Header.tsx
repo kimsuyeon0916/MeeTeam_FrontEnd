@@ -3,8 +3,8 @@ import S from './Header.styled';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { DropdownArrow, Logo, LogoName } from '../../assets';
 import { ProfileImage, WaitModal } from '..';
-import { useLogin } from '../../hooks';
-import { useRecoilValue, useRecoilState } from 'recoil';
+import { useLogin, useSignOut } from '../../hooks';
+import { useRecoilState } from 'recoil';
 import { userState, waitModalState } from '../../atom';
 import { fixModalBackground } from '../../utils';
 
@@ -12,8 +12,8 @@ const Header = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const location = useLocation();
-	const { isLoggedIn, logout } = useLogin();
-	const userInfo = useRecoilValue(userState);
+	const { isLoggedIn } = useLogin();
+	const [userInfo, setUserState] = useRecoilState(userState);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [openDrop, setOpenDrop] = useState<boolean>(false);
 	const [isWait, setIsWait] = useRecoilState(waitModalState);
@@ -41,11 +41,6 @@ const Header = () => {
 		}
 	};
 
-	const onClickLogout = () => {
-		logout();
-		setOpenDrop(false);
-	};
-
 	useEffect(() => {
 		if (location.pathname === `/recruitment/postings/${id}` || location.pathname === '/') {
 			setIsHere({ recruit: true, galary: false, inform: false });
@@ -71,6 +66,18 @@ const Header = () => {
 	useEffect(() => {
 		fixModalBackground(isWait);
 	}, [isWait]);
+
+	// 로그아웃
+	const { mutate: signOut } = useSignOut({ setUserState });
+
+	const handleLogOutButtonClick = () => {
+		const confirm = window.confirm('로그아웃 하시겠습니까?');
+		if (confirm) {
+			signOut();
+			navigate('/');
+			setOpenDrop(false);
+		}
+	};
 
 	return (
 		<S.Header $isLogin={isLoggedIn}>
@@ -141,7 +148,7 @@ const Header = () => {
 										구인글 관리
 										<hr />
 									</div>
-									<div className='menu logout' onClick={onClickLogout}>
+									<div className='menu logout' onClick={handleLogOutButtonClick}>
 										로그아웃
 									</div>
 								</div>

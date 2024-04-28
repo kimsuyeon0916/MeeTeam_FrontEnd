@@ -45,21 +45,6 @@ const InputContainer = styled.div`
 		margin-left: auto;
 		color: var(--State-unactive, #8e8e8e);
 	}
-
-	small {
-		position: absolute;
-		top: 5.4rem;
-		left: 1rem;
-		white-space: nowrap; // 줄바꿈 방지
-		color: var(--ButtonColors-Caution-outline-defaultLine, #f85858);
-
-		/* Text/t4 */
-		font-size: 1rem;
-		font-style: normal;
-		font-weight: 500;
-		line-height: 1.2rem; /* 120% */
-		letter-spacing: 0.002rem;
-	}
 `;
 
 const Input = styled.input<InputStyle>`
@@ -105,6 +90,24 @@ const Input = styled.input<InputStyle>`
 	}
 `;
 
-const S = { InputLabel, InputContainer, Input };
+const InputErrorMessage = styled.small<InputStyle>`
+	position: absolute;
+	top: 5.4rem;
+	left: 1rem;
+	white-space: nowrap; // 줄바꿈 방지
+	color: ${props =>
+		props.invalid
+			? 'var(--ButtonColors-Caution-outline-defaultLine, #f85858)'
+			: 'var(--Form-border-focus, #5877fc)'};
+
+	/* Text/t4 */
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 1.2rem; /* 120% */
+	letter-spacing: 0.002rem;
+`;
+
+const S = { InputLabel, InputContainer, Input, InputErrorMessage };
 
 export default S;
