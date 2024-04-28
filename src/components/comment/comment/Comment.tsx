@@ -57,6 +57,15 @@ const Comment = ({
 		},
 	];
 
+	const optionListsOthers = [
+		{
+			title: '답글',
+			optionClickHandler: () => {
+				setReplyClicked(true);
+			},
+		},
+	];
+
 	const onChangeEdit = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(event.target.value);
 	};
@@ -146,7 +155,7 @@ const Comment = ({
 						)}
 					</section>
 				</article>
-				{isCommentWriter && showKebab && <KebabMenu options={optionLists} />}
+				{showKebab && <KebabMenu options={isCommentWriter ? optionLists : optionListsOthers} />}
 			</section>
 			<hr />
 			<section className='wrapper-replies'>
