@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import S from './NicknameSettingPage.styled';
-import { SIGN_UP_DATA } from '../SignUpData';
+import { SIGN_UP_DATA } from '../signUp/SignUpData';
 import { useNavigate } from 'react-router-dom';
-import { useNaverSignUp, useCheckDuplicateNickname, useDebounce } from '../../../../hooks';
+import { useNaverSignUp, useCheckDuplicateNickname, useDebounce } from '../../../hooks';
 import { useSetRecoilState } from 'recoil';
-import { userState } from '../../../../atom';
+import { userState } from '../../../atom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
+import { Input, PrimaryBtn } from '../../../components';
 
 interface FormValues {
 	nickname: string;
@@ -17,18 +18,15 @@ const NicknameSettingPage = () => {
 
 	const navigate = useNavigate();
 
-	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors, isDirty, isValid },
-		control,
-	} = useForm<FormValues>({ mode: 'onChange' });
+	const { register, handleSubmit, watch, formState, control } = useForm<FormValues>({
+		mode: 'onChange',
+	});
+	const { isDirty, isValid } = formState;
 
 	const setUserState = useSetRecoilState(userState);
 
 	const checkNaverSignUpInSuccess = () => {
-		navigate('/');
+		navigate('/signup/complete', { replace: true });
 		localStorage.removeItem('naverSignUpState');
 		localStorage.removeItem('submitEmailState');
 	};
@@ -44,16 +42,18 @@ const NicknameSettingPage = () => {
 
 	const nickname = useDebounce(watch('nickname'));
 	const authKeys = ['checkDuplicateNickname', nickname];
-
 	const { data } = useCheckDuplicateNickname(authKeys, isDirty && isValid);
 
 	const [duplicateNicknameValidation, setDuplicateNicknameValidation] = useState('');
+	const [duplicated, setDuplicated] = useState(false);
 
 	const checkDuplicateNickname = () => {
 		if (data && !data.isEnable) {
 			setDuplicateNicknameValidation(() => '이미 사용중인 닉네임입니다');
+			setDuplicated(true);
 		} else if (data?.isEnable) {
 			setDuplicateNicknameValidation(() => '사용가능한 닉네임입니다');
+			setDuplicated(false);
 		}
 	};
 
@@ -66,20 +66,23 @@ const NicknameSettingPage = () => {
 			</header>
 			<S.NicknameSettingPageForm onSubmit={handleSubmit(naverSignUpHandler)}>
 				{SIGN_UP_DATA.map(
-					({ name, validation, ...props }, index) =>
+					({ name, ...props }, index) =>
 						name === 'nickname' && (
-							<label className='account__label' key={index}>
-								<input className='account__input' {...register(name, validation)} {...props} />
-								<small className='account_input-validation'>
-									{errors[name]?.message}
-									{isValid && duplicateNicknameValidation}
-								</small>
-							</label>
+							<S.NicknameSettingPageContainer key={index}>
+								<Input
+									register={register}
+									formState={formState}
+									name={name}
+									{...props}
+									duplicated={duplicated}
+									duplicatedMessage={isValid ? duplicateNicknameValidation : ''}
+								/>
+							</S.NicknameSettingPageContainer>
 						)
 				)}
-				<S.NicknameSettingButton disabled={!isDirty || !isValid} type='submit' value='signUp'>
-					확인
-				</S.NicknameSettingButton>
+				<div>
+					<PrimaryBtn title='확인' type='submit' disabled={!isValid || duplicated} />
+				</div>
 			</S.NicknameSettingPageForm>
 			<DevTool control={control} />
 		</S.NicknameSettingPageLayout>

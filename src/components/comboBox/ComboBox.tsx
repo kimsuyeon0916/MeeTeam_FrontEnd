@@ -72,10 +72,11 @@ const ComboBox = <T extends FieldValues>({
 
 	useEffect(() => {
 		const handleOutsideClick = (e: MouseEvent) => {
+			clearInput();
 			const target = e.target as HTMLDivElement;
 			if (isOpen && inputRef.current && !inputRef.current.contains(target)) {
 				setIsOpen(false);
-				clearInput();
+				// clearInput();
 			}
 		};
 
@@ -89,7 +90,7 @@ const ComboBox = <T extends FieldValues>({
 	};
 
 	const handleOptionClick = (name: Path<T>, optionName: PathValue<T, Path<T>>, id?: string) => {
-		setValue(name, optionName);
+		setValue(name, optionName, { shouldDirty: true });
 		id && sessionStorage.setItem(name, id);
 		clickOption?.(name);
 		// setFocus?.(name);

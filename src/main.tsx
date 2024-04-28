@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import {
-	MainPage,
 	RecruitPage,
 	GalaryPage,
 	RecruitCreatePage,
@@ -11,7 +10,6 @@ import {
 	SignInPage,
 	SchoolCertificationPage,
 	NicknameSettingPage,
-	SignUpPage,
 	PassWordFindingPage,
 	ProfileDetailsPage,
 	ProfileEditPage,
@@ -21,6 +19,7 @@ import {
 	RecruitPostingBookmark,
 	RecruitPostingApply,
 	RecruitMyPostings,
+	CompleteSignUpPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -56,9 +55,9 @@ const router = createBrowserRouter([
 			{
 				path: 'signup',
 				children: [
-					{ path: '', element: <SignUpPage /> },
 					{ path: 'school?', element: <SchoolCertificationPage /> },
 					{ path: 'nickname', element: <NicknameSettingPage /> },
+					{ path: 'complete', element: <CompleteSignUpPage /> },
 				],
 			},
 			{

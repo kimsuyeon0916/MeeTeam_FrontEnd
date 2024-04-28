@@ -9,11 +9,6 @@ const SchoolCertificationPageForm = styled(Account.AccountForm)<{ $submitEmail?:
 	${props => props.$submitEmail && 'row-gap: 3.35rem; width: auto;'}
 `;
 
-const SchoolCertificationButton = styled(Account.AccountButton)`
-	width: 16.5rem;
-	margin: 0 auto;
-`;
-
 const SchoolCertificationMark = styled.div`
 	display: flex;
 	align-items: center;
@@ -43,7 +38,6 @@ const SchoolCertificationRow = styled.div`
 const S = {
 	SchoolCertificationLayout,
 	SchoolCertificationPageForm,
-	SchoolCertificationButton,
 	SchoolCertificationMark,
 	SchoolCertificationEmailDomain,
 	SchoolCertificationRow,

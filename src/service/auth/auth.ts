@@ -1,5 +1,5 @@
 import type { Department, SignUpPayload, University, UserReponse } from '../../types';
-import { EndPoint, axiosInstance } from '..';
+import { EndPoint, axiosAuthInstance, axiosInstance } from '..';
 
 const platformType = 'NAVER';
 
@@ -97,5 +97,13 @@ export const readDepartmentList = async (universityId: string) => {
 	} catch (error) {
 		console.error(error);
 		return null;
+	}
+};
+
+export const signOut = async () => {
+	try {
+		await axiosAuthInstance.post(EndPoint.SIGN_OUT);
+	} catch (error) {
+		console.error(error);
 	}
 };
