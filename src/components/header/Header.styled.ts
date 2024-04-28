@@ -82,7 +82,7 @@ const Header = styled.header<{ $isLogin: boolean }>`
 		display: flex;
 		justify-content: flex-end;
 		align-items: center;
-		width: 24.2rem;
+		/* width: 24.2rem; */
 		gap: 1.1rem;
 
 		.header__nickname {
