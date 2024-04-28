@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { DropdownArrow, Search, XBtn } from '../../../assets';
 import S from './InputRoleForm.styled';
-import { RoleForPost, InputState, Skill, Keyword } from '../../../types';
+import { RoleForPost, InputState, Keyword } from '../../../types';
 import { useDebounce } from '../../../hooks';
 import { getRoleKeyword, getSkillKeyword } from '../../../service';
 import { useRecoilState } from 'recoil';
@@ -240,7 +240,10 @@ const InputRoleForm = () => {
 					)}
 				</section>
 				<section className='inputs-bottom'>
-					<section className='container-skills'>
+					<section
+						className='container-skills'
+						onClick={() => setDropdown(prev => ({ ...prev, skill: true }))}
+					>
 						<input
 							type='text'
 							className='skills-input body1-medium'
@@ -248,7 +251,6 @@ const InputRoleForm = () => {
 							value={tagItem}
 							onChange={onChangeKeyword}
 							onKeyPress={onKeyPress}
-							onClick={() => setDropdown(prev => ({ ...prev, skill: true }))}
 						/>
 						<img src={Search} className='icon-search' />
 					</section>

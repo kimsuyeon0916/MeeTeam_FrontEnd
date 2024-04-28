@@ -111,7 +111,6 @@ export const validMessageState = atom({
 		content: '',
 		procedure: '',
 		recruitRole: '',
-		tag: '',
 		title: '',
 	},
 });
@@ -125,7 +124,6 @@ export const validState = atom({
 		isDeadline: false,
 		isEndDate: false,
 		isProcedure: false,
-		isTag: false,
 		isTitle: false,
 		isContent: false,
 		isRole: false,
@@ -168,7 +166,7 @@ export const recruitFilterState = atom<RecruitFilter>({
 	default: {
 		scope: null,
 		category: null,
-		field: 1,
+		field: null,
 		skill: [],
 		role: [],
 		tag: [],
@@ -201,4 +199,12 @@ export const openChatModalState = atom({
 export const toastState = atom({
 	key: 'toastState',
 	default: false,
+});
+
+export const needLoginModalState = atom({
+	key: 'needLoginModalState',
+	default: {
+		isOpen: false,
+		type: '',
+	},
 });

@@ -81,7 +81,6 @@ const RecruitCreatePage = () => {
 			validCheck.isDeadline &&
 			validCheck.isProcedure &&
 			validCheck.isScope &&
-			validCheck.isTag &&
 			validCheck.isContent &&
 			validCheck.isTitle;
 		const pageNum = formData.pageNum;

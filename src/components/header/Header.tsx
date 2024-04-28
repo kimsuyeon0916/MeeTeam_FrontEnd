@@ -3,19 +3,20 @@ import S from './Header.styled';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { DropdownArrow, Logo, LogoName } from '../../assets';
 import { ProfileImage, WaitModal } from '..';
-import { useLogin } from '../../hooks';
-import { useRecoilValue, useRecoilState } from 'recoil';
-import { userState, waitModalState } from '../../atom';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { recruitFilterState, userState, waitModalState } from '../../atom';
+import { useLogin, useSignOut } from '../../hooks';
 import { fixModalBackground } from '../../utils';
 
 const Header = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const location = useLocation();
-	const { isLoggedIn, logout } = useLogin();
-	const userInfo = useRecoilValue(userState);
+	const { isLoggedIn } = useLogin();
+	const [userInfo, setUserState] = useRecoilState(userState);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [openDrop, setOpenDrop] = useState<boolean>(false);
+	const setFilterState = useSetRecoilState(recruitFilterState);
 	const [isWait, setIsWait] = useRecoilState(waitModalState);
 	const [isHere, setIsHere] = useState({
 		recruit: false,
@@ -25,6 +26,17 @@ const Header = () => {
 
 	const goRecruit = () => {
 		navigate('/');
+		setFilterState({
+			scope: null,
+			category: null,
+			field: null,
+			skill: [],
+			role: [],
+			tag: [],
+			keyword: '',
+			course: null,
+			professor: null,
+		});
 	};
 	const goGalary = () => {
 		setIsWait(true);
@@ -39,11 +51,6 @@ const Header = () => {
 		} else {
 			setOpenDrop(prev => !prev);
 		}
-	};
-
-	const onClickLogout = () => {
-		logout();
-		setOpenDrop(false);
 	};
 
 	useEffect(() => {
@@ -72,11 +79,23 @@ const Header = () => {
 		fixModalBackground(isWait);
 	}, [isWait]);
 
+	// 로그아웃
+	const { mutate: signOut } = useSignOut({ setUserState });
+
+	const handleLogOutButtonClick = () => {
+		const confirm = window.confirm('로그아웃 하시겠습니까?');
+		if (confirm) {
+			signOut();
+			navigate('/');
+			setOpenDrop(false);
+		}
+	};
+
 	return (
 		<S.Header $isLogin={isLoggedIn}>
 			<div className='header'>
 				<section className='header-leftside'>
-					<div className='header__logo' onClick={() => navigate('/')}>
+					<div className='header__logo' onClick={goRecruit}>
 						<img className='logo' src={Logo} />
 						<img className='logo-name' src={LogoName} />
 						{isLoggedIn && <span className='university'>광운대학교</span>}
@@ -135,13 +154,22 @@ const Header = () => {
 										className='menu'
 										onClick={() => {
 											setOpenDrop(false);
+											navigate('/'); // 임시 설정
+										}}
+									>
+										포트폴리오
+									</div>
+									<div
+										className='menu'
+										onClick={() => {
+											setOpenDrop(false);
 											navigate('/management/bookmark');
 										}}
 									>
 										구인글 관리
 										<hr />
 									</div>
-									<div className='menu logout' onClick={onClickLogout}>
+									<div className='menu logout' onClick={handleLogOutButtonClick}>
 										로그아웃
 									</div>
 								</div>

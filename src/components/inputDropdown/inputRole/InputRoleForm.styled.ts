@@ -14,8 +14,6 @@ const InputRoleForm = styled.article<InputRoleForm>`
 	.txt-big {
 		color: #f7faff;
 		font-size: 1.6rem;
-		line-height: 1.9rem;
-		letter-spacing: 0.0032rem;
 	}
 
 	.txt4 {
@@ -293,9 +291,6 @@ const InputRoleForm = styled.article<InputRoleForm>`
 	}
 
 	.add-btn {
-		width: 4.2rem;
-		height: 4.2rem;
-
 		button {
 			display: flex;
 			width: 9.2rem;

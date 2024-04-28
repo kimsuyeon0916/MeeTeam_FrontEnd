@@ -7,6 +7,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { applicantFilter, recruitFilterState } from '../../atom';
 import { ManageRole, Keyword } from '../../types';
 import { DropdownArrowUp, DropdownArrow } from '../../assets';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 interface Dropdown {
 	data?: string[];
@@ -47,10 +48,12 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		course: '',
 		professor: '',
 	});
+	const location = useLocation();
 	const setApplicantFilter = useSetRecoilState(applicantFilter);
 	const keywordCourse = useDebounce(name.course, 500);
 	const keywordProfessor = useDebounce(name.professor, 500);
 	const [filterState, setFilterState] = useRecoilState(recruitFilterState);
+	const [searchParams, setSearchParams] = useSearchParams();
 
 	const { data: dataCourse, isLoading: isLoadingCourse } = useQuery({
 		queryKey: ['searchCourse', keywordCourse],
@@ -60,6 +63,10 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		queryKey: ['searchProfessor', keywordProfessor],
 		queryFn: () => getProfessorKeyword(keywordProfessor),
 	});
+
+	const getKeyByValue = (obj: keyObj, value: number) => {
+		return Object.keys(obj).find(key => obj[key] === value);
+	};
 
 	const onClickDropdown = () => {
 		if (scope) {
@@ -77,6 +84,12 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 			setApplicantFilter(id);
 		} else {
 			setFilterState(prev => ({ ...prev, category: categoryObj[innerText] }));
+			if (innerText === '전체') {
+				searchParams.delete('category');
+				setSearchParams(searchParams);
+				setShowDropdown(false);
+				return;
+			}
 		}
 		setShowDropdown(false);
 	};
@@ -89,6 +102,11 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		if (value !== '교내') {
 			setShowDropdown(false);
 		}
+		// if (value === '전체 보기') {
+		// 	searchParams.delete('scope');
+		// 	setSearchParams(searchParams);
+		// 	return;
+		// }
 	};
 
 	const onClickCheckbox = () => {
@@ -139,19 +157,38 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		};
 	}, [dropdownRef.current, showDropdown, dropdown.course, dropdown.professor]);
 
-	useEffect(() => {
-		if (scope && filterState.scope === null) {
-			setCurrentValue('범위');
-		} else if (!scope && filterState.category === null && initialData !== '역할') {
-			setCurrentValue('유형');
-		}
-	}, [filterState.scope, filterState.category]);
+	// useEffect(() => {
+	// 	setCurrentValue(initialData);
+	// }, [location]);
+
+	// useEffect(() => {
+	// 	if (scope && filterState.scope) {
+	// 		searchParams.set('scope', filterState.scope.toString());
+	// 	} else if (category && filterState.category) {
+	// 		searchParams.set('category', filterState.category.toString());
+	// 	} else if (filterState.category === null) {
+	// 		searchParams.delete('category');
+	// 	}
+	// 	setSearchParams(searchParams);
+	// }, [filterState.scope, filterState.category]);
 
 	return (
 		<S.Dropdown $showDropdown={showDropdown} $scope={scope} $isCheck={isChecked} ref={dropdownRef}>
 			<article className='wrapper' onClick={onClickDropdown}>
 				<div className='dropdown-box'>
-					<div className='value'>{currentValue}</div>
+					{scope && (
+						<div className='value'>
+							{filterState.scope ? getKeyByValue(scopeObj, filterState.scope) : currentValue}
+						</div>
+					)}
+					{category && (
+						<div className='value'>
+							{filterState.category
+								? getKeyByValue(categoryObj, filterState.category)
+								: currentValue}
+						</div>
+					)}
+					{applicant && <div className='value'>{currentValue}</div>}
 					<img src={showDropdown ? DropdownArrowUp : DropdownArrow} />
 				</div>
 				{showDropdown && (

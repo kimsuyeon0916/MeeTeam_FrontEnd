@@ -6,8 +6,8 @@ const CommentInput = styled.div`
 	box-sizing: border-box;
 	margin: 0 auto;
 	border-radius: 0.75rem;
-	border: 0.075rem solid var(--box_stroke, #e3e3e3);
-	background: var(--Grayscale-200, #f6f6f6);
+	border: 0.075rem solid #e3e3e3;
+	background: #f6f6f6;
 
 	.wrapper {
 		display: flex;
@@ -15,9 +15,6 @@ const CommentInput = styled.div`
 		flex-direction: column;
 
 		.container-user__icon {
-			width: 3.15rem;
-			height: 3.15rem;
-			flex-shrink: 0;
 			display: flex;
 			align-items: center;
 			gap: 0.6rem;

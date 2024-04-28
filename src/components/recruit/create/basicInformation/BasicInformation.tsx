@@ -19,6 +19,12 @@ const BasicInformation = () => {
 		setFormData(prev => ({ ...prev, title: event.target.value }));
 	};
 
+	const onKeyDown = (event: React.KeyboardEvent) => {
+		if (event.key === 'Enter') {
+			event.preventDefault();
+		}
+	};
+
 	return (
 		<S.BasicInformation $isTitled={formData.title}>
 			<section className='container-basic'>
@@ -35,7 +41,8 @@ const BasicInformation = () => {
 							placeholder='40자 이내로 제목을 작성해주세요.'
 							value={formData.title}
 							onChange={onChangeTitle}
-							maxLength={20}
+							maxLength={40}
+							onKeyDown={onKeyDown}
 						/>
 						{isValid.isSubmitted && !isValid.isTitle && (
 							<p className='valid-msg'>{validMessage.title}</p>

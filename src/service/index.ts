@@ -7,6 +7,7 @@ import {
 	checkDuplicateNickname,
 	readUniversityList,
 	readDepartmentList,
+	signOut,
 } from './auth/auth';
 import {
 	getPostingData,
@@ -40,6 +41,7 @@ export {
 	checkDuplicateNickname,
 	readUniversityList,
 	readDepartmentList,
+	signOut,
 	readProfile,
 	updateProfile,
 	readSkillList,

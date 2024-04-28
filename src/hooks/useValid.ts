@@ -64,15 +64,6 @@ export default function useValid(data: InputState) {
 	}, [data.scope, data.courseTag]);
 
 	useEffect(() => {
-		if (data.tags.length === 0) {
-			setValidMessage(prev => ({ ...prev, tag: '태그를 하나 이상 선택해주세요.' }));
-		} else {
-			setValidMessage({ ...validMessage, tag: '' });
-		}
-		setIsValid({ ...isValid, isTag: data.tags.length !== 0 ? true : false });
-	}, [data.tags.length]);
-
-	useEffect(() => {
 		if (data.title === '') {
 			setValidMessage(prev => ({ ...prev, title: '제목을 입력해주세요.' }));
 		} else if (data.title.length < 10) {

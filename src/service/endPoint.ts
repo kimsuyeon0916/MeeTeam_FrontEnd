@@ -11,6 +11,7 @@ export const EndPoint = {
 		readUniversityList: '/university',
 		readDepartmentList: '/department',
 	},
+	SIGN_OUT: '/auth/logout',
 
 	/* profile */
 	PROFILE: {
