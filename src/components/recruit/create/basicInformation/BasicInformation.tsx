@@ -19,6 +19,12 @@ const BasicInformation = () => {
 		setFormData(prev => ({ ...prev, title: event.target.value }));
 	};
 
+	const onKeyDown = (event: React.KeyboardEvent) => {
+		if (event.key === 'Enter') {
+			event.preventDefault();
+		}
+	};
+
 	return (
 		<S.BasicInformation $isTitled={formData.title}>
 			<section className='container-basic'>
@@ -36,6 +42,7 @@ const BasicInformation = () => {
 							value={formData.title}
 							onChange={onChangeTitle}
 							maxLength={40}
+							onKeyDown={onKeyDown}
 						/>
 						{isValid.isSubmitted && !isValid.isTitle && (
 							<p className='valid-msg'>{validMessage.title}</p>

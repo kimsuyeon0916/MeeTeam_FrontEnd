@@ -240,7 +240,10 @@ const InputRoleForm = () => {
 					)}
 				</section>
 				<section className='inputs-bottom'>
-					<section className='container-skills'>
+					<section
+						className='container-skills'
+						onClick={() => setDropdown(prev => ({ ...prev, skill: true }))}
+					>
 						<input
 							type='text'
 							className='skills-input body1-medium'
@@ -248,7 +251,6 @@ const InputRoleForm = () => {
 							value={tagItem}
 							onChange={onChangeKeyword}
 							onKeyPress={onKeyPress}
-							onClick={() => setDropdown(prev => ({ ...prev, skill: true }))}
 						/>
 						<img src={Search} className='icon-search' />
 					</section>
