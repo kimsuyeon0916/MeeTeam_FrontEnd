@@ -1,9 +1,5 @@
 import JSZip from 'jszip';
-
-interface BlobFile {
-	fileName?: string;
-	blob?: Blob;
-}
+import { BlobFile } from '../types';
 
 const unzipFile = async (zipFileUrl: string) => {
 	const extractedFiles: BlobFile[] = []; // 압축 해제된 파일들을 저장할 배열
