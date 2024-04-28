@@ -175,7 +175,7 @@ const RecruitPage = () => {
 		return () => {
 			document.removeEventListener('mousedown', outsideClick);
 		};
-	}, [fieldRef.current, isFieldOpen]);
+	}, [dropdownRef.current, isOpen, fieldRef.current, isFieldOpen]);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);

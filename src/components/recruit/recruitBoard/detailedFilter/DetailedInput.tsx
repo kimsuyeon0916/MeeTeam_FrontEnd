@@ -48,8 +48,6 @@ const DetailedInput = ({ type }: DetailedInfo) => {
 		queryFn: () => getTagKeyword(keyword),
 	});
 
-	console.log(detailedFilter);
-
 	const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setTagItem(event.target.value);
 	};
