@@ -26,12 +26,16 @@ const START_PAGE_NUM = 1;
 const RecruitPage = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
+	const fieldRef = useRef<HTMLDivElement | null>(null);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [searchKeyword, setSearchKeyword] = useState<string>('');
 	const [isFloatingOpen, setIsFloatingOpen] = useState<boolean>(false);
 	const [fieldValue, setFieldValue] = useState({
 		applied: false,
-		value: '분야를 선택해주세요',
+		value: {
+			id: null as number | null,
+			value: '분야를 선택해주세요',
+		},
 	});
 	const [page, setPage] = useState<number>(START_PAGE_NUM);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -53,18 +57,22 @@ const RecruitPage = () => {
 		queryFn: () => getPostList({ filterState, isLoggedIn, page }),
 	});
 
-	const onClickDetailed = () => {
+	const onClickDetailed = (event: React.MouseEvent) => {
+		event.stopPropagation();
 		setIsOpen(prev => !prev);
 	};
 
 	const onClickField = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const { innerText } = event.target as HTMLElement;
-		setFieldValue(prev => ({ ...prev, value: innerText }));
-		setFilterState(prev => ({ ...prev, field: Number(event.currentTarget.id) }));
+		setFieldValue({
+			applied: false,
+			value: { id: Number(event.currentTarget.id), value: innerText },
+		});
 	};
 
 	const submitField = () => {
 		setFieldValue(prev => ({ ...prev, applied: true }));
+		setFilterState(prev => ({ ...prev, field: fieldValue.value.id }));
 		setIsFieldOpen(false);
 	};
 
@@ -113,7 +121,7 @@ const RecruitPage = () => {
 
 	const onClickClearField = () => {
 		setFilterState(prev => ({ ...prev, field: null }));
-		setFieldValue({ applied: false, value: '분야를 선택해주세요' });
+		setFieldValue({ applied: false, value: { id: null, value: '분야를 선택해주세요' } });
 	};
 
 	const onClickDeleteKeyword = () => {
@@ -149,37 +157,42 @@ const RecruitPage = () => {
 		}
 	};
 
+	const handlerChildDropdown = (event: React.MouseEvent<HTMLDivElement>) => {
+		event.stopPropagation();
+	};
+
 	useEffect(() => {
 		const outsideClick = (event: MouseEvent) => {
 			const { target } = event;
 			if (isOpen && dropdownRef.current && !dropdownRef.current.contains(target as Node)) {
 				setIsOpen(false);
 			}
+			if (isFieldOpen && fieldRef.current && !fieldRef.current.contains(target as Node)) {
+				setIsFieldOpen(false);
+			}
 		};
 		document.addEventListener('mousedown', outsideClick);
 		return () => {
 			document.removeEventListener('mousedown', outsideClick);
 		};
-	}, [dropdownRef.current, isOpen]);
+	}, [fieldRef.current, isFieldOpen]);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [page]);
 
-	console.log(location);
-
 	return (
 		<S.RecruitPage
-			$isFieldClick={fieldValue.value !== '분야를 선택해주세요'}
+			$isFieldClick={fieldValue.value.value !== '분야를 선택해주세요'}
 			$isDetailedClick={isOpen}
 		>
 			<>
 				<section>
-					<section className='wrapper-title'>
+					<section className='wrapper-title' ref={fieldRef}>
 						<h2>분야 전체</h2>
 						<div className='sep'> | </div>
 						<div className='container-field' onClick={() => setIsFieldOpen(prev => !prev)}>
-							<h3>{fieldValue.applied ? fieldValue.value : '분야를 선택해주세요'}</h3>
+							<h3>{fieldValue.applied ? fieldValue.value.value : '분야를 선택해주세요'}</h3>
 							<img src={DropdownArrow} />
 						</div>
 						{isFieldOpen && (
@@ -217,7 +230,7 @@ const RecruitPage = () => {
 									<img src={isOpen ? DropdownArrowUp : DropdownArrow} />
 								</section>
 								{isOpen && (
-									<section className='container-dropdown'>
+									<section className='container-dropdown' onClick={handlerChildDropdown}>
 										<section className='sidebar'>
 											<span
 												className={`body1 sidebar-elem ${isOpenDetail.skill ? 'active' : ''}`}
