@@ -7,7 +7,7 @@ import type { JsxElementComponentProps, stringSignature } from './indexSigniture
 import type { User, Contact, Skill, Award, Link } from './user';
 import type { Search } from './search';
 import type { Portfolio, PortfolioDetails } from './portfolio';
-import type { Image } from './image';
+import type { Image, BlobFile } from './image';
 
 export type {
 	SignUpPayload,
@@ -37,4 +37,5 @@ export type {
 	Image,
 	PortfolioPayload,
 	ImageResponse,
+	BlobFile,
 };
