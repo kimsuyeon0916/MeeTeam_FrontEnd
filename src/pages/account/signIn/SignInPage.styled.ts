@@ -27,7 +27,7 @@ const SignInPageLayout = styled(Account.AccountLayout)<{ $callBack?: boolean }>`
 	.sign_in__horizon {
 		all: unset;
 		display: flex;
-		width: 12.539rem;
+		width: 12.52rem;
 		height: 0.15rem;
 		background: #d9d9d9;
 	}
