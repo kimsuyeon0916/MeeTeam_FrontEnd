@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import S from './PortfolioDetails.styled';
 import {
 	DefaultBtn,
@@ -9,7 +9,7 @@ import {
 } from '../../../components';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useReadPortfolio } from '../../../hooks';
-import { Image } from '../../../types';
+import { Image, BlobFile } from '../../../types';
 import { unzipFile } from '../../../utils';
 import { useRecoilState } from 'recoil';
 import { uploadImageListState } from '../../../atom';
@@ -21,38 +21,53 @@ const PortfolioDetailsPage = () => {
 	const navigate = useNavigate();
 
 	const [uploadImageList, setUploadImageList] = useRecoilState(uploadImageListState); // 추후에 받아온 정보 reduce로 조합해서 초기화
-	const [extractedImageList, setExtractedImageList] = useState<Image[]>([]);
 
-	useEffect(() => {
-		if (extractedImageList && portfolio?.fileOrder) {
-			const reorderedImageList: Image[] = [];
-			for (let i = 0; i < portfolio?.fileOrder.length; i++) {
-				const reorderedImage = extractedImageList.find(
-					(extractedImage: Image) => extractedImage.fileName === portfolio?.fileOrder[i]
-				) as Image;
-				reorderedImageList.push(reorderedImage);
+	const extractPromise = (imageList: BlobFile[]) =>
+		new Promise<Image[]>(resolve => {
+			let extractedImageList: Image[] = [];
+			for (let i = 0; i < imageList.length; i++) {
+				const urlReader = new FileReader();
+				urlReader.readAsDataURL(imageList[i].blob as Blob);
+				urlReader.onload = () => {
+					const extractedImage = {
+						fileName: imageList[i].fileName,
+						url: urlReader.result,
+						file: imageList[i].blob,
+					} as Image;
+					extractedImageList = [...extractedImageList, extractedImage];
+					if (i === imageList.length - 1) {
+						resolve(extractedImageList);
+					}
+				};
 			}
-			setUploadImageList(reorderedImageList);
-		}
-	}, [extractedImageList]);
+		});
+
+	const reorderPromise = (extractedImageList: Image[]) =>
+		new Promise<BlobFile[]>(() => {
+			if (portfolio?.fileOrder) {
+				let reorderedImageList: Image[] = [];
+				for (let i = 0; i < portfolio?.fileOrder.length; i++) {
+					const reorderedImage = extractedImageList.find(
+						extractedImage => extractedImage.fileName === portfolio?.fileOrder[i]
+					) as Image;
+					reorderedImageList = [...reorderedImageList, reorderedImage];
+					if (i === portfolio?.fileOrder.length - 1) {
+						setUploadImageList(reorderedImageList);
+					}
+				}
+			}
+		});
 
 	useEffect(() => {
 		if (portfolio?.zipFileUrl && portfolio?.fileOrder) {
 			// 이미지 리사이징 추후 적용
-			unzipFile(portfolio?.zipFileUrl).then(imageList => {
-				for (let i = 0; i < imageList.length; i++) {
-					const urlReader = new FileReader();
-					urlReader.readAsDataURL(imageList[i].blob as Blob);
-					urlReader.onload = () => {
-						const extractedImage = {
-							fileName: imageList[i].fileName,
-							url: urlReader.result,
-							file: imageList[i].blob,
-						} as Image;
-						setExtractedImageList((prev: Image[]) => [...prev, extractedImage]);
-					};
-				}
-			});
+			unzipFile(portfolio?.zipFileUrl)
+				.then(imageList => {
+					return extractPromise(imageList);
+				})
+				.then(extractedImageList => {
+					return reorderPromise(extractedImageList);
+				});
 		}
 	}, [portfolio?.zipFileUrl]);
 

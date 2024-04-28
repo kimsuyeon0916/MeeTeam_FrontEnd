@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import S from './PortfolioImageUpload.styled';
 import { Plus } from '../../../../assets';
 import { useRecoilState } from 'recoil';
 import { uploadImageListState } from '../../../../atom';
 import { PortfolioCard } from '../../..';
-import { Image } from '../../../../types';
+import { BlobFile, Image } from '../../../../types';
 import { unzipFile } from '../../../../utils';
 
 const MAX_IMAGE_SIZE_BYTES = 30 * 1024 * 1024; // 30MB
@@ -21,39 +21,54 @@ const PortfolioImageUpload = ({ zipFileUrl, fileOrder }: PortfolioImage) => {
 		inputRef.current?.click();
 	};
 
-	const [uploadImageList, setUploadImageList] = useRecoilState(uploadImageListState); // 추후에 받아온 정보 reduce로 조합해서 초기화
-	const [extractedImageList, setExtractedImageList] = useState<Image[]>([]);
+	const [uploadImageList, setUploadImageList] = useRecoilState(uploadImageListState);
 
-	useEffect(() => {
-		if (fileOrder) {
-			const reorderedImageList: Image[] = [];
-			for (let i = 0; i < fileOrder.length; i++) {
-				const reorderedImage = extractedImageList.find(
-					extractedImage => extractedImage.fileName === fileOrder[i]
-				) as Image;
-				reorderedImageList.push(reorderedImage);
+	const extractPromise = (imageList: BlobFile[]) =>
+		new Promise<Image[]>(resolve => {
+			let extractedImageList: Image[] = [];
+			for (let i = 0; i < imageList.length; i++) {
+				const urlReader = new FileReader();
+				urlReader.readAsDataURL(imageList[i].blob as Blob);
+				urlReader.onload = () => {
+					const extractedImage = {
+						fileName: imageList[i].fileName,
+						url: urlReader.result,
+						file: imageList[i].blob,
+					} as Image;
+					extractedImageList = [...extractedImageList, extractedImage];
+					if (i === imageList.length - 1) {
+						resolve(extractedImageList);
+					}
+				};
 			}
-			setUploadImageList(reorderedImageList);
-		}
-	}, [extractedImageList]);
+		});
+
+	const reorderPromise = (extractedImageList: Image[]) =>
+		new Promise<BlobFile[]>(() => {
+			if (fileOrder) {
+				let reorderedImageList: Image[] = [];
+				for (let i = 0; i < fileOrder.length; i++) {
+					const reorderedImage = extractedImageList.find(
+						extractedImage => extractedImage.fileName === fileOrder[i]
+					) as Image;
+					reorderedImageList = [...reorderedImageList, reorderedImage];
+					if (i === fileOrder.length - 1) {
+						setUploadImageList(reorderedImageList);
+					}
+				}
+			}
+		});
 
 	useEffect(() => {
 		if (zipFileUrl && fileOrder) {
 			// 이미지 리사이징 추후 적용
-			unzipFile(zipFileUrl).then(imageList => {
-				for (let i = 0; i < imageList.length; i++) {
-					const urlReader = new FileReader();
-					urlReader.readAsDataURL(imageList[i].blob as Blob);
-					urlReader.onload = () => {
-						const extractedImage = {
-							fileName: imageList[i].fileName,
-							url: urlReader.result,
-							file: imageList[i].blob,
-						} as Image;
-						setExtractedImageList(prev => [...prev, extractedImage]);
-					};
-				}
-			});
+			unzipFile(zipFileUrl)
+				.then(imageList => {
+					return extractPromise(imageList);
+				})
+				.then(extractedImageList => {
+					return reorderPromise(extractedImageList);
+				});
 		}
 	}, [zipFileUrl]);
 
