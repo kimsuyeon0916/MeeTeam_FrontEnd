@@ -54,7 +54,7 @@ const ApplierManagePage = () => {
 		queryKey: ['recruitManageInfo'],
 		queryFn: () => getRecruitInfo(pageNum),
 	});
-	console.log(recruitManageInfo);
+
 	const isChecked =
 		checkList && recruitManageInfo && checkList.length !== 0 && recruitManageInfo.link !== null;
 
