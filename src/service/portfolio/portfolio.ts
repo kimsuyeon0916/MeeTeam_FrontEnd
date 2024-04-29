@@ -38,3 +38,28 @@ export const readInfinitePortfolioList = async ({
 		return null;
 	}
 };
+
+export const readPaginationPortfolioList = async ({
+	size,
+	pageParam,
+}: {
+	size: number;
+	pageParam: number;
+}) => {
+	try {
+		const response = await axiosAuthInstance.get<PortfolioListResponse>(
+			EndPoint.PORTFOLIO.readPortfolioList,
+			{
+				params: {
+					size: size,
+					page: pageParam,
+				},
+			}
+		);
+
+		return response;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+};

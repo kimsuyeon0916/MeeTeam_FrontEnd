@@ -18,7 +18,11 @@ import {
 } from './recruit/detail';
 import { readProfile, updateProfile } from './user/Profile';
 import { readSkillList, readRoleList } from './search/search';
-import { readPortfolio, readInfinitePortfolioList } from './portfolio/portfolio';
+import {
+	readPortfolio,
+	readInfinitePortfolioList,
+	readPaginationPortfolioList,
+} from './portfolio/portfolio';
 import {
 	postingRecruit,
 	getRoleKeyword,
@@ -48,6 +52,7 @@ export {
 	readRoleList,
 	readPortfolio,
 	readInfinitePortfolioList,
+	readPaginationPortfolioList,
 	getPostingData,
 	getApplyData,
 	applyRole,
