@@ -31,7 +31,7 @@ import {
 	useIntersection,
 } from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
-import { useReadPortfolioList } from '../../../hooks/usePortfolio';
+import { useReadInfinitePortfolioList } from '../../../hooks/usePortfolio';
 
 interface FormValues {
 	nickname?: string;
@@ -218,7 +218,7 @@ const ProfileEditPage = () => {
 		hasNextPage,
 		isFetching,
 		isSuccess: isPortfolioSuccess,
-	} = useReadPortfolioList(12);
+	} = useReadInfinitePortfolioList(12);
 	const portfolioList = useMemo(
 		() => (data ? data.pages.flatMap(response => response?.portfolios) : []),
 		[data]
