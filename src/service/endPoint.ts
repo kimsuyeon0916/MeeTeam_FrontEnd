@@ -29,6 +29,7 @@ export const EndPoint = {
 	/* portfolio */
 	PORTFOLIO: {
 		read: (portfolioId: string) => `/portfolio/${portfolioId}`,
+		readPortfolioList: '/portfolio',
 	},
 
 	/* recruit */
