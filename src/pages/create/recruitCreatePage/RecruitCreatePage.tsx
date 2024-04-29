@@ -57,7 +57,7 @@ const RecruitCreatePage = () => {
 		setFormData({
 			scope: '',
 			category: '',
-			fieldId: null,
+			fieldId: 1,
 			deadline: simpleDate(new Date()),
 			proceedType: '',
 			proceedingStart: simpleDate(new Date()),
@@ -95,17 +95,26 @@ const RecruitCreatePage = () => {
 		}
 
 		if (postAvailable && location.pathname.includes('recruitment/postings')) {
-			uploadPost.mutate(formData);
+			uploadPost.mutate(formData, {
+				onSuccess: () => resetFormData(),
+			});
 		}
 
 		if (postAvailable && location.pathname.includes('edit') && pageNum) {
-			editPost.mutate({ pageNum, formData });
+			editPost.mutate(
+				{ pageNum, formData },
+				{
+					onSuccess: () => resetFormData(),
+				}
+			);
 		}
 	};
 
 	useEffect(() => {
 		fixModalBackground(beforeSubmit);
 	}, [beforeSubmit]);
+
+	console.log(formData);
 
 	return (
 		<S.RecruitCreatePage>
