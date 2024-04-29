@@ -114,8 +114,6 @@ const RecruitCreatePage = () => {
 		fixModalBackground(beforeSubmit);
 	}, [beforeSubmit]);
 
-	console.log(formData);
-
 	return (
 		<S.RecruitCreatePage>
 			<form onSubmit={handleSubmit}>

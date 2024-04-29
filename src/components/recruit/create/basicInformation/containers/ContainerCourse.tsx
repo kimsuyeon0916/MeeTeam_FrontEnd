@@ -114,7 +114,7 @@ const ContainerCourse = () => {
 						<section className='dropdown'>
 							{!isLoadingCourse &&
 								dataCourse?.map((keyword: any) => (
-									<span key={keyword.id} onClick={onClickCourse}>
+									<span key={keyword.id} onClick={onClickCourse} className='option'>
 										{keyword.name}
 									</span>
 								))}
@@ -135,7 +135,7 @@ const ContainerCourse = () => {
 						<section className='dropdown'>
 							{!isLoadingProfessor &&
 								dataProfessor?.map((keyword: any) => (
-									<span key={keyword.id} onClick={onClickProfessor}>
+									<span key={keyword.id} onClick={onClickProfessor} className='option'>
 										{keyword.name}
 									</span>
 								))}
