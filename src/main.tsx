@@ -20,6 +20,7 @@ import {
 	RecruitPostingApply,
 	RecruitMyPostings,
 	CompleteSignUpPage,
+	PortfolioManagementPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
 			{
 				path: 'portfolio/:portfolioId?',
 				element: <PortfolioDetailsPage />,
+			},
+			{
+				path: 'portfolio/management',
+				element: <PortfolioManagementPage />,
 			},
 		],
 	},
