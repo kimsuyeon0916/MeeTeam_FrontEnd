@@ -140,6 +140,7 @@ import ApplyRole from './recruit/role/ApplyRole';
 import OpenChatModal from './recruit/applicants/modal/OpenChatModal';
 import Toast from './recruit/applicants/toast/Toast';
 import NeedLogin from './recruit/recruitDetail/modal/needLogin/NeedLogin';
+import TabMenu from './tabMenu/TabMenu';
 
 export {
 	Header,
@@ -275,4 +276,5 @@ export {
 	OpenChatModal,
 	Toast,
 	NeedLogin,
+	TabMenu,
 };
