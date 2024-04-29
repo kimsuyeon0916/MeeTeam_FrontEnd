@@ -55,7 +55,8 @@ const ApplierManagePage = () => {
 		queryFn: () => getRecruitInfo(pageNum),
 	});
 
-	const isChecked = checkList.length !== 0 && recruitManageInfo?.link.length !== 0;
+	const isChecked =
+		checkList && recruitManageInfo && checkList.length !== 0 && recruitManageInfo.link !== null;
 
 	const approved = useMutation({
 		mutationFn: ({ pageNum, applicantIds }: ApplicantsList) =>
