@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { cancelApply } from '../../../../service';
 import { useBookmark, useLogin } from '../../../../hooks';
 import { useDelBookmark } from '../../../../hooks/useBookMark';
+import { NeedLogin } from '../../../index';
 
 interface ApplierData {
 	deadline: string;
@@ -33,7 +34,11 @@ const ApplierFooter = ({ deadline, isApplied, isBookmarked }: ApplierData) => {
 	const setIsCancel = useSetRecoilState(applyCancelModalState);
 
 	const onClickApply = () => {
-		setIsModal(true);
+		if (isLoggedIn) {
+			setIsModal(true);
+		} else {
+			setNeedLoginModal({ isOpen: true, type: 'RECRUIT_APPLY' });
+		}
 	};
 
 	const onClickCancel = () => {

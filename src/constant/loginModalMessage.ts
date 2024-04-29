@@ -17,4 +17,8 @@ export const NEEDLOGINTYPE: {
 		TITLE: '꿈을 펼쳐보세요!',
 		MESSAGE: '나만의 개성이 담긴 \n포트폴리오를 등록해보세요!',
 	},
+	RECRUIT_APPLY: {
+		TITLE: '구인글에 신청해보세요!',
+		MESSAGE: '관심있는 구인글에 신청해보세요!',
+	},
 };
