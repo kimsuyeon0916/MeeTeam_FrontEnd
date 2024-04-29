@@ -57,7 +57,7 @@ const ApplyModal = () => {
 	}, [data]);
 
 	return (
-		<S.Modal $isChecked={isValid}>
+		<S.Modal $isChecked={isValid} $isValue={value !== '신청 역할을 선택해주세요.'}>
 			<article>
 				<h1>신청 정보</h1>
 				<section className='description'>
@@ -65,9 +65,9 @@ const ApplyModal = () => {
 					<span className='description-subinfo'>
 						정보 공개 동의 시, 내 정보가 멤버들에게 보이며 팀매칭에 유리해집니다.
 					</span>
-					<article className='agreement'>
-						<input type='checkbox' onClick={onClickCheckbox} />
-						<span>개인정보 열람 동의</span>
+					<article className='agreement' onClick={onClickCheckbox}>
+						<input type='checkbox' id='agree' onChange={onClickCheckbox} />
+						<label htmlFor='agree'>개인정보 열람 동의</label>
 					</article>
 				</section>
 			</article>
@@ -106,7 +106,7 @@ const ApplyModal = () => {
 			</article>
 			<article className='container-role'>
 				<article className='container-select__box' onClick={() => setIsOpen(prev => !prev)}>
-					<span>{value}</span>
+					<span className='value'>{value}</span>
 					{isOpen && (
 						<ul>
 							{data?.recruitmentRoles.map(role => (
