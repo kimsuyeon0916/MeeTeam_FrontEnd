@@ -14,7 +14,7 @@ export const readPortfolio = async (portfolioId: string) => {
 	}
 };
 
-export const readPortfolioList = async ({
+export const readInfinitePortfolioList = async ({
 	size,
 	pageParam,
 }: {
