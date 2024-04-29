@@ -11,7 +11,11 @@ import { useReadProfile, useUpdateProfile } from './useProfile';
 import useDebounce from './useDebounce';
 import useValid from './useValid';
 import { useReadSkillList, useReadRoleList } from './useSearch';
-import { useReadPortfolio, useReadInfinitePortfolioList } from './usePortfolio';
+import {
+	useReadPortfolio,
+	useReadInfinitePortfolioList,
+	usePaginationPortfolioList,
+} from './usePortfolio';
 import useIntersection from './useIntersection';
 import { useBookmark } from './useBookMark';
 import useLogin from './useLogin';
@@ -33,6 +37,7 @@ export {
 	useReadRoleList,
 	useReadPortfolio,
 	useReadInfinitePortfolioList,
+	usePaginationPortfolioList,
 	useIntersection,
 	useBookmark,
 	useLogin,

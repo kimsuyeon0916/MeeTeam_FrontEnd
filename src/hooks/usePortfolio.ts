@@ -1,9 +1,10 @@
-import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
-import { readPortfolio, readInfinitePortfolioList } from '../service';
+import { useQuery, useInfiniteQuery, keepPreviousData } from '@tanstack/react-query';
+import { readPortfolio, readInfinitePortfolioList, readPaginationPortfolioList } from '../service';
 
 const portfolioKeys = {
 	readPortfolio: (portfolioId: string) => ['readPortfolio', portfolioId],
 	readInfinitePortfolioList: (size: number) => ['readInfinitePortfolioList', size],
+	readPaginationPortfolioList: (size: number) => ['readPaginationPortfolioList', size],
 };
 
 /**
@@ -29,5 +30,16 @@ export const useReadInfinitePortfolioList = (size: number) => {
 				return lastPage?.pageInfo.page + 1;
 			} else return undefined;
 		},
+	});
+};
+
+/**
+ * @description 포트폴리오 목록 페이지네이션 조회 API를 호출하는 hook입니다.
+ */
+export const usePaginationPortfolioList = (size: number, pageParam: number) => {
+	return useQuery({
+		queryKey: portfolioKeys.readPaginationPortfolioList(size),
+		queryFn: () => readPaginationPortfolioList({ size, pageParam }),
+		placeholderData: keepPreviousData,
 	});
 };
