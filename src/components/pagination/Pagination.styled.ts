@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Pagination = styled.article`
-	margin-top: 12rem;
+	margin: 12rem auto;
 	margin-bottom: 22rem;
 	button {
 		background-color: transparent;
