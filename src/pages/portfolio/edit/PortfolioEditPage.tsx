@@ -107,8 +107,8 @@ const PortfolioEditPage = () => {
 			mainImageFileName: imageResponse?.[1].fileName,
 			zipFileName: imageResponse?.[0].fileName,
 			fileOrder: uploadImageList.map(image => image.fileName),
-			field: sessionStorage.field,
-			role: sessionStorage.role,
+			field: fields?.find(field => field.name === getValues('field'))?.id,
+			role: roles?.find(role => role.name === getValues('role'))?.id,
 			proceedType: proceedType,
 			skills: skillList.map(skill => skill.id),
 		} as PortfolioPayload;
@@ -129,7 +129,7 @@ const PortfolioEditPage = () => {
 
 	useEffect(() => {
 		if (isSuccessReadUrl && imageResponse) {
-			zipFile(uploadImageList).then(blob => {
+			zipFile(uploadImageList).then((blob: Blob) => {
 				const imageListZipFile = new File([blob], imageResponse[0].fileName, {
 					type: 'application/zip',
 				});
@@ -158,8 +158,8 @@ const PortfolioEditPage = () => {
 					// 추후, 수정 시 수정 여부 boolean 값 추가
 					...data,
 					fileOrder: uploadImageList.map(image => image.fileName),
-					field: sessionStorage.field,
-					role: sessionStorage.role,
+					field: fields?.find(field => field.name === getValues('field'))?.id,
+					role: roles?.find(role => role.name === getValues('role'))?.id,
 					proceedType: proceedType,
 					skills: skillList.map(skill => skill.id),
 				} as PortfolioPayload,
@@ -194,7 +194,10 @@ const PortfolioEditPage = () => {
 	const [skillList, setSkillList] = useState(portfolio?.skills ? portfolio?.skills : []);
 
 	const addSkill = () => {
-		const newSkill = { id: sessionStorage.skills, name: getValues('skills') } as Skill;
+		const newSkill = {
+			id: skills?.find(skill => skill.name === getValues('skills'))?.id,
+			name: getValues('skills'),
+		} as Skill;
 		if (getValues('skills')?.length === 0) return;
 		if (!skillList.find(skill => newSkill.name === skill.name)) {
 			setSkillList(prev => [...prev, newSkill]);

@@ -24,7 +24,6 @@ export const useCreatePortfolio = ({ onSuccess }: { onSuccess: (data: string) =>
 		onSuccess: data => {
 			if (data) {
 				onSuccess?.(data);
-				sessionStorage.clear();
 			}
 		},
 	});
@@ -38,7 +37,6 @@ export const useUpdatePortfolio = ({ onSuccess }: { onSuccess: () => void }) => 
 		mutationFn: updatePortfolio,
 		onSuccess: () => {
 			onSuccess?.();
-			sessionStorage.clear();
 		},
 	});
 };

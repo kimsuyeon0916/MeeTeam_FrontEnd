@@ -100,10 +100,10 @@ export const useReadUniversityList = () => {
 /**
  * @description 학과 목록 조회 API를 호출하는 hook입니다.
  */
-export const useReadDepartmentList = () => {
+export const useReadDepartmentList = (universityId: string) => {
 	return useQuery({
-		queryKey: authKeys.readDepartmentList(sessionStorage.university),
-		queryFn: () => sessionStorage.university && readDepartmentList(sessionStorage.university),
+		queryKey: authKeys.readDepartmentList(universityId),
+		queryFn: () => readDepartmentList(universityId),
 		enabled: false,
 	});
 };

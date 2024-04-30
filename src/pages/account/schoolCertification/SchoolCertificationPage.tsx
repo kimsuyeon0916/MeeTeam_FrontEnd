@@ -19,6 +19,7 @@ const SchoolCertificationPage = () => {
 	const [next, setNext] = useState(false);
 	const [submitEmail, setSubmitEmail] = useState(false);
 	const [domain, setDomain] = useState<string>();
+	const [universityId, setUniversityId] = useState<string>();
 
 	const nextHandler = (e: React.MouseEvent) => {
 		// 학과 리스트 넘겨줄 때 domain 만 따로 넘겨주는 거 변경 요청 시도
@@ -26,6 +27,10 @@ const SchoolCertificationPage = () => {
 		setDomain(
 			universityList?.find(university => university.universityName === getValues('university'))
 				?.universityDomain
+		);
+		setUniversityId(
+			universityList?.find(university => university.universityName === getValues('university'))
+				?.universityId
 		);
 		setNext(prev => !prev);
 	};
@@ -42,22 +47,26 @@ const SchoolCertificationPage = () => {
 		mutate({
 			platformId: localStorage.PLATFORM_ID,
 			year: data.year,
-			universityId: sessionStorage.university,
-			departmentId: sessionStorage.department,
+			universityId: universityId,
+			departmentId: departmentList?.find(
+				department => department.departmentName === getValues('department')
+			)?.departmentId,
 			emailId: data.email,
 		});
 	};
 
 	const { data: universityList, refetch: readUniversityList } = useReadUniversityList();
-	const { data: departmentList, refetch: readDepartmentList } = useReadDepartmentList();
+	const { data: departmentList, refetch: readDepartmentList } = useReadDepartmentList(
+		universityId as string
+	);
 
 	useEffect(() => {
 		readUniversityList();
 	}, []);
 
 	useEffect(() => {
-		sessionStorage?.university && readDepartmentList();
-	}, [sessionStorage?.university]);
+		domain && readDepartmentList();
+	}, [domain]);
 
 	const optionList = (name: string) => {
 		if (name === 'year') {

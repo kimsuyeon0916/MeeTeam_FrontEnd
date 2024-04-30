@@ -94,7 +94,7 @@ const ProfileEditPage = () => {
 			...formData,
 			imageFileName: imageResponse?.fileName,
 			isUserNamePublic: isUserNamePublic,
-			interestId: sessionStorage.interest,
+			interestId: roles?.find(role => role.name === getValues('interest'))?.id,
 			isPhonePublic: isPhonePublic,
 			isUniversityMain: isUniversityMain,
 			isUniversityEmailPublic: isUniversityEmailPublic,
@@ -126,7 +126,7 @@ const ProfileEditPage = () => {
 				// 추후, 수정 시 수정 여부 boolean 값 추가
 				...data,
 				isUserNamePublic: isUserNamePublic,
-				interestId: sessionStorage.interest,
+				interestId: roles?.find(role => role.name === getValues('interest'))?.id,
 				isPhonePublic: isPhonePublic,
 				isUniversityMain: isUniversityMain,
 				isUniversityEmailPublic: isUniversityEmailPublic,
@@ -200,7 +200,10 @@ const ProfileEditPage = () => {
 	const [skillList, setSkillList] = useState(user?.skills ? user?.skills : []);
 
 	const addSkill = () => {
-		const newSkill = { id: sessionStorage.skills, name: getValues('skills') } as Skill;
+		const newSkill = {
+			id: skills?.find(skill => skill.name === getValues('skills'))?.id,
+			name: getValues('skills'),
+		} as Skill;
 		if (getValues('skills')?.length === 0) return;
 		if (!skillList.find(skill => newSkill.name === skill.name)) {
 			setSkillList(prev => [...prev, newSkill]);
@@ -316,16 +319,18 @@ const ProfileEditPage = () => {
 									<Toggle state={isUserNamePublic} setState={setIsUserNamePublic} />
 								</S.ProfileRow>
 							</S.ProfileRow>
-							<ComboBox
-								width='clamp(50%, 39.2rem, 100%)'
-								// defaultValue={user?.interest}
-								register={register}
-								setValue={setValue}
-								getValues={getValues}
-								formState={formState}
-								optionList={roles}
-								{...PROFILE_EDIT_DATA.interest}
-							/>
+							{roles && (
+								<ComboBox
+									width='clamp(50%, 39.2rem, 100%)'
+									// defaultValue={user?.interest}
+									register={register}
+									setValue={setValue}
+									getValues={getValues}
+									formState={formState}
+									optionList={roles}
+									{...PROFILE_EDIT_DATA.interest}
+								/>
+							)}
 							<Input
 								width='clamp(50%, 39.2rem, 100%)'
 								// defaultValue={user?.introduction}
