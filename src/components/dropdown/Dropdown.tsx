@@ -24,11 +24,13 @@ type keyObj = {
 };
 
 const scopeObj: keyObj = {
+	'전체 보기': 0,
 	교외: 1,
 	교내: 2,
 };
 
 const categoryObj: keyObj = {
+	전체: 0,
 	프로젝트: 1,
 	스터디: 2,
 	공모전: 3,
@@ -172,6 +174,19 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 	// 	setSearchParams(searchParams);
 	// }, [filterState.scope, filterState.category]);
 
+	useEffect(() => {
+		if (scope && filterState.scope !== null) {
+			setCurrentValue(getKeyByValue(scopeObj, filterState.scope));
+		} else if (scope) {
+			setCurrentValue('범위');
+		}
+		if (category && filterState.category !== null) {
+			setCurrentValue(getKeyByValue(categoryObj, filterState.category));
+		} else if (category) {
+			setCurrentValue('유형');
+		}
+	}, [filterState.scope, filterState.category]);
+
 	return (
 		<S.Dropdown $showDropdown={showDropdown} $scope={scope} $isCheck={isChecked} ref={dropdownRef}>
 			<article className='wrapper' onClick={onClickDropdown}>
@@ -215,12 +230,17 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 														<span className='description'>
 															수업이신 경우 오른쪽의 “수업” 체크박스를 눌러주세요.
 														</span>
-														<section>
-															<input type='checkbox' id='course' onClick={onClickCheckbox} />
-															<label className='course-label' htmlFor='course'>
-																수업
-															</label>
-														</section>
+													</section>
+													<section className='container-checkbox'>
+														<input
+															type='checkbox'
+															id='course'
+															onClick={onClickCheckbox}
+															className='input-checkbox'
+														/>
+														<label className='course-label' htmlFor='course'>
+															수업
+														</label>
 													</section>
 													<section className='wrapper-inputs' ref={insideRef}>
 														<section className='container-inputs'>
@@ -230,7 +250,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 																value={name.course}
 																disabled={!isChecked ? true : false}
 																onChange={onChangeCourse}
-																onClick={() => setDropdown(prev => ({ ...prev, course: true }))}
+																onClick={() => setDropdown({ course: true, professor: false })}
 															/>
 															{dropdown.course && (
 																<section className='dropdown'>
@@ -254,7 +274,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 																value={name.professor}
 																disabled={!isChecked ? true : false}
 																onChange={onChangeProfessor}
-																onClick={() => setDropdown(prev => ({ ...prev, professor: true }))}
+																onClick={() => setDropdown({ course: false, professor: true })}
 															/>
 															{dropdown.professor && (
 																<section className='dropdown'>

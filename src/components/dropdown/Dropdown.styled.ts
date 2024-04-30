@@ -90,6 +90,9 @@ const Dropdown = styled.div<IDropdown>`
 				}
 
 				.inside {
+					display: flex;
+					flex-direction: column;
+					gap: 1rem;
 					position: absolute;
 					top: 0rem;
 					left: 14.9rem;
@@ -105,26 +108,22 @@ const Dropdown = styled.div<IDropdown>`
 					.intro {
 						display: flex;
 						justify-content: space-between;
-						margin-top: 0.95rem;
 
 						.description {
 							color: #8e8e8e;
-							font-size: 1.4rem;
-							line-height: 1.7rem;
-							letter-spacing: 0.0028rem;
+							font-size: 1.6rem;
 						}
 
-						section {
+						.container-checkbox {
 							display: flex;
 							align-items: center;
 
-							input {
-								padding: 0;
+							.input-checkbox {
 								margin: 0;
+							}
 
-								&:hover {
-									border: 1px solid red;
-								}
+							input[type='checkbox'] {
+								margin: 0;
 							}
 
 							.course-label {
@@ -145,7 +144,6 @@ const Dropdown = styled.div<IDropdown>`
 						display: flex;
 						width: 100%;
 						gap: 2rem;
-						margin-top: 0.8rem;
 
 						.container-inputs {
 							width: 100%;

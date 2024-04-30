@@ -20,6 +20,7 @@ import { getPostList } from '../../../service/recruit/board';
 import { useQuery } from '@tanstack/react-query';
 import { useLogin } from '../../../hooks';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { fixModalBackground } from '../../../utils';
 
 const START_PAGE_NUM = 1;
 
@@ -143,7 +144,7 @@ const RecruitPage = () => {
 
 	const profileCreateHandler = () => {
 		if (isLoggedIn) {
-			// 프로필 작성 페이지 연결 필요
+			navigate('/profile/edit');
 		} else {
 			setNeedLoginModal({ isOpen: true, type: 'PROFILE_CREATE' });
 		}
@@ -151,7 +152,7 @@ const RecruitPage = () => {
 
 	const portfolioCreateHandler = () => {
 		if (isLoggedIn) {
-			// 포트폴리오 작성 페이지 연결 필요
+			navigate('/portfolio/edit');
 		} else {
 			setNeedLoginModal({ isOpen: true, type: 'PORTFOLIO_CREATE' });
 		}
@@ -180,6 +181,10 @@ const RecruitPage = () => {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [page]);
+
+	useEffect(() => {
+		fixModalBackground(needLoginModal.isOpen);
+	}, [needLoginModal.isOpen]);
 
 	return (
 		<S.RecruitPage
