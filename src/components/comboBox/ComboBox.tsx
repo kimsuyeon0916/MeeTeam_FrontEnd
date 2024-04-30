@@ -60,15 +60,8 @@ const ComboBox = <T extends FieldValues>({
 		const inputValue = getValues?.(name as Path<T>);
 		if (!optionList?.find(option => option.name === inputValue)) {
 			setValue(name as Path<T>, '' as PathValue<T, Path<T>>);
-			sessionStorage.removeItem(name);
 		}
 	};
-
-	useEffect(() => {
-		const inputValue = getValues?.(name as Path<T>);
-		const defaultOptionId = optionList?.find(option => option.name === inputValue)?.id;
-		defaultOptionId && sessionStorage.setItem(name, defaultOptionId);
-	}, []);
 
 	useEffect(() => {
 		const handleOutsideClick = (e: MouseEvent) => {
@@ -88,17 +81,14 @@ const ComboBox = <T extends FieldValues>({
 		setIsOpen(true);
 	};
 
-	const handleOptionClick = (name: Path<T>, optionName: PathValue<T, Path<T>>, id?: string) => {
+	const handleOptionClick = (name: Path<T>, optionName: PathValue<T, Path<T>>) => {
 		setValue(name, optionName);
-		id && sessionStorage.setItem(name, id);
 		clickOption?.(name);
-		// setFocus?.(name);
 	};
 
 	const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === 'Enter') {
 			downKey?.(name);
-			// setIsOpen(true);
 		}
 	};
 
