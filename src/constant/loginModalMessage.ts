@@ -21,4 +21,8 @@ export const NEEDLOGINTYPE: {
 		TITLE: '구인글에 신청해보세요!',
 		MESSAGE: '관심있는 구인글에 신청해보세요!',
 	},
+	MANAGE_BOOKMARK: {
+		TITLE: '북마크만 모아보세요!',
+		MESSAGE: '북마크한 구인글을 확인해보세요! ',
+	},
 };

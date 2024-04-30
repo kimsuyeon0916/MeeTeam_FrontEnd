@@ -142,6 +142,14 @@ const RecruitPage = () => {
 		}
 	};
 
+	const bookmarkNavigateHandler = () => {
+		if (isLoggedIn) {
+			navigate('/management/bookmark');
+		} else {
+			setNeedLoginModal({ isOpen: true, type: 'MANAGE_BOOKMARK' });
+		}
+	};
+
 	const profileCreateHandler = () => {
 		if (isLoggedIn) {
 			navigate('/profile/edit');
@@ -288,7 +296,7 @@ const RecruitPage = () => {
 				<section>
 					<section className='container-contents'>
 						<div>
-							<article className='bookmark-intro'>
+							<article className='bookmark-intro' onClick={bookmarkNavigateHandler}>
 								<img src={FilledBookmark} />
 								<span className='body2'>북마크 모아보기 {'❯'}</span>
 							</article>
