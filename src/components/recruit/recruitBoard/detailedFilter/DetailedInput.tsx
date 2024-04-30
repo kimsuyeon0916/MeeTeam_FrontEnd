@@ -6,6 +6,7 @@ import { useDebounce } from '../../../../hooks';
 import { Keyword, DetailedInfo } from '../../../../types';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import { detailedFilterState, recruitFilterState } from '../../../../atom';
+import { useSearchParams } from 'react-router-dom';
 
 const MESSAGE = {
 	SKILL: {
@@ -32,6 +33,7 @@ const DetailedInput = ({ type }: DetailedInfo) => {
 	const [detailedFilter, setDetailedFilter] = useRecoilState(detailedFilterState);
 	const setFilterState = useSetRecoilState(recruitFilterState);
 	const keyword = useDebounce(tagItem);
+	const [searchParams, setSearchParams] = useSearchParams();
 
 	const { data: dataRole, isLoading: isLoadingRole } = useQuery({
 		queryKey: ['searchRole', keyword],
@@ -91,19 +93,32 @@ const DetailedInput = ({ type }: DetailedInfo) => {
 				...prev,
 				skill: skillIds,
 			}));
+			searchParams.delete('skill');
+			skillIds.map(e => {
+				searchParams.append('skill', e.toString());
+			});
 		} else if (type === '역할') {
 			const roleIds = detailedFilter.role.map(role => role.id);
 			setFilterState(prev => ({
 				...prev,
 				role: roleIds,
 			}));
+			searchParams.delete('role');
+			roleIds.map(e => {
+				searchParams.append('role', e.toString());
+			});
 		} else if (type === '태그') {
 			const tagIds = detailedFilter.tag.map(tag => tag.id);
 			setFilterState(prev => ({
 				...prev,
 				tag: tagIds,
 			}));
+			searchParams.delete('tag');
+			tagIds.map(e => {
+				searchParams.append('tag', e.toString());
+			});
 		}
+		setSearchParams(searchParams);
 	};
 
 	const onClickSearchBar = (event: React.MouseEvent<HTMLInputElement>) => {
@@ -116,13 +131,17 @@ const DetailedInput = ({ type }: DetailedInfo) => {
 		if (type === '기술') {
 			setDetailedFilter(prev => ({ ...prev, skill: [] }));
 			setFilterState(prev => ({ ...prev, skill: [] }));
+			searchParams.delete('skill');
 		} else if (type === '역할') {
 			setDetailedFilter(prev => ({ ...prev, role: [] }));
 			setFilterState(prev => ({ ...prev, role: [] }));
+			searchParams.delete('role');
 		} else if (type === '태그') {
 			setDetailedFilter(prev => ({ ...prev, tag: [] }));
 			setFilterState(prev => ({ ...prev, tag: [] }));
+			searchParams.delete('tag');
 		}
+		setSearchParams(searchParams);
 	};
 
 	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>, id: number) => {
@@ -153,6 +172,7 @@ const DetailedInput = ({ type }: DetailedInfo) => {
 		} else if (type === '태그') {
 			setMessage({ intro: MESSAGE.TAG.INTRO, message: MESSAGE.TAG.MESSAGE });
 		}
+		setIsOpenMenu(false);
 	}, [type]);
 
 	return (

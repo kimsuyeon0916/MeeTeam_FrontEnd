@@ -438,6 +438,7 @@ const RecruitPage = styled.div<RecruitPage>`
 			align-items: center;
 			gap: 0.8rem;
 			cursor: pointer;
+			width: 13rem;
 
 			img {
 				width: 1.4rem;

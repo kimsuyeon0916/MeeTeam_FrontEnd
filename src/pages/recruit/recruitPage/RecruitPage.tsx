@@ -19,17 +19,16 @@ import { detailedFilterState, needLoginModalState, recruitFilterState } from '..
 import { getPostList } from '../../../service/recruit/board';
 import { useQuery } from '@tanstack/react-query';
 import { useLogin } from '../../../hooks';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { fixModalBackground } from '../../../utils';
 
 const START_PAGE_NUM = 1;
 
 const RecruitPage = () => {
 	const navigate = useNavigate();
-	const location = useLocation();
 	const fieldRef = useRef<HTMLDivElement | null>(null);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
-	const [searchKeyword, setSearchKeyword] = useState<string>('');
+	const [searchKeyword, setSearchKeyword] = useState('');
 	const [isFloatingOpen, setIsFloatingOpen] = useState<boolean>(false);
 	const [fieldValue, setFieldValue] = useState({
 		applied: false,
@@ -50,7 +49,6 @@ const RecruitPage = () => {
 		message: '기술',
 	});
 	const [searchParams, setSearchParams] = useSearchParams();
-
 	const [needLoginModal, setNeedLoginModal] = useRecoilState(needLoginModalState);
 	const { isLoggedIn } = useLogin();
 	const { data, isLoading } = useQuery({
@@ -69,12 +67,14 @@ const RecruitPage = () => {
 			applied: false,
 			value: { id: Number(event.currentTarget.id), value: innerText },
 		});
+		searchParams.set('field', event.currentTarget.id);
 	};
 
 	const submitField = () => {
 		setFieldValue(prev => ({ ...prev, applied: true }));
 		setFilterState(prev => ({ ...prev, field: fieldValue.value.id }));
 		setIsFieldOpen(false);
+		setSearchParams(searchParams);
 	};
 
 	const onClickClear = () => {
@@ -91,10 +91,22 @@ const RecruitPage = () => {
 		});
 		setSearchKeyword('');
 		setDetailedFilterState({ skill: [], role: [], tag: [] });
-		searchParams.delete('scope');
-		searchParams.delete('category');
 		setSearchParams(searchParams);
 		setIsOpenDetail({ skill: true, role: false, tag: false, message: '기술' });
+		setFieldValue({
+			applied: false,
+			value: {
+				id: null as number | null,
+				value: '분야를 선택해주세요',
+			},
+		});
+		searchParams.delete('scope');
+		searchParams.delete('category');
+		searchParams.delete('skill');
+		searchParams.delete('role');
+		searchParams.delete('tag');
+		searchParams.delete('keyword');
+		setSearchParams(searchParams);
 	};
 
 	const onClickDetails = (event: React.MouseEvent<HTMLSpanElement>) => {
@@ -123,15 +135,21 @@ const RecruitPage = () => {
 	const onClickClearField = () => {
 		setFilterState(prev => ({ ...prev, field: null }));
 		setFieldValue({ applied: false, value: { id: null, value: '분야를 선택해주세요' } });
+		searchParams.delete('field');
+		setSearchParams(searchParams);
 	};
 
 	const onClickDeleteKeyword = () => {
 		setFilterState(prev => ({ ...prev, keyword: '' }));
 		setSearchKeyword('');
+		searchParams.delete('keyword');
+		setSearchParams(searchParams);
 	};
 
 	const submitTagItem = () => {
 		setFilterState(prev => ({ ...prev, keyword: searchKeyword }));
+		searchParams.set('keyword', searchKeyword);
+		setSearchParams(searchParams);
 	};
 
 	const recruitCreateHandler = () => {
@@ -193,6 +211,50 @@ const RecruitPage = () => {
 	useEffect(() => {
 		fixModalBackground(needLoginModal.isOpen);
 	}, [needLoginModal.isOpen]);
+
+	useEffect(() => {
+		const isScope = searchParams.get('scope');
+		const isCategory = searchParams.get('category');
+		const isSkill = searchParams.getAll('skill').map(Number);
+		const isRole = searchParams.getAll('role').map(Number);
+		const isTag = searchParams.getAll('tag').map(Number);
+		const isKeyword = searchParams.get('keyword');
+		const isField = searchParams.get('field');
+		const isCourse = searchParams.get('course');
+		const isProfessor = searchParams.get('professor');
+
+		if (isScope) {
+			setFilterState(prev => ({ ...prev, scope: Number(isScope) }));
+		}
+		if (isCategory) {
+			setFilterState(prev => ({ ...prev, category: Number(isCategory) }));
+		}
+		if (isSkill) {
+			setFilterState(prev => ({ ...prev, skill: isSkill }));
+		}
+		if (isRole) {
+			setFilterState(prev => ({ ...prev, role: isRole }));
+		}
+		if (isTag) {
+			setFilterState(prev => ({ ...prev, tag: isTag }));
+		}
+		if (isKeyword) {
+			setFilterState(prev => ({ ...prev, keyword: isKeyword }));
+		}
+		if (isField) {
+			setFilterState(prev => ({ ...prev, field: Number(isField) }));
+		}
+		if (isCourse) {
+			setFilterState(prev => ({ ...prev, course: Number(isCourse) }));
+		}
+		if (isProfessor) {
+			setFilterState(prev => ({ ...prev, professor: Number(isProfessor) }));
+		}
+	}, []);
+
+	useEffect(() => {
+		setSearchKeyword(filterState.keyword as any);
+	}, [filterState.keyword]);
 
 	return (
 		<S.RecruitPage

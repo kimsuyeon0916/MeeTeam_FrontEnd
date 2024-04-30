@@ -85,13 +85,16 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		if (applicant && id) {
 			setApplicantFilter(id);
 		} else {
-			setFilterState(prev => ({ ...prev, category: categoryObj[innerText] }));
 			if (innerText === '전체') {
 				searchParams.delete('category');
 				setSearchParams(searchParams);
 				setShowDropdown(false);
 				return;
+			} else {
+				searchParams.set('category', categoryObj[innerText].toString());
+				setSearchParams(searchParams);
 			}
+			setFilterState(prev => ({ ...prev, category: Number(searchParams.get('category')) }));
 		}
 		setShowDropdown(false);
 	};
@@ -104,11 +107,13 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		if (value !== '교내') {
 			setShowDropdown(false);
 		}
-		// if (value === '전체 보기') {
-		// 	searchParams.delete('scope');
-		// 	setSearchParams(searchParams);
-		// 	return;
-		// }
+		if (value === '전체 보기') {
+			searchParams.delete('scope');
+			setSearchParams(searchParams);
+			return;
+		}
+		searchParams.set('scope', scopeObj[value].toString());
+		setSearchParams(searchParams);
 	};
 
 	const onClickCheckbox = () => {
@@ -122,6 +127,8 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		setName(prev => ({ ...prev, course: innerText }));
 		setDropdown(prev => ({ ...prev, course: false }));
 		setFilterState(prev => ({ ...prev, course: Number(id) }));
+		searchParams.set('course', id);
+		setSearchParams(searchParams);
 	};
 	const onClickProfessor = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const target = event.target as HTMLSpanElement;
@@ -129,6 +136,8 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		setName(prev => ({ ...prev, professor: innerText }));
 		setDropdown(prev => ({ ...prev, professor: false }));
 		setFilterState(prev => ({ ...prev, professor: Number(id) }));
+		searchParams.set('professor', id);
+		setSearchParams(searchParams);
 	};
 
 	const onChangeCourse = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -159,33 +168,21 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		};
 	}, [dropdownRef.current, showDropdown, dropdown.course, dropdown.professor]);
 
-	// useEffect(() => {
-	// 	setCurrentValue(initialData);
-	// }, [location]);
-
-	// useEffect(() => {
-	// 	if (scope && filterState.scope) {
-	// 		searchParams.set('scope', filterState.scope.toString());
-	// 	} else if (category && filterState.category) {
-	// 		searchParams.set('category', filterState.category.toString());
-	// 	} else if (filterState.category === null) {
-	// 		searchParams.delete('category');
-	// 	}
-	// 	setSearchParams(searchParams);
-	// }, [filterState.scope, filterState.category]);
-
 	useEffect(() => {
 		if (scope && filterState.scope !== null) {
 			setCurrentValue(getKeyByValue(scopeObj, filterState.scope));
-		} else if (scope) {
+		} else if (scope && filterState.scope === null) {
 			setCurrentValue('범위');
 		}
+	}, [filterState.scope]);
+
+	useEffect(() => {
 		if (category && filterState.category !== null) {
 			setCurrentValue(getKeyByValue(categoryObj, filterState.category));
-		} else if (category) {
+		} else if (category && filterState.category === null) {
 			setCurrentValue('유형');
 		}
-	}, [filterState.scope, filterState.category]);
+	}, [filterState.category]);
 
 	return (
 		<S.Dropdown $showDropdown={showDropdown} $scope={scope} $isCheck={isChecked} ref={dropdownRef}>
@@ -212,8 +209,8 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 							{scope && (
 								<ul className='menu-container'>
 									{data?.map((e: string, index: number) => (
-										<>
-											<section key={index} className={`menu-scope ${e === '교내' && 'in'}`}>
+										<React.Fragment key={index}>
+											<section className={`menu-scope ${e === '교내' && 'in'}`}>
 												<input
 													type='radio'
 													id={`${index}`}
@@ -294,7 +291,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 													</section>
 												</section>
 											)}
-										</>
+										</React.Fragment>
 									))}
 								</ul>
 							)}
