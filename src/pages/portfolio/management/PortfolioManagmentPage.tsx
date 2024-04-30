@@ -4,7 +4,7 @@ import { Pagination, PortfolioCard, PrimaryBtn, TabMenu } from '../../../compone
 import { useNavigate } from 'react-router-dom';
 import { usePaginationPortfolioList } from '../../../hooks';
 
-const tabList = ['전체', '프로젝트', '스터디', '공모전'];
+const tabList = ['전체'];
 
 const PortfolioManagementPage = () => {
 	const navigate = useNavigate();
