@@ -77,6 +77,7 @@ const ProfileEditPage = () => {
 
 	const { mutate: updateProfile } = useUpdateProfile({
 		onSuccess: updateProfileInSuccess,
+		userId: userId,
 	});
 
 	// 이미지 업로드
