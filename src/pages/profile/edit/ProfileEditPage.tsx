@@ -90,7 +90,6 @@ const ProfileEditPage = () => {
 	const uploadImageFileInSuccess = () => {
 		const formData = getValues();
 		updateProfile({
-			// 추후, 수정 시 수정 여부 boolean 값 추가
 			...formData,
 			imageFileName: imageResponse?.fileName,
 			isUserNamePublic: isUserNamePublic,
@@ -123,7 +122,6 @@ const ProfileEditPage = () => {
 			readImagePresignedUrl(); // presignedUrl 발급
 		} else {
 			updateProfile({
-				// 추후, 수정 시 수정 여부 boolean 값 추가
 				...data,
 				isUserNamePublic: isUserNamePublic,
 				interestId: roles?.find(role => role.name === getValues('interest'))?.id,
@@ -151,8 +149,8 @@ const ProfileEditPage = () => {
 				awards: user?.awards,
 			},
 			resetOptions: {
-				keepDirtyValues: true, // user-interacted input will be retained
-				keepErrors: true, // input errors will be retained with value update
+				keepDirtyValues: true,
+				keepErrors: true,
 			},
 		});
 
@@ -262,7 +260,7 @@ const ProfileEditPage = () => {
 		user?.portfolios &&
 		[...user.portfolios]?.sort((a, b) =>
 			a.pinOrder > b.pinOrder ? 1 : a.pinOrder < b.pinOrder ? -1 : 0
-		); // userData -> user로 변경
+		);
 
 	const [pinnedPortfolioList, setPinnedPortfolioList] = useState(
 		sortedPortfolioList
@@ -303,12 +301,7 @@ const ProfileEditPage = () => {
 						/>
 						<S.ProfileColumn $gap='2.4rem'>
 							<S.ProfileRow $width='clamp(50%, 50.8rem, 100%)' $gap='1rem'>
-								<Input
-									// defaultValue={user?.nickname}
-									register={register}
-									formState={formState}
-									{...PROFILE_EDIT_DATA.nickname}
-								/>
+								<Input register={register} formState={formState} {...PROFILE_EDIT_DATA.nickname} />
 								<S.ProfileRow $gap='1rem'>
 									<Input
 										defaultValue={user?.userName}
@@ -322,7 +315,6 @@ const ProfileEditPage = () => {
 							{roles && (
 								<ComboBox
 									width='clamp(50%, 39.2rem, 100%)'
-									// defaultValue={user?.interest}
 									register={register}
 									setValue={setValue}
 									getValues={getValues}
@@ -333,7 +325,6 @@ const ProfileEditPage = () => {
 							)}
 							<Input
 								width='clamp(50%, 39.2rem, 100%)'
-								// defaultValue={user?.introduction}
 								register={register}
 								watch={watch}
 								formState={formState}
@@ -346,7 +337,6 @@ const ProfileEditPage = () => {
 						<S.ProfileArticle>
 							<S.ProfileTitle>자기 소개</S.ProfileTitle>
 							<Textarea
-								// defaultValue={user?.aboutMe}
 								register={register}
 								watch={watch}
 								formState={formState}
@@ -362,12 +352,7 @@ const ProfileEditPage = () => {
 								<S.ProfileColumn $width='clamp(50%, 51.8rem, 100%)' $gap='1.6rem'>
 									<label style={{ color: 'var(--Form-txtIcon-default,  #8E8E8E)' }}>연락처</label>
 									<S.ProfileRow $gap='1rem'>
-										<Input
-											// defaultValue={user?.phone?.content}
-											register={register}
-											formState={formState}
-											{...PROFILE_EDIT_DATA.phone}
-										/>
+										<Input register={register} formState={formState} {...PROFILE_EDIT_DATA.phone} />
 										<Toggle state={isPhonePublic} setState={setIsPhonePublic} />
 									</S.ProfileRow>
 								</S.ProfileColumn>
@@ -383,7 +368,6 @@ const ProfileEditPage = () => {
 											handleClick={handleRadioClick}
 										>
 											<Input
-												// defaultValue={user?.universityEmail?.content}
 												register={register}
 												formState={formState}
 												{...PROFILE_EDIT_DATA.universityEmail}
@@ -399,7 +383,6 @@ const ProfileEditPage = () => {
 											handleClick={handleRadioClick}
 										>
 											<Input
-												// defaultValue={user?.subEmail?.content}
 												register={register}
 												formState={formState}
 												{...PROFILE_EDIT_DATA.subEmail}
@@ -416,14 +399,8 @@ const ProfileEditPage = () => {
 							<S.ProfileTitle>교육</S.ProfileTitle>
 							<S.ProfileRow $gap='1rem'>
 								<S.ProfileRow $gap='1rem'>
+									<Input register={register} formState={formState} {...PROFILE_EDIT_DATA.year} />
 									<Input
-										// defaultValue={user?.year}
-										register={register}
-										formState={formState}
-										{...PROFILE_EDIT_DATA.year}
-									/>
-									<Input
-										// defaultValue={user?.university}
 										register={register}
 										formState={formState}
 										{...PROFILE_EDIT_DATA.university}
@@ -431,7 +408,6 @@ const ProfileEditPage = () => {
 								</S.ProfileRow>
 								<S.ProfileColumn $gap='1rem'>
 									<Input
-										// defaultValue={user?.department}
 										register={register}
 										formState={formState}
 										{...PROFILE_EDIT_DATA.department}
