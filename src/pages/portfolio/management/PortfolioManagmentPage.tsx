@@ -24,12 +24,16 @@ const PortfolioManagementPage = () => {
 					/>
 				</S.PortfolioManagementHeader>
 				<TabMenu tabList={tabList} />
-				<S.PortfolioManagementGrid>
-					{portfolioList &&
-						portfolioList.portfolios?.map(portfolio => (
-							<PortfolioCard key={portfolio.id} {...portfolio} />
-						))}
-				</S.PortfolioManagementGrid>
+				{!portfolioList?.portfolios.length ? (
+					<S.PortfolioManagementGrid>
+						{portfolioList &&
+							portfolioList.portfolios?.map(portfolio => (
+								<PortfolioCard key={portfolio.id} {...portfolio} />
+							))}
+					</S.PortfolioManagementGrid>
+				) : (
+					<S.PortfolioManagementColumn>아직 작성한 포트폴리오가 없어요</S.PortfolioManagementColumn>
+				)}
 				<Pagination
 					postsNum={portfolioList?.pageInfo.totalContents as number}
 					postsPerPage={portfolioList?.pageInfo.size as number}
