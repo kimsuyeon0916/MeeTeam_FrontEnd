@@ -43,6 +43,30 @@ const PortfolioManagementGrid = styled.div`
 		display: none; /* Chrome, Safari, Opera*/
 `;
 
-const S = { PortfolioManagementLayout, PortfolioManagementHeader, PortfolioManagementGrid };
+const PortfolioManagementColumn = styled.div`
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+
+	color: var(--State-unactive, #8e8e8e);
+
+	/* Headline/h3 */
+	font-size: 2rem;
+	font-weight: 600;
+	line-height: 2.4rem; /* 120% */
+	letter-spacing: 0.004rem;
+`;
+
+const S = {
+	PortfolioManagementLayout,
+	PortfolioManagementHeader,
+	PortfolioManagementGrid,
+	PortfolioManagementColumn,
+};
 
 export default S;
