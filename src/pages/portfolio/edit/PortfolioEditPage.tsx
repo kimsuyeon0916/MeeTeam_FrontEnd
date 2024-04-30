@@ -100,28 +100,7 @@ const PortfolioEditPage = () => {
 		isSuccess: isSuccessReadUrl,
 	} = useReadImageListPresignedUrl(uploadImageList[0]?.fileName as string, portfolioId);
 
-	const uploadImageFileInSuccess = () => {
-		const formData = getValues();
-		const portfolioData = {
-			...formData,
-			mainImageFileName: imageResponse?.[1].fileName,
-			zipFileName: imageResponse?.[0].fileName,
-			fileOrder: uploadImageList.map(image => image.fileName),
-			field: fields?.find(field => field.name === getValues('field'))?.id,
-			role: roles?.find(role => role.name === getValues('role'))?.id,
-			proceedType: proceedType,
-			skills: skillList.map(skill => skill.id),
-		} as PortfolioPayload;
-
-		if (portfolioId) {
-			updatePortfolio({
-				portfolioId: portfolioId,
-				portfolio: portfolioData,
-			});
-		} else {
-			createPortfolio({ ...portfolioData });
-		}
-	};
+	const uploadImageFileInSuccess = () => {};
 
 	const { mutate: uploadImageFile } = useUploadImageFile({
 		onSuccess: uploadImageFileInSuccess,
@@ -133,38 +112,45 @@ const PortfolioEditPage = () => {
 				const imageListZipFile = new File([blob], imageResponse[0].fileName, {
 					type: 'application/zip',
 				});
+				// 다중 이미지 압축 파일 업로드
 				uploadImageFile({
 					presignedUrl: imageResponse[0].url,
 					imageFile: imageListZipFile,
 				});
-			}); // 이미지 압축 및 업로드
+			});
 
+			// 메인 이미지 업로드
 			uploadImageFile({
 				presignedUrl: imageResponse[1].url,
 				imageFile: uploadImageList[0].file as File,
 			});
+
+			// 폼 제출
+			const formData = getValues();
+			const portfolioData = {
+				...formData,
+				mainImageFileName: imageResponse?.[1].fileName,
+				zipFileName: imageResponse?.[0].fileName,
+				fileOrder: uploadImageList.map(image => image.fileName),
+				field: fields?.find(field => field.name === getValues('field'))?.id,
+				role: roles?.find(role => role.name === getValues('role'))?.id,
+				proceedType: proceedType,
+				skills: skillList.map(skill => skill.id),
+			} as PortfolioPayload;
+
+			if (portfolioId) {
+				updatePortfolio({
+					portfolioId: portfolioId,
+					portfolio: portfolioData,
+				});
+			} else {
+				createPortfolio({ ...portfolioData });
+			}
 		}
 	}, [isSuccessReadUrl]);
 
-	const submitHandler: SubmitHandler<FormValues> = data => {
-		const isEditable = true; // 추후, 생성/변경 시 수정 여부 조건 변경
-		if (isEditable) {
-			// 이미지를 처음 업로드 및 변경하는 경우에만 S3에 업로드(기존!==지금)
-			readImageListPresignedUrl(); // presignedUrl 발급
-		} else {
-			updatePortfolio({
-				portfolioId: portfolioId,
-				portfolio: {
-					// 추후, 수정 시 수정 여부 boolean 값 추가
-					...data,
-					fileOrder: uploadImageList.map(image => image.fileName),
-					field: fields?.find(field => field.name === getValues('field'))?.id,
-					role: roles?.find(role => role.name === getValues('role'))?.id,
-					proceedType: proceedType,
-					skills: skillList.map(skill => skill.id),
-				} as PortfolioPayload,
-			});
-		}
+	const submitHandler: SubmitHandler<FormValues> = () => {
+		readImageListPresignedUrl(); // presignedUrl 발급
 	};
 
 	// 이미지 순서 변경 모달
