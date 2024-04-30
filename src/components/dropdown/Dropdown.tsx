@@ -6,7 +6,7 @@ import { getCourseKeyword, getProfessorKeyword } from '../../service';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { applicantFilter, recruitFilterState } from '../../atom';
 import { ManageRole, Keyword } from '../../types';
-import { DropdownArrowUp, DropdownArrow } from '../../assets';
+import { DropdownArrowUp, DropdownArrow, Clear } from '../../assets';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
 interface Dropdown {
@@ -46,14 +46,20 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 	const insideRef = useRef<HTMLDivElement | null>(null);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [isChecked, setIsChecked] = useState<boolean>(false);
-	const [name, setName] = useState({
-		course: '',
-		professor: '',
+	const [value, setValue] = useState({
+		course: {
+			name: '',
+			id: null as number | null,
+		},
+		professor: {
+			name: '',
+			id: null as number | null,
+		},
 	});
 	const location = useLocation();
 	const setApplicantFilter = useSetRecoilState(applicantFilter);
-	const keywordCourse = useDebounce(name.course, 500);
-	const keywordProfessor = useDebounce(name.professor, 500);
+	const keywordCourse = useDebounce(value.course.name, 500);
+	const keywordProfessor = useDebounce(value.professor.name, 500);
 	const [filterState, setFilterState] = useRecoilState(recruitFilterState);
 	const [searchParams, setSearchParams] = useSearchParams();
 
@@ -124,27 +130,52 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		event.stopPropagation();
 		const target = event.target as HTMLSpanElement;
 		const { innerText, id } = target;
-		setName(prev => ({ ...prev, course: innerText }));
+		setValue(prev => ({ ...prev, course: { name: innerText, id: Number(id) } }));
 		setDropdown(prev => ({ ...prev, course: false }));
-		setFilterState(prev => ({ ...prev, course: Number(id) }));
 		searchParams.set('course', id);
-		setSearchParams(searchParams);
 	};
 	const onClickProfessor = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const target = event.target as HTMLSpanElement;
 		const { innerText, id } = target;
-		setName(prev => ({ ...prev, professor: innerText }));
+		setValue(prev => ({ ...prev, professor: { name: innerText, id: Number(id) } }));
 		setDropdown(prev => ({ ...prev, professor: false }));
-		setFilterState(prev => ({ ...prev, professor: Number(id) }));
 		searchParams.set('professor', id);
-		setSearchParams(searchParams);
 	};
 
 	const onChangeCourse = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setName(prev => ({ ...prev, course: event.target.value }));
+		setValue(prev => ({
+			...prev,
+			course: { ...prev.course, name: event.target.value },
+		}));
 	};
 	const onChangeProfessor = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setName(prev => ({ ...prev, professor: event.target.value }));
+		setValue(prev => ({
+			...prev,
+			professor: { ...prev.professor, name: event.target.value },
+		}));
+	};
+	const onClickClearInfo = () => {
+		setValue({
+			course: {
+				name: '',
+				id: null as number | null,
+			},
+			professor: {
+				name: '',
+				id: null as number | null,
+			},
+		});
+		setDropdown({ course: false, professor: false });
+		setFilterState(prev => ({ ...prev, course: null, professor: null }));
+		searchParams.delete('course');
+		searchParams.delete('professor');
+		setSearchParams(searchParams);
+	};
+	const submitInfo = () => {
+		setDropdown({ course: false, professor: false });
+		setFilterState(prev => ({ ...prev, course: value.course.id }));
+		setFilterState(prev => ({ ...prev, professor: value.professor.id }));
+		setSearchParams(searchParams);
 	};
 
 	useEffect(() => {
@@ -223,71 +254,82 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 											</section>
 											{currentValue === '교내' && (
 												<section className='inside'>
-													<section className='intro'>
-														<span className='description'>
-															수업이신 경우 오른쪽의 “수업” 체크박스를 눌러주세요.
-														</span>
-													</section>
-													<section className='container-checkbox'>
-														<input
-															type='checkbox'
-															id='course'
-															onClick={onClickCheckbox}
-															className='input-checkbox'
-														/>
-														<label className='course-label' htmlFor='course'>
-															수업
-														</label>
-													</section>
-													<section className='wrapper-inputs' ref={insideRef}>
-														<section className='container-inputs'>
-															<input
-																type='text'
-																placeholder='수업명'
-																value={name.course}
-																disabled={!isChecked ? true : false}
-																onChange={onChangeCourse}
-																onClick={() => setDropdown({ course: true, professor: false })}
-															/>
-															{dropdown.course && (
-																<section className='dropdown'>
-																	{!isLoadingCourse &&
-																		dataCourse?.map((keyword: Keyword) => (
-																			<span
-																				key={keyword.id}
-																				onClick={onClickCourse}
-																				id={keyword.id.toString()}
-																			>
-																				{keyword.name}
-																			</span>
-																		))}
-																</section>
-															)}
+													<section className='container-inside'>
+														<section className='intro'>
+															<span className='description'>
+																수업이신 경우 오른쪽의 “수업” 체크박스를 눌러주세요.
+															</span>
 														</section>
-														<section className='container-inputs'>
+														<section className='container-checkbox'>
 															<input
-																type='text'
-																placeholder='교수명'
-																value={name.professor}
-																disabled={!isChecked ? true : false}
-																onChange={onChangeProfessor}
-																onClick={() => setDropdown({ course: false, professor: true })}
+																type='checkbox'
+																id='course'
+																onClick={onClickCheckbox}
+																className='input-checkbox'
 															/>
-															{dropdown.professor && (
-																<section className='dropdown'>
-																	{!isLoadingProfessor &&
-																		dataProfessor?.map((keyword: Keyword) => (
-																			<span
-																				key={keyword.id}
-																				onClick={onClickProfessor}
-																				id={keyword.id.toString()}
-																			>
-																				{keyword.name}
-																			</span>
-																		))}
-																</section>
-															)}
+															<label className='course-label' htmlFor='course'>
+																수업
+															</label>
 														</section>
+														<section className='wrapper-inputs' ref={insideRef}>
+															<section className='container-inputs'>
+																<input
+																	type='text'
+																	placeholder='수업명'
+																	value={value.course.name}
+																	disabled={!isChecked ? true : false}
+																	onChange={onChangeCourse}
+																	onClick={() => setDropdown({ course: true, professor: false })}
+																/>
+																{dropdown.course && (
+																	<section className='dropdown'>
+																		{!isLoadingCourse &&
+																			dataCourse?.map((keyword: Keyword) => (
+																				<span
+																					key={keyword.id}
+																					onClick={onClickCourse}
+																					id={keyword.id.toString()}
+																				>
+																					{keyword.name}
+																				</span>
+																			))}
+																	</section>
+																)}
+															</section>
+															<section className='container-inputs'>
+																<input
+																	type='text'
+																	placeholder='교수명'
+																	value={value.professor.name}
+																	disabled={!isChecked ? true : false}
+																	onChange={onChangeProfessor}
+																	onClick={() => setDropdown({ course: false, professor: true })}
+																/>
+																{dropdown.professor && (
+																	<section className='dropdown'>
+																		{!isLoadingProfessor &&
+																			dataProfessor?.map((keyword: Keyword) => (
+																				<span
+																					key={keyword.id}
+																					onClick={onClickProfessor}
+																					id={keyword.id.toString()}
+																				>
+																					{keyword.name}
+																				</span>
+																			))}
+																	</section>
+																)}
+															</section>
+														</section>
+													</section>
+													<section className='control-btn'>
+														<section className='clear' onClick={onClickClearInfo}>
+															<img src={Clear} />
+															<span>초기화</span>
+														</section>
+														<button type='button' onClick={submitInfo}>
+															적용
+														</button>
 													</section>
 												</section>
 											)}
