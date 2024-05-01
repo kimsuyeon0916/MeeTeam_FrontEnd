@@ -171,7 +171,7 @@ export const detailedFilterState = atom<DetailedFilter>({
 
 export const previousLocationState = atom({
 	key: 'previousLocationState',
-	default: '',
+	default: '/',
 });
 
 export const recruitFilterState = atom<RecruitFilter>({
