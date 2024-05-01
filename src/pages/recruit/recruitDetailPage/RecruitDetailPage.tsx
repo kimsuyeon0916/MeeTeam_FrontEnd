@@ -161,7 +161,7 @@ const RecruitDetailPage = () => {
 					)}
 					{isCancel && (
 						<section className='modal-background'>
-							<ApplyCancel />
+							<ApplyCancel pageNum={pageNum} />
 						</section>
 					)}
 					{isClose && (

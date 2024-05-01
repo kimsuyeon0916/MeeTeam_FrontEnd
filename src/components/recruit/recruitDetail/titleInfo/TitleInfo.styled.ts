@@ -56,6 +56,7 @@ const TitleInfo = styled.article`
 			.icon-bookmark {
 				position: absolute;
 				right: 2rem;
+				cursor: pointer;
 			}
 
 			.count-bookmark {

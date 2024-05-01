@@ -2,16 +2,33 @@ import React from 'react';
 import S from './ApplyCancel.styled';
 import { useSetRecoilState } from 'recoil';
 import { applyCancelModalState } from '../../../../../atom';
+import { useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
+import { cancelApply } from '../../../../../service';
 
-const ApplyCancel = () => {
+interface ApplyCancel {
+	pageNum: number;
+}
+
+const ApplyCancel = ({ pageNum }: ApplyCancel) => {
+	const queryClient = useQueryClient();
 	const setIsCancel = useSetRecoilState(applyCancelModalState);
+
+	const cancelApplyTeam = useMutation({
+		mutationFn: (pageNum: number) => cancelApply(pageNum),
+	});
 
 	const onClickBack = () => {
 		setIsCancel(false);
 	};
 
 	const onClickConfirm = () => {
-		setIsCancel(false);
+		cancelApplyTeam.mutate(pageNum, {
+			onSuccess: () => {
+				setIsCancel(false);
+				queryClient.invalidateQueries({ queryKey: ['detailedPage'] });
+			},
+		});
 	};
 	return (
 		<S.ApplyCancel>
