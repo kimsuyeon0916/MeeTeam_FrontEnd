@@ -76,7 +76,7 @@ const RecruitPostingBookmark = () => {
 			<article className='container-pagination'>
 				{data && (
 					<Pagination
-						postsNum={data.pageInfo.totalContents + 100}
+						postsNum={data.pageInfo.totalContents}
 						postsPerPage={data.pageInfo.size}
 						currentPage={page}
 						setCurrentPage={setPage}

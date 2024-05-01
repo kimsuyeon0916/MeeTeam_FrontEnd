@@ -49,8 +49,6 @@ export const modules = {
 				},
 				{ background: [] },
 			],
-			['image'],
-			['clean'],
 		],
 	},
 };
@@ -71,7 +69,5 @@ export const formats = [
 	'background',
 	'color',
 	'link',
-	'image',
-	'video',
 	'width',
 ];
