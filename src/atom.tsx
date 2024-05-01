@@ -79,6 +79,14 @@ export const waitModalState = atom({
 	default: false,
 });
 
+export const applicantModalState = atom({
+	key: 'refuseApplicantModalState',
+	default: {
+		approve: false,
+		refuse: false,
+	},
+});
+
 export const recruitInputState = atom<InputState>({
 	key: 'recruitInputState',
 	default: {
