@@ -27,6 +27,12 @@ const RecruitDetailPage = styled.section`
 		background: #e0e6ff;
 	}
 
+	.body1-semibold {
+		color: #151515;
+		font-size: 1.6rem;
+		font-weight: 600;
+	}
+
 	.modal-background {
 		position: fixed;
 		top: 0;
@@ -61,6 +67,19 @@ const RecruitDetailPage = styled.section`
 			width: 100%;
 			padding: 1.6rem 3rem;
 			box-sizing: border-box;
+		}
+
+		.need-login {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 4rem;
+			margin-bottom: 4rem;
+		}
+
+		.login {
+			color: #5877fc;
+			cursor: pointer;
 		}
 	}
 `;

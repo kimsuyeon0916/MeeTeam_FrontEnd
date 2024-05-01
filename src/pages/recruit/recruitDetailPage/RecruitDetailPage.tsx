@@ -117,7 +117,18 @@ const RecruitDetailPage = () => {
 										return <Comment key={comment.id} {...comment} />;
 									})}
 							</ul>
-							<CommentInput />
+							{isLoggedIn ? (
+								<CommentInput />
+							) : (
+								<section className='need-login'>
+									<span className='body1-semibold'>
+										<span className='body1-semibold login' onClick={() => navigate('/signin')}>
+											로그인
+										</span>{' '}
+										후 댓글을 달아보세요!
+									</span>
+								</section>
+							)}
 						</section>
 					</article>
 					{isModal && (
