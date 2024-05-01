@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { createPortfolio, readPortfolio, updatePortfolio } from '../service';
 
 const portfolioKeys = {
@@ -32,11 +32,21 @@ export const useCreatePortfolio = ({ onSuccess }: { onSuccess: (data: string) =>
 /**
  * @description 포트폴리오 편집 API를 호출하는 hook입니다.
  */
-export const useUpdatePortfolio = ({ onSuccess }: { onSuccess: () => void }) => {
+export const useUpdatePortfolio = ({
+	onSuccess,
+	portfolioId,
+}: {
+	onSuccess: (data: string) => void;
+	portfolioId: string;
+}) => {
+	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: updatePortfolio,
-		onSuccess: () => {
-			onSuccess?.();
+		onSuccess: async data => {
+			if (data) {
+				await queryClient.invalidateQueries({ queryKey: portfolioKeys.readPortfolio(portfolioId) });
+				onSuccess?.(data);
+			}
 		},
 	});
 };
