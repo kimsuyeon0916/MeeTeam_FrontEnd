@@ -35,7 +35,7 @@ const RecruitPostingBookmark = () => {
 	};
 	useEffect(() => {
 		refetch();
-	}, [isClosed]);
+	}, [isClosed, page]);
 	return (
 		<S.RecruitManage>
 			<article>

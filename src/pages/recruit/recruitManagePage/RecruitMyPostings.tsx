@@ -33,11 +33,10 @@ const RecruitMyPostings = () => {
 			setIsClosed(true);
 		}
 	};
-	console.log(data, isClosed);
 
 	useEffect(() => {
 		refetch();
-	}, [isClosed]);
+	}, [isClosed, page]);
 	return (
 		<S.RecruitManage>
 			<article>
