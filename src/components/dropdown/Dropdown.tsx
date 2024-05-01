@@ -7,7 +7,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { applicantFilter, recruitFilterState } from '../../atom';
 import { ManageRole, Keyword } from '../../types';
 import { DropdownArrowUp, DropdownArrow, Clear } from '../../assets';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 interface Dropdown {
 	data?: string[];
@@ -56,7 +56,6 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 			id: null as number | null,
 		},
 	});
-	const location = useLocation();
 	const setApplicantFilter = useSetRecoilState(applicantFilter);
 	const keywordCourse = useDebounce(value.course.name, 500);
 	const keywordProfessor = useDebounce(value.professor.name, 500);
@@ -95,7 +94,6 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 				searchParams.delete('category');
 				setSearchParams(searchParams);
 				setShowDropdown(false);
-				return;
 			} else {
 				searchParams.set('category', categoryObj[innerText].toString());
 				setSearchParams(searchParams);
