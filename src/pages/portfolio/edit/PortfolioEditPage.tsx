@@ -81,7 +81,7 @@ const PortfolioEditPage = () => {
 	const createPortfolioInSuccess = (newPortfolioId: string) => {
 		navigate(`/portfolio/${newPortfolioId}`);
 	};
-	const updatePortfolioInSuccess = () => {
+	const updatePortfolioInSuccess = (portfolioId: string) => {
 		navigate(`/portfolio/${portfolioId}`);
 	};
 
@@ -90,6 +90,7 @@ const PortfolioEditPage = () => {
 	});
 	const { mutate: updatePortfolio } = useUpdatePortfolio({
 		onSuccess: updatePortfolioInSuccess,
+		portfolioId: portfolioId,
 	});
 
 	// 이미지 업로드
