@@ -80,7 +80,7 @@ export default function useValid(data: InputState) {
 		} else {
 			setValidMessage(prev => ({ ...prev, scope: '' }));
 		}
-		setIsValid(prev => ({ ...prev, isScope: data.scope !== '' }));
+		setIsValid(prev => ({ ...prev, isScope: data.scope !== '' ? true : false }));
 	}, [data.scope]);
 
 	useEffect(() => {
