@@ -94,6 +94,7 @@ const PortfolioEditPage = () => {
 	});
 
 	// 이미지 업로드
+	const [readPresignedUrlList, setReadPresignedUrlList] = useState(false);
 	const uploadImageList = useRecoilValue(uploadImageListState);
 	const {
 		data: imageResponse,
@@ -108,7 +109,7 @@ const PortfolioEditPage = () => {
 	});
 
 	useEffect(() => {
-		if (isSuccessReadUrl && imageResponse) {
+		if (readPresignedUrlList && isSuccessReadUrl && imageResponse) {
 			zipFile(uploadImageList).then((blob: Blob) => {
 				const imageListZipFile = new File([blob], imageResponse[0].fileName, {
 					type: 'application/zip',
@@ -152,6 +153,7 @@ const PortfolioEditPage = () => {
 
 	const submitHandler: SubmitHandler<FormValues> = () => {
 		readImageListPresignedUrl(); // presignedUrl 발급
+		setReadPresignedUrlList(true);
 	};
 
 	// 이미지 순서 변경 모달
