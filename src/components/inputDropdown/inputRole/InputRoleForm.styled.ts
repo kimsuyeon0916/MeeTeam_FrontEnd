@@ -302,7 +302,6 @@ const InputRoleForm = styled.article<InputRoleForm>`
 	.add-btn {
 		button {
 			display: flex;
-			width: 9.2rem;
 			height: 4.8rem;
 			padding: 1.2rem 3.2rem;
 			justify-content: center;

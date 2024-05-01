@@ -3,7 +3,6 @@ import styled from 'styled-components';
 const ApplyCancel = styled.section`
 	display: flex;
 	flex-direction: column;
-	width: 31.3rem;
 	height: 23.2rem;
 	padding: 1.8rem 2rem;
 	align-items: center;
@@ -48,7 +47,7 @@ const ApplyCancel = styled.section`
 		button {
 			display: flex;
 			height: 3.6rem;
-			padding: 1.2rem 1.8rem;
+			padding: 1.2rem 2rem;
 			box-sizing: border-box;
 			justify-content: center;
 			align-items: center;
