@@ -36,7 +36,7 @@ export const updatePortfolio = async ({
 	portfolio: PortfolioPayload;
 }) => {
 	try {
-		const response = await axiosAuthInstance.put(EndPoint.PORTFOLIO.update(portfolioId), {
+		const response = await axiosAuthInstance.put<string>(EndPoint.PORTFOLIO.update(portfolioId), {
 			...portfolio,
 		});
 
