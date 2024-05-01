@@ -102,6 +102,10 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 			gap: 1.2rem;
 			margin-top: 6rem;
 
+			.second {
+				margin-top: -1rem;
+			}
+
 			.input-link {
 				display: flex;
 				justify-content: space-between;
@@ -151,6 +155,12 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 				top: 0rem;
 				z-index: 301;
 				background-color: #fff;
+			}
+
+			.target-area {
+				width: 66rem;
+				height: 1rem;
+				border: 1px solid red;
 			}
 
 			.header-title {

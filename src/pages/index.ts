@@ -24,6 +24,7 @@ import { userData } from './profile/userData';
 import RecruitPostingApply from './recruit/recruitManagePage/RecruitPostingApply';
 import RecruitMyPostings from './recruit/recruitManagePage/RecruitMyPostings';
 import CompleteSignUpPage from './account/complete/CompleteSignUpPage';
+import PrivateRouter from './routes/PrivateRouter';
 
 export {
 	MainPage,
@@ -53,4 +54,5 @@ export {
 	RecruitPostingApply,
 	RecruitMyPostings,
 	CompleteSignUpPage,
+	PrivateRouter,
 };

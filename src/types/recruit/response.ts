@@ -160,6 +160,7 @@ export interface ApplicantInfo {
 	universityName: string;
 	userId: string;
 	year: number;
+	email: string;
 }
 
 export interface PageInfo {

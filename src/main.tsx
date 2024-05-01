@@ -20,6 +20,7 @@ import {
 	RecruitPostingApply,
 	RecruitMyPostings,
 	CompleteSignUpPage,
+	PrivateRouter,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -37,8 +38,9 @@ const router = createBrowserRouter([
 				element: <RecruitDetailPage />,
 			},
 			{
-				path: '/recruitment/applicants',
-				element: <ApplierManagePage />,
+				path: '/recruitment/applicants/:id',
+				element: <PrivateRouter />,
+				children: [{ path: '', element: <ApplierManagePage /> }],
 			},
 			{
 				path: 'galary',

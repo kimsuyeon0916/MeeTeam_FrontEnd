@@ -46,6 +46,7 @@ const RecruitDetailPage = () => {
 	const isNeedLogin = useRecoilValue(needLoginModalState);
 	const step = useRecoilValue(applyStepState);
 	const setFormData = useSetRecoilState(recruitInputState);
+
 	const stepLists: JsxElementComponentProps = {
 		0: <ApplyModal />,
 		1: <ConfirmModal />,
@@ -174,7 +175,11 @@ const RecruitDetailPage = () => {
 				{detailedData && (
 					<section className='container-btn'>
 						{detailedData.isWriter && !detailedData.isClosed && (
-							<WriterFooter onClickEditPage={onClickEditPage} pageNum={pageNum} />
+							<WriterFooter
+								isWriter={detailedData.isWriter}
+								onClickEditPage={onClickEditPage}
+								pageNum={pageNum}
+							/>
 						)}
 						{!detailedData.isWriter && !detailedData.isClosed && (
 							<ApplierFooter
