@@ -15,17 +15,23 @@ import {
 	XBtn,
 } from '../../../assets';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { detailedFilterState, needLoginModalState, recruitFilterState } from '../../../atom';
+import {
+	detailedFilterState,
+	needLoginModalState,
+	previousLocationState,
+	recruitFilterState,
+} from '../../../atom';
 import { getPostList } from '../../../service/recruit/board';
 import { useQuery } from '@tanstack/react-query';
 import { useLogin } from '../../../hooks';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { fixModalBackground } from '../../../utils';
 
 const START_PAGE_NUM = 1;
 
 const RecruitPage = () => {
 	const navigate = useNavigate();
+	const location = useLocation();
 	const fieldRef = useRef<HTMLDivElement | null>(null);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [searchKeyword, setSearchKeyword] = useState('');
@@ -37,11 +43,13 @@ const RecruitPage = () => {
 			value: '분야를 선택해주세요',
 		},
 	});
+
 	const [page, setPage] = useState<number>(START_PAGE_NUM);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [isFieldOpen, setIsFieldOpen] = useState<boolean>(false);
 	const [filterState, setFilterState] = useRecoilState(recruitFilterState);
 	const setDetailedFilterState = useSetRecoilState(detailedFilterState);
+	const setPreviousLocationState = useSetRecoilState(previousLocationState);
 	const [isOpenDetail, setIsOpenDetail] = useState({
 		skill: true,
 		role: false,
@@ -211,6 +219,10 @@ const RecruitPage = () => {
 	useEffect(() => {
 		fixModalBackground(needLoginModal.isOpen);
 	}, [needLoginModal.isOpen]);
+
+	useEffect(() => {
+		setPreviousLocationState(location.pathname + location.search);
+	}, [location]);
 
 	useEffect(() => {
 		const isScope = searchParams.get('scope');
