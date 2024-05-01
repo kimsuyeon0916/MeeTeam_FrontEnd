@@ -7,15 +7,15 @@ import { useMutation } from '@tanstack/react-query';
 import { deletePostingRecruit } from '../../../../service';
 
 interface WriterFooter {
-	isWriter: boolean;
+	writerId: string;
 	pageNum: number;
 	onClickEditPage: () => void;
 }
 
-const WriterFooter = ({ isWriter, pageNum, onClickEditPage }: WriterFooter) => {
+const WriterFooter = ({ writerId, pageNum, onClickEditPage }: WriterFooter) => {
 	const navigate = useNavigate();
 	const setIsClose = useSetRecoilState(applyCloseModalState);
-	sessionStorage.setItem('isWriter', isWriter.toString());
+	sessionStorage.setItem('writerId', writerId);
 
 	const deletePosting = useMutation({
 		mutationFn: (pageNum: number) => deletePostingRecruit(pageNum),

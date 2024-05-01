@@ -19,10 +19,10 @@ import {
 	ApplyClose,
 } from '../../../components';
 import { calculateDate, fixModalBackground } from '../../../utils';
-import { JsxElementComponentProps, RoleInfo, RoleForPost } from '../../../types';
+import { JsxElementComponentProps } from '../../../types';
 import { useQuery } from '@tanstack/react-query';
 import { getPostingData } from '../../../service';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import {
 	applyCancelModalState,
 	applyCloseModalState,
@@ -30,7 +30,6 @@ import {
 	applyStepState,
 	commentDeleteModalState,
 	needLoginModalState,
-	recruitInputState,
 } from '../../../atom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLogin } from '../../../hooks';
@@ -45,7 +44,6 @@ const RecruitDetailPage = () => {
 	const isDelete = useRecoilValue(commentDeleteModalState);
 	const isNeedLogin = useRecoilValue(needLoginModalState);
 	const step = useRecoilValue(applyStepState);
-	const setFormData = useSetRecoilState(recruitInputState);
 
 	const stepLists: JsxElementComponentProps = {
 		0: <ApplyModal />,
@@ -67,40 +65,8 @@ const RecruitDetailPage = () => {
 		}
 	}, [detailedData?.comments]);
 
-	const convertRoleInfo = (roleInfo: RoleInfo): RoleForPost => {
-		return {
-			roleId: roleInfo.roleId,
-			count: roleInfo.recruitCount,
-			skillIds: roleInfo.skills.map(e => e.id),
-			skills: roleInfo.skills,
-			roleName: roleInfo.roleName,
-		};
-	};
-
 	const onClickEditPage = async () => {
-		const transformedRoles = detailedData?.recruitmentRoles.map(convertRoleInfo);
-		if (detailedData && transformedRoles) {
-			setFormData({
-				pageNum: pageNum,
-				scope: detailedData.scope,
-				category: detailedData.category,
-				deadline: detailedData.deadline,
-				proceedingStart: detailedData.proceedingStart,
-				proceedingEnd: detailedData.proceedingEnd,
-				fieldId: 1,
-				proceedType: detailedData.proceedType,
-				courseTag: {
-					courseTagName: detailedData.courseName,
-					courseProfessor: detailedData.courseProfessor,
-					isCourse: detailedData.courseName || detailedData.courseProfessor ? true : false,
-				},
-				recruitmentRoles: transformedRoles,
-				tags: detailedData.tags.map(e => e.name),
-				title: detailedData.title,
-				content: detailedData.content,
-			});
-		}
-		navigate('/edit/recruit');
+		navigate(`/recruitment/postings/edit/${pageNum}`);
 	};
 
 	useEffect(() => {
@@ -176,7 +142,7 @@ const RecruitDetailPage = () => {
 					<section className='container-btn'>
 						{detailedData.isWriter && !detailedData.isClosed && (
 							<WriterFooter
-								isWriter={detailedData.isWriter}
+								writerId={detailedData.writerId}
 								onClickEditPage={onClickEditPage}
 								pageNum={pageNum}
 							/>

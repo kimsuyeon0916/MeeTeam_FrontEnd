@@ -38,7 +38,7 @@ const router = createBrowserRouter([
 				element: <RecruitDetailPage />,
 			},
 			{
-				path: '/recruitment/applicants/:id',
+				path: 'recruitment/applicants/:id',
 				element: <PrivateRouter />,
 				children: [{ path: '', element: <ApplierManagePage /> }],
 			},
@@ -85,8 +85,14 @@ const router = createBrowserRouter([
 				element: <RecruitCreatePage />,
 			},
 			{
-				path: 'edit/recruit',
-				element: <RecruitCreatePage />,
+				path: 'recruitment/postings/edit/:id',
+				element: <PrivateRouter />,
+				children: [
+					{
+						path: '',
+						element: <RecruitCreatePage />,
+					},
+				],
 			},
 			{
 				path: 'profile/:userId?',
