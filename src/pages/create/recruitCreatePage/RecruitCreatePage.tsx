@@ -58,7 +58,7 @@ const RecruitCreatePage = () => {
 				...prev,
 				isSubmitted: false,
 			}));
-			navigate(`/recruitment/postings/${formData.pageNum}`);
+			navigate(`/recruitment/postings/${pageNum}`);
 		},
 	});
 
