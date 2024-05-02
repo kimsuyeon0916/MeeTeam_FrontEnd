@@ -98,11 +98,10 @@ const PortfolioEditPage = () => {
 	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	const uploadImageList = useRecoilValue(uploadImageListState);
-	const {
-		data: imageResponse,
-		refetch: readImageListPresignedUrl,
-		isSuccess: isSuccessReadUrl,
-	} = useReadImageListPresignedUrl(uploadImageList[0]?.fileName as string, portfolioId);
+	const { data: imageResponse, refetch: readImageListPresignedUrl } = useReadImageListPresignedUrl(
+		uploadImageList[0]?.fileName as string,
+		portfolioId
+	);
 
 	const uploadImageFileInSuccess = () => {
 		if (!isSubmitted && imageResponse) {
@@ -156,7 +155,7 @@ const PortfolioEditPage = () => {
 				});
 			});
 		}
-	}, [isSuccessReadUrl]);
+	}, [imageResponse]);
 
 	const submitHandler: SubmitHandler<FormValues> = () => {
 		readImageListPresignedUrl(); // presignedUrl 발급
