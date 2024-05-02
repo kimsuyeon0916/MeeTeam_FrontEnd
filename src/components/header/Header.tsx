@@ -3,7 +3,7 @@ import S from './Header.styled';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { DropdownArrow, Logo, LogoName } from '../../assets';
 import { ProfileImage, WaitModal } from '..';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { recruitFilterState, userState, waitModalState } from '../../atom';
 import { useLogin, useSignOut } from '../../hooks';
 import { fixModalBackground } from '../../utils';
@@ -123,15 +123,15 @@ const Header = () => {
 				</section>
 				<section>
 					<div className='header__menu'>
-						<span className='header__nickname body2-semibold'>
+						{/* <span className='header__nickname body2-semibold'>
 							{isLoggedIn && `안녕하세요, ${userInfo?.nickname}님!`}
-						</span>
+						</span> */}
 						<div className='header__menu--my' ref={dropdownRef}>
 							<section onClick={onClickMy}>
 								{isLoggedIn ? (
 									<article className='icon-container'>
 										<div className='icon-border'>
-											{userInfo?.userId && <ProfileImage userId={userInfo?.userId} size='3rem' />}
+											<ProfileImage url={userInfo?.imageUrl} size='3rem' />
 										</div>
 										<img src={DropdownArrow} />
 									</article>
