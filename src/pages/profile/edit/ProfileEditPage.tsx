@@ -83,12 +83,12 @@ const ProfileEditPage = () => {
 	});
 
 	// 이미지 업로드
-	const profileImage = useRecoilValue(uploadImageState);
+	const uploadImage = useRecoilValue(uploadImageState);
 	const {
 		data: imageResponse,
 		refetch: readImagePresignedUrl,
 		isSuccess: isSuccessReadUrl,
-	} = useReadImagePresignedUrl(profileImage?.fileName as string);
+	} = useReadImagePresignedUrl(uploadImage?.fileName as string);
 
 	const uploadImageFileInSuccess = () => {
 		const formData = getValues();
@@ -114,13 +114,13 @@ const ProfileEditPage = () => {
 		if (isSuccessReadUrl && imageResponse) {
 			uploadImageFile({
 				presignedUrl: imageResponse.url,
-				imageFile: profileImage?.file as File,
+				imageFile: uploadImage?.file as File,
 			});
 		}
 	}, [isSuccessReadUrl]);
 
 	const submitHandler: SubmitHandler<FormValues> = data => {
-		if (profileImage?.fileName) {
+		if (uploadImage) {
 			// 이미지를 처음 업로드 및 변경하는 경우에만 S3에 업로드(기존!==지금)
 			readImagePresignedUrl(); // presignedUrl 발급
 		} else {
