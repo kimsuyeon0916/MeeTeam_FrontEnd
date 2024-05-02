@@ -133,7 +133,7 @@ const ProfileEditPage = () => {
 				isUniversityEmailPublic: isUniversityEmailPublic,
 				isSubEmailPublic: isSubEmailPublic,
 				skills: skillList.map(skill => skill.id),
-				portfolios: pinnedPortfolioList,
+				portfolios: pinnedPortfolioList as string[],
 			});
 		}
 	};

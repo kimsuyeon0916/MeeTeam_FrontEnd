@@ -10,7 +10,7 @@ import {
 	LinkForm,
 	DefaultBtn,
 	PrimaryBtn,
-	MuiDatepicker,
+	MuiDatepickerController,
 	PortfolioImageUpload,
 	PortfolioImageModal,
 	ModalPortal,
@@ -324,8 +324,8 @@ const PortfolioEditPage = () => {
 								<S.PortfolioEditColumn>
 									<S.PortfolioEditLabel $required={true}>진행기간</S.PortfolioEditLabel>
 									<S.PortfolioEditRow $gap='2rem'>
-										<MuiDatepicker name={`startDate`} control={control} />
-										<MuiDatepicker name={`endDate`} control={control} />
+										<MuiDatepickerController name={`startDate`} control={control} />
+										<MuiDatepickerController name={`endDate`} control={control} />
 									</S.PortfolioEditRow>
 								</S.PortfolioEditColumn>
 								{/* 진행방식 */}

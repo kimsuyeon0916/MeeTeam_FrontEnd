@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface InputStyle {
-	default?: string;
+	$default?: string;
 	$focus?: string;
 	$arrow?: string;
 	disabled?: boolean;
@@ -84,7 +84,7 @@ const Input = styled.input<InputStyle>`
 		var(--Form-border-default, ${props => (props.disabled ? '#8E8E8E' : '#e3e3e3')});
 	background: ${props =>
 		props.disabled ? 'var(--Form-fill-disabled, #E3E3E3)' : 'var(--Form-fill-others, #fff)'};
-	${props => props.default && `background-image: url(${props.default}); `}
+	${props => props.$default && `background-image: url(${props.$default}); `}
 	background-repeat: no-repeat; // 배경 아이콘 반복 X
 	background-position: ${props =>
 		props.$arrow === 'left' ? 'center left 1.6rem' : 'center right 1.6rem'};

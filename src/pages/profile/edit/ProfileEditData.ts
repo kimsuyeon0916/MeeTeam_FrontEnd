@@ -32,7 +32,7 @@ const interest = {
 	placeholder: '역할',
 	name: 'interest',
 	icon: {
-		default: ArrowBottom,
+		$default: ArrowBottom,
 		$focus: ArrowTop,
 		$arrow: 'right',
 	},
@@ -59,7 +59,7 @@ const phone = {
 	placeholder: '휴대폰 번호',
 	name: 'phone',
 	icon: {
-		default: GrayPhone,
+		$default: GrayPhone,
 		$focus: BlackPhone,
 		$arrow: 'left',
 	},
@@ -70,7 +70,7 @@ const universityEmail = {
 	placeholder: '학교 이메일',
 	name: 'universityEmail',
 	icon: {
-		default: GrayEmail,
+		$default: GrayEmail,
 		$focus: BlackEmail,
 		$arrow: 'left',
 	},
@@ -84,7 +84,7 @@ const subEmail = {
 	placeholder: '이메일',
 	name: 'subEmail',
 	icon: {
-		default: GrayEmail,
+		$default: GrayEmail,
 		$focus: BlackEmail,
 		$arrow: 'left',
 	},
@@ -128,7 +128,7 @@ const maxGpa = {
 	placeholder: '최대학점',
 	name: 'maxGpa',
 	icon: {
-		default: ArrowBottom,
+		$default: ArrowBottom,
 		$focus: ArrowTop,
 		$arrow: 'right',
 	},
@@ -139,7 +139,7 @@ const skills = {
 	placeholder: '보유 스킬을 검색해주세요',
 	name: 'skills',
 	icon: {
-		default: Search,
+		$default: Search,
 		$arrow: 'right',
 	},
 };
@@ -148,7 +148,7 @@ const linkDescription = {
 	type: 'button',
 	placeholder: 'Link',
 	icon: {
-		default: ArrowBottom,
+		$default: ArrowBottom,
 		$focus: ArrowTop,
 		$arrow: 'right',
 	},
@@ -162,7 +162,7 @@ const linkUrl = {
 const awardDate = {
 	type: 'string',
 	icon: {
-		default: GrayCalendar,
+		$default: GrayCalendar,
 		$focus: BlackCalendar,
 		$arrow: 'right',
 	},

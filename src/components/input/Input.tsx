@@ -10,7 +10,7 @@ import {
 } from 'react-hook-form';
 
 export interface Icon {
-	default: string;
+	$default: string;
 	$focus?: string;
 	$arrow: string;
 }

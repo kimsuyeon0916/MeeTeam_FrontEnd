@@ -26,9 +26,9 @@ const field = {
 	name: 'field',
 	validation: INPUT_VALIDATION.field,
 	icon: {
-		default: ArrowBottom,
-		focus: ArrowTop,
-		arrow: 'right',
+		$default: ArrowBottom,
+		$focus: ArrowTop,
+		$arrow: 'right',
 	},
 };
 
@@ -39,9 +39,9 @@ const role = {
 	name: 'role',
 	validation: INPUT_VALIDATION.role,
 	icon: {
-		default: ArrowBottom,
-		focus: ArrowTop,
-		arrow: 'right',
+		$default: ArrowBottom,
+		$focus: ArrowTop,
+		$arrow: 'right',
 	},
 };
 
@@ -51,8 +51,8 @@ const skills = {
 	placeholder: '보유 스킬을 검색해주세요',
 	name: 'skills',
 	icon: {
-		default: Search,
-		arrow: 'right',
+		$default: Search,
+		$arrow: 'right',
 	},
 };
 
