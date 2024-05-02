@@ -154,7 +154,7 @@ const Header = () => {
 										className='menu'
 										onClick={() => {
 											setOpenDrop(false);
-											navigate('/'); // 임시 설정
+											navigate('/portfolio/management');
 										}}
 									>
 										포트폴리오
