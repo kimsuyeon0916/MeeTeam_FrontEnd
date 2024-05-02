@@ -4,12 +4,13 @@ import S from './Button.styled';
 interface Button {
 	type: 'button' | 'submit';
 	title: string;
+	icon?: string;
 	disabled?: boolean;
 	small?: boolean;
 	handleClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const PrimaryBtn = ({ type, title, disabled, small, handleClick }: Button) => {
+const PrimaryBtn = ({ type, title, icon, disabled, small, handleClick }: Button) => {
 	return (
 		<S.PrimaryButtonLayout
 			type={type}
@@ -18,6 +19,7 @@ const PrimaryBtn = ({ type, title, disabled, small, handleClick }: Button) => {
 			$small={small}
 			onClick={handleClick}
 		>
+			{icon && <img src={icon} alt='아이콘' />}
 			{title}
 		</S.PrimaryButtonLayout>
 	);

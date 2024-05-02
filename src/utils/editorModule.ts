@@ -2,7 +2,7 @@ export const modules = {
 	toolbar: {
 		container: [
 			[{ header: [1, 2, 3, 4, 5, 6, false] }],
-			[{ font: [] }],
+			// [{ font: [] }],
 			[{ align: [] }],
 			['bold', 'italic', 'underline', 'strike', 'blockquote'],
 			[{ list: 'ordered' }, { list: 'bullet' }, 'link'],
@@ -49,7 +49,7 @@ export const modules = {
 				},
 				{ background: [] },
 			],
-			['image'],
+			// ['image'],
 			['clean'],
 		],
 	},

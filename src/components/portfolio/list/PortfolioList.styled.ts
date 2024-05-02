@@ -41,7 +41,7 @@ const PortfolioList = styled.div`
 	}
 
 	article {
-		min-width: 27.4rem;
+		width: 27.4rem;
 	}
 `;
 

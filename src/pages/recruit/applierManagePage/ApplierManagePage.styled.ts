@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface ApplicantManage {
-	$isChecked: boolean;
+	$isChecked?: boolean;
 	$isOpenCurrent: boolean;
 }
 

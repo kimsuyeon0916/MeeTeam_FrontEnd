@@ -7,6 +7,8 @@ import SessionStorageEffect from './SessionStorageEffect';
 import LocalStorageEffect from './LocalStorageEffect';
 import fixModalBackground from './fixModalBackground';
 import simpleDate from './simpleDate';
+import zipFile from './zipFile';
+import unzipFile from './unzipFile';
 import isNotNumber from './isNotNumber';
 import calculateDate from './calculateDate';
 
@@ -21,6 +23,8 @@ export {
 	LocalStorageEffect,
 	fixModalBackground,
 	simpleDate,
+	zipFile,
+	unzipFile,
 	isNotNumber,
 	calculateDate,
 };

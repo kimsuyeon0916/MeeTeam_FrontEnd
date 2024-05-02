@@ -14,6 +14,7 @@ import {
 	ProfileDetailsPage,
 	ProfileEditPage,
 	PortfolioDetailsPage,
+	PortfolioEditPage,
 	ApplierManagePage,
 	RecruitManageWrapper,
 	RecruitPostingBookmark,
@@ -100,9 +101,13 @@ const router = createBrowserRouter([
 				element: <PortfolioDetailsPage />,
 			},
 			{
+				path: 'portfolio/edit/:portfolioId?',
+				element: <PortfolioEditPage />, // 생성 및 편집
+			},
+      {
 				path: 'portfolio/management',
 				element: <PortfolioManagementPage />,
-			},
+      }
 		],
 	},
 ]);

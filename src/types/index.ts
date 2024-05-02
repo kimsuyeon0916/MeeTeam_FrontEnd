@@ -1,10 +1,11 @@
-import type { SignUpPayload, UpdateProfilePayload } from './payload';
+import type { SignUpPayload, UpdateProfilePayload, PortfolioPayload } from './payload';
 import type {
 	UserReponse,
 	University,
 	Department,
 	PortfolioListResponse,
 	PageInfo,
+	ImageResponse,
 } from './response';
 import type { CustomInstance } from './api';
 import type { User, Contact, Skill, Award, Link } from './user';
@@ -57,7 +58,7 @@ import type {
 import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
 import type { Search } from './search';
 import type { Portfolio, PortfolioDetails } from './portfolio';
-import type { Image } from './image';
+import type { Image, BlobFile } from './image';
 
 export type {
 	SignUpPayload,
@@ -88,6 +89,9 @@ export type {
 	Search,
 	PortfolioDetails,
 	Image,
+	PortfolioPayload,
+	ImageResponse,
+	BlobFile,
 	PortfolioListResponse,
 	PageInfo,
 	RecruitPostings,

@@ -30,6 +30,14 @@ export const EndPoint = {
 	PORTFOLIO: {
 		read: (portfolioId: string) => `/portfolio/${portfolioId}`,
 		readPortfolioList: '/portfolio',
+		create: '/portfolio',
+		update: (portfolioId: string) => `/portfolio/${portfolioId}`,
+	},
+
+	/* presignedURL */
+	UPLOAD_IMAGE: {
+		profile: '/profile/pre-signed-url',
+		portfolio: '/portfolio/pre-signed-url',
 	},
 
 	/* recruit */

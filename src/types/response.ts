@@ -21,6 +21,12 @@ export interface Department {
 	departmentName: string;
 }
 
+export interface ImageResponse {
+	serviceType: string;
+	fileName: string;
+	url: string;
+}
+
 export interface PortfolioListResponse {
 	portfolios: Portfolio[];
 	pageInfo: PageInfo;
