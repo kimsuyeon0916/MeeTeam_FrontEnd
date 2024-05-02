@@ -12,10 +12,11 @@ import useDebounce from './useDebounce';
 import useValid from './useValid';
 import { useReadSkillList, useReadRoleList } from './useSearch';
 import {
-	useReadPortfolioList,
 	useReadPortfolio,
-	useCreatePortfolio,
+  useCreatePortfolio,
 	useUpdatePortfolio,
+	useReadInfinitePortfolioList,
+	usePaginationPortfolioList,
 } from './usePortfolio';
 import {
 	useReadImagePresignedUrl,
@@ -42,12 +43,13 @@ export {
 	useReadSkillList,
 	useReadRoleList,
 	useReadPortfolio,
+	useReadInfinitePortfolioList,
+	usePaginationPortfolioList,
 	useCreatePortfolio,
 	useUpdatePortfolio,
 	useReadImagePresignedUrl,
 	useReadImageListPresignedUrl,
 	useUploadImageFile,
-	useReadPortfolioList,
 	useIntersection,
 	useBookmark,
 	useLogin,

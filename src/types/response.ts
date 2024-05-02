@@ -36,4 +36,6 @@ export interface PageInfo {
 	page: number;
 	size: number;
 	hasNextPage?: boolean;
+	totalContents?: number;
+	totalPages?: number;
 }

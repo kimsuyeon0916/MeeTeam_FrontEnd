@@ -21,6 +21,7 @@ import {
 	RecruitPostingApply,
 	RecruitMyPostings,
 	CompleteSignUpPage,
+	PortfolioManagementPage,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -103,6 +104,10 @@ const router = createBrowserRouter([
 				path: 'portfolio/edit/:portfolioId?',
 				element: <PortfolioEditPage />, // 생성 및 편집
 			},
+      {
+				path: 'portfolio/management',
+				element: <PortfolioManagementPage />,
+      }
 		],
 	},
 ]);
