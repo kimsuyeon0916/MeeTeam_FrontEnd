@@ -3,7 +3,7 @@ import { CommentDeleteModal, KebabMenu, ProfileImage, ReplyComment, ReplyInput }
 import S from './Comment.styled';
 import { Comment as CommentType } from '../../../types';
 import { useParams } from 'react-router-dom';
-import { useCommentDelete, useCommentEdit } from '../../../hooks';
+import { useCommentEdit } from '../../../hooks';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { commentDeleteModalState, userState } from '../../../atom';

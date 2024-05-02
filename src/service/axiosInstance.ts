@@ -18,6 +18,10 @@ axiosInstance.defaults.paramsSerializer = params => {
 	return qs.stringify(params, { arrayFormat: 'repeat' });
 };
 
+axiosAuthInstance.defaults.paramsSerializer = params => {
+	return qs.stringify(params, { arrayFormat: 'repeat' });
+};
+
 const onResponse = (response: AxiosResponse): AxiosResponse => {
 	return response.data;
 };

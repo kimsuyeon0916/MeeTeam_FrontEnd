@@ -254,8 +254,8 @@ const ContainerCourse = styled.article<Course>`
 				background: ${props => (props.$isChecked ? 'transparent' : '#e3e3e3')};
 
 				&:hover {
-					border: 1px solid #5877fc;
-					transition: 0.2s ease-in-out;
+					border: ${props => props.$isChecked && '1px solid #5877fc'};
+					transition: ${props => props.$isChecked && '0.2s ease-in-out'};
 				}
 				&:focus {
 					outline: none;
@@ -278,8 +278,13 @@ const ContainerCourse = styled.article<Course>`
 				border: 1px solid #e3e3e3;
 				box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 
-				span {
+				.option {
 					cursor: pointer;
+
+					&:hover {
+						color: #000000;
+						transition: 0.2s ease-in-out;
+					}
 				}
 			}
 		}

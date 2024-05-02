@@ -143,6 +143,8 @@ import ApplyRole from './recruit/role/ApplyRole';
 import OpenChatModal from './recruit/applicants/modal/OpenChatModal';
 import Toast from './recruit/applicants/toast/Toast';
 import NeedLogin from './recruit/recruitDetail/modal/needLogin/NeedLogin';
+import RefuseModal from './recruit/applicants/modal/RefuseModal';
+import ApproveModal from './recruit/applicants/modal/ApproveModal';
 import TabMenu from './tabMenu/TabMenu';
 
 export {
@@ -282,5 +284,7 @@ export {
 	OpenChatModal,
 	Toast,
 	NeedLogin,
+	RefuseModal,
+	ApproveModal,
 	TabMenu,
 };

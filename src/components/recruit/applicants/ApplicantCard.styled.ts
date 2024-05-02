@@ -16,7 +16,7 @@ const ApplicantCard = styled.article`
 	}
 
 	.value {
-		color: #373f41;
+		color: #000000;
 	}
 
 	.container-user {

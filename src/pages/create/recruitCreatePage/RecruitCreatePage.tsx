@@ -8,33 +8,42 @@ import {
 	RecruitTags,
 	RecruitRoleForm,
 } from '../../../components/index';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
 import { recruitInputState, validState } from '../../../atom';
-import { editPostingRecruit, postingRecruit } from '../../../service/recruit/posting';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { EditPosting, InputState } from '../../../types';
+import { getPostingData, editPostingRecruit, postingRecruit } from '../../../service';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { EditPosting, InputState, RoleInfo, RoleForPost } from '../../../types';
 import { fixModalBackground, simpleDate } from '../../../utils';
+import { useLogin } from '../../../hooks';
 
 const RecruitCreatePage = () => {
+	const { id } = useParams();
 	const location = useLocation();
 	const navigate = useNavigate();
+	const { isLoggedIn } = useLogin();
 	const setIsSubmit = useSetRecoilState(validState);
 	const [formData, setFormData] = useRecoilState<InputState>(recruitInputState);
 	const validCheck = useRecoilValue(validState);
 	const [beforeSubmit, setBeforeSubmit] = useState<boolean>(false);
-	const baseCheck =
-		validCheck.isTitle &&
-		validCheck.isDeadline &&
-		validCheck.isScope &&
+	const postAvailable =
 		validCheck.isCategory &&
-		validCheck.isEndDate &&
-		validCheck.isProcedure;
+		validCheck.isDeadline &&
+		validCheck.isProcedure &&
+		validCheck.isScope &&
+		validCheck.isContent &&
+		validCheck.isTitle &&
+		validCheck.isRole &&
+		validCheck.isContent;
+	const pageNum = Number(id);
 
+	const { data, isSuccess } = useQuery({
+		queryKey: ['detailedPage', { pageNum, isLoggedIn }],
+		queryFn: () => getPostingData({ pageNum, isLoggedIn }),
+	});
 	const uploadPost = useMutation({
 		mutationFn: (formData: InputState) => postingRecruit(formData),
 		onSuccess: (data: { recruitmentPostId: number }) => {
-			resetFormData();
 			setIsSubmit(prev => ({
 				...prev,
 				isSubmitted: false,
@@ -49,7 +58,7 @@ const RecruitCreatePage = () => {
 				...prev,
 				isSubmitted: false,
 			}));
-			navigate(`/recruitment/postings/${formData.pageNum}`);
+			navigate(`/recruitment/postings/${pageNum}`);
 		},
 	});
 
@@ -57,7 +66,7 @@ const RecruitCreatePage = () => {
 		setFormData({
 			scope: '',
 			category: '',
-			fieldId: null,
+			fieldId: 1,
 			deadline: simpleDate(new Date()),
 			proceedType: '',
 			proceedingStart: simpleDate(new Date()),
@@ -76,15 +85,6 @@ const RecruitCreatePage = () => {
 
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
-		const postAvailable =
-			validCheck.isCategory &&
-			validCheck.isDeadline &&
-			validCheck.isProcedure &&
-			validCheck.isScope &&
-			validCheck.isContent &&
-			validCheck.isTitle;
-		const pageNum = formData.pageNum;
-
 		setIsSubmit(prev => ({
 			...prev,
 			isSubmitted: true,
@@ -93,19 +93,57 @@ const RecruitCreatePage = () => {
 		if (!postAvailable) {
 			setBeforeSubmit(true);
 		}
-
-		if (postAvailable && location.pathname.includes('recruitment/postings')) {
-			uploadPost.mutate(formData);
+		if (postAvailable && !location.pathname.includes('edit')) {
+			uploadPost.mutate(formData, {
+				onSuccess: () => resetFormData(),
+			});
 		}
-
 		if (postAvailable && location.pathname.includes('edit') && pageNum) {
-			editPost.mutate({ pageNum, formData });
+			editPost.mutate(
+				{ pageNum, formData },
+				{
+					onSuccess: () => resetFormData(),
+				}
+			);
 		}
 	};
 
 	useEffect(() => {
 		fixModalBackground(beforeSubmit);
 	}, [beforeSubmit]);
+
+	useEffect(() => {
+		const convertRoleInfo = (roleInfo: RoleInfo): RoleForPost => {
+			return {
+				roleId: roleInfo.roleId,
+				count: roleInfo.recruitCount,
+				skillIds: roleInfo.skills.map(e => e.id),
+				skills: roleInfo.skills,
+				roleName: roleInfo.roleName,
+			};
+		};
+		const transformedRoles = data?.recruitmentRoles.map(convertRoleInfo);
+		if (isSuccess && location.pathname.includes('edit') && data && transformedRoles) {
+			setFormData({
+				scope: data.scope,
+				category: data.category,
+				deadline: data.deadline,
+				proceedingStart: data.proceedingStart,
+				proceedingEnd: data.proceedingEnd,
+				fieldId: 1,
+				proceedType: data.proceedType,
+				courseTag: {
+					courseTagName: data.courseName,
+					courseProfessor: data.courseProfessor,
+					isCourse: data.courseName || data.courseProfessor ? true : false,
+				},
+				recruitmentRoles: transformedRoles,
+				tags: data.tags.map(e => e.name),
+				title: data.title,
+				content: data.content,
+			});
+		}
+	}, [data]);
 
 	return (
 		<S.RecruitCreatePage>
@@ -125,7 +163,7 @@ const RecruitCreatePage = () => {
 								완료해주세요.
 							</span>
 							<section className='wrapper-list__unsatisfied'>
-								{!baseCheck && (
+								{!postAvailable && (
 									<section className='container-list'>
 										<section className='subtitle body2-medium'>기본정보</section>
 										<section className='list-unsatisfied'>

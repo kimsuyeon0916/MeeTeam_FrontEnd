@@ -4,6 +4,8 @@ interface InputRoleForm {
 	$isRoleClicked: boolean;
 	$isSkillClicked: boolean;
 	$isNotValid: boolean;
+	$isRoleName: boolean;
+	$isCount: boolean;
 }
 
 const InputRoleForm = styled.article<InputRoleForm>`
@@ -43,6 +45,15 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		font-weight: 600;
 		line-height: 1.7rem;
 		letter-spacing: 0.0028rem;
+	}
+
+	.option {
+		cursor: pointer;
+
+		&:hover {
+			color: #000000;
+			transition: 0.2s ease-in-out;
+		}
 	}
 
 	.inputs {
@@ -101,6 +112,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 				width: 100%;
 				border: none;
 				outline: none;
+				color: ${props => props.$isRoleName && '#000000'};
 			}
 
 			&:hover {
@@ -130,10 +142,6 @@ const InputRoleForm = styled.article<InputRoleForm>`
 			background-color: #fff;
 			border-radius: 1rem;
 			box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
-
-			span {
-				cursor: pointer;
-			}
 		}
 
 		.dropdown-skill {
@@ -233,6 +241,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 			box-sizing: border-box;
 			border: 0.1rem solid #e3e3e3;
 			border-radius: 0.75rem;
+			color: ${props => props.$isCount && '#000000'};
 
 			&:hover {
 				border: 1px solid #5877fc;
@@ -293,7 +302,6 @@ const InputRoleForm = styled.article<InputRoleForm>`
 	.add-btn {
 		button {
 			display: flex;
-			width: 9.2rem;
 			height: 4.8rem;
 			padding: 1.2rem 3.2rem;
 			justify-content: center;

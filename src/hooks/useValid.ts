@@ -80,7 +80,7 @@ export default function useValid(data: InputState) {
 		} else {
 			setValidMessage(prev => ({ ...prev, scope: '' }));
 		}
-		setIsValid(prev => ({ ...prev, isScope: data.scope !== '' }));
+		setIsValid(prev => ({ ...prev, isScope: data.scope !== '' ? true : false }));
 	}, [data.scope]);
 
 	useEffect(() => {
@@ -107,7 +107,7 @@ export default function useValid(data: InputState) {
 		} else {
 			setValidMessage(prev => ({ ...prev, content: '' }));
 		}
-		setIsValid(prev => ({ ...prev, isContent: data.content !== '' }));
+		setIsValid(prev => ({ ...prev, isContent: data.content !== '<p><br></p>' }));
 	}, [data.content]);
 
 	useEffect(() => {

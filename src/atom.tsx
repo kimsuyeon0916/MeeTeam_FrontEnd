@@ -79,6 +79,14 @@ export const waitModalState = atom({
 	default: false,
 });
 
+export const applicantModalState = atom({
+	key: 'refuseApplicantModalState',
+	default: {
+		approve: false,
+		refuse: false,
+	},
+});
+
 export const recruitInputState = atom<InputState>({
 	key: 'recruitInputState',
 	default: {
@@ -159,6 +167,11 @@ export const detailedFilterState = atom<DetailedFilter>({
 		role: [],
 		tag: [],
 	},
+});
+
+export const previousLocationState = atom({
+	key: 'previousLocationState',
+	default: '/',
 });
 
 export const recruitFilterState = atom<RecruitFilter>({
