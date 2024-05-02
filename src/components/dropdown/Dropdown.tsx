@@ -264,6 +264,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 																id='course'
 																onClick={onClickCheckbox}
 																className='input-checkbox'
+																checked={isChecked}
 															/>
 															<label className='course-label' htmlFor='course'>
 																수업

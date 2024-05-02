@@ -66,15 +66,8 @@ const ApplyModal = () => {
 						정보 공개 동의 시, 내 정보가 멤버들에게 보이며 팀매칭에 유리해집니다.
 					</span>
 					<article className='agreement'>
-						<input
-							type='checkbox'
-							id='agree'
-							onChange={onClickCheckbox}
-							onClick={onClickCheckbox}
-						/>
-						<label htmlFor='agree' onClick={onClickCheckbox}>
-							개인정보 열람 동의
-						</label>
+						<input type='checkbox' id='agree' onClick={onClickCheckbox} checked={isChecked} />
+						<label htmlFor='agree'>개인정보 열람 동의</label>
 					</article>
 				</section>
 			</article>
