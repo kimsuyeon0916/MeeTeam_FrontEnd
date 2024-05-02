@@ -74,7 +74,7 @@ const PortfolioImageModal = ({ onClose }: { onClose: () => void }) => {
 																		clickNumber={index + 1}
 																	/>
 																</S.PortfolioImageWrapper>
-																{fileName}
+																<S.PortfolioImageTitle>{fileName}</S.PortfolioImageTitle>
 															</S.PortfolioImageModalRow>
 															<S.PortfolioImageNumberIcon>{index + 1}</S.PortfolioImageNumberIcon>
 														</S.PortfolioImageItem>
@@ -88,7 +88,7 @@ const PortfolioImageModal = ({ onClose }: { onClose: () => void }) => {
 						)}
 					</Droppable>
 				</DragDropContext>
-				<S.PortfolioImageModalRow>
+				<S.PortfolioImageModalRow $gap='1.6rem'>
 					<div>
 						<DefaultBtn title='취소하기' type='button' handleClick={onClose} />
 					</div>

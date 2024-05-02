@@ -97,11 +97,11 @@ const PortfolioImageWrapper = styled.div`
 	align-items: center;
 `;
 
-const PortfolioImageModalRow = styled.div`
+const PortfolioImageModalRow = styled.div<{ $gap?: string }>`
 	flex: 1;
 	display: flex;
 	flex-direction: row;
-	column-gap: 1.6rem;
+	column-gap: ${props => props.$gap};
 	align-items: center;
 `;
 
@@ -109,6 +109,17 @@ const PortfolioImageModalColumn = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+`;
+
+const PortfolioImageTitle = styled.span`
+	display: flex;
+	flex: 1;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	word-break: break-word;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; // 원하는 라인수
+	-webkit-box-orient: vertical;
 `;
 
 const PortfolioImageNumberIcon = styled.span`
@@ -139,6 +150,7 @@ const S = {
 	PortfolioImageWrapper,
 	PortfolioImageModalRow,
 	PortfolioImageModalColumn,
+	PortfolioImageTitle,
 	PortfolioImageNumberIcon,
 };
 
