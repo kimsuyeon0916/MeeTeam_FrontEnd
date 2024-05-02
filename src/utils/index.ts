@@ -7,13 +7,10 @@ import SessionStorageEffect from './SessionStorageEffect';
 import LocalStorageEffect from './LocalStorageEffect';
 import fixModalBackground from './fixModalBackground';
 import simpleDate from './simpleDate';
-<<<<<<< HEAD
 import zipFile from './zipFile';
 import unzipFile from './unzipFile';
-=======
 import isNotNumber from './isNotNumber';
 import calculateDate from './calculateDate';
->>>>>>> release-1.0
 
 export {
 	modules,
@@ -26,11 +23,8 @@ export {
 	LocalStorageEffect,
 	fixModalBackground,
 	simpleDate,
-<<<<<<< HEAD
 	zipFile,
 	unzipFile,
-=======
 	isNotNumber,
 	calculateDate,
->>>>>>> release-1.0
 };

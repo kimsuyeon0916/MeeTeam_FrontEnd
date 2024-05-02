@@ -3,8 +3,6 @@ const REGEXP = {
 };
 
 export const INPUT_VALIDATION = {
-<<<<<<< HEAD
-=======
 	year: {
 		required: true,
 	},
@@ -17,7 +15,6 @@ export const INPUT_VALIDATION = {
 	email: {
 		required: true,
 	},
->>>>>>> release-1.0
 	nickname: {
 		required: '값이 입력되지 않았습니다',
 		pattern: {
@@ -36,7 +33,6 @@ export const INPUT_VALIDATION = {
 	introduction: {
 		maxLength: 20,
 	},
-<<<<<<< HEAD
 	portfolioImage: {
 		required: '포트폴리오를 대표할 이미지를 업로드해주세요',
 	},
@@ -64,8 +60,6 @@ export const INPUT_VALIDATION = {
 	content: {
 		required: true,
 	},
-=======
->>>>>>> release-1.0
 };
 
 export const TEXTAREA_VALIDATION = {
