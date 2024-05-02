@@ -29,6 +29,7 @@ export const EndPoint = {
 	/* portfolio */
 	PORTFOLIO: {
 		read: (portfolioId: string) => `/portfolio/${portfolioId}`,
+		readPortfolioList: '/portfolio',
 		create: '/portfolio',
 		update: (portfolioId: string) => `/portfolio/${portfolioId}`,
 	},

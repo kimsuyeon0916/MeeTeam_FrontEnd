@@ -1,9 +1,10 @@
-import { useQuery, useMutation, useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
-import { readPortfolioList, createPortfolio, readPortfolio, updatePortfolio } from '../service';
+import { useQuery, useMutation, useInfiniteQuery, useQueryClient, keepPreviousData } from '@tanstack/react-query';
+import { createPortfolio, readPortfolio, updatePortfolio, readInfinitePortfolioList, readPaginationPortfolioList } from '../service';
 
 const portfolioKeys = {
 	readPortfolio: (portfolioId: string) => ['readPortfolio', portfolioId],
-	readPortfolioList: (size: number) => ['readProfile', size],
+	readInfinitePortfolioList: (size: number) => ['readInfinitePortfolioList', size],
+	readPaginationPortfolioList: (size: number) => ['readPaginationPortfolioList', size],
 };
 
 /**
@@ -55,16 +56,26 @@ export const useUpdatePortfolio = ({
 /**
  * @description 포트폴리오 목록 무한스크롤 조회 API를 호출하는 hook입니다.
  */
-
-export const useReadPortfolioList = (size: number) => {
+export const useReadInfinitePortfolioList = (size: number) => {
 	return useInfiniteQuery({
-		queryKey: portfolioKeys.readPortfolioList(size),
-		queryFn: ({ pageParam }) => readPortfolioList({ size, pageParam }),
+		queryKey: portfolioKeys.readInfinitePortfolioList(size),
+		queryFn: ({ pageParam }) => readInfinitePortfolioList({ size, pageParam }),
 		initialPageParam: 1,
 		getNextPageParam: lastPage => {
 			if (lastPage?.pageInfo.hasNextPage) {
 				return lastPage?.pageInfo.page + 1;
 			} else return undefined;
 		},
+	});
+};
+
+/**
+ * @description 포트폴리오 목록 페이지네이션 조회 API를 호출하는 hook입니다.
+ */
+export const usePaginationPortfolioList = (size: number, pageParam: number) => {
+	return useQuery({
+		queryKey: portfolioKeys.readPaginationPortfolioList(size),
+		queryFn: () => readPaginationPortfolioList({ size, pageParam }),
+		placeholderData: keepPreviousData,
 	});
 };

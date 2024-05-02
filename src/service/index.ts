@@ -19,10 +19,11 @@ import {
 import { readProfile, updateProfile } from './user/Profile';
 import { readSkillList, readRoleList } from './search/search';
 import {
-	readPortfolioList,
 	readPortfolio,
-	createPortfolio,
+  createPortfolio,
 	updatePortfolio,
+	readInfinitePortfolioList,
+	readPaginationPortfolioList,
 } from './portfolio/portfolio';
 import { readImagePresignedUrl, readImageListPresignedUrl, uploadImageFile } from './image/image';
 import {
@@ -55,10 +56,11 @@ export {
 	readPortfolio,
 	createPortfolio,
 	updatePortfolio,
+  readInfinitePortfolioList,
+	readPaginationPortfolioList,
 	readImagePresignedUrl,
 	readImageListPresignedUrl,
 	uploadImageFile,
-	readPortfolioList,
 	getPostingData,
 	getApplyData,
 	applyRole,
