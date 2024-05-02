@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const RecruitRoles = styled.article`
 	margin-top: 8rem;
-	width: 110%;
 	overflow: hidden;
+	width: 100%;
 
 	.scroll {
 		width: 100%;
@@ -15,7 +15,7 @@ const RecruitRoles = styled.article`
 	}
 
 	.container-roles {
-		width: 140%;
+		width: 400%;
 		margin-top: 1.98rem;
 		display: flex;
 		gap: 1.6rem;

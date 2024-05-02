@@ -198,7 +198,13 @@ const InputRoleForm = () => {
 	}, [dropdownRef.current, dropdown.role, dropdown.skill]);
 
 	return (
-		<S.InputRoleForm $isRoleClicked={dropdown.role} $isSkillClicked={dropdown.skill} $isNotValid>
+		<S.InputRoleForm
+			$isRoleClicked={dropdown.role}
+			$isSkillClicked={dropdown.skill}
+			$isNotValid
+			$isRoleName={roleData.roleName !== ''}
+			$isCount={roleData.count !== null}
+		>
 			<article className='inputs' ref={dropdownRef}>
 				<span className='inputs-subtitle body2-semibold'>
 					역할 입력 <span className='dot'> *</span>
@@ -217,7 +223,7 @@ const InputRoleForm = () => {
 							<section className='dropdown'>
 								{!isLoadingRole &&
 									dataRole?.map((keyword: any) => (
-										<span key={keyword.id} onClick={onClickRole} id={keyword.id}>
+										<span key={keyword.id} onClick={onClickRole} id={keyword.id} className='option'>
 											{keyword.name}
 										</span>
 									))}
@@ -261,7 +267,7 @@ const InputRoleForm = () => {
 									dataSkill?.map((elem, _) => (
 										<span
 											key={elem.id}
-											className='skill-element body1-medium'
+											className='skill-element body1-medium option'
 											id={elem.id.toString()}
 											onClick={onClickSkill}
 										>

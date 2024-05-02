@@ -19,8 +19,13 @@ const RecruitManage = styled.article`
 		color: #151515;
 		font-size: 2.4rem;
 		font-weight: 700;
-		line-height: 2.9rem;
-		letter-spacing: 0.0048rem;
+	}
+
+	h3 {
+		color: #8e8e8e;
+		font-size: 2rem;
+		font-style: normal;
+		font-weight: 600;
 	}
 
 	.body1 {
@@ -30,6 +35,11 @@ const RecruitManage = styled.article`
 		font-weight: 600;
 		line-height: 1.9rem;
 		letter-spacing: 0.0032rem;
+	}
+
+	.txt-big {
+		color: #f7faff;
+		font-size: 1.6rem;
 	}
 
 	.wrapper {
@@ -76,9 +86,33 @@ const RecruitManage = styled.article`
 			margin-top: 3.25rem;
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
-			grid-template-rows: repeat(4, auto);
+			grid-template-rows: repeat(4, 1fr);
 			gap: 3.2rem 3.2rem;
 		}
+		.container-none {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 2rem;
+			margin-top: 20.25rem;
+			min-height: 54.8rem;
+		}
+	}
+
+	.container-pagination {
+		display: flex;
+		justify-content: center;
+	}
+
+	.btn-navigate {
+		display: flex;
+		height: 4.8rem;
+		padding: 1.2rem 3.2rem;
+		justify-content: center;
+		align-items: center;
+		gap: 0.75rem;
+		border-radius: 0.6rem;
+		background: #5877fc;
 	}
 `;
 

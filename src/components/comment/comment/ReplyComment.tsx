@@ -57,6 +57,17 @@ const ReplyComment = ({
 		},
 	];
 
+	const optionListsOthers = [
+		{
+			title: '답글',
+			optionClickHandler: () => {
+				if (replyComment) {
+					replyComment(nickname);
+				}
+			},
+		},
+	];
+
 	const editingComment = () => {
 		setIsEdit(false);
 		setShowKebab(true);
@@ -133,7 +144,7 @@ const ReplyComment = ({
 						)}
 					</section>
 				</article>
-				{isCommentWriter && showKebab && <KebabMenu options={optionLists} />}
+				{showKebab && <KebabMenu options={isCommentWriter ? optionLists : optionListsOthers} />}
 			</section>
 			<hr />
 			{isDelete.isDelete && (

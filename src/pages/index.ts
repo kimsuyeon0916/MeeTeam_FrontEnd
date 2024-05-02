@@ -26,6 +26,7 @@ import RecruitPostingBookmark from './recruit/recruitManagePage/RecruitPostingBo
 import RecruitPostingApply from './recruit/recruitManagePage/RecruitPostingApply';
 import RecruitMyPostings from './recruit/recruitManagePage/RecruitMyPostings';
 import CompleteSignUpPage from './account/complete/CompleteSignUpPage';
+import PrivateRouter from './routes/PrivateRouter';
 import PortfolioManagementPage from './portfolio/management/PortfolioManagmentPage';
 
 export {
@@ -58,5 +59,6 @@ export {
 	RecruitPostingApply,
 	RecruitMyPostings,
 	CompleteSignUpPage,
+	PrivateRouter,
 	PortfolioManagementPage,
 };

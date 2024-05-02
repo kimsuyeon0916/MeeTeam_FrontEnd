@@ -18,6 +18,7 @@ const ApplicantCard = ({
 	universityName,
 	userId,
 	year,
+	email,
 }: ApplicantInfo) => {
 	const [isChecked, setIsChecked] = useState<boolean>(false);
 	const setIsHold = useSetRecoilState(applicantHolder);
@@ -88,7 +89,7 @@ const ApplicantCard = ({
 									<span className='body2-medium value'>{name}</span>
 									<span className='body2-medium value'>{universityName}</span>
 									<span className='body2-medium value'>{departmentName}</span>
-									<span className='body2-medium value'>{'mingi123@naver.com'}</span>
+									<span className='body2-medium value'>{email}</span>
 								</section>
 							</section>
 							<section className='container-detailed__row'>

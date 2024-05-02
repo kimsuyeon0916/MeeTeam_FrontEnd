@@ -3,8 +3,10 @@ import S from './RecruitManagePage.styled';
 import { RecruitCard, Pagination } from '../../../components';
 import { useQuery } from '@tanstack/react-query';
 import { getManagementMyPost } from '../../../service/management/recruit';
+import { useNavigate } from 'react-router-dom';
 
 const RecruitMyPostings = () => {
+	const navigate = useNavigate();
 	const [page, setPage] = useState<number>(1);
 	const [menuState, setMenuState] = useState({
 		all: true,
@@ -34,7 +36,7 @@ const RecruitMyPostings = () => {
 
 	useEffect(() => {
 		refetch();
-	}, [isClosed]);
+	}, [isClosed, page]);
 	return (
 		<S.RecruitManage>
 			<article>
@@ -52,11 +54,25 @@ const RecruitMyPostings = () => {
 						마감
 					</span>
 				</section>
-				<section className='container-contents'>
-					{isSuccess &&
-						data &&
-						data.data.map((element, index) => <RecruitCard key={index} {...element} />)}
-				</section>
+				{data && (
+					<section className='container-contents'>
+						{data.data.map((element, index) => (
+							<RecruitCard key={index} {...element} />
+						))}
+					</section>
+				)}
+				{data && isSuccess && data.data.length === 0 && page === 1 && (
+					<section className='container-none'>
+						{menuState.all && <h3>아직 작성한 구인글이 없어요.</h3>}
+						{menuState.doing && <h3>진행중인 구인글이 없어요.</h3>}
+						{menuState.done && <h3>마감한 구인글이 없어요.</h3>}
+						{(menuState.all || menuState.doing) && (
+							<button type='button' className='btn-navigate txt-big' onClick={() => navigate('/')}>
+								구인글 보러가기
+							</button>
+						)}
+					</section>
+				)}
 			</article>
 			<article className='container-pagination'>
 				{data && (

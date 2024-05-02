@@ -18,7 +18,6 @@ const Dropdown = styled.div<IDropdown>`
 		box-sizing: border-box;
 		border-radius: 0.6rem;
 		min-width: ${props => (!props.$scope ? '13rem' : '15rem')};
-		cursor: pointer;
 
 		&:hover {
 			border: 1px solid #5877fc;
@@ -101,30 +100,70 @@ const Dropdown = styled.div<IDropdown>`
 					box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 					padding: 2.8rem 3.2rem 2.8rem 2.5rem;
 					z-index: 501;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+
+					.container-inside {
+						display: flex;
+						flex-direction: column;
+						gap: 1rem;
+					}
+
+					.control-btn {
+						display: flex;
+						align-items: center;
+						gap: 1.6rem;
+						justify-content: flex-end;
+
+						.clear {
+							display: flex;
+							align-items: center;
+							gap: 0.4rem;
+							cursor: pointer;
+
+							span {
+								margin-top: 0.2rem;
+								font-size: 1.4rem;
+								letter-spacing: 0.0028rem;
+								color: #8e8e8e;
+							}
+						}
+
+						button {
+							display: flex;
+							height: 3.6rem;
+							padding: 1.2rem 2rem;
+							box-sizing: border-box;
+							border-radius: 0.6rem;
+							background: #5877fc;
+							color: #fff;
+							font-size: 1.4rem;
+							line-height: 1.7rem;
+							justify-content: center;
+							align-items: center;
+						}
+					}
 
 					.intro {
 						display: flex;
 						justify-content: space-between;
-						margin-top: 0.95rem;
 
 						.description {
 							color: #8e8e8e;
-							font-size: 1.4rem;
-							line-height: 1.7rem;
-							letter-spacing: 0.0028rem;
+							font-size: 1.6rem;
 						}
 
-						section {
+						.container-checkbox {
 							display: flex;
 							align-items: center;
 
-							input {
-								padding: 0;
+							.input-checkbox {
 								margin: 0;
+							}
 
-								&:hover {
-									border: 1px solid red;
-								}
+							input[type='checkbox'] {
+								margin: 0;
 							}
 
 							.course-label {
@@ -145,7 +184,6 @@ const Dropdown = styled.div<IDropdown>`
 						display: flex;
 						width: 100%;
 						gap: 2rem;
-						margin-top: 0.8rem;
 
 						.container-inputs {
 							width: 100%;

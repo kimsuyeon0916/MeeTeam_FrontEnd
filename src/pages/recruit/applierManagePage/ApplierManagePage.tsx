@@ -7,11 +7,26 @@ import {
 	FloatingBackground,
 	LinkIcon,
 } from '../../../assets';
-import { ApplicantCard, ApplyRole, Dropdown, OpenChatModal, Toast } from '../../../components';
+import {
+	ApplicantCard,
+	ApplyRole,
+	ApproveModal,
+	Dropdown,
+	OpenChatModal,
+	RefuseModal,
+	Toast,
+} from '../../../components';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { getApplicantsList } from '../../../service';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { applicantFilter, applicantHolder, openChatModalState, toastState } from '../../../atom';
+import {
+	applicantFilter,
+	applicantHolder,
+	applicantModalState,
+	openChatModalState,
+	toastState,
+	userState,
+} from '../../../atom';
 import {
 	approveApplicant,
 	getRecruitInfo,
@@ -19,16 +34,20 @@ import {
 	setOpenChatLink,
 } from '../../../service/recruit/applicant';
 import { ApplicantInfo, ApplicantsLink, ApplicantsList } from '../../../types';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useScrollToTop } from '../../../hooks';
 import { fixModalBackground } from '../../../utils';
 
 const ApplierManagePage = () => {
+	const { id } = useParams();
+	const pageNum = Number(id);
 	const role = useRecoilValue(applicantFilter);
 	const targetRef = useRef<HTMLDivElement | null>(null);
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const scrollToTop = useScrollToTop();
+	const userInfo = useRecoilValue(userState);
+	const [applicantModal, setApplicantModalState] = useRecoilState(applicantModalState);
 
 	const [page, setPage] = useState<number>(1);
 	const [isOpenChat, setIsOpenChat] = useState<boolean>(false);
@@ -38,9 +57,6 @@ const ApplierManagePage = () => {
 	const [isToast, setIsToast] = useRecoilState(toastState);
 	const isTutorialOpen = useRecoilValue(openChatModalState);
 	const [applicantsArr, setApplicantsArr] = useState<ApplicantInfo[]>([]);
-
-	const storedNum = sessionStorage.getItem('pageNum');
-	const pageNum = Number(storedNum !== null && storedNum);
 
 	const {
 		data: applicantList,
@@ -58,22 +74,6 @@ const ApplierManagePage = () => {
 	const isChecked =
 		checkList && recruitManageInfo && checkList.length !== 0 && recruitManageInfo.link !== null;
 
-	const approved = useMutation({
-		mutationFn: ({ pageNum, applicantIds }: ApplicantsList) =>
-			approveApplicant({ pageNum, applicantIds }),
-		onSuccess: () => {
-			setCheckList([]);
-			queryClient.invalidateQueries({ queryKey: ['applicantsList'] });
-		},
-	});
-	const refused = useMutation({
-		mutationFn: ({ pageNum, applicantIds }: ApplicantsList) =>
-			refusedApplicant({ pageNum, applicantIds }),
-		onSuccess: () => {
-			setCheckList([]);
-			queryClient.invalidateQueries({ queryKey: ['applicantsList'] });
-		},
-	});
 	const openLink = useMutation({
 		mutationFn: ({ pageNum, link }: ApplicantsLink) => setOpenChatLink({ pageNum, link }),
 		onSuccess: () => {
@@ -96,20 +96,20 @@ const ApplierManagePage = () => {
 		if (!recruitManageInfo?.link) {
 			setIsToast(true);
 		} else {
-			refused.mutate({ pageNum, applicantIds: checkList });
+			setApplicantModalState({ approve: false, refuse: true });
 		}
 	};
 	const onClickApproved = () => {
 		if (!recruitManageInfo?.link) {
 			setIsToast(true);
 		} else {
-			approved.mutate({ pageNum, applicantIds: checkList });
+			setApplicantModalState({ approve: true, refuse: false });
 		}
 	};
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(entries => {
-			if (entries[0].isIntersecting) {
+			if (entries[0].isIntersecting && applicantList?.pageInfo.hasNextPage) {
 				setPage(prev => prev + 1);
 			}
 		});
@@ -130,7 +130,7 @@ const ApplierManagePage = () => {
 			setApplicantsArr(applicantList.applicants);
 		}
 		refetch();
-		if (applicantList) {
+		if (applicantList && applicantList.pageInfo.hasNextPage) {
 			setApplicantsArr(prev => [...prev, ...applicantList.applicants]);
 		}
 	}, [page, applicantList]);
@@ -142,21 +142,24 @@ const ApplierManagePage = () => {
 	}, [recruitManageInfo?.link]);
 
 	useEffect(() => {
-		fixModalBackground(isTutorialOpen);
-	}, [recruitManageInfo?.isFirstAccess]);
+		fixModalBackground(isTutorialOpen || applicantModal.approve || applicantModal.refuse);
+	}, [recruitManageInfo?.isFirstAccess, applicantModal.approve, applicantModal.refuse]);
 
 	return (
 		<S.ApplierManagePage $isChecked={isChecked} $isOpenCurrent={isOpenCurrent}>
 			<article className='wrapper-applicants'>
 				<section className='container-title'>
 					<h1>{recruitManageInfo?.title}</h1>
-					<h4 className='page-link' onClick={() => navigate(-1)}>
+					<h4 className='page-link' onClick={() => navigate(`/recruitment/postings/${pageNum}`)}>
 						구인글 바로가기 ⟩
 					</h4>
 				</section>
 				<section className='container-link'>
 					<h4>오픈채팅방 설정</h4>
 					<span className='body1-medium'>멤버를 초대할 오픈채팅방 주소를 설정해보세요!</span>
+					<span className='body1-medium second'>
+						신청자 승인 시, 설정한 오픈채팅방 주소가 신청자의 이메일로 보내집니다.
+					</span>
 					{manageSuccess && recruitManageInfo && (
 						<article className='input-link'>
 							{!isOpenChat ? (
@@ -188,7 +191,7 @@ const ApplierManagePage = () => {
 						<section className='header-title'>
 							<h4>신청자 관리</h4>
 							<span className='body1-medium'>
-								○○님의 구인글에 신청한 (유저명)입니다. 다양한 정보들을 확인하고 멤버로 영입해보세요!
+								{`${userInfo?.nickname}님의 구인글에 신청한 (유저명)입니다. 다양한 정보들을 확인하고 멤버로 영입해보세요!`}
 							</span>
 						</section>
 						{recruitManageInfo && manageSuccess && (
@@ -214,8 +217,8 @@ const ApplierManagePage = () => {
 						{listSuccess &&
 							applicantsArr.map(info => <ApplicantCard key={info.applicantId} {...info} />)}
 					</section>
-					<section ref={targetRef}></section>
 				</section>
+				<section className='target-area' ref={targetRef}></section>
 			</article>
 			<article className={`current-recruit ${!isOpenCurrent && 'closed'}`}>
 				<section className='container-title' onClick={() => setIsOpenCurrent(prev => !prev)}>
@@ -252,6 +255,16 @@ const ApplierManagePage = () => {
 				</section>
 			)}
 			{isToast && <Toast message='오픈채팅방 주소를 입력해주세요!' />}
+			{applicantModal.refuse && (
+				<section className='modal-background'>
+					<RefuseModal pageNum={pageNum} />
+				</section>
+			)}
+			{recruitManageInfo?.link && applicantModal.approve && (
+				<section className='modal-background'>
+					<ApproveModal pageNum={pageNum} openChatLink={recruitManageInfo.link} />
+				</section>
+			)}
 		</S.ApplierManagePage>
 	);
 };

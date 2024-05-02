@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface Modal {
 	$isChecked?: boolean;
+	$isValue?: boolean;
 }
 
 const Modal = styled.section<Modal>`
@@ -77,11 +78,10 @@ const Modal = styled.section<Modal>`
 				padding: 0;
 			}
 
-			span {
+			label {
 				color: #373f41;
 				font-size: 1.4rem;
-				line-height: 1.7rem;
-				letter-spacing: 0.0028rem;
+				margin-top: 0.2rem;
 			}
 		}
 	}
@@ -169,6 +169,10 @@ const Modal = styled.section<Modal>`
 			line-height: 1.35rem;
 			letter-spacing: 0.015rem;
 
+			.value {
+				color: ${props => props.$isValue && '#000000'};
+			}
+
 			&:hover {
 				border-color: #5877fc;
 				transition: 0.2s ease-in-out;
@@ -217,11 +221,16 @@ const Modal = styled.section<Modal>`
 			border-radius: 1rem;
 			border: 1px solid #e3e3e3;
 			background: #fff;
-			color: #8e8e8e;
+			color: #000000;
 			font-size: 1.6rem;
-			font-weight: 400;
+			font-weight: 500;
 			line-height: 1.35rem;
 			letter-spacing: 0.015rem;
+			font-family: Pretendard;
+
+			&::placeholder {
+				color: #8e8e8e;
+			}
 
 			&:hover {
 				border-color: #5877fc;

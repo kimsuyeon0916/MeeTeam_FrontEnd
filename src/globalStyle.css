@@ -142,3 +142,6 @@ button {
 	outline: none;
 	/* all: unset; */
 }
+::-webkit-scrollbar {
+	display: none;
+}

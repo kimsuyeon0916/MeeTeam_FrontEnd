@@ -21,6 +21,7 @@ import {
 	RecruitPostingApply,
 	RecruitMyPostings,
 	CompleteSignUpPage,
+	PrivateRouter,
 	PortfolioManagementPage,
 } from './pages/index.ts';
 import './globalStyle.css';
@@ -39,8 +40,9 @@ const router = createBrowserRouter([
 				element: <RecruitDetailPage />,
 			},
 			{
-				path: '/recruitment/applicants',
-				element: <ApplierManagePage />,
+				path: 'recruitment/applicants/:id',
+				element: <PrivateRouter />,
+				children: [{ path: '', element: <ApplierManagePage /> }],
 			},
 			{
 				path: 'galary',
@@ -85,8 +87,14 @@ const router = createBrowserRouter([
 				element: <RecruitCreatePage />,
 			},
 			{
-				path: 'edit/recruit',
-				element: <RecruitCreatePage />,
+				path: 'recruitment/postings/edit/:id',
+				element: <PrivateRouter />,
+				children: [
+					{
+						path: '',
+						element: <RecruitCreatePage />,
+					},
+				],
 			},
 			{
 				path: 'profile/:userId?',
@@ -104,10 +112,10 @@ const router = createBrowserRouter([
 				path: 'portfolio/edit/:portfolioId?',
 				element: <PortfolioEditPage />, // 생성 및 편집
 			},
-      {
+			{
 				path: 'portfolio/management',
 				element: <PortfolioManagementPage />,
-      }
+			},
 		],
 	},
 ]);

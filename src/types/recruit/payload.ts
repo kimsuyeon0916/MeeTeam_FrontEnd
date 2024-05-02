@@ -75,7 +75,7 @@ export interface RecruitFilter {
 	skill: number[];
 	role: number[];
 	tag: number[];
-	keyword: string;
+	keyword: string | null;
 	course: number | null;
 	professor: number | null;
 }

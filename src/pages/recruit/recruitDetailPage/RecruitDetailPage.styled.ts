@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const RecruitDetailPage = styled.section`
-	width: clamp(33.33%, 108rem, 66.66%);
+	width: clamp(45%, 96rem, 75%);
 	margin: 0 auto;
 	margin-top: 8.02rem;
 	margin-bottom: 10rem;
@@ -25,6 +25,12 @@ const RecruitDetailPage = styled.section`
 		box-sizing: border-box;
 		border-radius: 1.5rem;
 		background: #e0e6ff;
+	}
+
+	.body1-semibold {
+		color: #151515;
+		font-size: 1.6rem;
+		font-weight: 600;
 	}
 
 	.modal-background {
@@ -61,6 +67,19 @@ const RecruitDetailPage = styled.section`
 			width: 100%;
 			padding: 1.6rem 3rem;
 			box-sizing: border-box;
+		}
+
+		.need-login {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin-top: 4rem;
+			margin-bottom: 4rem;
+		}
+
+		.login {
+			color: #5877fc;
+			cursor: pointer;
 		}
 	}
 `;
@@ -173,6 +192,16 @@ const Footer = styled.footer`
 			cursor: default;
 			color: #8e8e8e;
 		}
+	}
+
+	.modal-background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 105;
+		background-color: rgba(0, 0, 0, 0.15);
 	}
 `;
 
