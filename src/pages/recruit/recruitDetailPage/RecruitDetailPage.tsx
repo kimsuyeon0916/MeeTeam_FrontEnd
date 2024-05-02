@@ -72,7 +72,6 @@ const RecruitDetailPage = () => {
 	useEffect(() => {
 		fixModalBackground(isModal || isCancel || isClose || isDelete.isDelete || isNeedLogin.isOpen);
 	}, [isModal, isCancel, isClose, isDelete, isNeedLogin.isOpen]);
-
 	return (
 		<>
 			{isSuccess && detailedData && (
