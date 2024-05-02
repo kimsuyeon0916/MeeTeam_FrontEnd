@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 import { SessionStorageEffect, simpleDate } from './utils';
-import { User, InputState, ApplyRole, RecruitFilter, DetailedFilter } from './types';
+import { User, InputState, ApplyRole, RecruitFilter, DetailedFilter, Image } from './types';
 import { LocalStorageEffect } from './utils';
 import { Account } from './pages';
 
@@ -199,9 +199,14 @@ export const applicantFilter = atom({
 	default: null as number | null,
 });
 
-export const imageNameState = atom({
-	key: 'imageNameState',
-	default: '',
+export const uploadImageListState = atom<Image[]>({
+	key: 'uploadImageListState',
+	default: [],
+});
+
+export const uploadImageState = atom<Image | null>({
+	key: 'uploadImageState',
+	default: null,
 });
 
 export const openChatModalState = atom({

@@ -126,6 +126,9 @@ import LinkDetails from './link/details/LinkDetails';
 import PortfolioInformation from './portfolio/information/PortfolioInformation';
 import PortfolioList from './portfolio/list/PortfolioList';
 import ImageCarousel from './carousel/ImageCarousel';
+import PortfolioImageUpload from './portfolio/image/upload/PortfolioImageUpload';
+import ModalPortal from './modal/ModalPortal';
+import PortfolioImageModal from './portfolio/image/modal/PortfolioImageModal';
 import WriterFooter from './recruit/recruitDetail/footer/WriterFooter';
 import ApplierFooter from './recruit/recruitDetail/footer/ApplierFooter';
 import ClosedFooter from './recruit/recruitDetail/footer/ClosedFooter';
@@ -142,6 +145,7 @@ import Toast from './recruit/applicants/toast/Toast';
 import NeedLogin from './recruit/recruitDetail/modal/needLogin/NeedLogin';
 import RefuseModal from './recruit/applicants/modal/RefuseModal';
 import ApproveModal from './recruit/applicants/modal/ApproveModal';
+import TabMenu from './tabMenu/TabMenu';
 
 export {
 	Header,
@@ -260,6 +264,9 @@ export {
 	PortfolioInformation,
 	PortfolioList,
 	ImageCarousel,
+	PortfolioImageUpload,
+	ModalPortal,
+	PortfolioImageModal,
 	WriterFooter,
 	ApplierFooter,
 	ApplyModal,
@@ -279,4 +286,5 @@ export {
 	NeedLogin,
 	RefuseModal,
 	ApproveModal,
+	TabMenu,
 };

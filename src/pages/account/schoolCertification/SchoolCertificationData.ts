@@ -10,7 +10,7 @@ const SCHOOL_CERTIFICATION_DATA = [
 		validation: INPUT_VALIDATION.year,
 		isNext: false,
 		icon: {
-			default: ArrowBottom,
+			$default: ArrowBottom,
 			$focus: ArrowTop,
 			$arrow: 'right',
 		},
@@ -23,7 +23,7 @@ const SCHOOL_CERTIFICATION_DATA = [
 		validation: INPUT_VALIDATION.university,
 		isNext: false,
 		icon: {
-			default: Search,
+			$default: Search,
 			$arrow: 'right',
 		},
 	},

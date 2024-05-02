@@ -1,9 +1,10 @@
-import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
-import { readPortfolio, readPortfolioList } from '../service';
+import { useQuery, useMutation, useInfiniteQuery, useQueryClient, keepPreviousData } from '@tanstack/react-query';
+import { createPortfolio, readPortfolio, updatePortfolio, readInfinitePortfolioList, readPaginationPortfolioList } from '../service';
 
 const portfolioKeys = {
 	readPortfolio: (portfolioId: string) => ['readPortfolio', portfolioId],
-  readPortfolioList: (size: number) => ['readProfile', size],
+	readInfinitePortfolioList: (size: number) => ['readInfinitePortfolioList', size],
+	readPaginationPortfolioList: (size: number) => ['readPaginationPortfolioList', size],
 };
 
 /**
@@ -17,17 +18,64 @@ export const useReadPortfolio = (portfolioId: string) => {
 };
 
 /**
+ * @description 포트폴리오 등록 API를 호출하는 hook입니다.
+ */
+export const useCreatePortfolio = ({ onSuccess }: { onSuccess: (data: string) => void }) => {
+	return useMutation({
+		mutationFn: createPortfolio,
+		onSuccess: data => {
+			if (data) {
+				onSuccess?.(data);
+			}
+		},
+	});
+};
+
+/**
+ * @description 포트폴리오 편집 API를 호출하는 hook입니다.
+ */
+export const useUpdatePortfolio = ({
+	onSuccess,
+	portfolioId,
+}: {
+	onSuccess: (data: string) => void;
+	portfolioId: string;
+}) => {
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: updatePortfolio,
+		onSuccess: async data => {
+			if (data) {
+				await queryClient.invalidateQueries({ queryKey: portfolioKeys.readPortfolio(portfolioId) });
+				onSuccess?.(data);
+			}
+		},
+	});
+};
+
+/**
  * @description 포트폴리오 목록 무한스크롤 조회 API를 호출하는 hook입니다.
  */
-export const useReadPortfolioList = (size: number) => {
+export const useReadInfinitePortfolioList = (size: number) => {
 	return useInfiniteQuery({
-		queryKey: portfolioKeys.readPortfolioList(size),
-		queryFn: ({ pageParam }) => readPortfolioList({ size, pageParam }),
+		queryKey: portfolioKeys.readInfinitePortfolioList(size),
+		queryFn: ({ pageParam }) => readInfinitePortfolioList({ size, pageParam }),
 		initialPageParam: 1,
 		getNextPageParam: lastPage => {
 			if (lastPage?.pageInfo.hasNextPage) {
 				return lastPage?.pageInfo.page + 1;
 			} else return undefined;
 		},
+	});
+};
+
+/**
+ * @description 포트폴리오 목록 페이지네이션 조회 API를 호출하는 hook입니다.
+ */
+export const usePaginationPortfolioList = (size: number, pageParam: number) => {
+	return useQuery({
+		queryKey: portfolioKeys.readPaginationPortfolioList(size),
+		queryFn: () => readPaginationPortfolioList({ size, pageParam }),
+		placeholderData: keepPreviousData,
 	});
 };
