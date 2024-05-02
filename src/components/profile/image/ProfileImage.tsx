@@ -8,7 +8,7 @@ import { uploadImageState } from '../../../atom';
 
 interface ProfileImage {
 	isEditable?: boolean;
-	userId: string;
+	userId?: string;
 	size: string;
 	url?: string;
 }
@@ -16,8 +16,10 @@ interface ProfileImage {
 const ProfileImage = ({ isEditable, userId, size, url }: ProfileImage) => {
 	const navigate = useNavigate();
 	const navigateProfile = (event: React.MouseEvent<HTMLDivElement>) => {
-		event.stopPropagation();
-		navigate(`/profile/${userId}`);
+		if (userId) {
+			event.stopPropagation();
+			navigate(`/profile/${userId}`);
+		}
 	};
 
 	const [image, setImage] = useState<Image | null>({ url: url });
