@@ -8,7 +8,7 @@ interface InputStyle {
 	invalid?: boolean;
 }
 
-const InputLabel = styled.label<{ $width?: string }>`
+const InputLayout = styled.label<{ $width?: string }>`
 	min-width: 0;
 	display: flex;
 	flex-direction: column;
@@ -24,8 +24,6 @@ const InputLabel = styled.label<{ $width?: string }>`
 	letter-spacing: 0.0032rem;
 
 	h6 {
-		margin-bottom: 0.8rem;
-
 		/* Body/body2/semibold */
 		font-size: 1.4rem;
 		font-style: normal;
@@ -33,6 +31,17 @@ const InputLabel = styled.label<{ $width?: string }>`
 		line-height: 1.7rem; /* 121.429% */
 		letter-spacing: 0.0028rem;
 	}
+`;
+
+const InputLabel = styled.h6<{ $required?: boolean }>`
+	margin-bottom: 0.8rem;
+
+	${props =>
+		props.$required &&
+		`&:: after {
+			content: ' *';
+			color: #f85858;
+		}`}
 `;
 
 const InputContainer = styled.div`
@@ -44,6 +53,21 @@ const InputContainer = styled.div`
 		margin-top: 0.4rem;
 		margin-left: auto;
 		color: var(--State-unactive, #8e8e8e);
+	}
+
+	small {
+		position: absolute;
+		top: 5.4rem;
+		left: 1rem;
+		white-space: nowrap; // 줄바꿈 방지
+		color: var(--ButtonColors-Caution-outline-defaultLine, #f85858);
+
+		/* Text/t4 */
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 1.2rem; /* 120% */
+		letter-spacing: 0.002rem;
 	}
 `;
 
@@ -108,6 +132,6 @@ const InputErrorMessage = styled.small<InputStyle>`
 	letter-spacing: 0.002rem;
 `;
 
-const S = { InputLabel, InputContainer, Input, InputErrorMessage };
+const S = { InputLayout, InputLabel, InputContainer, Input, InputErrorMessage };
 
 export default S;

@@ -36,6 +36,11 @@ import Test1 from './Test1.png';
 import Test2 from './Test2.png';
 import Test3 from './Test3.png';
 import Test4 from './Test4.png';
+<<<<<<< HEAD
+import Refresh from './Refresh.svg';
+import HambergerMenuIcon from './HamburgerMenuIcon.svg';
+import Pencil from './Pencil.svg';
+=======
 import FilledBookmark from './FilledBookmark.svg';
 import UnfilledBookmark from './UnfilledBookmark.svg';
 import Edit from './Edit.svg';
@@ -55,6 +60,7 @@ import Alert from './Alert.svg';
 import MeeteamLogoLarge from './MeeteamLogoLarge.svg';
 import Congratulation from './Congratulation.svg';
 import NaverIcon from './NaverIcon.png';
+>>>>>>> release-1.0
 
 export {
 	Exit,
@@ -98,6 +104,11 @@ export {
 	Test2,
 	Test3,
 	Test4,
+<<<<<<< HEAD
+	Refresh,
+	HambergerMenuIcon,
+	Pencil,
+=======
 	DATE_ICON,
 	Clear,
 	BookmarkRight,
@@ -114,4 +125,5 @@ export {
 	MeeteamLogoLarge,
 	Congratulation,
 	NaverIcon,
+>>>>>>> release-1.0
 };

@@ -3,6 +3,8 @@ const REGEXP = {
 };
 
 export const INPUT_VALIDATION = {
+<<<<<<< HEAD
+=======
 	year: {
 		required: true,
 	},
@@ -15,6 +17,7 @@ export const INPUT_VALIDATION = {
 	email: {
 		required: true,
 	},
+>>>>>>> release-1.0
 	nickname: {
 		required: '값이 입력되지 않았습니다',
 		pattern: {
@@ -33,6 +36,36 @@ export const INPUT_VALIDATION = {
 	introduction: {
 		maxLength: 20,
 	},
+<<<<<<< HEAD
+	portfolioImage: {
+		required: '포트폴리오를 대표할 이미지를 업로드해주세요',
+	},
+	portfolioTitle: {
+		required: '포트폴리오 제목을 작성해주세요',
+	},
+	portfolioDescription: {
+		required: '포트폴리오 한줄 소개를 작성해주세요',
+	},
+	field: {
+		required: '분야를 선택해주세요',
+	},
+	role: {
+		required: '분야를 선택해주세요',
+	},
+	startDate: {
+		required: '진행 시작일을 설정해주세요',
+	},
+	endDate: {
+		required: '진행 마감일을 설정해주세요',
+	},
+	proceedType: {
+		required: '진행방식을 설정해주세요',
+	},
+	content: {
+		required: true,
+	},
+=======
+>>>>>>> release-1.0
 };
 
 export const TEXTAREA_VALIDATION = {

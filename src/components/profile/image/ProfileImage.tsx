@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import S from './ProfileImage.styled';
 import { AddProfile, DefaultProfileImage } from '../../../assets';
 import { useNavigate } from 'react-router';
-import { useSetRecoilState } from 'recoil';
-import { imageNameState } from '../../../atom';
+import { Image } from '../../../types';
+import { useRecoilState } from 'recoil';
+import { uploadImageState } from '../../../atom';
 
 interface ProfileImage {
 	isEditable?: boolean;
@@ -19,31 +20,39 @@ const ProfileImage = ({ isEditable, userId, size, url }: ProfileImage) => {
 		navigate(`/profile/${userId}`);
 	};
 
+	const [uploadImage, setUploadImage] = useRecoilState(uploadImageState);
+	useEffect(() => {
+		setUploadImage({ url: url });
+	}, []);
+
 	const inputRef = useRef<HTMLInputElement>(null);
+
 	const addImage = () => {
 		inputRef.current?.click();
 	};
 
-	const [imageSrc, setImageSrc] = useState<string | null>(url ? url : null);
-	const setImageNameState = useSetRecoilState(imageNameState);
-
 	const changeImage = (event: React.BaseSyntheticEvent) => {
-		const uploadImage = event.target?.files[0];
-		setImageNameState(uploadImage.name);
-
-		const reader = new FileReader();
-		reader.readAsDataURL(uploadImage);
-		reader.onload = () => setImageSrc(reader.result as string);
+		const image = event.target?.files[0];
+		const urlReader = new FileReader();
+		urlReader.readAsDataURL(image);
+		urlReader.onload = () => {
+			const newImage = {
+				fileName: image.name,
+				url: urlReader.result,
+				file: image,
+			} as Image;
+			setUploadImage(newImage);
+		};
 	};
 
 	return (
 		<S.ProfileImageLayout>
 			<S.ProfileImageWrapper
 				$size={size}
-				$url={imageSrc ? true : false}
+				$url={uploadImage?.url ? true : false}
 				onClick={isEditable ? addImage : navigateProfile}
 			>
-				<S.ProfileImage src={imageSrc ? imageSrc : DefaultProfileImage} alt='프로필이미지' />
+				<S.ProfileImage src={uploadImage?.url ?? DefaultProfileImage} alt='프로필이미지' />
 			</S.ProfileImageWrapper>
 			{isEditable && (
 				<>

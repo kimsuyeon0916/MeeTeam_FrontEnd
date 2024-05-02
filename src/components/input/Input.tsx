@@ -56,8 +56,10 @@ const Input = <T extends FieldValues>({
 	const { ref, ...rest } = register(name as Path<T>, validation?.disabled ? undefined : validation);
 
 	return (
-		<S.InputLabel $width={width}>
-			{label && <h6>{label}</h6>}
+		<S.InputLayout $width={width}>
+			{label && (
+				<S.InputLabel $required={validation?.required ? true : false}>{label}</S.InputLabel>
+			)}
 			<S.InputContainer>
 				<S.Input
 					disabled={validation?.disabled}
@@ -79,7 +81,7 @@ const Input = <T extends FieldValues>({
 					</span>
 				)}
 			</S.InputContainer>
-		</S.InputLabel>
+		</S.InputLayout>
 	);
 };
 

@@ -1,4 +1,4 @@
-import { Award, Link } from './index';
+import { Award, Link, PortfolioDetails } from './index';
 
 export interface SignUpPayload {
 	platformType?: string;
@@ -30,4 +30,11 @@ export interface UpdateProfilePayload {
 	awards?: Award[];
 	links?: Link[];
 	portfolios?: string[];
+}
+
+export interface PortfolioPayload
+	extends Omit<PortfolioDetails, 'zipFileUrl' | 'skills' | 'otherPortfolios' | 'isWriter'> {
+	skills: string[];
+	mainImageFileName: string;
+	zipFileName: string;
 }

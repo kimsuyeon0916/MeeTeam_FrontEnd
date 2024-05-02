@@ -1,10 +1,16 @@
 import styled from 'styled-components';
 
-const OptionList = styled.ul<{ $label?: string }>`
+interface OptionStyle {
+	$label?: string;
+	$style?: string;
+}
+
+const OptionList = styled.ul<OptionStyle>`
 	position: absolute;
 	width: 100%;
 	z-index: 5;
 	top: ${props => (props.$label ? '7.9rem' : '5.4rem')};
+	${props => props.$style}
 
 	display: flex;
 	flex-direction: column;

@@ -1,20 +1,43 @@
 import styled from 'styled-components';
 
-const PortfolioCardLayout = styled.article`
+interface PortfolioCardStyle {
+	$open?: boolean;
+}
+
+const PortfolioCardLayout = styled.article<PortfolioCardStyle>`
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	row-gap: 0.8rem;
 
 	cursor: pointer;
+	${props =>
+		!props.$open &&
+		`
+			button:last-of-type {
+				display: none;
+			}
+
+			&:hover {
+				button:last-of-type {
+					display: flex;
+				}
+			}
+	`}
 `;
 
-const PortfolioCardBox = styled.div<{ $url?: string }>`
+const PortfolioCardBox = styled.div<{ $isEditable?: boolean }>`
 	position: relative;
 
-	border-radius: 0.75rem;
+	border-radius: 1rem;
+	border: ${props => props.$isEditable && '0.1rem solid var(--Form-border-default, #e3e3e3)'};
 	overflow: hidden;
 
 	aspect-ratio: 183 / 103; // 포트폴리오 비율
+
+	button:first-of-type {
+		display: flex;
+	}
 `;
 
 const PortfolioCardImage = styled.img`
@@ -49,7 +72,7 @@ const PortfolioTagRow = styled.div`
 	column-gap: 0.8rem;
 `;
 
-const PortfolioCardTag = styled.span<{ $color: string }>`
+const PortfolioCardTag = styled.span<{ $color?: string }>`
 	align-items: center;
 
 	display: flex;
@@ -66,9 +89,16 @@ const PortfolioCardTag = styled.span<{ $color: string }>`
 	font-weight: 500;
 	line-height: 1.4rem; /* 116.667% */
 	letter-spacing: 0.0024rem;
+
+	&.main-image-tag {
+		padding: 0.6rem 0.8rem;
+		border-radius: 1.5rem;
+		border: 1px solid var(--Purplescale-200, #e0e6ff);
+		background: var(--Grayscale-000, #fff);
+	}
 `;
 
-const PortfolioCardButton = styled.button<{ $checked?: boolean }>`
+const PortfolioCardNumberButton = styled.button<{ $checked?: boolean }>`
 	position: absolute;
 	bottom: 1rem;
 	right: 1rem;
@@ -91,6 +121,16 @@ const PortfolioCardButton = styled.button<{ $checked?: boolean }>`
 	letter-spacing: 0.0032rem;
 `;
 
+const PortfolioCardIconButton = styled(PortfolioCardNumberButton)`
+	top: -1rem;
+	left: -1rem;
+`;
+
+const PortfolioImageInput = styled.input`
+	position: absolute;
+	display: none;
+`;
+
 const S = {
 	PortfolioCardLayout,
 	PortfolioCardBox,
@@ -98,7 +138,9 @@ const S = {
 	PortfolioCardTitle,
 	PortfolioTagRow,
 	PortfolioCardTag,
-	PortfolioCardButton,
+	PortfolioCardNumberButton,
+	PortfolioCardIconButton,
+	PortfolioImageInput,
 };
 
 export default S;

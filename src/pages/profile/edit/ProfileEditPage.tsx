@@ -20,7 +20,7 @@ import {
 	AddFormBtn,
 } from '../../../components';
 import { useRecoilValue } from 'recoil';
-import { imageNameState, userState } from '../../../atom';
+import { uploadImageState, userState } from '../../../atom';
 import { Skill, Award, Link } from '../../../types';
 import {
 	useDebounce,
@@ -29,6 +29,8 @@ import {
 	useReadRoleList,
 	useReadSkillList,
 	useIntersection,
+	useUploadImageFile,
+	useReadImagePresignedUrl,
 } from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
 import { useReadPortfolioList } from '../../../hooks/usePortfolio';
@@ -68,8 +70,6 @@ const gpaList = [{ name: '4.5' }, { name: '4.3' }];
 const ProfileEditPage = () => {
 	const userId = useRecoilValue(userState)?.userId as string;
 	const { data: user, isSuccess: isUserSuccess } = useReadProfile(userId); // 새로고침 시, 렌더링 지연 및 콘솔 에러
-	// const user = useRecoilValue(userState);
-	const profileImageName = useRecoilValue(imageNameState);
 
 	const navigate = useNavigate();
 
@@ -77,17 +77,26 @@ const ProfileEditPage = () => {
 		return navigate(`/profile/${userId}`);
 	};
 
-	const { mutate } = useUpdateProfile({
+	const { mutate: updateProfile } = useUpdateProfile({
 		onSuccess: updateProfileInSuccess,
+		userId: userId,
 	});
 
-	const submitHandler: SubmitHandler<FormValues> = data => {
-		// const { imageUrl, interest, ...updateData } = data;
-		mutate({
-			...data, // updateData -> data
-			imageFileName: profileImageName,
+	// 이미지 업로드
+	const profileImage = useRecoilValue(uploadImageState);
+	const {
+		data: imageResponse,
+		refetch: readImagePresignedUrl,
+		isSuccess: isSuccessReadUrl,
+	} = useReadImagePresignedUrl(profileImage?.fileName as string);
+
+	const uploadImageFileInSuccess = () => {
+		const formData = getValues();
+		updateProfile({
+			...formData,
+			imageFileName: imageResponse?.fileName,
 			isUserNamePublic: isUserNamePublic,
-			interestId: sessionStorage.interest,
+			interestId: roles?.find(role => role.name === getValues('interest'))?.id,
 			isPhonePublic: isPhonePublic,
 			isUniversityMain: isUniversityMain,
 			isUniversityEmailPublic: isUniversityEmailPublic,
@@ -95,8 +104,38 @@ const ProfileEditPage = () => {
 			skills: skillList.map(skill => skill.id),
 			portfolios: pinnedPortfolioList as string[],
 		});
-		sessionStorage.removeItem('interest');
-		sessionStorage.removeItem('skill');
+	};
+
+	const { mutate: uploadImageFile } = useUploadImageFile({
+		onSuccess: uploadImageFileInSuccess,
+	});
+
+	useEffect(() => {
+		if (isSuccessReadUrl && imageResponse) {
+			uploadImageFile({
+				presignedUrl: imageResponse.url,
+				imageFile: profileImage?.file as File,
+			});
+		}
+	}, [isSuccessReadUrl]);
+
+	const submitHandler: SubmitHandler<FormValues> = data => {
+		if (profileImage?.fileName) {
+			// 이미지를 처음 업로드 및 변경하는 경우에만 S3에 업로드(기존!==지금)
+			readImagePresignedUrl(); // presignedUrl 발급
+		} else {
+			updateProfile({
+				...data,
+				isUserNamePublic: isUserNamePublic,
+				interestId: roles?.find(role => role.name === getValues('interest'))?.id,
+				isPhonePublic: isPhonePublic,
+				isUniversityMain: isUniversityMain,
+				isUniversityEmailPublic: isUniversityEmailPublic,
+				isSubEmailPublic: isSubEmailPublic,
+				skills: skillList.map(skill => skill.id),
+				portfolios: pinnedPortfolioList,
+			});
+		}
 	};
 
 	const { register, formState, handleSubmit, control, watch, getValues, setValue } =
@@ -113,8 +152,8 @@ const ProfileEditPage = () => {
 				awards: user?.awards,
 			},
 			resetOptions: {
-				keepDirtyValues: true, // user-interacted input will be retained
-				keepErrors: true, // input errors will be retained with value update
+				keepDirtyValues: true,
+				keepErrors: true,
 			},
 		});
 
@@ -157,7 +196,10 @@ const ProfileEditPage = () => {
 	const [skillList, setSkillList] = useState(user?.skills ? user?.skills : []);
 
 	const addSkill = () => {
-		const newSkill = { id: sessionStorage.skills, name: getValues('skills') } as Skill;
+		const newSkill = {
+			id: skills?.find(skill => skill.name === getValues('skills'))?.id,
+			name: getValues('skills'),
+		} as Skill;
 		if (getValues('skills')?.length === 0) return;
 		if (!skillList.find(skill => newSkill.name === skill.name)) {
 			setSkillList(prev => [...prev, newSkill]);
@@ -180,7 +222,7 @@ const ProfileEditPage = () => {
 	});
 
 	const addLink = (index: number) => {
-		if (index === -1 || getValues(`links.${index}.url`)) {
+		if (index === -1 || getValues(`links.0.url`)) {
 			prependLink({ description: 'Link', url: '' });
 		}
 	};
@@ -325,7 +367,6 @@ const ProfileEditPage = () => {
 					<S.ProfileArticle>
 						<S.ProfileTitle>자기 소개</S.ProfileTitle>
 						<Textarea
-							// defaultValue={user?.aboutMe}
 							register={register}
 							watch={watch}
 							formState={formState}
@@ -341,12 +382,7 @@ const ProfileEditPage = () => {
 							<S.ProfileColumn $width='clamp(50%, 51.8rem, 100%)' $gap='1.6rem'>
 								<label style={{ color: 'var(--Form-txtIcon-default,  #8E8E8E)' }}>연락처</label>
 								<S.ProfileRow $gap='1rem'>
-									<Input
-										// defaultValue={user?.phone?.content}
-										register={register}
-										formState={formState}
-										{...PROFILE_EDIT_DATA.phone}
-									/>
+									<Input register={register} formState={formState} {...PROFILE_EDIT_DATA.phone} />
 									<Toggle state={isPhonePublic} setState={setIsPhonePublic} />
 								</S.ProfileRow>
 							</S.ProfileColumn>
@@ -360,7 +396,6 @@ const ProfileEditPage = () => {
 										handleClick={handleRadioClick}
 									>
 										<Input
-											// defaultValue={user?.universityEmail?.content}
 											register={register}
 											formState={formState}
 											{...PROFILE_EDIT_DATA.universityEmail}
@@ -376,7 +411,6 @@ const ProfileEditPage = () => {
 										handleClick={handleRadioClick}
 									>
 										<Input
-											// defaultValue={user?.subEmail?.content}
 											register={register}
 											formState={formState}
 											{...PROFILE_EDIT_DATA.subEmail}
@@ -393,14 +427,8 @@ const ProfileEditPage = () => {
 						<S.ProfileTitle>교육</S.ProfileTitle>
 						<S.ProfileRow $gap='1rem'>
 							<S.ProfileRow $gap='1rem'>
+								<Input register={register} formState={formState} {...PROFILE_EDIT_DATA.year} />
 								<Input
-									// defaultValue={user?.year}
-									register={register}
-									formState={formState}
-									{...PROFILE_EDIT_DATA.year}
-								/>
-								<Input
-									// defaultValue={user?.university}
 									register={register}
 									formState={formState}
 									{...PROFILE_EDIT_DATA.university}
@@ -408,7 +436,6 @@ const ProfileEditPage = () => {
 							</S.ProfileRow>
 							<S.ProfileColumn $gap='1rem'>
 								<Input
-									// defaultValue={user?.department}
 									register={register}
 									formState={formState}
 									{...PROFILE_EDIT_DATA.department}
@@ -491,8 +518,8 @@ const ProfileEditPage = () => {
 					<S.ProfileArticle>
 						<S.ProfileTitle>링크</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.links}</S.ProfileDescription>
+						<AddFormBtn title='링크 추가' handleClick={() => addLink(links.length - 1)} />
 						<S.ProfileColumn $gap='2.4rem'>
-							<AddFormBtn title='링크 추가' handleClick={() => addLink(links.length - 1)} />
 							{links?.map((link, index) => (
 								<LinkForm
 									key={link.id}

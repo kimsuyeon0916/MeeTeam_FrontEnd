@@ -12,15 +12,17 @@ import NicknameSettingPage from './account/nicknameSetting/NicknameSettingPage';
 import type { Account, User } from './account/signUp/SignUpData';
 import PassWordFindingPage from './account/passWordFindingPage/PassWordFindingPage';
 import { PASSWORD_DATA } from './account/passWordFindingPage/PassWordData';
+import ProfileDetailsPage from './profile/details/ProfileDetailsPage';
+import { userData } from './profile/userData';
 import ProfileEditPage from './profile/edit/ProfileEditPage';
 import PROFILE_EDIT_DATA from './profile/edit/ProfileEditData';
 import { portfolioData } from './portfolio/portfolioData';
 import PortfolioDetailsPage from './portfolio/details/PortfolioDetailsPage';
+import PORTFOLIO_EDIT_DATA from './portfolio/edit/portfolioEditData';
+import PortfolioEditPage from './portfolio/edit/PortfolioEditPage';
 import ApplierManagePage from './recruit/applierManagePage/ApplierManagePage';
 import RecruitManageWrapper from './recruit/recruitManagePage/RecruitManageWrapper';
 import RecruitPostingBookmark from './recruit/recruitManagePage/RecruitPostingBookmark';
-import ProfileDetailsPage from './profile/details/ProfileDetailsPage';
-import { userData } from './profile/userData';
 import RecruitPostingApply from './recruit/recruitManagePage/RecruitPostingApply';
 import RecruitMyPostings from './recruit/recruitManagePage/RecruitMyPostings';
 import CompleteSignUpPage from './account/complete/CompleteSignUpPage';
@@ -49,6 +51,8 @@ export {
 	PROFILE_EDIT_DATA,
 	portfolioData,
 	PortfolioDetailsPage,
+	PORTFOLIO_EDIT_DATA,
+	PortfolioEditPage,
 	ApplierManagePage,
 	RecruitPostingApply,
 	RecruitMyPostings,

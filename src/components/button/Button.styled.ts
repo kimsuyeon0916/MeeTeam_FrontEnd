@@ -30,6 +30,7 @@ const DefaultButtonLayout = styled.button<ButtonStyle>`
 	padding: ${props => (props.$small ? '1.2rem 2rem' : '1.2rem 3.2rem')};
 	justify-content: center;
 	align-items: center;
+	column-gap: 0.75rem;
 	border: 1px solid var(--ButtonColors-Default-outline-defaultLine, #e3e3e3);
 	border-radius: 0.6rem;
 	color: var(--text-color-2, #373f41);
@@ -90,7 +91,7 @@ const FormButtonLayout = styled.button`
 	flex-direction: row;
 	column-gap: 0.8rem;
 	width: 100%;
-	padding: 1.7rem 0;
+	padding-bottom: 2.7rem;
 	align-items: center;
 	color: var(--Text-textColor2, var(--text-color-2, #373f41));
 	cursor: pointer;

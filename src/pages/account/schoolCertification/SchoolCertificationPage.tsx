@@ -21,12 +21,33 @@ interface FormValues {
 }
 
 const SchoolCertificationPage = () => {
+<<<<<<< HEAD
+	const [next, setNext] = useState(false);
+	const [submitEmail, setSubmitEmail] = useState(false);
+	const [domain, setDomain] = useState<string>();
+	const [universityId, setUniversityId] = useState<string>();
+
+	const nextHandler = (e: React.MouseEvent) => {
+		// 학과 리스트 넘겨줄 때 domain 만 따로 넘겨주는 거 변경 요청 시도
+		e.preventDefault();
+		setDomain(
+			universityList?.find(university => university.universityName === getValues('university'))
+				?.universityDomain
+		);
+		setUniversityId(
+			universityList?.find(university => university.universityName === getValues('university'))
+				?.universityId
+		);
+		setNext(prev => !prev);
+	};
+=======
 	const { data: universityList, refetch: readUniversityList } = useReadUniversityList();
 	const { data: departmentList, refetch: readDepartmentList } = useReadDepartmentList();
 
 	useEffect(() => {
 		readUniversityList();
 	}, []);
+>>>>>>> release-1.0
 
 	useEffect(() => {
 		sessionStorage?.university && readDepartmentList();
@@ -52,12 +73,28 @@ const SchoolCertificationPage = () => {
 		mutate({
 			platformId: localStorage.PLATFORM_ID,
 			year: data.year,
-			universityId: sessionStorage.university,
-			departmentId: sessionStorage.department,
+			universityId: universityId,
+			departmentId: departmentList?.find(
+				department => department.departmentName === getValues('department')
+			)?.departmentId,
 			emailId: data.email,
 		});
 	};
 
+<<<<<<< HEAD
+	const { data: universityList, refetch: readUniversityList } = useReadUniversityList();
+	const { data: departmentList, refetch: readDepartmentList } = useReadDepartmentList(
+		universityId as string
+	);
+
+	useEffect(() => {
+		readUniversityList();
+	}, []);
+
+	useEffect(() => {
+		domain && readDepartmentList();
+	}, [domain]);
+=======
 	const [next, setNext] = useState(false);
 	const [submitEmail, setSubmitEmail] = useState(false);
 	const [domain, setDomain] = useState<string>();
@@ -71,6 +108,7 @@ const SchoolCertificationPage = () => {
 		);
 		setNext(prev => !prev);
 	};
+>>>>>>> release-1.0
 
 	const optionList = (name: string) => {
 		if (name === 'year') {
