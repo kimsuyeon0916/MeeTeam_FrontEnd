@@ -7,11 +7,35 @@ import {
 	checkDuplicateNickname,
 	readUniversityList,
 	readDepartmentList,
+	signOut,
 } from './auth/auth';
+import {
+	getPostingData,
+	getApplyData,
+	applyRole,
+	cancelApply,
+	closeRecruitPost,
+} from './recruit/detail';
 import { readProfile, updateProfile } from './user/Profile';
 import { readSkillList, readRoleList } from './search/search';
-import { readPortfolio, createPortfolio, updatePortfolio } from './portfolio/portfolio';
+import {
+	readPortfolioList,
+	readPortfolio,
+	createPortfolio,
+	updatePortfolio,
+} from './portfolio/portfolio';
 import { readImagePresignedUrl, readImageListPresignedUrl, uploadImageFile } from './image/image';
+import {
+	postingRecruit,
+	getRoleKeyword,
+	getSkillKeyword,
+	getCourseKeyword,
+	getProfessorKeyword,
+	getTagKeyword,
+	editPostingRecruit,
+	deletePostingRecruit,
+} from './recruit/posting';
+import { getApplicantsList } from './recruit/applicant';
 
 export {
 	EndPoint,
@@ -23,6 +47,7 @@ export {
 	checkDuplicateNickname,
 	readUniversityList,
 	readDepartmentList,
+	signOut,
 	readProfile,
 	updateProfile,
 	readSkillList,
@@ -33,4 +58,19 @@ export {
 	readImagePresignedUrl,
 	readImageListPresignedUrl,
 	uploadImageFile,
+	readPortfolioList,
+	getPostingData,
+	getApplyData,
+	applyRole,
+	postingRecruit,
+	getRoleKeyword,
+	getSkillKeyword,
+	getCourseKeyword,
+	getProfessorKeyword,
+	getTagKeyword,
+	closeRecruitPost,
+	cancelApply,
+	editPostingRecruit,
+	getApplicantsList,
+	deletePostingRecruit,
 };

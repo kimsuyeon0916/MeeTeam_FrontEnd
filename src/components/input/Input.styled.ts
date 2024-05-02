@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 interface InputStyle {
 	default?: string;
-	focus?: string;
-	arrow?: string;
+	$focus?: string;
+	$arrow?: string;
 	disabled?: boolean;
 	invalid?: boolean;
 }
@@ -50,9 +50,8 @@ const InputContainer = styled.div`
 	flex-direction: column;
 
 	span {
-		position: absolute;
-		top: 5.4rem;
-		right: 0;
+		margin-top: 0.4rem;
+		margin-left: auto;
 		color: var(--State-unactive, #8e8e8e);
 	}
 
@@ -77,7 +76,7 @@ const Input = styled.input<InputStyle>`
 	display: flex;
 	padding: 0 1.6rem;
 	${props =>
-		props.arrow && (props.arrow === 'left' ? 'padding-left: 5rem;' : 'padding-right: 5rem;')};
+		props.$arrow && (props.$arrow === 'left' ? 'padding-left: 5rem;' : 'padding-right: 5rem;')};
 	height: 4.8rem;
 
 	border-radius: 1rem;
@@ -88,7 +87,7 @@ const Input = styled.input<InputStyle>`
 	${props => props.default && `background-image: url(${props.default}); `}
 	background-repeat: no-repeat; // 배경 아이콘 반복 X
 	background-position: ${props =>
-		props.arrow === 'left' ? 'center left 1.6rem' : 'center right 1.6rem'};
+		props.$arrow === 'left' ? 'center left 1.6rem' : 'center right 1.6rem'};
 	color: ${props =>
 		props.disabled
 			? 'var(--Form-txtIcon-disabled, #8E8E8E)'
@@ -96,7 +95,7 @@ const Input = styled.input<InputStyle>`
 	cursor: text;
 
 	&:focus {
-		${props => props.focus && `background-image: url(${props.focus}); `}
+		${props => props.$focus && `background-image: url(${props.$focus}); `}
 	}
 
 	${props =>
@@ -115,6 +114,24 @@ const Input = styled.input<InputStyle>`
 	}
 `;
 
-const S = { InputLayout, InputLabel, InputContainer, Input };
+const InputErrorMessage = styled.small<InputStyle>`
+	position: absolute;
+	top: 5.4rem;
+	left: 1rem;
+	white-space: nowrap; // 줄바꿈 방지
+	color: ${props =>
+		props.invalid
+			? 'var(--ButtonColors-Caution-outline-defaultLine, #f85858)'
+			: 'var(--Form-border-focus, #5877fc)'};
+
+	/* Text/t4 */
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 1.2rem; /* 120% */
+	letter-spacing: 0.002rem;
+`;
+
+const S = { InputLayout, InputLabel, InputContainer, Input, InputErrorMessage };
 
 export default S;

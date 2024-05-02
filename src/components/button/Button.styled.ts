@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
-const IconButtonLayout = styled.button<{ $add?: boolean }>`
+interface ButtonStyle {
+	$add?: boolean;
+	$small?: boolean;
+	$disabled?: boolean;
+}
+
+const IconButtonLayout = styled.button<ButtonStyle>`
 	all: unset;
 	display: flex;
 	width: 4.8rem;
@@ -16,7 +22,7 @@ const IconButtonLayout = styled.button<{ $add?: boolean }>`
 			: `border: 1px solid #8E8E8E; background: #F6F6F6;`}
 `;
 
-const DefaultButtonLayout = styled.button<{ $small?: boolean }>`
+const DefaultButtonLayout = styled.button<ButtonStyle>`
 	all: unset;
 	box-sizing: border-box;
 	display: flex;
@@ -49,11 +55,34 @@ const DefaultButtonLayout = styled.button<{ $small?: boolean }>`
 					line-height: 1.9rem; /* 118.75% */
 					letter-spacing: 0.0032rem;
 				`}
+
+	${props =>
+		props.$disabled
+			? `background: var(--box_stroke, #E3E3E3);
+			color: var(--ButtonColors-Disabled-borderTxt, #8E8E8E);`
+			: `&:hover {
+			background: var(--ButtonColors-Default-contained-hover, #EDEDED);
+		}
+		&:active {
+			background: var(--ButtonColors-Default-contained-onPress, #747B7F);
+		}`}
 `;
+
 const PrimaryButtonLayout = styled(DefaultButtonLayout)`
 	border: 0;
 	background: var(--main-color, #5877fc);
 	color: var(--ButtonColors-Primary-outline-default, #fff);
+
+	${props =>
+		props.$disabled
+			? `background: var(--box_stroke, #E3E3E3);
+			color: var(--ButtonColors-Disabled-borderTxt, #8E8E8E);`
+			: `&:hover {
+			background: var(--ButtonColors-Primary-contained-hover, #2F4FD9);
+		}
+		&:active {
+			background: var(--ButtonColors-Primary-contained-onPress, #0E2690);
+		}`}
 `;
 
 const FormButtonLayout = styled.button`

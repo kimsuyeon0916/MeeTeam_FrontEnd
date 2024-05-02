@@ -7,10 +7,17 @@ const Comment = styled.li`
 		align-items: center;
 	}
 
+	.txt-small {
+		color: #373f41;
+		font-size: 1.4rem;
+		line-height: 1.7rem;
+		letter-spacing: 0.0028rem;
+	}
+
 	.container {
 		display: flex;
-		gap: 2rem;
-		align-items: center;
+		flex-direction: column;
+		gap: 0.8rem;
 		width: 100%;
 
 		.input-edit {
@@ -22,49 +29,97 @@ const Comment = styled.li`
 			padding-bottom: 0.5rem;
 			font-size: 1.5rem;
 		}
-	}
 
-	.comment-icon {
-		display: flex;
-	}
+		.comment-icon {
+			display: flex;
+			align-items: center;
+			gap: 0.6rem;
 
-	.comment-info {
-		display: flex;
-		flex-direction: column;
-		gap: 0.3rem;
+			.nickname {
+				color: #373f41;
+				font-size: 1.2rem;
+				font-weight: 600;
+			}
 
-		span:nth-child(1) {
-			color: #434343;
-			font-size: 1.2rem;
-			font-style: normal;
-			font-weight: 400;
-			line-height: 1.35rem;
-			letter-spacing: 0.015rem;
+			.createAt {
+				color: #8e8e8e;
+				font-size: 1.2rem;
+			}
 		}
-		span:nth-child(2) {
-			padding: 0.4rem 1.5rem;
-			background-color: #fff;
-			color: #373f41;
-			font-size: 1.5rem;
-			font-style: normal;
-			font-weight: 400;
-			line-height: 150%;
-			letter-spacing: 0.015rem;
-			border-radius: 0.75rem;
+
+		.comment-info {
+			display: flex;
+			flex-direction: column;
+			gap: 0.3rem;
+
+			span {
+				color: #373f41;
+				font-size: 1.2rem;
+			}
+
+			.edit-container {
+				display: flex;
+				flex-direction: column;
+
+				.edit-input {
+					margin-top: 0.8rem;
+					width: 100%;
+					box-sizing: border-box;
+					height: 3.75rem;
+					border-radius: 0.75rem;
+					border: 0.75px solid #bebebe;
+					background: #fff;
+					outline: none;
+					padding-left: 1.3rem;
+				}
+
+				.btn-container {
+					display: flex;
+					justify-content: flex-end;
+					align-items: center;
+					margin-top: 1.6rem;
+					gap: 1.2rem;
+
+					button {
+						display: inline-flex;
+						height: 3.6rem;
+						padding: 1.2rem 2rem;
+						justify-content: center;
+						align-items: center;
+						flex-shrink: 0;
+						border-radius: 0.6rem;
+					}
+
+					.cancel {
+						border: 1px solid #e3e3e3;
+						background: #fff;
+					}
+
+					.save {
+						color: #f7faff;
+						background: #5877fc;
+					}
+				}
+			}
 		}
 	}
 
-	.reply-btn {
-		background-color: transparent;
-		margin-left: -1.5rem;
+	hr {
+		height: 0.075rem;
+		margin: 1.6rem 0;
+		width: 100%;
+		opacity: 0.96;
+		background: #e3e3e3;
 	}
 
-	.container-reply__lists {
-		display: flex;
-		flex-direction: column;
-		margin-top: 2rem;
-		margin-left: 5rem;
-		gap: 2rem;
+	.wrapper-replies {
+		padding-left: 3rem;
+		box-sizing: border-box;
+
+		.container-reply__lists {
+			display: flex;
+			flex-direction: column;
+		}
 	}
 `;
 

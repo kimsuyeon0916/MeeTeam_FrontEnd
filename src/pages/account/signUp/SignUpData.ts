@@ -12,7 +12,6 @@ export interface User {
 
 const SIGN_UP_DATA = [
 	{
-		label: '닉네임',
 		name: 'nickname',
 		type: 'text',
 		placeholder: '닉네임을 입력해주세요',

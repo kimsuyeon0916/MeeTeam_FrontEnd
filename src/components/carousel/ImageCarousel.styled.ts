@@ -51,6 +51,10 @@ const ImageCarouselRow = styled.div`
 		display: flex;
 		column-gap: 0.8rem;
 	}
+
+	span {
+		color: #5877fc;
+	}
 `;
 
 const ButtonIcon = styled.img`

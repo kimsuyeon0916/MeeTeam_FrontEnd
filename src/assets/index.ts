@@ -7,10 +7,12 @@ import SearchIcon from './SearchIcon.svg';
 import LeftBtn from './LeftBtn.svg';
 import RightBtn from './RightBtn.svg';
 import MeeteamLogo from './MeeteamLogo.svg';
-import { CREATE_ICON } from './IconData';
 import Logo from './Logo.svg';
 import CancelBtn from './CancelBtn.svg';
 import XBtn from './XBtn.svg';
+import Reply from './Reply.svg';
+import LogoName from './LogoName.svg';
+import { DATE_ICON } from './DateIcon';
 import DefaultProfileImage from './DefaultProfileImage.svg';
 import DefaultPortfolioImage from './DefaultPortfolioImage.svg';
 import Search from './Search.svg';
@@ -34,12 +36,36 @@ import Test1 from './Test1.png';
 import Test2 from './Test2.png';
 import Test3 from './Test3.png';
 import Test4 from './Test4.png';
+<<<<<<< HEAD
 import Refresh from './Refresh.svg';
 import HambergerMenuIcon from './HamburgerMenuIcon.svg';
 import Pencil from './Pencil.svg';
+=======
+import FilledBookmark from './FilledBookmark.svg';
+import UnfilledBookmark from './UnfilledBookmark.svg';
+import Edit from './Edit.svg';
+import TrashCan from './TrashCan.svg';
+import Clear from './Clear.svg';
+import BookmarkRight from './BookmarkRight.svg';
+import PlusWhite from './PlusWhite.svg';
+import CancelWhite from './CancelWhite.svg';
+import Create from './Create.svg';
+import Profile from './Profile.svg';
+import Portpolio from './Portpolio.svg';
+import User from './User.svg';
+import School from './School.svg';
+import DropdownArrowUp from './DropdownArrowUp.svg';
+import FloatingBackground from './FloatingBackground.svg';
+import Alert from './Alert.svg';
+import MeeteamLogoLarge from './MeeteamLogoLarge.svg';
+import Congratulation from './Congratulation.svg';
+import NaverIcon from './NaverIcon.png';
+>>>>>>> release-1.0
 
 export {
 	Exit,
+	Edit,
+	TrashCan,
 	Alarm,
 	Plus,
 	Upload,
@@ -48,10 +74,13 @@ export {
 	LeftBtn,
 	RightBtn,
 	MeeteamLogo,
-	CREATE_ICON,
 	Logo,
 	CancelBtn,
 	XBtn,
+	Reply,
+	LogoName,
+	FilledBookmark,
+	UnfilledBookmark,
 	DefaultProfileImage,
 	DefaultPortfolioImage,
 	Search,
@@ -75,7 +104,26 @@ export {
 	Test2,
 	Test3,
 	Test4,
+<<<<<<< HEAD
 	Refresh,
 	HambergerMenuIcon,
 	Pencil,
+=======
+	DATE_ICON,
+	Clear,
+	BookmarkRight,
+	CancelWhite,
+	PlusWhite,
+	Create,
+	Profile,
+	Portpolio,
+	User,
+	School,
+	DropdownArrowUp,
+	FloatingBackground,
+	Alert,
+	MeeteamLogoLarge,
+	Congratulation,
+	NaverIcon,
+>>>>>>> release-1.0
 };

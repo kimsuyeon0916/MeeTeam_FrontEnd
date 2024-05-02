@@ -1,26 +1,139 @@
 import React, { useState, useRef, useEffect } from 'react';
 import S from './Dropdown.styled';
-import DropdownArrow from './DropdownArrow';
+import { useDebounce } from '../../hooks';
+import { useQuery } from '@tanstack/react-query';
+import { getCourseKeyword, getProfessorKeyword } from '../../service';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { applicantFilter, recruitFilterState } from '../../atom';
+import { ManageRole, Keyword } from '../../types';
+import { DropdownArrowUp, DropdownArrow } from '../../assets';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
-interface IDropdown {
-	data: string[];
+interface Dropdown {
+	data?: string[];
 	initialData?: string;
-	$arrowNeed?: boolean;
 	$showDropdown?: boolean;
+	scope?: boolean;
+	category?: boolean;
+	applicant?: boolean;
+	roleObj?: ManageRole[];
 }
 
-const Dropdown = ({ data, initialData, $arrowNeed }: IDropdown) => {
-	const [currentValue, setCurrentValue] = useState(`${initialData}`);
-	const [showDropdown, setShowDropdown] = useState(false);
-	const dropdownRef = useRef<HTMLDivElement | null>(null);
+type keyObj = {
+	[key: string]: number;
+};
 
-	const onClickDropdown = () => {
-		setShowDropdown(prev => !prev);
+const scopeObj: keyObj = {
+	교외: 1,
+	교내: 2,
+};
+
+const categoryObj: keyObj = {
+	프로젝트: 1,
+	스터디: 2,
+	공모전: 3,
+};
+
+const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dropdown) => {
+	const [currentValue, setCurrentValue] = useState<string | undefined>(`${initialData}`);
+	const [showDropdown, setShowDropdown] = useState<boolean>(false);
+	const [dropdown, setDropdown] = useState({
+		course: false,
+		professor: false,
+	});
+	const insideRef = useRef<HTMLDivElement | null>(null);
+	const dropdownRef = useRef<HTMLDivElement | null>(null);
+	const [isChecked, setIsChecked] = useState<boolean>(false);
+	const [name, setName] = useState({
+		course: '',
+		professor: '',
+	});
+	const location = useLocation();
+	const setApplicantFilter = useSetRecoilState(applicantFilter);
+	const keywordCourse = useDebounce(name.course, 500);
+	const keywordProfessor = useDebounce(name.professor, 500);
+	const [filterState, setFilterState] = useRecoilState(recruitFilterState);
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const { data: dataCourse, isLoading: isLoadingCourse } = useQuery({
+		queryKey: ['searchCourse', keywordCourse],
+		queryFn: () => getCourseKeyword(keywordCourse),
+	});
+	const { data: dataProfessor, isLoading: isLoadingProfessor } = useQuery({
+		queryKey: ['searchProfessor', keywordProfessor],
+		queryFn: () => getProfessorKeyword(keywordProfessor),
+	});
+
+	const getKeyByValue = (obj: keyObj, value: number) => {
+		return Object.keys(obj).find(key => obj[key] === value);
 	};
 
-	const onClickList = (event: React.MouseEvent<HTMLElement>) => {
+	const onClickDropdown = () => {
+		if (scope) {
+			setShowDropdown(true);
+		} else {
+			setShowDropdown(prev => !prev);
+		}
+	};
+
+	const onClickList = (event: React.MouseEvent<HTMLElement>, id?: number) => {
+		event.stopPropagation();
 		const { innerText } = event.target as HTMLElement;
 		setCurrentValue(innerText);
+		if (applicant && id) {
+			setApplicantFilter(id);
+		} else {
+			setFilterState(prev => ({ ...prev, category: categoryObj[innerText] }));
+			if (innerText === '전체') {
+				searchParams.delete('category');
+				setSearchParams(searchParams);
+				setShowDropdown(false);
+				return;
+			}
+		}
+		setShowDropdown(false);
+	};
+
+	const onClickRadio = (event: React.ChangeEvent<HTMLInputElement>) => {
+		event.stopPropagation();
+		const value = event.target.value;
+		setCurrentValue(value);
+		setFilterState(prev => ({ ...prev, scope: scopeObj[value] }));
+		if (value !== '교내') {
+			setShowDropdown(false);
+		}
+		// if (value === '전체 보기') {
+		// 	searchParams.delete('scope');
+		// 	setSearchParams(searchParams);
+		// 	return;
+		// }
+	};
+
+	const onClickCheckbox = () => {
+		setIsChecked(prev => !prev);
+	};
+
+	const onClickCourse = (event: React.MouseEvent<HTMLSpanElement>) => {
+		event.stopPropagation();
+		const target = event.target as HTMLSpanElement;
+		const { innerText, id } = target;
+		setName(prev => ({ ...prev, course: innerText }));
+		setDropdown(prev => ({ ...prev, course: false }));
+		setFilterState(prev => ({ ...prev, course: Number(id) }));
+	};
+	const onClickProfessor = (event: React.MouseEvent<HTMLSpanElement>) => {
+		const target = event.target as HTMLSpanElement;
+		const { innerText, id } = target;
+		setName(prev => ({ ...prev, professor: innerText }));
+		setDropdown(prev => ({ ...prev, professor: false }));
+		setFilterState(prev => ({ ...prev, professor: Number(id) }));
+	};
+
+	const onChangeCourse = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setName(prev => ({ ...prev, course: event.target.value }));
+	};
+	const onChangeProfessor = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setName(prev => ({ ...prev, professor: event.target.value }));
 	};
 
 	useEffect(() => {
@@ -29,34 +142,167 @@ const Dropdown = ({ data, initialData, $arrowNeed }: IDropdown) => {
 			if (showDropdown && dropdownRef.current && !dropdownRef.current.contains(target as Node)) {
 				setShowDropdown(false);
 			}
+
+			if (dropdown.course && insideRef.current && !insideRef.current.contains(target as Node)) {
+				setDropdown(prev => ({ ...prev, course: false }));
+			}
+
+			if (dropdown.professor && insideRef.current && !insideRef.current.contains(target as Node)) {
+				setDropdown(prev => ({ ...prev, professor: false }));
+			}
 		};
 		document.addEventListener('mousedown', outsideClick);
 		return () => {
 			document.removeEventListener('mousedown', outsideClick);
 		};
-	}, [dropdownRef.current, showDropdown]);
+	}, [dropdownRef.current, showDropdown, dropdown.course, dropdown.professor]);
+
+	// useEffect(() => {
+	// 	setCurrentValue(initialData);
+	// }, [location]);
+
+	// useEffect(() => {
+	// 	if (scope && filterState.scope) {
+	// 		searchParams.set('scope', filterState.scope.toString());
+	// 	} else if (category && filterState.category) {
+	// 		searchParams.set('category', filterState.category.toString());
+	// 	} else if (filterState.category === null) {
+	// 		searchParams.delete('category');
+	// 	}
+	// 	setSearchParams(searchParams);
+	// }, [filterState.scope, filterState.category]);
 
 	return (
-		<S.Dropdown $arrowNeed={$arrowNeed} $showDropdown={showDropdown}>
-			<div className='menu' onClick={onClickDropdown} ref={dropdownRef}>
-				<div className='temp'>
-					<div>{currentValue}</div>
-					<div>
-						<DropdownArrow />
-					</div>
+		<S.Dropdown $showDropdown={showDropdown} $scope={scope} $isCheck={isChecked} ref={dropdownRef}>
+			<article className='wrapper' onClick={onClickDropdown}>
+				<div className='dropdown-box'>
+					{scope && (
+						<div className='value'>
+							{filterState.scope ? getKeyByValue(scopeObj, filterState.scope) : currentValue}
+						</div>
+					)}
+					{category && (
+						<div className='value'>
+							{filterState.category
+								? getKeyByValue(categoryObj, filterState.category)
+								: currentValue}
+						</div>
+					)}
+					{applicant && <div className='value'>{currentValue}</div>}
+					<img src={showDropdown ? DropdownArrowUp : DropdownArrow} />
 				</div>
 				{showDropdown && (
-					<div className='dropdown'>
-						<ul className='menu-container'>
-							{data.map((e: string, index: number) => (
-								<li onClick={onClickList} key={index}>
-									{e}
-								</li>
-							))}
-						</ul>
-					</div>
+					<>
+						<div className='dropdown'>
+							{scope && (
+								<ul className='menu-container'>
+									{data?.map((e: string, index: number) => (
+										<>
+											<section key={index} className={`menu-scope ${e === '교내' && 'in'}`}>
+												<input
+													type='radio'
+													id={`${index}`}
+													name='scope'
+													value={e}
+													checked={e === currentValue}
+													onChange={onClickRadio}
+												/>
+												<label htmlFor={`${index}`}>{e}</label>
+											</section>
+											{currentValue === '교내' && (
+												<section className='inside'>
+													<section className='intro'>
+														<span className='description'>
+															수업이신 경우 오른쪽의 “수업” 체크박스를 눌러주세요.
+														</span>
+														<section>
+															<input type='checkbox' id='course' onClick={onClickCheckbox} />
+															<label className='course-label' htmlFor='course'>
+																수업
+															</label>
+														</section>
+													</section>
+													<section className='wrapper-inputs' ref={insideRef}>
+														<section className='container-inputs'>
+															<input
+																type='text'
+																placeholder='수업명'
+																value={name.course}
+																disabled={!isChecked ? true : false}
+																onChange={onChangeCourse}
+																onClick={() => setDropdown(prev => ({ ...prev, course: true }))}
+															/>
+															{dropdown.course && (
+																<section className='dropdown'>
+																	{!isLoadingCourse &&
+																		dataCourse?.map((keyword: Keyword) => (
+																			<span
+																				key={keyword.id}
+																				onClick={onClickCourse}
+																				id={keyword.id.toString()}
+																			>
+																				{keyword.name}
+																			</span>
+																		))}
+																</section>
+															)}
+														</section>
+														<section className='container-inputs'>
+															<input
+																type='text'
+																placeholder='교수명'
+																value={name.professor}
+																disabled={!isChecked ? true : false}
+																onChange={onChangeProfessor}
+																onClick={() => setDropdown(prev => ({ ...prev, professor: true }))}
+															/>
+															{dropdown.professor && (
+																<section className='dropdown'>
+																	{!isLoadingProfessor &&
+																		dataProfessor?.map((keyword: Keyword) => (
+																			<span
+																				key={keyword.id}
+																				onClick={onClickProfessor}
+																				id={keyword.id.toString()}
+																			>
+																				{keyword.name}
+																			</span>
+																		))}
+																</section>
+															)}
+														</section>
+													</section>
+												</section>
+											)}
+										</>
+									))}
+								</ul>
+							)}
+							{category && (
+								<ul className='menu-container category'>
+									{data?.map((e: string, index: number) => (
+										<li onClick={onClickList} key={index}>
+											{e}
+										</li>
+									))}
+								</ul>
+							)}
+							{applicant && (
+								<ul className='menu-container category'>
+									{roleObj?.map(e => (
+										<li
+											onClick={event => onClickList(event, e.id as number | undefined)}
+											key={e.id}
+										>
+											{e.title}
+										</li>
+									))}
+								</ul>
+							)}
+						</div>
+					</>
 				)}
-			</div>
+			</article>
 		</S.Dropdown>
 	);
 };

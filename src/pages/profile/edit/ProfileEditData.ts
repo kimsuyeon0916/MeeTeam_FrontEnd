@@ -33,8 +33,8 @@ const interest = {
 	name: 'interest',
 	icon: {
 		default: ArrowBottom,
-		focus: ArrowTop,
-		arrow: 'right',
+		$focus: ArrowTop,
+		$arrow: 'right',
 	},
 };
 
@@ -60,8 +60,8 @@ const phone = {
 	name: 'phone',
 	icon: {
 		default: GrayPhone,
-		focus: BlackPhone,
-		arrow: 'left',
+		$focus: BlackPhone,
+		$arrow: 'left',
 	},
 };
 
@@ -71,8 +71,8 @@ const universityEmail = {
 	name: 'universityEmail',
 	icon: {
 		default: GrayEmail,
-		focus: BlackEmail,
-		arrow: 'left',
+		$focus: BlackEmail,
+		$arrow: 'left',
 	},
 	validation: {
 		disabled: true,
@@ -85,8 +85,8 @@ const subEmail = {
 	name: 'subEmail',
 	icon: {
 		default: GrayEmail,
-		focus: BlackEmail,
-		arrow: 'left',
+		$focus: BlackEmail,
+		$arrow: 'left',
 	},
 };
 
@@ -129,8 +129,8 @@ const maxGpa = {
 	name: 'maxGpa',
 	icon: {
 		default: ArrowBottom,
-		focus: ArrowTop,
-		arrow: 'right',
+		$focus: ArrowTop,
+		$arrow: 'right',
 	},
 };
 
@@ -140,7 +140,7 @@ const skills = {
 	name: 'skills',
 	icon: {
 		default: Search,
-		arrow: 'right',
+		$arrow: 'right',
 	},
 };
 
@@ -149,8 +149,8 @@ const linkDescription = {
 	placeholder: 'Link',
 	icon: {
 		default: ArrowBottom,
-		focus: ArrowTop,
-		arrow: 'right',
+		$focus: ArrowTop,
+		$arrow: 'right',
 	},
 };
 
@@ -163,8 +163,8 @@ const awardDate = {
 	type: 'string',
 	icon: {
 		default: GrayCalendar,
-		focus: BlackCalendar,
-		arrow: 'right',
+		$focus: BlackCalendar,
+		$arrow: 'right',
 	},
 };
 

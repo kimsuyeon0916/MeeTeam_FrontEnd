@@ -1,3 +1,5 @@
+import { Portfolio } from './index';
+
 export interface UserReponse {
 	userId?: string;
 	nickname?: string;
@@ -23,4 +25,15 @@ export interface ImageResponse {
 	serviceType: string;
 	fileName: string;
 	url: string;
+}
+
+export interface PortfolioListResponse {
+	portfolios: Portfolio[];
+	pageInfo: PageInfo;
+}
+
+export interface PageInfo {
+	page: number;
+	size: number;
+	hasNextPage?: boolean;
 }

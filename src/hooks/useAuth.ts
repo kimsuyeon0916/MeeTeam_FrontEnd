@@ -7,6 +7,7 @@ import {
 	checkDuplicateNickname,
 	readUniversityList,
 	readDepartmentList,
+	signOut,
 } from '../service';
 import { User } from '../types';
 
@@ -105,5 +106,19 @@ export const useReadDepartmentList = (universityId: string) => {
 		queryKey: authKeys.readDepartmentList(universityId),
 		queryFn: () => readDepartmentList(universityId),
 		enabled: false,
+	});
+};
+
+/**
+ * @description 로그아웃 API를 호출하는 hook입니다. 성공 시 access token을 로컬 스토리지에서 제거합니다.
+ */
+export const useSignOut = ({ onSuccess, setUserState }: AuthProps = {}) => {
+	return useMutation({
+		mutationFn: signOut,
+		onSuccess: () => {
+			localStorage.removeItem(ACCESS_TOKEN_KEY);
+			setUserState?.(null);
+			onSuccess?.();
+		},
 	});
 };

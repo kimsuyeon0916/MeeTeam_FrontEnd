@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+interface RecruitStyle {
+	$isClosed: boolean;
+}
+
 const Card = styled.div`
 	position: relative;
 	width: 25.65rem;
@@ -59,98 +63,107 @@ const PortpolioCard = styled.div`
 	}
 `;
 
-const RecruitCard = styled.div`
+const RecruitCard = styled.article<RecruitStyle>`
 	display: flex;
 	flex-direction: column;
-	width: 25.65rem;
-	height: 18.375rem;
+	width: 22.8rem;
+	height: 18.8rem;
 	flex-shrink: 0;
-	border-radius: 0.75rem;
-	border: 1.5px solid var(--main-color, #ababab);
-	background: #f9f9f9;
-	padding: 1.35rem 1.5rem 1.8rem 1.5rem;
+	padding: 1.8rem 2rem;
+	border-radius: 1rem;
+	border: 1px solid #e3e3e3;
+	background: ${props => (props.$isClosed ? '#EDEDED' : '#fff')};
+	justify-content: space-between;
+
 	cursor: pointer;
 
 	&:hover {
-		transition: 0.7s;
-		border: 1.5px solid var(--main-color, #5877fc);
+		transition: 0.3s;
+		border-color: #5877fc;
+	}
+
+	.txt2 {
+		color: #8e8e8e;
+		font-size: 1.2rem;
+		line-height: 1.4rem;
+		letter-spacing: 0.0024rem;
 	}
 
 	.content-tags {
 		display: flex;
-		justify-content: space-between;
+		flex-direction: column;
 
-		.tags {
+		.header {
 			display: flex;
-			gap: 0.6rem;
-
-			div:nth-child(1) {
+			justify-content: space-between;
+			.tags {
 				display: flex;
-				width: 4.05rem;
-				height: 2.4rem;
-				padding: 0.75rem;
-				justify-content: center;
-				align-items: center;
-				gap: 0.75rem;
-				border-radius: 0.6rem;
-				background: #e0e6ff;
-				color: #000;
-				font-size: 1.2rem;
-				font-style: normal;
-				font-weight: 400;
-				line-height: 1.35rem; /* 112.5% */
-				letter-spacing: 0.015rem;
-			}
+				gap: 0.6rem;
 
-			div:nth-child(2) {
-				display: flex;
-				width: 5.55rem;
-				height: 2.4rem;
-				padding: 0.75rem;
-				justify-content: center;
-				align-items: center;
-				gap: 0.75rem;
-				border-radius: 0.6rem;
-				background: #e3f5ff;
-				color: #373f41;
-				font-size: 1.1rem;
-				font-style: normal;
-				font-weight: 400;
-				line-height: 1.35rem; /* 112.5% */
-				letter-spacing: 0.015rem;
-			}
-		}
+				.tag {
+					display: inline-flex;
+					padding: 0.4rem;
+					align-items: center;
+					gap: 0.4rem;
+					border-radius: 0.4rem;
+					font-size: 1.2rem;
+					line-height: 1.4rem;
+					letter-spacing: 0.0024rem;
+				}
 
-		.bookmark {
-			font-size: 2rem;
+				.scope {
+					background: #ffe7fe;
+					color: #f979dd;
+				}
+
+				.category {
+					background: #c9deff;
+					color: #5877fc;
+				}
+			}
 		}
 	}
 
 	.content-title {
-		height: 4.8rem;
-		flex-shrink: 0;
-		margin-top: 1.65rem;
-		color: #373f41;
+		margin-top: 1.6rem;
+		overflow: hidden;
+		color: ${props => (props.$isClosed ? '#8E8E8E' : '#373f41')};
 		text-overflow: ellipsis;
-		font-size: 1.65rem;
-		font-style: normal;
-		font-weight: 400;
-		line-height: 130%;
-		letter-spacing: 0.015rem;
+		white-space: wrap;
+		-webkit-line-clamp: 3;
+		font-size: 1.6rem;
+		font-weight: 600;
+		line-height: 1.9rem;
+		letter-spacing: 0.0032rem;
 	}
 
 	.content-info {
 		display: flex;
-		margin-top: 5rem;
+		margin-top: 3.2rem;
 		justify-content: space-between;
+		align-items: center;
 
-		div {
-			color: #373f41;
+		.user {
+			display: flex;
+			align-items: center;
+			gap: 0.56rem;
+		}
+
+		.date {
+			color: #8e8e8e;
 			font-size: 1.2rem;
-			font-style: normal;
-			font-weight: 400;
-			line-height: 1.35rem;
-			letter-spacing: 0.015rem;
+			line-height: 1.4rem;
+			letter-spacing: 0.0024rem;
+		}
+
+		.closed {
+			display: flex;
+			padding: 0.4rem 0.8rem;
+			justify-content: center;
+			align-items: center;
+			border-radius: 1.5rem;
+			border: 1px solid #8e8e8e;
+			background: #e3e3e3;
 		}
 	}
 `;

@@ -16,7 +16,7 @@ const Radio = ({ name, id, state, handleClick, children }: Radio) => {
 				type='radio'
 				name={name}
 				id={id}
-				checked={state}
+				defaultChecked={state}
 				onClick={() => handleClick?.(id)}
 			/>
 			{children}

@@ -1,71 +1,65 @@
 import React, { useEffect, useState, useRef } from 'react';
 import S from './Header.styled';
-import { BiSearch, BiBell, BiUser } from 'react-icons/bi';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { preUrlState } from '../../atom';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { MeeteamLogo, CREATE_ICON } from '../../assets';
-import { searchPageState } from '../../atom';
-import { useRecoilState } from 'recoil';
-import { CancelBtn, Logo, SearchIcon, XBtn } from '../../assets';
-import { Create } from '..';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { DropdownArrow, Logo, LogoName } from '../../assets';
+import { ProfileImage, WaitModal } from '..';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { recruitFilterState, userState, waitModalState } from '../../atom';
+import { useLogin, useSignOut } from '../../hooks';
+import { fixModalBackground } from '../../utils';
 
 const Header = () => {
 	const navigate = useNavigate();
+	const { id } = useParams();
 	const location = useLocation();
+	const { isLoggedIn } = useLogin();
+	const [userInfo, setUserState] = useRecoilState(userState);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
-	const alarmRef = useRef<HTMLDivElement | null>(null);
 	const [openDrop, setOpenDrop] = useState<boolean>(false);
-	const [openDropAlarm, setOpenDropAlarm] = useState<boolean>(false);
-	const [openSearch, setOpenSearch] = useRecoilState(searchPageState);
-	const [newAlarm, setNewAlarm] = useState<boolean>(true);
+	const setFilterState = useSetRecoilState(recruitFilterState);
+	const [isWait, setIsWait] = useRecoilState(waitModalState);
 	const [isHere, setIsHere] = useState({
 		recruit: false,
 		galary: false,
-		member: false,
 		inform: false,
 	});
 
-	const goHome = () => {
-		navigate('/');
-	};
 	const goRecruit = () => {
-		navigate('/recruit');
+		navigate('/');
+		setFilterState({
+			scope: null,
+			category: null,
+			field: null,
+			skill: [],
+			role: [],
+			tag: [],
+			keyword: '',
+			course: null,
+			professor: null,
+		});
 	};
 	const goGalary = () => {
-		navigate('/galary');
-	};
-	const goMember = () => {
-		navigate('/member');
+		setIsWait(true);
 	};
 	const goInformationUse = () => {
-		navigate('/information');
+		setIsWait(true);
 	};
 
-	const onClickSearch = () => {
-		setOpenSearch(true);
+	const onClickMy = () => {
+		if (!isLoggedIn) {
+			navigate('/signin');
+		} else {
+			setOpenDrop(prev => !prev);
+		}
 	};
-
-	const onClickCancel = () => {
-		setOpenSearch(false);
-	};
-
-	const setPreUrl = useSetRecoilState(preUrlState);
 
 	useEffect(() => {
-		if (location.pathname === '/recruit/:recruitId?' || location.pathname === '/recruit') {
-			setIsHere({ recruit: true, galary: false, member: false, inform: false });
+		if (location.pathname === `/recruitment/postings/${id}` || location.pathname === '/') {
+			setIsHere({ recruit: true, galary: false, inform: false });
 		}
 		if (location.pathname === '/galary') {
-			setIsHere({ recruit: false, galary: true, member: false, inform: false });
+			setIsHere({ recruit: false, galary: true, inform: false });
 		}
-		if (location.pathname === '/member') {
-			setIsHere({ recruit: false, galary: false, member: true, inform: false });
-		}
-		if (location.pathname === '/information') {
-			setIsHere({ recruit: false, galary: false, member: false, inform: true });
-		}
-		setPreUrl(location.pathname);
 	}, [location]);
 
 	useEffect(() => {
@@ -74,176 +68,120 @@ const Header = () => {
 			if (openDrop && dropdownRef.current && !dropdownRef.current.contains(target as Node)) {
 				setOpenDrop(false);
 			}
-			if (openDropAlarm && alarmRef.current && !alarmRef.current.contains(target as Node)) {
-				setOpenDropAlarm(false);
-			}
 		};
 		document.addEventListener('mousedown', outsideClick);
 		return () => {
 			document.removeEventListener('mousedown', outsideClick);
 		};
-	}, [openDrop, openDropAlarm]);
+	}, [openDrop]);
+
+	useEffect(() => {
+		fixModalBackground(isWait);
+	}, [isWait]);
+
+	// 로그아웃
+	const { mutate: signOut } = useSignOut({ setUserState });
+
+	const handleLogOutButtonClick = () => {
+		const confirm = window.confirm('로그아웃 하시겠습니까?');
+		if (confirm) {
+			signOut();
+			navigate('/');
+			setOpenDrop(false);
+		}
+	};
 
 	return (
-		<S.Header>
+		<S.Header $isLogin={isLoggedIn}>
 			<div className='header'>
-				<div className='header__logo' onClick={goHome}>
-					<img src={Logo} />
-				</div>
-				<div className='header__navigation'>
-					<div
-						className={`header__navigation--navi-text ${isHere.recruit ? 'here' : ''}`}
-						onClick={goRecruit}
-					>
-						구인 게시판
+				<section className='header-leftside'>
+					<div className='header__logo' onClick={goRecruit}>
+						<img className='logo' src={Logo} />
+						<img className='logo-name' src={LogoName} />
+						{isLoggedIn && <span className='university'>광운대학교</span>}
 					</div>
-					<div
-						className={`header__navigation--navi-text ${isHere.galary ? 'here' : ''}`}
-						onClick={goGalary}
-					>
-						밋팀 갤러리
-					</div>
-					<div
-						className={`header__navigation--navi-text ${isHere.member ? 'here' : ''}`}
-						onClick={goMember}
-					>
-						멤버
-					</div>
-					<div
-						className={`header__navigation--navi-text ${isHere.inform ? 'here' : ''}`}
-						onClick={goInformationUse}
-					>
-						이용안내
-					</div>
-				</div>
-				<div className='header__menu'>
-					<div className='header__menu--search' onClick={onClickSearch}>
-						<BiSearch />
-					</div>
-					<div className='header__menu--alarm' ref={alarmRef}>
+					<div className='header__navigation'>
 						<div
-							className='icon'
-							onClick={() => {
-								setOpenDropAlarm(prev => !prev);
-								setNewAlarm(false);
-							}}
+							className={`header__navigation--navi-text ${isHere.recruit ? 'here' : ''}`}
+							onClick={goRecruit}
 						>
-							<BiBell />
+							구인게시판
 						</div>
-						{newAlarm && <div className='dot'></div>}
-						{openDropAlarm && (
-							<div className='alarm-dropdown'>
-								<div className='message apply'>
-									<span>
-										팀 신청이 도착했어요.
-										<div className='dot2'></div>
-									</span>
-									<span>{'>'}</span>
-								</div>
-								<hr />
-								<div className='message issue'>
-									<span>1일 전</span>
-									<span>00님이 민지님을 팔로우 하기 시작했습니다.</span>
-								</div>
-							</div>
-						)}
-					</div>
-					<div className='header__menu--create' onClick={() => navigate('/create/meeteam')}>
-						<Create />
-					</div>
-					<div className='header__menu--my' ref={dropdownRef}>
-						<div className='icon' onClick={() => setOpenDrop(prev => !prev)}>
-							<BiUser />
+						<div
+							className={`header__navigation--navi-text ${isHere.galary ? 'here' : ''}`}
+							onClick={goGalary}
+						>
+							밋팀갤러리
 						</div>
-						{openDrop && (
-							<div className='dropdown'>
-								<div
-									className='menu'
-									onClick={() => {
-										setOpenDrop(false);
-										navigate('/profile');
-									}}
-								>
-									프로필 설정
-								</div>
-								<div
-									className='menu'
-									onClick={() => {
-										setOpenDrop(false);
-										navigate('/activity/invited');
-									}}
-								>
-									내 활동
-								</div>
-								<div
-									className='menu'
-									onClick={() => {
-										setOpenDrop(false);
-										navigate('/manage/meeteam');
-									}}
-								>
-									밋팀 관리
-								</div>
-								<div
-									className='menu'
-									onClick={() => {
-										setOpenDrop(false);
-										navigate('/account');
-									}}
-								>
-									계정 관리
-								</div>
-								<div className='menu'>로그아웃</div>
-							</div>
-						)}
+						<div
+							className={`header__navigation--navi-text ${isHere.inform ? 'here' : ''}`}
+							onClick={goInformationUse}
+						>
+							이용안내
+						</div>
 					</div>
-				</div>
+				</section>
+				<section>
+					<div className='header__menu'>
+						<span className='header__nickname body2-semibold'>
+							{isLoggedIn && `안녕하세요, ${userInfo?.nickname}님!`}
+						</span>
+						<div className='header__menu--my' ref={dropdownRef}>
+							<section onClick={onClickMy}>
+								{isLoggedIn ? (
+									<article className='icon-container'>
+										<div className='icon-border'>
+											{userInfo?.userId && <ProfileImage userId={userInfo?.userId} size='3rem' />}
+										</div>
+										<img src={DropdownArrow} />
+									</article>
+								) : (
+									<span className='login'>로그인</span>
+								)}
+							</section>
+							{openDrop && (
+								<div className='dropdown'>
+									<div
+										className='menu'
+										onClick={() => {
+											setOpenDrop(false);
+											navigate(`/profile/${userInfo?.userId}`);
+										}}
+									>
+										프로필
+									</div>
+									<div
+										className='menu'
+										onClick={() => {
+											setOpenDrop(false);
+											navigate('/'); // 임시 설정
+										}}
+									>
+										포트폴리오
+									</div>
+									<div
+										className='menu'
+										onClick={() => {
+											setOpenDrop(false);
+											navigate('/management/bookmark');
+										}}
+									>
+										구인글 관리
+										<hr />
+									</div>
+									<div className='menu logout' onClick={handleLogOutButtonClick}>
+										로그아웃
+									</div>
+								</div>
+							)}
+						</div>
+					</div>
+				</section>
 			</div>
-			{openSearch && (
-				<div className='search-box'>
-					<div className='search-box__container'>
-						<div className='search-box__bar'>
-							<div>
-								<img src={SearchIcon} />
-							</div>
-							<div className='container-input'>
-								<input />
-							</div>
-						</div>
-						<div className='search-box__recent'>
-							<span className='subtitle'>최근 검색어</span>
-							<div className='container-elements__recent'>
-								<div className='element word_recent'>
-									<span>프로젝트</span>
-									<img src={XBtn} />
-								</div>
-								<div className='element word_recent'>
-									<span>프로젝트</span>
-									<img src={XBtn} />
-								</div>
-								<div className='element word_recent'>
-									<span>프로젝트</span>
-									<img src={XBtn} />
-								</div>
-								<div className='element word_recent'>
-									<span>프로젝트</span>
-									<img src={XBtn} />
-								</div>
-							</div>
-						</div>
-						<div className='search-box__popular'>
-							<span className='subtitle'>인기 검색어</span>
-							<div className='container-keys__popular'>
-								<span className='keyword'>1. {'프로젝트'}</span>
-								<span className='keyword'>2. {'응용소프트웨어실습'}</span>
-								<span className='keyword'>3. {'오픈소스소프트웨어'}</span>
-							</div>
-						</div>
-					</div>
-					<div className='btn-cancel'>
-						<img src={CancelBtn} onClick={onClickCancel} />
-					</div>
-				</div>
+			{isWait && (
+				<section className='modal-background'>
+					<WaitModal />
+				</section>
 			)}
 		</S.Header>
 	);

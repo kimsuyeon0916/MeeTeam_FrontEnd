@@ -1,5 +1,6 @@
 import React from 'react';
 import S from './NaverLogin.styled';
+import { NaverIcon } from '../../assets';
 
 const NaverLogin = () => {
 	const initializeNaver = () => {
@@ -14,7 +15,7 @@ const NaverLogin = () => {
 
 	return (
 		<S.NaverCustomButton onClick={initializeNaver}>
-			<img src='/src/assets/NaverIcon.png' className='sign-in__naver-icon' alt='naverIcon' />
+			<img src={NaverIcon} className='sign-in__naver-icon' alt='naverIcon' />
 			<span>네이버 로그인</span>
 		</S.NaverCustomButton>
 	);

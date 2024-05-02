@@ -11,8 +11,8 @@ import {
 
 export interface Icon {
 	default: string;
-	focus?: string;
-	arrow: string;
+	$focus?: string;
+	$arrow: string;
 }
 
 interface Input<T extends FieldValues> {
@@ -26,6 +26,8 @@ interface Input<T extends FieldValues> {
 	label?: string;
 	icon?: Icon;
 	maxLength?: number;
+	duplicated?: boolean;
+	duplicatedMessage?: string;
 	placeholder?: string;
 	inputRef?: React.MutableRefObject<HTMLInputElement | null>; // RefObject
 	handleInputClick?: React.MouseEventHandler<HTMLInputElement>;
@@ -46,12 +48,12 @@ const Input = <T extends FieldValues>({
 	handleKeyDown,
 	...props
 }: Input<T>) => {
-	const inputError = formState?.errors[name];
-	const inputErrorType = formState?.errors[name]?.type;
-	const inputErrorMessage = formState?.errors[name]?.message as string;
+	const inputError = (formState?.errors[name] || props?.duplicated) as boolean;
+	const inputErrorMessage = (formState?.errors[name]?.message ??
+		props?.duplicatedMessage) as string;
 	const inputValue = watch?.(name as Path<T>);
 
-	const { ref, ...rest } = register(name as Path<T>, validation);
+	const { ref, ...rest } = register(name as Path<T>, validation?.disabled ? undefined : validation);
 
 	return (
 		<S.InputLayout $width={width}>
@@ -60,10 +62,11 @@ const Input = <T extends FieldValues>({
 			)}
 			<S.InputContainer>
 				<S.Input
+					disabled={validation?.disabled}
 					{...rest}
 					{...props}
 					{...icon}
-					invalid={inputErrorType !== 'countingLetters' && inputError}
+					invalid={inputError}
 					ref={(e: HTMLInputElement) => {
 						ref(e);
 						if (inputRef) inputRef.current = e;
@@ -71,7 +74,7 @@ const Input = <T extends FieldValues>({
 					onClick={handleInputClick}
 					onKeyDown={handleKeyDown}
 				/>
-				<small>{inputErrorMessage}</small>
+				<S.InputErrorMessage invalid={inputError}>{inputErrorMessage}</S.InputErrorMessage>
 				{props?.maxLength && (
 					<span>
 						{inputValue?.length ?? 0}/{props.maxLength}

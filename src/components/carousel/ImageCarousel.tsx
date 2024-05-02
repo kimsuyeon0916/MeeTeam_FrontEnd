@@ -53,7 +53,7 @@ const ImageCarousel = ({ images }: { images: Image[] }) => {
 					alt='prevBtn'
 				/>
 				<small>
-					<span style={{ color: '#5877FC' }}>{selectedIndex + 1}</span> / {images.length}
+					<span>{selectedIndex + 1}</span> / {images.length}
 				</small>
 				<S.ButtonIcon
 					className='embla__next'

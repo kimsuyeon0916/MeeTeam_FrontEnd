@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import S from '../Profile.styled';
 import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
@@ -10,7 +10,7 @@ import {
 	Toggle,
 	Radio,
 	DeleteBtn,
-	MuiDatepicker,
+	MuiDatepickerController,
 	SkillTag,
 	PortfolioCard,
 	DefaultBtn,
@@ -21,17 +21,19 @@ import {
 } from '../../../components';
 import { useRecoilValue } from 'recoil';
 import { uploadImageState, userState } from '../../../atom';
-import { Skill, Portfolio, Award, Link } from '../../../types';
+import { Skill, Award, Link } from '../../../types';
 import {
 	useDebounce,
 	useReadProfile,
 	useUpdateProfile,
 	useReadRoleList,
 	useReadSkillList,
+	useIntersection,
 	useUploadImageFile,
 	useReadImagePresignedUrl,
 } from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
+import { useReadPortfolioList } from '../../../hooks/usePortfolio';
 
 interface FormValues {
 	nickname?: string;
@@ -67,7 +69,7 @@ const gpaList = [{ name: '4.5' }, { name: '4.3' }];
 
 const ProfileEditPage = () => {
 	const userId = useRecoilValue(userState)?.userId as string;
-	const { data: user, isSuccess } = useReadProfile(userId); // 새로고침 시, 렌더링 지연 및 콘솔 에러
+	const { data: user, isSuccess: isUserSuccess } = useReadProfile(userId); // 새로고침 시, 렌더링 지연 및 콘솔 에러
 
 	const navigate = useNavigate();
 
@@ -100,7 +102,7 @@ const ProfileEditPage = () => {
 			isUniversityEmailPublic: isUniversityEmailPublic,
 			isSubEmailPublic: isSubEmailPublic,
 			skills: skillList.map(skill => skill.id),
-			portfolios: pinnedPortfolioList,
+			portfolios: pinnedPortfolioList as string[],
 		});
 	};
 
@@ -171,21 +173,16 @@ const ProfileEditPage = () => {
 	const [isUniversityMain, setIsUniversityMain] = useState(user?.universityEmail?.isDefault); // 대표 메일
 
 	useEffect(() => {
-		if (isSuccess) {
+		if (isUserSuccess) {
 			setIsUserNamePublic(user?.isUserNamePublic);
 			setIsPhonePublic(user?.phone?.isPublic);
 			setIsUniversityEmailPublic(user?.universityEmail?.isPublic);
 			setIsSubEmailPublic(user?.subEmail?.isPublic);
 			setIsUniversityMain(user?.universityEmail?.isDefault);
 
-			setPinnedPortfolioList(
-				sortedPortfolioList
-					? sortedPortfolioList.filter(portfolio => portfolio.pinned).map(portfolio => portfolio.id)
-					: []
-			);
 			setSkillList(user?.skills ? user?.skills : []);
 		}
-	}, [isSuccess]);
+	}, [isUserSuccess]);
 
 	const handleRadioClick = (id: string) => {
 		if (id === 'universityEmail') {
@@ -257,17 +254,45 @@ const ProfileEditPage = () => {
 	};
 
 	// 포트폴리오
+	const {
+		data,
+		fetchNextPage,
+		hasNextPage,
+		isFetching,
+		isSuccess: isPortfolioSuccess,
+	} = useReadPortfolioList(12);
+	const portfolioList = useMemo(
+		() => (data ? data.pages.flatMap(response => response?.portfolios) : []),
+		[data]
+	);
+
+	const ref = useIntersection((entry, observer) => {
+		observer.unobserve(entry.target);
+
+		if (hasNextPage && !isFetching) fetchNextPage();
+	});
+
 	const sortedPortfolioList =
-		user?.portfolios &&
-		[...user.portfolios]?.sort((a, b) =>
-			a.pinOrder > b.pinOrder ? 1 : a.pinOrder < b.pinOrder ? -1 : 0
+		portfolioList &&
+		[...portfolioList].sort((a, b) =>
+			a && b && a.pinOrder > b.pinOrder ? 1 : a && b && a.pinOrder < b.pinOrder ? -1 : 0
 		);
 
 	const [pinnedPortfolioList, setPinnedPortfolioList] = useState(
 		sortedPortfolioList
-			? sortedPortfolioList.filter(portfolio => portfolio.pinned).map(portfolio => portfolio.id)
+			? sortedPortfolioList?.filter(portfolio => portfolio?.pinned).map(portfolio => portfolio?.id)
 			: []
 	);
+
+	useEffect(() => {
+		setPinnedPortfolioList(
+			sortedPortfolioList
+				? sortedPortfolioList
+						?.filter(portfolio => portfolio?.pinned)
+						?.map(portfolio => portfolio?.id as string)
+				: []
+		);
+	}, [isPortfolioSuccess]);
 
 	const addPinnedPortfolioList = (id: string) => {
 		if (pinnedPortfolioList.length < 8) {
@@ -290,256 +315,263 @@ const ProfileEditPage = () => {
 	};
 
 	return (
-		isSuccess && (
-			<>
-				<S.ProfileLayout onSubmit={handleSubmit(submitHandler)} onKeyDown={e => checkKeyDown(e)}>
-					<S.ProfileHeader>
-						<ProfileImage
-							isEditable={true}
-							userId={user?.nickname as string}
-							size='14rem'
-							url={user?.imageUrl}
-						/>
-						<S.ProfileColumn $gap='2.4rem'>
-							<S.ProfileRow $width='clamp(50%, 50.8rem, 100%)' $gap='1rem'>
-								<Input register={register} formState={formState} {...PROFILE_EDIT_DATA.nickname} />
-								<S.ProfileRow $gap='1rem'>
-									<Input
-										defaultValue={user?.userName}
-										register={register}
-										formState={formState}
-										{...PROFILE_EDIT_DATA.userName}
-									/>
-									<Toggle state={isUserNamePublic} setState={setIsUserNamePublic} />
-								</S.ProfileRow>
-							</S.ProfileRow>
-							{roles && (
-								<ComboBox
-									width='clamp(50%, 39.2rem, 100%)'
-									register={register}
-									setValue={setValue}
-									getValues={getValues}
-									formState={formState}
-									optionList={roles}
-									{...PROFILE_EDIT_DATA.interest}
-								/>
-							)}
+		<>
+			<S.ProfileLayout onSubmit={handleSubmit(submitHandler)} onKeyDown={e => checkKeyDown(e)}>
+				<S.ProfileHeader>
+					<ProfileImage
+						isEditable={true}
+						userId={user?.nickname as string}
+						size='14rem'
+						url={user?.imageUrl}
+					/>
+					<S.ProfileColumn $gap='2.4rem'>
+						<S.ProfileRow $width='clamp(50%, 50.8rem, 100%)' $gap='1rem'>
 							<Input
-								width='clamp(50%, 39.2rem, 100%)'
+								// defaultValue={user?.nickname}
 								register={register}
-								watch={watch}
 								formState={formState}
-								{...PROFILE_EDIT_DATA.introduction}
+								{...PROFILE_EDIT_DATA.nickname}
 							/>
-						</S.ProfileColumn>
-					</S.ProfileHeader>
-
-					<S.ProfileColumn $gap='5rem'>
-						<S.ProfileArticle>
-							<S.ProfileTitle>자기 소개</S.ProfileTitle>
-							<Textarea
-								register={register}
-								watch={watch}
-								formState={formState}
-								{...PROFILE_EDIT_DATA.aboutMe}
-							/>
-							<hr />
-						</S.ProfileArticle>
-
-						<S.ProfileArticle>
-							<S.ProfileTitle>연락 수단</S.ProfileTitle>
-							<S.ProfileDescription>{DESCRIPTION.contact}</S.ProfileDescription>
-							<S.ProfileColumn $gap='2.84rem'>
-								<S.ProfileColumn $width='clamp(50%, 51.8rem, 100%)' $gap='1.6rem'>
-									<label style={{ color: 'var(--Form-txtIcon-default,  #8E8E8E)' }}>연락처</label>
-									<S.ProfileRow $gap='1rem'>
-										<Input register={register} formState={formState} {...PROFILE_EDIT_DATA.phone} />
-										<Toggle state={isPhonePublic} setState={setIsPhonePublic} />
-									</S.ProfileRow>
-								</S.ProfileColumn>
-								<S.ProfileColumn $width='clamp(50%, 51.8rem, 100%)' $gap='1.6rem'>
-									<label style={{ color: 'var(--Form-txtIcon-default,  #8E8E8E)' }}>
-										대표 메일
-									</label>
-									<S.ProfileRow $gap='1rem'>
-										<Radio
-											name='email'
-											id={PROFILE_EDIT_DATA.universityEmail.name}
-											state={isUniversityMain}
-											handleClick={handleRadioClick}
-										>
-											<Input
-												register={register}
-												formState={formState}
-												{...PROFILE_EDIT_DATA.universityEmail}
-											/>
-										</Radio>
-										<Toggle state={isUniversityEmailPublic} setState={setIsUniversityEmailPublic} />
-									</S.ProfileRow>
-									<S.ProfileRow $gap='1rem'>
-										<Radio
-											name='email'
-											id={PROFILE_EDIT_DATA.subEmail.name}
-											state={!isUniversityMain}
-											handleClick={handleRadioClick}
-										>
-											<Input
-												register={register}
-												formState={formState}
-												{...PROFILE_EDIT_DATA.subEmail}
-											/>
-										</Radio>
-										<Toggle state={isSubEmailPublic} setState={setIsSubEmailPublic} />
-									</S.ProfileRow>
-								</S.ProfileColumn>
-							</S.ProfileColumn>
-							<hr />
-						</S.ProfileArticle>
-
-						<S.ProfileArticle>
-							<S.ProfileTitle>교육</S.ProfileTitle>
 							<S.ProfileRow $gap='1rem'>
+								<Input
+									// defaultValue={user?.userName}
+									register={register}
+									formState={formState}
+									{...PROFILE_EDIT_DATA.userName}
+								/>
+								<Toggle state={isUserNamePublic} setState={setIsUserNamePublic} />
+							</S.ProfileRow>
+						</S.ProfileRow>
+						<ComboBox
+							width='clamp(50%, 39.2rem, 100%)'
+							// defaultValue={user?.interest}
+							register={register}
+							setValue={setValue}
+							getValues={getValues}
+							formState={formState}
+							optionList={roles}
+							{...PROFILE_EDIT_DATA.interest}
+						/>
+						<Input
+							width='clamp(50%, 39.2rem, 100%)'
+							// defaultValue={user?.introduction}
+							register={register}
+							watch={watch}
+							formState={formState}
+							{...PROFILE_EDIT_DATA.introduction}
+						/>
+					</S.ProfileColumn>
+				</S.ProfileHeader>
+
+				<S.ProfileColumn $gap='5rem'>
+					<S.ProfileArticle>
+						<S.ProfileTitle>자기 소개</S.ProfileTitle>
+						<Textarea
+							register={register}
+							watch={watch}
+							formState={formState}
+							{...PROFILE_EDIT_DATA.aboutMe}
+						/>
+						<hr />
+					</S.ProfileArticle>
+
+					<S.ProfileArticle>
+						<S.ProfileTitle>연락 수단</S.ProfileTitle>
+						<S.ProfileDescription>{DESCRIPTION.contact}</S.ProfileDescription>
+						<S.ProfileColumn $gap='2.84rem'>
+							<S.ProfileColumn $width='clamp(50%, 51.8rem, 100%)' $gap='1.6rem'>
+								<label style={{ color: 'var(--Form-txtIcon-default,  #8E8E8E)' }}>연락처</label>
 								<S.ProfileRow $gap='1rem'>
-									<Input register={register} formState={formState} {...PROFILE_EDIT_DATA.year} />
-									<Input
+									<Input register={register} formState={formState} {...PROFILE_EDIT_DATA.phone} />
+									<Toggle state={isPhonePublic} setState={setIsPhonePublic} />
+								</S.ProfileRow>
+							</S.ProfileColumn>
+							<S.ProfileColumn $width='clamp(50%, 51.8rem, 100%)' $gap='1.6rem'>
+								<label style={{ color: 'var(--Form-txtIcon-default,  #8E8E8E)' }}>대표 메일</label>
+								<S.ProfileRow $gap='1rem'>
+									<Radio
+										name='email'
+										id={PROFILE_EDIT_DATA.universityEmail.name}
+										state={isUniversityMain}
+										handleClick={handleRadioClick}
+									>
+										<Input
+											register={register}
+											formState={formState}
+											{...PROFILE_EDIT_DATA.universityEmail}
+										/>
+									</Radio>
+									<Toggle state={isUniversityEmailPublic} setState={setIsUniversityEmailPublic} />
+								</S.ProfileRow>
+								<S.ProfileRow $gap='1rem'>
+									<Radio
+										name='email'
+										id={PROFILE_EDIT_DATA.subEmail.name}
+										state={!isUniversityMain}
+										handleClick={handleRadioClick}
+									>
+										<Input
+											register={register}
+											formState={formState}
+											{...PROFILE_EDIT_DATA.subEmail}
+										/>
+									</Radio>
+									<Toggle state={isSubEmailPublic} setState={setIsSubEmailPublic} />
+								</S.ProfileRow>
+							</S.ProfileColumn>
+						</S.ProfileColumn>
+						<hr />
+					</S.ProfileArticle>
+
+					<S.ProfileArticle>
+						<S.ProfileTitle>교육</S.ProfileTitle>
+						<S.ProfileRow $gap='1rem'>
+							<S.ProfileRow $gap='1rem'>
+								<Input register={register} formState={formState} {...PROFILE_EDIT_DATA.year} />
+								<Input
+									register={register}
+									formState={formState}
+									{...PROFILE_EDIT_DATA.university}
+								/>
+							</S.ProfileRow>
+							<S.ProfileColumn $gap='1rem'>
+								<Input
+									register={register}
+									formState={formState}
+									{...PROFILE_EDIT_DATA.department}
+								/>
+								<S.ProfileRow $gap='1rem'>
+									<Input register={register} formState={formState} {...PROFILE_EDIT_DATA.gpa} />
+									<ComboBox
 										register={register}
+										setValue={setValue}
+										getValues={getValues}
 										formState={formState}
-										{...PROFILE_EDIT_DATA.university}
+										optionList={gpaList}
+										{...PROFILE_EDIT_DATA.maxGpa}
 									/>
 								</S.ProfileRow>
-								<S.ProfileColumn $gap='1rem'>
-									<Input
-										register={register}
-										formState={formState}
-										{...PROFILE_EDIT_DATA.department}
-									/>
-									<S.ProfileRow $gap='1rem'>
-										<Input register={register} formState={formState} {...PROFILE_EDIT_DATA.gpa} />
-										<ComboBox
-											register={register}
-											setValue={setValue}
-											getValues={getValues}
-											formState={formState}
-											optionList={gpaList}
-											{...PROFILE_EDIT_DATA.maxGpa}
-										/>
-									</S.ProfileRow>
-								</S.ProfileColumn>
-							</S.ProfileRow>
-							<hr />
-						</S.ProfileArticle>
+							</S.ProfileColumn>
+						</S.ProfileRow>
+						<hr />
+					</S.ProfileArticle>
 
-						<S.ProfileArticle>
-							<S.ProfileTitle>스킬</S.ProfileTitle>
-							<S.ProfileDescription>{DESCRIPTION.skills}</S.ProfileDescription>
-							<S.ProfileColumn $gap='2rem'>
-								<ComboBox
+					<S.ProfileArticle>
+						<S.ProfileTitle>스킬</S.ProfileTitle>
+						<S.ProfileDescription>{DESCRIPTION.skills}</S.ProfileDescription>
+						<S.ProfileColumn $gap='2rem'>
+							<ComboBox
+								register={register}
+								setValue={setValue}
+								formState={formState}
+								getValues={getValues}
+								optionList={skills}
+								clickOption={addSkill}
+								{...PROFILE_EDIT_DATA.skills}
+							/>
+							<S.ProfileRow $gap='1.05rem'>
+								{skillList?.map(({ ...props }, index) => (
+									<SkillTag isEditable={true} handleClick={deleteSkill} key={index} {...props} />
+								))}
+							</S.ProfileRow>
+						</S.ProfileColumn>
+						<hr />
+					</S.ProfileArticle>
+
+					<S.ProfileArticle>
+						<S.ProfileTitle>수상/활동</S.ProfileTitle>
+						<S.ProfileDescription>{DESCRIPTION.awards}</S.ProfileDescription>
+						<S.ProfileColumn $gap='2.4rem'>
+							<AddFormBtn title='수상/활동 추가' handleClick={() => addAward(awards.length - 1)} />
+							{awards?.map((award, index) => (
+								<S.ProfileRow key={award.id} $gap='1rem'>
+									<S.ProfileColumn $gap='1rem'>
+										<S.ProfileRow $gap='1rem'>
+											<MuiDatepickerController
+												name={`awards.${index}.startDate`}
+												control={control}
+											/>
+											<MuiDatepickerController name={`awards.${index}.endDate`} control={control} />
+										</S.ProfileRow>
+										<Input
+											name={`awards.${index}.title`}
+											register={register}
+											formState={formState}
+											{...PROFILE_EDIT_DATA.awardTitle}
+										/>
+									</S.ProfileColumn>
+									<S.ProfileRow $gap='1rem'>
+										<Input
+											name={`awards.${index}.description`}
+											register={register}
+											formState={formState}
+											{...PROFILE_EDIT_DATA.awardDescription}
+										/>
+										<DeleteBtn handleClick={() => deleteAward(index)} />
+									</S.ProfileRow>
+								</S.ProfileRow>
+							))}
+						</S.ProfileColumn>
+						<hr />
+					</S.ProfileArticle>
+
+					<S.ProfileArticle>
+						<S.ProfileTitle>링크</S.ProfileTitle>
+						<S.ProfileDescription>{DESCRIPTION.links}</S.ProfileDescription>
+						<AddFormBtn title='링크 추가' handleClick={() => addLink(links.length - 1)} />
+						<S.ProfileColumn $gap='2.4rem'>
+							{links?.map((link, index) => (
+								<LinkForm
+									key={link.id}
+									index={index}
+									width='clamp(10%, 11.8rem, 100%)'
 									register={register}
-									setValue={setValue}
 									formState={formState}
 									getValues={getValues}
-									optionList={skills}
-									clickOption={addSkill}
-									{...PROFILE_EDIT_DATA.skills}
+									setValue={setValue}
+									remove={removeLink}
 								/>
-								<S.ProfileRow $gap='1.05rem'>
-									{skillList?.map(({ ...props }, index) => (
-										<SkillTag isEditable={true} handleClick={deleteSkill} key={index} {...props} />
-									))}
-								</S.ProfileRow>
-							</S.ProfileColumn>
-							<hr />
-						</S.ProfileArticle>
+							))}
+						</S.ProfileColumn>
+						<hr />
+					</S.ProfileArticle>
 
-						<S.ProfileArticle>
-							<S.ProfileTitle>수상/활동</S.ProfileTitle>
-							<S.ProfileDescription>{DESCRIPTION.awards}</S.ProfileDescription>
-							<AddFormBtn title='수상/활동 추가' handleClick={() => addAward(awards.length - 1)} />
-							<S.ProfileColumn $gap='2.4rem'>
-								{awards?.map((award, index) => (
-									<S.ProfileRow key={award.id} $gap='1rem'>
-										<S.ProfileColumn $gap='1rem'>
-											<S.ProfileRow $gap='1rem'>
-												<MuiDatepicker name={`awards.${index}.startDate`} control={control} />
-												<MuiDatepicker name={`awards.${index}.endDate`} control={control} />
-											</S.ProfileRow>
-											<Input
-												name={`awards.${index}.title`}
-												register={register}
-												formState={formState}
-												{...PROFILE_EDIT_DATA.awardTitle}
+					<S.ProfileArticle>
+						<S.ProfileTitle>포트폴리오</S.ProfileTitle>
+						<S.ProfileDescription>{DESCRIPTION.portfolio}</S.ProfileDescription>
+						<S.ProfileGrid>
+							{portfolioList &&
+								portfolioList?.map(
+									portfolio =>
+										portfolio && (
+											<PortfolioCard
+												key={portfolio.id}
+												{...portfolio}
+												isEditable={true}
+												clickNumber={checkPinnedIndex(portfolio.id) + 1}
+												handleClick={
+													checkPinnedIndex(portfolio.id) === -1
+														? addPinnedPortfolioList
+														: deletePinnedPortfolioList
+												}
 											/>
-										</S.ProfileColumn>
-										<S.ProfileRow $gap='1rem'>
-											<Input
-												name={`awards.${index}.description`}
-												register={register}
-												formState={formState}
-												{...PROFILE_EDIT_DATA.awardDescription}
-											/>
-											<DeleteBtn handleClick={() => deleteAward(index)} />
-										</S.ProfileRow>
-									</S.ProfileRow>
-								))}
-							</S.ProfileColumn>
-							<hr />
-						</S.ProfileArticle>
-
-						<S.ProfileArticle>
-							<S.ProfileTitle>링크</S.ProfileTitle>
-							<S.ProfileDescription>{DESCRIPTION.links}</S.ProfileDescription>
-							<AddFormBtn title='링크 추가' handleClick={() => addLink(links.length - 1)} />
-							<S.ProfileColumn $gap='2.4rem'>
-								{links?.map((link, index) => (
-									<LinkForm
-										key={link.id}
-										index={index}
-										width='clamp(10%, 11.8rem, 100%)'
-										register={register}
-										formState={formState}
-										getValues={getValues}
-										setValue={setValue}
-										remove={removeLink}
-									/>
-								))}
-							</S.ProfileColumn>
-							<hr />
-						</S.ProfileArticle>
-
-						<S.ProfileArticle>
-							<S.ProfileTitle>포트폴리오</S.ProfileTitle>
-							<S.ProfileDescription>{DESCRIPTION.portfolio}</S.ProfileDescription>
-							<S.ProfileGrid>
-								{user?.portfolios &&
-									user?.portfolios.map(({ ...props }: Portfolio, index) => (
-										<PortfolioCard
-											key={index}
-											{...props}
-											isEditable={true}
-											clickNumber={checkPinnedIndex(props.id) + 1}
-											handleClick={
-												checkPinnedIndex(props.id) === -1
-													? addPinnedPortfolioList
-													: deletePinnedPortfolioList
-											}
-										/>
-									))}
-							</S.ProfileGrid>
-							<hr />
-						</S.ProfileArticle>
-					</S.ProfileColumn>
-					<S.ProfileButtonBox>
-						<DefaultBtn
-							type='button'
-							title='취소'
-							handleClick={() => navigate(`/profile/${userId}`)}
-						/>
-						<PrimaryBtn type='submit' title='저장' />
-					</S.ProfileButtonBox>
-				</S.ProfileLayout>
-				<DevTool control={control} />
-			</>
-		)
+										)
+								)}
+						</S.ProfileGrid>
+						<hr ref={ref} />
+					</S.ProfileArticle>
+				</S.ProfileColumn>
+				<S.ProfileButtonBox>
+					<DefaultBtn
+						type='button'
+						title='취소'
+						handleClick={() => navigate(`/profile/${userId}`)}
+					/>
+					<PrimaryBtn type='submit' title='저장' />
+				</S.ProfileButtonBox>
+			</S.ProfileLayout>
+			<DevTool control={control} />
+		</>
 	);
 };
 

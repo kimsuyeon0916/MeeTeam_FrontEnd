@@ -65,10 +65,10 @@ const ComboBox = <T extends FieldValues>({
 
 	useEffect(() => {
 		const handleOutsideClick = (e: MouseEvent) => {
+			clearInput();
 			const target = e.target as HTMLDivElement;
 			if (isOpen && inputRef.current && !inputRef.current.contains(target)) {
 				setIsOpen(false);
-				clearInput();
 			}
 		};
 
