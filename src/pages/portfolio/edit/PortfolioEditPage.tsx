@@ -95,6 +95,8 @@ const PortfolioEditPage = () => {
 
 	// 이미지 업로드
 	const [readPresignedUrlList, setReadPresignedUrlList] = useState(false);
+	const [isSubmitted, setIsSubmitted] = useState(false);
+
 	const uploadImageList = useRecoilValue(uploadImageListState);
 	const {
 		data: imageResponse,
@@ -102,24 +104,9 @@ const PortfolioEditPage = () => {
 		isSuccess: isSuccessReadUrl,
 	} = useReadImageListPresignedUrl(uploadImageList[0]?.fileName as string, portfolioId);
 
-	const uploadImageFileInSuccess = () => {};
-
-	const { mutate: uploadImageFile } = useUploadImageFile({
-		onSuccess: uploadImageFileInSuccess,
-	});
-
-	useEffect(() => {
-		if (readPresignedUrlList && isSuccessReadUrl && imageResponse) {
-			zipFile(uploadImageList).then((blob: Blob) => {
-				const imageListZipFile = new File([blob], imageResponse[0].fileName, {
-					type: 'application/zip',
-				});
-				// 다중 이미지 압축 파일 업로드
-				uploadImageFile({
-					presignedUrl: imageResponse[0].url,
-					imageFile: imageListZipFile,
-				});
-			});
+	const uploadImageFileInSuccess = () => {
+		if (!isSubmitted && imageResponse) {
+			setIsSubmitted(true);
 
 			// 메인 이미지 업로드
 			uploadImageFile({
@@ -148,6 +135,26 @@ const PortfolioEditPage = () => {
 			} else {
 				createPortfolio({ ...portfolioData });
 			}
+		}
+	};
+
+	const { mutate: uploadImageFile } = useUploadImageFile({
+		onSuccess: uploadImageFileInSuccess,
+	});
+
+	useEffect(() => {
+		if (readPresignedUrlList && imageResponse) {
+			zipFile(uploadImageList).then((blob: Blob) => {
+				const imageListZipFile = new File([blob], imageResponse[0].fileName, {
+					type: 'application/zip',
+				});
+
+				// 다중 이미지 압축 파일 업로드
+				uploadImageFile({
+					presignedUrl: imageResponse[0].url,
+					imageFile: imageListZipFile,
+				});
+			});
 		}
 	}, [isSuccessReadUrl]);
 
