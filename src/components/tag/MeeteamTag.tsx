@@ -94,7 +94,7 @@ const MeeteamTag = () => {
 			<section className='tag__box' onClick={onClickInput}>
 				<input
 					type='text'
-					placeholder={'태그를 선택하거나 입력해주세요.'}
+					placeholder={'태그는 최대 5개까지 가능합니다.'}
 					tabIndex={2}
 					disabled={tagList.length < 20 ? false : true}
 					onChange={event => setTagItem(event.target.value)}
