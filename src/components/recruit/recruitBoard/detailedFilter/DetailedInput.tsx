@@ -23,7 +23,7 @@ const MESSAGE = {
 	},
 };
 
-const DetailedInput = ({ type }: DetailedInfo) => {
+const DetailedInput = ({ type, closeHandler }: DetailedInfo) => {
 	const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
 	const [message, setMessage] = useState({
 		intro: MESSAGE.SKILL.INTRO,
@@ -119,6 +119,7 @@ const DetailedInput = ({ type }: DetailedInfo) => {
 			});
 		}
 		setSearchParams(searchParams);
+		closeHandler();
 	};
 
 	const onClickSearchBar = (event: React.MouseEvent<HTMLInputElement>) => {
@@ -142,6 +143,7 @@ const DetailedInput = ({ type }: DetailedInfo) => {
 			searchParams.delete('tag');
 		}
 		setSearchParams(searchParams);
+		closeHandler();
 	};
 
 	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>, id: number) => {

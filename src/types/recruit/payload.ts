@@ -82,6 +82,7 @@ export interface RecruitFilter {
 
 export interface DetailedInfo {
 	type: string;
+	closeHandler: () => void;
 }
 
 export interface Array {

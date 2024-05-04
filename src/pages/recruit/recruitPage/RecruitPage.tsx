@@ -117,6 +117,10 @@ const RecruitPage = () => {
 		setSearchParams(searchParams);
 	};
 
+	const closeHandler = () => {
+		setIsOpen(false);
+	};
+
 	const onClickDetails = (event: React.MouseEvent<HTMLSpanElement>) => {
 		event.stopPropagation();
 		const { innerText } = event.target as HTMLElement;
@@ -313,7 +317,7 @@ const RecruitPage = () => {
 							/>
 							<article className='dropdown-detailed' onClick={onClickDetailed} ref={dropdownRef}>
 								<section className='dropdown-box'>
-									<label>{'상세정보'}</label>
+									<label>{'상세조건'}</label>
 									<img src={isOpen ? DropdownArrowUp : DropdownArrow} />
 								</section>
 								{isOpen && (
@@ -338,7 +342,7 @@ const RecruitPage = () => {
 												태그
 											</span>
 										</section>
-										<DetailedInput type={isOpenDetail.message} />
+										<DetailedInput type={isOpenDetail.message} closeHandler={closeHandler} />
 									</section>
 								)}
 							</article>
