@@ -6,7 +6,7 @@ import { ProfileImage, WaitModal } from '..';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { recruitFilterState, userState, waitModalState } from '../../atom';
 import { useLogin, useSignOut } from '../../hooks';
-import { fixModalBackground } from '../../utils';
+import { fixModalBackground, resetFormData } from '../../utils';
 
 const Header = () => {
 	const navigate = useNavigate();
@@ -90,6 +90,8 @@ const Header = () => {
 			setOpenDrop(false);
 		}
 	};
+
+	resetFormData();
 
 	return (
 		<S.Header $isLogin={isLoggedIn}>

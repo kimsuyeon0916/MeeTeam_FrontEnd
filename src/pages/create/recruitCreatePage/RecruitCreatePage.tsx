@@ -22,10 +22,10 @@ const RecruitCreatePage = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { isLoggedIn } = useLogin();
-	const setIsSubmit = useSetRecoilState(validState);
-	const [formData, setFormData] = useRecoilState<InputState>(recruitInputState);
 	const validCheck = useRecoilValue(validState);
+	const setIsSubmit = useSetRecoilState(validState);
 	const [beforeSubmit, setBeforeSubmit] = useState<boolean>(false);
+	const [formData, setFormData] = useRecoilState<InputState>(recruitInputState);
 	const postAvailable =
 		validCheck.isCategory &&
 		validCheck.isDeadline &&
@@ -36,11 +36,14 @@ const RecruitCreatePage = () => {
 		validCheck.isRole &&
 		validCheck.isContent;
 	const pageNum = Number(id);
+	console.log(id);
 
 	const { data, isSuccess } = useQuery({
 		queryKey: ['detailedPage', { pageNum, isLoggedIn }],
 		queryFn: () => getPostingData({ pageNum, isLoggedIn }),
+		enabled: !!id,
 	});
+
 	const uploadPost = useMutation({
 		mutationFn: (formData: InputState) => postingRecruit(formData),
 		onSuccess: (data: { recruitmentPostId: number }) => {
@@ -144,8 +147,6 @@ const RecruitCreatePage = () => {
 			});
 		}
 	}, [data]);
-
-	console.log(validCheck);
 
 	return (
 		<S.RecruitCreatePage>
