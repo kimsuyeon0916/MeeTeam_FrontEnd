@@ -46,6 +46,7 @@ const DateSelect = ({ type }: { type: string }) => {
 						? 'selectedDay'
 						: 'unselectedDay'
 				}
+				minDate={type === 'end' ? new Date(formData.proceedingStart as string) : new Date()}
 				renderCustomHeader={({
 					date,
 					decreaseMonth,

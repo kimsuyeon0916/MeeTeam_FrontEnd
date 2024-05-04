@@ -12,8 +12,28 @@ const DetailedInformation = () => {
 	const [formData, setFormData] = useRecoilState(recruitInputState);
 	const { validMessage, isValid } = useValid(formData);
 
-	const onChangeContents = (contents: string) => {
-		setFormData({ ...formData, content: contents });
+	const extractEmojis = (text: any) => {
+		const regex = /[\uD800-\uDBFF][\uDC00-\uDFFF]/gu;
+		return text.match(regex) || [];
+	};
+
+	const onChangeContents = (contents: any) => {
+		const emojis = extractEmojis(contents);
+		let updatedContent = contents;
+
+		emojis.forEach((emoji: any) => {
+			const unicodeEmoji =
+				emoji.length === 1
+					? emoji.codePointAt(0).toString(16)
+					: `${emoji.codePointAt(0).toString(16)}-${emoji.codePointAt(2).toString(16)}`;
+			updatedContent = updatedContent.replace(emoji, `{{${unicodeEmoji}}}`);
+		});
+
+		console.log(contents);
+
+		console.log(updatedContent);
+
+		setFormData({ ...formData, content: updatedContent });
 	};
 
 	return (
