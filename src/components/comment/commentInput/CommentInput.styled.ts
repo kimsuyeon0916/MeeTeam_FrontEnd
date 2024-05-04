@@ -48,7 +48,6 @@ const CommentInput = styled.div`
 			justify-content: flex-end;
 			.submit-btn {
 				display: flex;
-				width: 6.5rem;
 				height: 3.6rem;
 				padding: 1.2rem 2rem;
 				justify-content: center;
