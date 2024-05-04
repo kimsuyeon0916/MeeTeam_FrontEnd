@@ -152,7 +152,8 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 			professor: { ...prev.professor, name: event.target.value },
 		}));
 	};
-	const onClickClearInfo = () => {
+	const onClickClearInfo = (event: React.MouseEvent<HTMLDivElement>) => {
+		event.stopPropagation();
 		setValue({
 			course: {
 				name: '',
@@ -168,12 +169,15 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		searchParams.delete('course');
 		searchParams.delete('professor');
 		setSearchParams(searchParams);
+		setShowDropdown(false);
 	};
-	const submitInfo = () => {
+	const submitInfo = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.stopPropagation();
 		setDropdown({ course: false, professor: false });
 		setFilterState(prev => ({ ...prev, course: value.course.id }));
 		setFilterState(prev => ({ ...prev, professor: value.professor.id }));
 		setSearchParams(searchParams);
+		setShowDropdown(false);
 	};
 
 	useEffect(() => {
