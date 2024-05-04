@@ -3,6 +3,7 @@ import { SessionStorageEffect, simpleDate } from './utils';
 import { User, InputState, ApplyRole, RecruitFilter, DetailedFilter, Image } from './types';
 import { LocalStorageEffect } from './utils';
 import { Account } from './pages';
+import { SAFE_DEFAULT_VALUE } from './constant';
 
 export const userState = atom<User | null>({
 	key: 'userState',
@@ -105,7 +106,7 @@ export const recruitInputState = atom<InputState>({
 		recruitmentRoles: [],
 		tags: [],
 		title: '',
-		content: '',
+		content: SAFE_DEFAULT_VALUE,
 	},
 });
 

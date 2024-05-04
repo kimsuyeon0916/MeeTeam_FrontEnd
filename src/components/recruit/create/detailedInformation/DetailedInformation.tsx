@@ -29,10 +29,6 @@ const DetailedInformation = () => {
 			updatedContent = updatedContent.replace(emoji, `{{${unicodeEmoji}}}`);
 		});
 
-		console.log(contents);
-
-		console.log(updatedContent);
-
 		setFormData({ ...formData, content: updatedContent });
 	};
 
