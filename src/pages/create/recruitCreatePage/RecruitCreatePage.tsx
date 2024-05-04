@@ -145,6 +145,8 @@ const RecruitCreatePage = () => {
 		}
 	}, [data]);
 
+	console.log(validCheck);
+
 	return (
 		<S.RecruitCreatePage>
 			<form onSubmit={handleSubmit}>
