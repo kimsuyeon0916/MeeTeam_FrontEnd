@@ -211,6 +211,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 			setIsScopeSelected(true);
 		} else if (scope && filterState.scope === null) {
 			setCurrentValue('범위');
+			setIsScopeSelected(false);
 		}
 	}, [filterState.scope]);
 
@@ -220,6 +221,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 			setIsCategorySelected(true);
 		} else if (category && filterState.category === null) {
 			setCurrentValue('유형');
+			setIsCategorySelected(false);
 		}
 	}, [filterState.category]);
 
