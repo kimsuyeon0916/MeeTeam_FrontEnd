@@ -8,7 +8,6 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '../../../atom';
 
 const CommentInput = () => {
-	const isLogin = true; // 임시 코드
 	const postComment = useComment();
 	const { id } = useParams();
 	const pageNum = Number(id);
@@ -40,15 +39,6 @@ const CommentInput = () => {
 	const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setContents(event.target.value);
 	};
-	const onClickInput = () => {};
-
-	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		const target = event.currentTarget;
-		if (target.value.length !== 0 && event.key === 'Enter') {
-			event.preventDefault();
-			addComment();
-		}
-	};
 
 	return (
 		<S.CommentInput>
@@ -64,16 +54,20 @@ const CommentInput = () => {
 					</section>
 					<section className='container-user__input'>
 						<textarea
-							// onKeyDown={onKeyPress}
 							value={contents}
 							onChange={onChangeHandler}
-							onClick={onClickInput}
-							placeholder={isLogin ? '댓글 쓰기' : '로그인이 필요합니다.'}
+							maxLength={1000}
+							placeholder='댓글을 입력해주세요. 댓글의 글자 수는 1000자로 제한합니다.'
 						/>
+					</section>
+					<section className='container-length_counter'>
+						<span className='body2-medium'>
+							{contents.length > 1000 ? 1000 : contents.length}/1000
+						</span>
 					</section>
 					<section className='container-btn'>
 						<button type='submit' onClick={addComment} className='submit-btn'>
-							댓글
+							등록
 						</button>
 					</section>
 				</article>
