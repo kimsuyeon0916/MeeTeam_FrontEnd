@@ -14,7 +14,7 @@ import { recruitInputState, validState } from '../../../atom';
 import { getPostingData, editPostingRecruit, postingRecruit } from '../../../service';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { EditPosting, InputState, RoleInfo, RoleForPost } from '../../../types';
-import { fixModalBackground, simpleDate } from '../../../utils';
+import { fixModalBackground, resetFormData } from '../../../utils';
 import { useLogin } from '../../../hooks';
 
 const RecruitCreatePage = () => {
@@ -36,7 +36,6 @@ const RecruitCreatePage = () => {
 		validCheck.isRole &&
 		validCheck.isContent;
 	const pageNum = Number(id);
-	console.log(id);
 
 	const { data, isSuccess } = useQuery({
 		queryKey: ['detailedPage', { pageNum, isLoggedIn }],
@@ -65,29 +64,12 @@ const RecruitCreatePage = () => {
 		},
 	});
 
-	const resetFormData = () => {
-		setFormData({
-			scope: '',
-			category: '',
-			fieldId: 1,
-			deadline: simpleDate(new Date()),
-			proceedType: '',
-			proceedingStart: simpleDate(new Date()),
-			proceedingEnd: simpleDate(new Date()),
-			courseTag: {
-				isCourse: false,
-				courseTagName: '',
-				courseProfessor: '',
-			},
-			recruitmentRoles: [],
-			tags: [],
-			title: '',
-			content: '',
-		});
-	};
-
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+
+		const sanitizedContent = formData.content.replace(/["']/g, '');
+		setFormData({ ...formData, content: sanitizedContent });
+
 		setIsSubmit(prev => ({
 			...prev,
 			isSubmitted: true,

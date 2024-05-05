@@ -3,6 +3,7 @@ import { recruitInputState } from '../atom';
 import { useLocation } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import simpleDate from './simpleDate';
+import { SAFE_DEFAULT_VALUE } from '../constant';
 
 const resetFormData = () => {
 	const [formData, setFormData] = useRecoilState(recruitInputState);
@@ -25,7 +26,7 @@ const resetFormData = () => {
 			recruitmentRoles: [],
 			tags: [],
 			title: '',
-			content: '',
+			content: SAFE_DEFAULT_VALUE,
 		});
 	}, [location.pathname]);
 };

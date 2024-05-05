@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import { useRecoilState } from 'recoil';
 import { modules } from '../../../../utils';
@@ -6,30 +6,25 @@ import { recruitInputState } from '../../../../atom';
 import S from './DetailedInformation.styled';
 import { useValid } from '../../../../hooks';
 import 'react-quill/dist/quill.snow.css';
+import DOMPurify from 'dompurify';
 
 const DetailedInformation = () => {
 	const quillRef = useRef<ReactQuill | null>(null);
 	const [formData, setFormData] = useRecoilState(recruitInputState);
 	const { validMessage, isValid } = useValid(formData);
 
-	const extractEmojis = (text: any) => {
-		const regex = /[\uD800-\uDBFF][\uDC00-\uDFFF]/gu;
-		return text.match(regex) || [];
+	const preventInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		// 입력을 허용하지 않을 키 코드를 배열에 정의합니다.
+		const forbiddenKeys = ['"', "'"];
+
+		// 입력 이벤트가 허용되지 않는 키를 누르면 이벤트를 취소합니다.
+		if (forbiddenKeys.includes(event.key)) {
+			event.preventDefault();
+		}
 	};
 
-	const onChangeContents = (contents: any) => {
-		const emojis = extractEmojis(contents);
-		let updatedContent = contents;
-
-		emojis.forEach((emoji: any) => {
-			const unicodeEmoji =
-				emoji.length === 1
-					? emoji.codePointAt(0).toString(16)
-					: `${emoji.codePointAt(0).toString(16)}-${emoji.codePointAt(2).toString(16)}`;
-			updatedContent = updatedContent.replace(emoji, `{{${unicodeEmoji}}}`);
-		});
-
-		setFormData({ ...formData, content: updatedContent });
+	const onChangeContents = (contents: string) => {
+		setFormData({ ...formData, content: contents });
 	};
 
 	return (
@@ -50,6 +45,7 @@ const DetailedInformation = () => {
 						modules={modules}
 						onChange={onChangeContents}
 						value={formData.content}
+						onKeyDown={preventInput}
 					/>
 					{isValid.isSubmitted && !isValid.isContent && (
 						<p className='valid-msg'>{validMessage.content}</p>

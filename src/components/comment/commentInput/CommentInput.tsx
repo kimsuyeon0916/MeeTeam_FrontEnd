@@ -37,7 +37,7 @@ const CommentInput = () => {
 			);
 		}
 	};
-	const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setContents(event.target.value);
 	};
 	const onClickInput = () => {};
@@ -63,9 +63,8 @@ const CommentInput = () => {
 						<span>{userInfo?.nickname}</span>
 					</section>
 					<section className='container-user__input'>
-						<input
-							type='text'
-							onKeyUp={onKeyPress}
+						<textarea
+							// onKeyDown={onKeyPress}
 							value={contents}
 							onChange={onChangeHandler}
 							onClick={onClickInput}
