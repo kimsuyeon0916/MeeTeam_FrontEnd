@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { RecruitInfo as RecruitInformation } from '../../../../types';
 import S from './RecruitInfo.styled';
+import { formatDistance } from 'date-fns';
+import { ko } from 'date-fns/locale';
 
 const RecruitInfo = ({
 	deadline,
@@ -13,6 +15,11 @@ const RecruitInfo = ({
 	dDay,
 	isClosed,
 }: RecruitInformation) => {
+	const convertedDeadline = new Date(deadline + 'T23:59:59');
+	const now = new Date();
+
+	const countDown = formatDistance(convertedDeadline, now, { locale: ko });
+
 	return (
 		<S.RecruitInfo className='wrapper-info'>
 			<section className='container-info'>
@@ -25,7 +32,12 @@ const RecruitInfo = ({
 				<section className='values'>
 					<section>
 						<span>{deadline}</span>
-						{!isClosed && <span className='recruiting'>{`마감 ${dDay}일 전`}</span>}
+						{!isClosed && dDay && (
+							<span className='recruiting'>
+								{dDay === '1' && `마감 ${countDown} 전`}
+								{dDay > '1' && `마감 ${countDown} 전`}
+							</span>
+						)}
 					</section>
 					<span>{scope}</span>
 					<span>{period}</span>
