@@ -6,7 +6,7 @@ const RoleCard = styled.article`
 	align-items: flex-start;
 	width: 26rem;
 	border-radius: 1rem;
-	border: 0.075rem solid #e3e3e3;
+	border: 0.075rem solid #d3d3d3;
 	background: #fff;
 	padding: 1.8rem 2rem;
 	box-sizing: border-box;
