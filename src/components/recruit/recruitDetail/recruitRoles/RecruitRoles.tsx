@@ -21,7 +21,6 @@ const RecruitRoles = (props: { roles: RoleInfo[] }) => {
 		setStartX(x);
 		if (scrollRef.current && 'scrollLeft' in scrollRef.current) {
 			setTotalX(x + scrollRef.current.scrollLeft);
-			console.log('ji');
 		}
 	};
 	const onDragMove = (event: React.MouseEvent) => {
