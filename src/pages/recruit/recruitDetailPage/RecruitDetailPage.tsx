@@ -17,6 +17,7 @@ import {
 	ClosedFooter,
 	ApplyCancel,
 	ApplyClose,
+	PostingDelete,
 } from '../../../components';
 import { calculateDate, fixModalBackground } from '../../../utils';
 import { JsxElementComponentProps } from '../../../types';
@@ -30,6 +31,7 @@ import {
 	applyStepState,
 	commentDeleteModalState,
 	needLoginModalState,
+	recruitPostingDeleteModalState,
 } from '../../../atom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLogin } from '../../../hooks';
@@ -43,6 +45,7 @@ const RecruitDetailPage = () => {
 	const isClose = useRecoilValue(applyCloseModalState);
 	const isDelete = useRecoilValue(commentDeleteModalState);
 	const isNeedLogin = useRecoilValue(needLoginModalState);
+	const isPostingDelete = useRecoilValue(recruitPostingDeleteModalState);
 	const step = useRecoilValue(applyStepState);
 
 	const stepLists: JsxElementComponentProps = {
@@ -70,8 +73,10 @@ const RecruitDetailPage = () => {
 	};
 
 	useEffect(() => {
-		fixModalBackground(isModal || isCancel || isClose || isDelete.isDelete || isNeedLogin.isOpen);
-	}, [isModal, isCancel, isClose, isDelete, isNeedLogin.isOpen]);
+		fixModalBackground(
+			isModal || isCancel || isClose || isDelete.isDelete || isNeedLogin.isOpen || isPostingDelete
+		);
+	}, [isModal, isCancel, isClose, isDelete, isNeedLogin.isOpen, isPostingDelete]);
 
 	return (
 		<>
@@ -144,6 +149,11 @@ const RecruitDetailPage = () => {
 					{isClose && (
 						<section className='modal-background'>
 							<ApplyClose />
+						</section>
+					)}
+					{isPostingDelete && (
+						<section className='modal-background'>
+							<PostingDelete />
 						</section>
 					)}
 				</S.RecruitDetailPage>

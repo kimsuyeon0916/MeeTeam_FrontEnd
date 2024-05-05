@@ -59,6 +59,11 @@ export const applyCloseModalState = atom({
 	default: false,
 });
 
+export const recruitPostingDeleteModalState = atom({
+	key: 'recruitPostingDeleteModalState',
+	default: false,
+});
+
 export const commentDeleteModalState = atom({
 	key: 'commentDeleteModalState',
 	default: {

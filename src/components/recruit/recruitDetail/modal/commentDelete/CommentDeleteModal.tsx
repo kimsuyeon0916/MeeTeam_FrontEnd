@@ -53,7 +53,7 @@ const CommentDeleteModal = ({ pageNum, commentId, type }: DeleteComment) => {
 		<S.CommentDeleteModal>
 			<h3>댓글 삭제</h3>
 			<section className='description'>
-				<span className='body2-medium'>삭제된 댓글은 더이상 보이지 않습니다.</span>
+				<span className='body2-medium'>삭제된 댓글은 더 이상 보이지 않습니다.</span>
 				<span className='body2-medium'>댓글을 완전히 삭제할까요?</span>
 			</section>
 			<section className='btn-container'>
