@@ -73,7 +73,6 @@ const RecruitDetailPage = () => {
 		fixModalBackground(isModal || isCancel || isClose || isDelete.isDelete || isNeedLogin.isOpen);
 	}, [isModal, isCancel, isClose, isDelete, isNeedLogin.isOpen]);
 
-	console.log(detailedData);
 	return (
 		<>
 			{isSuccess && detailedData && (

@@ -30,6 +30,11 @@ const RoleCard = styled.article`
 		letter-spacing: 0.0028rem;
 	}
 
+	.t2 {
+		color: #151515;
+		font-size: 1.2rem;
+	}
+
 	hr {
 		width: 100%;
 		margin: 1.6rem 0;
