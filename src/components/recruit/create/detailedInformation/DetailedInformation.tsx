@@ -6,7 +6,6 @@ import { recruitInputState } from '../../../../atom';
 import S from './DetailedInformation.styled';
 import { useValid } from '../../../../hooks';
 import 'react-quill/dist/quill.snow.css';
-import DOMPurify from 'dompurify';
 
 const DetailedInformation = () => {
 	const quillRef = useRef<ReactQuill | null>(null);
@@ -24,7 +23,8 @@ const DetailedInformation = () => {
 	};
 
 	const onChangeContents = (contents: string) => {
-		setFormData({ ...formData, content: contents });
+		const sanitizedContent = contents.replace(/ class="[^"]*ql-indent-1[^"]*"/g, '');
+		setFormData({ ...formData, content: sanitizedContent });
 	};
 
 	return (
