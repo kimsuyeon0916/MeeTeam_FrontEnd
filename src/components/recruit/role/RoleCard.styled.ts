@@ -4,13 +4,13 @@ const RoleCard = styled.article`
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	width: 24rem;
-	height: 27rem;
+	width: 26rem;
 	border-radius: 1rem;
 	border: 0.075rem solid #e3e3e3;
 	background: #fff;
 	padding: 1.8rem 2rem;
 	box-sizing: border-box;
+	box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
 
 	.container-role__info {
 		height: 8.7rem;
