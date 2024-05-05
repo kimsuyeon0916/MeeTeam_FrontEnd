@@ -114,6 +114,8 @@ const RecruitPage = () => {
 		searchParams.delete('role');
 		searchParams.delete('tag');
 		searchParams.delete('keyword');
+		searchParams.delete('course');
+		searchParams.delete('professor');
 		setSearchParams(searchParams);
 	};
 
