@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react';
 import S from '../Profile.styled';
-import { DefaultBtn, PortfolioCard, ProfileImage, SkillTag } from '../../../components';
+import {
+	DefaultBtn,
+	LinkDetails,
+	PortfolioCard,
+	ProfileImage,
+	SkillTag,
+} from '../../../components';
 import { useReadProfile } from '../../../hooks';
 import { useParams, useNavigate } from 'react-router';
 import { useRecoilState } from 'recoil';
@@ -106,12 +112,9 @@ const ProfileDetailsPage = () => {
 					<S.ProfileArticle>
 						<S.ProfileTitle>링크</S.ProfileTitle>
 						<S.ProfileColumn>
-							{user?.links?.map(({ url, description }, index) => (
+							{user?.links?.map((link, index) => (
 								<S.ProfileRow key={index} $gap='3.65rem'>
-									<span>{description}</span>
-									<a href={url} target='_blank' title={description} rel='noreferrer noopener'>
-										{url}
-									</a>
+									<LinkDetails {...link} />
 								</S.ProfileRow>
 							))}
 						</S.ProfileColumn>

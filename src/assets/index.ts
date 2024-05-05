@@ -58,6 +58,7 @@ import Alert from './Alert.svg';
 import MeeteamLogoLarge from './MeeteamLogoLarge.svg';
 import Congratulation from './Congratulation.svg';
 import NaverIcon from './NaverIcon.png';
+import Clip from './Clip.svg';
 
 export {
 	Exit,
@@ -120,4 +121,5 @@ export {
 	MeeteamLogoLarge,
 	Congratulation,
 	NaverIcon,
+	Clip,
 };
