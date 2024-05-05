@@ -26,6 +26,8 @@ const RecruitCard = ({
 	const { mutate: bookmarked } = useBookmark({ queryKey: 'recruit_board' });
 	const { mutate: unBookmarked } = useDelBookmark({ queryKey: 'recruit_board' });
 	const setNeedLoginModal = useSetRecoilState(needLoginModalState);
+	const extractDeadline = new Date(deadline);
+	const convertedDeadline = `${extractDeadline.getFullYear()}/${extractDeadline.getMonth()}/${extractDeadline.getDate()}`;
 
 	const onClickContent = () => {
 		navigate(`/recruitment/postings/${id}`);
@@ -66,7 +68,7 @@ const RecruitCard = ({
 				{isClosed ? (
 					<span className='closed txt2'>모집마감</span>
 				) : (
-					<span className='date'>~ {deadline}</span>
+					<span className='date'>~{convertedDeadline}</span>
 				)}
 			</section>
 		</S.RecruitCard>
