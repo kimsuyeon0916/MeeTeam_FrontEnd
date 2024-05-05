@@ -28,7 +28,7 @@ const ProfileDetailsPage = () => {
 					<S.ProfileColumn>
 						<div className='profile-header__row'>
 							<h2>{user?.nickname}</h2>
-							<h3>{user?.userName}</h3>
+							<h3>{user?.isUserNamePublic && user?.userName}</h3>
 						</div>
 						<h4>{user?.interest}</h4>
 						<h6>{user?.introduction}</h6>
