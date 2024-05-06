@@ -310,13 +310,9 @@ const ProfileEditPage = () => {
 		return pinnedPortfolioList.findIndex(portfolioId => portfolioId === id);
 	};
 
-	const checkKeyDown = (e: React.KeyboardEvent) => {
-		if (e.key === 'Enter') e.preventDefault();
-	};
-
 	return (
 		<>
-			<S.ProfileLayout onSubmit={handleSubmit(submitHandler)} onKeyDown={e => checkKeyDown(e)}>
+			<S.ProfileLayout onSubmit={handleSubmit(submitHandler)}>
 				<S.ProfileHeader>
 					<ProfileImage
 						isEditable={true}
