@@ -11,6 +11,7 @@ import { useReadProfile } from '../../../hooks';
 import { useParams, useNavigate } from 'react-router';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../../atom';
+import { BlackEmail, BlackPhone } from '../../../assets';
 
 const ProfileDetailsPage = () => {
 	const [userInfo, setUserState] = useRecoilState(userState);
@@ -53,10 +54,48 @@ const ProfileDetailsPage = () => {
 
 					<S.ProfileArticle>
 						<S.ProfileTitle>연락 수단</S.ProfileTitle>
-						<S.ProfileColumn $gap='1rem'>
-							{user?.universityEmail?.isPublic && <div>{user?.universityEmail?.content}</div>}
-							{user?.subEmail?.isPublic && <div>{user?.subEmail?.content}</div>}
-							{user?.phone?.isPublic && <div>{user?.phone?.content}</div>}
+						<S.ProfileColumn $gap='2.4rem'>
+							{user?.phone?.isPublic && (
+								<S.ProfileColumn>
+									<S.ProfileSmallText>연락처</S.ProfileSmallText>
+									<S.ProfileRow $gap='1rem'>
+										<img src={BlackPhone} alt='링크 아이콘' />
+										<div>{user?.phone?.content}</div>
+									</S.ProfileRow>
+								</S.ProfileColumn>
+							)}
+							<S.ProfileColumn $gap='1.2rem'>
+								{(user?.universityEmail?.isDefault
+									? user?.universityEmail?.isPublic
+									: user?.subEmail?.isPublic) && (
+									<S.ProfileColumn>
+										<S.ProfileSmallText $color='#5877FC'>대표 메일</S.ProfileSmallText>
+										<S.ProfileRow $gap='1rem'>
+											<img src={BlackEmail} alt='링크 아이콘' />
+											{user?.universityEmail?.isDefault ? (
+												<div>{user?.universityEmail?.content}</div>
+											) : (
+												<div>{user?.subEmail?.content}</div>
+											)}
+										</S.ProfileRow>
+									</S.ProfileColumn>
+								)}
+								{(!user?.universityEmail?.isDefault
+									? user?.universityEmail?.isPublic
+									: user?.subEmail?.isPublic) && (
+									<S.ProfileColumn>
+										<S.ProfileSmallText>이메일</S.ProfileSmallText>
+										<S.ProfileRow $gap='1rem'>
+											<img src={BlackEmail} alt='링크 아이콘' />
+											{!user?.universityEmail?.isDefault ? (
+												<div>{user?.universityEmail?.content ?? '-'}</div>
+											) : (
+												<div>{user?.subEmail?.content ?? '-'}</div>
+											)}
+										</S.ProfileRow>
+									</S.ProfileColumn>
+								)}
+							</S.ProfileColumn>
 						</S.ProfileColumn>
 						<hr />
 					</S.ProfileArticle>
@@ -64,7 +103,7 @@ const ProfileDetailsPage = () => {
 					<S.ProfileArticle>
 						<S.ProfileTitle>교육</S.ProfileTitle>
 						<div>
-							<S.ProfileDate>{user?.year}년도 입학</S.ProfileDate>
+							<S.ProfileSmallText>{user?.year}년도 입학</S.ProfileSmallText>
 							<S.ProfileRow>
 								<S.ProfileColumn $gap='1.5rem'>
 									<h4>{user?.university}</h4>
@@ -93,9 +132,9 @@ const ProfileDetailsPage = () => {
 						<S.ProfileColumn $gap='2.4rem'>
 							{user?.awards?.map(({ title, startDate, endDate, description }, index) => (
 								<S.ProfileColumn key={index}>
-									<S.ProfileDate>
+									<S.ProfileSmallText>
 										{startDate} ~ {endDate}
-									</S.ProfileDate>
+									</S.ProfileSmallText>
 									<S.ProfileRow $gap='1.05rem'>
 										<S.ProfileColumn $gap='1.5rem'>
 											<h4>{title}</h4>

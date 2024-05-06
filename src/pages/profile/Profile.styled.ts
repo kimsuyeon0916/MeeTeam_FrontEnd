@@ -69,9 +69,9 @@ const ProfileTitle = styled.h3`
 	margin-bottom: 2.4rem;
 `;
 
-const ProfileDate = styled.span`
+const ProfileSmallText = styled.span<{ $color?: string }>`
 	margin-bottom: 0.6rem;
-	color: #747b7f;
+	color: ${props => props.$color ?? '#747b7f'};
 
 	font-size: 1.2rem;
 	font-weight: 700;
@@ -180,7 +180,7 @@ const ProfileButtonBox = styled.div`
 const S = {
 	ProfileLayout,
 	ProfileTitle,
-	ProfileDate,
+	ProfileSmallText,
 	ProfileHeader,
 	ProfileColumn,
 	ProfileArticle,
