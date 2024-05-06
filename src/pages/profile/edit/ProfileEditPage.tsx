@@ -390,6 +390,7 @@ const ProfileEditPage = () => {
 								<label style={{ color: 'var(--Form-txtIcon-default,  #8E8E8E)' }}>대표 메일</label>
 								<S.ProfileRow $gap='1rem'>
 									<Radio
+										register={register}
 										name='email'
 										id={PROFILE_EDIT_DATA.universityEmail.name}
 										state={isUniversityMain}
@@ -405,6 +406,7 @@ const ProfileEditPage = () => {
 								</S.ProfileRow>
 								<S.ProfileRow $gap='1rem'>
 									<Radio
+										register={register}
 										name='email'
 										id={PROFILE_EDIT_DATA.subEmail.name}
 										state={!isUniversityMain}

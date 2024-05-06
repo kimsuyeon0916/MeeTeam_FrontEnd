@@ -40,6 +40,7 @@ interface FormValues {
 	description?: string;
 	field?: string;
 	role?: string;
+	proceedType?: string;
 	startDate?: string;
 	endDate?: string;
 	skills?: string | null;
@@ -77,6 +78,7 @@ const PortfolioEditPage = () => {
 				keepErrors: true,
 			},
 		});
+	const { isSubmitting, isSubmitSuccessful } = formState;
 
 	const createPortfolioInSuccess = (newPortfolioId: string) => {
 		navigate(`/portfolio/${newPortfolioId}`);
@@ -323,28 +325,44 @@ const PortfolioEditPage = () => {
 								<S.PortfolioEditColumn>
 									<S.PortfolioEditLabel $required={true}>진행기간</S.PortfolioEditLabel>
 									<S.PortfolioEditRow $gap='2rem'>
-										<MuiDatepickerController name={`startDate`} control={control} />
-										<MuiDatepickerController name={`endDate`} control={control} />
+										<MuiDatepickerController
+											name={`startDate`}
+											control={control}
+											formState={formState}
+											{...PORTFOLIO_EDIT_DATA.startDate}
+										/>
+										<MuiDatepickerController
+											name={`endDate`}
+											control={control}
+											formState={formState}
+											{...PORTFOLIO_EDIT_DATA.endDate}
+										/>
 									</S.PortfolioEditRow>
 								</S.PortfolioEditColumn>
 								{/* 진행방식 */}
 								<S.PortfolioEditColumn>
 									<S.PortfolioEditLabel $required={true}>진행방식</S.PortfolioEditLabel>
-									<S.PortfolioEditRow $width='clamp(45%, 34rem, 100%)' $gap='2rem'>
-										{PROCEED_TYPE.map(type => (
-											<Radio
-												key={type}
-												name='email'
-												id={type}
-												state={type === proceedType}
-												handleClick={handleRadioClick}
-											>
-												<div style={{ color: type === proceedType ? '#373F41' : '#8E8E8E' }}>
-													{type}
-												</div>
-											</Radio>
-										))}
-									</S.PortfolioEditRow>
+									<S.PortfolioEditRelativeBox>
+										<S.PortfolioEditRow $width='clamp(45%, 34rem, 100%)' $gap='2rem'>
+											{PROCEED_TYPE.map(type => (
+												<Radio
+													register={register}
+													key={type}
+													id={type}
+													state={type === proceedType}
+													handleClick={handleRadioClick}
+													{...PORTFOLIO_EDIT_DATA.proceedType}
+												>
+													<div style={{ color: type === proceedType ? '#373F41' : '#8E8E8E' }}>
+														{type}
+													</div>
+												</Radio>
+											))}
+										</S.PortfolioEditRow>
+										<S.PortfolioEditErrorMessage>
+											{formState?.errors['proceedType']?.message}
+										</S.PortfolioEditErrorMessage>
+									</S.PortfolioEditRelativeBox>
 								</S.PortfolioEditColumn>
 								{/* 스킬 */}
 								<S.PortfolioEditColumn $gap='2rem'>
@@ -383,7 +401,7 @@ const PortfolioEditPage = () => {
 										ref(e);
 										if (quillRef) quillRef.current = e;
 									}}
-									value={portfolio?.content}
+									defaultValue={portfolio?.content}
 									onChange={handleChangeEditor}
 									modules={modules}
 									formats={formats}
@@ -424,7 +442,11 @@ const PortfolioEditPage = () => {
 							title='취소'
 							handleClick={() => navigate(`/portfolio/${portfolioId}`)}
 						/>
-						<PrimaryBtn type='submit' title='등록' />
+						<PrimaryBtn
+							type='submit'
+							title='등록'
+							disabled={isSubmitting || isSubmitted || isSubmitSuccessful}
+						/>
 					</S.PortfolioEditButtonBox>
 				</S.PortfolioEditColumn>
 			</S.PortfolioEditLayout>

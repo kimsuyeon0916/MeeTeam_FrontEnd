@@ -122,6 +122,26 @@ const PortfolioEditArticle = styled.article`
 	row-gap: 2.4rem;
 `;
 
+const PortfolioEditRelativeBox = styled.div`
+	position: relative;
+	display: flex;
+`;
+
+const PortfolioEditErrorMessage = styled.small`
+	position: absolute;
+	bottom: -1.6rem;
+	left: 1rem;
+	white-space: nowrap; // 줄바꿈 방지
+	color: var(--ButtonColors-Caution-outline-defaultLine, #f85858);
+
+	/* Text/t4 */
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 1.2rem; /* 120% */
+	letter-spacing: 0.002rem;
+`;
+
 const PortfolioEditor = styled(ReactQuill)`
 	display: flex;
 	flex-direction: column;
@@ -194,6 +214,8 @@ const S = {
 	PortfolioEditTitle,
 	PortfolioEditLabel,
 	PortfolioEditArticle,
+	PortfolioEditRelativeBox,
+	PortfolioEditErrorMessage,
 	PortfolioEditor,
 	PortfolioEditButtonBox,
 };
