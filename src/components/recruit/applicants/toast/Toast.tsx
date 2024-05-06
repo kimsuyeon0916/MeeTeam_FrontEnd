@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import S from './Toast.styled';
 import { Alert } from '../../../../assets';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { toastState } from '../../../../atom';
 
 interface ToastInfo {
@@ -10,7 +10,7 @@ interface ToastInfo {
 
 const Toast = ({ message }: ToastInfo) => {
 	const [isOpen, setIsOpen] = useState(false);
-	const setIsToast = useSetRecoilState(toastState);
+	const [isToast, setIsToast] = useRecoilState(toastState);
 
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
@@ -22,7 +22,7 @@ const Toast = ({ message }: ToastInfo) => {
 			clearTimeout(timeoutId);
 			setIsOpen(true);
 		};
-	}, []);
+	}, [isToast]);
 
 	return (
 		<S.ToastContainer isOpen={isOpen}>
