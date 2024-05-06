@@ -18,6 +18,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import {
 	detailedFilterState,
 	needLoginModalState,
+	pageState,
 	previousLocationState,
 	recruitFilterState,
 } from '../../../atom';
@@ -45,7 +46,7 @@ const RecruitPage = () => {
 		},
 	});
 
-	const [page, setPage] = useState<number>(START_PAGE_NUM);
+	const [page, setPage] = useRecoilState<number>(pageState);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [isFieldOpen, setIsFieldOpen] = useState<boolean>(false);
 	const [filterState, setFilterState] = useRecoilState(recruitFilterState);
