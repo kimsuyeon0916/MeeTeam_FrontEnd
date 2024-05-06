@@ -13,6 +13,7 @@ import { Image, BlobFile } from '../../../types';
 import { unzipFile } from '../../../utils';
 import { useRecoilState } from 'recoil';
 import { uploadImageListState } from '../../../atom';
+import DOMPurify from 'dompurify';
 
 const PortfolioDetailsPage = () => {
 	const { portfolioId } = useParams() as { portfolioId: string };
@@ -99,7 +100,12 @@ const PortfolioDetailsPage = () => {
 							<S.PortfolioDetailsArticle>
 								<S.PortfolioDetailsTitle>상세내용</S.PortfolioDetailsTitle>
 								<hr />
-								<S.PortfolioDetailsContent>{portfolio?.content}</S.PortfolioDetailsContent>
+								<S.PortfolioDetailsContent
+									className='container-contents'
+									dangerouslySetInnerHTML={{
+										__html: DOMPurify.sanitize(portfolio?.content as string),
+									}}
+								/>
 							</S.PortfolioDetailsArticle>
 
 							<S.PortfolioDetailsArticle>
