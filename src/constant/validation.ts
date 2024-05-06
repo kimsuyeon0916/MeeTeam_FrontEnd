@@ -68,6 +68,9 @@ export const INPUT_VALIDATION = {
 	content: {
 		required: true,
 	},
+	url: {
+		required: 'url을 입력해주세요',
+	},
 };
 
 export const TEXTAREA_VALIDATION = {
