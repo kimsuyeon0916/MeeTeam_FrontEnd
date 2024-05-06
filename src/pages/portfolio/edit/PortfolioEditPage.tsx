@@ -78,6 +78,7 @@ const PortfolioEditPage = () => {
 				keepErrors: true,
 			},
 		});
+	const { isSubmitting, isSubmitSuccessful } = formState;
 
 	const createPortfolioInSuccess = (newPortfolioId: string) => {
 		navigate(`/portfolio/${newPortfolioId}`);
@@ -441,7 +442,11 @@ const PortfolioEditPage = () => {
 							title='취소'
 							handleClick={() => navigate(`/portfolio/${portfolioId}`)}
 						/>
-						<PrimaryBtn type='submit' title='등록' />
+						<PrimaryBtn
+							type='submit'
+							title='등록'
+							disabled={isSubmitting || isSubmitted || isSubmitSuccessful}
+						/>
 					</S.PortfolioEditButtonBox>
 				</S.PortfolioEditColumn>
 			</S.PortfolioEditLayout>
