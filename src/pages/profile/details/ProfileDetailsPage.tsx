@@ -27,6 +27,14 @@ const ProfileDetailsPage = () => {
 
 	const navigate = useNavigate();
 
+	const isDefaultEmailPublic = user?.universityEmail?.isDefault
+		? user?.universityEmail?.isPublic
+		: user?.subEmail?.isPublic;
+
+	const isSubEmailPublic = !user?.universityEmail?.isDefault
+		? user?.universityEmail?.isPublic
+		: user?.subEmail?.isPublic;
+
 	return (
 		isSuccess && (
 			<S.ProfileLayout>
@@ -35,7 +43,14 @@ const ProfileDetailsPage = () => {
 					<S.ProfileColumn>
 						<div className='profile-header__row'>
 							<h2>{user?.nickname}</h2>
-							<h3>{user?.isUserNamePublic && user?.userName}</h3>
+							{(userInfo?.userId === userId || user?.isUserNamePublic) && (
+								<S.ProfileRow $gap='1rem'>
+									<h3>{user?.userName}</h3>
+									{userInfo?.userId === userId && !user?.isUserNamePublic && (
+										<S.ProfileTag>비공개</S.ProfileTag>
+									)}
+								</S.ProfileRow>
+							)}
 						</div>
 						<h4>{user?.interest}</h4>
 						<h6>{user?.introduction}</h6>
@@ -55,19 +70,20 @@ const ProfileDetailsPage = () => {
 					<S.ProfileArticle>
 						<S.ProfileTitle>연락 수단</S.ProfileTitle>
 						<S.ProfileColumn $gap='2.4rem'>
-							{user?.phone?.isPublic && (
+							{(user?.phone?.isPublic || userInfo?.userId === userId) && (
 								<S.ProfileColumn>
 									<S.ProfileSmallText>연락처</S.ProfileSmallText>
 									<S.ProfileRow $gap='1rem'>
 										<img src={BlackPhone} alt='링크 아이콘' />
 										<div>{user?.phone?.content ?? '-'}</div>
+										{userInfo?.userId === userId && !user?.phone?.isPublic && (
+											<S.ProfileTag>비공개</S.ProfileTag>
+										)}
 									</S.ProfileRow>
 								</S.ProfileColumn>
 							)}
 							<S.ProfileColumn $gap='1.2rem'>
-								{(user?.universityEmail?.isDefault
-									? user?.universityEmail?.isPublic
-									: user?.subEmail?.isPublic) && (
+								{(isDefaultEmailPublic || userInfo?.userId === userId) && (
 									<S.ProfileColumn>
 										<S.ProfileSmallText $color='#5877FC'>대표 메일</S.ProfileSmallText>
 										<S.ProfileRow $gap='1rem'>
@@ -77,12 +93,13 @@ const ProfileDetailsPage = () => {
 											) : (
 												<div>{user?.subEmail?.content ?? '-'}</div>
 											)}
+											{userInfo?.userId === userId && !isDefaultEmailPublic && (
+												<S.ProfileTag>비공개</S.ProfileTag>
+											)}
 										</S.ProfileRow>
 									</S.ProfileColumn>
 								)}
-								{(!user?.universityEmail?.isDefault
-									? user?.universityEmail?.isPublic
-									: user?.subEmail?.isPublic) && (
+								{(isSubEmailPublic || userInfo?.userId === userId) && (
 									<S.ProfileColumn>
 										<S.ProfileSmallText>이메일</S.ProfileSmallText>
 										<S.ProfileRow $gap='1rem'>
@@ -91,6 +108,9 @@ const ProfileDetailsPage = () => {
 												<div>{user?.universityEmail?.content ?? '-'}</div>
 											) : (
 												<div>{user?.subEmail?.content ?? '-'}</div>
+											)}
+											{userInfo?.userId === userId && !isSubEmailPublic && (
+												<S.ProfileTag>비공개</S.ProfileTag>
 											)}
 										</S.ProfileRow>
 									</S.ProfileColumn>
@@ -167,10 +187,9 @@ const ProfileDetailsPage = () => {
 					<S.ProfileArticle>
 						<S.ProfileTitle>포트폴리오</S.ProfileTitle>
 						<S.ProfileGrid>
-							{user?.portfolios &&
-								user?.portfolios.map(({ ...props }, index) => (
-									<PortfolioCard key={index} {...props} />
-								))}
+							{user?.portfolios?.map(({ ...props }, index) => (
+								<PortfolioCard key={index} {...props} />
+							))}
 						</S.ProfileGrid>
 						<hr />
 					</S.ProfileArticle>

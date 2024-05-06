@@ -17,7 +17,7 @@ const ProfileLayout = styled.form`
 	font-size: 1.6rem;
 	font-style: normal;
 	font-weight: 600;
-	line-height: 150%; /* 2.4rem */
+	line-height: 1.9rem;
 	letter-spacing: 0.0032rem;
 
 	h2 {
@@ -74,9 +74,9 @@ const ProfileSmallText = styled.span<{ $color?: string }>`
 	color: ${props => props.$color ?? '#747b7f'};
 
 	font-size: 1.2rem;
-	font-weight: 700;
-	line-height: 1.2rem;
-	letter-spacing: 0.02rem;
+	font-weight: 600;
+	line-height: 1.4rem;
+	letter-spacing: 0.0024rem;
 `;
 
 const ProfileHeader = styled.header`
@@ -177,6 +177,20 @@ const ProfileButtonBox = styled.div`
 	margin-left: auto;
 `;
 
+const ProfileTag = styled.span`
+	display: flex;
+	padding: 0.4rem 0.6rem;
+	align-items: center;
+	border-radius: 0.4rem;
+	border: 0.05rem solid #8e8e8e;
+	background: var(--Grayscale-100, #f8fafb);
+	color: #8e8e8e;
+	font-size: 1.2rem;
+	font-weight: 500;
+	line-height: 1.4rem;
+	letter-spacing: 0.0024rem;
+`;
+
 const S = {
 	ProfileLayout,
 	ProfileTitle,
@@ -188,6 +202,7 @@ const S = {
 	ProfileGrid,
 	ProfileDescription,
 	ProfileButtonBox,
+	ProfileTag,
 };
 
 export default S;
