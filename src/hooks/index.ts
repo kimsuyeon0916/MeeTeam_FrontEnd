@@ -13,10 +13,11 @@ import useValid from './useValid';
 import { useReadSkillList, useReadRoleList } from './useSearch';
 import {
 	useReadPortfolio,
-  useCreatePortfolio,
+	useCreatePortfolio,
 	useUpdatePortfolio,
 	useReadInfinitePortfolioList,
 	usePaginationPortfolioList,
+	useDeletePortfolio,
 } from './usePortfolio';
 import {
 	useReadImagePresignedUrl,
@@ -47,6 +48,7 @@ export {
 	usePaginationPortfolioList,
 	useCreatePortfolio,
 	useUpdatePortfolio,
+	useDeletePortfolio,
 	useReadImagePresignedUrl,
 	useReadImageListPresignedUrl,
 	useUploadImageFile,

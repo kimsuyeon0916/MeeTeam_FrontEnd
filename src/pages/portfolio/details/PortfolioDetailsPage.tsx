@@ -2,17 +2,19 @@ import React, { useEffect } from 'react';
 import S from './PortfolioDetails.styled';
 import {
 	DefaultBtn,
+	IconBtn,
 	ImageCarousel,
 	LinkDetails,
 	PortfolioInformation,
 	PortfolioList,
 } from '../../../components';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useReadPortfolio } from '../../../hooks';
+import { useReadPortfolio, useDeletePortfolio } from '../../../hooks';
 import { Image, BlobFile } from '../../../types';
 import { unzipFile } from '../../../utils';
 import { useRecoilState } from 'recoil';
 import { uploadImageListState } from '../../../atom';
+import { TrashCan } from '../../../assets';
 import DOMPurify from 'dompurify';
 
 const PortfolioDetailsPage = () => {
@@ -72,6 +74,16 @@ const PortfolioDetailsPage = () => {
 		}
 	}, [portfolio?.zipFileUrl]);
 
+	const { mutate: deletePortfolio } = useDeletePortfolio();
+
+	const handleDeletePortfoilo = () => {
+		const confirm = window.confirm('포트폴리오를 삭제 하시겠습니까?');
+		if (confirm) {
+			deletePortfolio(portfolioId);
+			navigate('/portfolio/management');
+		}
+	};
+
 	return (
 		isSuccess && (
 			<S.PortfolioDetailsLayout>
@@ -82,11 +94,14 @@ const PortfolioDetailsPage = () => {
 							<h5>{portfolio?.description}</h5>
 						</S.PortfolioDetailsColumn>
 						{portfolio?.isWriter && (
-							<DefaultBtn
-								type='button'
-								title='편집'
-								handleClick={() => navigate(`/portfolio/edit/${portfolioId}`)}
-							/>
+							<S.PortfolioDetailsButtonContainer>
+								<IconBtn icon={TrashCan} handleClick={handleDeletePortfoilo} />
+								<DefaultBtn
+									type='button'
+									title='편집'
+									handleClick={() => navigate(`/portfolio/edit/${portfolioId}`)}
+								/>
+							</S.PortfolioDetailsButtonContainer>
 						)}
 					</S.PortfolioDetailsHeader>
 
