@@ -157,6 +157,7 @@ const linkDescription = {
 const linkUrl = {
 	type: 'url',
 	placeholder: 'URL을 입력해주세요',
+	validation: INPUT_VALIDATION.url,
 };
 
 const awardDate = {

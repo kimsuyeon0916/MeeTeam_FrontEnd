@@ -45,6 +45,20 @@ const role = {
 	},
 };
 
+const startDate = {
+	rules: INPUT_VALIDATION.startDate,
+};
+
+const endDate = {
+	rules: INPUT_VALIDATION.endDate,
+};
+
+const proceedType = {
+	type: 'radio',
+	name: 'proceedType',
+	validation: INPUT_VALIDATION.proceedType,
+};
+
 const skills = {
 	label: '스킬',
 	type: 'text',
@@ -69,6 +83,9 @@ const PORTFOLIO_EDIT_DATA = {
 	description,
 	field,
 	role,
+	startDate,
+	endDate,
+	proceedType,
 	skills,
 	content,
 };

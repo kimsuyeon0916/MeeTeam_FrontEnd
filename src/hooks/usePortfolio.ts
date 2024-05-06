@@ -1,5 +1,18 @@
-import { useQuery, useMutation, useInfiniteQuery, useQueryClient, keepPreviousData } from '@tanstack/react-query';
-import { createPortfolio, readPortfolio, updatePortfolio, readInfinitePortfolioList, readPaginationPortfolioList } from '../service';
+import {
+	useQuery,
+	useMutation,
+	useInfiniteQuery,
+	useQueryClient,
+	keepPreviousData,
+} from '@tanstack/react-query';
+import {
+	createPortfolio,
+	readPortfolio,
+	updatePortfolio,
+	readInfinitePortfolioList,
+	readPaginationPortfolioList,
+	deletePortfolio,
+} from '../service';
 
 const portfolioKeys = {
 	readPortfolio: (portfolioId: string) => ['readPortfolio', portfolioId],
@@ -77,5 +90,14 @@ export const usePaginationPortfolioList = (size: number, pageParam: number) => {
 		queryKey: portfolioKeys.readPaginationPortfolioList(size),
 		queryFn: () => readPaginationPortfolioList({ size, pageParam }),
 		placeholderData: keepPreviousData,
+	});
+};
+
+/**
+ * @description 포트폴리오 삭제 API를 호출하는 hook입니다.
+ */
+export const useDeletePortfolio = () => {
+	return useMutation({
+		mutationFn: deletePortfolio,
 	});
 };
