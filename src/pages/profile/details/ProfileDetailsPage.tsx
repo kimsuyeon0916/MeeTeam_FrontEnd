@@ -13,6 +13,14 @@ import { useRecoilState } from 'recoil';
 import { userState } from '../../../atom';
 import { BlackEmail, BlackPhone } from '../../../assets';
 
+const MESSAGE = {
+	aboutMe: '간단한 자기 소개를 적어주세요',
+	skills: '가지고 있는 직무와 관련된 스킬을 추가해주세요',
+	awards: '수상 이력, 수료한 교육이나 참석한 외부활동 등을 추가해주세요',
+	links: '성과를 보여줄 수 있는 링크가 있다면 추가해주세요',
+	portfolios: '밋팀에서 포트폴리오 작성하고, 추가해주세요',
+};
+
 const ProfileDetailsPage = () => {
 	const [userInfo, setUserState] = useRecoilState(userState);
 
@@ -64,6 +72,9 @@ const ProfileDetailsPage = () => {
 					<S.ProfileArticle>
 						<S.ProfileTitle>자기 소개</S.ProfileTitle>
 						<div>{user?.aboutMe}</div>
+						{userInfo?.userId === userId && !user?.aboutMe && (
+							<S.ProfileMessage>{MESSAGE.aboutMe}</S.ProfileMessage>
+						)}
 						<hr />
 					</S.ProfileArticle>
 
@@ -148,6 +159,9 @@ const ProfileDetailsPage = () => {
 						<S.ProfileRow $gap='1.05rem'>
 							{user?.skills?.map(({ ...props }, index) => <SkillTag key={index} {...props} />)}
 						</S.ProfileRow>
+						{userInfo?.userId === userId && !user?.skills?.length && (
+							<S.ProfileMessage>{MESSAGE.skills}</S.ProfileMessage>
+						)}
 						<hr />
 					</S.ProfileArticle>
 
@@ -169,6 +183,9 @@ const ProfileDetailsPage = () => {
 								</S.ProfileColumn>
 							))}
 						</S.ProfileColumn>
+						{userInfo?.userId === userId && !user?.awards?.length && (
+							<S.ProfileMessage>{MESSAGE.awards}</S.ProfileMessage>
+						)}
 						<hr />
 					</S.ProfileArticle>
 
@@ -181,6 +198,9 @@ const ProfileDetailsPage = () => {
 								</S.ProfileRow>
 							))}
 						</S.ProfileColumn>
+						{userInfo?.userId === userId && !user?.links?.length && (
+							<S.ProfileMessage>{MESSAGE.links}</S.ProfileMessage>
+						)}
 						<hr />
 					</S.ProfileArticle>
 
@@ -191,6 +211,9 @@ const ProfileDetailsPage = () => {
 								<PortfolioCard key={index} {...props} />
 							))}
 						</S.ProfileGrid>
+						{userInfo?.userId === userId && !user?.portfolios?.length && (
+							<S.ProfileMessage>{MESSAGE.portfolios}</S.ProfileMessage>
+						)}
 						<hr />
 					</S.ProfileArticle>
 				</S.ProfileColumn>

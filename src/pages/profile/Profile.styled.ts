@@ -191,6 +191,10 @@ const ProfileTag = styled.span`
 	letter-spacing: 0.0024rem;
 `;
 
+const ProfileMessage = styled.div`
+	color: #8e8e8e;
+`;
+
 const S = {
 	ProfileLayout,
 	ProfileTitle,
@@ -203,6 +207,7 @@ const S = {
 	ProfileDescription,
 	ProfileButtonBox,
 	ProfileTag,
+	ProfileMessage,
 };
 
 export default S;
