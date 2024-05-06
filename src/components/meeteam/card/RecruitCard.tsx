@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import S from './Card.styled';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FilledBookmark, UnfilledBookmark } from '../../../assets';
 import { ProfileImage } from '../..';
 import { Post } from '../../../types';
@@ -21,14 +21,19 @@ const RecruitCard = ({
 	writerId,
 	isClosed,
 }: Post) => {
+	const location = useLocation();
 	const navigate = useNavigate();
 	const { isLoggedIn } = useLogin();
-	const { mutate: bookmarked } = useBookmark({ queryKey: 'recruit_board' });
+	const { mutate: bookmarked } = useBookmark({
+		queryKey: `${
+			location.pathname !== 'management/bookmark' ? 'recruit_board' : 'managementBookmark'
+		}`,
+	});
 	const { mutate: unBookmarked } = useDelBookmark({ queryKey: 'recruit_board' });
 	const setNeedLoginModal = useSetRecoilState(needLoginModalState);
 	const extractDeadline = new Date(deadline);
 	const convertedDeadline = `${extractDeadline.getFullYear()}/${extractDeadline.getMonth()}/${extractDeadline.getDate()}`;
-
+	console.log(location.pathname);
 	const onClickContent = () => {
 		navigate(`/recruitment/postings/${id}`);
 	};

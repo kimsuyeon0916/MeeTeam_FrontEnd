@@ -75,7 +75,7 @@ const ReplyInput = ({
 					/>
 				</section>
 				<section className='container-btn'>
-					<button type='button' className='cancel-btn'>
+					<button type='button' className='cancel-btn' onClick={onClickCancel}>
 						취소
 					</button>
 					<button type='button' onClick={addReply} className='submit-btn'>
