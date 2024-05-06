@@ -11,6 +11,11 @@ export const userState = atom<User | null>({
 	effects: [LocalStorageEffect<User | null>('userState')],
 });
 
+export const pageState = atom({
+	key: 'pageState',
+	default: 1,
+});
+
 export const naverSignUpState = atom<Account | null>({
 	key: 'naverSignUpState',
 	default: null,
