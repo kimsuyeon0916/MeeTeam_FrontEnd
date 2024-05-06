@@ -3,6 +3,7 @@ import styled from 'styled-components';
 interface RecruitPage {
 	$isFieldClick: boolean;
 	$isDetailedClick: boolean;
+	$isDetailSelected: boolean;
 }
 
 const RecruitPage = styled.div<RecruitPage>`
@@ -178,6 +179,11 @@ const RecruitPage = styled.div<RecruitPage>`
 				font-weight: 400;
 				width: 13rem;
 				height: 4.8rem;
+
+				.selected {
+					color: ${props => (props.$isDetailSelected ? '#5877FC' : '#373f41')};
+					font-weight: ${props => (props.$isDetailSelected ? '600' : '500')};
+				}
 
 				&:hover {
 					border: 1px solid #5877fc;

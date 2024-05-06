@@ -4,10 +4,13 @@ interface IDropdown {
 	$showDropdown?: boolean;
 	$scope?: boolean;
 	$isCheck?: boolean;
+	$isScopeSelected?: boolean;
+	$isCategorySelected?: boolean;
 }
 
 const Dropdown = styled.div<IDropdown>`
 	position: relative;
+
 	.wrapper {
 		position: relative;
 		display: flex;
@@ -31,7 +34,17 @@ const Dropdown = styled.div<IDropdown>`
 			width: 100%;
 
 			.value {
-				font-size: 1.5rem;
+				font-size: 1.6rem;
+			}
+
+			.scope-selected {
+				color: ${props => (props.$isScopeSelected ? '#5877FC' : '#373f41')};
+				font-weight: ${props => (props.$isScopeSelected ? '600' : '500')};
+			}
+
+			.category-selected {
+				color: ${props => (props.$isCategorySelected ? '#5877FC' : '#373f41')};
+				font-weight: ${props => (props.$isCategorySelected ? '600' : '500')};
 			}
 		}
 

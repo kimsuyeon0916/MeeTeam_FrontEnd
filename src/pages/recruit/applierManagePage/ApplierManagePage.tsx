@@ -27,13 +27,8 @@ import {
 	toastState,
 	userState,
 } from '../../../atom';
-import {
-	approveApplicant,
-	getRecruitInfo,
-	refusedApplicant,
-	setOpenChatLink,
-} from '../../../service/recruit/applicant';
-import { ApplicantInfo, ApplicantsLink, ApplicantsList } from '../../../types';
+import { getRecruitInfo, setOpenChatLink } from '../../../service/recruit/applicant';
+import { ApplicantInfo, ApplicantsLink } from '../../../types';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useScrollToTop } from '../../../hooks';
 import { fixModalBackground } from '../../../utils';
@@ -53,7 +48,7 @@ const ApplierManagePage = () => {
 	const [isOpenChat, setIsOpenChat] = useState<boolean>(false);
 	const [isOpenCurrent, setIsOpenCurrent] = useState<boolean>(true);
 	const [linkUrl, setLinkUrl] = useState<string>('');
-	const [checkList, setCheckList] = useRecoilState(applicantHolder);
+	const checkList = useRecoilValue(applicantHolder);
 	const [isToast, setIsToast] = useRecoilState(toastState);
 	const isTutorialOpen = useRecoilValue(openChatModalState);
 	const [applicantsArr, setApplicantsArr] = useState<ApplicantInfo[]>([]);
@@ -71,8 +66,7 @@ const ApplierManagePage = () => {
 		queryFn: () => getRecruitInfo(pageNum),
 	});
 
-	const isChecked =
-		checkList && recruitManageInfo && checkList.length !== 0 && recruitManageInfo.link !== null;
+	const isChecked = checkList && checkList.length !== 0;
 
 	const openLink = useMutation({
 		mutationFn: ({ pageNum, link }: ApplicantsLink) => setOpenChatLink({ pageNum, link }),
@@ -146,7 +140,7 @@ const ApplierManagePage = () => {
 	}, [recruitManageInfo?.isFirstAccess, applicantModal.approve, applicantModal.refuse]);
 
 	return (
-		<S.ApplierManagePage $isChecked={isChecked} $isOpenCurrent={isOpenCurrent}>
+		<S.ApplierManagePage $isChecked={isChecked}>
 			<article className='wrapper-applicants'>
 				<section className='container-title'>
 					<h1>{recruitManageInfo?.title}</h1>

@@ -33,6 +33,11 @@ const RecruitDetailPage = styled.section`
 		font-weight: 600;
 	}
 
+	.body2-medium {
+		color: #8e8e8e;
+		font-size: 1.4rem;
+	}
+
 	.modal-background {
 		position: fixed;
 		top: 0;

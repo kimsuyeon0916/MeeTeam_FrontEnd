@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 interface ApplicantManage {
 	$isChecked?: boolean;
-	$isOpenCurrent: boolean;
 }
 
 const ApplierManagePage = styled.section<ApplicantManage>`
