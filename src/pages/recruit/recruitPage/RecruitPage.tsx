@@ -204,6 +204,10 @@ const RecruitPage = () => {
 		setIsDetailSelected(true);
 	};
 
+	const detailOptionsNotSelected = () => {
+		setIsDetailSelected(false);
+	};
+
 	const handlerChildDropdown = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation();
 	};
@@ -254,15 +258,12 @@ const RecruitPage = () => {
 			setFilterState(prev => ({ ...prev, category: Number(isCategory) }));
 		}
 		if (isSkill) {
-			setIsDetailSelected(true);
 			setFilterState(prev => ({ ...prev, skill: isSkill }));
 		}
 		if (isRole) {
-			setIsDetailSelected(true);
 			setFilterState(prev => ({ ...prev, role: isRole }));
 		}
 		if (isTag) {
-			setIsDetailSelected(true);
 			setFilterState(prev => ({ ...prev, tag: isTag }));
 		}
 		if (isKeyword) {
@@ -358,6 +359,7 @@ const RecruitPage = () => {
 											type={isOpenDetail.message}
 											closeHandler={closeHandler}
 											detailOptionsSelected={detailOptionsSelected}
+											detailOptionsNotSelected={detailOptionsNotSelected}
 										/>
 									</section>
 								)}
