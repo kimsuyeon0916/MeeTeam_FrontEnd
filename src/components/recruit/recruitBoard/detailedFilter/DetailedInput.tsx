@@ -23,7 +23,12 @@ const MESSAGE = {
 	},
 };
 
-const DetailedInput = ({ type, closeHandler, detailOptionsSelected }: DetailedInfo) => {
+const DetailedInput = ({
+	type,
+	closeHandler,
+	detailOptionsSelected,
+	detailOptionsNotSelected,
+}: DetailedInfo) => {
 	const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
 	const [message, setMessage] = useState({
 		intro: MESSAGE.SKILL.INTRO,
@@ -151,6 +156,7 @@ const DetailedInput = ({ type, closeHandler, detailOptionsSelected }: DetailedIn
 			setFilterState(prev => ({ ...prev, tag: [] }));
 			searchParams.delete('tag');
 		}
+
 		setSearchParams(searchParams);
 		closeHandler();
 	};
@@ -185,6 +191,13 @@ const DetailedInput = ({ type, closeHandler, detailOptionsSelected }: DetailedIn
 		}
 		setIsOpenMenu(false);
 	}, [type]);
+	useEffect(() => {
+		if (filterState.role.length === 0 && filterState.skill.length && filterState.tag.length) {
+			detailOptionsNotSelected();
+		} else {
+			detailOptionsSelected();
+		}
+	}, [filterState.role, filterState.skill, filterState.tag]);
 
 	return (
 		<section className='dropdown-search'>

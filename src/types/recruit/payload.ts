@@ -84,6 +84,7 @@ export interface DetailedInfo {
 	type: string;
 	closeHandler: () => void;
 	detailOptionsSelected: () => void;
+	detailOptionsNotSelected: () => void;
 }
 
 export interface Array {
