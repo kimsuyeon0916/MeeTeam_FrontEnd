@@ -6,7 +6,7 @@ import { ProfileImage, WaitModal } from '..';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { recruitFilterState, userState, waitModalState } from '../../atom';
 import { useLogin, useSignOut } from '../../hooks';
-import { fixModalBackground } from '../../utils';
+import { fixModalBackground, resetFormData } from '../../utils';
 
 const Header = () => {
 	const navigate = useNavigate();
@@ -91,6 +91,8 @@ const Header = () => {
 		}
 	};
 
+	resetFormData();
+
 	return (
 		<S.Header $isLogin={isLoggedIn}>
 			<div className='header'>
@@ -113,19 +115,10 @@ const Header = () => {
 						>
 							밋팀갤러리
 						</div>
-						<div
-							className={`header__navigation--navi-text ${isHere.inform ? 'here' : ''}`}
-							onClick={goInformationUse}
-						>
-							이용안내
-						</div>
 					</div>
 				</section>
 				<section>
 					<div className='header__menu'>
-						{/* <span className='header__nickname body2-semibold'>
-							{isLoggedIn && `안녕하세요, ${userInfo?.nickname}님!`}
-						</span> */}
 						<div className='header__menu--my' ref={dropdownRef}>
 							<section onClick={onClickMy}>
 								{isLoggedIn ? (

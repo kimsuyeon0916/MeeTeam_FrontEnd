@@ -35,6 +35,10 @@ const PortfolioManagementGrid = styled.div`
 	row-gap: 4rem;
 	column-gap: 2rem;
 
+	@media (min-width: 144rem) {
+    grid-template-columns: repeat(4, minmax(22.5rem, 1fr));
+  }
+
 	/* 스크롤바 숨기기 */
 	overflow-y: auto;
 	-ms-overflow-style: none; /* IE and Edge */

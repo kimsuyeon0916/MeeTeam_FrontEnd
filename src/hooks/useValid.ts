@@ -49,21 +49,6 @@ export default function useValid(data: InputState) {
 	}, [data.deadline, data.proceedingEnd]);
 
 	useEffect(() => {
-		if (data.courseTag.isCourse && data.scope === '교외') {
-			setValidMessage(prev => ({
-				...prev,
-				scope: '범위 선택이 잘못되었습니다.',
-			}));
-		} else {
-			setValidMessage(prev => ({ ...prev, scope: '' }));
-		}
-		setIsValid(prev => ({
-			...prev,
-			isScope: data.courseTag.isCourse && data.scope !== '교외',
-		}));
-	}, [data.scope, data.courseTag]);
-
-	useEffect(() => {
 		if (data.title === '') {
 			setValidMessage(prev => ({ ...prev, title: '제목을 입력해주세요.' }));
 		} else if (data.title.length < 10) {

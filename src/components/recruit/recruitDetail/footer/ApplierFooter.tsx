@@ -17,10 +17,9 @@ const ApplierFooter = ({ deadline, isApplied, isBookmarked }: ApplierData) => {
 	const { id } = useParams();
 	const pageNum = Number(id);
 	const { isLoggedIn } = useLogin();
-	const setIsModal = useSetRecoilState(applyModalState);
 	const diffDate = calculateDate(deadline);
+	const setIsModal = useSetRecoilState(applyModalState);
 	const setNeedLoginModal = useSetRecoilState(needLoginModalState);
-
 	const { mutate: bookmarked } = useBookmark({ queryKey: 'detailedPage' });
 	const { mutate: unBookmarked } = useDelBookmark({ queryKey: 'detailedPage' });
 

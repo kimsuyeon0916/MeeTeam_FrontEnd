@@ -43,6 +43,8 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		course: false,
 		professor: false,
 	});
+	const [isScopeSelected, setIsScopeSelected] = useState(false);
+	const [isCategorySelected, setIsCategorySelected] = useState(false);
 	const insideRef = useRef<HTMLDivElement | null>(null);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [isChecked, setIsChecked] = useState<boolean>(false);
@@ -99,6 +101,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 				setSearchParams(searchParams);
 			}
 			setFilterState(prev => ({ ...prev, category: Number(searchParams.get('category')) }));
+			setIsCategorySelected(true);
 		}
 		setShowDropdown(false);
 	};
@@ -118,6 +121,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		}
 		searchParams.set('scope', scopeObj[value].toString());
 		setSearchParams(searchParams);
+		setIsScopeSelected(true);
 	};
 
 	const onClickCheckbox = () => {
@@ -152,7 +156,8 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 			professor: { ...prev.professor, name: event.target.value },
 		}));
 	};
-	const onClickClearInfo = () => {
+	const onClickClearInfo = (event: React.MouseEvent<HTMLDivElement>) => {
+		event.stopPropagation();
 		setValue({
 			course: {
 				name: '',
@@ -168,12 +173,15 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		searchParams.delete('course');
 		searchParams.delete('professor');
 		setSearchParams(searchParams);
+		setShowDropdown(false);
 	};
-	const submitInfo = () => {
+	const submitInfo = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.stopPropagation();
 		setDropdown({ course: false, professor: false });
 		setFilterState(prev => ({ ...prev, course: value.course.id }));
 		setFilterState(prev => ({ ...prev, professor: value.professor.id }));
 		setSearchParams(searchParams);
+		setShowDropdown(false);
 	};
 
 	useEffect(() => {
@@ -200,30 +208,41 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 	useEffect(() => {
 		if (scope && filterState.scope !== null) {
 			setCurrentValue(getKeyByValue(scopeObj, filterState.scope));
+			setIsScopeSelected(true);
 		} else if (scope && filterState.scope === null) {
 			setCurrentValue('범위');
+			setIsScopeSelected(false);
 		}
 	}, [filterState.scope]);
 
 	useEffect(() => {
 		if (category && filterState.category !== null) {
 			setCurrentValue(getKeyByValue(categoryObj, filterState.category));
+			setIsCategorySelected(true);
 		} else if (category && filterState.category === null) {
 			setCurrentValue('유형');
+			setIsCategorySelected(false);
 		}
 	}, [filterState.category]);
 
 	return (
-		<S.Dropdown $showDropdown={showDropdown} $scope={scope} $isCheck={isChecked} ref={dropdownRef}>
+		<S.Dropdown
+			$showDropdown={showDropdown}
+			$scope={scope}
+			$isCheck={isChecked}
+			ref={dropdownRef}
+			$isScopeSelected={isScopeSelected}
+			$isCategorySelected={isCategorySelected}
+		>
 			<article className='wrapper' onClick={onClickDropdown}>
 				<div className='dropdown-box'>
 					{scope && (
-						<div className='value'>
+						<div className='value scope-selected'>
 							{filterState.scope ? getKeyByValue(scopeObj, filterState.scope) : currentValue}
 						</div>
 					)}
 					{category && (
-						<div className='value'>
+						<div className='value category-selected'>
 							{filterState.category
 								? getKeyByValue(categoryObj, filterState.category)
 								: currentValue}

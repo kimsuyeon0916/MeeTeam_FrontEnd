@@ -35,6 +35,7 @@ const RecruitPage = () => {
 	const fieldRef = useRef<HTMLDivElement | null>(null);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [searchKeyword, setSearchKeyword] = useState('');
+	const [isDetailSelected, setIsDetailSelected] = useState(false);
 	const [isFloatingOpen, setIsFloatingOpen] = useState<boolean>(false);
 	const [fieldValue, setFieldValue] = useState({
 		applied: false,
@@ -101,20 +102,21 @@ const RecruitPage = () => {
 		setDetailedFilterState({ skill: [], role: [], tag: [] });
 		setSearchParams(searchParams);
 		setIsOpenDetail({ skill: true, role: false, tag: false, message: '기술' });
-		setFieldValue({
-			applied: false,
-			value: {
-				id: null as number | null,
-				value: '분야를 선택해주세요',
-			},
-		});
+
 		searchParams.delete('scope');
 		searchParams.delete('category');
 		searchParams.delete('skill');
 		searchParams.delete('role');
 		searchParams.delete('tag');
 		searchParams.delete('keyword');
+		searchParams.delete('course');
+		searchParams.delete('professor');
+		setIsDetailSelected(false);
 		setSearchParams(searchParams);
+	};
+
+	const closeHandler = () => {
+		setIsOpen(false);
 	};
 
 	const onClickDetails = (event: React.MouseEvent<HTMLSpanElement>) => {
@@ -190,6 +192,14 @@ const RecruitPage = () => {
 		} else {
 			setNeedLoginModal({ isOpen: true, type: 'PORTFOLIO_CREATE' });
 		}
+	};
+
+	const detailOptionsSelected = () => {
+		setIsDetailSelected(true);
+	};
+
+	const detailOptionsNotSelected = () => {
+		setIsDetailSelected(false);
 	};
 
 	const handlerChildDropdown = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -272,6 +282,7 @@ const RecruitPage = () => {
 		<S.RecruitPage
 			$isFieldClick={fieldValue.value.value !== '분야를 선택해주세요'}
 			$isDetailedClick={isOpen}
+			$isDetailSelected={isDetailSelected}
 		>
 			<>
 				<section>
@@ -313,7 +324,7 @@ const RecruitPage = () => {
 							/>
 							<article className='dropdown-detailed' onClick={onClickDetailed} ref={dropdownRef}>
 								<section className='dropdown-box'>
-									<label>{'상세정보'}</label>
+									<label className='selected'>{'상세조건'}</label>
 									<img src={isOpen ? DropdownArrowUp : DropdownArrow} />
 								</section>
 								{isOpen && (
@@ -338,7 +349,12 @@ const RecruitPage = () => {
 												태그
 											</span>
 										</section>
-										<DetailedInput type={isOpenDetail.message} />
+										<DetailedInput
+											type={isOpenDetail.message}
+											closeHandler={closeHandler}
+											detailOptionsSelected={detailOptionsSelected}
+											detailOptionsNotSelected={detailOptionsNotSelected}
+										/>
 									</section>
 								)}
 							</article>

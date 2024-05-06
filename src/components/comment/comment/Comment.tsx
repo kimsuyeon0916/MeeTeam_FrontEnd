@@ -3,7 +3,7 @@ import { CommentDeleteModal, KebabMenu, ProfileImage, ReplyComment, ReplyInput }
 import S from './Comment.styled';
 import { Comment as CommentType } from '../../../types';
 import { useParams } from 'react-router-dom';
-import { useCommentEdit } from '../../../hooks';
+import { useCommentEdit, useLogin } from '../../../hooks';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { commentDeleteModalState, userState } from '../../../atom';
@@ -22,6 +22,7 @@ const Comment = ({
 }: CommentType) => {
 	const { id: recruitId } = useParams();
 	const pageNum = Number(recruitId);
+	const { isLoggedIn } = useLogin();
 	const [replyClicked, setReplyClicked] = useState<boolean>(false);
 	const [value, setValue] = useState<string>(content);
 	const [showKebab, setShowKebab] = useState<boolean>(true);
@@ -155,7 +156,9 @@ const Comment = ({
 						)}
 					</section>
 				</article>
-				{showKebab && <KebabMenu options={isCommentWriter ? optionLists : optionListsOthers} />}
+				{showKebab && isLoggedIn && (
+					<KebabMenu options={isCommentWriter ? optionLists : optionListsOthers} />
+				)}
 			</section>
 			<hr />
 			<section className='wrapper-replies'>

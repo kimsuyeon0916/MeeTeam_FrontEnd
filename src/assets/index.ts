@@ -30,8 +30,8 @@ import Close from './Close.svg';
 import AddProfile from './AddProfile.svg';
 import BluePlus from './BluePlus.svg';
 import LinkIcon from './LinkIcon.svg';
-import ArrowLeft from './ArrowLeft.svg';
-import ArrowRight from './ArrowRight.svg';
+import ArrowLeft from './ArrowLeft.png';
+import ArrowRight from './ArrowRight.png';
 import Test1 from './Test1.png';
 import Test2 from './Test2.png';
 import Test3 from './Test3.png';
@@ -58,6 +58,7 @@ import Alert from './Alert.svg';
 import MeeteamLogoLarge from './MeeteamLogoLarge.svg';
 import Congratulation from './Congratulation.svg';
 import NaverIcon from './NaverIcon.png';
+import Clip from './Clip.svg';
 
 export {
 	Exit,
@@ -120,4 +121,5 @@ export {
 	MeeteamLogoLarge,
 	Congratulation,
 	NaverIcon,
+	Clip,
 };

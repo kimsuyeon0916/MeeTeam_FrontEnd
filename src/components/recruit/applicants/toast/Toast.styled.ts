@@ -27,7 +27,7 @@ const ToastContainer = styled.article<ToastProps>`
 	transition: opacity 0.2s ease-in-out;
 
 	.body1-medium {
-		color: #f3f5ff;
+		color: #ffffff;
 		font-size: 1.6rem;
 		letter-spacing: 0.0032rem;
 		margin-top: 0.5rem;

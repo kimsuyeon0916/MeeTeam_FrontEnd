@@ -15,6 +15,7 @@ import { unzipFile } from '../../../utils';
 import { useRecoilState } from 'recoil';
 import { uploadImageListState } from '../../../atom';
 import { TrashCan } from '../../../assets';
+import DOMPurify from 'dompurify';
 
 const PortfolioDetailsPage = () => {
 	const { portfolioId } = useParams() as { portfolioId: string };
@@ -114,7 +115,12 @@ const PortfolioDetailsPage = () => {
 							<S.PortfolioDetailsArticle>
 								<S.PortfolioDetailsTitle>상세내용</S.PortfolioDetailsTitle>
 								<hr />
-								<S.PortfolioDetailsContent>{portfolio?.content}</S.PortfolioDetailsContent>
+								<S.PortfolioDetailsContent
+									className='container-contents'
+									dangerouslySetInnerHTML={{
+										__html: DOMPurify.sanitize(portfolio?.content as string),
+									}}
+								/>
 							</S.PortfolioDetailsArticle>
 
 							<S.PortfolioDetailsArticle>
@@ -131,7 +137,10 @@ const PortfolioDetailsPage = () => {
 						</S.PortfolioDetailsColumn>
 					</S.PortfolioDetailsColumn>
 				</S.PortfolioDetailsContainer>
-				<PortfolioList portfolios={portfolio?.otherPortfolios ?? []} />
+				<PortfolioList
+					nickname={portfolio?.writerNickname as string}
+					portfolios={portfolio?.otherPortfolios ?? []}
+				/>
 			</S.PortfolioDetailsLayout>
 		)
 	);

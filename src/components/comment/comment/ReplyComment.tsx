@@ -4,7 +4,7 @@ import { CommentDeleteModal, KebabMenu, ProfileImage } from '../..';
 import { Comment as CommentType } from '../../../types';
 import { Reply } from '../../../assets';
 import { useParams } from 'react-router-dom';
-import { useCommentEdit } from '../../../hooks';
+import { useCommentEdit, useLogin } from '../../../hooks';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { userState, replyDeleteModalState } from '../../../atom';
@@ -21,6 +21,7 @@ const ReplyComment = ({
 	replyComment,
 }: CommentType) => {
 	const { id: recruitId } = useParams();
+	const { isLoggedIn } = useLogin();
 	const pageNum = Number(recruitId);
 	const [value, setValue] = useState<string>(content);
 	const [showKebab, setShowKebab] = useState<boolean>(true);
@@ -144,7 +145,9 @@ const ReplyComment = ({
 						)}
 					</section>
 				</article>
-				{showKebab && <KebabMenu options={isCommentWriter ? optionLists : optionListsOthers} />}
+				{showKebab && isLoggedIn && (
+					<KebabMenu options={isCommentWriter ? optionLists : optionListsOthers} />
+				)}
 			</section>
 			<hr />
 			{isDelete.isDelete && (
