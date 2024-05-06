@@ -60,7 +60,7 @@ const ProfileDetailsPage = () => {
 									<S.ProfileSmallText>연락처</S.ProfileSmallText>
 									<S.ProfileRow $gap='1rem'>
 										<img src={BlackPhone} alt='링크 아이콘' />
-										<div>{user?.phone?.content}</div>
+										<div>{user?.phone?.content ?? '-'}</div>
 									</S.ProfileRow>
 								</S.ProfileColumn>
 							)}
@@ -73,9 +73,9 @@ const ProfileDetailsPage = () => {
 										<S.ProfileRow $gap='1rem'>
 											<img src={BlackEmail} alt='링크 아이콘' />
 											{user?.universityEmail?.isDefault ? (
-												<div>{user?.universityEmail?.content}</div>
+												<div>{user?.universityEmail?.content ?? '-'}</div>
 											) : (
-												<div>{user?.subEmail?.content}</div>
+												<div>{user?.subEmail?.content ?? '-'}</div>
 											)}
 										</S.ProfileRow>
 									</S.ProfileColumn>
