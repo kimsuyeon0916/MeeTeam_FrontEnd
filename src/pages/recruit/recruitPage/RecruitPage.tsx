@@ -102,13 +102,7 @@ const RecruitPage = () => {
 		setDetailedFilterState({ skill: [], role: [], tag: [] });
 		setSearchParams(searchParams);
 		setIsOpenDetail({ skill: true, role: false, tag: false, message: '기술' });
-		setFieldValue({
-			applied: false,
-			value: {
-				id: null as number | null,
-				value: '분야를 선택해주세요',
-			},
-		});
+
 		searchParams.delete('scope');
 		searchParams.delete('category');
 		searchParams.delete('skill');
