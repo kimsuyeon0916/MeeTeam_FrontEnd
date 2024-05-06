@@ -40,6 +40,7 @@ interface FormValues {
 	description?: string;
 	field?: string;
 	role?: string;
+	proceedType?: string;
 	startDate?: string;
 	endDate?: string;
 	skills?: string | null;
@@ -330,21 +331,27 @@ const PortfolioEditPage = () => {
 								{/* 진행방식 */}
 								<S.PortfolioEditColumn>
 									<S.PortfolioEditLabel $required={true}>진행방식</S.PortfolioEditLabel>
-									<S.PortfolioEditRow $width='clamp(45%, 34rem, 100%)' $gap='2rem'>
-										{PROCEED_TYPE.map(type => (
-											<Radio
-												key={type}
-												name='email'
-												id={type}
-												state={type === proceedType}
-												handleClick={handleRadioClick}
-											>
-												<div style={{ color: type === proceedType ? '#373F41' : '#8E8E8E' }}>
-													{type}
-												</div>
-											</Radio>
-										))}
-									</S.PortfolioEditRow>
+									<S.PortfolioEditRelativeBox>
+										<S.PortfolioEditRow $width='clamp(45%, 34rem, 100%)' $gap='2rem'>
+											{PROCEED_TYPE.map(type => (
+												<Radio
+													register={register}
+													key={type}
+													id={type}
+													state={type === proceedType}
+													handleClick={handleRadioClick}
+													{...PORTFOLIO_EDIT_DATA.proceedType}
+												>
+													<div style={{ color: type === proceedType ? '#373F41' : '#8E8E8E' }}>
+														{type}
+													</div>
+												</Radio>
+											))}
+										</S.PortfolioEditRow>
+										<S.PortfolioEditErrorMessage>
+											{formState?.errors['proceedType']?.message}
+										</S.PortfolioEditErrorMessage>
+									</S.PortfolioEditRelativeBox>
 								</S.PortfolioEditColumn>
 								{/* 스킬 */}
 								<S.PortfolioEditColumn $gap='2rem'>

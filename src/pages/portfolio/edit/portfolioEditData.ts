@@ -45,6 +45,12 @@ const role = {
 	},
 };
 
+const proceedType = {
+	type: 'radio',
+	name: 'proceedType',
+	validation: INPUT_VALIDATION.proceedType,
+};
+
 const skills = {
 	label: '스킬',
 	type: 'text',
@@ -69,6 +75,7 @@ const PORTFOLIO_EDIT_DATA = {
 	description,
 	field,
 	role,
+	proceedType,
 	skills,
 	content,
 };
