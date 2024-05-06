@@ -24,7 +24,7 @@ const PortfolioManagementPage = () => {
 					/>
 				</S.PortfolioManagementHeader>
 				<TabMenu tabList={tabList} />
-				{!portfolioList?.portfolios.length ? (
+				{portfolioList?.portfolios.length ? (
 					<S.PortfolioManagementGrid>
 						{portfolioList &&
 							portfolioList.portfolios?.map(portfolio => (
