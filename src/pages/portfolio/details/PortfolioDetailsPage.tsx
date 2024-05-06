@@ -116,7 +116,10 @@ const PortfolioDetailsPage = () => {
 						</S.PortfolioDetailsColumn>
 					</S.PortfolioDetailsColumn>
 				</S.PortfolioDetailsContainer>
-				<PortfolioList portfolios={portfolio?.otherPortfolios ?? []} />
+				<PortfolioList
+					nickname={portfolio?.writerNickname as string}
+					portfolios={portfolio?.otherPortfolios ?? []}
+				/>
 			</S.PortfolioDetailsLayout>
 		)
 	);

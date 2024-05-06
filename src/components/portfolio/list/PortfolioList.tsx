@@ -3,11 +3,11 @@ import { Portfolio } from '../../../types';
 import S from './PortfolioList.styled';
 import PortfolioCard from '../card/PortfolioCard';
 
-const PortfolioList = ({ portfolios }: { portfolios: Portfolio[] }) => {
+const PortfolioList = ({ nickname, portfolios }: { nickname: string; portfolios: Portfolio[] }) => {
 	return (
 		<S.PortfolioListLayout>
 			<S.PortfolioListContainer>
-				<h3>유저의 다른 포트폴리오</h3>
+				<h3>{nickname}님의 대표 포트폴리오</h3>
 				<S.PortfolioList>
 					{portfolios.map((portfolio: Portfolio, index) => (
 						<PortfolioCard key={index} {...portfolio} />
