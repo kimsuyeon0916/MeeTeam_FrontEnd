@@ -9,13 +9,14 @@ interface MuiDatepicker {
 	defaultValue?: Date;
 	value?: Date;
 	inputRef?: React.Ref<HTMLInputElement>;
+	invalid?: boolean;
 }
 
 const CalendarIcon = () => {
 	return <img src={GrayCalendar} alt='calendar' />;
 };
 
-const MuiDatepicker = ({ handleChange, defaultValue, value, inputRef }: MuiDatepicker) => {
+const MuiDatepicker = ({ handleChange, defaultValue, value, inputRef, invalid }: MuiDatepicker) => {
 	const [datePickerOpen, setDatePickerOpen] = useState<boolean>(false);
 
 	return (
@@ -39,6 +40,7 @@ const MuiDatepicker = ({ handleChange, defaultValue, value, inputRef }: MuiDatep
 							setDatePickerOpen(true);
 						}
 					},
+					error: invalid,
 				},
 			}}
 			views={['year', 'month', 'day']}

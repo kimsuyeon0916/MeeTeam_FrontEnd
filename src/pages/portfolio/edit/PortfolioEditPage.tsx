@@ -324,8 +324,18 @@ const PortfolioEditPage = () => {
 								<S.PortfolioEditColumn>
 									<S.PortfolioEditLabel $required={true}>진행기간</S.PortfolioEditLabel>
 									<S.PortfolioEditRow $gap='2rem'>
-										<MuiDatepickerController name={`startDate`} control={control} />
-										<MuiDatepickerController name={`endDate`} control={control} />
+										<MuiDatepickerController
+											name={`startDate`}
+											control={control}
+											formState={formState}
+											{...PORTFOLIO_EDIT_DATA.startDate}
+										/>
+										<MuiDatepickerController
+											name={`endDate`}
+											control={control}
+											formState={formState}
+											{...PORTFOLIO_EDIT_DATA.endDate}
+										/>
 									</S.PortfolioEditRow>
 								</S.PortfolioEditColumn>
 								{/* 진행방식 */}
