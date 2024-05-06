@@ -147,8 +147,9 @@ const ProfileEditPage = () => {
 				phone: user?.phone?.content,
 				universityEmail: user?.universityEmail?.content,
 				subEmail: user?.subEmail?.content,
-				skills: null,
+				maxGpa: user?.maxGpa ?? '4.5',
 				links: user?.links,
+				skills: null,
 				awards: user?.awards,
 			},
 			resetOptions: {
