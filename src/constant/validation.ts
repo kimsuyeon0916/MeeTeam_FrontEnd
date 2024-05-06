@@ -64,6 +64,6 @@ export const INPUT_VALIDATION = {
 
 export const TEXTAREA_VALIDATION = {
 	aboutMe: {
-		maxLength: 150,
+		maxLength: 300,
 	},
 };

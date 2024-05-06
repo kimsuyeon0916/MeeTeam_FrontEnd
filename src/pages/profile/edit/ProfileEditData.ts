@@ -51,7 +51,7 @@ const aboutMe = {
 	placeholder: '자기 소개로 자신을 표현해보세요!',
 	name: 'aboutMe',
 	validation: TEXTAREA_VALIDATION.aboutMe,
-	maxLength: 150,
+	maxLength: 300,
 };
 
 const phone = {
