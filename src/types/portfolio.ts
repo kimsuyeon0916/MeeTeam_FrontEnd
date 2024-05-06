@@ -25,4 +25,5 @@ export interface PortfolioDetails {
 	links: Link[];
 	otherPortfolios: Portfolio[];
 	isWriter: boolean;
+	writerNickname: string;
 }
