@@ -115,9 +115,7 @@ const ProfileDetailsPage = () => {
 									</S.ProfileRow>
 									<S.ProfileRow $gap='1.5rem'>
 										학점
-										<span>
-											{user?.gpa}/{user?.maxGpa}
-										</span>
+										<span>{user?.gpa ? `${user?.gpa}/${user?.maxGpa}` : '-'}</span>
 									</S.ProfileRow>
 								</S.ProfileColumn>
 							</S.ProfileRow>
