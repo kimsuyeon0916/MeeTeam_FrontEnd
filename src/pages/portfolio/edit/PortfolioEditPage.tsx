@@ -383,7 +383,7 @@ const PortfolioEditPage = () => {
 										ref(e);
 										if (quillRef) quillRef.current = e;
 									}}
-									value={portfolio?.content}
+									defaultValue={portfolio?.content}
 									onChange={handleChangeEditor}
 									modules={modules}
 									formats={formats}
