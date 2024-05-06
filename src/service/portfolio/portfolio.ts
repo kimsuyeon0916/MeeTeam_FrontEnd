@@ -94,3 +94,13 @@ export const readPaginationPortfolioList = async ({
 		return null;
 	}
 };
+
+export const deletePortfolio = async (portfolioId: string) => {
+	try {
+		const response = await axiosAuthInstance.delete(EndPoint.PORTFOLIO.delete(portfolioId));
+
+		return response;
+	} catch (error) {
+		console.error(error);
+	}
+};

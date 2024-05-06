@@ -119,6 +119,13 @@ const PortfolioDetailsContent = styled.article`
 	white-space: pre-wrap; // 줄바꿈
 `;
 
+const PortfolioDetailsButtonContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	column-gap: 1.4rem;
+	margin-left: auto;
+`;
+
 const S = {
 	PortfolioDetailsLayout,
 	PortfolioDetailsContainer,
@@ -128,6 +135,7 @@ const S = {
 	PortfolioDetailsColumn,
 	PortfolioDetailsRow,
 	PortfolioDetailsContent,
+	PortfolioDetailsButtonContainer,
 };
 
 export default S;

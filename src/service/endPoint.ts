@@ -32,6 +32,7 @@ export const EndPoint = {
 		readPortfolioList: '/portfolio',
 		create: '/portfolio',
 		update: (portfolioId: string) => `/portfolio/${portfolioId}`,
+		delete: (portfolioId: string) => `/portfolio/${portfolioId}`,
 	},
 
 	/* presignedURL */

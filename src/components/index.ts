@@ -114,7 +114,7 @@ import Input from './input/Input';
 import ComboBox from './comboBox/ComboBox';
 import Textarea from './textarea/Textarea';
 import Radio from './radio/Radio';
-import AddBtn from './button/AddBtn';
+import IconBtn from './button/IconBtn';
 import DeleteBtn from './button/DeleteBtn';
 import LinkForm from './link/LinkForm';
 import MuiDatepicker from './muiDatepicker/MuiDatepicker';
@@ -252,7 +252,7 @@ export {
 	ComboBox,
 	Textarea,
 	Radio,
-	AddBtn,
+	IconBtn,
 	DeleteBtn,
 	LinkForm,
 	MuiDatepicker,
