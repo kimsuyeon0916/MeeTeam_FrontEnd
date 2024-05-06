@@ -38,9 +38,17 @@ export const INPUT_VALIDATION = {
 	},
 	portfolioTitle: {
 		required: '포트폴리오 제목을 작성해주세요',
+		minLength: {
+			value: 4,
+			message: '최소 4자리 이상 입력해 주세요',
+		},
 	},
 	portfolioDescription: {
 		required: '포트폴리오 한줄 소개를 작성해주세요',
+		minLength: {
+			value: 4,
+			message: '최소 4자리 이상 입력해 주세요',
+		},
 	},
 	field: {
 		required: '분야를 선택해주세요',
