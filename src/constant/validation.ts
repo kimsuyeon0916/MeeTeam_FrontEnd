@@ -54,7 +54,7 @@ export const INPUT_VALIDATION = {
 		required: '분야를 선택해주세요',
 	},
 	role: {
-		required: '분야를 선택해주세요',
+		required: '역할를 선택해주세요',
 	},
 	startDate: {
 		required: '진행 시작일을 설정해주세요',
