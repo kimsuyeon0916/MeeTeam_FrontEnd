@@ -109,10 +109,16 @@ const ProfileDetailsPage = () => {
 									<h4>{user?.university}</h4>
 								</S.ProfileColumn>
 								<S.ProfileColumn $gap='1.5rem'>
-									<div>{user?.department}</div>
-									<div>
-										{user?.gpa}/{user?.maxGpa}
-									</div>
+									<S.ProfileRow $gap='1.5rem'>
+										학과
+										<span>{user?.department}</span>
+									</S.ProfileRow>
+									<S.ProfileRow $gap='1.5rem'>
+										학점
+										<span>
+											{user?.gpa}/{user?.maxGpa}
+										</span>
+									</S.ProfileRow>
 								</S.ProfileColumn>
 							</S.ProfileRow>
 						</div>
