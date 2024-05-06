@@ -33,7 +33,7 @@ const RecruitCard = ({
 	const setNeedLoginModal = useSetRecoilState(needLoginModalState);
 	const extractDeadline = new Date(deadline);
 	const convertedDeadline = `${extractDeadline.getFullYear()}/${extractDeadline.getMonth()}/${extractDeadline.getDate()}`;
-	console.log(location.pathname);
+
 	const onClickContent = () => {
 		navigate(`/recruitment/postings/${id}`);
 	};

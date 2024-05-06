@@ -117,7 +117,16 @@ const ReplyComment = ({
 					</section>
 					<section className='comment-info'>
 						{!isEdit ? (
-							<span>{value}</span>
+							<span>
+								{value.split('\n').map(line => {
+									return (
+										<span>
+											{line}
+											<br />
+										</span>
+									);
+								})}
+							</span>
 						) : (
 							<section className='edit-container'>
 								<input
