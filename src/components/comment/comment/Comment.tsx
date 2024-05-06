@@ -131,7 +131,18 @@ const Comment = ({
 					</section>
 					<section className='comment-info'>
 						{!isEdit ? (
-							<span>{value === null ? '삭제된 메세지입니다.' : value}</span>
+							<span>
+								{value === null
+									? '삭제된 메세지입니다.'
+									: value.split('\n').map(line => {
+											return (
+												<span>
+													{line}
+													<br />
+												</span>
+											);
+									  })}
+							</span>
 						) : (
 							<section className='edit-container'>
 								<input
