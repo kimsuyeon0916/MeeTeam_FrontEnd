@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import { useRecoilState } from 'recoil';
 import { modules } from '../../../../utils';
@@ -12,8 +12,19 @@ const DetailedInformation = () => {
 	const [formData, setFormData] = useRecoilState(recruitInputState);
 	const { validMessage, isValid } = useValid(formData);
 
+	const preventInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
+		// 입력을 허용하지 않을 키 코드를 배열에 정의합니다.
+		const forbiddenKeys = ['"', "'"];
+
+		// 입력 이벤트가 허용되지 않는 키를 누르면 이벤트를 취소합니다.
+		if (forbiddenKeys.includes(event.key)) {
+			event.preventDefault();
+		}
+	};
+
 	const onChangeContents = (contents: string) => {
-		setFormData({ ...formData, content: contents });
+		const sanitizedContent = contents.replace(/ class="[^"]*ql-indent-1[^"]*"/g, '');
+		setFormData({ ...formData, content: sanitizedContent });
 	};
 
 	return (
@@ -34,6 +45,7 @@ const DetailedInformation = () => {
 						modules={modules}
 						onChange={onChangeContents}
 						value={formData.content}
+						onKeyDown={preventInput}
 					/>
 					{isValid.isSubmitted && !isValid.isContent && (
 						<p className='valid-msg'>{validMessage.content}</p>

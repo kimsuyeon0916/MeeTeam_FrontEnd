@@ -14,7 +14,7 @@ import { recruitInputState, validState } from '../../../atom';
 import { getPostingData, editPostingRecruit, postingRecruit } from '../../../service';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { EditPosting, InputState, RoleInfo, RoleForPost } from '../../../types';
-import { fixModalBackground, simpleDate } from '../../../utils';
+import { fixModalBackground, resetFormData } from '../../../utils';
 import { useLogin } from '../../../hooks';
 
 const RecruitCreatePage = () => {
@@ -22,10 +22,10 @@ const RecruitCreatePage = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { isLoggedIn } = useLogin();
-	const setIsSubmit = useSetRecoilState(validState);
-	const [formData, setFormData] = useRecoilState<InputState>(recruitInputState);
 	const validCheck = useRecoilValue(validState);
+	const setIsSubmit = useSetRecoilState(validState);
 	const [beforeSubmit, setBeforeSubmit] = useState<boolean>(false);
+	const [formData, setFormData] = useRecoilState<InputState>(recruitInputState);
 	const postAvailable =
 		validCheck.isCategory &&
 		validCheck.isDeadline &&
@@ -40,7 +40,9 @@ const RecruitCreatePage = () => {
 	const { data, isSuccess } = useQuery({
 		queryKey: ['detailedPage', { pageNum, isLoggedIn }],
 		queryFn: () => getPostingData({ pageNum, isLoggedIn }),
+		enabled: !!id,
 	});
+
 	const uploadPost = useMutation({
 		mutationFn: (formData: InputState) => postingRecruit(formData),
 		onSuccess: (data: { recruitmentPostId: number }) => {
@@ -62,29 +64,12 @@ const RecruitCreatePage = () => {
 		},
 	});
 
-	const resetFormData = () => {
-		setFormData({
-			scope: '',
-			category: '',
-			fieldId: 1,
-			deadline: simpleDate(new Date()),
-			proceedType: '',
-			proceedingStart: simpleDate(new Date()),
-			proceedingEnd: simpleDate(new Date()),
-			courseTag: {
-				isCourse: false,
-				courseTagName: '',
-				courseProfessor: '',
-			},
-			recruitmentRoles: [],
-			tags: [],
-			title: '',
-			content: '',
-		});
-	};
-
 	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+
+		const sanitizedContent = formData.content.replace(/["']/g, '');
+		setFormData({ ...formData, content: sanitizedContent });
+
 		setIsSubmit(prev => ({
 			...prev,
 			isSubmitted: true,

@@ -2,69 +2,87 @@ import styled from 'styled-components';
 
 const ReplyInput = styled.div`
 	width: 100%;
+	display: flex;
+	align-items: flex-start;
+	gap: 1.55rem;
+
+	.reply-icon {
+		margin-top: 0.7rem;
+	}
 
 	.wrapper {
 		display: flex;
-		gap: 1rem;
-		width: 100%;
-		margin: 1rem 2rem 1.6rem 0;
+		gap: 2rem;
+		flex-direction: column;
+		align-items: flex-start;
 
-		.user-input__icon {
+		.container-user__icon {
 			display: flex;
-			margin-left: -0.45rem;
+			align-items: center;
+			gap: 0.6rem;
+
+			span {
+				color: #373f41;
+				font-size: 1.2rem;
+				font-weight: 600;
+			}
 		}
 
-		.user-input__container {
+		.container-user__input {
+			margin-top: -0.5rem;
 			display: flex;
-			justify-content: space-between;
-			width: 100%;
-			position: relative;
-			margin-right: 4.8rem;
+			gap: 1rem;
 
-			.reply-input {
-				width: 100%;
-				box-sizing: border-box;
-				height: 3.75rem;
+			textarea {
+				display: flex;
+				width: 80.957rem;
+				height: 11.2rem;
+				padding: 1.6rem 2rem;
+				align-items: flex-start;
+				gap: 1rem;
+				flex-shrink: 0;
 				border-radius: 0.75rem;
-				border: 0.75px solid #bebebe;
+				border: 0.75px solid #d3d3d3;
 				background: #fff;
+				box-sizing: border-box;
+				resize: none;
+				font-family: Pretendard;
 				outline: none;
-				padding-left: 1.3rem;
+
+				&:focus {
+					border: 1px solid #5877fc;
+				}
 			}
 		}
 	}
-
-	.btn-container {
+	.container-btn {
+		width: 100%;
 		display: flex;
 		justify-content: flex-end;
-		align-items: center;
-		margin: 0 4.8rem 1.6rem 0;
 		gap: 1.2rem;
 
-		.txt-small {
-			color: #f7faff;
-			font-size: 1.4rem;
-			line-height: 1.7rem;
-			letter-spacing: 0.0028rem;
-		}
-
-		button {
+		.cancel-btn {
 			display: flex;
-			justify-content: center;
-			align-items: center;
 			height: 3.6rem;
 			padding: 1.2rem 2rem;
+			justify-content: center;
+			align-items: center;
+			gap: 0.75rem;
 			border-radius: 0.6rem;
-		}
-
-		.cancel-btn {
+			background: #fff;
 			color: #373f41;
 			border: 1px solid #e3e3e3;
-			background: #fff;
 		}
-
-		.reply-btn {
+		.submit-btn {
+			display: flex;
+			height: 3.6rem;
+			padding: 1.2rem 2rem;
+			justify-content: center;
+			align-items: center;
+			gap: 0.75rem;
+			border-radius: 0.6rem;
 			background: #5877fc;
+			color: #fff;
 		}
 	}
 `;

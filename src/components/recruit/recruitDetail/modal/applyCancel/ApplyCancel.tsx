@@ -34,7 +34,7 @@ const ApplyCancel = ({ pageNum }: ApplyCancel) => {
 		<S.ApplyCancel>
 			<h3>신청취소</h3>
 			<section className='description'>
-				<span className='body2-medium'>신청 취소한 구인글은 더이상</span>
+				<span className='body2-medium'>신청 취소한 구인글은 더 이상</span>
 				<span className='body2-medium'>신청한 구인글 관리에서 보실 수 없습니다.</span>
 				<span className='body2-medium'>해당 구인글의 신청을 취소할까요?</span>
 			</section>

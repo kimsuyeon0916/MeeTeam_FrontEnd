@@ -35,7 +35,7 @@ const RefuseModal = ({ pageNum }: RefuseModal) => {
 			<section className='wrapper-info'>
 				<h3>신청 거절</h3>
 				<section className='container-description'>
-					<span className='body2-medium'>거절한 신청자는 더이상</span>
+					<span className='body2-medium'>거절한 신청자는 더 이상</span>
 					<span className='body2-medium'>신청자 관리 페이지에서 확인할 수 없습니다.</span>
 					<span className='body2-medium'>선택하신 신청자를 거절할까요?</span>
 				</section>

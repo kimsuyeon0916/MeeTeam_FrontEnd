@@ -1,14 +1,7 @@
 import styled from 'styled-components';
 
 const CommentInput = styled.div`
-	width: 100%;
-	padding: 2.4rem 4.8rem;
-	box-sizing: border-box;
-	margin: 0 auto;
-	border-radius: 0.75rem;
-	border: 0.075rem solid #e3e3e3;
-	background: #f6f6f6;
-
+	margin-top: 2.1rem;
 	.wrapper {
 		display: flex;
 		gap: 2rem;
@@ -27,28 +20,43 @@ const CommentInput = styled.div`
 		}
 
 		.container-user__input {
+			margin-top: -0.5rem;
 			display: flex;
 			gap: 1rem;
-			width: 100%;
 
-			input {
-				width: 100%;
-				height: 4rem;
+			textarea {
+				display: flex;
+				width: 90rem;
+				height: 11.2rem;
+				padding: 1.6rem 2rem;
+				align-items: flex-start;
+				gap: 1rem;
 				flex-shrink: 0;
 				border-radius: 0.75rem;
-				border: 0.075rem solid #e3e3e3;
+				border: 0.75px solid #d3d3d3;
 				background: #fff;
-				outline: none;
-				padding-left: 1.3rem;
 				box-sizing: border-box;
+				resize: none;
+				font-family: Pretendard;
+				outline: none;
+
+				&:focus {
+					border: 1px solid #5877fc;
+				}
 			}
 		}
+
+		.container-length_counter {
+			display: flex;
+			justify-content: flex-end;
+			margin-top: -1.61rem;
+		}
+
 		.container-btn {
 			display: flex;
 			justify-content: flex-end;
 			.submit-btn {
 				display: flex;
-				width: 6.5rem;
 				height: 3.6rem;
 				padding: 1.2rem 2rem;
 				justify-content: center;

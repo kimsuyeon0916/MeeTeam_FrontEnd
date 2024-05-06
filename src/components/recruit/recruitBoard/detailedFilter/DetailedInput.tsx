@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getRoleKeyword, getSkillKeyword, getTagKeyword } from '../../../../service';
 import { useDebounce } from '../../../../hooks';
 import { Keyword, DetailedInfo } from '../../../../types';
-import { useSetRecoilState, useRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { detailedFilterState, recruitFilterState } from '../../../../atom';
 import { useSearchParams } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ const MESSAGE = {
 	},
 };
 
-const DetailedInput = ({ type }: DetailedInfo) => {
+const DetailedInput = ({ type, closeHandler, detailOptionsSelected }: DetailedInfo) => {
 	const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
 	const [message, setMessage] = useState({
 		intro: MESSAGE.SKILL.INTRO,
@@ -31,7 +31,7 @@ const DetailedInput = ({ type }: DetailedInfo) => {
 	});
 	const [tagItem, setTagItem] = useState('');
 	const [detailedFilter, setDetailedFilter] = useRecoilState(detailedFilterState);
-	const setFilterState = useSetRecoilState(recruitFilterState);
+	const [filterState, setFilterState] = useRecoilState(recruitFilterState);
 	const keyword = useDebounce(tagItem);
 	const [searchParams, setSearchParams] = useSearchParams();
 
@@ -118,7 +118,17 @@ const DetailedInput = ({ type }: DetailedInfo) => {
 				searchParams.append('tag', e.toString());
 			});
 		}
+
+		if (
+			filterState.skill.length !== 0 ||
+			filterState.role.length !== 0 ||
+			filterState.tag.length !== 0
+		) {
+			detailOptionsSelected();
+		}
+
 		setSearchParams(searchParams);
+		closeHandler();
 	};
 
 	const onClickSearchBar = (event: React.MouseEvent<HTMLInputElement>) => {
@@ -142,6 +152,7 @@ const DetailedInput = ({ type }: DetailedInfo) => {
 			searchParams.delete('tag');
 		}
 		setSearchParams(searchParams);
+		closeHandler();
 	};
 
 	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>, id: number) => {

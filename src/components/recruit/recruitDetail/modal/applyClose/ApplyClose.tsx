@@ -32,7 +32,7 @@ const ApplyClose = () => {
 		<S.ApplyClose>
 			<h3>구인글 마감</h3>
 			<section className='description'>
-				<span className='body2-medium'>마감된 구인글은 더이상</span>
+				<span className='body2-medium'>마감된 구인글은 더 이상</span>
 				<span className='body2-medium'>신청자를 받을 수 없습니다.</span>
 				<span className='body2-medium'>해당 구인글을 모집 마감할까요?</span>
 			</section>

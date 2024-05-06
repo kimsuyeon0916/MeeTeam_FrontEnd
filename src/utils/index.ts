@@ -11,6 +11,8 @@ import zipFile from './zipFile';
 import unzipFile from './unzipFile';
 import isNotNumber from './isNotNumber';
 import calculateDate from './calculateDate';
+import resetFormData from './resetFormData';
+import throttle from './throttle';
 
 export {
 	modules,
@@ -27,4 +29,6 @@ export {
 	unzipFile,
 	isNotNumber,
 	calculateDate,
+	resetFormData,
+	throttle,
 };

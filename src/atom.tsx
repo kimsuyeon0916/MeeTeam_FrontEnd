@@ -3,6 +3,7 @@ import { SessionStorageEffect, simpleDate } from './utils';
 import { User, InputState, ApplyRole, RecruitFilter, DetailedFilter, Image } from './types';
 import { LocalStorageEffect } from './utils';
 import { Account } from './pages';
+import { SAFE_DEFAULT_VALUE } from './constant';
 
 export const userState = atom<User | null>({
 	key: 'userState',
@@ -58,6 +59,11 @@ export const applyCloseModalState = atom({
 	default: false,
 });
 
+export const recruitPostingDeleteModalState = atom({
+	key: 'recruitPostingDeleteModalState',
+	default: false,
+});
+
 export const commentDeleteModalState = atom({
 	key: 'commentDeleteModalState',
 	default: {
@@ -105,7 +111,7 @@ export const recruitInputState = atom<InputState>({
 		recruitmentRoles: [],
 		tags: [],
 		title: '',
-		content: '',
+		content: SAFE_DEFAULT_VALUE,
 	},
 });
 

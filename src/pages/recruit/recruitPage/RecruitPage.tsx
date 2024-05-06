@@ -35,6 +35,7 @@ const RecruitPage = () => {
 	const fieldRef = useRef<HTMLDivElement | null>(null);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [searchKeyword, setSearchKeyword] = useState('');
+	const [isDetailSelected, setIsDetailSelected] = useState(false);
 	const [isFloatingOpen, setIsFloatingOpen] = useState<boolean>(false);
 	const [fieldValue, setFieldValue] = useState({
 		applied: false,
@@ -114,7 +115,14 @@ const RecruitPage = () => {
 		searchParams.delete('role');
 		searchParams.delete('tag');
 		searchParams.delete('keyword');
+		searchParams.delete('course');
+		searchParams.delete('professor');
+		setIsDetailSelected(false);
 		setSearchParams(searchParams);
+	};
+
+	const closeHandler = () => {
+		setIsOpen(false);
 	};
 
 	const onClickDetails = (event: React.MouseEvent<HTMLSpanElement>) => {
@@ -192,6 +200,10 @@ const RecruitPage = () => {
 		}
 	};
 
+	const detailOptionsSelected = () => {
+		setIsDetailSelected(true);
+	};
+
 	const handlerChildDropdown = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation();
 	};
@@ -242,12 +254,15 @@ const RecruitPage = () => {
 			setFilterState(prev => ({ ...prev, category: Number(isCategory) }));
 		}
 		if (isSkill) {
+			setIsDetailSelected(true);
 			setFilterState(prev => ({ ...prev, skill: isSkill }));
 		}
 		if (isRole) {
+			setIsDetailSelected(true);
 			setFilterState(prev => ({ ...prev, role: isRole }));
 		}
 		if (isTag) {
+			setIsDetailSelected(true);
 			setFilterState(prev => ({ ...prev, tag: isTag }));
 		}
 		if (isKeyword) {
@@ -272,6 +287,7 @@ const RecruitPage = () => {
 		<S.RecruitPage
 			$isFieldClick={fieldValue.value.value !== '분야를 선택해주세요'}
 			$isDetailedClick={isOpen}
+			$isDetailSelected={isDetailSelected}
 		>
 			<>
 				<section>
@@ -313,7 +329,7 @@ const RecruitPage = () => {
 							/>
 							<article className='dropdown-detailed' onClick={onClickDetailed} ref={dropdownRef}>
 								<section className='dropdown-box'>
-									<label>{'상세정보'}</label>
+									<label className='selected'>{'상세조건'}</label>
 									<img src={isOpen ? DropdownArrowUp : DropdownArrow} />
 								</section>
 								{isOpen && (
@@ -338,7 +354,11 @@ const RecruitPage = () => {
 												태그
 											</span>
 										</section>
-										<DetailedInput type={isOpenDetail.message} />
+										<DetailedInput
+											type={isOpenDetail.message}
+											closeHandler={closeHandler}
+											detailOptionsSelected={detailOptionsSelected}
+										/>
 									</section>
 								)}
 							</article>
