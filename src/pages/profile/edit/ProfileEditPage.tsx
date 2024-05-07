@@ -31,6 +31,7 @@ import {
 	useIntersection,
 	useUploadImageFile,
 	useReadImagePresignedUrl,
+	useCheckDuplicateNickname,
 } from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
 import { useReadInfinitePortfolioList } from '../../../hooks/usePortfolio';
@@ -61,8 +62,8 @@ interface FormValues {
 const DESCRIPTION = {
 	contact: `대표 메일로 구인과 관련된 정보를 받을 수 있습니다.\n자주 사용하는 이메일을 대표 메일로 설정해주세요.`,
 	skills: `개발 , 디자인 툴 등 가지고 있는 직무와 관련된 스킬을 추가해보세요.\n최대 10개까지 입력할 수 있습니다.`,
-	awards: `수상 이력, 수료한 교육이나 참석한 외부활동 등이 있다면 간단히 작성해주세요.`,
-	links: ` 깃헙, 노션으로 작성한 포트폴리오, 구글 드라이브 파일 등 업무 성과를 보여줄 수 있는 링크가 있다면 작성해주세요.`,
+	awards: `수상 이력, 수료한 교육이나 참석한 외부활동 등이 있다면 간단히 작성해주세요.\n최대 10개까지 입력할 수 있습니다.`,
+	links: `깃헙, 노션으로 작성한 포트폴리오, 구글 드라이브 파일 등 업무 성과를 보여줄 수 있는 링크가 있다면 작성해주세요.\n최대 10개까지 입력할 수 있습니다.`,
 	portfolio: `밋팀에서 작성한 포트폴리오가 있다면 선택해주세요!\n프로필에서 최대 8개까지 보여집니다.`,
 };
 const gpaList = [{ name: '4.5' }, { name: '4.3' }];
@@ -138,7 +139,7 @@ const ProfileEditPage = () => {
 		}
 	};
 
-	const { register, formState, handleSubmit, control, watch, getValues, setValue } =
+	const { register, formState, handleSubmit, control, watch, getValues, setValue, getFieldState } =
 		useForm<FormValues>({
 			mode: 'onChange',
 			values: {
@@ -147,8 +148,9 @@ const ProfileEditPage = () => {
 				phone: user?.phone?.content,
 				universityEmail: user?.universityEmail?.content,
 				subEmail: user?.subEmail?.content,
-				skills: null,
+				maxGpa: user?.maxGpa ?? '4.5',
 				links: user?.links,
+				skills: null,
 				awards: user?.awards,
 			},
 			resetOptions: {
@@ -156,6 +158,28 @@ const ProfileEditPage = () => {
 				keepErrors: true,
 			},
 		});
+
+	// 닉네임
+	const nickname = useDebounce(watch('nickname') as string);
+	const authKeys = ['checkDuplicateNickname', nickname];
+	const { data: nicknameData } = useCheckDuplicateNickname(
+		authKeys,
+		getFieldState('nickname').isDirty && !getFieldState('nickname').invalid
+	);
+
+	const [duplicateNicknameValidation, setDuplicateNicknameValidation] = useState('');
+	const [duplicated, setDuplicated] = useState(false);
+
+	const checkDuplicateNickname = () => {
+		if (nickname !== user?.nickname && nicknameData && !nicknameData.isEnable) {
+			setDuplicateNicknameValidation(() => '이미 사용중인 닉네임입니다');
+			setDuplicated(true);
+		} else if (nickname === user?.nickname || nicknameData?.isEnable) {
+			setDuplicateNicknameValidation(() => '사용가능한 닉네임입니다');
+			setDuplicated(false);
+		}
+	};
+	useEffect(() => checkDuplicateNickname(), [nicknameData?.isEnable, nickname]);
 
 	const role = useDebounce(watch('interest')) as string;
 	const { data: roles } = useReadRoleList(role);
@@ -196,14 +220,21 @@ const ProfileEditPage = () => {
 	const [skillList, setSkillList] = useState(user?.skills ? user?.skills : []);
 
 	const addSkill = () => {
+		if (skillList.length === 10) {
+			alert('스킬은 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
+			setValue('skills', '');
+			return;
+		}
 		const newSkill = {
 			id: skills?.find(skill => skill.name === getValues('skills'))?.id,
 			name: getValues('skills'),
 		} as Skill;
 		if (getValues('skills')?.length === 0) return;
-		if (!skillList.find(skill => newSkill.name === skill.name)) {
-			setSkillList(prev => [...prev, newSkill]);
+		if (skillList.find(skill => newSkill.name === skill.name)) {
+			alert('이미 추가한 스킬입니다.'); // 디자인 요청
+			setValue('skills', '');
 		}
+		setSkillList(prev => [...prev, newSkill]);
 		setValue('skills', '');
 	};
 
@@ -221,10 +252,12 @@ const ProfileEditPage = () => {
 		control: control,
 	});
 
-	const addLink = (index: number) => {
-		if (index === -1 || getValues(`links.0.url`)) {
-			prependLink({ description: 'Link', url: '' });
+	const addLink = () => {
+		if (links.length === 10) {
+			alert('링크은 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
+			return;
 		}
+		prependLink({ description: 'Link', url: '' });
 	};
 
 	// 수상/활동
@@ -237,16 +270,12 @@ const ProfileEditPage = () => {
 		control: control,
 	});
 
-	const addAward = (index: number) => {
-		if (
-			index === -1 ||
-			(getValues(`awards.${index}.startDate`) &&
-				getValues(`awards.${index}.endDate`) &&
-				getValues(`awards.${index}.title`) &&
-				getValues(`awards.${index}.description`))
-		) {
-			prependAward({ startDate: '', endDate: '', title: '', description: '' });
+	const addAward = () => {
+		if (awards.length === 10) {
+			alert('수상/활동은 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
+			return;
 		}
+		prependAward({ startDate: '', endDate: '', title: '', description: '' });
 	};
 
 	const deleteAward = (index: number) => {
@@ -310,13 +339,9 @@ const ProfileEditPage = () => {
 		return pinnedPortfolioList.findIndex(portfolioId => portfolioId === id);
 	};
 
-	const checkKeyDown = (e: React.KeyboardEvent) => {
-		if (e.key === 'Enter') e.preventDefault();
-	};
-
 	return (
 		<>
-			<S.ProfileLayout onSubmit={handleSubmit(submitHandler)} onKeyDown={e => checkKeyDown(e)}>
+			<S.ProfileLayout onSubmit={handleSubmit(submitHandler)}>
 				<S.ProfileHeader>
 					<ProfileImage
 						isEditable={true}
@@ -330,6 +355,10 @@ const ProfileEditPage = () => {
 								// defaultValue={user?.nickname}
 								register={register}
 								formState={formState}
+								duplicated={duplicated}
+								duplicatedMessage={
+									!getFieldState('nickname').invalid ? duplicateNicknameValidation : ''
+								}
 								{...PROFILE_EDIT_DATA.nickname}
 							/>
 							<S.ProfileRow $gap='1rem'>
@@ -483,17 +512,24 @@ const ProfileEditPage = () => {
 					<S.ProfileArticle>
 						<S.ProfileTitle>수상/활동</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.awards}</S.ProfileDescription>
+						<AddFormBtn title='수상/활동 추가' handleClick={() => addAward()} />
 						<S.ProfileColumn $gap='2.4rem'>
-							<AddFormBtn title='수상/활동 추가' handleClick={() => addAward(awards.length - 1)} />
 							{awards?.map((award, index) => (
 								<S.ProfileRow key={award.id} $gap='1rem'>
-									<S.ProfileColumn $gap='1rem'>
+									<S.ProfileColumn $gap='1.6rem'>
 										<S.ProfileRow $gap='1rem'>
 											<MuiDatepickerController
 												name={`awards.${index}.startDate`}
 												control={control}
+												formState={formState}
+												{...PROFILE_EDIT_DATA.awardStartDate}
 											/>
-											<MuiDatepickerController name={`awards.${index}.endDate`} control={control} />
+											<MuiDatepickerController
+												name={`awards.${index}.endDate`}
+												control={control}
+												formState={formState}
+												{...PROFILE_EDIT_DATA.awardEndDate}
+											/>
 										</S.ProfileRow>
 										<Input
 											name={`awards.${index}.title`}
@@ -520,7 +556,7 @@ const ProfileEditPage = () => {
 					<S.ProfileArticle>
 						<S.ProfileTitle>링크</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.links}</S.ProfileDescription>
-						<AddFormBtn title='링크 추가' handleClick={() => addLink(links.length - 1)} />
+						<AddFormBtn title='링크 추가' handleClick={() => addLink()} />
 						<S.ProfileColumn $gap='2.4rem'>
 							{links?.map((link, index) => (
 								<LinkForm
@@ -568,6 +604,7 @@ const ProfileEditPage = () => {
 						type='button'
 						title='취소'
 						handleClick={() => navigate(`/profile/${userId}`)}
+						disabled={getFieldState('nickname').invalid || duplicated}
 					/>
 					<PrimaryBtn type='submit' title='저장' />
 				</S.ProfileButtonBox>

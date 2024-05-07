@@ -95,7 +95,7 @@ const PortfolioCard = ({
 	return (
 		<S.PortfolioCardLayout
 			$open={isOpen}
-			onClick={() => (isEditable ? () => id && handleClick?.(id) : navigate(`/portfolio/${id}`))}
+			onClick={() => (isEditable ? id && handleClick?.(id) : navigate(`/portfolio/${id}`))}
 		>
 			<S.PortfolioCardBox $isEditable={isEditable}>
 				<S.PortfolioCardImage
