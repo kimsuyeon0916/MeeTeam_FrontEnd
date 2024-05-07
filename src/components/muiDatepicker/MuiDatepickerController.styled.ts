@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const MuiDatepickerControllerLayout = styled.div`
 	position: relative;
 	display: flex;
+	flex: 1;
 `;
 
 const ErrorMessage = styled.small`
