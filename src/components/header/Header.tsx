@@ -53,11 +53,8 @@ const Header = () => {
 		}
 	};
 
-	console.log(location.pathname);
-
 	useEffect(() => {
 		if (location.pathname === `/recruitment/postings/${id}` || location.pathname === '/') {
-			console.log('why?');
 			setIsHere({ recruit: true, galary: false, inform: false });
 		}
 		if (location.pathname === '/galary') {
