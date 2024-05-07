@@ -27,17 +27,17 @@ const PortfolioManagementHeader = styled.header`
 `;
 
 const PortfolioManagementGrid = styled.div`
-  display: grid;
+	display: grid;
 	// margin: 8rem 0;
-  margin-top: 8rem;
+	margin-top: 8rem;
 	grid-template-columns: repeat(auto-fill, minmax(22.5rem, 1fr));
 	grid-auto-rows: minmax(12.7rem, auto);
 	row-gap: 4rem;
 	column-gap: 2rem;
 
 	@media (min-width: 144rem) {
-    grid-template-columns: repeat(4, minmax(22.5rem, 1fr));
-  }
+		grid-template-columns: repeat(4, minmax(22.5rem, 1fr));
+	}
 
 	/* 스크롤바 숨기기 */
 	overflow-y: auto;
@@ -45,17 +45,19 @@ const PortfolioManagementGrid = styled.div`
 	scrollbar-width: none; /* Firefox */
 	&::-webkit-scrollbar {
 		display: none; /* Chrome, Safari, Opera*/
+	}
 `;
 
 const PortfolioManagementColumn = styled.div`
-	position: fixed;
+	/* position: fixed; */
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	left: 0;
-	top: 0;
+	/* left: 0; */
+	/* top: 0; */
 	width: 100%;
 	height: 100%;
+	margin-top: 20rem;
 
 	color: var(--State-unactive, #8e8e8e);
 
