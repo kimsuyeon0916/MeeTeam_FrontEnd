@@ -236,6 +236,18 @@ const RecruitPage = () => {
 	}, [location]);
 
 	useEffect(() => {
+		if (
+			filterState.role.length === 0 &&
+			filterState.skill.length === 0 &&
+			filterState.tag.length === 0
+		) {
+			detailOptionsNotSelected();
+		} else {
+			detailOptionsSelected();
+		}
+	}, [filterState.role, filterState.skill, filterState.tag]);
+
+	useEffect(() => {
 		const isScope = searchParams.get('scope');
 		const isCategory = searchParams.get('category');
 		const isSkill = searchParams.getAll('skill').map(Number);
