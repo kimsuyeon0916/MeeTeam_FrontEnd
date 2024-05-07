@@ -1,5 +1,12 @@
 import React from 'react';
-import { Controller, Control, FormState, FieldValues, RegisterOptions } from 'react-hook-form';
+import {
+	Controller,
+	Control,
+	FormState,
+	FieldValues,
+	RegisterOptions,
+	FieldErrors,
+} from 'react-hook-form';
 import MuiDatepicker from './MuiDatepicker';
 import S from './MuiDatepickerController.styled';
 
@@ -11,8 +18,17 @@ interface Date {
 }
 
 const MuiDatepickerController = ({ name, control, formState, rules }: Date) => {
-	const inputError = formState?.errors[name];
-	const inputErrorMessage = formState?.errors[name]?.message as string;
+	const errorResult =
+		formState &&
+		name
+			.split('.')
+			.map(key => key as string)
+			.reduce<FieldErrors<FieldValues>>((errorsObject, key) => {
+				if (!errorsObject) return errorsObject;
+				return errorsObject[key] as FieldErrors<FieldValues>;
+			}, formState.errors);
+	const inputError = !!errorResult;
+	const inputErrorMessage = (errorResult?.message ?? '') as string;
 
 	return (
 		<S.MuiDatepickerControllerLayout>
