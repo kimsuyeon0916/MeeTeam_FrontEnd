@@ -51,12 +51,12 @@ export default function useValid(data: InputState) {
 	useEffect(() => {
 		if (data.title === '') {
 			setValidMessage(prev => ({ ...prev, title: '제목을 입력해주세요.' }));
-		} else if (data.title.length < 10) {
-			setValidMessage(prev => ({ ...prev, title: '제목을 10자 이상 입력해주세요.' }));
+		} else if (data.title.length < 5) {
+			setValidMessage(prev => ({ ...prev, title: '제목을 5자 이상 입력해주세요.' }));
 		} else {
 			setValidMessage(prev => ({ ...prev, title: '' }));
 		}
-		setIsValid(prev => ({ ...prev, isTitle: data.title.length < 10 ? false : true }));
+		setIsValid(prev => ({ ...prev, isTitle: data.title.length < 5 ? false : true }));
 	}, [data.title]);
 
 	useEffect(() => {

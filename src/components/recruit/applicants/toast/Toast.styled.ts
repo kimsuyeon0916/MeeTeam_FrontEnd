@@ -6,7 +6,7 @@ interface ToastProps {
 
 const ToastContainer = styled.article<ToastProps>`
 	position: fixed;
-	bottom: 1rem;
+	bottom: 2rem;
 	left: 50%;
 	display: flex;
 	align-items: center;
@@ -18,12 +18,12 @@ const ToastContainer = styled.article<ToastProps>`
 	border-radius: 1rem;
 	gap: 1.2rem;
 	box-sizing: border-box;
-	border: 2px solid var(--Purplescale-500, #8358fc);
+	border: 2px solid #8358fc;
 	box-shadow:
 		0px 4px 20px 0px rgba(0, 0, 0, 0.1),
 		0px 2px 2px 0px rgba(0, 0, 0, 0.25);
-	opacity: ${props => (props.isOpen ? '1' : '0')};
-	visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
+	opacity: 1;
+	visibility: visible;
 	transition: opacity 0.2s ease-in-out;
 
 	.body1-medium {

@@ -35,6 +35,13 @@ const RecruitCreatePage = () => {
 		validCheck.isTitle &&
 		validCheck.isRole &&
 		validCheck.isContent;
+	const basicAvailable =
+		validCheck.isCategory &&
+		validCheck.isDeadline &&
+		validCheck.isProcedure &&
+		validCheck.isScope &&
+		validCheck.isContent &&
+		validCheck.isTitle;
 	const pageNum = Number(id);
 
 	const { data, isSuccess } = useQuery({
@@ -148,7 +155,7 @@ const RecruitCreatePage = () => {
 								완료해주세요.
 							</span>
 							<section className='wrapper-list__unsatisfied'>
-								{!postAvailable && (
+								{!basicAvailable && (
 									<section className='container-list'>
 										<section className='subtitle body2-medium'>기본정보</section>
 										<section className='list-unsatisfied'>
