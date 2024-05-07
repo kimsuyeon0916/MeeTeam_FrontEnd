@@ -124,14 +124,6 @@ const DetailedInput = ({
 			});
 		}
 
-		if (
-			filterState.skill.length !== 0 ||
-			filterState.role.length !== 0 ||
-			filterState.tag.length !== 0
-		) {
-			detailOptionsSelected();
-		}
-
 		setSearchParams(searchParams);
 		closeHandler();
 	};
@@ -191,13 +183,6 @@ const DetailedInput = ({
 		}
 		setIsOpenMenu(false);
 	}, [type]);
-	useEffect(() => {
-		if (filterState.role.length === 0 && filterState.skill.length && filterState.tag.length) {
-			detailOptionsNotSelected();
-		} else {
-			detailOptionsSelected();
-		}
-	}, [filterState.role, filterState.skill, filterState.tag]);
 
 	return (
 		<section className='dropdown-search'>
