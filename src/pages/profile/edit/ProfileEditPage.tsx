@@ -31,6 +31,7 @@ import {
 	useIntersection,
 	useUploadImageFile,
 	useReadImagePresignedUrl,
+	useCheckDuplicateNickname,
 } from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
 import { useReadInfinitePortfolioList } from '../../../hooks/usePortfolio';
@@ -138,7 +139,7 @@ const ProfileEditPage = () => {
 		}
 	};
 
-	const { register, formState, handleSubmit, control, watch, getValues, setValue } =
+	const { register, formState, handleSubmit, control, watch, getValues, setValue, getFieldState } =
 		useForm<FormValues>({
 			mode: 'onChange',
 			values: {
@@ -157,6 +158,28 @@ const ProfileEditPage = () => {
 				keepErrors: true,
 			},
 		});
+
+	// 닉네임
+	const nickname = useDebounce(watch('nickname') as string);
+	const authKeys = ['checkDuplicateNickname', nickname];
+	const { data: nicknameData } = useCheckDuplicateNickname(
+		authKeys,
+		getFieldState('nickname').isDirty && !getFieldState('nickname').invalid
+	);
+
+	const [duplicateNicknameValidation, setDuplicateNicknameValidation] = useState('');
+	const [duplicated, setDuplicated] = useState(false);
+
+	const checkDuplicateNickname = () => {
+		if (nickname !== user?.nickname && nicknameData && !nicknameData.isEnable) {
+			setDuplicateNicknameValidation(() => '이미 사용중인 닉네임입니다');
+			setDuplicated(true);
+		} else if (nickname === user?.nickname || nicknameData?.isEnable) {
+			setDuplicateNicknameValidation(() => '사용가능한 닉네임입니다');
+			setDuplicated(false);
+		}
+	};
+	useEffect(() => checkDuplicateNickname(), [nicknameData?.isEnable, nickname]);
 
 	const role = useDebounce(watch('interest')) as string;
 	const { data: roles } = useReadRoleList(role);
@@ -229,14 +252,12 @@ const ProfileEditPage = () => {
 		control: control,
 	});
 
-	const addLink = (index: number) => {
+	const addLink = () => {
 		if (links.length === 10) {
 			alert('링크은 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
 			return;
 		}
-		if (index === -1 || getValues(`links.0.url`)) {
-			prependLink({ description: 'Link', url: '' });
-		}
+		prependLink({ description: 'Link', url: '' });
 	};
 
 	// 수상/활동
@@ -249,20 +270,12 @@ const ProfileEditPage = () => {
 		control: control,
 	});
 
-	const addAward = (index: number) => {
+	const addAward = () => {
 		if (awards.length === 10) {
 			alert('수상/활동은 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
 			return;
 		}
-		if (
-			index === -1 ||
-			(getValues(`awards.${index}.startDate`) &&
-				getValues(`awards.${index}.endDate`) &&
-				getValues(`awards.${index}.title`) &&
-				getValues(`awards.${index}.description`))
-		) {
-			prependAward({ startDate: '', endDate: '', title: '', description: '' });
-		}
+		prependAward({ startDate: '', endDate: '', title: '', description: '' });
 	};
 
 	const deleteAward = (index: number) => {
@@ -342,6 +355,10 @@ const ProfileEditPage = () => {
 								// defaultValue={user?.nickname}
 								register={register}
 								formState={formState}
+								duplicated={duplicated}
+								duplicatedMessage={
+									!getFieldState('nickname').invalid ? duplicateNicknameValidation : ''
+								}
 								{...PROFILE_EDIT_DATA.nickname}
 							/>
 							<S.ProfileRow $gap='1rem'>
@@ -493,7 +510,7 @@ const ProfileEditPage = () => {
 					<S.ProfileArticle>
 						<S.ProfileTitle>수상/활동</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.awards}</S.ProfileDescription>
-						<AddFormBtn title='수상/활동 추가' handleClick={() => addAward(awards.length - 1)} />
+						<AddFormBtn title='수상/활동 추가' handleClick={() => addAward()} />
 						<S.ProfileColumn $gap='2.4rem'>
 							{awards?.map((award, index) => (
 								<S.ProfileRow key={award.id} $gap='1rem'>
@@ -537,7 +554,7 @@ const ProfileEditPage = () => {
 					<S.ProfileArticle>
 						<S.ProfileTitle>링크</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.links}</S.ProfileDescription>
-						<AddFormBtn title='링크 추가' handleClick={() => addLink(links.length - 1)} />
+						<AddFormBtn title='링크 추가' handleClick={() => addLink()} />
 						<S.ProfileColumn $gap='2.4rem'>
 							{links?.map((link, index) => (
 								<LinkForm
@@ -585,6 +602,7 @@ const ProfileEditPage = () => {
 						type='button'
 						title='취소'
 						handleClick={() => navigate(`/profile/${userId}`)}
+						disabled={getFieldState('nickname').invalid || duplicated}
 					/>
 					<PrimaryBtn type='submit' title='저장' />
 				</S.ProfileButtonBox>
