@@ -59,6 +59,8 @@ const Header = () => {
 		}
 		if (location.pathname === '/galary') {
 			setIsHere({ recruit: false, galary: true, inform: false });
+		} else {
+			setIsHere({ recruit: false, galary: false, inform: false });
 		}
 	}, [location]);
 
