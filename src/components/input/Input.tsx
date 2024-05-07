@@ -7,6 +7,7 @@ import {
 	Path,
 	RegisterOptions,
 	UseFormWatch,
+	FieldErrors,
 } from 'react-hook-form';
 
 export interface Icon {
@@ -48,9 +49,18 @@ const Input = <T extends FieldValues>({
 	handleKeyDown,
 	...props
 }: Input<T>) => {
-	const inputError = (formState?.errors[name] || props?.duplicated) as boolean;
-	const inputErrorMessage = (formState?.errors[name]?.message ??
-		props?.duplicatedMessage) as string;
+	const errorResult =
+		formState &&
+		name
+			.split('.')
+			.map(key => key as string)
+			.reduce<FieldErrors<T>>((errorsObject, key) => {
+				if (!errorsObject) return errorsObject;
+				return errorsObject[key] as FieldErrors<T>;
+			}, formState.errors);
+
+	const inputError = (errorResult || props?.duplicated) as boolean;
+	const inputErrorMessage = (errorResult?.message ?? props?.duplicatedMessage) as string;
 	const inputValue = watch?.(name as Path<T>);
 
 	const { ref, ...rest } = register(name as Path<T>, validation?.disabled ? undefined : validation);
