@@ -1,5 +1,7 @@
 const REGEXP = {
 	nickname: /^[a-zA-Z0-9가-힣._]{4,16}$/,
+	phone: /^\d{3}-\d{4}-\d{4}$/,
+	email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
 	gpa: /^[0-9]+(\.[0-9]+)?$/,
 };
 
@@ -33,6 +35,18 @@ export const INPUT_VALIDATION = {
 	},
 	introduction: {
 		maxLength: 20,
+	},
+	phone: {
+		pattern: {
+			value: REGEXP.phone,
+			message: '숫자를 입력해주세요 예) 010-1234-5678',
+		},
+	},
+	emailAddress: {
+		pattern: {
+			value: REGEXP.email,
+			message: '이메일 형식이 올바르지 않습니다',
+		},
 	},
 	gpa: {
 		pattern: {

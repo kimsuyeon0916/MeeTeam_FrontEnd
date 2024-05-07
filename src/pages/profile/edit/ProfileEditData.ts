@@ -63,6 +63,7 @@ const phone = {
 		$focus: BlackPhone,
 		$arrow: 'left',
 	},
+	validation: INPUT_VALIDATION.phone,
 };
 
 const universityEmail = {
@@ -88,6 +89,7 @@ const subEmail = {
 		$focus: BlackEmail,
 		$arrow: 'left',
 	},
+	validation: INPUT_VALIDATION.emailAddress,
 };
 
 const year = {
