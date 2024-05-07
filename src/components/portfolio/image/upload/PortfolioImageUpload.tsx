@@ -69,6 +69,8 @@ const PortfolioImageUpload = ({ zipFileUrl, fileOrder }: PortfolioImage) => {
 				.then(extractedImageList => {
 					return reorderPromise(extractedImageList);
 				});
+		} else if (!(zipFileUrl || fileOrder)) {
+			setUploadImageList([]);
 		}
 	}, [zipFileUrl]);
 

@@ -63,5 +63,5 @@ export const portfolioData: PortfolioDetails = {
 		},
 	],
 	isWriter: true,
-	writerNickname: 'temp',
+	writerNickname: 'testNickname',
 };

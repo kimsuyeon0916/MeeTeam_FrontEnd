@@ -51,7 +51,7 @@ const aboutMe = {
 	placeholder: '자기 소개로 자신을 표현해보세요!',
 	name: 'aboutMe',
 	validation: TEXTAREA_VALIDATION.aboutMe,
-	maxLength: 150,
+	maxLength: 300,
 };
 
 const phone = {
@@ -63,6 +63,7 @@ const phone = {
 		$focus: BlackPhone,
 		$arrow: 'left',
 	},
+	validation: INPUT_VALIDATION.phone,
 };
 
 const universityEmail = {
@@ -88,6 +89,7 @@ const subEmail = {
 		$focus: BlackEmail,
 		$arrow: 'left',
 	},
+	validation: INPUT_VALIDATION.emailAddress,
 };
 
 const year = {
@@ -121,6 +123,7 @@ const gpa = {
 	type: 'text',
 	placeholder: '학점',
 	name: 'gpa',
+	validation: INPUT_VALIDATION.gpa,
 };
 
 const maxGpa = {
@@ -155,28 +158,41 @@ const linkDescription = {
 };
 
 const linkUrl = {
-	type: 'url',
+	type: 'text',
 	placeholder: 'URL을 입력해주세요',
 	validation: INPUT_VALIDATION.url,
 };
 
-const awardDate = {
+const awardStartDate = {
 	type: 'string',
 	icon: {
 		$default: GrayCalendar,
 		$focus: BlackCalendar,
 		$arrow: 'right',
 	},
+	rules: INPUT_VALIDATION.startDate,
+};
+
+const awardEndDate = {
+	type: 'string',
+	icon: {
+		$default: GrayCalendar,
+		$focus: BlackCalendar,
+		$arrow: 'right',
+	},
+	rules: INPUT_VALIDATION.endDate,
 };
 
 const awardTitle = {
 	type: 'text',
 	placeholder: '수상/활동명',
+	validation: INPUT_VALIDATION.awardTitle,
 };
 
 const awardDescription = {
 	type: 'text',
 	placeholder: '수상/활동내역',
+	validation: INPUT_VALIDATION.awardDescription,
 };
 
 const PROFILE_EDIT_DATA = {
@@ -196,7 +212,8 @@ const PROFILE_EDIT_DATA = {
 	skills,
 	linkDescription,
 	linkUrl,
-	awardDate,
+	awardStartDate,
+	awardEndDate,
 	awardTitle,
 	awardDescription,
 };
