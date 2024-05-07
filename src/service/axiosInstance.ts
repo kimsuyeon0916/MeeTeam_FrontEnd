@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { CustomInstance } from '../types';
 import qs from 'qs';
+import { useNavigate } from 'react-router-dom';
 
 const axiosConfig = {
 	baseURL: import.meta.env.VITE_BASE_URL,
@@ -31,6 +32,9 @@ const onError = (error: AxiosError) => {
 
 	if (response?.data) {
 		console.error(response.data);
+		if (response?.status === 400) {
+			window.location.href = '/signin';
+		}
 	}
 
 	return Promise.reject(error);
