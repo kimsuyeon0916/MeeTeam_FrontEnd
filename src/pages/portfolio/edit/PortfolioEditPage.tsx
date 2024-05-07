@@ -191,14 +191,22 @@ const PortfolioEditPage = () => {
 	const [skillList, setSkillList] = useState(portfolio?.skills ? portfolio?.skills : []);
 
 	const addSkill = () => {
+		if (skillList.length === 10) {
+			alert('스킬은 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
+			setValue('skills', '');
+			return;
+		}
 		const newSkill = {
 			id: skills?.find(skill => skill.name === getValues('skills'))?.id,
 			name: getValues('skills'),
 		} as Skill;
 		if (getValues('skills')?.length === 0) return;
-		if (!skillList.find(skill => newSkill.name === skill.name)) {
-			setSkillList(prev => [...prev, newSkill]);
+		if (skillList.find(skill => newSkill.name === skill.name)) {
+			alert('이미 추가한 스킬입니다.'); // 디자인 요청
+			setValue('skills', '');
+			return;
 		}
+		setSkillList(prev => [...prev, newSkill]);
 		setValue('skills', '');
 	};
 
@@ -216,10 +224,12 @@ const PortfolioEditPage = () => {
 		control: control,
 	});
 
-	const addLink = (index: number) => {
-		if (index === -1 || getValues(`links.0.url`)) {
-			prependLink({ description: 'Link', url: '' });
+	const addLink = () => {
+		if (links.length === 10) {
+			alert('링크는 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
+			return;
 		}
+		prependLink({ description: 'Link', url: '' });
 	};
 
 	// 상세 내용
@@ -416,7 +426,7 @@ const PortfolioEditPage = () => {
 						<S.PortfolioEditArticle>
 							<S.PortfolioEditTitle>링크</S.PortfolioEditTitle>
 							<S.PortfolioEditColumn $width='clamp(50%, 76.4rem, 100%)'>
-								<AddFormBtn title='링크 추가' handleClick={() => addLink(links.length - 1)} />
+								<AddFormBtn title='링크 추가' handleClick={() => addLink()} />
 								<S.PortfolioEditColumn $gap='3.6rem'>
 									{links?.map((link, index) => (
 										<LinkForm
@@ -437,11 +447,7 @@ const PortfolioEditPage = () => {
 					</S.PortfolioEditColumn>
 
 					<S.PortfolioEditButtonBox>
-						<DefaultBtn
-							type='button'
-							title='취소'
-							handleClick={() => navigate(`/portfolio/${portfolioId}`)}
-						/>
+						<DefaultBtn type='button' title='취소' handleClick={() => navigate(-1)} />
 						<PrimaryBtn
 							type='submit'
 							title='등록'
