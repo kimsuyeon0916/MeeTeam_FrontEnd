@@ -134,7 +134,6 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 
 			.btn-setting {
 				display: flex;
-				width: 7rem;
 				height: 3.6rem;
 				padding: 1.2rem 2rem;
 				justify-content: center;
