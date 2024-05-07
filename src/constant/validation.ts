@@ -1,5 +1,6 @@
 const REGEXP = {
 	nickname: /^[a-zA-Z0-9가-힣._]{4,16}$/,
+	gpa: /^[0-9]+(\.[0-9]+)?$/,
 };
 
 export const INPUT_VALIDATION = {
@@ -23,15 +24,21 @@ export const INPUT_VALIDATION = {
 		},
 		minLength: {
 			value: 4,
-			message: '최소 4자리 이상 입력해 주세요',
+			message: '최소 4자리 이상 입력해주세요',
 		},
 		maxLength: {
 			value: 16,
-			message: '최대 16자리 이하 입력해 주세요',
+			message: '최대 16자리 이하 입력해주세요',
 		},
 	},
 	introduction: {
 		maxLength: 20,
+	},
+	gpa: {
+		pattern: {
+			value: REGEXP.gpa,
+			message: '숫자를 입력해주세요',
+		},
 	},
 	portfolioImage: {
 		required: '포트폴리오를 대표할 이미지를 업로드해주세요',

@@ -121,6 +121,7 @@ const gpa = {
 	type: 'text',
 	placeholder: '학점',
 	name: 'gpa',
+	validation: INPUT_VALIDATION.gpa,
 };
 
 const maxGpa = {
