@@ -158,8 +158,9 @@ const linkDescription = {
 };
 
 const linkUrl = {
-	type: 'url',
+	type: 'text',
 	placeholder: 'URL을 입력해주세요',
+	validation: INPUT_VALIDATION.url,
 };
 
 const awardStartDate = {
@@ -185,11 +186,13 @@ const awardEndDate = {
 const awardTitle = {
 	type: 'text',
 	placeholder: '수상/활동명',
+	validation: INPUT_VALIDATION.awardTitle,
 };
 
 const awardDescription = {
 	type: 'text',
 	placeholder: '수상/활동내역',
+	validation: INPUT_VALIDATION.awardDescription,
 };
 
 const PROFILE_EDIT_DATA = {

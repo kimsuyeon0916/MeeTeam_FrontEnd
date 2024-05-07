@@ -493,11 +493,11 @@ const ProfileEditPage = () => {
 					<S.ProfileArticle>
 						<S.ProfileTitle>수상/활동</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.awards}</S.ProfileDescription>
+						<AddFormBtn title='수상/활동 추가' handleClick={() => addAward(awards.length - 1)} />
 						<S.ProfileColumn $gap='2.4rem'>
-							<AddFormBtn title='수상/활동 추가' handleClick={() => addAward(awards.length - 1)} />
 							{awards?.map((award, index) => (
 								<S.ProfileRow key={award.id} $gap='1rem'>
-									<S.ProfileColumn $gap='1rem'>
+									<S.ProfileColumn $gap='1.6rem'>
 										<S.ProfileRow $gap='1rem'>
 											<MuiDatepickerController
 												name={`awards.${index}.startDate`}

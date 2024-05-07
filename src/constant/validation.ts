@@ -54,6 +54,20 @@ export const INPUT_VALIDATION = {
 			message: '숫자를 입력해주세요',
 		},
 	},
+	awardTitle: {
+		required: '값이 입력되지 않았습니다',
+		maxLength: {
+			value: 20,
+			message: '최대 20자리 이하 입력해주세요',
+		},
+	},
+	awardDescription: {
+		required: '값이 입력되지 않았습니다',
+		maxLength: {
+			value: 20,
+			message: '최대 20자리 이하 입력해주세요',
+		},
+	},
 	portfolioImage: {
 		required: '포트폴리오를 대표할 이미지를 업로드해주세요',
 	},
@@ -80,6 +94,9 @@ export const INPUT_VALIDATION = {
 	},
 	content: {
 		required: true,
+	},
+	url: {
+		required: 'url을 입력해주세요',
 	},
 };
 
