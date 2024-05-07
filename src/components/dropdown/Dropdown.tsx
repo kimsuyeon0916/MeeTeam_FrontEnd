@@ -80,12 +80,13 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		return Object.keys(obj).find(key => obj[key] === value);
 	};
 
-	const onClickDropdown = () => {
-		if (scope) {
-			setShowDropdown(true);
-		} else {
-			setShowDropdown(prev => !prev);
-		}
+	const onClickDropdown = (event: React.MouseEvent<HTMLDivElement>) => {
+		event.stopPropagation();
+		setShowDropdown(prev => !prev);
+	};
+
+	const handleRadio = (event: React.MouseEvent<HTMLDivElement>) => {
+		event.stopPropagation();
 	};
 
 	const onClickList = (event: React.MouseEvent<HTMLElement>, id?: number) => {
@@ -186,6 +187,9 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		setSearchParams(searchParams);
 		setShowDropdown(false);
 	};
+	const onClickInside = (event: React.MouseEvent<HTMLDivElement>) => {
+		event.stopPropagation();
+	};
 
 	useEffect(() => {
 		const outsideClick = (event: MouseEvent) => {
@@ -261,7 +265,10 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 								<ul className='menu-container'>
 									{data?.map((e: string, index: number) => (
 										<React.Fragment key={index}>
-											<section className={`menu-scope ${e === '교내' && 'in'}`}>
+											<section
+												className={`menu-scope ${e === '교내' && 'in'}`}
+												onClick={handleRadio}
+											>
 												<input
 													type='radio'
 													id={`${index}`}
@@ -273,7 +280,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 												<label htmlFor={`${index}`}>{e}</label>
 											</section>
 											{currentValue === '교내' && (
-												<section className='inside'>
+												<section className='inside' onClick={onClickInside}>
 													<section className='container-inside'>
 														<section className='intro'>
 															<span className='description'>

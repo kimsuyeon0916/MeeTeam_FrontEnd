@@ -56,13 +56,10 @@ const Header = () => {
 	useEffect(() => {
 		if (location.pathname === `/recruitment/postings/${id}` || location.pathname === '/') {
 			setIsHere({ recruit: true, galary: false, inform: false });
-		}
-		if (location.pathname === '/galary') {
-			setIsHere({ recruit: false, galary: true, inform: false });
 		} else {
 			setIsHere({ recruit: false, galary: false, inform: false });
 		}
-	}, [location]);
+	}, [location.pathname]);
 
 	useEffect(() => {
 		const outsideClick = (event: MouseEvent) => {
