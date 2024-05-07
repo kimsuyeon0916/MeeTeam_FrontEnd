@@ -255,6 +255,7 @@ const ProfileEditPage = () => {
 
 	const addLink = () => {
 		if (links.length === 10) {
+			alert('링크는 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
 			return;
 		}
 		prependLink({ description: 'Link', url: '' });
