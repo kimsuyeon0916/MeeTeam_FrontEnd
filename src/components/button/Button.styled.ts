@@ -59,12 +59,15 @@ const DefaultButtonLayout = styled.button<ButtonStyle>`
 	${props =>
 		props.$disabled
 			? `background: var(--box_stroke, #E3E3E3);
-			color: var(--ButtonColors-Disabled-borderTxt, #8E8E8E);`
+			color: var(--ButtonColors-Disabled-borderTxt, #8E8E8E);
+			border: 0.1rem solid #8E8E8E;`
 			: `&:hover {
-			background: var(--ButtonColors-Default-contained-hover, #EDEDED);
+			border: 0.1rem solid var(--text-color-2, #373F41);
 		}
 		&:active {
 			background: var(--ButtonColors-Default-contained-onPress, #747B7F);
+			color: var(--ButtonColors-Default-outline-onPressTxt, #F8FAFB);
+			border: 0.1rem solid var(--text-color-2, #373F41);
 		}`}
 `;
 
@@ -76,12 +79,15 @@ const PrimaryButtonLayout = styled(DefaultButtonLayout)`
 	${props =>
 		props.$disabled
 			? `background: var(--box_stroke, #E3E3E3);
-			color: var(--ButtonColors-Disabled-borderTxt, #8E8E8E);`
+			color: var(--ButtonColors-Disabled-borderTxt, #8E8E8E);
+			border: 0;`
 			: `&:hover {
 			background: var(--ButtonColors-Primary-contained-hover, #2F4FD9);
+			border: 0;
 		}
 		&:active {
 			background: var(--ButtonColors-Primary-contained-onPress, #0E2690);
+			border: 0;
 		}`}
 `;
 
