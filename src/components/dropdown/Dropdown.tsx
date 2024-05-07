@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import S from './Dropdown.styled';
-import { useDebounce } from '../../hooks';
+import { useDebounce, useLogin } from '../../hooks';
 import { useQuery } from '@tanstack/react-query';
 import { getCourseKeyword, getProfessorKeyword } from '../../service';
 import { useRecoilState, useSetRecoilState } from 'recoil';
@@ -43,6 +43,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		course: false,
 		professor: false,
 	});
+	const { isLoggedIn } = useLogin();
 	const [isScopeSelected, setIsScopeSelected] = useState(false);
 	const [isCategorySelected, setIsCategorySelected] = useState(false);
 	const insideRef = useRef<HTMLDivElement | null>(null);
@@ -67,10 +68,12 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 	const { data: dataCourse, isLoading: isLoadingCourse } = useQuery({
 		queryKey: ['searchCourse', keywordCourse],
 		queryFn: () => getCourseKeyword(keywordCourse),
+		enabled: isLoggedIn,
 	});
 	const { data: dataProfessor, isLoading: isLoadingProfessor } = useQuery({
 		queryKey: ['searchProfessor', keywordProfessor],
 		queryFn: () => getProfessorKeyword(keywordProfessor),
+		enabled: isLoggedIn,
 	});
 
 	const getKeyByValue = (obj: keyObj, value: number) => {
