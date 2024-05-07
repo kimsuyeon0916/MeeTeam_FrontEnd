@@ -32,9 +32,9 @@ const onError = (error: AxiosError) => {
 
 	if (response?.data) {
 		console.error(response.data);
-		if (response?.status === 400 || response?.status === 403) {
-			window.location.href = '/signin';
-		}
+		// if (response?.status === 400 || response?.status === 403) {
+		// 	window.location.href = '/signin';
+		// }
 	}
 
 	return Promise.reject(error);
