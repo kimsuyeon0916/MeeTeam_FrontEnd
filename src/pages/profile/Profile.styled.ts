@@ -144,6 +144,10 @@ const ProfileGrid = styled.div`
 	row-gap: 2.4rem;
 	column-gap: 2.4rem;
 
+	@media (min-width: 144rem) {
+		grid-template-columns: repeat(4, minmax(18.3rem, 1fr));
+	}
+
 	/* 스크롤바 숨기기 */
 	overflow-y: auto;
 	-ms-overflow-style: none; /* IE and Edge */
