@@ -18,8 +18,20 @@ const IconButtonLayout = styled.button<ButtonStyle>`
 	border-radius: 1rem;
 	${props =>
 		props.$add
-			? `border: 1px solid #e3e3e3; background: #fff;`
-			: `border: 1px solid #8E8E8E; background: #F6F6F6;`}
+			? `border: 0.1rem solid #e3e3e3; background: #fff;`
+			: `border: 0.1rem solid #8E8E8E; background: #F6F6F6;`}
+
+	${props =>
+		props.$add &&
+		`&:hover {
+				border: 0.1rem solid var(--text-color-2, #373F41);
+			}
+			
+			&:active {
+				background: var(--ButtonColors-Default-contained-onPress, #747B7F);
+				border: 0.1rem solid var(--text-color-2, #373F41);
+			}
+			`}
 `;
 
 const DefaultButtonLayout = styled.button<ButtonStyle>`
