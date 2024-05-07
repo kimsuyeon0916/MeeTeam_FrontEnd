@@ -20,7 +20,7 @@ const Radio = ({ register, name, id, validation, state, handleClick, children }:
 				type='radio'
 				name={name}
 				id={id}
-				defaultChecked={state}
+				checked={state}
 				value={id}
 				onClick={() => handleClick?.(id)}
 			/>
