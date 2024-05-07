@@ -197,14 +197,21 @@ const ProfileEditPage = () => {
 	const [skillList, setSkillList] = useState(user?.skills ? user?.skills : []);
 
 	const addSkill = () => {
+		if (skillList.length === 10) {
+			alert('스킬은 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
+			setValue('skills', '');
+			return;
+		}
 		const newSkill = {
 			id: skills?.find(skill => skill.name === getValues('skills'))?.id,
 			name: getValues('skills'),
 		} as Skill;
 		if (getValues('skills')?.length === 0) return;
-		if (!skillList.find(skill => newSkill.name === skill.name)) {
-			setSkillList(prev => [...prev, newSkill]);
+		if (skillList.find(skill => newSkill.name === skill.name)) {
+			alert('이미 추가한 스킬입니다.'); // 디자인 요청
+			setValue('skills', '');
 		}
+		setSkillList(prev => [...prev, newSkill]);
 		setValue('skills', '');
 	};
 
