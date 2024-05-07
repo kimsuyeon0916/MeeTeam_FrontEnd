@@ -516,7 +516,7 @@ const ProfileEditPage = () => {
 						<S.ProfileColumn $gap='2.4rem'>
 							{awards?.map((award, index) => (
 								<S.ProfileRow key={award.id} $gap='1rem'>
-									<S.ProfileColumn $gap='1.6rem'>
+									<S.ProfileColumn $gap='2rem'>
 										<S.ProfileRow $gap='1rem'>
 											<MuiDatepickerController
 												name={`awards.${index}.startDate`}
