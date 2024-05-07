@@ -233,6 +233,7 @@ const ProfileEditPage = () => {
 		if (skillList.find(skill => newSkill.name === skill.name)) {
 			alert('이미 추가한 스킬입니다.'); // 디자인 요청
 			setValue('skills', '');
+			return;
 		}
 		setSkillList(prev => [...prev, newSkill]);
 		setValue('skills', '');
@@ -254,7 +255,7 @@ const ProfileEditPage = () => {
 
 	const addLink = () => {
 		if (links.length === 10) {
-			alert('링크은 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
+			alert('링크는 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
 			return;
 		}
 		prependLink({ description: 'Link', url: '' });
@@ -513,7 +514,7 @@ const ProfileEditPage = () => {
 						<S.ProfileTitle>수상/활동</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.awards}</S.ProfileDescription>
 						<AddFormBtn title='수상/활동 추가' handleClick={() => addAward()} />
-						<S.ProfileColumn $gap='2.4rem'>
+						<S.ProfileColumn $gap='3.6rem'>
 							{awards?.map((award, index) => (
 								<S.ProfileRow key={award.id} $gap='1rem'>
 									<S.ProfileColumn $gap='2rem'>
@@ -557,7 +558,7 @@ const ProfileEditPage = () => {
 						<S.ProfileTitle>링크</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.links}</S.ProfileDescription>
 						<AddFormBtn title='링크 추가' handleClick={() => addLink()} />
-						<S.ProfileColumn $gap='2.4rem'>
+						<S.ProfileColumn $gap='3.6rem'>
 							{links?.map((link, index) => (
 								<LinkForm
 									key={link.id}
