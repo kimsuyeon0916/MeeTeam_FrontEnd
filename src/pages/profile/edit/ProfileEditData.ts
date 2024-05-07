@@ -162,13 +162,24 @@ const linkUrl = {
 	placeholder: 'URL을 입력해주세요',
 };
 
-const awardDate = {
+const awardStartDate = {
 	type: 'string',
 	icon: {
 		$default: GrayCalendar,
 		$focus: BlackCalendar,
 		$arrow: 'right',
 	},
+	rules: INPUT_VALIDATION.startDate,
+};
+
+const awardEndDate = {
+	type: 'string',
+	icon: {
+		$default: GrayCalendar,
+		$focus: BlackCalendar,
+		$arrow: 'right',
+	},
+	rules: INPUT_VALIDATION.endDate,
 };
 
 const awardTitle = {
@@ -198,7 +209,8 @@ const PROFILE_EDIT_DATA = {
 	skills,
 	linkDescription,
 	linkUrl,
-	awardDate,
+	awardStartDate,
+	awardEndDate,
 	awardTitle,
 	awardDescription,
 };

@@ -1,10 +1,12 @@
 import React from 'react';
-import { Controller, Control } from 'react-hook-form';
+import { Controller, Control, FormState, FieldValues, RegisterOptions } from 'react-hook-form';
 import MuiDatepicker from './MuiDatepicker';
 
 interface Date {
 	name: string;
 	control: Control;
+	formState?: FormState<FieldValues>;
+	rules?: RegisterOptions;
 }
 
 const MuiDatepickerController = ({ name, control }: Date) => {

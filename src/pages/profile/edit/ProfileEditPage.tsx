@@ -502,8 +502,15 @@ const ProfileEditPage = () => {
 											<MuiDatepickerController
 												name={`awards.${index}.startDate`}
 												control={control}
+												formState={formState}
+												{...PROFILE_EDIT_DATA.awardStartDate}
 											/>
-											<MuiDatepickerController name={`awards.${index}.endDate`} control={control} />
+											<MuiDatepickerController
+												name={`awards.${index}.endDate`}
+												control={control}
+												formState={formState}
+												{...PROFILE_EDIT_DATA.awardEndDate}
+											/>
 										</S.ProfileRow>
 										<Input
 											name={`awards.${index}.title`}
