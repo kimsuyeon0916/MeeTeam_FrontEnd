@@ -141,6 +141,7 @@ button {
 	border: none;
 	outline: none;
 	/* all: unset; */
+	font-family: Pretendard;
 }
 ::-webkit-scrollbar {
 	display: none;
