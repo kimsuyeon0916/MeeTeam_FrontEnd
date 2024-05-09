@@ -13,18 +13,15 @@ const DetailedInformation = () => {
 	const { validMessage, isValid } = useValid(formData);
 
 	const preventInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		// 입력을 허용하지 않을 키 코드를 배열에 정의합니다.
-		const forbiddenKeys = ['"', "'"];
+		const forbiddenKeys = ['\t'];
 
-		// 입력 이벤트가 허용되지 않는 키를 누르면 이벤트를 취소합니다.
 		if (forbiddenKeys.includes(event.key)) {
 			event.preventDefault();
 		}
 	};
 
 	const onChangeContents = (contents: string) => {
-		const sanitizedContent = contents.replace(/ class="[^"]*ql-indent-1[^"]*"/g, '');
-		setFormData({ ...formData, content: sanitizedContent });
+		setFormData({ ...formData, content: contents });
 	};
 
 	return (

@@ -49,6 +49,18 @@ const RecruitDescription = styled.article`
 			padding-left: 2rem;
 		}
 
+		.ql-indent-1 {
+			margin-left: 5rem;
+		}
+
+		.ql-indent-2 {
+			margin-left: 10rem;
+		}
+
+		.ql-indent-3 {
+			margin-left: 15rem;
+		}
+
 		em {
 			font-style: italic;
 		}
