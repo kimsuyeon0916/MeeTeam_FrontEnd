@@ -113,23 +113,35 @@ const Footer = styled.footer`
 		.btn-bookmark {
 			height: 4.8rem;
 			padding: 1.2rem 3.2rem;
-			border-radius: 0.8rem;
-			border: 1.5px solid #e3e3e3;
-			background: #fff;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			gap: 0.8rem;
-			font-size: 1.5rem;
+			font-size: 1.6rem;
+			border-radius: 0.8rem;
+			border: 1px solid #6091f0;
+			background: #fff;
+
+			&:hover {
+				transition: 0.2s ease-in-out;
+				border: 1px solid #6091f0;
+				box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+			}
 		}
 
 		.apply {
 			height: 4.8rem;
 			padding: 1.2rem 7.2rem;
-			border-radius: 0.6rem;
-			font-size: 1.5rem;
+			border-radius: 0.8rem;
+			font-size: 1.6rem;
 			background: linear-gradient(90deg, #6091f0 0%, #723dff 100%);
-			color: #fff;
+			color: #f7faff;
+
+			&:hover {
+				color: #fff;
+				font-weight: 600;
+				box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+			}
 		}
 
 		.default {
@@ -152,10 +164,20 @@ const Footer = styled.footer`
 		.cancel {
 			height: 4.8rem;
 			padding: 1.2rem 7.2rem;
-			border-radius: 0.6rem;
-			font-size: 1.5rem;
+			border-radius: 0.8rem;
+			font-size: 1.6rem;
 			background-color: #f85858;
 			color: #fff;
+
+			&:hover {
+				transition: 0.2s ease-in-out;
+				background: #fb9b9b;
+			}
+
+			&:active {
+				background: #fedede;
+				color: #953535;
+			}
 		}
 
 		.btn-edit,
@@ -222,6 +244,7 @@ const Footer = styled.footer`
 			border: 1px solid #e3e3e3;
 			background: #fff;
 		}
+
 		.btn-closed {
 			height: 4.8rem;
 			padding: 1.2rem 3.2rem;
