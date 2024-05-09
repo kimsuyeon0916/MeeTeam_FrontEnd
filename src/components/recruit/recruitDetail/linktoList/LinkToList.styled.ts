@@ -24,7 +24,7 @@ const LinkToList = styled.article`
 		&:active {
 			border: 1px solid #373f41;
 			background: #747b7f;
-			color: #ffffff;
+			color: #fff;
 			transition: 0.2s ease-in-out;
 		}
 	}

@@ -104,8 +104,6 @@ const Footer = styled.footer`
 	.btn-txt__big {
 		color: #373f41;
 		font-size: 1.6rem;
-		line-height: 1.9rem;
-		letter-spacing: 0.0032rem;
 	}
 
 	.container-btn {
@@ -132,6 +130,23 @@ const Footer = styled.footer`
 			font-size: 1.5rem;
 			background: linear-gradient(90deg, #6091f0 0%, #723dff 100%);
 			color: #fff;
+		}
+
+		.default {
+			&:hover {
+				border: 1px solid #373f41;
+				transition: 0.2s ease-in-out;
+			}
+
+			&:active {
+				border: 1px solid #373f41;
+				background: #747b7f;
+
+				img {
+					filter: invert(100%) sepia(18%) saturate(0%) hue-rotate(27deg) brightness(106%)
+						contrast(101%);
+				}
+			}
 		}
 
 		.cancel {
@@ -167,6 +182,16 @@ const Footer = styled.footer`
 			border-radius: 0.6rem;
 			background: #5877fc;
 			color: #fff;
+
+			&:hover {
+				background: #2f4fd9;
+				color: #f7faff;
+			}
+
+			&:active {
+				background: #0e2690;
+				color: #f7faff;
+			}
 		}
 
 		.btn-close {
@@ -179,6 +204,15 @@ const Footer = styled.footer`
 			border-radius: 0.6rem;
 			background: #f85858;
 			color: #fff;
+
+			&:hover {
+				background: #fb9b9b;
+			}
+
+			&:active {
+				background: #fedede;
+				color: #953535;
+			}
 		}
 
 		.btn-list {

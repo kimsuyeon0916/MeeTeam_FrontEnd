@@ -29,16 +29,20 @@ const WriterFooter = ({ writerId, pageNum, onClickEditPage }: WriterFooter) => {
 	};
 	return (
 		<>
-			<button type='button' className='btn-edit' onClick={onClickEditPage}>
+			<button type='button' className='btn-edit default' onClick={onClickEditPage}>
 				<img src={Edit} />
 			</button>
-			<button type='button' className='btn-delete' onClick={onClickDelete}>
+			<button type='button' className='btn-delete default' onClick={onClickDelete}>
 				<img src={TrashCan} />
 			</button>
-			<button type='button' className='btn-navigate_appliers' onClick={onClickApplicant}>
+			<button
+				type='button'
+				className='btn-navigate_appliers btn-txt__big'
+				onClick={onClickApplicant}
+			>
 				신청자 보러가기
 			</button>
-			<button type='button' className='btn-close' onClick={onClickClose}>
+			<button type='button' className='btn-close btn-txt__big' onClick={onClickClose}>
 				마감하기
 			</button>
 		</>
