@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import S from './RecruitRolesForm.styled';
 import { recruitInputState } from '../../../../atom';
 import { useRecoilState } from 'recoil';
@@ -7,7 +7,6 @@ import { useValid } from '../../../../hooks';
 
 const RecruitRoleForm = () => {
 	const [info, setInfo] = useRecoilState(recruitInputState);
-	const { validMessage, isValid } = useValid(info);
 
 	const deleteObj = (id: number | null) => {
 		setInfo(prev => ({
@@ -27,6 +26,7 @@ const RecruitRoleForm = () => {
 						최소 1개에서 최대 10개까지 역할을 입력하세요. <span>*</span>
 					</span>
 					<InputRoleForm />
+
 					<article className='container-role__list'>
 						{info.recruitmentRoles.map(userRole => (
 							<InputRole
@@ -39,9 +39,6 @@ const RecruitRoleForm = () => {
 							/>
 						))}
 					</article>
-					{isValid.isSubmitted && !isValid.isRole && (
-						<p className='valid-msg'>{validMessage.recruitRole}</p>
-					)}
 				</section>
 			</section>
 			<hr className='under-info' />

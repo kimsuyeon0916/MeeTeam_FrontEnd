@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { DropdownArrow, Search, XBtn } from '../../../assets';
 import S from './InputRoleForm.styled';
-import { RoleForPost, InputState, Keyword } from '../../../types';
-import { useDebounce } from '../../../hooks';
-import { getRoleKeyword, getSkillKeyword } from '../../../service';
+import { useQuery } from '@tanstack/react-query';
 import { useRecoilState } from 'recoil';
-import { recruitInputState } from '../../../atom';
 import { isNotNumber } from '../../../utils';
+import { recruitInputState } from '../../../atom';
+import { useDebounce, useValid } from '../../../hooks';
+import { DropdownArrow, Search, XBtn } from '../../../assets';
+import { RoleForPost, InputState, Keyword } from '../../../types';
+import { getRoleKeyword, getSkillKeyword } from '../../../service';
 
 const InputRoleForm = () => {
 	const [tagItem, setTagItem] = useState<string>('');
@@ -23,13 +23,17 @@ const InputRoleForm = () => {
 		roleName: '',
 		skills: [],
 	});
-
-	const [isValid, setIsValid] = useState({
+	const { validMessage, isValid } = useValid(info);
+	const [isValidBeforeSubmit, setisValidBeforeSubmit] = useState({
 		role: {
 			valid: false,
 			message: '',
 		},
 		count: {
+			valid: false,
+			message: '',
+		},
+		roleLength: {
 			valid: false,
 			message: '',
 		},
@@ -71,15 +75,17 @@ const InputRoleForm = () => {
 		}));
 	};
 
-	const onClickHandler = () => {
+	const handleAddRole = () => {
 		if (
 			roleData.roleId !== null &&
 			roleData.count &&
-			!info.recruitmentRoles.some(obj => obj.roleId === roleData.roleId)
+			!info.recruitmentRoles.some(obj => obj.roleId === roleData.roleId) &&
+			info.recruitmentRoles.length < 10
 		) {
-			setIsValid({
+			setisValidBeforeSubmit({
 				role: { valid: true, message: '' },
 				count: { valid: true, message: '' },
+				roleLength: { valid: true, message: '' },
 			});
 
 			setInfos((prev: InputState) => ({
@@ -99,20 +105,28 @@ const InputRoleForm = () => {
 				skill: false,
 			}));
 		} else if (!roleData.roleId && roleData.count) {
-			setIsValid({
+			setisValidBeforeSubmit(prev => ({
+				...prev,
 				role: { valid: false, message: '해당 역할명을 입력해주세요.' },
 				count: { valid: true, message: '' },
-			});
+			}));
 		} else if (!roleData.roleId && !roleData.count) {
-			setIsValid({
+			setisValidBeforeSubmit(prev => ({
+				...prev,
 				role: { valid: false, message: '모집하는 역할을 입력해주세요.' },
 				count: { valid: true, message: '' },
-			});
+			}));
 		} else if (roleData.roleId && !roleData.count) {
-			setIsValid({
+			setisValidBeforeSubmit(prev => ({
+				...prev,
 				role: { valid: true, message: '' },
 				count: { valid: false, message: '모집 인원 수를 입력해주세요.' },
-			});
+			}));
+		} else if (info.recruitmentRoles.length === 10) {
+			setisValidBeforeSubmit(prev => ({
+				...prev,
+				roleLength: { valid: false, message: '최대 10개의 역할을 입력할 수 있습니다.' },
+			}));
 		}
 	};
 	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -127,7 +141,7 @@ const InputRoleForm = () => {
 		const countValue = event.target.value;
 
 		if (countValue.length) {
-			setIsValid(prev => ({
+			setisValidBeforeSubmit(prev => ({
 				...prev,
 				count: { valid: true, message: '' },
 			}));
@@ -159,7 +173,7 @@ const InputRoleForm = () => {
 			roleId: Number(target.id),
 			roleName: innerText,
 		}));
-		setIsValid(prev => ({
+		setisValidBeforeSubmit(prev => ({
 			...prev,
 			role: { valid: true, message: '' },
 		}));
@@ -177,6 +191,12 @@ const InputRoleForm = () => {
 			setTagItem('');
 		}
 	};
+
+	useEffect(() => {
+		if (info.recruitmentRoles.length < 10) {
+			setisValidBeforeSubmit(prev => ({ ...prev, roleLength: { valid: true, message: '' } }));
+		}
+	}, [info.recruitmentRoles.length]);
 
 	useEffect(() => {
 		const outsideClick = (event: MouseEvent) => {
@@ -231,8 +251,11 @@ const InputRoleForm = () => {
 						)}
 						<img src={DropdownArrow} />
 					</section>
-					{!isValid.role.valid && (
-						<p className='valid-message__role txt4'>{isValid.role.message}</p>
+					{!isValidBeforeSubmit.role.valid && (
+						<p className='valid-message__role txt4'>{isValidBeforeSubmit.role.message}</p>
+					)}
+					{isValid.isSubmitted && !isValid.isRole && (
+						<p className='valid-message__role txt4'>{validMessage.recruitRole}</p>
 					)}
 					<input
 						className='count-input body1-medium'
@@ -241,8 +264,8 @@ const InputRoleForm = () => {
 						value={roleData.count?.toString()}
 						onChange={onChangeCount}
 					/>
-					{!isValid.count.valid && (
-						<p className='valid-message__count txt4'>{isValid.count.message}</p>
+					{!isValidBeforeSubmit.count.valid && (
+						<p className='valid-message__count txt4'>{isValidBeforeSubmit.count.message}</p>
 					)}
 				</section>
 				<section className='inputs-bottom'>
@@ -260,7 +283,6 @@ const InputRoleForm = () => {
 						/>
 						<img src={Search} className='icon-search' />
 					</section>
-					<section>{}</section>
 					{dropdown.skill && (
 						<section className='dropdown-skill'>
 							<section className='list-skill'>
@@ -308,11 +330,14 @@ const InputRoleForm = () => {
 						</section>
 					)}
 					<article className='add-btn'>
-						<button type='button' className='txt-big' onClick={onClickHandler}>
+						<button type='button' className='txt-big' onClick={handleAddRole}>
 							추가
 						</button>
 					</article>
 				</section>
+				{!isValidBeforeSubmit.roleLength.valid && (
+					<p className='valid-length__msg'>{isValidBeforeSubmit.roleLength.message}</p>
+				)}
 			</article>
 		</S.InputRoleForm>
 	);

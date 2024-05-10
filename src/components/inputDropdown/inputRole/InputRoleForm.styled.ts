@@ -16,6 +16,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 	.txt-big {
 		color: #f7faff;
 		font-size: 1.6rem;
+		letter-spacing: 0.000032rem;
 	}
 
 	.txt4 {
@@ -256,7 +257,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 
 		.container-skills {
 			position: relative;
-			width: 66rem;
+			width: 65.5rem;
 			height: 4.8rem;
 			display: flex;
 			align-items: center;
@@ -314,6 +315,14 @@ const InputRoleForm = styled.article<InputRoleForm>`
 			border-radius: 0.6rem;
 			background: #5877fc;
 		}
+	}
+
+	.valid-length__msg {
+		color: #f85858;
+		font-family: Pretendard;
+		font-size: 1.4rem;
+		font-weight: 600;
+		margin-bottom: -1rem;
 	}
 `;
 
