@@ -72,9 +72,6 @@ const RecruitDetailPage = () => {
 		navigate(`/recruitment/postings/edit/${pageNum}`);
 	};
 
-	console.log(detailedData);
-	console.log(typeof detailedData);
-
 	useEffect(() => {
 		fixModalBackground(
 			isModal || isCancel || isClose || isDelete.isDelete || isNeedLogin.isOpen || isPostingDelete

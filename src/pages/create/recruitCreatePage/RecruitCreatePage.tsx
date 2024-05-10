@@ -7,13 +7,14 @@ import {
 	DetailedInformation,
 	RecruitTags,
 	RecruitRoleForm,
+	WarnRoleDelete,
 } from '../../../components/index';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
-import { recruitInputState, validState } from '../../../atom';
+import { recruitInputState, validState, warnRoleDeleteModalState } from '../../../atom';
 import { getPostingData, editPostingRecruit, postingRecruit } from '../../../service';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { EditPosting, InputState, RoleInfo, RoleForPost } from '../../../types';
+import { EditPosting, InputState, RoleInfo, RoleForPost, RecruitApplicant } from '../../../types';
 import { fixModalBackground, resetFormData } from '../../../utils';
 import { useLogin } from '../../../hooks';
 
@@ -25,6 +26,7 @@ const RecruitCreatePage = () => {
 	const validCheck = useRecoilValue(validState);
 	const setIsSubmit = useSetRecoilState(validState);
 	const [beforeSubmit, setBeforeSubmit] = useState<boolean>(false);
+	const isWarnRoleDelete = useRecoilValue(warnRoleDeleteModalState);
 	const [formData, setFormData] = useRecoilState<InputState>(recruitInputState);
 	const postAvailable =
 		validCheck.isCategory &&
@@ -101,8 +103,8 @@ const RecruitCreatePage = () => {
 	};
 
 	useEffect(() => {
-		fixModalBackground(beforeSubmit);
-	}, [beforeSubmit]);
+		fixModalBackground(beforeSubmit || isWarnRoleDelete);
+	}, [beforeSubmit, isWarnRoleDelete]);
 
 	useEffect(() => {
 		const convertRoleInfo = (roleInfo: RoleInfo): RoleForPost => {
@@ -143,7 +145,11 @@ const RecruitCreatePage = () => {
 				<Description />
 				<BasicInformation />
 				<DetailedInformation />
-				<RecruitRoleForm />
+				<RecruitRoleForm
+					applicantsList={data?.recruitmentRoles.map(role => {
+						return { roleId: role.roleId, applicantCount: role.applicantCount };
+					})}
+				/>
 				<RecruitTags />
 				<ControlButtons />
 				{beforeSubmit && (
@@ -205,6 +211,11 @@ const RecruitCreatePage = () => {
 								확인
 							</button>
 						</section>
+					</article>
+				)}
+				{isWarnRoleDelete && id && (
+					<article className='modal-background'>
+						<WarnRoleDelete id={id} />
 					</article>
 				)}
 			</form>

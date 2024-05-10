@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import S from './RecruitRolesForm.styled';
-import { recruitInputState } from '../../../../atom';
-import { useRecoilState } from 'recoil';
+import { recruitInputState, warnRoleDeleteModalState } from '../../../../atom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { InputRole, InputRoleForm } from '../../../index';
-import { useValid } from '../../../../hooks';
+import { useParams } from 'react-router-dom';
+import { RecruitApplicantsList } from '../../../../types';
 
-const RecruitRoleForm = () => {
+const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
+	const { id } = useParams();
 	const [info, setInfo] = useRecoilState(recruitInputState);
+	const setWarnRoleDeleteState = useSetRecoilState(warnRoleDeleteModalState);
 
 	const deleteObj = (id: number | null) => {
-		setInfo(prev => ({
-			...prev,
-			recruitmentRoles: prev.recruitmentRoles?.filter(elem => elem.roleId !== id),
-		}));
+		const roleToDelete = applicantsList?.find(role => role.roleId === id);
+
+		if (roleToDelete) {
+			if (roleToDelete.applicantCount === 0) {
+				setInfo(prev => ({
+					...prev,
+					recruitmentRoles: prev.recruitmentRoles?.filter(elem => elem.roleId !== id),
+				}));
+			} else {
+				setWarnRoleDeleteState(true);
+			}
+		}
 	};
 
 	return (
@@ -26,7 +37,6 @@ const RecruitRoleForm = () => {
 						최소 1개에서 최대 10개까지 역할을 입력하세요. <span>*</span>
 					</span>
 					<InputRoleForm />
-
 					<article className='container-role__list'>
 						{info.recruitmentRoles.map(userRole => (
 							<InputRole

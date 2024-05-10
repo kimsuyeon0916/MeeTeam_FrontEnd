@@ -148,6 +148,7 @@ import ApproveModal from './recruit/applicants/modal/ApproveModal';
 import TabMenu from './tabMenu/TabMenu';
 import PostingDelete from './recruit/recruitDetail/modal/postingDelete/PostingDelete';
 import Modal from './modal/Modal';
+import WarnRoleDelete from './recruit/recruitDetail/modal/warnRoleDelete/WarnRoleDelete';
 
 export {
 	Header,
@@ -291,4 +292,5 @@ export {
 	TabMenu,
 	PostingDelete,
 	Modal,
+	WarnRoleDelete,
 };
