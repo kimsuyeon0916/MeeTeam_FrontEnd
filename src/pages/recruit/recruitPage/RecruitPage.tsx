@@ -258,34 +258,45 @@ const RecruitPage = () => {
 		const isCourse = searchParams.get('course');
 		const isProfessor = searchParams.get('professor');
 
-		if (isScope) {
-			setFilterState(prev => ({ ...prev, scope: Number(isScope) }));
-		}
-		if (isCategory) {
-			setFilterState(prev => ({ ...prev, category: Number(isCategory) }));
-		}
-		if (isSkill) {
-			setFilterState(prev => ({ ...prev, skill: isSkill }));
-		}
-		if (isRole) {
-			setFilterState(prev => ({ ...prev, role: isRole }));
-		}
-		if (isTag) {
-			setFilterState(prev => ({ ...prev, tag: isTag }));
-		}
-		if (isKeyword) {
-			setFilterState(prev => ({ ...prev, keyword: isKeyword }));
-		}
-		if (isField) {
-			setFilterState(prev => ({ ...prev, field: Number(isField) }));
-		}
-		if (isCourse) {
-			setFilterState(prev => ({ ...prev, course: Number(isCourse) }));
-		}
-		if (isProfessor) {
-			setFilterState(prev => ({ ...prev, professor: Number(isProfessor) }));
-		}
-	}, []);
+		// if (isScope) {
+		// 	setFilterState(prev => ({ ...prev, scope: Number(isScope) }));
+		// }
+		// if (isCategory) {
+		// 	setFilterState(prev => ({ ...prev, category: Number(isCategory) }));
+		// }
+		// if (isSkill) {
+		// 	setFilterState(prev => ({ ...prev, skill: isSkill }));
+		// }
+		// if (isRole) {
+		// 	setFilterState(prev => ({ ...prev, role: isRole }));
+		// }
+		// if (isTag) {
+		// 	setFilterState(prev => ({ ...prev, tag: isTag }));
+		// }
+		// if (isKeyword) {
+		// 	setFilterState(prev => ({ ...prev, keyword: isKeyword }));
+		// }
+		// if (isField) {
+		// 	setFilterState(prev => ({ ...prev, field: Number(isField) }));
+		// }
+		// if (isCourse) {
+		// 	setFilterState(prev => ({ ...prev, course: Number(isCourse) }));
+		// }
+		// if (isProfessor) {
+		// 	setFilterState(prev => ({ ...prev, professor: Number(isProfessor) }));
+		// }
+		setFilterState({
+			scope: isScope ? Number(isScope) : null,
+			category: isCategory ? Number(isCategory) : null,
+			skill: isSkill ? isSkill : [],
+			role: isRole ? isRole : [],
+			tag: isTag ? isTag : [],
+			keyword: isKeyword ? isKeyword : '',
+			field: isField ? Number(isField) : null,
+			course: isCourse ? Number(isCourse) : null,
+			professor: isProfessor ? Number(isProfessor) : null,
+		});
+	}, [searchParams.size]);
 
 	useEffect(() => {
 		setSearchKeyword(filterState.keyword as any);
@@ -328,10 +339,10 @@ const RecruitPage = () => {
 					<section className='wrapper-filters'>
 						<section className='container-filters'>
 							{isLoggedIn && (
-								<Dropdown data={['전체 보기', '교내', '교외']} initialData='범위' scope />
+								<Dropdown data={['모든 범위', '교내', '교외']} initialData='범위' scope />
 							)}
 							<Dropdown
-								data={['전체', '프로젝트', '스터디', '공모전']}
+								data={['모든 유형', '프로젝트', '스터디', '공모전']}
 								initialData='유형'
 								category
 							/>

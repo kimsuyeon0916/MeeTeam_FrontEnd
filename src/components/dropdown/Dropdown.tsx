@@ -7,7 +7,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { applicantFilter, recruitFilterState } from '../../atom';
 import { ManageRole, Keyword } from '../../types';
 import { DropdownArrowUp, DropdownArrow, Clear } from '../../assets';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 interface Dropdown {
 	data?: string[];
@@ -24,19 +24,20 @@ type keyObj = {
 };
 
 const scopeObj: keyObj = {
-	'전체 보기': 0,
+	'모든 범위': 0,
 	교외: 1,
 	교내: 2,
 };
 
 const categoryObj: keyObj = {
-	전체: 0,
+	'모든 유형': 0,
 	프로젝트: 1,
 	스터디: 2,
 	공모전: 3,
 };
 
 const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dropdown) => {
+	const location = useLocation();
 	const [currentValue, setCurrentValue] = useState<string | undefined>(`${initialData}`);
 	const [showDropdown, setShowDropdown] = useState<boolean>(false);
 	const [dropdown, setDropdown] = useState({
@@ -96,7 +97,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		if (applicant && id) {
 			setApplicantFilter(id);
 		} else {
-			if (innerText === '전체') {
+			if (innerText === '모든 유형') {
 				searchParams.delete('category');
 				setSearchParams(searchParams);
 				setShowDropdown(false);
@@ -118,7 +119,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		if (value !== '교내') {
 			setShowDropdown(false);
 		}
-		if (value === '전체 보기') {
+		if (value === '모든 범위') {
 			searchParams.delete('scope');
 			setSearchParams(searchParams);
 			return;
@@ -177,7 +178,6 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		searchParams.delete('course');
 		searchParams.delete('professor');
 		setSearchParams(searchParams);
-		setShowDropdown(false);
 	};
 	const submitInfo = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
@@ -216,21 +216,27 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		if (scope && filterState.scope !== null) {
 			setCurrentValue(getKeyByValue(scopeObj, filterState.scope));
 			setIsScopeSelected(true);
-		} else if (scope && filterState.scope === null) {
+		}
+		if ((scope && filterState.scope === null) || location.search === null) {
 			setCurrentValue('범위');
 			setIsScopeSelected(false);
 		}
-	}, [filterState.scope]);
+	}, [filterState.scope, location.search]);
 
 	useEffect(() => {
 		if (category && filterState.category !== null) {
+			console.log('hi');
 			setCurrentValue(getKeyByValue(categoryObj, filterState.category));
 			setIsCategorySelected(true);
-		} else if (category && filterState.category === null) {
+		}
+		if ((category && filterState.category === null) || location.search === null) {
+			console.log('hi2');
 			setCurrentValue('유형');
 			setIsCategorySelected(false);
 		}
-	}, [filterState.category]);
+	}, [filterState.category, location.search]);
+
+	console.log(filterState.category);
 
 	return (
 		<S.Dropdown
