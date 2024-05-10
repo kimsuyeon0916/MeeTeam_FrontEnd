@@ -10,9 +10,9 @@ const ControlButtons = () => {
 		if (location.pathname.includes('edit')) {
 			navigate(-1);
 		} else {
-			resetFormData();
 			navigate('/');
 		}
+		resetFormData();
 	};
 
 	return (

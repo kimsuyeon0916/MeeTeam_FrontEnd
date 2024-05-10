@@ -89,22 +89,20 @@ const RecruitCreatePage = () => {
 		}
 		if (postAvailable && !location.pathname.includes('edit')) {
 			uploadPost.mutate(formData, {
-				onSuccess: () => {
-					resetFormData();
-				},
+				onSuccess: () => resetFormData(),
 			});
 		}
 		if (postAvailable && location.pathname.includes('edit') && pageNum) {
 			editPost.mutate(
 				{ pageNum, formData },
 				{
-					onSuccess: () => {
-						resetFormData();
-					},
+					onSuccess: () => resetFormData(),
 				}
 			);
 		}
 	};
+
+	resetFormData();
 
 	useEffect(() => {
 		if (data) {
@@ -140,9 +138,6 @@ const RecruitCreatePage = () => {
 			}
 		}
 	}, [data]);
-
-	console.log('formData:', formData);
-	console.log('data:', data);
 
 	useEffect(() => {
 		fixModalBackground(beforeSubmit || isWarnRoleDelete);
