@@ -125,11 +125,12 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		if (value === '모든 범위') {
 			searchParams.delete('scope');
 			setSearchParams(searchParams);
-			return;
+			// return;
+		} else {
+			searchParams.set('scope', scopeObj[value].toString());
+			setSearchParams(searchParams);
+			setIsScopeSelected(true);
 		}
-		searchParams.set('scope', scopeObj[value].toString());
-		setSearchParams(searchParams);
-		setIsScopeSelected(true);
 	};
 
 	const onClickCheckbox = () => {

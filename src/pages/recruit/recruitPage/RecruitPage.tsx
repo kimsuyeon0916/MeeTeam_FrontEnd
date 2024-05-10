@@ -64,6 +64,7 @@ const RecruitPage = () => {
 		queryKey: ['recruit_board', { filterState, isLoggedIn, page }],
 		queryFn: () => getPostList({ filterState, isLoggedIn, page }),
 		staleTime: 6000 * 30,
+		gcTime: 6000 * 60,
 	});
 
 	const onClickDetailed = (event: React.MouseEvent) => {
