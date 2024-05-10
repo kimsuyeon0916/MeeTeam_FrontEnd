@@ -28,8 +28,6 @@ import { useLogin } from '../../../hooks';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { fixModalBackground } from '../../../utils';
 
-const START_PAGE_NUM = 1;
-
 const RecruitPage = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -45,7 +43,8 @@ const RecruitPage = () => {
 			value: '분야를 선택해주세요',
 		},
 	});
-
+	const [isFocused, setIsFocused] = useState(false);
+	const [placeholderText, setPlaceholderText] = useState('제목을 검색해보세요.');
 	const [page, setPage] = useRecoilState<number>(pageState);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [isFieldOpen, setIsFieldOpen] = useState<boolean>(false);
@@ -207,6 +206,16 @@ const RecruitPage = () => {
 		event.stopPropagation();
 	};
 
+	const handleFocusedPlaceholder = () => {
+		setIsFocused(true);
+		setPlaceholderText('검색어 입력');
+	};
+
+	const handleBlurredPlaceholder = () => {
+		setIsFocused(true);
+		setPlaceholderText('제목을 검색해보세요.');
+	};
+
 	useEffect(() => {
 		const outsideClick = (event: MouseEvent) => {
 			const { target } = event;
@@ -258,33 +267,6 @@ const RecruitPage = () => {
 		const isCourse = searchParams.get('course');
 		const isProfessor = searchParams.get('professor');
 
-		// if (isScope) {
-		// 	setFilterState(prev => ({ ...prev, scope: Number(isScope) }));
-		// }
-		// if (isCategory) {
-		// 	setFilterState(prev => ({ ...prev, category: Number(isCategory) }));
-		// }
-		// if (isSkill) {
-		// 	setFilterState(prev => ({ ...prev, skill: isSkill }));
-		// }
-		// if (isRole) {
-		// 	setFilterState(prev => ({ ...prev, role: isRole }));
-		// }
-		// if (isTag) {
-		// 	setFilterState(prev => ({ ...prev, tag: isTag }));
-		// }
-		// if (isKeyword) {
-		// 	setFilterState(prev => ({ ...prev, keyword: isKeyword }));
-		// }
-		// if (isField) {
-		// 	setFilterState(prev => ({ ...prev, field: Number(isField) }));
-		// }
-		// if (isCourse) {
-		// 	setFilterState(prev => ({ ...prev, course: Number(isCourse) }));
-		// }
-		// if (isProfessor) {
-		// 	setFilterState(prev => ({ ...prev, professor: Number(isProfessor) }));
-		// }
 		setFilterState({
 			scope: isScope ? Number(isScope) : null,
 			category: isCategory ? Number(isCategory) : null,
@@ -389,15 +371,17 @@ const RecruitPage = () => {
 						</section>
 						<section className='container-options__search'>
 							<div>
-								<img src={SearchIcon} />
+								<img className='search-icon' src={SearchIcon} />
 							</div>
 							<div className='search-bar'>
 								<input
-									placeholder='제목을 검색해보세요.'
+									placeholder={placeholderText}
 									type='text'
 									onChange={event => setSearchKeyword(event.target.value)}
 									value={searchKeyword}
-									onKeyPress={onKeyPress}
+									onKeyDown={onKeyPress}
+									onFocus={handleFocusedPlaceholder}
+									onBlur={handleBlurredPlaceholder}
 								/>
 							</div>
 							{searchKeyword && (

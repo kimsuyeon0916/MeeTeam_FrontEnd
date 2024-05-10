@@ -217,26 +217,22 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 			setCurrentValue(getKeyByValue(scopeObj, filterState.scope));
 			setIsScopeSelected(true);
 		}
-		if ((scope && filterState.scope === null) || location.search === null) {
+		if (scope && filterState.scope === null) {
 			setCurrentValue('범위');
 			setIsScopeSelected(false);
 		}
-	}, [filterState.scope, location.search]);
+	}, [filterState.scope]);
 
 	useEffect(() => {
 		if (category && filterState.category !== null) {
-			console.log('hi');
 			setCurrentValue(getKeyByValue(categoryObj, filterState.category));
 			setIsCategorySelected(true);
 		}
-		if ((category && filterState.category === null) || location.search === null) {
-			console.log('hi2');
+		if (category && filterState.category === null) {
 			setCurrentValue('유형');
 			setIsCategorySelected(false);
 		}
-	}, [filterState.category, location.search]);
-
-	console.log(filterState.category);
+	}, [filterState.category]);
 
 	return (
 		<S.Dropdown

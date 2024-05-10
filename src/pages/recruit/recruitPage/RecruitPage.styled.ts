@@ -397,19 +397,25 @@ const RecruitPage = styled.div<RecruitPage>`
 			border: 0.75px solid #dcdcdc;
 			background: #fff;
 			color: #373f41;
-			font-size: 1.2rem;
-			font-weight: 400;
-			line-height: 1.35rem;
-			letter-spacing: 0.015rem;
 
-			.search-bar {
+			&:hover {
+				transition: 0.2s ease-in-out;
+				border: 0.75px solid #5877fc;
+			}
+
+			&:focus-within {
+				border: 0.75px solid #5877fc;
+
+				.search-icon {
+					filter: invert(0%) sepia(83%) saturate(7431%) hue-rotate(54deg) brightness(77%)
+						contrast(114%);
+				}
 			}
 
 			input {
 				width: 16.5rem;
 				border: none;
 				outline: none;
-				font-size: 1.2rem;
 				background-color: transparent;
 				font-size: 1.4rem;
 			}
