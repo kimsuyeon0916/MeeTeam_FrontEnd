@@ -89,55 +89,64 @@ const RecruitCreatePage = () => {
 		}
 		if (postAvailable && !location.pathname.includes('edit')) {
 			uploadPost.mutate(formData, {
-				onSuccess: () => resetFormData(),
+				onSuccess: () => {
+					resetFormData();
+				},
 			});
 		}
 		if (postAvailable && location.pathname.includes('edit') && pageNum) {
 			editPost.mutate(
 				{ pageNum, formData },
 				{
-					onSuccess: () => resetFormData(),
+					onSuccess: () => {
+						resetFormData();
+					},
 				}
 			);
 		}
 	};
 
 	useEffect(() => {
-		fixModalBackground(beforeSubmit || isWarnRoleDelete);
-	}, [beforeSubmit, isWarnRoleDelete]);
-
-	useEffect(() => {
-		const convertRoleInfo = (roleInfo: RoleInfo): RoleForPost => {
-			return {
-				roleId: roleInfo.roleId,
-				count: roleInfo.recruitCount,
-				skillIds: roleInfo.skills.map(e => e.id),
-				skills: roleInfo.skills,
-				roleName: roleInfo.roleName,
+		if (data) {
+			const convertRoleInfo = (roleInfo: RoleInfo): RoleForPost => {
+				return {
+					roleId: roleInfo.roleId,
+					count: roleInfo.recruitCount,
+					skillIds: roleInfo.skills.map(e => e.id),
+					skills: roleInfo.skills,
+					roleName: roleInfo.roleName,
+				};
 			};
-		};
-		const transformedRoles = data?.recruitmentRoles.map(convertRoleInfo);
-		if (isSuccess && location.pathname.includes('edit') && data && transformedRoles) {
-			setFormData({
-				scope: data.scope,
-				category: data.category,
-				deadline: data.deadline,
-				proceedingStart: data.proceedingStart,
-				proceedingEnd: data.proceedingEnd,
-				fieldId: 1,
-				proceedType: data.proceedType,
-				courseTag: {
-					courseTagName: data.courseName,
-					courseProfessor: data.courseProfessor,
-					isCourse: data.courseName || data.courseProfessor ? true : false,
-				},
-				recruitmentRoles: transformedRoles,
-				tags: data.tags.map(e => e.name),
-				title: data.title,
-				content: data.content,
-			});
+			const transformedRoles = data.recruitmentRoles.map(convertRoleInfo);
+			if (isSuccess && location.pathname.includes('edit') && transformedRoles) {
+				setFormData({
+					scope: data.scope,
+					category: data.category,
+					deadline: data.deadline,
+					proceedingStart: data.proceedingStart,
+					proceedingEnd: data.proceedingEnd,
+					fieldId: 1,
+					proceedType: data.proceedType,
+					courseTag: {
+						courseTagName: data.courseName,
+						courseProfessor: data.courseProfessor,
+						isCourse: data.courseName || data.courseProfessor ? true : false,
+					},
+					recruitmentRoles: transformedRoles,
+					tags: data.tags.map(e => e.name),
+					title: data.title,
+					content: data.content,
+				});
+			}
 		}
 	}, [data]);
+
+	console.log('formData:', formData);
+	console.log('data:', data);
+
+	useEffect(() => {
+		fixModalBackground(beforeSubmit || isWarnRoleDelete);
+	}, [beforeSubmit, isWarnRoleDelete]);
 
 	return (
 		<S.RecruitCreatePage>

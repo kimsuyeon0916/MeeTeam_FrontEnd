@@ -28,6 +28,12 @@ const DetailedInformation = styled.section`
 				border-radius: 0.1rem;
 				width: 100%;
 				margin-top: 0.8rem;
+				strong {
+					font-weight: bold;
+				}
+				em {
+					font-style: italic;
+				}
 			}
 
 			.ql-container.ql-snow {
