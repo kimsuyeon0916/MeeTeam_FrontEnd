@@ -12,10 +12,8 @@ const DetailedInformation = () => {
 	const [formData, setFormData] = useRecoilState(recruitInputState);
 	const { validMessage, isValid } = useValid(formData);
 
-	const preventInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		const forbiddenKeys = ['\t'];
-
-		if (forbiddenKeys.includes(event.key)) {
+	const preventInput = (event: React.KeyboardEvent<ReactQuill>) => {
+		if (event.key === 'Tab') {
 			event.preventDefault();
 		}
 	};
