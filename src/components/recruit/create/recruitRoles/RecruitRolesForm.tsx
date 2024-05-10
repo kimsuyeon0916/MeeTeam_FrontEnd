@@ -23,6 +23,9 @@ const RecruitRoleForm = () => {
 					<h4>모집 역할</h4>
 				</section>
 				<section className='wrapper-roles'>
+					<span className='input-subtitle'>
+						최소 1개에서 최대 10개까지 역할을 입력하세요. <span>*</span>
+					</span>
 					<InputRoleForm />
 					<article className='container-role__list'>
 						{info.recruitmentRoles.map(userRole => (

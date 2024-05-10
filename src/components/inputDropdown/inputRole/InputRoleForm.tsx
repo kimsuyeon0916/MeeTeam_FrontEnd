@@ -206,9 +206,6 @@ const InputRoleForm = () => {
 			$isCount={roleData.count !== null}
 		>
 			<article className='inputs' ref={dropdownRef}>
-				<span className='inputs-subtitle body2-semibold'>
-					역할 입력 <span className='dot'> *</span>
-				</span>
 				<section className='inputs-top'>
 					<section className='container-role__input'>
 						<input

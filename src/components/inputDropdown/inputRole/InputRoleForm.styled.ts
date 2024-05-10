@@ -62,6 +62,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		width: 100%;
 		gap: 2.4rem;
 		position: relative;
+		margin-top: -1.2rem;
 
 		.inputs-subtitle {
 			margin-bottom: -1.6rem;
