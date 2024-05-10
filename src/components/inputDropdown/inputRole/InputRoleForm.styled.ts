@@ -147,7 +147,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 
 		.dropdown-skill {
 			position: absolute;
-			top: 15rem;
+			top: 12.5rem;
 			width: 66rem;
 			border-radius: 1rem;
 			border: 1px solid #e3e3e3;

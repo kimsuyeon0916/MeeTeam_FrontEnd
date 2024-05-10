@@ -37,7 +37,6 @@ const categoryObj: keyObj = {
 };
 
 const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dropdown) => {
-	const location = useLocation();
 	const [currentValue, setCurrentValue] = useState<string | undefined>(`${initialData}`);
 	const [showDropdown, setShowDropdown] = useState<boolean>(false);
 	const [dropdown, setDropdown] = useState({
@@ -70,11 +69,15 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		queryKey: ['searchCourse', keywordCourse],
 		queryFn: () => getCourseKeyword(keywordCourse),
 		enabled: isLoggedIn,
+		staleTime: Infinity,
+		gcTime: Infinity,
 	});
 	const { data: dataProfessor, isLoading: isLoadingProfessor } = useQuery({
 		queryKey: ['searchProfessor', keywordProfessor],
 		queryFn: () => getProfessorKeyword(keywordProfessor),
 		enabled: isLoggedIn,
+		staleTime: Infinity,
+		gcTime: Infinity,
 	});
 
 	const getKeyByValue = (obj: keyObj, value: number) => {

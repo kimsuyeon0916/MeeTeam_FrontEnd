@@ -42,12 +42,15 @@ const InputRoleForm = () => {
 	const { data: dataRole, isLoading: isLoadingRole } = useQuery({
 		queryKey: ['searchRole', keywordRole],
 		queryFn: () => getRoleKeyword(keywordRole as string),
-		staleTime: 10000,
+		staleTime: Infinity,
+		gcTime: Infinity,
 	});
 
 	const { data: dataSkill, isLoading: isLoadingSkill } = useQuery({
 		queryKey: ['searchSkill', keywordSkill],
 		queryFn: () => getSkillKeyword(keywordSkill),
+		staleTime: Infinity,
+		gcTime: Infinity,
 	});
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -257,6 +260,7 @@ const InputRoleForm = () => {
 						/>
 						<img src={Search} className='icon-search' />
 					</section>
+					<section>{}</section>
 					{dropdown.skill && (
 						<section className='dropdown-skill'>
 							<section className='list-skill'>

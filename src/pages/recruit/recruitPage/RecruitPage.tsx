@@ -63,6 +63,7 @@ const RecruitPage = () => {
 	const { data, isLoading } = useQuery({
 		queryKey: ['recruit_board', { filterState, isLoggedIn, page }],
 		queryFn: () => getPostList({ filterState, isLoggedIn, page }),
+		staleTime: 6000 * 30,
 	});
 
 	const onClickDetailed = (event: React.MouseEvent) => {

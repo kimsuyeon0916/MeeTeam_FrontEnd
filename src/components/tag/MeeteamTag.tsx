@@ -19,6 +19,8 @@ const MeeteamTag = () => {
 	const { data, isSuccess } = useQuery({
 		queryKey: ['keywordTag', keywordTag],
 		queryFn: () => getTagKeyword(keywordTag),
+		staleTime: Infinity,
+		gcTime: Infinity,
 	});
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
