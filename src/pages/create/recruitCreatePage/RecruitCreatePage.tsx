@@ -102,42 +102,46 @@ const RecruitCreatePage = () => {
 		}
 	};
 
+	resetFormData();
+
+	useEffect(() => {
+		if (data) {
+			const convertRoleInfo = (roleInfo: RoleInfo): RoleForPost => {
+				return {
+					roleId: roleInfo.roleId,
+					count: roleInfo.recruitCount,
+					skillIds: roleInfo.skills.map(e => e.id),
+					skills: roleInfo.skills,
+					roleName: roleInfo.roleName,
+				};
+			};
+			const transformedRoles = data.recruitmentRoles.map(convertRoleInfo);
+			if (isSuccess && location.pathname.includes('edit') && transformedRoles) {
+				setFormData({
+					scope: data.scope,
+					category: data.category,
+					deadline: data.deadline,
+					proceedingStart: data.proceedingStart,
+					proceedingEnd: data.proceedingEnd,
+					fieldId: 1,
+					proceedType: data.proceedType,
+					courseTag: {
+						courseTagName: data.courseName,
+						courseProfessor: data.courseProfessor,
+						isCourse: data.courseName || data.courseProfessor ? true : false,
+					},
+					recruitmentRoles: transformedRoles,
+					tags: data.tags.map(e => e.name),
+					title: data.title,
+					content: data.content,
+				});
+			}
+		}
+	}, [data]);
+
 	useEffect(() => {
 		fixModalBackground(beforeSubmit || isWarnRoleDelete);
 	}, [beforeSubmit, isWarnRoleDelete]);
-
-	useEffect(() => {
-		const convertRoleInfo = (roleInfo: RoleInfo): RoleForPost => {
-			return {
-				roleId: roleInfo.roleId,
-				count: roleInfo.recruitCount,
-				skillIds: roleInfo.skills.map(e => e.id),
-				skills: roleInfo.skills,
-				roleName: roleInfo.roleName,
-			};
-		};
-		const transformedRoles = data?.recruitmentRoles.map(convertRoleInfo);
-		if (isSuccess && location.pathname.includes('edit') && data && transformedRoles) {
-			setFormData({
-				scope: data.scope,
-				category: data.category,
-				deadline: data.deadline,
-				proceedingStart: data.proceedingStart,
-				proceedingEnd: data.proceedingEnd,
-				fieldId: 1,
-				proceedType: data.proceedType,
-				courseTag: {
-					courseTagName: data.courseName,
-					courseProfessor: data.courseProfessor,
-					isCourse: data.courseName || data.courseProfessor ? true : false,
-				},
-				recruitmentRoles: transformedRoles,
-				tags: data.tags.map(e => e.name),
-				title: data.title,
-				content: data.content,
-			});
-		}
-	}, [data]);
 
 	return (
 		<S.RecruitCreatePage>

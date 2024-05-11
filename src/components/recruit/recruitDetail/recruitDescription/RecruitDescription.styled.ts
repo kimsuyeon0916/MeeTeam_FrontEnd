@@ -15,9 +15,10 @@ const RecruitDescription = styled.article`
 		color: #373f41;
 		font-size: 1.6rem;
 		font-weight: 500;
-		line-height: 1.9rem;
+		font-family: Pretendard;
 		letter-spacing: 0.0032rem;
 		box-sizing: border-box;
+		line-height: 1.42;
 
 		h1 {
 			font-size: 3.2rem;
@@ -40,6 +41,15 @@ const RecruitDescription = styled.article`
 		strong {
 			font-weight: bold;
 		}
+		em {
+			font-style: italic;
+		}
+		blockquote {
+			border-left: 4px solid #ccc;
+			margin-bottom: 5px;
+			margin-top: 5px;
+			padding-left: 16px;
+		}
 		ul {
 			list-style-type: circle;
 			padding-left: 2rem;
@@ -59,16 +69,6 @@ const RecruitDescription = styled.article`
 
 		.ql-indent-3 {
 			margin-left: 15rem;
-		}
-
-		em {
-			font-style: italic;
-		}
-		blockquote {
-			border-left: 4px solid #ccc;
-			margin-bottom: 5px;
-			margin-top: 5px;
-			padding-left: 16px;
 		}
 	}
 `;

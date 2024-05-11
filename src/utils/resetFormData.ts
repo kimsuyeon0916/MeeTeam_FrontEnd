@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { recruitInputState } from '../atom';
 import { useLocation } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
