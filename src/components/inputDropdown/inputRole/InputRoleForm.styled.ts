@@ -16,6 +16,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 	.txt-big {
 		color: #f7faff;
 		font-size: 1.6rem;
+		letter-spacing: 0.000032rem;
 	}
 
 	.txt4 {
@@ -62,6 +63,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		width: 100%;
 		gap: 2.4rem;
 		position: relative;
+		margin-top: -1.2rem;
 
 		.inputs-subtitle {
 			margin-bottom: -1.6rem;
@@ -146,7 +148,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 
 		.dropdown-skill {
 			position: absolute;
-			top: 15rem;
+			top: 12.5rem;
 			width: 66rem;
 			border-radius: 1rem;
 			border: 1px solid #e3e3e3;
@@ -255,7 +257,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 
 		.container-skills {
 			position: relative;
-			width: 66rem;
+			width: 65.5rem;
 			height: 4.8rem;
 			display: flex;
 			align-items: center;
@@ -313,6 +315,14 @@ const InputRoleForm = styled.article<InputRoleForm>`
 			border-radius: 0.6rem;
 			background: #5877fc;
 		}
+	}
+
+	.valid-length__msg {
+		color: #f85858;
+		font-family: Pretendard;
+		font-size: 1.4rem;
+		font-weight: 600;
+		margin-bottom: -1rem;
 	}
 `;
 

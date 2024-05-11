@@ -54,6 +54,8 @@ import type {
 	ApplicantList,
 	DetailedFilter,
 	ManageListResult,
+	RecruitApplicant,
+	RecruitApplicantsList,
 } from './recruit/response';
 import type { JsxElementComponentProps, StringElementProps } from './indexSigniture';
 import type { Search } from './search';
@@ -125,4 +127,6 @@ export type {
 	ApplicantList,
 	DetailedFilter,
 	ManageListResult,
+	RecruitApplicant,
+	RecruitApplicantsList,
 };

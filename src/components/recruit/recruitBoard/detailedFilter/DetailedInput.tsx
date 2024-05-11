@@ -150,7 +150,6 @@ const DetailedInput = ({
 		}
 
 		setSearchParams(searchParams);
-		closeHandler();
 	};
 
 	const onClickDelete = (event: React.MouseEvent<HTMLButtonElement>, id: number) => {

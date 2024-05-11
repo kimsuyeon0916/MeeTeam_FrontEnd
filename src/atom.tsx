@@ -98,6 +98,11 @@ export const applicantModalState = atom({
 	},
 });
 
+export const warnRoleDeleteModalState = atom({
+	key: 'warnRoleDeleteModalState',
+	default: false,
+});
+
 export const recruitInputState = atom<InputState>({
 	key: 'recruitInputState',
 	default: {

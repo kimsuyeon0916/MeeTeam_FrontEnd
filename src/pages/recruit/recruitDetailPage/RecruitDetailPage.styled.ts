@@ -104,8 +104,6 @@ const Footer = styled.footer`
 	.btn-txt__big {
 		color: #373f41;
 		font-size: 1.6rem;
-		line-height: 1.9rem;
-		letter-spacing: 0.0032rem;
 	}
 
 	.container-btn {
@@ -115,32 +113,71 @@ const Footer = styled.footer`
 		.btn-bookmark {
 			height: 4.8rem;
 			padding: 1.2rem 3.2rem;
-			border-radius: 0.8rem;
-			border: 1.5px solid #e3e3e3;
-			background: #fff;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			gap: 0.8rem;
-			font-size: 1.5rem;
+			font-size: 1.6rem;
+			border-radius: 0.8rem;
+			border: 1px solid #6091f0;
+			background: #fff;
+
+			&:hover {
+				transition: 0.2s ease-in-out;
+				border: 1px solid #6091f0;
+				box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+			}
 		}
 
 		.apply {
 			height: 4.8rem;
 			padding: 1.2rem 7.2rem;
-			border-radius: 0.6rem;
-			font-size: 1.5rem;
+			border-radius: 0.8rem;
+			font-size: 1.6rem;
 			background: linear-gradient(90deg, #6091f0 0%, #723dff 100%);
-			color: #fff;
+			color: #f7faff;
+
+			&:hover {
+				color: #fff;
+				font-weight: 600;
+				box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+			}
+		}
+
+		.default {
+			&:hover {
+				border: 1px solid #373f41;
+				transition: 0.2s ease-in-out;
+			}
+
+			&:active {
+				border: 1px solid #373f41;
+				background: #747b7f;
+
+				img {
+					filter: invert(100%) sepia(18%) saturate(0%) hue-rotate(27deg) brightness(106%)
+						contrast(101%);
+				}
+			}
 		}
 
 		.cancel {
 			height: 4.8rem;
 			padding: 1.2rem 7.2rem;
-			border-radius: 0.6rem;
-			font-size: 1.5rem;
+			border-radius: 0.8rem;
+			font-size: 1.6rem;
 			background-color: #f85858;
 			color: #fff;
+
+			&:hover {
+				transition: 0.2s ease-in-out;
+				background: #fb9b9b;
+			}
+
+			&:active {
+				background: #fedede;
+				color: #953535;
+			}
 		}
 
 		.btn-edit,
@@ -167,6 +204,16 @@ const Footer = styled.footer`
 			border-radius: 0.6rem;
 			background: #5877fc;
 			color: #fff;
+
+			&:hover {
+				background: #2f4fd9;
+				color: #f7faff;
+			}
+
+			&:active {
+				background: #0e2690;
+				color: #f7faff;
+			}
 		}
 
 		.btn-close {
@@ -179,6 +226,15 @@ const Footer = styled.footer`
 			border-radius: 0.6rem;
 			background: #f85858;
 			color: #fff;
+
+			&:hover {
+				background: #fb9b9b;
+			}
+
+			&:active {
+				background: #fedede;
+				color: #953535;
+			}
 		}
 
 		.btn-list {
@@ -188,6 +244,7 @@ const Footer = styled.footer`
 			border: 1px solid #e3e3e3;
 			background: #fff;
 		}
+
 		.btn-closed {
 			height: 4.8rem;
 			padding: 1.2rem 3.2rem;

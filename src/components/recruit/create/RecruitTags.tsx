@@ -1,10 +1,7 @@
 import React from 'react';
 import { MeeteamTag } from '../../index';
-import { useRecoilValue } from 'recoil';
-import { recruitInputState } from '../../../atom';
 
 const RecruitTags = () => {
-	const formData = useRecoilValue(recruitInputState);
 	return (
 		<>
 			<section className='container-tags'>
