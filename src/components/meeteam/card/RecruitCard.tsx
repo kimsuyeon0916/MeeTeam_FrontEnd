@@ -40,7 +40,9 @@ const RecruitCard = ({
 	});
 	const setNeedLoginModal = useSetRecoilState(needLoginModalState);
 	const extractDeadline = new Date(deadline);
-	const convertedDeadline = `${extractDeadline.getFullYear()}/${extractDeadline.getMonth()}/${extractDeadline.getDate()}`;
+	const convertedDeadline = `${extractDeadline.getFullYear()}/${
+		extractDeadline.getMonth() + 1
+	}/${extractDeadline.getDate()}`;
 
 	const onClickContent = () => {
 		navigate(`/recruitment/postings/${id}`);

@@ -1,38 +1,18 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
-import { recruitInputState } from '../../../atom';
-import { simpleDate } from '../../../utils';
+import { resetFormData } from '../../../utils';
 
 const ControlButtons = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const setFormData = useSetRecoilState(recruitInputState);
-
-	const resetFormData = () => {
-		setFormData({
-			scope: '',
-			category: '',
-			fieldId: 1,
-			deadline: simpleDate(new Date()),
-			proceedType: '',
-			proceedingStart: simpleDate(new Date()),
-			proceedingEnd: simpleDate(new Date()),
-			courseTag: {
-				isCourse: false,
-				courseTagName: '',
-				courseProfessor: '',
-			},
-			recruitmentRoles: [],
-			tags: [],
-			title: '',
-			content: '',
-		});
-	};
 
 	const cancelHandler = () => {
+		if (location.pathname.includes('edit')) {
+			navigate(-1);
+		} else {
+			navigate('/');
+		}
 		resetFormData();
-		navigate('/');
 	};
 
 	return (

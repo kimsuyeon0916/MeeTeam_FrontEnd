@@ -23,6 +23,7 @@ const Header = () => {
 		galary: false,
 		inform: false,
 	});
+	const { mutate: signOut } = useSignOut({ setUserState });
 
 	const goRecruit = () => {
 		navigate('/');
@@ -38,10 +39,8 @@ const Header = () => {
 			professor: null,
 		});
 	};
+
 	const goGalary = () => {
-		setIsWait(true);
-	};
-	const goInformationUse = () => {
 		setIsWait(true);
 	};
 
@@ -50,6 +49,15 @@ const Header = () => {
 			navigate('/signin');
 		} else {
 			setOpenDrop(prev => !prev);
+		}
+	};
+
+	const handleLogOutButtonClick = () => {
+		const confirm = window.confirm('로그아웃 하시겠습니까?');
+		if (confirm) {
+			signOut();
+			navigate('/');
+			setOpenDrop(false);
 		}
 	};
 
@@ -77,18 +85,6 @@ const Header = () => {
 	useEffect(() => {
 		fixModalBackground(isWait);
 	}, [isWait]);
-
-	// 로그아웃
-	const { mutate: signOut } = useSignOut({ setUserState });
-
-	const handleLogOutButtonClick = () => {
-		const confirm = window.confirm('로그아웃 하시겠습니까?');
-		if (confirm) {
-			signOut();
-			navigate('/');
-			setOpenDrop(false);
-		}
-	};
 
 	resetFormData();
 

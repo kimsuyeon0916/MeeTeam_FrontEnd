@@ -51,6 +51,11 @@ export const modules = {
 			['clean'],
 		],
 	},
+	keyboard: {
+		bindings: {
+			tab: false,
+		},
+	},
 };
 
 export const formats = [
