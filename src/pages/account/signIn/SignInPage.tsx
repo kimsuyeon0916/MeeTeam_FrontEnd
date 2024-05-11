@@ -6,6 +6,7 @@ import { useCheckExist } from '../../../hooks';
 import { useSetRecoilState } from 'recoil';
 import { userState } from '../../../atom';
 import { MeeteamLogoLarge } from '../../../assets';
+import secureLocalStorage from 'react-secure-storage';
 
 const SignInPage = () => {
 	const navigate = useNavigate();
@@ -19,7 +20,10 @@ const SignInPage = () => {
 	const setUserState = useSetRecoilState(userState);
 
 	const handleNaverSignInSuccess = () => {
-		if (localStorage?.ACCESS_TOKEN_KEY) {
+		// if (localStorage?.ACCESS_TOKEN_KEY) {
+		// 	return navigate('/');
+		// }
+		if (secureLocalStorage.getItem('ACCESS_TOKEN_KEY')) {
 			return navigate('/');
 		}
 		return navigate('/signup/school');

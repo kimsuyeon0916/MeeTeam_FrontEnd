@@ -24,7 +24,6 @@ const Header = () => {
 		inform: false,
 	});
 	const { mutate: signOut } = useSignOut({ setUserState });
-
 	const goRecruit = () => {
 		navigate('/');
 		setFilterState({

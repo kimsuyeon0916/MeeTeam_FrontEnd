@@ -28,8 +28,10 @@ const ProfileDetailsPage = () => {
 	const { data: user, isSuccess } = useReadProfile(userId);
 
 	useEffect(() => {
+		const isLogin = userInfo?.isLogin;
 		if (isSuccess) {
-			userInfo?.userId === userId && setUserState({ ...user, userId }); // 본인인지 아닌지 확인 로직 필요
+			// 로그인 여부 추가했음.
+			userInfo?.userId === userId && setUserState({ ...user, userId, isLogin }); // 본인인지 아닌지 확인 로직 필요
 		}
 	}, [isSuccess]);
 

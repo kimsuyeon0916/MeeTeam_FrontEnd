@@ -36,11 +36,16 @@ export const useCheckExist = ({ onSuccess, setUserState }: AuthProps = {}) => {
 		mutationFn: checkExist,
 		onSuccess: data => {
 			if (data?.accessToken) {
-				localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
-				setUserState?.({ userId: data.userId, nickname: data.nickname, imageUrl: data.imageUrl });
+				secureLocalStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
+				setUserState?.({
+					userId: data.userId,
+					nickname: data.nickname,
+					imageUrl: data.imageUrl,
+					isLogin: true,
+				});
 			}
 			if (data?.platformId) {
-				localStorage.setItem(PLATFORM_ID, data.platformId);
+				secureLocalStorage.setItem(PLATFORM_ID, data.platformId);
 			}
 			onSuccess?.();
 		},
@@ -55,9 +60,14 @@ export const useNaverSignUp = ({ onSuccess, setUserState }: AuthProps = {}) => {
 		mutationFn: signUp,
 		onSuccess: data => {
 			if (data?.accessToken) {
-				localStorage.removeItem(PLATFORM_ID);
-				localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
-				setUserState?.({ userId: data.userId, nickname: data.nickname, imageUrl: data.imageUrl });
+				secureLocalStorage.removeItem(PLATFORM_ID);
+				secureLocalStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
+				setUserState?.({
+					userId: data.userId,
+					nickname: data.nickname,
+					imageUrl: data.imageUrl,
+					isLogin: true,
+				});
 				onSuccess?.();
 			}
 		},
@@ -117,7 +127,7 @@ export const useSignOut = ({ onSuccess, setUserState }: AuthProps = {}) => {
 	return useMutation({
 		mutationFn: signOut,
 		onSuccess: () => {
-			localStorage.removeItem(ACCESS_TOKEN_KEY);
+			secureLocalStorage.removeItem(ACCESS_TOKEN_KEY);
 			setUserState?.(null);
 			onSuccess?.();
 		},

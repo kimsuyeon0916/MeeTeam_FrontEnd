@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Header = styled.header<{ $isLogin: boolean }>`
+const Header = styled.header<{ $isLogin?: boolean }>`
 	position: relative;
 	border-bottom: 0.375px solid #e3e3e3;
 
