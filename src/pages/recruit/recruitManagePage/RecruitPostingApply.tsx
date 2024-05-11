@@ -38,6 +38,10 @@ const RecruitPostingApply = () => {
 		refetch();
 	}, [isClosed, page]);
 
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [page]);
+
 	return (
 		<S.RecruitManage>
 			<article>

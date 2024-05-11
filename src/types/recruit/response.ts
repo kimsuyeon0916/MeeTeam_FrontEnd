@@ -48,6 +48,15 @@ export interface RecruitTags {
 	name: string;
 }
 
+export interface RecruitApplicant {
+	roleId?: number;
+	applicantCount?: number;
+}
+
+export interface RecruitApplicantsList {
+	applicantsList?: RecruitApplicant[];
+}
+
 export interface RecruitPostings {
 	isWriter: boolean;
 	isApplied: boolean;

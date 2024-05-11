@@ -23,10 +23,14 @@ const ContainerCourse = () => {
 	const { data: dataCourse, isLoading: isLoadingCourse } = useQuery({
 		queryKey: ['searchCourse', keywordCourse],
 		queryFn: () => getCourseKeyword(keywordCourse),
+		staleTime: Infinity,
+		gcTime: Infinity,
 	});
 	const { data: dataProfessor, isLoading: isLoadingProfessor } = useQuery({
 		queryKey: ['searchProfessor', keywordProfessor],
 		queryFn: () => getProfessorKeyword(keywordProfessor),
+		staleTime: Infinity,
+		gcTime: Infinity,
 	});
 
 	const onChangeCourse = (event: React.ChangeEvent<HTMLInputElement>) => {

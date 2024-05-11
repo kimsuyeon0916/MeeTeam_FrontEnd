@@ -7,7 +7,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { applicantFilter, recruitFilterState } from '../../atom';
 import { ManageRole, Keyword } from '../../types';
 import { DropdownArrowUp, DropdownArrow, Clear } from '../../assets';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 interface Dropdown {
 	data?: string[];
@@ -24,13 +24,13 @@ type keyObj = {
 };
 
 const scopeObj: keyObj = {
-	'전체 보기': 0,
+	'모든 범위': 0,
 	교외: 1,
 	교내: 2,
 };
 
 const categoryObj: keyObj = {
-	전체: 0,
+	'모든 유형': 0,
 	프로젝트: 1,
 	스터디: 2,
 	공모전: 3,
@@ -69,11 +69,15 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		queryKey: ['searchCourse', keywordCourse],
 		queryFn: () => getCourseKeyword(keywordCourse),
 		enabled: isLoggedIn,
+		staleTime: Infinity,
+		gcTime: Infinity,
 	});
 	const { data: dataProfessor, isLoading: isLoadingProfessor } = useQuery({
 		queryKey: ['searchProfessor', keywordProfessor],
 		queryFn: () => getProfessorKeyword(keywordProfessor),
 		enabled: isLoggedIn,
+		staleTime: Infinity,
+		gcTime: Infinity,
 	});
 
 	const getKeyByValue = (obj: keyObj, value: number) => {
@@ -96,7 +100,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		if (applicant && id) {
 			setApplicantFilter(id);
 		} else {
-			if (innerText === '전체') {
+			if (innerText === '모든 유형') {
 				searchParams.delete('category');
 				setSearchParams(searchParams);
 				setShowDropdown(false);
@@ -118,14 +122,15 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		if (value !== '교내') {
 			setShowDropdown(false);
 		}
-		if (value === '전체 보기') {
+		if (value === '모든 범위') {
 			searchParams.delete('scope');
 			setSearchParams(searchParams);
-			return;
+			// return;
+		} else {
+			searchParams.set('scope', scopeObj[value].toString());
+			setSearchParams(searchParams);
+			setIsScopeSelected(true);
 		}
-		searchParams.set('scope', scopeObj[value].toString());
-		setSearchParams(searchParams);
-		setIsScopeSelected(true);
 	};
 
 	const onClickCheckbox = () => {
@@ -177,7 +182,6 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		searchParams.delete('course');
 		searchParams.delete('professor');
 		setSearchParams(searchParams);
-		setShowDropdown(false);
 	};
 	const submitInfo = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
@@ -216,7 +220,8 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		if (scope && filterState.scope !== null) {
 			setCurrentValue(getKeyByValue(scopeObj, filterState.scope));
 			setIsScopeSelected(true);
-		} else if (scope && filterState.scope === null) {
+		}
+		if (scope && filterState.scope === null) {
 			setCurrentValue('범위');
 			setIsScopeSelected(false);
 		}
@@ -226,7 +231,8 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		if (category && filterState.category !== null) {
 			setCurrentValue(getKeyByValue(categoryObj, filterState.category));
 			setIsCategorySelected(true);
-		} else if (category && filterState.category === null) {
+		}
+		if (category && filterState.category === null) {
 			setCurrentValue('유형');
 			setIsCategorySelected(false);
 		}

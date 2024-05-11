@@ -11,10 +11,22 @@ const LinkToList = styled.article`
 		justify-content: center;
 		align-items: center;
 		border-radius: 0.6rem;
-		border: 0.15rem solid #e3e3e3;
+		border: 1px solid #e3e3e3;
 		background: #fff;
 		font-size: 1.6rem;
 		color: #373f41;
+
+		&:hover {
+			border: 1px solid #373f41;
+			transition: 0.2s ease-in-out;
+		}
+
+		&:active {
+			border: 1px solid #373f41;
+			background: #747b7f;
+			color: #fff;
+			transition: 0.2s ease-in-out;
+		}
 	}
 `;
 

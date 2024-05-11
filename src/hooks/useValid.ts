@@ -101,7 +101,10 @@ export default function useValid(data: InputState) {
 		} else {
 			setValidMessage(prev => ({ ...prev, recruitRole: '' }));
 		}
-		setIsValid(prev => ({ ...prev, isRole: data.recruitmentRoles.length > 0 }));
+		setIsValid(prev => ({
+			...prev,
+			isRole: data.recruitmentRoles.length > 0 && data.recruitmentRoles.length < 11,
+		}));
 	}, [data.recruitmentRoles.length]);
 
 	return { validMessage, isValid };
