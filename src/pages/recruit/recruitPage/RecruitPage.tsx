@@ -63,8 +63,6 @@ const RecruitPage = () => {
 	const { data, isLoading } = useQuery({
 		queryKey: ['recruit_board', { filterState, isLoggedIn, page }],
 		queryFn: () => getPostList({ filterState, isLoggedIn, page }),
-		staleTime: 6000 * 30,
-		gcTime: 6000 * 60,
 	});
 
 	const onClickDetailed = (event: React.MouseEvent) => {
@@ -280,7 +278,7 @@ const RecruitPage = () => {
 			course: isCourse ? Number(isCourse) : null,
 			professor: isProfessor ? Number(isProfessor) : null,
 		});
-	}, [searchParams.size]);
+	}, []);
 
 	useEffect(() => {
 		setSearchKeyword(filterState.keyword as any);
