@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { Header } from './components/index';
+import { Footer, Header } from './components/index';
 import { ScrollToTop } from './utils/index';
 import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -22,6 +22,7 @@ function App() {
 						<ScrollToTop />
 						<Outlet />
 					</main>
+					<Footer />
 				</RecoilRoot>
 			</QueryClientProvider>
 		</LocalizationProvider>
