@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { SetterOrUpdater } from 'recoil';
 import {
 	checkExist,
@@ -124,12 +124,14 @@ export const useReadDepartmentList = (universityId: string) => {
  * @description 로그아웃 API를 호출하는 hook입니다. 성공 시 access token을 로컬 스토리지에서 제거합니다.
  */
 export const useSignOut = ({ onSuccess, setUserState }: AuthProps = {}) => {
+	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: signOut,
 		onSuccess: () => {
 			secureLocalStorage.removeItem(ACCESS_TOKEN_KEY);
 			setUserState?.(null);
 			onSuccess?.();
+			queryClient.invalidateQueries({ queryKey: ['recruit_board'] });
 		},
 	});
 };
