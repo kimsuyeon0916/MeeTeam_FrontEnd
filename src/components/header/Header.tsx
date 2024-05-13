@@ -53,12 +53,9 @@ const Header = () => {
 	};
 
 	const handleLogOutButtonClick = () => {
-		const confirm = window.confirm('로그아웃 하시겠습니까?');
-		if (confirm) {
-			signOut();
-			navigate('/');
-			setOpenDrop(false);
-		}
+		signOut();
+		navigate('/');
+		setOpenDrop(false);
 	};
 
 	useEffect(() => {
