@@ -24,12 +24,29 @@ const SignInPageLayout = styled(Account.AccountLayout)<{ $callBack?: boolean }>`
 		letter-spacing: 0.0024rem;
 	}
 
-	.sign_in__horizon {
+	.sign-in__horizon {
 		all: unset;
 		display: flex;
 		width: 12.52rem;
 		height: 0.15rem;
 		background: #d9d9d9;
+	}
+
+	.sign-in_tos {
+		display: flex;
+		margin-top: 2.4rem;
+	}
+
+	.sign-in_tos-marker {
+		color: var(--Form-border-error, #f85858);
+	}
+
+	small {
+		/* Text/t4 */
+		font-size: 1rem;
+		font-weight: 500;
+		line-height: 1.2rem;
+		letter-spacing: 0.002rem;
 	}
 `;
 
