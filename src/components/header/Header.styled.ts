@@ -135,8 +135,9 @@ const Header = styled.header<{ $isLogin?: boolean }>`
 			}
 
 			.menu {
-				color: #8e8e8e;
+				color: #747b7f;
 				font-size: 1.4rem;
+				font-weight: 600;
 				line-height: 1.7rem;
 				letter-spacing: 0.0028rem;
 
@@ -152,7 +153,9 @@ const Header = styled.header<{ $isLogin?: boolean }>`
 			}
 
 			.logout {
+				color: #8e8e8e;
 				margin-top: -1.2rem;
+				font-weight: 500;
 			}
 		}
 	}
