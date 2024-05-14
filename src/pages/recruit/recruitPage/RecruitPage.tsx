@@ -1,5 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Dropdown, RecruitCard, Pagination, DetailedInput, NeedLogin } from '../../../components';
+import {
+	Dropdown,
+	RecruitCard,
+	Pagination,
+	DetailedInput,
+	NeedLogin,
+	ModalPortal,
+	Modal,
+} from '../../../components';
 import S from './RecruitPage.styled';
 import {
 	CancelWhite,
@@ -21,6 +29,7 @@ import {
 	pageState,
 	previousLocationState,
 	recruitFilterState,
+	signupModalState,
 } from '../../../atom';
 import { getPostList } from '../../../service/recruit/board';
 import { useQuery } from '@tanstack/react-query';
@@ -31,6 +40,7 @@ import { fixModalBackground } from '../../../utils';
 const RecruitPage = () => {
 	const navigate = useNavigate();
 	const location = useLocation();
+
 	const fieldRef = useRef<HTMLDivElement | null>(null);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [searchKeyword, setSearchKeyword] = useState('');
@@ -286,6 +296,29 @@ const RecruitPage = () => {
 		setSearchKeyword(filterState.keyword as any);
 	}, [filterState.keyword]);
 
+	// 회원가입 이후 팝업창 띄우기
+	const [signupModalOpen, setSignupModalOpen] = useRecoilState(signupModalState);
+	useEffect(() => {
+		fixModalBackground(signupModalOpen);
+	}, [signupModalOpen]);
+
+	const signupModalProps = {
+		title: '프로필을 추가해보세요!',
+		content:
+			'프로필 입력정보를 추가하면\n팀을 만날 확률이 늘어납니다.\n내 프로필로 이동하시겠습니끼?',
+		defaultBtn: {
+			title: '나중에 하기',
+			handleClick: () => setSignupModalOpen(false),
+		},
+		primaryBtn: {
+			title: '프로필로 이동',
+			handleClick: () => {
+				setSignupModalOpen(false);
+				navigate(`/profile/${location.state?.userId}`);
+			},
+		},
+	};
+
 	return (
 		<S.RecruitPage
 			$isFieldClick={fieldValue.value.value !== '분야를 선택해주세요'}
@@ -461,6 +494,11 @@ const RecruitPage = () => {
 				<section className='modal-background'>
 					<NeedLogin type={needLoginModal.type} />
 				</section>
+			)}
+			{signupModalOpen && (
+				<ModalPortal>
+					<Modal {...signupModalProps} />
+				</ModalPortal>
 			)}
 		</S.RecruitPage>
 	);

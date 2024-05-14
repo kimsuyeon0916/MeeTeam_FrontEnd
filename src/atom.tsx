@@ -242,3 +242,8 @@ export const needLoginModalState = atom({
 		type: '',
 	},
 });
+
+export const signupModalState = atom({
+	key: 'signupModalState',
+	default: false,
+});
