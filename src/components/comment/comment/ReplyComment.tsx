@@ -114,6 +114,7 @@ const ReplyComment = ({
 						</section>
 						<span className='nickname'>{nickname}</span>
 						{!isEdit && <span className='createAt'>{createAt.slice(0, -9)}</span>}
+						{isWriter && <section className='writer-mark'>작성자</section>}
 					</section>
 					<section className='comment-info'>
 						{!isEdit ? (
@@ -158,7 +159,7 @@ const ReplyComment = ({
 					<KebabMenu options={isCommentWriter ? optionLists : optionListsOthers} />
 				)}
 			</section>
-			<hr />
+			<hr className='reply-hr' />
 			{isDelete.isDelete && (
 				<section className='modal-background'>
 					<CommentDeleteModal pageNum={pageNum} commentId={isDelete.id} type='reply' />

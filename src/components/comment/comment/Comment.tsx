@@ -128,7 +128,7 @@ const Comment = ({
 								{createAt.length > 10 ? createAt.slice(0, -9) : createAt}
 							</span>
 						)}
-						{isWriter && <section className='writer-mark'></section>}
+						{isWriter && <section className='writer-mark'>작성자</section>}
 					</section>
 					<section className='comment-info'>
 						{!isEdit ? (
@@ -172,7 +172,7 @@ const Comment = ({
 					<KebabMenu options={isCommentWriter ? optionLists : optionListsOthers} />
 				)}
 			</section>
-			<hr />
+			<hr className='' />
 			<section className='wrapper-replies'>
 				<ul className='container-reply__lists'>
 					{replies?.map(reply => {

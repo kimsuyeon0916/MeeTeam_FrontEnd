@@ -47,6 +47,18 @@ const Comment = styled.li`
 			}
 
 			.writer-mark {
+				margin-left: 0.4rem;
+				display: flex;
+				padding: 0.5rem 0.8rem;
+				justify-content: center;
+				align-items: center;
+				gap: 0.4rem;
+				border-radius: 2rem;
+				border: 1px solid #5877fc;
+				background: #f3f5ff;
+				color: #5877fc;
+				font-family: Pretendard;
+				font-size: 1rem;
 			}
 		}
 
@@ -113,12 +125,11 @@ const Comment = styled.li`
 		height: 0.075rem;
 		margin: 1.6rem 0;
 		width: 100%;
-		opacity: 0.96;
+		border: none;
 		background: #e3e3e3;
 	}
 
 	.wrapper-replies {
-		padding-left: 3rem;
 		width: 100%;
 
 		.container-reply__lists {
