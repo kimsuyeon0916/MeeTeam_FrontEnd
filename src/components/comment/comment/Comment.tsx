@@ -124,10 +124,11 @@ const Comment = ({
 						</section>
 						<span className='nickname'>{nickname}</span>
 						{!isEdit && (
-							<span className='createAt'>
+							<span className='create-at'>
 								{createAt.length > 10 ? createAt.slice(0, -9) : createAt}
 							</span>
 						)}
+						{isWriter && <section className='writer-mark'></section>}
 					</section>
 					<section className='comment-info'>
 						{!isEdit ? (

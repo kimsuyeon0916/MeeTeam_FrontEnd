@@ -33,7 +33,7 @@ const Comment = styled.li`
 		.comment-icon {
 			display: flex;
 			align-items: center;
-			gap: 0.6rem;
+			gap: 0.8rem;
 
 			.nickname {
 				color: #373f41;
@@ -41,15 +41,20 @@ const Comment = styled.li`
 				font-weight: 600;
 			}
 
-			.createAt {
+			.create-at {
 				color: #8e8e8e;
 				font-size: 1.2rem;
+			}
+
+			.writer-mark {
 			}
 		}
 
 		.comment-info {
 			display: flex;
 			flex-direction: column;
+			margin-left: 3.2rem;
+			margin-top: 0.76rem;
 			gap: 0.3rem;
 
 			span {
@@ -114,11 +119,12 @@ const Comment = styled.li`
 
 	.wrapper-replies {
 		padding-left: 3rem;
-		box-sizing: border-box;
+		width: 100%;
 
 		.container-reply__lists {
 			display: flex;
 			flex-direction: column;
+			width: 100%;
 		}
 	}
 `;

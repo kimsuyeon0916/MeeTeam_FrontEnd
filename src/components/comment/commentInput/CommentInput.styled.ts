@@ -26,7 +26,7 @@ const CommentInput = styled.div`
 
 			textarea {
 				display: flex;
-				width: 90rem;
+				width: 100%;
 				height: 11.2rem;
 				padding: 1.6rem 2rem;
 				align-items: flex-start;
@@ -49,7 +49,7 @@ const CommentInput = styled.div`
 		.container-length_counter {
 			display: flex;
 			justify-content: flex-end;
-			margin-top: -1.61rem;
+			margin-top: -1.11rem;
 		}
 
 		.container-btn {

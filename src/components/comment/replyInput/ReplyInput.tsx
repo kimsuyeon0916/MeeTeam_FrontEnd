@@ -55,36 +55,38 @@ const ReplyInput = ({
 	};
 
 	return (
-		<S.ReplyInput className='reply-container'>
-			<img className='reply-icon' src={Reply} />
-			<article className='wrapper'>
-				<section className='container-user__icon'>
-					<div>
-						{userInfo?.userId && (
-							<ProfileImage url={userInfo?.imageUrl} userId={userInfo?.userId} size='2.31rem' />
-						)}
-					</div>
-					<span>{userInfo?.nickname}</span>
-				</section>
-				<section className='container-user__input'>
-					<textarea
-						value={contents}
-						onChange={onChangeHandler}
-						maxLength={1000}
-						placeholder='답글을 입력해주세요.'
-					/>
-				</section>
-				<section className='container-btn'>
-					<button type='button' className='cancel-btn' onClick={onClickCancel}>
-						취소
-					</button>
-					<button type='button' onClick={addReply} className='submit-btn'>
-						저장
-					</button>
-				</section>
-			</article>
+		<React.Fragment>
+			<S.ReplyInput>
+				<img className='reply-icon' src={Reply} />
+				<article className='wrapper-reply__input'>
+					<section className='container-user__icon'>
+						<div>
+							{userInfo?.userId && (
+								<ProfileImage url={userInfo?.imageUrl} userId={userInfo?.userId} size='2.31rem' />
+							)}
+						</div>
+						<span>{userInfo?.nickname}</span>
+					</section>
+					<section className='container-user__input'>
+						<textarea
+							value={contents}
+							onChange={onChangeHandler}
+							maxLength={1000}
+							placeholder='답글을 입력해주세요.'
+						/>
+					</section>
+					<section className='container-btn'>
+						<button type='button' className='cancel-btn' onClick={onClickCancel}>
+							취소
+						</button>
+						<button type='button' onClick={addReply} className='submit-btn'>
+							저장
+						</button>
+					</section>
+				</article>
+			</S.ReplyInput>
 			<hr />
-		</S.ReplyInput>
+		</React.Fragment>
 	);
 };
 
