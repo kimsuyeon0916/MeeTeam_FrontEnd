@@ -54,7 +54,6 @@ const Header = styled.header<{ $isLogin?: boolean }>`
 
 	.header__navigation {
 		display: flex;
-		width: 26rem;
 		justify-content: flex-start;
 		align-items: center;
 		gap: 3.2rem;
@@ -122,7 +121,7 @@ const Header = styled.header<{ $isLogin?: boolean }>`
 				position: absolute;
 				top: 4rem;
 				right: 0rem;
-				width: 15rem;
+				width: 14rem;
 				background: #fff;
 				border-radius: 0.8rem;
 				border: 1px solid #e3e3e3;
