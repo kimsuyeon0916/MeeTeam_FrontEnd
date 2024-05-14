@@ -18,7 +18,7 @@ const RecruitDescription = styled.article`
 		font-family: Pretendard;
 		letter-spacing: 0.0032rem;
 		box-sizing: border-box;
-		line-height: 1.42;
+		line-height: 1.75;
 
 		h1 {
 			font-size: 3.2rem;
