@@ -20,6 +20,23 @@ const RoleCard = styled.article`
 			margin-top: 1.2rem;
 			gap: 0.8rem;
 		}
+
+		.no-skills {
+			display: flex;
+			height: 9.4rem;
+			justify-content: center;
+			align-items: center;
+			align-content: center;
+			gap: 0.8rem;
+			align-self: stretch;
+			flex-wrap: wrap;
+			border-radius: 1.2rem;
+			background: #f6f6f6;
+		}
+
+		.no-skills__description {
+			color: #8e8e8e;
+		}
 	}
 
 	h4 {

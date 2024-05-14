@@ -14,6 +14,11 @@ const RoleCard = ({ roleName, skills, recruitCount, applicantCount, recruitedCou
 							{skill.name}
 						</span>
 					))}
+					{skills.length === 0 && (
+						<section className='no-skills'>
+							<span className='no-skills__description t2'>입력된 기술들이 없습니다!</span>
+						</section>
+					)}
 				</section>
 			</section>
 			<hr />
