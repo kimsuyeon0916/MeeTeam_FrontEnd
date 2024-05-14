@@ -8,7 +8,7 @@ const RoleCard = ({ roleName, skills, recruitCount, applicantCount, recruitedCou
 		<S.RoleCard>
 			<section className='container-role__info'>
 				<h4>{roleName}</h4>
-				<section>
+				<section className='container-skill__tags'>
 					{skills.map((skill, index) => (
 						<span className='tag' key={index}>
 							{skill.name}
