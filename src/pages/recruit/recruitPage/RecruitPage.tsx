@@ -1,5 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Dropdown, RecruitCard, Pagination, DetailedInput, NeedLogin } from '../../../components';
+import {
+	Dropdown,
+	RecruitCard,
+	Pagination,
+	DetailedInput,
+	NeedLogin,
+	Footer,
+} from '../../../components';
 import S from './RecruitPage.styled';
 import {
 	CancelWhite,
@@ -285,12 +292,12 @@ const RecruitPage = () => {
 	}, [filterState.keyword]);
 
 	return (
-		<S.RecruitPage
-			$isFieldClick={fieldValue.value.value !== '분야를 선택해주세요'}
-			$isDetailedClick={isOpen}
-			$isDetailSelected={isDetailSelected}
-		>
-			<>
+		<>
+			<S.RecruitPage
+				$isFieldClick={fieldValue.value.value !== '분야를 선택해주세요'}
+				$isDetailedClick={isOpen}
+				$isDetailSelected={isDetailSelected}
+			>
 				<section>
 					<section className='wrapper-title' ref={fieldRef}>
 						<h2>분야 전체</h2>
@@ -454,13 +461,15 @@ const RecruitPage = () => {
 						<img src={isFloatingOpen ? CancelWhite : PlusWhite} />
 					</section>
 				</article>
-			</>
-			{needLoginModal.isOpen && (
-				<section className='modal-background'>
-					<NeedLogin type={needLoginModal.type} />
-				</section>
-			)}
-		</S.RecruitPage>
+
+				{needLoginModal.isOpen && (
+					<section className='modal-background'>
+						<NeedLogin type={needLoginModal.type} />
+					</section>
+				)}
+			</S.RecruitPage>
+			<Footer />
+		</>
 	);
 };
 
