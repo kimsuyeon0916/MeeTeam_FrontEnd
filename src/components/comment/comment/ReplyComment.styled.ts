@@ -101,14 +101,6 @@ const ReplyComment = styled.div`
 			}
 		}
 	}
-
-	hr {
-		height: 0.075rem;
-		margin: 1.6rem 0;
-		width: 100%;
-		opacity: 0.96;
-		background: #e3e3e3;
-	}
 `;
 
 const S = { ReplyComment };

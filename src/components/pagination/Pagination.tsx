@@ -29,7 +29,7 @@ const Pagination = ({
 		setCurrentPage(currentPage - 1);
 	};
 
-	if (totalPages === 1 || totalPages === 0) {
+	if (totalPages === 0) {
 		return null;
 	}
 	return (

@@ -1,30 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { loginState } from '../atom';
 
 // 임시
 const useLogin = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const token = localStorage.getItem('ACCESS_TOKEN_KEY');
-
-	const login = () => {
-		if (token) {
-			setIsLoggedIn(true);
-		}
-	};
-
-	const logout = () => {
-		setIsLoggedIn(false);
-		localStorage.removeItem('ACCESS_TOKEN_KEY');
-	};
+	const isLogin = useRecoilValue(loginState);
 
 	useEffect(() => {
-		if (token) {
+		if (isLogin) {
 			setIsLoggedIn(true);
 		} else {
 			setIsLoggedIn(false);
 		}
-	}, [token]);
+	}, [isLogin]);
 
-	return { login, logout, isLoggedIn };
+	return { isLoggedIn };
 };
 
 export default useLogin;

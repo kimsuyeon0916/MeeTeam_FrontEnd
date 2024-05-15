@@ -53,7 +53,6 @@ const RecruitManage = styled.article`
 			border-bottom: 1px solid #8e8e8e;
 
 			.menu {
-				width: 11.6rem;
 				height: 3.6rem;
 				padding: 0.85rem 4.4rem;
 				box-sizing: border-box;

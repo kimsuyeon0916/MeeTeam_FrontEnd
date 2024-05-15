@@ -6,7 +6,6 @@ interface Modal {
 }
 
 const Modal = styled.section<Modal>`
-	width: 52rem;
 	height: 68rem;
 	border-radius: 1rem;
 	border: 1px solid #e3e3e3;
@@ -87,7 +86,6 @@ const Modal = styled.section<Modal>`
 	}
 
 	.container-user__info {
-		width: 44rem;
 		border-radius: 0.8rem;
 		border: 1px solid #e3e3e3;
 		background-color: #fff;
@@ -104,7 +102,7 @@ const Modal = styled.section<Modal>`
 			justify-content: flex-start;
 			margin-top: 1.6rem;
 			height: 8.4rem;
-			gap: 6.26rem;
+			gap: 4.26rem;
 
 			span {
 				color: #8e8e8e;

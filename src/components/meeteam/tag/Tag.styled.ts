@@ -35,7 +35,7 @@ const Tag = styled.div<TagInfo>`
 	font-size: 1.1rem;
 	font-style: normal;
 	font-weight: 400;
-	line-height: 1.35rem; /* 112.5% */
+	line-height: 1.35rem;
 	letter-spacing: 0.015rem;
 `;
 

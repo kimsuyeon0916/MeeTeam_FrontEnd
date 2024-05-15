@@ -158,7 +158,6 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 			.target-area {
 				width: 66rem;
 				height: 1rem;
-				border: 1px solid red;
 			}
 
 			.header-title {

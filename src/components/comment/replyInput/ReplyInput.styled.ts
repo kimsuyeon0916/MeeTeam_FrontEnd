@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const ReplyInput = styled.div`
+const ReplyInput = styled.section`
 	width: 100%;
 	display: flex;
 	align-items: flex-start;
@@ -10,7 +10,8 @@ const ReplyInput = styled.div`
 		margin-top: 0.7rem;
 	}
 
-	.wrapper {
+	.wrapper-reply__input {
+		width: 100%;
 		display: flex;
 		gap: 2rem;
 		flex-direction: column;
@@ -32,10 +33,12 @@ const ReplyInput = styled.div`
 			margin-top: -0.5rem;
 			display: flex;
 			gap: 1rem;
+			width: 100%;
 
 			textarea {
 				display: flex;
-				width: 80.957rem;
+				width: 100%;
+				/* width: 90.0164rem; */
 				height: 11.2rem;
 				padding: 1.6rem 2rem;
 				align-items: flex-start;

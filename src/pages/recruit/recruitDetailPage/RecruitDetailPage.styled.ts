@@ -70,7 +70,7 @@ const RecruitDetailPage = styled.section`
 
 		.container-comments {
 			width: 100%;
-			padding: 1.6rem 3rem;
+			padding: 1.6rem 0;
 			box-sizing: border-box;
 		}
 
