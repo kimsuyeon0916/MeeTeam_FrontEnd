@@ -157,6 +157,17 @@ const ProfileGrid = styled.div`
 	}
 `;
 
+const ProfileEmptyPortfolio = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 15rem 0;
+
+	h3 {
+		color: var(--State-unactive, #8e8e8e);
+	}
+`;
+
 const ProfileDescription = styled.blockquote`
 	display: flex;
 	margin-bottom: 2.4rem;
@@ -207,6 +218,7 @@ const S = {
 	ProfileArticle,
 	ProfileRow,
 	ProfileGrid,
+	ProfileEmptyPortfolio,
 	ProfileDescription,
 	ProfileButtonBox,
 	ProfileTag,
