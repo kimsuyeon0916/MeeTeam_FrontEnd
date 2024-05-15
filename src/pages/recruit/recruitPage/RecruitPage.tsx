@@ -308,10 +308,12 @@ const RecruitPage = () => {
 			'프로필 입력정보를 추가하면\n팀을 만날 확률이 늘어납니다.\n내 프로필로 이동하시겠습니끼?',
 		defaultBtn: {
 			title: '나중에 하기',
+			small: true,
 			handleClick: () => setSignupModalOpen(false),
 		},
 		primaryBtn: {
 			title: '프로필로 이동',
+			small: true,
 			handleClick: () => {
 				setSignupModalOpen(false);
 				navigate(`/profile/${location.state?.userId}`);
