@@ -19,6 +19,7 @@ const PLATFORM_ID = import.meta.env.VITE_PLATFORM_ID;
 interface AuthProps {
 	onSuccess?: () => void;
 	setUserState?: SetterOrUpdater<User | null>;
+	setLoginState?: SetterOrUpdater<boolean>;
 }
 
 const authKeys = {
@@ -31,7 +32,7 @@ const authKeys = {
  * 기존 회원인 경우 access token 을 로컬 스토리지에 저장합니다. 그리고 메인 페이지로 이동합니다.
  * 회원이 아닌 경우, platformId 를 로컬 스토리지에 저장합니다. 그리고 회원가입 페이지로 이동합니다.
  */
-export const useCheckExist = ({ onSuccess, setUserState }: AuthProps = {}) => {
+export const useCheckExist = ({ onSuccess, setUserState, setLoginState }: AuthProps = {}) => {
 	return useMutation({
 		mutationFn: checkExist,
 		onSuccess: data => {
@@ -41,8 +42,8 @@ export const useCheckExist = ({ onSuccess, setUserState }: AuthProps = {}) => {
 					userId: data.userId,
 					nickname: data.nickname,
 					imageUrl: data.imageUrl,
-					isLogin: true,
 				});
+				setLoginState?.(true);
 			}
 			if (data?.platformId) {
 				secureLocalStorage.setItem(PLATFORM_ID, data.platformId);
@@ -55,7 +56,7 @@ export const useCheckExist = ({ onSuccess, setUserState }: AuthProps = {}) => {
 /**
  * @description 네이버 연동 회원가입 API를 호출하는 hook입니다. 성공 시 access token을 로컬 스토리지에 저장합니다.
  */
-export const useNaverSignUp = ({ onSuccess, setUserState }: AuthProps = {}) => {
+export const useNaverSignUp = ({ onSuccess, setUserState, setLoginState }: AuthProps = {}) => {
 	return useMutation({
 		mutationFn: signUp,
 		onSuccess: data => {
@@ -66,8 +67,8 @@ export const useNaverSignUp = ({ onSuccess, setUserState }: AuthProps = {}) => {
 					userId: data.userId,
 					nickname: data.nickname,
 					imageUrl: data.imageUrl,
-					isLogin: true,
 				});
+				setLoginState?.(true);
 				onSuccess?.();
 			}
 		},
@@ -123,13 +124,14 @@ export const useReadDepartmentList = (universityId: string) => {
 /**
  * @description 로그아웃 API를 호출하는 hook입니다. 성공 시 access token을 로컬 스토리지에서 제거합니다.
  */
-export const useSignOut = ({ onSuccess, setUserState }: AuthProps = {}) => {
+export const useSignOut = ({ onSuccess, setUserState, setLoginState }: AuthProps = {}) => {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: signOut,
 		onSuccess: () => {
 			secureLocalStorage.removeItem(ACCESS_TOKEN_KEY);
 			setUserState?.(null);
+			setLoginState?.(false);
 			onSuccess?.();
 			queryClient.invalidateQueries({ queryKey: ['recruit_board'] });
 		},

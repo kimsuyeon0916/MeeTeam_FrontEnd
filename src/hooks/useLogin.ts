@@ -1,27 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../atom';
+import { loginState } from '../atom';
 
 // 임시
 const useLogin = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const userInfo = useRecoilValue(userState);
-
-	const login = () => {
-		if (userInfo?.isLogin) {
-			setIsLoggedIn(true);
-		}
-	};
+	const isLogin = useRecoilValue(loginState);
 
 	useEffect(() => {
-		if (userInfo?.isLogin) {
+		if (isLogin) {
 			setIsLoggedIn(true);
 		} else {
 			setIsLoggedIn(false);
 		}
-	}, [userInfo?.isLogin]);
+	}, [isLogin]);
 
-	return { login, isLoggedIn };
+	return { isLoggedIn };
 };
 
 export default useLogin;

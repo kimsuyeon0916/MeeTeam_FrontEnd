@@ -4,7 +4,7 @@ import { NaverLogin } from '../../../components';
 import { useNavigate } from 'react-router-dom';
 import { useCheckExist } from '../../../hooks';
 import { useSetRecoilState } from 'recoil';
-import { userState } from '../../../atom';
+import { userState, loginState } from '../../../atom';
 import { MeeteamLogoLarge } from '../../../assets';
 import secureLocalStorage from 'react-secure-storage';
 
@@ -18,6 +18,7 @@ const SignInPage = () => {
 	};
 
 	const setUserState = useSetRecoilState(userState);
+	const setLoginState = useSetRecoilState(loginState);
 
 	const handleNaverSignInSuccess = () => {
 		// if (localStorage?.ACCESS_TOKEN_KEY) {
@@ -32,6 +33,7 @@ const SignInPage = () => {
 	const { mutate } = useCheckExist({
 		onSuccess: handleNaverSignInSuccess,
 		setUserState: setUserState,
+		setLoginState: setLoginState,
 	});
 
 	useEffect(() => {

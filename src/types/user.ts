@@ -1,7 +1,7 @@
 import { Portfolio } from './index';
 
 export interface User {
-	isLogin?: boolean;
+	// isLogin?: boolean;
 	userId?: string;
 	imageUrl?: string;
 	nickname?: string;
