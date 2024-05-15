@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Header = styled.header<{ $isLogin: boolean }>`
+const Header = styled.header<{ $isLogin?: boolean }>`
 	position: relative;
 	border-bottom: 0.375px solid #e3e3e3;
 
@@ -54,7 +54,6 @@ const Header = styled.header<{ $isLogin: boolean }>`
 
 	.header__navigation {
 		display: flex;
-		width: 26rem;
 		justify-content: flex-start;
 		align-items: center;
 		gap: 3.2rem;
@@ -122,7 +121,7 @@ const Header = styled.header<{ $isLogin: boolean }>`
 				position: absolute;
 				top: 4rem;
 				right: 0rem;
-				width: 15rem;
+				width: 14rem;
 				background: #fff;
 				border-radius: 0.8rem;
 				border: 1px solid #e3e3e3;
@@ -135,8 +134,9 @@ const Header = styled.header<{ $isLogin: boolean }>`
 			}
 
 			.menu {
-				color: #8e8e8e;
+				color: #747b7f;
 				font-size: 1.4rem;
+				font-weight: 600;
 				line-height: 1.7rem;
 				letter-spacing: 0.0028rem;
 
@@ -152,7 +152,9 @@ const Header = styled.header<{ $isLogin: boolean }>`
 			}
 
 			.logout {
+				color: #8e8e8e;
 				margin-top: -1.2rem;
+				font-weight: 500;
 			}
 		}
 	}

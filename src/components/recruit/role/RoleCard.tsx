@@ -8,12 +8,17 @@ const RoleCard = ({ roleName, skills, recruitCount, applicantCount, recruitedCou
 		<S.RoleCard>
 			<section className='container-role__info'>
 				<h4>{roleName}</h4>
-				<section>
+				<section className='container-skill__tags'>
 					{skills.map((skill, index) => (
 						<span className='tag' key={index}>
 							{skill.name}
 						</span>
 					))}
+					{skills.length === 0 && (
+						<section className='no-skills'>
+							<span className='no-skills__description t2'>입력된 기술들이 없습니다!</span>
+						</section>
+					)}
 				</section>
 			</section>
 			<hr />

@@ -1,5 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Dropdown, RecruitCard, Pagination, DetailedInput, NeedLogin } from '../../../components';
+import {
+	Dropdown,
+	RecruitCard,
+	Pagination,
+	DetailedInput,
+	NeedLogin,
+	Footer,
+} from '../../../components';
 import S from './RecruitPage.styled';
 import {
 	CancelWhite,
@@ -63,8 +70,6 @@ const RecruitPage = () => {
 	const { data, isLoading } = useQuery({
 		queryKey: ['recruit_board', { filterState, isLoggedIn, page }],
 		queryFn: () => getPostList({ filterState, isLoggedIn, page }),
-		staleTime: 6000 * 30,
-		gcTime: 6000 * 60,
 	});
 
 	const onClickDetailed = (event: React.MouseEvent) => {
@@ -280,19 +285,19 @@ const RecruitPage = () => {
 			course: isCourse ? Number(isCourse) : null,
 			professor: isProfessor ? Number(isProfessor) : null,
 		});
-	}, [searchParams.size]);
+	}, []);
 
 	useEffect(() => {
 		setSearchKeyword(filterState.keyword as any);
 	}, [filterState.keyword]);
 
 	return (
-		<S.RecruitPage
-			$isFieldClick={fieldValue.value.value !== '분야를 선택해주세요'}
-			$isDetailedClick={isOpen}
-			$isDetailSelected={isDetailSelected}
-		>
-			<>
+		<>
+			<S.RecruitPage
+				$isFieldClick={fieldValue.value.value !== '분야를 선택해주세요'}
+				$isDetailedClick={isOpen}
+				$isDetailSelected={isDetailSelected}
+			>
 				<section>
 					<section className='wrapper-title' ref={fieldRef}>
 						<h2>분야 전체</h2>
@@ -456,13 +461,15 @@ const RecruitPage = () => {
 						<img src={isFloatingOpen ? CancelWhite : PlusWhite} />
 					</section>
 				</article>
-			</>
-			{needLoginModal.isOpen && (
-				<section className='modal-background'>
-					<NeedLogin type={needLoginModal.type} />
-				</section>
-			)}
-		</S.RecruitPage>
+
+				{needLoginModal.isOpen && (
+					<section className='modal-background'>
+						<NeedLogin type={needLoginModal.type} />
+					</section>
+				)}
+			</S.RecruitPage>
+			<Footer />
+		</>
 	);
 };
 

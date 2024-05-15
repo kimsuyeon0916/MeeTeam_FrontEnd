@@ -33,7 +33,7 @@ const Comment = styled.li`
 		.comment-icon {
 			display: flex;
 			align-items: center;
-			gap: 0.6rem;
+			gap: 0.8rem;
 
 			.nickname {
 				color: #373f41;
@@ -41,15 +41,32 @@ const Comment = styled.li`
 				font-weight: 600;
 			}
 
-			.createAt {
+			.create-at {
 				color: #8e8e8e;
 				font-size: 1.2rem;
+			}
+
+			.writer-mark {
+				margin-left: 0.4rem;
+				display: flex;
+				padding: 0.5rem 0.8rem;
+				justify-content: center;
+				align-items: center;
+				gap: 0.4rem;
+				border-radius: 2rem;
+				border: 1px solid #5877fc;
+				background: #f3f5ff;
+				color: #5877fc;
+				font-family: Pretendard;
+				font-size: 1rem;
 			}
 		}
 
 		.comment-info {
 			display: flex;
 			flex-direction: column;
+			margin-left: 3.2rem;
+			margin-top: 0.76rem;
 			gap: 0.3rem;
 
 			span {
@@ -108,17 +125,17 @@ const Comment = styled.li`
 		height: 0.075rem;
 		margin: 1.6rem 0;
 		width: 100%;
-		opacity: 0.96;
+		border: none;
 		background: #e3e3e3;
 	}
 
 	.wrapper-replies {
-		padding-left: 3rem;
-		box-sizing: border-box;
+		width: 100%;
 
 		.container-reply__lists {
 			display: flex;
 			flex-direction: column;
+			width: 100%;
 		}
 	}
 `;

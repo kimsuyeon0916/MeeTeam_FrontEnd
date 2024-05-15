@@ -177,8 +177,8 @@ const RecruitPage = styled.div<RecruitPage>`
 				font-size: 1.5rem;
 				color: #373f41;
 				font-weight: 400;
-				width: 13rem;
 				height: 4.8rem;
+				cursor: pointer;
 
 				.selected {
 					color: ${props => (props.$isDetailSelected ? '#5877FC' : '#373f41')};
@@ -190,10 +190,10 @@ const RecruitPage = styled.div<RecruitPage>`
 				}
 
 				.dropdown-box {
-					width: 100%;
 					display: flex;
 					align-items: center;
 					justify-content: space-between;
+					gap: 1.6rem;
 				}
 
 				.container-dropdown {
@@ -237,7 +237,6 @@ const RecruitPage = styled.div<RecruitPage>`
 						position: relative;
 
 						.search {
-							width: 58rem;
 							height: 4.8rem;
 							border-radius: 1rem;
 							border: 1px solid #e3e3e3;
@@ -413,7 +412,7 @@ const RecruitPage = styled.div<RecruitPage>`
 			}
 
 			input {
-				width: 16.5rem;
+				width: 100%;
 				border: none;
 				outline: none;
 				background-color: transparent;
@@ -450,7 +449,6 @@ const RecruitPage = styled.div<RecruitPage>`
 			align-items: center;
 			gap: 0.8rem;
 			cursor: pointer;
-			width: 13rem;
 
 			img {
 				width: 1.4rem;
@@ -498,8 +496,6 @@ const RecruitPage = styled.div<RecruitPage>`
 
 	.btn-floating {
 		position: fixed;
-		width: 5.6rem;
-		height: 5.6rem;
 		bottom: 5rem;
 		right: 5rem;
 		z-index: 101;

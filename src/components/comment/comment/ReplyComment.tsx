@@ -8,6 +8,8 @@ import { useCommentEdit, useLogin } from '../../../hooks';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { userState, replyDeleteModalState } from '../../../atom';
+import { ko } from 'date-fns/locale';
+import { formatDistanceToNow, differenceInDays } from 'date-fns';
 
 const ReplyComment = ({
 	id,
@@ -31,6 +33,8 @@ const ReplyComment = ({
 	const editComment = useCommentEdit();
 	const userInfo = useRecoilValue(userState);
 	const isCommentWriter = userId === userInfo?.userId;
+	const diffDays = differenceInDays(new Date(), new Date(createAt));
+	const time = formatDistanceToNow(new Date(createAt), { locale: ko, addSuffix: true });
 
 	const optionLists = [
 		{
@@ -113,7 +117,10 @@ const ReplyComment = ({
 							<ProfileImage url={profileImg} userId={userId} size='2.31rem' />
 						</section>
 						<span className='nickname'>{nickname}</span>
-						{!isEdit && <span className='createAt'>{createAt.slice(0, -9)}</span>}
+						{!isEdit && (
+							<span className='createAt'>{diffDays > 3 ? createAt.slice(0, -9) : time}</span>
+						)}
+						{isWriter && <section className='writer-mark'>작성자</section>}
 					</section>
 					<section className='comment-info'>
 						{!isEdit ? (
@@ -158,7 +165,7 @@ const ReplyComment = ({
 					<KebabMenu options={isCommentWriter ? optionLists : optionListsOthers} />
 				)}
 			</section>
-			<hr />
+			<hr className='reply-hr' />
 			{isDelete.isDelete && (
 				<section className='modal-background'>
 					<CommentDeleteModal pageNum={pageNum} commentId={isDelete.id} type='reply' />

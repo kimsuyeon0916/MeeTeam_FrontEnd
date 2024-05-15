@@ -149,9 +149,11 @@ import TabMenu from './tabMenu/TabMenu';
 import PostingDelete from './recruit/recruitDetail/modal/postingDelete/PostingDelete';
 import Modal from './modal/Modal';
 import WarnRoleDelete from './recruit/recruitDetail/modal/warnRoleDelete/WarnRoleDelete';
+import Footer from './footer/Footer';
 
 export {
 	Header,
+	Footer,
 	Subtitle,
 	Dot,
 	CustomSelect,

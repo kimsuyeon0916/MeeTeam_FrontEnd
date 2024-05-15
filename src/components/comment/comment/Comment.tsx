@@ -7,6 +7,8 @@ import { useCommentEdit, useLogin } from '../../../hooks';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRecoilValue, useRecoilState } from 'recoil';
 import { commentDeleteModalState, userState } from '../../../atom';
+import { ko } from 'date-fns/locale';
+import { formatDistanceToNow, differenceInDays } from 'date-fns';
 
 const Comment = ({
 	id,
@@ -33,6 +35,8 @@ const Comment = ({
 	const editComment = useCommentEdit();
 	const userInfo = useRecoilValue(userState);
 	const isCommentWriter = userId === userInfo?.userId;
+	const diffDays = differenceInDays(new Date(), new Date(createAt));
+	const time = formatDistanceToNow(new Date(createAt), { locale: ko, addSuffix: true });
 
 	const optionLists = [
 		{
@@ -124,10 +128,9 @@ const Comment = ({
 						</section>
 						<span className='nickname'>{nickname}</span>
 						{!isEdit && (
-							<span className='createAt'>
-								{createAt.length > 10 ? createAt.slice(0, -9) : createAt}
-							</span>
+							<span className='create-at'>{diffDays > 3 ? createAt.slice(0, -9) : time}</span>
 						)}
+						{isWriter && <section className='writer-mark'>작성자</section>}
 					</section>
 					<section className='comment-info'>
 						{!isEdit ? (
@@ -171,7 +174,7 @@ const Comment = ({
 					<KebabMenu options={isCommentWriter ? optionLists : optionListsOthers} />
 				)}
 			</section>
-			<hr />
+			<hr className='' />
 			<section className='wrapper-replies'>
 				<ul className='container-reply__lists'>
 					{replies?.map(reply => {
