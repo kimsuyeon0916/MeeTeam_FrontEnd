@@ -6,6 +6,7 @@ interface InputStyle {
 	$arrow?: string;
 	disabled?: boolean;
 	invalid?: boolean;
+	$invalid?: string;
 }
 
 const InputLayout = styled.label<{ $width?: string }>`
@@ -94,6 +95,8 @@ const Input = styled.input<InputStyle>`
 			};
 		}`}
 
+	${props => props.invalid && props.$invalid && `background-image: url(${props.$invalid});`}
+	
 	&::placeholder {
 		color: #8e8e8e;
 	}

@@ -1,4 +1,5 @@
 import { INPUT_VALIDATION } from '../../../constant';
+import { Valid, Invalid } from '../../../assets';
 
 export interface Account {
 	[key: string]: string;
@@ -17,6 +18,11 @@ const SIGN_UP_DATA = [
 		placeholder: '닉네임을 입력해주세요',
 		required: true,
 		validation: INPUT_VALIDATION.nickname,
+		icon: {
+			$default: Valid,
+			$invalid: Invalid,
+			$arrow: 'right',
+		},
 	},
 	{
 		label: '이름',
