@@ -22,18 +22,10 @@ const Modal = ({ title, content, defaultBtn, primaryBtn }: Modal) => {
 				<S.ModalContent>{content}</S.ModalContent>
 				<S.ModalRow $gap='1.6rem'>
 					<div>
-						<DefaultBtn
-							title={defaultBtn.title}
-							type='button'
-							handleClick={defaultBtn.handleClick}
-						/>
+						<DefaultBtn type='button' {...defaultBtn} />
 					</div>
 					<div>
-						<PrimaryBtn
-							title={primaryBtn.title}
-							type='button'
-							handleClick={primaryBtn.handleClick}
-						/>
+						<PrimaryBtn type='button' {...primaryBtn} />
 					</div>
 				</S.ModalRow>
 			</S.ModalContainer>

@@ -59,6 +59,8 @@ import MeeteamLogoLarge from './MeeteamLogoLarge.svg';
 import Congratulation from './Congratulation.svg';
 import NaverIcon from './NaverIcon.png';
 import Clip from './Clip.svg';
+import Valid from './Valid.svg';
+import Invalid from './Invalid.svg';
 import LogoFooter from './LogoFooter.svg';
 
 export {
@@ -123,5 +125,7 @@ export {
 	Congratulation,
 	NaverIcon,
 	Clip,
+	Valid,
+	Invalid,
 	LogoFooter,
 };

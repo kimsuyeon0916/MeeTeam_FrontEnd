@@ -42,6 +42,7 @@ export const useCheckExist = ({ onSuccess, setUserState, setLoginState }: AuthPr
 					userId: data.userId,
 					nickname: data.nickname,
 					imageUrl: data.imageUrl,
+					university: data.university,
 				});
 				setLoginState?.(true);
 			}

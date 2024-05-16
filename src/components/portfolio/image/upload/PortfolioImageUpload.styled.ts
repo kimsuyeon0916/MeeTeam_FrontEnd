@@ -13,13 +13,17 @@ const PortfolioImageGrid = styled.div`
 	column-gap: 1.6rem;
 `;
 
-const PortfolioImageUpload = styled.div`
+const PortfolioImageUpload = styled.div<{ $invalid?: boolean }>`
 	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border-radius: 1rem;
-	border: 0.1rem solid var(--Form-border-default, #8e8e8e);
+	border: 0.1rem solid
+		${props =>
+			props.$invalid
+				? 'var(--ButtonColors-Caution-outline-defaultLine, #F85858)'
+				: 'var(--Form-border-default, #8e8e8e)'};
 	background: var(--Grayscale-200, #f6f6f6);
 	color: var(--Text-textColor2, var(--text-color-2, #373f41));
 	cursor: pointer;
@@ -64,6 +68,26 @@ const PortfolioImageInput = styled.input`
 	display: none;
 `;
 
+const PortfolioImageUploadContainer = styled.div`
+	position: relative;
+	display: flex;
+`;
+
+const PortfolioImageUploadErrorMessage = styled.small`
+	position: absolute;
+	bottom: -1.6rem;
+	left: 1rem;
+	white-space: nowrap; // 줄바꿈 방지
+	color: var(--ButtonColors-Caution-outline-defaultLine, #f85858);
+
+	/* Text/t4 */
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 1.2rem; /* 120% */
+	letter-spacing: 0.002rem;
+`;
+
 const S = {
 	PortfolioImageUploadLayout,
 	PortfolioImageGrid,
@@ -71,6 +95,8 @@ const S = {
 	PortfolioImageUploadRow,
 	PortfolioImageUploadColumn,
 	PortfolioImageInput,
+	PortfolioImageUploadContainer,
+	PortfolioImageUploadErrorMessage,
 };
 
 export default S;

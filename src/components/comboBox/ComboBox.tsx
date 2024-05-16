@@ -59,7 +59,11 @@ const ComboBox = <T extends FieldValues>({
 	const clearInput = () => {
 		const inputValue = getValues?.(name as Path<T>);
 		if (!optionList?.find(option => option.name === inputValue)) {
-			setValue(name as Path<T>, '' as PathValue<T, Path<T>>);
+			setValue(name as Path<T>, '' as PathValue<T, Path<T>>, {
+				shouldValidate: true,
+				shouldDirty: true,
+				shouldTouch: true,
+			});
 		}
 	};
 
@@ -82,7 +86,11 @@ const ComboBox = <T extends FieldValues>({
 	};
 
 	const handleOptionClick = (name: Path<T>, optionName: PathValue<T, Path<T>>) => {
-		setValue(name, optionName);
+		setValue(name, optionName, {
+			shouldValidate: true,
+			shouldDirty: true,
+			shouldTouch: true,
+		});
 		clickOption?.(name);
 	};
 

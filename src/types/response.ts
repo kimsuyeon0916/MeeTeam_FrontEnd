@@ -4,6 +4,7 @@ export interface UserReponse {
 	userId?: string;
 	nickname?: string;
 	imageUrl?: string;
+	university?: string;
 	accessToken?: string;
 	refreshToken?: string;
 	platformId?: string;
