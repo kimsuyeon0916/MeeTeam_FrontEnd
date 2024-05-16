@@ -37,7 +37,12 @@ export const useCheckExist = ({ onSuccess, setUserState }: AuthProps = {}) => {
 		onSuccess: data => {
 			if (data?.accessToken) {
 				localStorage.setItem(ACCESS_TOKEN_KEY, data.accessToken);
-				setUserState?.({ userId: data.userId, nickname: data.nickname, imageUrl: data.imageUrl });
+				setUserState?.({
+					userId: data.userId,
+					nickname: data.nickname,
+					imageUrl: data.imageUrl,
+					university: data.university,
+				});
 			}
 			if (data?.platformId) {
 				localStorage.setItem(PLATFORM_ID, data.platformId);
