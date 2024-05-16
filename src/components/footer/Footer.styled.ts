@@ -3,7 +3,8 @@ import styled from 'styled-components';
 const Footer = styled.article`
 	display: flex;
 	justify-content: space-between;
-	padding: 8rem 24rem;
+	padding: 8rem clamp(10%, 24rem, 20%);
+	// padding: 8rem 24rem;
 	font-family: Pretendard;
 	background: #f6f6f6;
 	height: 31.7rem;
