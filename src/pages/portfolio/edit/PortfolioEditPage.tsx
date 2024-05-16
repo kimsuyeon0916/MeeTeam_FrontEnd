@@ -34,6 +34,7 @@ import { Refresh } from '../../../assets';
 import type ReactQuill from 'react-quill';
 import { useRecoilValue } from 'recoil';
 import { uploadImageListState } from '../../../atom';
+import { differenceInDays } from 'date-fns';
 
 interface FormValues {
 	mainImage?: Image;
@@ -343,7 +344,17 @@ const PortfolioEditPage = () => {
 											name={`startDate`}
 											control={control}
 											formState={formState}
-											{...PORTFOLIO_EDIT_DATA.startDate}
+											rules={{
+												required: '시작일을 설정해주세요',
+												validate: (startDate: string) => {
+													return (
+														differenceInDays(
+															new Date(watch('endDate') as string),
+															new Date(startDate)
+														) < 0 && '시작일을 종료일보다 빠르게 설정해주세요'
+													);
+												},
+											}}
 										/>
 										<MuiDatepickerController
 											name={`endDate`}
