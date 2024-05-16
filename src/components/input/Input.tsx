@@ -14,6 +14,7 @@ export interface Icon {
 	$default: string;
 	$focus?: string;
 	$arrow: string;
+	$invalid?: string;
 }
 
 interface Input<T extends FieldValues> {

@@ -8,6 +8,8 @@ import {
 	Search,
 	GrayCalendar,
 	BlackCalendar,
+	Valid,
+	Invalid,
 } from '../../../assets';
 import { INPUT_VALIDATION, TEXTAREA_VALIDATION } from '../../../constant';
 
@@ -16,6 +18,11 @@ const nickname = {
 	placeholder: '닉네임',
 	name: 'nickname',
 	validation: INPUT_VALIDATION.nickname,
+	icon: {
+		$default: Valid,
+		$invalid: Invalid,
+		$arrow: 'right',
+	},
 };
 
 const userName = {

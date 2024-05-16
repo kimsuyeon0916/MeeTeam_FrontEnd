@@ -578,25 +578,31 @@ const ProfileEditPage = () => {
 					<S.ProfileArticle>
 						<S.ProfileTitle>포트폴리오</S.ProfileTitle>
 						<S.ProfileDescription>{DESCRIPTION.portfolio}</S.ProfileDescription>
-						<S.ProfileGrid>
-							{portfolioList &&
-								portfolioList?.map(
-									portfolio =>
-										portfolio && (
-											<PortfolioCard
-												key={portfolio.id}
-												{...portfolio}
-												isEditable={true}
-												clickNumber={checkPinnedIndex(portfolio.id) + 1}
-												handleClick={
-													checkPinnedIndex(portfolio.id) === -1
-														? addPinnedPortfolioList
-														: deletePinnedPortfolioList
-												}
-											/>
-										)
-								)}
-						</S.ProfileGrid>
+						{portfolioList?.length ? (
+							<S.ProfileGrid>
+								{portfolioList &&
+									portfolioList?.map(
+										portfolio =>
+											portfolio && (
+												<PortfolioCard
+													key={portfolio.id}
+													{...portfolio}
+													isEditable={true}
+													clickNumber={checkPinnedIndex(portfolio.id) + 1}
+													handleClick={
+														checkPinnedIndex(portfolio.id) === -1
+															? addPinnedPortfolioList
+															: deletePinnedPortfolioList
+													}
+												/>
+											)
+									)}
+							</S.ProfileGrid>
+						) : (
+							<S.ProfileEmptyPortfolio>
+								<h3>아직 작성한 포트폴리오가 없어요</h3>
+							</S.ProfileEmptyPortfolio>
+						)}
 						<hr ref={ref} />
 					</S.ProfileArticle>
 				</S.ProfileColumn>

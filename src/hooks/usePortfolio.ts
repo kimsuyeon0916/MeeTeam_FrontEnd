@@ -97,7 +97,11 @@ export const usePaginationPortfolioList = (size: number, pageParam: number) => {
  * @description 포트폴리오 삭제 API를 호출하는 hook입니다.
  */
 export const useDeletePortfolio = () => {
+	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: deletePortfolio,
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: portfolioKeys.readPaginationPortfolioList(16) });
+		},
 	});
 };

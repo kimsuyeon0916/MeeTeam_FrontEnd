@@ -1,34 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import S from './CompleteSignUpPage.styled';
-import { Modal, ModalPortal, PrimaryBtn } from '../../../components';
+import { PrimaryBtn } from '../../../components';
 import { Congratulation } from '../../../assets';
 import { useNavigate } from 'react-router-dom';
-import { fixModalBackground } from '../../../utils';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../../atom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { userState, signupModalState } from '../../../atom';
 
 const CompleteSignUpPage = () => {
 	const navigate = useNavigate();
 	const user = useRecoilValue(userState);
+	const setSignupModalOpen = useSetRecoilState(signupModalState);
 
-	const [modalOpen, setModalOpen] = useState(false);
-
-	useEffect(() => {
-		fixModalBackground(modalOpen);
-	}, [modalOpen]);
-
-	const modalProps = {
-		title: '프로필을 추가해보세요!',
-		content:
-			'프로필 입력정보를 추가하면\n팀을 만날 확률이 늘어납니다.\n내 프로필로 이동하시겠습니끼?',
-		defaultBtn: {
-			title: '나중에 하기',
-			handleClick: () => navigate('/'),
-		},
-		primaryBtn: {
-			title: '프로필로 이동',
-			handleClick: () => navigate(`/profile/${user?.userId}`),
-		},
+	const handleClick = () => {
+		setSignupModalOpen(true);
+		navigate('/', {
+			state: {
+				userId: user?.userId,
+			},
+			replace: true,
+		});
 	};
 
 	return (
@@ -38,12 +28,7 @@ const CompleteSignUpPage = () => {
 			</header>
 			<img src={Congratulation} alt='회원가입을 축하합니다!' />
 			<div>
-				<PrimaryBtn title='확인' type='button' handleClick={() => setModalOpen(true)} />
-				{modalOpen && (
-					<ModalPortal>
-						<Modal {...modalProps} />
-					</ModalPortal>
-				)}
+				<PrimaryBtn title='확인' type='button' handleClick={() => handleClick()} />
 			</div>
 		</S.CompleteSignUpLayout>
 	);

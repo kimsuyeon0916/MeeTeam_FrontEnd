@@ -6,16 +6,27 @@ import { uploadImageListState } from '../../../../atom';
 import { PortfolioCard } from '../../..';
 import { BlobFile, Image } from '../../../../types';
 import { unzipFile } from '../../../../utils';
+import { UseFormRegister, FieldValues, FormState, UseFormSetValue } from 'react-hook-form';
+import { INPUT_VALIDATION } from '../../../../constant';
 
 const MAX_IMAGE_SIZE_BYTES = 30 * 1024 * 1024; // 30MB
 const MAX_IMAGE_COUNT = 15;
 
 interface PortfolioImage {
+	register: UseFormRegister<FieldValues>;
+	formState: FormState<FieldValues>;
+	setValue: UseFormSetValue<FieldValues>;
 	zipFileUrl?: string;
 	fileOrder?: string[];
 }
 
-const PortfolioImageUpload = ({ zipFileUrl, fileOrder }: PortfolioImage) => {
+const PortfolioImageUpload = ({
+	register,
+	formState,
+	setValue,
+	zipFileUrl,
+	fileOrder,
+}: PortfolioImage) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const addImageList = () => {
 		inputRef.current?.click();
@@ -54,6 +65,11 @@ const PortfolioImageUpload = ({ zipFileUrl, fileOrder }: PortfolioImage) => {
 					reorderedImageList = [...reorderedImageList, reorderedImage];
 					if (i === fileOrder.length - 1) {
 						setUploadImageList(reorderedImageList);
+						setValue('mainImage', reorderedImageList[0], {
+							shouldValidate: true,
+							shouldDirty: true,
+							shouldTouch: true,
+						});
 					}
 				}
 			}
@@ -96,6 +112,13 @@ const PortfolioImageUpload = ({ zipFileUrl, fileOrder }: PortfolioImage) => {
 					file: imageList[i],
 				} as Image;
 				setUploadImageList(prev => [...prev, uploadImage]);
+				i === 0 &&
+					uploadImageList.length === 0 &&
+					setValue('mainImage', uploadImage, {
+						shouldValidate: true,
+						shouldDirty: true,
+						shouldTouch: true,
+					});
 			};
 		}
 	};
@@ -111,25 +134,32 @@ const PortfolioImageUpload = ({ zipFileUrl, fileOrder }: PortfolioImage) => {
 						isEditable={true}
 						isImageEditable={true}
 						clickNumber={index + 1}
+						setValue={setValue}
 					/>
 				))}
 				{/* 이미지 추가 버튼 */}
-				<S.PortfolioImageUpload onClick={addImageList}>
-					<S.PortfolioImageUploadColumn>
-						<S.PortfolioImageUploadRow>
-							<img src={Plus} alt='포트폴리오 이미지 추가' />
-							이미지 추가 (최대 15장)
-						</S.PortfolioImageUploadRow>
-						<small>(1920px X 1080px)</small>
-					</S.PortfolioImageUploadColumn>
-					<S.PortfolioImageInput
-						multiple
-						ref={inputRef}
-						type='file'
-						accept='image/*'
-						onChange={changeImageList}
-					/>
-				</S.PortfolioImageUpload>
+				<S.PortfolioImageUploadContainer>
+					<S.PortfolioImageUpload onClick={addImageList} $invalid={!!formState.errors['mainImage']}>
+						<S.PortfolioImageUploadColumn>
+							<S.PortfolioImageUploadRow>
+								<img src={Plus} alt='포트폴리오 이미지 추가' />
+								이미지 추가 (최대 15장)
+							</S.PortfolioImageUploadRow>
+							<small>(1920px X 1080px)</small>
+						</S.PortfolioImageUploadColumn>
+						<S.PortfolioImageInput
+							{...register('mainImage', INPUT_VALIDATION.portfolioImage)}
+							multiple
+							ref={inputRef}
+							type='file'
+							accept='image/*'
+							onChange={changeImageList}
+						/>
+					</S.PortfolioImageUpload>
+					<S.PortfolioImageUploadErrorMessage>
+						{formState?.errors['mainImage']?.message as string}
+					</S.PortfolioImageUploadErrorMessage>
+				</S.PortfolioImageUploadContainer>
 			</S.PortfolioImageGrid>
 		</S.PortfolioImageUploadLayout>
 	);
