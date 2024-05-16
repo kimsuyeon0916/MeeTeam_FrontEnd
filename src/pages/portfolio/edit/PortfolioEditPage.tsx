@@ -253,6 +253,10 @@ const PortfolioEditPage = () => {
 		if (e.key === 'Enter') e.preventDefault();
 	};
 
+	const checkTabKeyDown = (event: React.KeyboardEvent<ReactQuill>) => {
+		if (event.key === 'Tab') event.preventDefault();
+	};
+
 	return (
 		<>
 			<S.PortfolioEditLayout
@@ -430,6 +434,7 @@ const PortfolioEditPage = () => {
 									onChange={handleChangeEditor}
 									modules={modules}
 									formats={formats}
+									onKeyDown={checkTabKeyDown}
 									{...PORTFOLIO_EDIT_DATA.content}
 								/>
 							</S.PortfolioEditColumn>

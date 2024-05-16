@@ -13,7 +13,7 @@ import {
 import { useNavigate, useParams } from 'react-router-dom';
 import { useReadPortfolio, useDeletePortfolio } from '../../../hooks';
 import { Image, BlobFile } from '../../../types';
-import { fixModalBackground, unzipFile } from '../../../utils';
+import { addClassToEmptyPTags, fixModalBackground, unzipFile } from '../../../utils';
 import { useRecoilState } from 'recoil';
 import { uploadImageListState } from '../../../atom';
 import { TrashCan } from '../../../assets';
@@ -148,7 +148,7 @@ const PortfolioDetailsPage = () => {
 								<S.PortfolioDetailsContent
 									className='container-contents'
 									dangerouslySetInnerHTML={{
-										__html: DOMPurify.sanitize(portfolio?.content as string),
+										__html: DOMPurify.sanitize(addClassToEmptyPTags(portfolio?.content as string)),
 									}}
 								/>
 							</S.PortfolioDetailsArticle>

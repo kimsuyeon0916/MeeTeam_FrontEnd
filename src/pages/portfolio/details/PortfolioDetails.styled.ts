@@ -117,6 +117,62 @@ const PortfolioDetailsContent = styled.article`
 	padding: 0 clamp(5%, 9.8rem, 8%);
 	font-weight: 500;
 	white-space: pre-wrap; // 줄바꿈
+
+	/* 상세 내용 스타일링 */
+	.empty-p {
+		line-height: 1.2;
+	}
+
+	h1 {
+		font-size: 3.2rem;
+	}
+	h2 {
+		font-size: 2.4rem;
+	}
+	h3 {
+		font-size: 1.872rem;
+	}
+	h4 {
+		font-size: 1.6rem;
+	}
+	h5 {
+		font-size: 1.328rem;
+	}
+	h6 {
+		font-size: 1.072rem;
+	}
+	strong {
+		font-weight: bold;
+	}
+	em {
+		font-style: italic;
+	}
+	blockquote {
+		border-left: 4px solid #ccc;
+		margin-bottom: 5px;
+		margin-top: 5px;
+		padding-left: 16px;
+	}
+	ul {
+		list-style-type: circle;
+		padding-left: 2rem;
+	}
+	ol {
+		list-style-type: decimal;
+		padding-left: 2rem;
+	}
+
+	.ql-indent-1 {
+		margin-left: 5rem;
+	}
+
+	.ql-indent-2 {
+		margin-left: 10rem;
+	}
+
+	.ql-indent-3 {
+		margin-left: 15rem;
+	}
 `;
 
 const PortfolioDetailsButtonContainer = styled.div`
