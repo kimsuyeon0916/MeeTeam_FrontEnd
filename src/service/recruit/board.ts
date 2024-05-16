@@ -3,13 +3,13 @@ import { ListResult, FilterData } from '../../types';
 
 interface FilterItem {
 	filterState: FilterData;
-	isLoggedIn: boolean;
+	isLogin: boolean;
 	page: number;
 }
 
-export const getPostList = async ({ filterState, isLoggedIn, page }: FilterItem) => {
+export const getPostList = async ({ filterState, isLogin, page }: FilterItem) => {
 	try {
-		if (isLoggedIn) {
+		if (isLogin) {
 			const response = await axiosAuthInstance.get<ListResult>(EndPoint.RECRUITMENT_BOARD.list, {
 				params: {
 					skill: filterState.skill,

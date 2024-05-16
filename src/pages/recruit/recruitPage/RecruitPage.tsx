@@ -66,10 +66,10 @@ const RecruitPage = () => {
 	});
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [needLoginModal, setNeedLoginModal] = useRecoilState(needLoginModalState);
-	const { isLoggedIn } = useLogin();
+	const { isLogin } = useLogin();
 	const { data, isLoading } = useQuery({
-		queryKey: ['recruit_board', { filterState, isLoggedIn, page }],
-		queryFn: () => getPostList({ filterState, isLoggedIn, page }),
+		queryKey: ['recruit_board', { filterState, isLogin, page }],
+		queryFn: () => getPostList({ filterState, isLogin, page }),
 	});
 
 	const onClickDetailed = (event: React.MouseEvent) => {
@@ -170,7 +170,7 @@ const RecruitPage = () => {
 	};
 
 	const recruitCreateHandler = () => {
-		if (isLoggedIn) {
+		if (isLogin) {
 			navigate('/recruitment/postings');
 		} else {
 			setNeedLoginModal({ isOpen: true, type: 'RECRUIT_CREATE' });
@@ -178,7 +178,7 @@ const RecruitPage = () => {
 	};
 
 	const bookmarkNavigateHandler = () => {
-		if (isLoggedIn) {
+		if (isLogin) {
 			navigate('/management/bookmark');
 		} else {
 			setNeedLoginModal({ isOpen: true, type: 'MANAGE_BOOKMARK' });
@@ -186,7 +186,7 @@ const RecruitPage = () => {
 	};
 
 	const profileCreateHandler = () => {
-		if (isLoggedIn) {
+		if (isLogin) {
 			navigate('/profile/edit');
 		} else {
 			setNeedLoginModal({ isOpen: true, type: 'PROFILE_CREATE' });
@@ -194,7 +194,7 @@ const RecruitPage = () => {
 	};
 
 	const portfolioCreateHandler = () => {
-		if (isLoggedIn) {
+		if (isLogin) {
 			navigate('/portfolio/edit');
 		} else {
 			setNeedLoginModal({ isOpen: true, type: 'PORTFOLIO_CREATE' });
@@ -327,7 +327,7 @@ const RecruitPage = () => {
 					</section>
 					<section className='wrapper-filters'>
 						<section className='container-filters'>
-							{isLoggedIn && (
+							{isLogin && (
 								<Dropdown data={['모든 범위', '교내', '교외']} initialData='범위' scope />
 							)}
 							<Dropdown

@@ -8,6 +8,7 @@ import { RecruitApplicantsList } from '../../../../types';
 
 const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 	const { id } = useParams();
+	const pageNum = Number(id);
 	const [info, setInfo] = useRecoilState(recruitInputState);
 	const setWarnRoleDeleteState = useSetRecoilState(warnRoleDeleteModalState);
 
@@ -23,6 +24,11 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 			} else {
 				setWarnRoleDeleteState(true);
 			}
+		} else {
+			setInfo(prev => ({
+				...prev,
+				recruitmentRoles: prev.recruitmentRoles?.filter(elem => elem.roleId !== id),
+			}));
 		}
 	};
 

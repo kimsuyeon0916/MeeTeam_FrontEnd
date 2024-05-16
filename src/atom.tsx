@@ -14,6 +14,7 @@ export const userState = atom<User | null>({
 export const loginState = atom<boolean>({
 	key: 'loginState',
 	default: false,
+	effects: [LocalStorageEffect<boolean>('loginState')],
 });
 
 export const pageState = atom({

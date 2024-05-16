@@ -8,23 +8,16 @@ import { useRecoilValue } from 'recoil';
 import { userState } from '../../../atom';
 
 interface ReplyHandler {
-	mention?: string;
 	pageNum: number;
 	groupNumber: number;
 	onClickCancel: () => void;
 	replyInputHandler: () => void;
 }
 
-const ReplyInput = ({
-	mention,
-	pageNum,
-	groupNumber,
-	onClickCancel,
-	replyInputHandler,
-}: ReplyHandler) => {
+const ReplyInput = ({ pageNum, groupNumber, onClickCancel, replyInputHandler }: ReplyHandler) => {
 	const postComment = useComment();
 	const queryClient = useQueryClient();
-	const [contents, setContents] = useState<string>(mention ? `@${mention + ' '}` : '');
+	const [contents, setContents] = useState<string>('');
 	const userInfo = useRecoilValue(userState);
 
 	const addReply = () => {

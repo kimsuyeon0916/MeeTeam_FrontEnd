@@ -10,12 +10,12 @@ import {
 
 interface PostingData {
 	pageNum: number;
-	isLoggedIn: boolean;
+	isLogin: boolean;
 }
 
-export const getPostingData = async ({ pageNum, isLoggedIn }: PostingData) => {
+export const getPostingData = async ({ pageNum, isLogin }: PostingData) => {
 	try {
-		if (isLoggedIn) {
+		if (isLogin) {
 			const response = await axiosAuthInstance.get<RecruitPostings>(
 				EndPoint.RECRUIT_DETAIL.posting(pageNum)
 			);

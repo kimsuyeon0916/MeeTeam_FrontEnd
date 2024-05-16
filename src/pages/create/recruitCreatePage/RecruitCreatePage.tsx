@@ -22,7 +22,7 @@ const RecruitCreatePage = () => {
 	const { id } = useParams();
 	const location = useLocation();
 	const navigate = useNavigate();
-	const { isLoggedIn } = useLogin();
+	const { isLogin } = useLogin();
 	const validCheck = useRecoilValue(validState);
 	const setIsSubmit = useSetRecoilState(validState);
 	const [beforeSubmit, setBeforeSubmit] = useState<boolean>(false);
@@ -47,8 +47,8 @@ const RecruitCreatePage = () => {
 	const pageNum = Number(id);
 
 	const { data, isSuccess } = useQuery({
-		queryKey: ['detailedPage', { pageNum, isLoggedIn }],
-		queryFn: () => getPostingData({ pageNum, isLoggedIn }),
+		queryKey: ['detailedPage', { pageNum, isLogin }],
+		queryFn: () => getPostingData({ pageNum, isLogin }),
 		enabled: !!id,
 	});
 

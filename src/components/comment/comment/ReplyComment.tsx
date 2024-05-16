@@ -23,7 +23,7 @@ const ReplyComment = ({
 	replyComment,
 }: CommentType) => {
 	const { id: recruitId } = useParams();
-	const { isLoggedIn } = useLogin();
+	const { isLogin } = useLogin();
 	const pageNum = Number(recruitId);
 	const [value, setValue] = useState<string>(content);
 	const [showKebab, setShowKebab] = useState<boolean>(true);
@@ -161,7 +161,7 @@ const ReplyComment = ({
 						)}
 					</section>
 				</article>
-				{showKebab && isLoggedIn && (
+				{showKebab && isLogin && (
 					<KebabMenu options={isCommentWriter ? optionLists : optionListsOthers} />
 				)}
 			</section>

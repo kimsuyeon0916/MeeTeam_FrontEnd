@@ -43,7 +43,7 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 		course: false,
 		professor: false,
 	});
-	const { isLoggedIn } = useLogin();
+	const { isLogin } = useLogin();
 	const [isScopeSelected, setIsScopeSelected] = useState(false);
 	const [isCategorySelected, setIsCategorySelected] = useState(false);
 	const insideRef = useRef<HTMLDivElement | null>(null);
@@ -68,14 +68,14 @@ const Dropdown = ({ data, initialData, scope, category, applicant, roleObj }: Dr
 	const { data: dataCourse, isLoading: isLoadingCourse } = useQuery({
 		queryKey: ['searchCourse', keywordCourse],
 		queryFn: () => getCourseKeyword(keywordCourse),
-		enabled: isLoggedIn,
+		enabled: isLogin,
 		staleTime: Infinity,
 		gcTime: Infinity,
 	});
 	const { data: dataProfessor, isLoading: isLoadingProfessor } = useQuery({
 		queryKey: ['searchProfessor', keywordProfessor],
 		queryFn: () => getProfessorKeyword(keywordProfessor),
-		enabled: isLoggedIn,
+		enabled: isLogin,
 		staleTime: Infinity,
 		gcTime: Infinity,
 	});
