@@ -9,7 +9,7 @@ import {
 	useDebounce,
 } from '../../../hooks';
 import { ComboBox } from '../../../components';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Path } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { Department } from '../../../types';
 
@@ -105,6 +105,12 @@ const SchoolCertificationPage = () => {
 		}
 	};
 
+	const autoCompleteOptionList = (name: string) => {
+		return optionList(name)
+			?.filter(option => option.name.includes(watch(name as Path<FormValues>)))
+			.sort();
+	};
+
 	const checkExistYear = optionList('year')?.find(
 		(year: { name: string }) => year.name === getValues('year')
 	);
@@ -153,7 +159,7 @@ const SchoolCertificationPage = () => {
 											register={register}
 											setValue={setValue}
 											getValues={getValues}
-											optionList={optionList(name)}
+											optionList={autoCompleteOptionList(name)}
 											name={name}
 											{...props}
 										/>
