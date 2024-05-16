@@ -39,6 +39,7 @@ const MuiDatepickerController = ({ name, control, formState, rules }: Date) => {
 				render={({ field: { onChange, ref, value } }) => (
 					<MuiDatepicker
 						defaultValue={new Date(value)}
+						value={new Date(value)}
 						handleChange={onChange}
 						inputRef={ref}
 						invalid={!!inputError}
