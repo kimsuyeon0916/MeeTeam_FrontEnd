@@ -86,6 +86,7 @@ const Modal = styled.section<Modal>`
 	}
 
 	.container-user__info {
+		width: 44rem;
 		border-radius: 0.8rem;
 		border: 1px solid #e3e3e3;
 		background-color: #fff;

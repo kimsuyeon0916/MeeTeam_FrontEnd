@@ -16,6 +16,7 @@ const PostingDelete = () => {
 		mutationFn: (pageNum: number) => deletePostingRecruit(pageNum),
 		onSuccess: () => {
 			navigate('/');
+			setIsDelete(false);
 		},
 	});
 
