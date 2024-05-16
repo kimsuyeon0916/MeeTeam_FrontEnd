@@ -17,7 +17,7 @@ import {
 } from '../../../components';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForm, useFieldArray, SubmitHandler } from 'react-hook-form';
-import { Link, PortfolioPayload, Skill } from '../../../types';
+import { Image, Link, PortfolioPayload, Skill } from '../../../types';
 import {
 	useCreatePortfolio,
 	useDebounce,
@@ -36,6 +36,7 @@ import { useRecoilValue } from 'recoil';
 import { uploadImageListState } from '../../../atom';
 
 interface FormValues {
+	mainImage?: Image;
 	title?: string;
 	description?: string;
 	field?: string;
@@ -285,6 +286,9 @@ const PortfolioEditPage = () => {
 									)}
 								</S.PortfolioEditRow>
 								<PortfolioImageUpload
+									register={register}
+									formState={formState}
+									setValue={setValue}
 									zipFileUrl={portfolio?.zipFileUrl}
 									fileOrder={portfolio?.fileOrder}
 								/>

@@ -6,6 +6,7 @@ import { OptionList } from '../..';
 import { useRecoilState } from 'recoil';
 import { uploadImageListState } from '../../../atom';
 import { Image } from '../../../types';
+import { UseFormSetValue, FieldValues } from 'react-hook-form';
 
 interface PortfolioCard {
 	id?: string;
@@ -18,6 +19,7 @@ interface PortfolioCard {
 	isImageEditable?: boolean;
 	clickNumber?: number;
 	handleClick?: (id: string) => void;
+	setValue?: UseFormSetValue<FieldValues>;
 }
 
 const MAX_IMAGE_SIZE_BYTES = 30 * 1024 * 1024; // 30MB
@@ -34,6 +36,7 @@ const PortfolioCard = ({
 	isImageEditable,
 	clickNumber,
 	handleClick,
+	setValue,
 }: PortfolioCard) => {
 	const navigate = useNavigate();
 
@@ -75,6 +78,11 @@ const PortfolioCard = ({
 			const imageList = [...uploadImageList];
 			imageList.splice((clickNumber as number) - 1, 1, uploadImage);
 			setUploadImageList(imageList);
+			setValue?.('mainImage', imageList[0], {
+				shouldValidate: true,
+				shouldDirty: true,
+				shouldTouch: true,
+			});
 		};
 	};
 
@@ -82,6 +90,11 @@ const PortfolioCard = ({
 		const imageList = [...uploadImageList];
 		imageList.splice((clickNumber as number) - 1, 1);
 		setUploadImageList(imageList);
+		setValue?.('mainImage', imageList[0] ?? '', {
+			shouldValidate: true,
+			shouldDirty: true,
+			shouldTouch: true,
+		});
 	};
 
 	const handleOptionClick = (name: string, optionName: string) => {
