@@ -7,7 +7,7 @@ const RecruitRoles = styled.article`
 
 	.scroll {
 		width: 100%;
-		height: 29rem;
+		height: 33rem;
 		overflow-x: scroll;
 
 		&::-webkit-scrollbar {

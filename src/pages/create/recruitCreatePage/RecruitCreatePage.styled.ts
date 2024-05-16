@@ -166,7 +166,6 @@ const RecruitCreatePage = styled.div`
 		left: 50%;
 		transform: translate(-50%, -50%);
 		z-index: 505;
-		width: 58.9516rem;
 
 		.caution {
 			color: #f85858;
@@ -209,6 +208,7 @@ const RecruitCreatePage = styled.div`
 		}
 
 		.btn-okay {
+			margin-top: 4rem;
 			display: flex;
 			height: 3.6rem;
 			padding: 1.2rem 3.2rem;

@@ -7,6 +7,7 @@ import {
 	NeedLogin,
 	ModalPortal,
 	Modal,
+	Footer,
 } from '../../../components';
 import S from './RecruitPage.styled';
 import {
@@ -69,12 +70,10 @@ const RecruitPage = () => {
 	});
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [needLoginModal, setNeedLoginModal] = useRecoilState(needLoginModalState);
-	const { isLoggedIn } = useLogin();
+	const { isLogin } = useLogin();
 	const { data, isLoading } = useQuery({
-		queryKey: ['recruit_board', { filterState, isLoggedIn, page }],
-		queryFn: () => getPostList({ filterState, isLoggedIn, page }),
-		staleTime: 6000 * 30,
-		gcTime: 6000 * 60,
+		queryKey: ['recruit_board', { filterState, isLogin, page }],
+		queryFn: () => getPostList({ filterState, isLogin, page }),
 	});
 
 	const onClickDetailed = (event: React.MouseEvent) => {
@@ -175,7 +174,7 @@ const RecruitPage = () => {
 	};
 
 	const recruitCreateHandler = () => {
-		if (isLoggedIn) {
+		if (isLogin) {
 			navigate('/recruitment/postings');
 		} else {
 			setNeedLoginModal({ isOpen: true, type: 'RECRUIT_CREATE' });
@@ -183,7 +182,7 @@ const RecruitPage = () => {
 	};
 
 	const bookmarkNavigateHandler = () => {
-		if (isLoggedIn) {
+		if (isLogin) {
 			navigate('/management/bookmark');
 		} else {
 			setNeedLoginModal({ isOpen: true, type: 'MANAGE_BOOKMARK' });
@@ -191,7 +190,7 @@ const RecruitPage = () => {
 	};
 
 	const profileCreateHandler = () => {
-		if (isLoggedIn) {
+		if (isLogin) {
 			navigate('/profile/edit');
 		} else {
 			setNeedLoginModal({ isOpen: true, type: 'PROFILE_CREATE' });
@@ -199,7 +198,7 @@ const RecruitPage = () => {
 	};
 
 	const portfolioCreateHandler = () => {
-		if (isLoggedIn) {
+		if (isLogin) {
 			navigate('/portfolio/edit');
 		} else {
 			setNeedLoginModal({ isOpen: true, type: 'PORTFOLIO_CREATE' });
@@ -290,7 +289,7 @@ const RecruitPage = () => {
 			course: isCourse ? Number(isCourse) : null,
 			professor: isProfessor ? Number(isProfessor) : null,
 		});
-	}, [searchParams.size]);
+	}, []);
 
 	useEffect(() => {
 		setSearchKeyword(filterState.keyword as any);
@@ -322,12 +321,12 @@ const RecruitPage = () => {
 	};
 
 	return (
-		<S.RecruitPage
-			$isFieldClick={fieldValue.value.value !== '분야를 선택해주세요'}
-			$isDetailedClick={isOpen}
-			$isDetailSelected={isDetailSelected}
-		>
-			<>
+		<>
+			<S.RecruitPage
+				$isFieldClick={fieldValue.value.value !== '분야를 선택해주세요'}
+				$isDetailedClick={isOpen}
+				$isDetailSelected={isDetailSelected}
+			>
 				<section>
 					<section className='wrapper-title' ref={fieldRef}>
 						<h2>분야 전체</h2>
@@ -357,7 +356,7 @@ const RecruitPage = () => {
 					</section>
 					<section className='wrapper-filters'>
 						<section className='container-filters'>
-							{isLoggedIn && (
+							{isLogin && (
 								<Dropdown data={['모든 범위', '교내', '교외']} initialData='범위' scope />
 							)}
 							<Dropdown
@@ -491,7 +490,6 @@ const RecruitPage = () => {
 						<img src={isFloatingOpen ? CancelWhite : PlusWhite} />
 					</section>
 				</article>
-			</>
 			{needLoginModal.isOpen && (
 				<section className='modal-background'>
 					<NeedLogin type={needLoginModal.type} />
@@ -503,6 +501,8 @@ const RecruitPage = () => {
 				</ModalPortal>
 			)}
 		</S.RecruitPage>
+    <Footer />
+		</>
 	);
 };
 

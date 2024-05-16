@@ -61,6 +61,7 @@ import NaverIcon from './NaverIcon.png';
 import Clip from './Clip.svg';
 import Valid from './Valid.svg';
 import Invalid from './Invalid.svg';
+import LogoFooter from './LogoFooter.svg';
 
 export {
 	Exit,
@@ -126,4 +127,5 @@ export {
 	Clip,
 	Valid,
 	Invalid,
+	LogoFooter,
 };

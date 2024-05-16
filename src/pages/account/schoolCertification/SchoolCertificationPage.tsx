@@ -12,6 +12,7 @@ import { ComboBox } from '../../../components';
 import { useForm, SubmitHandler, Path } from 'react-hook-form';
 import { DevTool } from '@hookform/devtools';
 import { Department } from '../../../types';
+import secureLocalStorage from 'react-secure-storage';
 
 interface FormValues {
 	year: string;
@@ -62,7 +63,7 @@ const SchoolCertificationPage = () => {
 
 	const certificateHandler: SubmitHandler<FormValues> = data => {
 		mutate({
-			platformId: localStorage.PLATFORM_ID,
+			platformId: secureLocalStorage.getItem('PLATFORM_ID') as string,
 			year: data.year,
 			universityId: universityId,
 			departmentId: departmentList?.find(

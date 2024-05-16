@@ -62,7 +62,7 @@ export const EndPoint = {
 		tag: (keyword: string) => `/tag/search?keyword=${keyword}&limit=5`,
 	},
 	RECRUITMENT_BOARD: {
-		list: '/recruitment/postings/search',
+		list: '/recruitment/postings/search?size=16',
 	},
 	RECRUITMENT_APPLICANT: {
 		info: (id: number) => `/recruitment/applicants/${id}/info`,
