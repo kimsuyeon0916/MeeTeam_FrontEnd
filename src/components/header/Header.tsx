@@ -3,7 +3,7 @@ import S from './Header.styled';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { DropdownArrow, Logo, LogoName } from '../../assets';
 import { ProfileImage, WaitModal } from '..';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { recruitFilterState, userState, waitModalState, loginState } from '../../atom';
 import { useLogin, useSignOut } from '../../hooks';
 import { fixModalBackground, resetFormData } from '../../utils';
@@ -12,7 +12,7 @@ const Header = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const location = useLocation();
-	const { isLoggedIn } = useLogin();
+	const isLogin = useRecoilValue(loginState);
 	const setLoginState = useSetRecoilState(loginState);
 	const [userInfo, setUserState] = useRecoilState(userState);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -45,7 +45,7 @@ const Header = () => {
 	};
 
 	const onClickMy = () => {
-		if (!isLoggedIn) {
+		if (!isLogin) {
 			navigate('/signin');
 		} else {
 			setOpenDrop(prev => !prev);
@@ -89,13 +89,13 @@ const Header = () => {
 	resetFormData();
 
 	return (
-		<S.Header $isLogin={isLoggedIn}>
+		<S.Header $isLogin={isLogin}>
 			<div className='header'>
 				<section className='header-leftside'>
 					<div className='header__logo' onClick={goRecruit}>
 						<img className='logo' src={Logo} />
 						<img className='logo-name' src={LogoName} />
-						{isLoggedIn && <span className='university'>광운대학교</span>}
+						{isLogin && <span className='university'>광운대학교</span>}
 					</div>
 					<div className='header__navigation'>
 						<div
@@ -116,7 +116,7 @@ const Header = () => {
 					<div className='header__menu'>
 						<div className='header__menu--my' ref={dropdownRef}>
 							<section onClick={onClickMy}>
-								{isLoggedIn ? (
+								{isLogin ? (
 									<article className='icon-container'>
 										<div className='icon-border'>
 											<ProfileImage url={userInfo?.imageUrl} size='3rem' />

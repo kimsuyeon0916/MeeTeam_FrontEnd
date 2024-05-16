@@ -31,7 +31,7 @@ const RecruitCard = ({
 	const location = useLocation();
 	const navigate = useNavigate();
 	const [path, setPath] = useState('');
-	const { isLoggedIn } = useLogin();
+	const { isLogin } = useLogin();
 	const { mutate: bookmarked } = useBookmark({
 		queryKey: path,
 	});
@@ -50,7 +50,7 @@ const RecruitCard = ({
 
 	const onClickBookmark = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation();
-		if (!isLoggedIn) {
+		if (!isLogin) {
 			setNeedLoginModal({ isOpen: true, type: 'BOOKMARK' });
 			return;
 		}

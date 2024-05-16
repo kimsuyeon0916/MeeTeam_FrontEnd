@@ -21,13 +21,13 @@ const TitleInfo = ({
 	isBookmarked,
 }: TitleAndEtc) => {
 	const { id } = useParams();
-	const { isLoggedIn } = useLogin();
+	const { isLogin } = useLogin();
 	const { mutate: bookmarked } = useBookmark({ queryKey: 'detailedPage' });
 	const { mutate: unBookmarked } = useDelBookmark({ queryKey: 'detailedPage' });
 	const [needLoginModal, setNeedLoginModal] = useRecoilState(needLoginModalState);
 
 	const toggleBookmark = () => {
-		if (!isLoggedIn) {
+		if (!isLogin) {
 			setNeedLoginModal({ isOpen: true, type: 'BOOKMARK' });
 			return;
 		}

@@ -53,11 +53,13 @@ const RecruitDetailPage = () => {
 		1: <ConfirmModal />,
 		2: <FinalModal />,
 	};
-	const { isLoggedIn } = useLogin();
+	const { isLogin } = useLogin();
 	const { data: detailedData, isSuccess } = useQuery({
-		queryKey: ['detailedPage', { pageNum, isLoggedIn }],
-		queryFn: () => getPostingData({ pageNum, isLoggedIn }),
+		queryKey: ['detailedPage', { pageNum, isLogin }],
+		queryFn: () => getPostingData({ pageNum, isLogin }),
 	});
+
+	console.log(detailedData?.comments);
 	const period = detailedData?.proceedingStart + ' ~ ' + detailedData?.proceedingEnd;
 	const diffDate = detailedData && calculateDate(detailedData.deadline);
 	const totalCommentsCount = useMemo(() => {
@@ -122,7 +124,7 @@ const RecruitDetailPage = () => {
 										return <Comment key={comment.id} {...comment} />;
 									})}
 							</ul>
-							{isLoggedIn ? (
+							{isLogin ? (
 								<CommentInput />
 							) : (
 								<section className='need-login'>

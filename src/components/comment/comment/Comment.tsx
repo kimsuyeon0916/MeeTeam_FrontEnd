@@ -24,7 +24,7 @@ const Comment = ({
 }: CommentType) => {
 	const { id: recruitId } = useParams();
 	const pageNum = Number(recruitId);
-	const { isLoggedIn } = useLogin();
+	const { isLogin } = useLogin();
 	const [replyClicked, setReplyClicked] = useState<boolean>(false);
 	const [value, setValue] = useState<string>(content);
 	const [showKebab, setShowKebab] = useState<boolean>(true);
@@ -170,7 +170,7 @@ const Comment = ({
 						)}
 					</section>
 				</article>
-				{showKebab && isLoggedIn && (
+				{showKebab && isLogin && (
 					<KebabMenu options={isCommentWriter ? optionLists : optionListsOthers} />
 				)}
 			</section>
@@ -187,7 +187,6 @@ const Comment = ({
 						onClickCancel={onClickCancel}
 						groupNumber={groupNumber}
 						pageNum={pageNum}
-						mention={mention}
 						replyInputHandler={replyInputHandler}
 					/>
 				)}
