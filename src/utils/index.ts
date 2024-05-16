@@ -13,6 +13,7 @@ import isNotNumber from './isNotNumber';
 import calculateDate from './calculateDate';
 import resetFormData from './resetFormData';
 import throttle from './throttle';
+import addClassToEmptyPTags from './addClassToEmptyPTags';
 
 export {
 	modules,
@@ -31,4 +32,5 @@ export {
 	calculateDate,
 	resetFormData,
 	throttle,
+	addClassToEmptyPTags,
 };
