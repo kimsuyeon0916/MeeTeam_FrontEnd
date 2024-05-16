@@ -59,7 +59,6 @@ const RecruitDetailPage = () => {
 		queryFn: () => getPostingData({ pageNum, isLogin }),
 	});
 
-	console.log(detailedData?.comments);
 	const period = detailedData?.proceedingStart + ' ~ ' + detailedData?.proceedingEnd;
 	const diffDate = detailedData && calculateDate(detailedData.deadline);
 	const totalCommentsCount = useMemo(() => {
