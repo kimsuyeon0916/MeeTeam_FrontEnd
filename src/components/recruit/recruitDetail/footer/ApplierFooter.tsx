@@ -16,7 +16,7 @@ interface ApplierData {
 const ApplierFooter = ({ deadline, isApplied, isBookmarked }: ApplierData) => {
 	const { id } = useParams();
 	const pageNum = Number(id);
-	const { isLoggedIn } = useLogin();
+	const { isLogin } = useLogin();
 	const diffDate = calculateDate(deadline);
 	const setIsModal = useSetRecoilState(applyModalState);
 	const setNeedLoginModal = useSetRecoilState(needLoginModalState);
@@ -26,7 +26,7 @@ const ApplierFooter = ({ deadline, isApplied, isBookmarked }: ApplierData) => {
 	const setIsCancel = useSetRecoilState(applyCancelModalState);
 
 	const onClickApply = () => {
-		if (isLoggedIn) {
+		if (isLogin) {
 			setIsModal(true);
 		} else {
 			setNeedLoginModal({ isOpen: true, type: 'RECRUIT_APPLY' });
@@ -38,7 +38,7 @@ const ApplierFooter = ({ deadline, isApplied, isBookmarked }: ApplierData) => {
 	};
 
 	const onClickBookmark = () => {
-		if (!isLoggedIn) {
+		if (!isLogin) {
 			setNeedLoginModal({ isOpen: true, type: 'BOOKMARK' });
 			return;
 		}
