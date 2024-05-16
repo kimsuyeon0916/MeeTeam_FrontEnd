@@ -249,7 +249,7 @@ const PortfolioEditPage = () => {
 		}
 	}, [isSuccessReadPortfolio]);
 
-	const checkKeyDown = (e: React.KeyboardEvent) => {
+	const checkEnterKeyDown = (e: React.KeyboardEvent) => {
 		if (e.key === 'Enter') e.preventDefault();
 	};
 
@@ -257,7 +257,7 @@ const PortfolioEditPage = () => {
 		<>
 			<S.PortfolioEditLayout
 				onSubmit={handleSubmit(submitHandler)}
-				onKeyDown={e => checkKeyDown(e)}
+				onKeyDown={e => checkEnterKeyDown(e)}
 			>
 				<S.PortfolioEditColumn $gap='4rem'>
 					<S.PortfolioEditHeader>
@@ -351,7 +351,7 @@ const PortfolioEditPage = () => {
 														differenceInDays(
 															new Date(watch('endDate') as string),
 															new Date(startDate)
-														) < 0 && '시작일을 종료일보다 빠르게 설정해주세요'
+														) >= 0 || '시작일을 종료일보다 빠르게 설정해주세요'
 													);
 												},
 											}}
