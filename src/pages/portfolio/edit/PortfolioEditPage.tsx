@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import S from './PortfolioEdit.styled';
-import { DevTool } from '@hookform/devtools';
 import {
 	Input,
 	ComboBox,
@@ -471,7 +470,6 @@ const PortfolioEditPage = () => {
 					</S.PortfolioEditButtonBox>
 				</S.PortfolioEditColumn>
 			</S.PortfolioEditLayout>
-			<DevTool control={control} />
 		</>
 	);
 };
