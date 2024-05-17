@@ -23,6 +23,7 @@ import {
 	CompleteSignUpPage,
 	PrivateRouter,
 	PortfolioManagementPage,
+	NotFound,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -115,6 +116,10 @@ const router = createBrowserRouter([
 			{
 				path: 'portfolio/management',
 				element: <PortfolioManagementPage />,
+			},
+			{
+				path: '*',
+				element: <NotFound />,
 			},
 		],
 	},

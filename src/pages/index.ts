@@ -28,6 +28,7 @@ import RecruitMyPostings from './recruit/recruitManagePage/RecruitMyPostings';
 import CompleteSignUpPage from './account/complete/CompleteSignUpPage';
 import PrivateRouter from './routes/PrivateRouter';
 import PortfolioManagementPage from './portfolio/management/PortfolioManagmentPage';
+import NotFound from './notFound/NotFound';
 
 export {
 	MainPage,
@@ -61,4 +62,5 @@ export {
 	CompleteSignUpPage,
 	PrivateRouter,
 	PortfolioManagementPage,
+	NotFound,
 };
