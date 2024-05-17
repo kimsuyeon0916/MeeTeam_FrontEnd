@@ -196,6 +196,13 @@ const PortfolioEditor = styled(ReactQuill)`
 		display: flex;
 		color: #8e8e8e;
 	}
+
+	strong {
+		font-weight: bold;
+	}
+	em {
+		font-style: italic;
+	}
 `;
 
 const PortfolioEditButtonBox = styled.div`
