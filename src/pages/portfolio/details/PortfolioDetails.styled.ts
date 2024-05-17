@@ -114,6 +114,7 @@ const PortfolioDetailsRow = styled.div<PortfolioBoxStyle>`
 
 const PortfolioDetailsContent = styled.article`
 	display: flex;
+	flex-direction: column;
 	padding: 0 clamp(5%, 9.8rem, 8%);
 	font-weight: 500;
 	white-space: pre-wrap; // 줄바꿈
