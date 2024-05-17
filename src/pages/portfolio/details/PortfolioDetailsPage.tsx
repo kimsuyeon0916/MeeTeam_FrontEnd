@@ -146,7 +146,6 @@ const PortfolioDetailsPage = () => {
 								<S.PortfolioDetailsTitle>상세내용</S.PortfolioDetailsTitle>
 								<hr />
 								<S.PortfolioDetailsContent
-									className='container-contents'
 									dangerouslySetInnerHTML={{
 										__html: DOMPurify.sanitize(addClassToEmptyPTags(portfolio?.content as string)),
 									}}
