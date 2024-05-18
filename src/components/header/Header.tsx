@@ -5,7 +5,7 @@ import { DropdownArrow, Logo, LogoName } from '../../assets';
 import { ProfileImage, WaitModal } from '..';
 import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 import { recruitFilterState, userState, waitModalState, loginState } from '../../atom';
-import { useLogin, useSignOut } from '../../hooks';
+import { useSignOut } from '../../hooks';
 import { fixModalBackground, resetFormData } from '../../utils';
 
 const Header = () => {

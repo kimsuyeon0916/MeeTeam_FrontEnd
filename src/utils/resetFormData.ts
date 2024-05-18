@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
-import { recruitInputState } from '../atom';
+import { recruitInputState, validState } from '../atom';
 import { useLocation } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import simpleDate from './simpleDate';
 import { SAFE_DEFAULT_VALUE } from '../constant';
 
 const resetFormData = () => {
-	const [formData, setFormData] = useRecoilState(recruitInputState);
+	const setFormData = useSetRecoilState(recruitInputState);
+	const setValidState = useSetRecoilState(validState);
 	const location = useLocation();
 
 	useEffect(() => {
@@ -27,6 +28,18 @@ const resetFormData = () => {
 			tags: [],
 			title: '',
 			content: SAFE_DEFAULT_VALUE,
+		});
+
+		setValidState({
+			isSubmitted: false,
+			isScope: false,
+			isCategory: false,
+			isDeadline: false,
+			isEndDate: false,
+			isProcedure: false,
+			isTitle: false,
+			isContent: false,
+			isRole: false,
 		});
 	}, [location.pathname]);
 };

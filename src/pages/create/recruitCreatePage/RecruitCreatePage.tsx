@@ -14,7 +14,7 @@ import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
 import { recruitInputState, validState, warnRoleDeleteModalState } from '../../../atom';
 import { getPostingData, editPostingRecruit, postingRecruit } from '../../../service';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { EditPosting, InputState, RoleInfo, RoleForPost, RecruitApplicant } from '../../../types';
+import { EditPosting, InputState, RoleInfo, RoleForPost } from '../../../types';
 import { fixModalBackground, resetFormData } from '../../../utils';
 import { useLogin } from '../../../hooks';
 
