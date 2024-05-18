@@ -330,7 +330,11 @@ const InputRoleForm = () => {
 						</section>
 					)}
 					<article className='add-btn'>
-						<button type='button' className='txt-big' onClick={handleAddRole}>
+						<button
+							type='button'
+							className={`txt-big ${info.recruitmentRoles.length === 10 && 'disabled'}`}
+							onClick={handleAddRole}
+						>
 							추가
 						</button>
 					</article>

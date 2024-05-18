@@ -315,6 +315,11 @@ const InputRoleForm = styled.article<InputRoleForm>`
 			border-radius: 0.6rem;
 			background: #5877fc;
 		}
+
+		.disabled {
+			background-color: #e3e3e3;
+			color: #8e8e8e;
+		}
 	}
 
 	.valid-length__msg {
