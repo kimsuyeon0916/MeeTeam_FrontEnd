@@ -3,11 +3,10 @@ import styled from 'styled-components';
 const Footer = styled.article`
 	display: flex;
 	justify-content: space-between;
-	padding: 8rem clamp(10%, 24rem, 20%);
-	// padding: 8rem 24rem;
+	padding: 6.5rem clamp(10%, 24rem, 20%);
 	font-family: Pretendard;
 	background: #f6f6f6;
-	height: 31.7rem;
+	height: 24.8rem;
 
 	h3 {
 		color: #373f41;
@@ -16,7 +15,26 @@ const Footer = styled.article`
 		margin-bottom: 0.4rem;
 	}
 
+	h5 {
+		color: #373f41;
+		font-size: 1.6rem;
+		font-weight: 600;
+		line-height: 1.9rem;
+		letter-spacing: 0.0032rem;
+	}
+
+	.copyright {
+		color: #8e8e8e;
+		font-family: Pretendard;
+		font-size: 1.4rem;
+		line-height: 1.6rem;
+		letter-spacing: 0.0028rem;
+	}
+
 	.wrapper-logo {
+		display: flex;
+		flex-direction: column;
+
 		.container-logo {
 			display: flex;
 			align-items: center;
@@ -34,23 +52,18 @@ const Footer = styled.article`
 			flex-shrink: 0;
 			margin-left: 1.05rem;
 		}
-	}
 
-	.container-menu {
-		display: flex;
-		gap: 6rem;
-
-		.container-menu__column {
+		.container-copyright {
 			display: flex;
 			flex-direction: column;
-			gap: 1.6rem;
+			margin-top: 3.6rem;
 		}
 	}
 
-	.menu {
-		color: #8e8e8e;
-		font-size: 1.6rem;
-		font-weight: 600;
+	.wrapper-menu {
+		display: flex;
+		margin-top: 7.63rem;
+		gap: 10rem;
 		cursor: pointer;
 	}
 `;

@@ -10,24 +10,17 @@ const Footer = () => {
 					<img className='logo' src={LogoFooter} />
 					<img className='logo-name' src={LogoName} />
 				</section>
+				<section className='container-copyright'>
+					<span className='copyright'>Contact meeteam@naver.com</span>
+					<span className='copyright'>Copyright ©Meeteam. All rights reserved.</span>
+				</section>
 			</section>
-			<section className='container-menu'>
-				<section className='container-menu__column'>
-					<h3>바로가기</h3>
-					<span className='menu'>구인</span>
-					<span className='menu'>밋팀</span>
-					<span className='menu'>포트폴리오</span>
-				</section>
-				<section className='container-menu__column'>
-					<h3>이용안내</h3>
-					<span className='menu'>공지사항</span>
-					<span className='menu'>FAQ</span>
-				</section>
-				<section className='container-menu__column'>
-					<h3>서비스약관</h3>
-					<span className='menu'>서비스이용약관</span>
-					<span className='menu'>개인정보처리방침</span>
-				</section>
+			<section className='wrapper-menu'>
+				<h5>서비스이용약관</h5>
+				<h5>개인정보처리방침</h5>
+				<h5 onClick={() => window.open('https://forms.gle/CVVDm4gnF21GpwM78', '_blank')}>
+					피드백주기
+				</h5>
 			</section>
 		</S.Footer>
 	);
