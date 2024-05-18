@@ -24,6 +24,7 @@ import {
 	PrivateRouter,
 	PortfolioManagementPage,
 	NotFound,
+	AccountSetting,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -120,6 +121,10 @@ const router = createBrowserRouter([
 			{
 				path: '*',
 				element: <NotFound />,
+			},
+			{
+				path: 'account',
+				element: <AccountSetting />,
 			},
 		],
 	},
