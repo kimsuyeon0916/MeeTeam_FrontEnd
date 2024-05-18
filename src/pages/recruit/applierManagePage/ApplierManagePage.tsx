@@ -32,6 +32,7 @@ import { ApplicantInfo, ApplicantsLink } from '../../../types';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useScrollToTop } from '../../../hooks';
 import { fixModalBackground } from '../../../utils';
+import NotFound from '../../notFound/NotFound';
 
 const ApplierManagePage = () => {
 	const { id } = useParams();
@@ -61,7 +62,11 @@ const ApplierManagePage = () => {
 		queryKey: ['applicantsList', { pageNum, role }],
 		queryFn: () => getApplicantsList({ pageNum: pageNum, role, page }),
 	});
-	const { data: recruitManageInfo, isSuccess: manageSuccess } = useQuery({
+	const {
+		data: recruitManageInfo,
+		isSuccess: manageSuccess,
+		isError,
+	} = useQuery({
 		queryKey: ['recruitManageInfo'],
 		queryFn: () => getRecruitInfo(pageNum),
 	});
