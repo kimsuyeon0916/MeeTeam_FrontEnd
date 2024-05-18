@@ -148,6 +148,15 @@ const Header = () => {
 										className='menu'
 										onClick={() => {
 											setOpenDrop(false);
+											navigate('/account');
+										}}
+									>
+										계정 설정
+									</div>
+									<div
+										className='menu'
+										onClick={() => {
+											setOpenDrop(false);
 											navigate('/management/bookmark');
 										}}
 									>

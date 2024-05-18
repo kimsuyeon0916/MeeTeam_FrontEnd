@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 
 const Footer = styled.article`
-	display: flex;
-	justify-content: space-between;
-	padding: 6.5rem clamp(10%, 24rem, 20%);
-	font-family: Pretendard;
+	width: 100%;
 	background: #f6f6f6;
 	height: 24.8rem;
+	.wrapper {
+		width: clamp(45%, 96rem, 75%);
+		display: flex;
+		justify-content: space-between;
+		padding: 6.5rem 0;
+		font-family: Pretendard;
+		margin: 0 auto;
+	}
 
 	h3 {
 		color: #373f41;
