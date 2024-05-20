@@ -3,11 +3,10 @@ import S from './WarnRoleDelete.styled';
 import { useSetRecoilState } from 'recoil';
 import { warnRoleDeleteModalState } from '../../../../../atom';
 
-const WarnRoleDelete = ({ id }: { id: string }) => {
+const WarnRoleDelete = () => {
 	const setWarnRoleDeleteState = useSetRecoilState(warnRoleDeleteModalState);
 
 	const onClickConfirm = () => {
-		// navigate(`/recruitment/applicants/${id}`);
 		setWarnRoleDeleteState(false);
 	};
 

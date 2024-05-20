@@ -233,7 +233,7 @@ const RecruitCreatePage = () => {
 						)}
 						{isWarnRoleDelete && id && (
 							<article className='modal-background'>
-								<WarnRoleDelete id={id} />
+								<WarnRoleDelete />
 							</article>
 						)}
 					</form>
