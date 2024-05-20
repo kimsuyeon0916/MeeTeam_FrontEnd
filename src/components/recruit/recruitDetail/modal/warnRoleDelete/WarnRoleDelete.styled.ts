@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const WarnRoleDelete = styled.section`
 	display: flex;
 	flex-direction: column;
-	width: 28rem;
+	width: 30rem;
 	padding: 1.8rem 2rem;
 	align-items: center;
 	border-radius: 1rem;
@@ -34,8 +34,6 @@ const WarnRoleDelete = styled.section`
 		color: #373f41;
 		text-align: center;
 		font-size: 1.4rem;
-		line-height: 1.7rem;
-		letter-spacing: 0.0028rem;
 	}
 
 	.btn-txt {

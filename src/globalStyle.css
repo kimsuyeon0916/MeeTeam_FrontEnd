@@ -104,6 +104,8 @@ menu,
 nav,
 section {
 	display: block;
+	font-style: normal;
+	font-weight: 500;
 }
 body {
 	line-height: 1;
