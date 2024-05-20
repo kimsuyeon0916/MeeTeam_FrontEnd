@@ -63,6 +63,6 @@ export {
 	CompleteSignUpPage,
 	PrivateRouter,
 	PortfolioManagementPage,
-	NotFound,
 	AccountSetting,
+	NotFound,
 };
