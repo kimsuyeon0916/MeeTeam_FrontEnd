@@ -94,8 +94,6 @@ const Header = () => {
 
 	resetFormData();
 
-	console.log(userInfo);
-
 	return (
 		<S.Header $isLogin={isLogin}>
 			<div className='header'>
