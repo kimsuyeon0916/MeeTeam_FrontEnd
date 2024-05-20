@@ -8,10 +8,17 @@ import {
 	RecruitTags,
 	RecruitRoleForm,
 	WarnRoleDelete,
+	WarnRoleCount,
 } from '../../../components/index';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
-import { recruitInputState, userState, validState, warnRoleDeleteModalState } from '../../../atom';
+import {
+	recruitInputState,
+	userState,
+	validState,
+	warnRoleDeleteModalState,
+	warningModalRoleCountState,
+} from '../../../atom';
 import { getPostingData, editPostingRecruit, postingRecruit } from '../../../service';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { EditPosting, InputState, RoleInfo, RoleForPost } from '../../../types';
@@ -29,6 +36,7 @@ const RecruitCreatePage = () => {
 	const [beforeSubmit, setBeforeSubmit] = useState<boolean>(false);
 	const userInfo = useRecoilValue(userState);
 	const isWarnRoleDelete = useRecoilValue(warnRoleDeleteModalState);
+	const isWarnRoleCount = useRecoilValue(warningModalRoleCountState);
 	const [formData, setFormData] = useRecoilState<InputState>(recruitInputState);
 	const postAvailable =
 		validCheck.isCategory &&
@@ -154,90 +162,91 @@ const RecruitCreatePage = () => {
 			{isLoading ? (
 				<section className='blank'></section>
 			) : (
-				<>
-					<form onSubmit={handleSubmit}>
-						<Description />
-						<BasicInformation />
-						<DetailedInformation />
-						<RecruitRoleForm
-							applicantsList={data?.recruitmentRoles.map(role => {
-								return { roleId: role.roleId, applicantCount: role.applicantCount };
-							})}
-						/>
-						<RecruitTags />
-						<ControlButtons />
-						{beforeSubmit && (
-							<article className='modal-background'>
-								<section className='validation-modal'>
-									<h3>필수정보를 입력해주세요.</h3>
-									<span className='body2-semibold'>
-										아래 <span className='caution'>미작성된 항목</span>을 입력해 구인글 작성을
-										완료해주세요.
-									</span>
-									<section className='wrapper-list__unsatisfied'>
-										{!basicAvailable && (
-											<section className='container-list'>
-												<section className='subtitle body2-medium'>기본정보</section>
-												<section className='list-unsatisfied'>
-													{!validCheck.isTitle && (
-														<span className='element body2-medium'>구인글 제목</span>
-													)}
-													{!validCheck.isDeadline && (
-														<span className='element body2-medium'>구인글 마감일</span>
-													)}
-													{!validCheck.isScope && (
-														<span className='element body2-medium'>범위</span>
-													)}
-													{!validCheck.isCategory && (
-														<span className='element body2-medium'>유형</span>
-													)}
-													{!validCheck.isEndDate && (
-														<span className='element body2-medium'>진행기간</span>
-													)}
-													{!validCheck.isProcedure && (
-														<span className='element body2-medium'>진행방식</span>
-													)}
-												</section>
+				<form onSubmit={handleSubmit}>
+					<Description />
+					<BasicInformation />
+					<DetailedInformation />
+					<RecruitRoleForm
+						applicantsList={data?.recruitmentRoles.map(role => {
+							return { roleId: role.roleId, applicantCount: role.applicantCount };
+						})}
+					/>
+					<RecruitTags />
+					<ControlButtons />
+					{beforeSubmit && (
+						<article className='modal-background'>
+							<section className='validation-modal'>
+								<h3>필수정보를 입력해주세요.</h3>
+								<span className='body2-semibold'>
+									아래 <span className='caution'>미작성된 항목</span>을 입력해 구인글 작성을
+									완료해주세요.
+								</span>
+								<section className='wrapper-list__unsatisfied'>
+									{!basicAvailable && (
+										<section className='container-list'>
+											<section className='subtitle body2-medium'>기본정보</section>
+											<section className='list-unsatisfied'>
+												{!validCheck.isTitle && (
+													<span className='element body2-medium'>구인글 제목</span>
+												)}
+												{!validCheck.isDeadline && (
+													<span className='element body2-medium'>구인글 마감일</span>
+												)}
+												{!validCheck.isScope && <span className='element body2-medium'>범위</span>}
+												{!validCheck.isCategory && (
+													<span className='element body2-medium'>유형</span>
+												)}
+												{!validCheck.isEndDate && (
+													<span className='element body2-medium'>진행기간</span>
+												)}
+												{!validCheck.isProcedure && (
+													<span className='element body2-medium'>진행방식</span>
+												)}
 											</section>
-										)}
-										{!validCheck.isContent && (
-											<section className='container-list'>
-												<section className='subtitle body2-medium'>상세내용</section>
-												<section className='list-unsatisfied'>
-													{!validCheck.isContent && (
-														<span className='element body2-medium'>내용 미입력</span>
-													)}
-												</section>
+										</section>
+									)}
+									{!validCheck.isContent && (
+										<section className='container-list'>
+											<section className='subtitle body2-medium'>상세내용</section>
+											<section className='list-unsatisfied'>
+												{!validCheck.isContent && (
+													<span className='element body2-medium'>내용 미입력</span>
+												)}
 											</section>
-										)}
-										{!validCheck.isRole && (
-											<section className='container-list'>
-												<section className='subtitle body2-medium'>모집역할</section>
-												<section className='list-unsatisfied'>
-													{!validCheck.isRole && (
-														<span className='element body2-medium'>내용 미입력</span>
-													)}
-												</section>
+										</section>
+									)}
+									{!validCheck.isRole && (
+										<section className='container-list'>
+											<section className='subtitle body2-medium'>모집역할</section>
+											<section className='list-unsatisfied'>
+												{!validCheck.isRole && (
+													<span className='element body2-medium'>내용 미입력</span>
+												)}
 											</section>
-										)}
-									</section>
-									<button
-										type='button'
-										className='btn-okay txt-small'
-										onClick={() => setBeforeSubmit(false)}
-									>
-										확인
-									</button>
+										</section>
+									)}
 								</section>
-							</article>
-						)}
-						{isWarnRoleDelete && id && (
-							<article className='modal-background'>
-								<WarnRoleDelete />
-							</article>
-						)}
-					</form>
-				</>
+								<button
+									type='button'
+									className='btn-okay txt-small'
+									onClick={() => setBeforeSubmit(false)}
+								>
+									확인
+								</button>
+							</section>
+						</article>
+					)}
+					{isWarnRoleDelete && id && (
+						<article className='modal-background'>
+							<WarnRoleDelete />
+						</article>
+					)}
+					{isWarnRoleCount && (
+						<article className='modal-background'>
+							<WarnRoleCount />
+						</article>
+					)}
+				</form>
 			)}
 		</S.RecruitCreatePage>
 	);

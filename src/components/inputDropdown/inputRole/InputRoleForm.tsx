@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import S from './InputRoleForm.styled';
 import { useQuery } from '@tanstack/react-query';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { isNotNumber } from '../../../utils';
-import { recruitInputState } from '../../../atom';
+import { recruitInputState, warningModalRoleCountState } from '../../../atom';
 import { useDebounce, useValid } from '../../../hooks';
 import { DropdownArrow, Search, XBtn } from '../../../assets';
 import { RoleForPost, InputState, Keyword } from '../../../types';
@@ -42,6 +42,7 @@ const InputRoleForm = () => {
 	const keywordRole = useDebounce(roleData.roleName, 500);
 	const keywordSkill = useDebounce(tagItem, 500);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
+	const setWarningModalRoleCountState = useSetRecoilState(warningModalRoleCountState);
 
 	const { data: dataRole, isLoading: isLoadingRole } = useQuery({
 		queryKey: ['searchRole', keywordRole],
@@ -73,6 +74,22 @@ const InputRoleForm = () => {
 			skills: prevState?.skills?.filter(skill => skill.id !== deletedId),
 			skillIds: prevState?.skillIds.filter(id => id !== deletedId),
 		}));
+	};
+
+	const dropdownHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+		const target = event.target as HTMLElement;
+		if (target.classList.contains('role-input')) {
+			setDropdown(prev => ({
+				...prev,
+				role: true,
+			}));
+		}
+		if (target.classList.contains('skills-input')) {
+			setDropdown(prev => ({
+				...prev,
+				skill: true,
+			}));
+		}
 	};
 
 	const handleAddRole = () => {
@@ -110,13 +127,13 @@ const InputRoleForm = () => {
 				role: { valid: false, message: '해당 역할명을 입력해주세요.' },
 				count: { valid: true, message: '' },
 			}));
-		} else if (!roleData.roleId && !roleData.count) {
+		} else if (!roleData.roleId && !roleData.count && info.recruitmentRoles.length !== 10) {
 			setisValidBeforeSubmit(prev => ({
 				...prev,
 				role: { valid: false, message: '모집하는 역할을 입력해주세요.' },
 				count: { valid: true, message: '' },
 			}));
-		} else if (roleData.roleId && !roleData.count) {
+		} else if (roleData.roleId && !roleData.count && info.recruitmentRoles.length !== 10) {
 			setisValidBeforeSubmit(prev => ({
 				...prev,
 				role: { valid: true, message: '' },
@@ -127,6 +144,7 @@ const InputRoleForm = () => {
 				...prev,
 				roleLength: { valid: false, message: '최대 10개의 역할을 입력할 수 있습니다.' },
 			}));
+			setWarningModalRoleCountState(true);
 		}
 	};
 	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -237,7 +255,7 @@ const InputRoleForm = () => {
 							placeholder='역할'
 							value={roleData.roleName}
 							onChange={onChangeRole}
-							onClick={() => setDropdown(prev => ({ ...prev, role: true }))}
+							onClick={dropdownHandler}
 						/>
 						{dropdown.role && (
 							<section className='dropdown'>
@@ -269,10 +287,7 @@ const InputRoleForm = () => {
 					)}
 				</section>
 				<section className='inputs-bottom'>
-					<section
-						className='container-skills'
-						onClick={() => setDropdown(prev => ({ ...prev, skill: true }))}
-					>
+					<section className='container-skills' onClick={dropdownHandler}>
 						<input
 							type='text'
 							className='skills-input body1-medium'
