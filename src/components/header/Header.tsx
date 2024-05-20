@@ -3,17 +3,18 @@ import S from './Header.styled';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { DropdownArrow, Logo, LogoName } from '../../assets';
 import { ProfileImage, WaitModal } from '..';
-import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { recruitFilterState, userState, waitModalState, loginState } from '../../atom';
 import { useSignOut } from '../../hooks';
 import { fixModalBackground, resetFormData } from '../../utils';
+import { useQuery } from '@tanstack/react-query';
+import { readProfileImage } from '../../service';
 
 const Header = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const location = useLocation();
-	const isLogin = useRecoilValue(loginState);
-	const setLoginState = useSetRecoilState(loginState);
+	const [isLogin, setLoginState] = useRecoilState(loginState);
 	const [userInfo, setUserState] = useRecoilState(userState);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [openDrop, setOpenDrop] = useState<boolean>(false);
@@ -25,6 +26,14 @@ const Header = () => {
 		inform: false,
 	});
 	const { mutate: signOut } = useSignOut({ setUserState, setLoginState });
+	const { data: user } = useQuery({
+		queryKey: ['user'],
+		queryFn: () => readProfileImage(),
+		enabled: isLogin,
+		gcTime: Infinity,
+		staleTime: Infinity,
+	});
+
 	const goRecruit = () => {
 		navigate('/');
 		setFilterState({
@@ -85,6 +94,8 @@ const Header = () => {
 
 	resetFormData();
 
+	console.log(userInfo);
+
 	return (
 		<S.Header $isLogin={isLogin}>
 			<div className='header'>
@@ -92,7 +103,7 @@ const Header = () => {
 					<div className='header__logo' onClick={goRecruit}>
 						<img className='logo' src={Logo} />
 						<img className='logo-name' src={LogoName} />
-						{isLogin && <span className='university'>광운대학교</span>}
+						{isLogin && <span className='university'>{userInfo?.university}</span>}
 					</div>
 					<div className='header__navigation'>
 						<div
@@ -116,7 +127,7 @@ const Header = () => {
 								{isLogin ? (
 									<article className='icon-container'>
 										<div className='icon-border'>
-											<ProfileImage url={userInfo?.imageUrl} size='3rem' />
+											<ProfileImage url={user?.imageUrl} size='3rem' />
 										</div>
 										<img src={DropdownArrow} />
 									</article>

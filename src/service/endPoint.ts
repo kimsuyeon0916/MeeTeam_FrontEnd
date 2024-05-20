@@ -18,6 +18,7 @@ export const EndPoint = {
 		read: (userId: string) => `/user/profile/${userId}`,
 		update: '/user/profile',
 		readPortfolioList: '/user/portfolios',
+		image: '/user/profile/image',
 	},
 
 	/* search */
