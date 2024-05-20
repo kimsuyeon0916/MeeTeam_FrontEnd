@@ -66,8 +66,9 @@ const ApplierManagePage = () => {
 		data: recruitManageInfo,
 		isSuccess: manageSuccess,
 		isError,
+		isLoading,
 	} = useQuery({
-		queryKey: ['recruitManageInfo'],
+		queryKey: ['recruitManageInfo', pageNum],
 		queryFn: () => getRecruitInfo(pageNum),
 	});
 
@@ -144,125 +145,137 @@ const ApplierManagePage = () => {
 		fixModalBackground(isTutorialOpen || applicantModal.approve || applicantModal.refuse);
 	}, [recruitManageInfo?.isFirstAccess, applicantModal.approve, applicantModal.refuse]);
 
+	if (isError) {
+		return <NotFound />;
+	}
 	return (
 		<S.ApplierManagePage $isChecked={isChecked}>
-			<article className='wrapper-applicants'>
-				<section className='container-title'>
-					<h1>{recruitManageInfo?.title}</h1>
-					<h4 className='page-link' onClick={() => navigate(`/recruitment/postings/${pageNum}`)}>
-						구인글 바로가기 ⟩
-					</h4>
-				</section>
-				<section className='container-link'>
-					<h4>오픈채팅방 설정</h4>
-					<span className='body1-medium'>멤버를 초대할 오픈채팅방 주소를 설정해보세요!</span>
-					<span className='body1-medium second'>
-						신청자 승인 시, 설정한 오픈채팅방 주소가 신청자의 이메일로 보내집니다.
-					</span>
-					{manageSuccess && recruitManageInfo && (
-						<article className='input-link'>
-							{!isOpenChat ? (
-								<section className='container-input__link'>
-									<img src={LinkIcon} />
-									<span className='body1-medium input-prev'>
-										{!recruitManageInfo.link
-											? '오픈채팅방 주소를 입력해주세요.'
-											: recruitManageInfo.link}
+			{isLoading ? (
+				<section className='blank' />
+			) : (
+				<>
+					<article className='wrapper-applicants'>
+						<section className='container-title'>
+							{recruitManageInfo && <h1>{recruitManageInfo.title}</h1>}
+							<h4
+								className='page-link'
+								onClick={() => navigate(`/recruitment/postings/${pageNum}`)}
+							>
+								구인글 바로가기 ⟩
+							</h4>
+						</section>
+						<section className='container-link'>
+							<h4>오픈채팅방 설정</h4>
+							<span className='body1-medium'>멤버를 초대할 오픈채팅방 주소를 설정해보세요!</span>
+							<span className='body1-medium second'>
+								신청자 승인 시, 설정한 오픈채팅방 주소가 신청자의 이메일로 보내집니다.
+							</span>
+							{manageSuccess && recruitManageInfo && (
+								<article className='input-link'>
+									{!isOpenChat ? (
+										<section className='container-input__link'>
+											<img src={LinkIcon} />
+											<span className='body1-medium input-prev'>
+												{!recruitManageInfo.link
+													? '오픈채팅방 주소를 입력해주세요.'
+													: recruitManageInfo.link}
+											</span>
+										</section>
+									) : (
+										<input
+											type='text'
+											className='input-chat body1-medium'
+											placeholder='오픈채팅방 주소를 입력해주세요.'
+											value={linkUrl}
+											onChange={onChangeInput}
+										/>
+									)}
+									<button type='button' className='btn-setting text-small' onClick={onClickSetting}>
+										{isOpenChat ? '저장' : '설정'}
+									</button>
+								</article>
+							)}
+						</section>
+						<section className='container-applicants'>
+							<section className='header-applicants'>
+								<section className='header-title'>
+									<h4>신청자 관리</h4>
+									<span className='body1-medium'>
+										{`${userInfo?.nickname}님의 구인글에 신청한 (유저명)입니다. 다양한 정보들을 확인하고 멤버로 영입해보세요!`}
 									</span>
 								</section>
-							) : (
-								<input
-									type='text'
-									className='input-chat body1-medium'
-									placeholder='오픈채팅방 주소를 입력해주세요.'
-									value={linkUrl}
-									onChange={onChangeInput}
-								/>
-							)}
-							<button type='button' className='btn-setting text-small' onClick={onClickSetting}>
-								{isOpenChat ? '저장' : '설정'}
-							</button>
-						</article>
-					)}
-				</section>
-				<section className='container-applicants'>
-					<section className='header-applicants'>
-						<section className='header-title'>
-							<h4>신청자 관리</h4>
-							<span className='body1-medium'>
-								{`${userInfo?.nickname}님의 구인글에 신청한 (유저명)입니다. 다양한 정보들을 확인하고 멤버로 영입해보세요!`}
-							</span>
+								{recruitManageInfo && manageSuccess && (
+									<section className='header-control'>
+										<Dropdown
+											initialData='역할'
+											applicant
+											roleObj={[{ id: null, title: '전체' }, ...recruitManageInfo.roles]}
+										/>
+										<section className='btn-container'>
+											<button className='text-big refused' onClick={onClickRefused}>
+												거절
+											</button>
+											<button className='text-big approved' onClick={onClickApproved}>
+												승인
+											</button>
+										</section>
+									</section>
+								)}
+								<hr className='header-border' />
+							</section>
+							<section className='list-applicants'>
+								{listSuccess &&
+									applicantsArr.map(info => <ApplicantCard key={info.applicantId} {...info} />)}
+							</section>
 						</section>
-						{recruitManageInfo && manageSuccess && (
-							<section className='header-control'>
-								<Dropdown
-									initialData='역할'
-									applicant
-									roleObj={[{ id: null, title: '전체' }, ...recruitManageInfo.roles]}
-								/>
-								<section className='btn-container'>
-									<button className='text-big refused' onClick={onClickRefused}>
-										거절
-									</button>
-									<button className='text-big approved' onClick={onClickApproved}>
-										승인
-									</button>
-								</section>
+						<section className='target-area' ref={targetRef}></section>
+					</article>
+					<article className={`current-recruit ${!isOpenCurrent && 'closed'}`}>
+						<section className='container-title' onClick={() => setIsOpenCurrent(prev => !prev)}>
+							<span className='body1-semibold'>모집 현황</span>
+							<img src={isOpenCurrent ? DropdownArrowUp : DropdownArrow} />
+						</section>
+						{isOpenCurrent && (
+							<section className='container-roles'>
+								{recruitManageInfo &&
+									manageSuccess &&
+									recruitManageInfo.recruitmentStatus.map((elem, index) => (
+										<ApplyRole
+											key={index}
+											approvedMemberCount={elem.approvedMemberCount}
+											recruitMemberCount={elem.recruitMemberCount}
+											roleName={elem.roleName}
+										/>
+									))}
 							</section>
 						)}
-						<hr className='header-border' />
-					</section>
-					<section className='list-applicants'>
-						{listSuccess &&
-							applicantsArr.map(info => <ApplicantCard key={info.applicantId} {...info} />)}
-					</section>
-				</section>
-				<section className='target-area' ref={targetRef}></section>
-			</article>
-			<article className={`current-recruit ${!isOpenCurrent && 'closed'}`}>
-				<section className='container-title' onClick={() => setIsOpenCurrent(prev => !prev)}>
-					<span className='body1-semibold'>모집 현황</span>
-					<img src={isOpenCurrent ? DropdownArrowUp : DropdownArrow} />
-				</section>
-				{isOpenCurrent && (
-					<section className='container-roles'>
-						{recruitManageInfo &&
-							manageSuccess &&
-							recruitManageInfo.recruitmentStatus.map((elem, index) => (
-								<ApplyRole
-									key={index}
-									approvedMemberCount={elem.approvedMemberCount}
-									recruitMemberCount={elem.recruitMemberCount}
-									roleName={elem.roleName}
-								/>
-							))}
-					</section>
-				)}
-			</article>
-			<article className='btn-floating' onClick={scrollToTop}>
-				<section className='background'>
-					<img src={FloatingBackground} />
-					<section className='arrow'>
-						<img src={ArrowTop} />
-						<span>TOP</span>
-					</section>
-				</section>
-			</article>
-			{recruitManageInfo?.isFirstAccess && (
-				<section className='modal-background'>
-					<OpenChatModal />
-				</section>
-			)}
-			{isToast && <Toast message='오픈채팅방 주소를 입력해주세요!' />}
-			{applicantModal.refuse && (
-				<section className='modal-background'>
-					<RefuseModal pageNum={pageNum} />
-				</section>
-			)}
-			{recruitManageInfo?.link && applicantModal.approve && (
-				<section className='modal-background'>
-					<ApproveModal pageNum={pageNum} openChatLink={recruitManageInfo.link} />
-				</section>
+					</article>
+					<article className='btn-floating' onClick={scrollToTop}>
+						<section className='background'>
+							<img src={FloatingBackground} />
+							<section className='arrow'>
+								<img src={ArrowTop} />
+								<span>TOP</span>
+							</section>
+						</section>
+					</article>
+					{recruitManageInfo?.isFirstAccess && (
+						<section className='modal-background'>
+							<OpenChatModal pageNum={pageNum} />
+						</section>
+					)}
+					{isToast && <Toast message='오픈채팅방 주소를 입력해주세요!' />}
+					{applicantModal.refuse && (
+						<section className='modal-background'>
+							<RefuseModal pageNum={pageNum} />
+						</section>
+					)}
+					{recruitManageInfo?.link && applicantModal.approve && (
+						<section className='modal-background'>
+							<ApproveModal pageNum={pageNum} openChatLink={recruitManageInfo.link} />
+						</section>
+					)}
+				</>
 			)}
 		</S.ApplierManagePage>
 	);

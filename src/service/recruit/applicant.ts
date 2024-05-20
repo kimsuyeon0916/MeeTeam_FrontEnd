@@ -18,7 +18,7 @@ export const getRecruitInfo = async (pageNum: number) => {
 	} catch (error) {
 		if (axios.isAxiosError(error)) {
 			console.error(error);
-			if (error.response && error.response.status === 404) {
+			if (error.response && error.response.status === 400) {
 			}
 		}
 	}

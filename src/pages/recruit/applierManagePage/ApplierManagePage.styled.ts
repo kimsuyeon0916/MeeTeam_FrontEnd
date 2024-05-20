@@ -13,6 +13,12 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 	margin-bottom: 20rem;
 	position: relative;
 
+	.blank {
+		width: 100vw;
+		height: 100vh;
+		background: #fff;
+	}
+
 	h1 {
 		color: #151515;
 		font-size: 2.8rem;

@@ -5,16 +5,14 @@ import { applyCloseModalState, recruitPostingDeleteModalState } from '../../../.
 import { useNavigate } from 'react-router-dom';
 
 interface WriterFooter {
-	writerId: string;
 	pageNum: number;
 	onClickEditPage: () => void;
 }
 
-const WriterFooter = ({ writerId, pageNum, onClickEditPage }: WriterFooter) => {
+const WriterFooter = ({ pageNum, onClickEditPage }: WriterFooter) => {
 	const navigate = useNavigate();
 	const setIsClose = useSetRecoilState(applyCloseModalState);
 	const setIsDelete = useSetRecoilState(recruitPostingDeleteModalState);
-	sessionStorage.setItem('writerId', writerId);
 
 	const onClickClose = () => {
 		setIsClose(true);

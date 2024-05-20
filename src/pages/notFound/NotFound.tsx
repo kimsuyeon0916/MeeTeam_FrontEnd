@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 const NotFound = () => {
 	const navigate = useNavigate();
+	const homeHandler = () => {
+		navigate('/');
+	};
 
 	return (
 		<S.NotFound>
@@ -15,7 +18,7 @@ const NotFound = () => {
 			<span className='body1-semibold'>
 				입력하신 페이지의 주소가 정확한지 다시 한번 확인해 주세요.
 			</span>
-			<button type='button' className='txt-big' onClick={() => navigate('/')}>
+			<button type='button' className='txt-big' onClick={homeHandler}>
 				홈으로 돌아가기
 			</button>
 			<span

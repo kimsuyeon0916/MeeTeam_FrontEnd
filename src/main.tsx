@@ -68,19 +68,25 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'management',
-				element: <RecruitManageWrapper />,
+				element: <PrivateRouter />,
 				children: [
 					{
-						path: 'bookmark',
-						element: <RecruitPostingBookmark />,
-					},
-					{
-						path: 'applied',
-						element: <RecruitPostingApply />,
-					},
-					{
-						path: 'my-post',
-						element: <RecruitMyPostings />,
+						path: '',
+						element: <RecruitManageWrapper />,
+						children: [
+							{
+								path: 'bookmark',
+								element: <RecruitPostingBookmark />,
+							},
+							{
+								path: 'applied',
+								element: <RecruitPostingApply />,
+							},
+							{
+								path: 'my-post',
+								element: <RecruitMyPostings />,
+							},
+						],
 					},
 				],
 			},
@@ -124,7 +130,13 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'account',
-				element: <AccountSetting />,
+				element: <PrivateRouter />,
+				children: [
+					{
+						path: '',
+						element: <AccountSetting />,
+					},
+				],
 			},
 		],
 	},

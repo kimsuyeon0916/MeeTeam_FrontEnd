@@ -1,14 +1,13 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../../atom';
+import { loginState } from '../../atom';
 import NotFound from '../notFound/NotFound';
 
 const PrivateRouter = () => {
-	const writerId = sessionStorage.getItem('writerId');
-	const userInfo = useRecoilValue(userState);
+	const isLogin = useRecoilValue(loginState);
 
-	return writerId === userInfo?.userId ? <Outlet /> : <NotFound />;
+	return isLogin ? <Outlet /> : <Navigate to='/signin' />;
 };
 
 export default PrivateRouter;
