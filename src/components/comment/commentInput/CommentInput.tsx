@@ -1,19 +1,29 @@
 import React, { useState } from 'react';
 import { ProfileImage } from '../..';
 import S from './CommentInput.styled';
-import { useComment } from '../../../hooks';
+import { useComment, useLogin } from '../../../hooks';
 import { useParams } from 'react-router-dom';
-import { useQueryClient } from '@tanstack/react-query';
+import { useQueryClient, useQuery } from '@tanstack/react-query';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../../atom';
+import { readProfileImage } from '../../../service';
 
 const CommentInput = () => {
+	const { isLogin } = useLogin();
 	const postComment = useComment();
 	const { id } = useParams();
 	const pageNum = Number(id);
 	const [contents, setContents] = useState<string>('');
 	const queryClient = useQueryClient();
 	const userInfo = useRecoilValue(userState);
+
+	const { data: user } = useQuery({
+		queryKey: ['user'],
+		queryFn: () => readProfileImage(),
+		enabled: isLogin,
+		gcTime: Infinity,
+		staleTime: Infinity,
+	});
 
 	const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
@@ -47,7 +57,7 @@ const CommentInput = () => {
 					<section className='container-user__icon'>
 						<div>
 							{userInfo?.userId && (
-								<ProfileImage url={userInfo?.imageUrl} userId={userInfo?.userId} size='2.31rem' />
+								<ProfileImage url={user?.imageUrl} userId={userInfo?.userId} size='2.31rem' />
 							)}
 						</div>
 						<span>{userInfo?.nickname}</span>
