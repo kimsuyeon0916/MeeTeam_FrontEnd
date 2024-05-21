@@ -45,11 +45,11 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 					<InputRoleForm />
 					<article className='container-role__list'>
 						{info.recruitmentRoles.map(userRole => (
-							<InputRole
+							<InputRoleForm
 								key={userRole.roleId}
-								role={userRole.roleName as any}
+								role={userRole.roleName}
 								count={Number(userRole.count)}
-								skill={userRole.skills?.map(e => e.name) as any}
+								skills={userRole.skills}
 								onDelete={() => deleteObj(userRole.roleId)}
 								id={userRole.roleId}
 							/>

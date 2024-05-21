@@ -99,20 +99,20 @@ const RecruitCreatePage = () => {
 		}
 		if (postAvailable && !location.pathname.includes('edit')) {
 			uploadPost.mutate(formData, {
-				onSuccess: () => resetFormData(),
+				// onSuccess: () => resetFormData(),
 			});
 		}
 		if (postAvailable && location.pathname.includes('edit') && pageNum) {
 			editPost.mutate(
 				{ pageNum, formData },
 				{
-					onSuccess: () => resetFormData(),
+					// onSuccess: () => resetFormData(),
 				}
 			);
 		}
 	};
 
-	resetFormData();
+	// resetFormData();
 
 	useEffect(() => {
 		if (data) {
@@ -153,9 +153,10 @@ const RecruitCreatePage = () => {
 		fixModalBackground(beforeSubmit || isWarnRoleDelete);
 	}, [beforeSubmit, isWarnRoleDelete]);
 
-	if (userInfo?.userId !== data?.writerId && !isLoading) {
+	if (userInfo?.userId !== data?.writerId && !isLoading && id) {
 		return <NotFound />;
 	}
+	console.log(formData);
 
 	return (
 		<S.RecruitCreatePage>

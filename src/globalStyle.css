@@ -139,3 +139,33 @@ button {
 ::-webkit-scrollbar {
 	display: none;
 }
+
+.body1-medium {
+	color: #8e8e8e;
+	font-family: Pretendard;
+	font-size: 1.6rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 1.9rem;
+	letter-spacing: 0.0032rem;
+}
+
+.h5 {
+	color: #373f41;
+	font-family: Pretendard;
+	font-size: 1.6rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 1.9rem;
+	letter-spacing: 0.0032rem;
+}
+
+.txt4 {
+	color: #f85858;
+	font-family: Pretendard;
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 1.2rem;
+	letter-spacing: 0.002rem;
+}
