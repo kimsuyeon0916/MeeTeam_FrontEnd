@@ -18,7 +18,6 @@ const RecruitRoles = styled.section`
 				display: flex;
 				flex-direction: column;
 				gap: 1rem;
-				margin-top: -1rem;
 			}
 
 			.valid-msg {
@@ -31,20 +30,6 @@ const RecruitRoles = styled.section`
 				letter-spacing: 0.002rem;
 			}
 		}
-	}
-
-	.wrapper-btn__add {
-		display: flex;
-		align-items: center;
-		gap: 0.8rem;
-		margin-top: 3.2rem;
-	}
-
-	.btn-add {
-		border: none;
-		background-color: transparent;
-		padding: 0;
-		margin-top: 0.3rem;
 	}
 `;
 
