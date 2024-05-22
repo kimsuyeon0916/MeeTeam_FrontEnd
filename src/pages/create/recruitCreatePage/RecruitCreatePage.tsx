@@ -249,7 +249,6 @@ const RecruitCreatePage = () => {
 					)}
 				</form>
 			)}
-			<Toast message='구인글이 성공적으로 등록되었습니다.' />
 		</S.RecruitCreatePage>
 	);
 };
