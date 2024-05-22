@@ -9,6 +9,7 @@ import {
 	RecruitRoleForm,
 	WarnRoleDelete,
 	WarnRoleCount,
+	Toast,
 } from '../../../components/index';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
@@ -248,6 +249,7 @@ const RecruitCreatePage = () => {
 					)}
 				</form>
 			)}
+			<Toast message='구인글이 성공적으로 등록되었습니다.' />
 		</S.RecruitCreatePage>
 	);
 };
