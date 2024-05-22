@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle, Ref } from 'react';
 import S from './InputRoleForm.styled';
 import { useQuery } from '@tanstack/react-query';
 import { useRecoilState, useSetRecoilState } from 'recoil';
@@ -17,7 +17,8 @@ interface InputRoleObj {
 	onDelete?: (id: number | null) => void;
 }
 
-const InputRoleForm = ({ id, role, count, skills, onDelete }: InputRoleObj) => {
+const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole: () => void }>) => {
+	const { id, role, count, skills, onDelete } = props;
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [tagItem, setTagItem] = useState<string>('');
 	const [info, setInfos] = useRecoilState(recruitInputState);
@@ -315,6 +316,10 @@ const InputRoleForm = ({ id, role, count, skills, onDelete }: InputRoleObj) => {
 		}
 	};
 
+	useImperativeHandle(ref, () => ({
+		handleAddRole,
+	}));
+
 	useEffect(() => {
 		if (containerRef.current) {
 			applyEllipsis(containerRef.current);
@@ -526,16 +531,8 @@ const InputRoleForm = ({ id, role, count, skills, onDelete }: InputRoleObj) => {
 					</button>
 				</section>
 			</article>
-			{!id && (
-				<article className='wrapper-btn__add'>
-					<img src={BluePlus} />
-					<button type='button' className='btn-add h5' onClick={handleAddRole}>
-						역할 추가
-					</button>
-				</article>
-			)}
 		</S.InputRoleForm>
 	);
-};
+});
 
 export default InputRoleForm;

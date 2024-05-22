@@ -31,6 +31,20 @@ const RecruitRoles = styled.section`
 			}
 		}
 	}
+
+	.wrapper-btn__add {
+		display: flex;
+		align-items: center;
+		gap: 0.8rem;
+		margin-top: 3.2rem;
+	}
+
+	.btn-add {
+		border: none;
+		background-color: transparent;
+		padding: 0;
+		margin-top: 0.3rem;
+	}
 `;
 
 const S = { RecruitRoles };
