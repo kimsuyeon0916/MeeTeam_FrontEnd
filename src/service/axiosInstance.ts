@@ -1,7 +1,6 @@
 import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { CustomInstance } from '../types';
 import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
 import secureLocalStorage from 'react-secure-storage';
 
 const axiosConfig = {

@@ -177,6 +177,7 @@ const RecruitPage = styled.div<RecruitPage>`
 				position: relative;
 				display: flex;
 				align-items: center;
+				width: 13.5rem;
 				padding: 1.2rem 1rem 1.2rem 1.6rem;
 				border: 1px solid #e0e6ff;
 				box-sizing: border-box;
@@ -199,6 +200,7 @@ const RecruitPage = styled.div<RecruitPage>`
 				.dropdown-box {
 					display: flex;
 					align-items: center;
+					width: 100%;
 					justify-content: space-between;
 					gap: 1.6rem;
 				}
