@@ -18,6 +18,7 @@ const RecruitRoles = styled.section`
 				display: flex;
 				flex-direction: column;
 				gap: 1rem;
+				margin-top: -1rem;
 			}
 
 			.valid-msg {

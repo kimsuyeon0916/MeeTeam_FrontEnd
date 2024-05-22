@@ -157,6 +157,8 @@ const RecruitCreatePage = () => {
 		return <NotFound />;
 	}
 
+	console.log(formData);
+
 	return (
 		<S.RecruitCreatePage>
 			{isLoading ? (

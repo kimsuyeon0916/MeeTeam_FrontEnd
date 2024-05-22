@@ -5,6 +5,8 @@ interface InputRoleForm {
 	$isSkillClicked: boolean;
 	$isRoleName: boolean;
 	$isCount: boolean;
+	$isSkill: boolean;
+	$isSkillLength: boolean;
 }
 
 const InputRoleForm = styled.article<InputRoleForm>`
@@ -55,6 +57,11 @@ const InputRoleForm = styled.article<InputRoleForm>`
 
 	.option {
 		cursor: pointer;
+
+		&:hover {
+			color: #000000;
+			transition: 0.2s ease-in-out;
+		}
 	}
 
 	.dropdown-skill {
@@ -175,20 +182,6 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		}
 	}
 
-	.wrapper-btn__add {
-		display: flex;
-		align-items: center;
-		gap: 0.8rem;
-		margin-top: 3.2rem;
-	}
-
-	.btn-add {
-		border: none;
-		background-color: transparent;
-		padding: 0;
-		margin-top: 0.3rem;
-	}
-
 	.btn-delete {
 		border: none;
 		background-color: transparent;
@@ -202,6 +195,21 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		background: #fff;
 		position: relative;
 		width: 100%;
+
+		&:hover {
+			border: 1px solid #5877fc;
+			transition: 0.2s ease-in-out;
+		}
+
+		&:focus-within {
+			outline: none;
+			border: 1px solid #5877fc;
+
+			.icon-search {
+				filter: invert(0%) sepia(83%) saturate(7431%) hue-rotate(54deg) brightness(77%)
+					contrast(114%);
+			}
+		}
 	}
 	.wrapper-role {
 		display: flex;
@@ -211,6 +219,9 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		justify-content: space-between;
 		align-items: center;
 		flex-shrink: 0;
+		.role-input {
+			color: ${props => props.$isRoleName && '#000000'};
+		}
 	}
 	.wrapper-count {
 		display: flex;
@@ -221,6 +232,9 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		gap: 1rem;
 		flex-shrink: 0;
 		position: relative;
+		.count-input {
+			color: ${props => props.$isCount && '#000000'};
+		}
 	}
 	.wrapper-skill {
 		display: flex;
@@ -230,6 +244,10 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		justify-content: space-between;
 		align-items: center;
 		flex-shrink: 0;
+
+		.skill-input {
+			color: ${props => props.$isCount && '#000000'};
+		}
 	}
 
 	.icon-search {

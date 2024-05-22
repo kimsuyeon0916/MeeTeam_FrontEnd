@@ -5,7 +5,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { isNotNumber } from '../../../utils';
 import { recruitInputState, warningModalRoleCountState } from '../../../atom';
 import { useDebounce, useValid } from '../../../hooks';
-import { BluePlus, GrayDelete, SearchIcon, XBtn } from '../../../assets';
+import { GrayDelete, SearchIcon, XBtn } from '../../../assets';
 import { RoleForPost, InputState, Keyword } from '../../../types';
 import { getRoleKeyword, getSkillKeyword } from '../../../service';
 
@@ -79,6 +79,20 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 	};
 
 	const deleteTagItem = (deletedId: number) => {
+		if (id) {
+			setInfos(prev => ({
+				...prev,
+				recruitmentRoles: prev.recruitmentRoles.map(role =>
+					role.roleId === id
+						? {
+								...role,
+								skills: role.skills?.filter(skill => skill.id !== deletedId),
+								skillIds: role.skillIds.filter(id => id !== deletedId),
+						  }
+						: role
+				),
+			}));
+		}
 		setRoleData(prevState => ({
 			...prevState,
 			skills: prevState?.skills?.filter(skill => skill.id !== deletedId),
@@ -225,6 +239,10 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 		}
 	};
 
+	const onClickSkillInput = (event: React.MouseEvent<HTMLInputElement>) => {
+		event.stopPropagation();
+	};
+
 	const onClickSkill = (event: React.MouseEvent<HTMLSpanElement>) => {
 		event.stopPropagation();
 		const { innerText } = event.target as HTMLElement;
@@ -360,13 +378,15 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 			$isSkillClicked={dropdown.skill}
 			$isRoleName={roleData.roleName !== ''}
 			$isCount={roleData.count !== null}
+			$isSkill={tagItem !== ''}
+			$isSkillLength={roleData?.skills?.length !== 10}
 		>
 			<article className='wrapper' ref={dropdownRef}>
 				<section className='wrapper-role container-input'>
 					<input
 						type='text'
 						placeholder='역할을 검색하세요.'
-						className='body1-medium'
+						className='body1-medium role-input'
 						value={roleData.roleName}
 						onChange={onChangeRole}
 						onKeyDown={onKeyPress}
@@ -387,13 +407,13 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 					{isValid.isSubmitted && !isValid.isRole && (
 						<p className='valid-message__role txt4'>{validMessage.recruitRole}</p>
 					)}
-					<img src={SearchIcon} />
+					<img src={SearchIcon} className='icon-search' />
 				</section>
 				<section className='wrapper-count container-input'>
 					<input
 						type='text'
 						placeholder='인원'
-						className='body1-medium'
+						className='body1-medium count-input'
 						onChange={onChangeCount}
 						onKeyDown={onKeyPress}
 						value={roleData.count?.toString()}
@@ -413,7 +433,7 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 												<span className='txt2'>{tagItem.name}</span>
 												<button
 													type='button'
-													onClick={() => deleteTagItem(tagItem.id)}
+													onClick={event => deleteTagHandler(event, tagItem.id)}
 													className='btn-delete__tag'
 												>
 													<img src={XBtn} />
@@ -431,7 +451,7 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 												<span className='txt2'>{tagItem.name}</span>
 												<button
 													type='button'
-													onClick={() => deleteTagItem(tagItem.id)}
+													onClick={event => deleteTagHandler(event, tagItem.id)}
 													className='btn-delete__tag'
 												>
 													<img src={XBtn} />
@@ -445,20 +465,22 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 						<input
 							type='text'
 							placeholder='스킬을 검색하세요. 최대 5개의 스킬을 입력할 수 있습니다.'
-							className='body1-medium'
+							className='body1-medium skill-input'
 							onChange={onChangeKeyword}
 							onKeyDown={onKeyPress}
 							value={tagItem}
+							onClick={onClickSkillInput}
 						/>
 					)}
 					{id && (dropdown.skill || roleData.skills?.length === 0) && (
 						<input
 							type='text'
 							placeholder='스킬을 검색하세요. 최대 5개의 스킬을 입력할 수 있습니다.'
-							className='body1-medium'
+							className='body1-medium skill-input'
 							onChange={onChangeKeyword}
 							onKeyDown={onKeyPress}
 							value={tagItem}
+							onClick={onClickSkillInput}
 						/>
 					)}
 					{dropdown.skill && (

@@ -28,6 +28,7 @@ const DetailedInformation = styled.section`
 				border-radius: 0.1rem;
 				width: 100%;
 				margin-top: 0.8rem;
+				margin-bottom: 4rem;
 				strong {
 					font-weight: bold;
 				}
@@ -40,7 +41,7 @@ const DetailedInformation = styled.section`
 				border: 0.1rem solid #e3e3e3;
 				border-bottom-right-radius: 0.75rem;
 				border-bottom-left-radius: 0.75rem;
-				height: 37rem;
+				min-height: 37rem;
 			}
 
 			.ql-toolbar.ql-snow {
