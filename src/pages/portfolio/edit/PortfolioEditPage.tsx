@@ -473,6 +473,7 @@ const PortfolioEditPage = () => {
 											if (quillRef) quillRef.current = e;
 										}}
 										value={watch('content')}
+										defaultValue={portfolio?.content}
 										onChange={handleChangeEditor}
 										modules={modules}
 										formats={formats}
