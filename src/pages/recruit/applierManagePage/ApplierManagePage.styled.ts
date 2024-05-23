@@ -102,16 +102,19 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 		}
 
 		.container-link {
+			position: relative;
 			display: flex;
 			flex-direction: column;
 			gap: 1.2rem;
 			margin-top: 6rem;
+			width: 66.5rem;
 
 			.second {
 				margin-top: -1rem;
 			}
 
 			.input-link {
+				position: relative;
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
@@ -122,11 +125,12 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 					display: flex;
 					align-items: center;
 					gap: 0.8rem;
+					width: 100%;
 				}
 
 				.input-chat {
 					display: flex;
-					width: 100%;
+					width: 58rem;
 					height: 4.8rem;
 					padding: 1.2rem 1.6rem;
 					align-items: center;
@@ -137,16 +141,15 @@ const ApplierManagePage = styled.section<ApplicantManage>`
 					background: #fff;
 				}
 			}
-
 			.btn-setting {
 				display: flex;
+				width: 7.2rem;
 				height: 3.6rem;
 				padding: 1.2rem 2rem;
 				justify-content: center;
 				align-items: center;
 				border-radius: 0.6rem;
 				background: #5877fc;
-				margin-right: 0.8rem;
 			}
 		}
 

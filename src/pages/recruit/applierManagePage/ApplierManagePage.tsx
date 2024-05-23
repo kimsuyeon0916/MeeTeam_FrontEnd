@@ -190,6 +190,7 @@ const ApplierManagePage = () => {
 											onChange={onChangeInput}
 										/>
 									)}
+
 									<button type='button' className='btn-setting text-small' onClick={onClickSetting}>
 										{isOpenChat ? '저장' : '설정'}
 									</button>
