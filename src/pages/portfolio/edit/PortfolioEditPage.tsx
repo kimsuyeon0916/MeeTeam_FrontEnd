@@ -14,6 +14,7 @@ import {
 	PortfolioImageUpload,
 	PortfolioImageModal,
 	ModalPortal,
+	Modal,
 } from '../../../components';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForm, useFieldArray, SubmitHandler } from 'react-hook-form';
@@ -194,7 +195,12 @@ const PortfolioEditPage = () => {
 
 	const addSkill = () => {
 		if (skillList.length === 10) {
-			alert('스킬은 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
+			setModalProps(prev => ({
+				...prev,
+				title: '스킬',
+				content: '스킬은 최대 10개까지 입력할 수 있어요!',
+			}));
+			setAlertOpen(true);
 			setValue('skills', '');
 			return;
 		}
@@ -204,7 +210,12 @@ const PortfolioEditPage = () => {
 		} as Skill;
 		if (getValues('skills')?.length === 0) return;
 		if (skillList.find(skill => newSkill.name === skill.name)) {
-			alert('이미 추가한 스킬입니다.'); // 디자인 요청
+			setModalProps(prev => ({
+				...prev,
+				title: '스킬',
+				content: '이미 추가한 스킬입니다!',
+			}));
+			setAlertOpen(true);
 			setValue('skills', '');
 			return;
 		}
@@ -228,7 +239,12 @@ const PortfolioEditPage = () => {
 
 	const addLink = () => {
 		if (links.length === 10) {
-			alert('링크는 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
+			setModalProps(prev => ({
+				...prev,
+				title: '링크',
+				content: '링크는 최대 10개까지 입력할 수 있어요!',
+			}));
+			setAlertOpen(true);
 			return;
 		}
 		prependLink({ description: 'Link', url: '' });
@@ -257,6 +273,29 @@ const PortfolioEditPage = () => {
 	const checkTabKeyDown = (event: React.KeyboardEvent<ReactQuill>) => {
 		if (event.key === 'Tab') event.preventDefault();
 	};
+
+	// 모달
+	const [alertOpen, setAlertOpen] = useState(false);
+	useEffect(() => {
+		fixModalBackground(alertOpen);
+	}, [alertOpen]);
+
+	const [modalProps, setModalProps] = useState({
+		title: ``,
+		content: ``,
+		primaryBtn: {
+			title: `확인`,
+			small: true,
+			handleClick: () => {
+				setAlertOpen(false);
+			},
+			handleKeyDown: (event: React.KeyboardEvent<HTMLButtonElement>) => {
+				if (event.key === 'Escape' || event.key === 'Enter' || event.key === 'Space') {
+					setAlertOpen(false);
+				}
+			},
+		},
+	});
 
 	return (
 		<>
@@ -479,6 +518,11 @@ const PortfolioEditPage = () => {
 						</S.PortfolioEditButtonBox>
 					</S.PortfolioEditColumn>
 				</S.PortfolioEditLayout>
+			)}
+			{alertOpen && (
+				<ModalPortal>
+					<Modal {...modalProps} />
+				</ModalPortal>
 			)}
 			<DevTool control={control} />
 		</>
