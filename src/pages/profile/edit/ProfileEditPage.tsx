@@ -77,8 +77,8 @@ const ProfileEditPage = () => {
 
 	const navigate = useNavigate();
 
-	const updateProfileInSuccess = () => {
-		return navigate(`/profile/${userId}`);
+	const updateProfileInSuccess = (userId: string) => {
+		navigate(`/profile/${userId}`);
 	};
 
 	const { mutate: updateProfile } = useUpdateProfile({
@@ -657,9 +657,12 @@ const ProfileEditPage = () => {
 						type='button'
 						title='취소'
 						handleClick={() => navigate(`/profile/${userId}`)}
+					/>
+					<PrimaryBtn
+						type='submit'
+						title='저장'
 						disabled={getFieldState('nickname').invalid || duplicated}
 					/>
-					<PrimaryBtn type='submit' title='저장' />
 				</S.ProfileButtonBox>
 			</S.ProfileLayout>
 			{alertOpen && (

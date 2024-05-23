@@ -22,15 +22,17 @@ export const useUpdateProfile = ({
 	onSuccess,
 	userId,
 }: {
-	onSuccess: () => void;
+	onSuccess: (data: string) => void;
 	userId: string;
 }) => {
 	const queryClient = useQueryClient();
 	return useMutation({
 		mutationFn: updateProfile,
-		onSuccess: async () => {
-			await queryClient.invalidateQueries({ queryKey: profileKeys.readProfile(userId) });
-			onSuccess?.();
+		onSuccess: async data => {
+			if (data) {
+				await queryClient.invalidateQueries({ queryKey: profileKeys.readProfile(userId) });
+				onSuccess?.(data);
+			}
 		},
 	});
 };

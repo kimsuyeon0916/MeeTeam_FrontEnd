@@ -14,7 +14,7 @@ export const readProfile = async (userId: string) => {
 
 export const updateProfile = async (profile: UpdateProfilePayload) => {
 	try {
-		const response = await axiosAuthInstance.put(EndPoint.PROFILE.update, {
+		const response = await axiosAuthInstance.put<string>(EndPoint.PROFILE.update, {
 			...profile,
 		});
 
