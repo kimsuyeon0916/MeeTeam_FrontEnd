@@ -489,7 +489,6 @@ const PortfolioEditPage = () => {
 					</S.PortfolioEditColumn>
 				</S.PortfolioEditLayout>
 			)}
-			<DevTool control={control} />
 		</>
 	);
 };
