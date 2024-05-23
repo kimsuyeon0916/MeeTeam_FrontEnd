@@ -18,6 +18,8 @@ import {
 	ProfileImage,
 	LinkForm,
 	AddFormBtn,
+	ModalPortal,
+	Modal,
 } from '../../../components';
 import { useRecoilValue } from 'recoil';
 import { uploadImageState, userState } from '../../../atom';
@@ -35,6 +37,7 @@ import {
 } from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
 import { useReadInfinitePortfolioList } from '../../../hooks/usePortfolio';
+import { fixModalBackground } from '../../../utils';
 
 interface FormValues {
 	nickname?: string;
@@ -221,7 +224,12 @@ const ProfileEditPage = () => {
 
 	const addSkill = () => {
 		if (skillList.length === 10) {
-			alert('스킬은 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
+			setModalProps(prev => ({
+				...prev,
+				title: '스킬',
+				content: '스킬은 최대 10개까지 입력할 수 있어요!',
+			}));
+			setAlertOpen(true);
 			setValue('skills', '');
 			return;
 		}
@@ -231,7 +239,12 @@ const ProfileEditPage = () => {
 		} as Skill;
 		if (getValues('skills')?.length === 0) return;
 		if (skillList.find(skill => newSkill.name === skill.name)) {
-			alert('이미 추가한 스킬입니다.'); // 디자인 요청
+			setModalProps(prev => ({
+				...prev,
+				title: '스킬',
+				content: '이미 추가한 스킬입니다!',
+			}));
+			setAlertOpen(true);
 			setValue('skills', '');
 			return;
 		}
@@ -255,7 +268,12 @@ const ProfileEditPage = () => {
 
 	const addLink = () => {
 		if (links.length === 10) {
-			alert('링크는 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
+			setModalProps(prev => ({
+				...prev,
+				title: '링크',
+				content: '링크는 최대 10개까지 입력할 수 있어요!',
+			}));
+			setAlertOpen(true);
 			return;
 		}
 		prependLink({ description: 'Link', url: '' });
@@ -273,7 +291,12 @@ const ProfileEditPage = () => {
 
 	const addAward = () => {
 		if (awards.length === 10) {
-			alert('수상/활동은 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
+			setModalProps(prev => ({
+				...prev,
+				title: '수상/활동',
+				content: '수상/활동은 최대 10개까지 입력할 수 있어요!',
+			}));
+			setAlertOpen(true);
 			return;
 		}
 		prependAward({ startDate: '', endDate: '', title: '', description: '' });
@@ -339,6 +362,29 @@ const ProfileEditPage = () => {
 	const checkPinnedIndex = (id: string) => {
 		return pinnedPortfolioList.findIndex(portfolioId => portfolioId === id);
 	};
+
+	// 모달
+	const [alertOpen, setAlertOpen] = useState(false);
+	useEffect(() => {
+		fixModalBackground(alertOpen);
+	}, [alertOpen]);
+
+	const [modalProps, setModalProps] = useState({
+		title: ``,
+		content: ``,
+		primaryBtn: {
+			title: `확인`,
+			small: true,
+			handleClick: () => {
+				setAlertOpen(false);
+			},
+			handleKeyDown: (event: React.KeyboardEvent<HTMLButtonElement>) => {
+				if (event.key === 'Escape' || event.key === 'Enter' || event.key === 'Space') {
+					setAlertOpen(false);
+				}
+			},
+		},
+	});
 
 	return (
 		<>
@@ -616,6 +662,11 @@ const ProfileEditPage = () => {
 					<PrimaryBtn type='submit' title='저장' />
 				</S.ProfileButtonBox>
 			</S.ProfileLayout>
+			{alertOpen && (
+				<ModalPortal>
+					<Modal {...modalProps} />
+				</ModalPortal>
+			)}
 			<DevTool control={control} />
 		</>
 	);
