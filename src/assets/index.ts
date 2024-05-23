@@ -62,6 +62,8 @@ import Clip from './Clip.svg';
 import Valid from './Valid.svg';
 import Invalid from './Invalid.svg';
 import LogoFooter from './LogoFooter.svg';
+import Email from './Email.svg';
+import GrayDelete from './GrayDelete.svg';
 
 export {
 	Exit,
@@ -128,4 +130,6 @@ export {
 	Valid,
 	Invalid,
 	LogoFooter,
+	Email,
+	GrayDelete,
 };

@@ -24,3 +24,14 @@ export const updateProfile = async (profile: UpdateProfilePayload) => {
 		return null;
 	}
 };
+
+export const readProfileImage = async () => {
+	try {
+		const response = await axiosAuthInstance.get<{ imageUrl: string }>(EndPoint.PROFILE.image);
+
+		return response;
+	} catch (error) {
+		console.error(error);
+		return null;
+	}
+};

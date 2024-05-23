@@ -37,6 +37,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useLogin } from '../../../hooks';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { fixModalBackground } from '../../../utils';
+import { is } from 'date-fns/locale';
 
 const RecruitPage = () => {
 	const navigate = useNavigate();
@@ -486,22 +487,26 @@ const RecruitPage = () => {
 							</article>
 						</section>
 					)}
-					<section className='container-btn floating'>
-						<img src={isFloatingOpen ? CancelWhite : PlusWhite} />
+					<section className={`container-btn floating  ${isFloatingOpen && 'cancel-icon'}`}>
+						{isFloatingOpen ? (
+							<img className='floating-icon' src={CancelWhite} />
+						) : (
+							<img className='floating-icon add-icon' src={PlusWhite} />
+						)}
 					</section>
 				</article>
-			{needLoginModal.isOpen && (
-				<section className='modal-background'>
-					<NeedLogin type={needLoginModal.type} />
-				</section>
-			)}
-			{signupModalOpen && (
-				<ModalPortal>
-					<Modal {...signupModalProps} />
-				</ModalPortal>
-			)}
-		</S.RecruitPage>
-    <Footer />
+				{needLoginModal.isOpen && (
+					<section className='modal-background'>
+						<NeedLogin type={needLoginModal.type} />
+					</section>
+				)}
+				{signupModalOpen && (
+					<ModalPortal>
+						<Modal {...signupModalProps} />
+					</ModalPortal>
+				)}
+			</S.RecruitPage>
+			<Footer />
 		</>
 	);
 };

@@ -6,6 +6,12 @@ const RecruitCreatePage = styled.div`
 	margin-bottom: 17rem;
 	position: relative;
 
+	.blank {
+		width: 100vw;
+		height: 100vh;
+		background: #fff;
+	}
+
 	h2 {
 		color: #151515;
 		font-size: 2.4rem;
