@@ -263,7 +263,7 @@ const PortfolioEditPage = () => {
 		if (event.key === 'Tab') event.preventDefault();
 	};
 
-	if (!isLoading && !portfolio?.isWriter) {
+	if (isSuccessReadPortfolio && portfolioId && !portfolio?.isWriter) {
 		return <NotFound />;
 	}
 
