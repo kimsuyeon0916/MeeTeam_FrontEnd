@@ -163,11 +163,7 @@ const RecruitDetailPage = () => {
 				{detailedData && (
 					<section className='container-btn'>
 						{detailedData.isWriter && !detailedData.isClosed && (
-							<WriterFooter
-								writerId={detailedData.writerId}
-								onClickEditPage={onClickEditPage}
-								pageNum={pageNum}
-							/>
+							<WriterFooter onClickEditPage={onClickEditPage} pageNum={pageNum} />
 						)}
 						{!detailedData.isWriter && !detailedData.isClosed && (
 							<ApplierFooter

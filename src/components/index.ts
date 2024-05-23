@@ -150,6 +150,7 @@ import PostingDelete from './recruit/recruitDetail/modal/postingDelete/PostingDe
 import Modal from './modal/Modal';
 import WarnRoleDelete from './recruit/recruitDetail/modal/warnRoleDelete/WarnRoleDelete';
 import Footer from './footer/Footer';
+import WarnRoleCount from './recruit/create/modal/WarnRoleCount';
 
 export {
 	Header,
@@ -295,4 +296,5 @@ export {
 	PostingDelete,
 	Modal,
 	WarnRoleDelete,
+	WarnRoleCount,
 };

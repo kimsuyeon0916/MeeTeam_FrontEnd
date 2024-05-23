@@ -253,3 +253,8 @@ export const signupModalState = atom({
 	key: 'signupModalState',
 	default: false,
 });
+
+export const warningModalRoleCountState = atom({
+	key: 'warningRoleCountState',
+	default: false,
+});

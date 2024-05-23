@@ -23,6 +23,8 @@ import {
 	CompleteSignUpPage,
 	PrivateRouter,
 	PortfolioManagementPage,
+	NotFound,
+	AccountSetting,
 } from './pages/index.ts';
 import './globalStyle.css';
 
@@ -32,7 +34,7 @@ const router = createBrowserRouter([
 		element: <App />,
 		children: [
 			{
-				path: '', // 일단 메인페이지가 생성되기 전까지 해당 url을 사용할 예정입니다.
+				path: '',
 				element: <RecruitPage />,
 			},
 			{
@@ -66,19 +68,25 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'management',
-				element: <RecruitManageWrapper />,
+				element: <PrivateRouter />,
 				children: [
 					{
-						path: 'bookmark',
-						element: <RecruitPostingBookmark />,
-					},
-					{
-						path: 'applied',
-						element: <RecruitPostingApply />,
-					},
-					{
-						path: 'my-post',
-						element: <RecruitMyPostings />,
+						path: '',
+						element: <RecruitManageWrapper />,
+						children: [
+							{
+								path: 'bookmark',
+								element: <RecruitPostingBookmark />,
+							},
+							{
+								path: 'applied',
+								element: <RecruitPostingApply />,
+							},
+							{
+								path: 'my-post',
+								element: <RecruitMyPostings />,
+							},
+						],
 					},
 				],
 			},
@@ -102,7 +110,8 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'profile/edit',
-				element: <ProfileEditPage />,
+				element: <PrivateRouter />,
+				children: [{ path: '', element: <ProfileEditPage /> }],
 			},
 			{
 				path: 'portfolio/:portfolioId?',
@@ -110,11 +119,31 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'portfolio/edit/:portfolioId?',
-				element: <PortfolioEditPage />, // 생성 및 편집
+				element: <PrivateRouter />,
+				children: [
+					{
+						path: '',
+						element: <PortfolioEditPage />,
+					},
+				],
 			},
 			{
 				path: 'portfolio/management',
 				element: <PortfolioManagementPage />,
+			},
+			{
+				path: '*',
+				element: <NotFound />,
+			},
+			{
+				path: 'account',
+				element: <PrivateRouter />,
+				children: [
+					{
+						path: '',
+						element: <AccountSetting />,
+					},
+				],
 			},
 		],
 	},

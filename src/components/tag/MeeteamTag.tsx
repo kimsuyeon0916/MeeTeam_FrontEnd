@@ -136,7 +136,7 @@ const MeeteamTag = () => {
 				)}
 			</section>
 			<section className='tags-selected'>
-				{tagList.map((tagItem, _) => {
+				{formData.tags.map((tagItem, _) => {
 					return (
 						<div className='tag__item txt2' key={tagItem}>
 							<span>{tagItem}</span>

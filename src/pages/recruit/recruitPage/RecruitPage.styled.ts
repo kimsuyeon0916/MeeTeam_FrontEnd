@@ -49,6 +49,13 @@ const RecruitPage = styled.div<RecruitPage>`
 		letter-spacing: 0.0024rem;
 	}
 
+	.nav-info {
+		color: #373f41;
+		font-family: Pretendard;
+		font-size: 1.4rem;
+		font-weight: 600;
+	}
+
 	.wrapper-title {
 		display: flex;
 		align-items: center;
@@ -170,6 +177,7 @@ const RecruitPage = styled.div<RecruitPage>`
 				position: relative;
 				display: flex;
 				align-items: center;
+				width: 13.5rem;
 				padding: 1.2rem 1rem 1.2rem 1.6rem;
 				border: 1px solid #e0e6ff;
 				box-sizing: border-box;
@@ -192,6 +200,7 @@ const RecruitPage = styled.div<RecruitPage>`
 				.dropdown-box {
 					display: flex;
 					align-items: center;
+					width: 100%;
 					justify-content: space-between;
 					gap: 1.6rem;
 				}
@@ -494,6 +503,9 @@ const RecruitPage = styled.div<RecruitPage>`
 		background-color: #5877fc;
 	}
 
+	.cancel-icon {
+		background-color: #ededed;
+	}
 	.btn-floating {
 		position: fixed;
 		bottom: 5rem;
@@ -506,6 +518,11 @@ const RecruitPage = styled.div<RecruitPage>`
 			display: flex;
 			justify-content: center;
 			align-items: center;
+
+			.floating-icon {
+				width: 2.4rem;
+				height: 2.4rem;
+			}
 		}
 
 		.floating-menu {
@@ -513,8 +530,8 @@ const RecruitPage = styled.div<RecruitPage>`
 			flex-direction: column;
 			gap: 1.2rem;
 			position: fixed;
-			bottom: 11.6rem;
-			right: 6.25rem;
+			bottom: 12.6rem;
+			right: 5.55rem;
 			z-index: 101;
 		}
 
@@ -522,13 +539,13 @@ const RecruitPage = styled.div<RecruitPage>`
 			display: flex;
 			justify-content: flex-end;
 			align-items: center;
-			gap: 0.6rem;
+			gap: 1rem;
 		}
 
 		.menu {
 			position: relative;
-			width: 3.2rem;
-			height: 3.2rem;
+			width: 4.6rem;
+			height: 4.6rem;
 			display: flex;
 			justify-content: center;
 			align-items: center;

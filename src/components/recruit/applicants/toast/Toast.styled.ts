@@ -33,6 +33,10 @@ const ToastContainer = styled.article<ToastProps>`
 		margin-top: 0.5rem;
 		font-weight: 600;
 	}
+
+	img {
+		margin-top: 0.25rem;
+	}
 `;
 
 const S = { ToastContainer };

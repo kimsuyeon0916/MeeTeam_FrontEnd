@@ -3,8 +3,7 @@ import S from './OpenChatModal.styled';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { patchFirstAccess } from '../../../../service/recruit/applicant';
 
-const OpenChatModal = () => {
-	const pageNum = sessionStorage.getItem('pageNum');
+const OpenChatModal = (pageNum: { pageNum: number }) => {
 	const queryClient = useQueryClient();
 	const tutorialAccess = useMutation({
 		mutationFn: (pageNum: number) => patchFirstAccess(pageNum),
