@@ -18,6 +18,7 @@ const RecruitRoles = styled.section`
 				display: flex;
 				flex-direction: column;
 				gap: 1rem;
+				margin-top: -1rem;
 			}
 
 			.valid-msg {
@@ -36,6 +37,8 @@ const RecruitRoles = styled.section`
 		align-items: center;
 		gap: 0.8rem;
 		margin-top: 3.2rem;
+		cursor: pointer;
+		width: 13%;
 	}
 	.btn-add {
 		border: none;

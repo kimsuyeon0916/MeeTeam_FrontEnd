@@ -79,11 +79,29 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 	};
 
 	const deleteTagItem = (deletedId: number) => {
+		if (id) {
+			setInfos(prev => ({
+				...prev,
+				recruitmentRoles: prev.recruitmentRoles.map(role =>
+					role.roleId === id
+						? {
+								...role,
+								skills: role.skills?.filter(skill => skill.id !== deletedId),
+								skillIds: role.skillIds.filter(id => id !== deletedId),
+						  }
+						: role
+				),
+			}));
+		}
 		setRoleData(prevState => ({
 			...prevState,
 			skills: prevState?.skills?.filter(skill => skill.id !== deletedId),
 			skillIds: prevState?.skillIds.filter(id => id !== deletedId),
 		}));
+	};
+
+	const onClickSkillInput = (event: React.MouseEvent<HTMLInputElement>) => {
+		event.stopPropagation();
 	};
 
 	const deleteTagHandler = (event: React.MouseEvent<HTMLButtonElement>, deleteId: number) => {
@@ -92,59 +110,20 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 	};
 
 	const handleAddRole = () => {
-		if (
-			roleData.roleId !== null &&
-			roleData.count &&
-			!info.recruitmentRoles.some(obj => obj.roleId === roleData.roleId) &&
-			info.recruitmentRoles.length < 10
-		) {
-			setisValidBeforeSubmit({
-				role: { valid: true, message: '' },
-				count: { valid: true, message: '' },
-				roleLength: { valid: true, message: '' },
-			});
+		setInfos(prevState => {
+			const hasNullRoleId = prevState.recruitmentRoles.some(role => role.roleId === null);
 
-			setInfos((prev: InputState) => ({
-				...prev,
-				recruitmentRoles: [...prev.recruitmentRoles, roleData],
-			}));
-			setRoleData({
-				roleName: '',
-				roleId: null,
-				count: '',
-				skillIds: [],
-				skills: [],
-			});
-			setTagItem('');
-			setDropdown(prev => ({
-				...prev,
-				skill: false,
-			}));
-		} else if (!roleData.roleId && roleData.count) {
-			setisValidBeforeSubmit(prev => ({
-				...prev,
-				role: { valid: false, message: '해당 역할명을 입력해주세요.' },
-				count: { valid: true, message: '' },
-			}));
-		} else if (!roleData.roleId && !roleData.count && info.recruitmentRoles.length !== 10) {
-			setisValidBeforeSubmit(prev => ({
-				...prev,
-				role: { valid: false, message: '모집하는 역할을 입력해주세요.' },
-				count: { valid: true, message: '' },
-			}));
-		} else if (roleData.roleId && !roleData.count && info.recruitmentRoles.length !== 10) {
-			setisValidBeforeSubmit(prev => ({
-				...prev,
-				role: { valid: true, message: '' },
-				count: { valid: false, message: '모집 인원 수를 입력해주세요.' },
-			}));
-		} else if (info.recruitmentRoles.length === 10) {
-			setisValidBeforeSubmit(prev => ({
-				...prev,
-				roleLength: { valid: false, message: '최대 10개의 역할을 입력할 수 있습니다.' },
-			}));
-			setWarningModalRoleCountState(true);
-		}
+			if (!hasNullRoleId) {
+				return {
+					...prevState,
+					recruitmentRoles: [
+						{ roleName: '', roleId: null, count: null, skillIds: [], skills: [] },
+						...prevState.recruitmentRoles,
+					],
+				};
+			}
+			return prevState;
+		});
 	};
 	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
 		event.preventDefault();
@@ -156,12 +135,14 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 	};
 	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
 		event.preventDefault();
-		const countValue = event.target.value;
+		let countValue = event.target.value;
 
+		if (!isNotNumber(countValue)) {
+			countValue = countValue.replace(/\D/g, '');
+		}
 		if (id) {
 			setRoleData(prev => {
 				const updatedRoleData = { ...prev, count: countValue };
-
 				setInfos(prevInfos => ({
 					...prevInfos,
 					recruitmentRoles: prevInfos.recruitmentRoles.map(role =>
@@ -170,25 +151,19 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 							: role
 					),
 				}));
-
 				return updatedRoleData;
 			});
 		} else {
-			if (isNotNumber(countValue)) {
-				setRoleData(prev => ({
-					...prev,
-					count: Number(countValue),
-				}));
-			} else {
-				setRoleData(prev => ({ ...prev, count: Number(countValue.replace(/\D/g, '')) }));
-			}
+			setInfos(prev => {
+				const recruitmentRoles = prev.recruitmentRoles.map(role => {
+					if (role.roleId === null) {
+						return { ...role, count: Number(countValue) };
+					}
+					return role;
+				});
 
-			if (countValue.length) {
-				setisValidBeforeSubmit(prev => ({
-					...prev,
-					count: { valid: true, message: '' },
-				}));
-			}
+				return { ...prev, recruitmentRoles };
+			});
 		}
 	};
 
@@ -209,21 +184,21 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 				),
 			}));
 		} else {
-			setDropdown(prev => ({
-				...prev,
-				role: false,
-			}));
-			setRoleData(prev => ({
-				...prev,
-				roleId: Number(target.id),
-				roleName: innerText,
-			}));
-			setisValidBeforeSubmit(prev => ({
-				...prev,
-				role: { valid: true, message: '' },
-			}));
+			setInfos(prev => {
+				const recruitmentRoles = prev.recruitmentRoles.map(role => {
+					if (role.roleId === null) {
+						return { ...role, roleName: innerText, roleId: Number(target.id) };
+					}
+
+					return role;
+				});
+
+				return { ...prev, recruitmentRoles };
+			});
 		}
 	};
+
+	console.log(info);
 
 	const onClickSkill = (event: React.MouseEvent<HTMLSpanElement>) => {
 		event.stopPropagation();
@@ -263,6 +238,7 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 
 				return updatedRoleData;
 			});
+			setTagItem('');
 		} else {
 			if (!roleData.skills?.map(e => e.name).includes(innerText) && roleData.skillIds.length < 5) {
 				setRoleData(prev => ({
@@ -413,7 +389,7 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 												<span className='txt2'>{tagItem.name}</span>
 												<button
 													type='button'
-													onClick={() => deleteTagItem(tagItem.id)}
+													onClick={event => deleteTagHandler(event, tagItem.id)}
 													className='btn-delete__tag'
 												>
 													<img src={XBtn} />
@@ -431,7 +407,7 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 												<span className='txt2'>{tagItem.name}</span>
 												<button
 													type='button'
-													onClick={() => deleteTagItem(tagItem.id)}
+													onClick={event => deleteTagHandler(event, tagItem.id)}
 													className='btn-delete__tag'
 												>
 													<img src={XBtn} />
@@ -449,6 +425,7 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 							onChange={onChangeKeyword}
 							onKeyDown={onKeyPress}
 							value={tagItem}
+							onClick={onClickSkillInput}
 						/>
 					)}
 					{id && (dropdown.skill || roleData.skills?.length === 0) && (
@@ -459,6 +436,7 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 							onChange={onChangeKeyword}
 							onKeyDown={onKeyPress}
 							value={tagItem}
+							onClick={onClickSkillInput}
 						/>
 					)}
 					{dropdown.skill && (

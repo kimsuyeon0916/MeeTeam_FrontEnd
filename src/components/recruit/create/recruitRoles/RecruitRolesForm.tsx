@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import S from './RecruitRolesForm.styled';
 import { recruitInputState, warnRoleDeleteModalState } from '../../../../atom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { InputRole, InputRoleForm } from '../../../index';
+import { InputRoleForm } from '../../../index';
 import { useParams } from 'react-router-dom';
 import { RecruitApplicantsList } from '../../../../types';
 import { BluePlus } from '../../../../assets';
@@ -39,6 +39,7 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 			childRef.current.handleAddRole();
 		}
 	};
+
 	return (
 		<S.RecruitRoles>
 			<section className='container-roles'>
@@ -49,7 +50,6 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 					<span className='input-subtitle'>
 						최소 1개에서 최대 10개까지 역할을 입력하세요. <span>*</span>
 					</span>
-					{!pageNum && <InputRoleForm ref={childRef} />}
 					<article className='container-role__list'>
 						{info.recruitmentRoles.map(userRole => (
 							<InputRoleForm
@@ -59,12 +59,13 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 								skills={userRole.skills}
 								onDelete={() => deleteObj(userRole.roleId)}
 								id={userRole.roleId}
+								ref={childRef}
 							/>
 						))}
 					</article>
-					<article className='wrapper-btn__add'>
+					<article className='wrapper-btn__add' onClick={addHandler}>
 						<img src={BluePlus} />
-						<button type='button' className='btn-add h5' onClick={addHandler}>
+						<button type='button' className='btn-add h5'>
 							역할 추가
 						</button>
 					</article>
