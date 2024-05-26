@@ -16,7 +16,6 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 
 	const deleteObj = (id: number | null) => {
 		const roleToDelete = applicantsList?.find(role => role.roleId === id);
-		console.log(id);
 
 		if (roleToDelete) {
 			if (roleToDelete.applicantCount === 0) {
@@ -44,7 +43,6 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 			childRef.current.handleAddRole();
 		}
 	};
-	console.log('info', info);
 
 	return (
 		<S.RecruitRoles>

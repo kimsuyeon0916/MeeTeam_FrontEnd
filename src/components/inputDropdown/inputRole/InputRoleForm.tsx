@@ -69,10 +69,6 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 	});
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		const target = event.currentTarget;
-		if (target.value.length !== 0 && event.key === 'Enter') {
-			event.preventDefault();
-		}
 		if (event.key === 'Enter') {
 			event.preventDefault();
 		}
@@ -112,7 +108,6 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 	const handleAddRole = () => {
 		setInfos(prevState => {
 			const hasNullRoleId = prevState.recruitmentRoles.some(role => role.roleId === null);
-			console.log(hasNullRoleId);
 			if (!hasNullRoleId) {
 				return {
 					...prevState,
@@ -197,8 +192,6 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 			});
 		}
 	};
-
-	console.log(info);
 
 	const onClickSkill = (event: React.MouseEvent<HTMLSpanElement>) => {
 		event.stopPropagation();
