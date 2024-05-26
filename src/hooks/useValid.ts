@@ -107,5 +107,5 @@ export default function useValid(data: InputState) {
 		}));
 	}, [data.recruitmentRoles.length]);
 
-	return { validMessage, isValid };
+	return { validMessage, isValid, setValidMessage, setIsValid };
 }

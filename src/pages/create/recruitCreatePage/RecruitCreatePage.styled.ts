@@ -34,14 +34,6 @@ const RecruitCreatePage = styled.div`
 		letter-spacing: 0.0036rem;
 	}
 
-	.body2-semibold {
-		color: #151515;
-		font-size: 1.4rem;
-		font-weight: 600;
-		line-height: 1.7rem;
-		letter-spacing: 0.0028rem;
-	}
-
 	.body2-medium {
 		color: #151515;
 		font-size: 1.4rem;

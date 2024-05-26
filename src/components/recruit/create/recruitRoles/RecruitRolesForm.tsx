@@ -6,6 +6,7 @@ import { InputRoleForm } from '../../../index';
 import { useParams } from 'react-router-dom';
 import { RecruitApplicantsList } from '../../../../types';
 import { BluePlus } from '../../../../assets';
+import { useValid } from '../../../../hooks';
 
 const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 	const { id } = useParams();
@@ -13,6 +14,7 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 	const childRef = useRef<{ handleAddRole: () => void }>(null);
 	const [info, setInfo] = useRecoilState(recruitInputState);
 	const setWarnRoleDeleteState = useSetRecoilState(warnRoleDeleteModalState);
+	const { validMessage, isValid, setValidMessage, setIsValid } = useValid(info);
 
 	const deleteObj = (id: number | null) => {
 		const roleToDelete = applicantsList?.find(role => role.roleId === id);
@@ -30,10 +32,11 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 			if (info.recruitmentRoles?.length > 1) {
 				setInfo(prev => ({
 					...prev,
-					recruitmentRoles: prev.recruitmentRoles?.filter(
-						elem => elem.roleId !== id && elem.roleId !== null
-					),
+					recruitmentRoles: prev.recruitmentRoles?.filter(elem => elem.roleId !== id),
 				}));
+			} else if (info.recruitmentRoles?.length === 1) {
+				setIsValid(prev => ({ ...prev, isRole: false }));
+				setValidMessage(prev => ({ ...prev, recruitRole: '최소 1개의 역할을 입력해주세요.' }));
 			}
 		}
 	};
@@ -73,6 +76,9 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 							역할 추가
 						</button>
 					</article>
+					{!isValid.isRole && (
+						<span className='body2-semibold warning'>{validMessage.recruitRole}</span>
+					)}
 				</section>
 			</section>
 			<hr className='under-info' />

@@ -150,6 +150,14 @@ button {
 	letter-spacing: 0.0032rem;
 }
 
+.body2-semibold {
+	color: #151515;
+	font-size: 1.4rem;
+	font-weight: 600;
+	line-height: 1.7rem;
+	letter-spacing: 0.0028rem;
+}
+
 .h5 {
 	color: #373f41;
 	font-family: Pretendard;

@@ -46,6 +46,9 @@ const RecruitRoles = styled.section`
 		padding: 0;
 		margin-top: 0.3rem;
 	}
+	.warning {
+		color: #f85858;
+	}
 `;
 
 const S = { RecruitRoles };

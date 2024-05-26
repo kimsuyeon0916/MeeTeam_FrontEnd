@@ -4,9 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { isNotNumber } from '../../../utils';
 import { recruitInputState, warningModalRoleCountState } from '../../../atom';
-import { useDebounce, useValid } from '../../../hooks';
-import { BluePlus, GrayDelete, SearchIcon, XBtn } from '../../../assets';
-import { RoleForPost, InputState, Keyword } from '../../../types';
+import { useDebounce } from '../../../hooks';
+import { GrayDelete, SearchIcon, XBtn } from '../../../assets';
+import { RoleForPost, Keyword } from '../../../types';
 import { getRoleKeyword, getSkillKeyword } from '../../../service';
 
 interface InputRoleObj {
@@ -33,17 +33,12 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 		roleName: role ? role : '',
 		skills: skills ? skills : [],
 	});
-	const { validMessage, isValid } = useValid(info);
 	const [isValidBeforeSubmit, setisValidBeforeSubmit] = useState({
 		role: {
 			valid: false,
 			message: '',
 		},
 		count: {
-			valid: false,
-			message: '',
-		},
-		roleLength: {
 			valid: false,
 			message: '',
 		},
@@ -106,19 +101,38 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 	};
 
 	const handleAddRole = () => {
-		setInfos(prevState => {
-			const hasNullRoleId = prevState.recruitmentRoles.some(role => role.roleId === null);
-			if (!hasNullRoleId) {
-				return {
-					...prevState,
-					recruitmentRoles: [
-						{ roleName: '', roleId: null, count: null, skillIds: [], skills: [] },
-						...prevState.recruitmentRoles,
-					],
-				};
-			}
-			return prevState;
-		});
+		if (roleData.roleName === '') {
+			setisValidBeforeSubmit(prev => ({
+				...prev,
+				role: { valid: false, message: '역할을 입력해주세요.' },
+			}));
+		} else if (roleData.count === null) {
+			setisValidBeforeSubmit(prev => ({
+				...prev,
+				count: { valid: false, message: '인원을 입력해주세요.' },
+			}));
+		} else {
+			setInfos(prevState => {
+				const hasNullRoleId = prevState.recruitmentRoles.some(role => role.roleId === null);
+				if (!hasNullRoleId) {
+					return {
+						...prevState,
+						recruitmentRoles: [
+							{ roleName: '', roleId: null, count: null, skillIds: [], skills: [] },
+							...prevState.recruitmentRoles,
+						],
+					};
+				}
+				return prevState;
+			});
+			setRoleData({
+				roleId: null,
+				count: null,
+				roleName: '',
+				skillIds: [],
+				skills: [],
+			});
+		}
 	};
 	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
 		event.preventDefault();
@@ -135,6 +149,7 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 		if (!isNotNumber(countValue)) {
 			countValue = countValue.replace(/\D/g, '');
 		}
+
 		if (id) {
 			setRoleData(prev => {
 				const updatedRoleData = { ...prev, count: countValue };
@@ -159,7 +174,12 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 
 				return { ...prev, recruitmentRoles };
 			});
+			setRoleData(prev => ({ ...prev, count: countValue }));
 		}
+		setisValidBeforeSubmit(prev => ({
+			...prev,
+			count: { valid: roleData.count !== null && roleData.count !== 0, message: '' },
+		}));
 	};
 
 	const onChangeKeyword = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -298,12 +318,6 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 	}, [roleData.skills, containerRef.current, dropdown.skill, skills]);
 
 	useEffect(() => {
-		if (info.recruitmentRoles.length < 10) {
-			setisValidBeforeSubmit(prev => ({ ...prev, roleLength: { valid: true, message: '' } }));
-		}
-	}, [info.recruitmentRoles.length]);
-
-	useEffect(() => {
 		const outsideClick = (event: MouseEvent) => {
 			const { target } = event;
 			if (dropdown.role && dropdownRef.current && !dropdownRef.current.contains(target as Node)) {
@@ -354,9 +368,6 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 					)}
 					{!isValidBeforeSubmit.role.valid && (
 						<p className='valid-message__role txt4'>{isValidBeforeSubmit.role.message}</p>
-					)}
-					{isValid.isSubmitted && !isValid.isRole && (
-						<p className='valid-message__role txt4'>{validMessage.recruitRole}</p>
 					)}
 					<img src={SearchIcon} />
 				</section>
