@@ -112,7 +112,7 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 	const handleAddRole = () => {
 		setInfos(prevState => {
 			const hasNullRoleId = prevState.recruitmentRoles.some(role => role.roleId === null);
-
+			console.log(hasNullRoleId);
 			if (!hasNullRoleId) {
 				return {
 					...prevState,
@@ -289,6 +289,8 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 	const deleteRoleHandler = () => {
 		if (id && onDelete) {
 			onDelete(id);
+		} else if (onDelete) {
+			onDelete(null);
 		}
 	};
 

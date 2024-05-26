@@ -16,6 +16,7 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 
 	const deleteObj = (id: number | null) => {
 		const roleToDelete = applicantsList?.find(role => role.roleId === id);
+		console.log(id);
 
 		if (roleToDelete) {
 			if (roleToDelete.applicantCount === 0) {
@@ -27,10 +28,14 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 				setWarnRoleDeleteState(true);
 			}
 		} else {
-			setInfo(prev => ({
-				...prev,
-				recruitmentRoles: prev.recruitmentRoles?.filter(elem => elem.roleId !== id),
-			}));
+			if (info.recruitmentRoles?.length > 1) {
+				setInfo(prev => ({
+					...prev,
+					recruitmentRoles: prev.recruitmentRoles?.filter(
+						elem => elem.roleId !== id && elem.roleId !== null
+					),
+				}));
+			}
 		}
 	};
 
@@ -39,6 +44,7 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 			childRef.current.handleAddRole();
 		}
 	};
+	console.log('info', info);
 
 	return (
 		<S.RecruitRoles>
