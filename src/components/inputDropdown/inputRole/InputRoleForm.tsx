@@ -116,7 +116,6 @@ const InputRoleForm = (props: InputRoleObj) => {
 						? {
 								...role,
 								roleName: event.target.value,
-								roleId: null,
 						  }
 						: role
 				),
