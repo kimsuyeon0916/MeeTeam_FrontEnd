@@ -17,8 +17,7 @@ const RecruitRoles = styled.section`
 			.container-role__list {
 				display: flex;
 				flex-direction: column;
-				gap: 1rem;
-				margin-top: -1rem;
+				gap: 1.6rem;
 			}
 
 			.valid-msg {

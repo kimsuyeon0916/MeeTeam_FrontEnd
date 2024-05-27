@@ -136,14 +136,14 @@ const InputRoleForm = styled.article<InputRoleForm>`
 
 	.valid-message__role {
 		position: absolute;
-		top: 5.3rem;
+		top: 5rem;
 		left: 1rem;
 	}
 
 	.valid-message__count {
 		width: 150%;
 		position: absolute;
-		top: 5.3rem;
+		top: 5rem;
 		left: 1rem;
 	}
 

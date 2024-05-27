@@ -142,6 +142,8 @@ export const validMessageState = atom({
 		procedure: '',
 		recruitRole: '',
 		title: '',
+		roleName: '',
+		roleCount: '',
 	},
 });
 
@@ -157,6 +159,9 @@ export const validState = atom({
 		isTitle: false,
 		isContent: false,
 		isRole: false,
+		isRoleSubmitted: false,
+		isRoleName: false,
+		isRoleCount: false,
 	},
 });
 

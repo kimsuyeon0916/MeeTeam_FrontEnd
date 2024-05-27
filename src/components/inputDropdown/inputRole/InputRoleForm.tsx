@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect, forwardRef, useImperativeHandle, Ref } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import S from './InputRoleForm.styled';
 import { useQuery } from '@tanstack/react-query';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { isNotNumber } from '../../../utils';
 import { recruitInputState, warningModalRoleCountState } from '../../../atom';
-import { useDebounce } from '../../../hooks';
+import { useDebounce, useValid } from '../../../hooks';
 import { GrayDelete, SearchIcon, XBtn } from '../../../assets';
 import { RoleForPost, Keyword } from '../../../types';
 import { getRoleKeyword, getSkillKeyword } from '../../../service';
@@ -17,7 +17,7 @@ interface InputRoleObj {
 	onDelete?: (id: number | null) => void;
 }
 
-const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole: () => void }>) => {
+const InputRoleForm = (props: InputRoleObj) => {
 	const { id, role, count, skills, onDelete } = props;
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [tagItem, setTagItem] = useState<string>('');
@@ -48,6 +48,7 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 	const keywordSkill = useDebounce(tagItem, 500);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const setWarningModalRoleCountState = useSetRecoilState(warningModalRoleCountState);
+	const { isValid } = useValid(info);
 
 	const { data: dataRole, isLoading: isLoadingRole } = useQuery({
 		queryKey: ['searchRole', keywordRole],
@@ -100,46 +101,27 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 		deleteTagItem(deleteId);
 	};
 
-	const handleAddRole = () => {
-		if (roleData.roleName === '') {
-			setisValidBeforeSubmit(prev => ({
-				...prev,
-				role: { valid: false, message: '역할을 입력해주세요.' },
-			}));
-		} else if (roleData.count === null) {
-			setisValidBeforeSubmit(prev => ({
-				...prev,
-				count: { valid: false, message: '인원을 입력해주세요.' },
-			}));
-		} else {
-			setInfos(prevState => {
-				const hasNullRoleId = prevState.recruitmentRoles.some(role => role.roleId === null);
-				if (!hasNullRoleId) {
-					return {
-						...prevState,
-						recruitmentRoles: [
-							{ roleName: '', roleId: null, count: null, skillIds: [], skills: [] },
-							...prevState.recruitmentRoles,
-						],
-					};
-				}
-				return prevState;
-			});
-			setRoleData({
-				roleId: null,
-				count: null,
-				roleName: '',
-				skillIds: [],
-				skills: [],
-			});
-		}
-	};
 	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
 		event.preventDefault();
 		setRoleData(prev => ({
 			...prev,
 			roleName: event.target.value,
+			count: prev.count,
 		}));
+		if (event.target.value === '') {
+			setInfos(prev => ({
+				...prev,
+				recruitmentRoles: prev.recruitmentRoles.map(role =>
+					role.roleId === id
+						? {
+								...role,
+								roleName: event.target.value,
+								roleId: null,
+						  }
+						: role
+				),
+			}));
+		}
 		setDropdown(prev => ({ ...prev, role: true }));
 	};
 	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -191,25 +173,30 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 	const onClickRole = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		const target = event.target as HTMLElement;
-		if (id) {
-			setInfos(prev => ({
-				...prev,
-				recruitmentRoles: prev.recruitmentRoles.map(role =>
-					role.roleId === id ? { ...role, roleName: innerText, roleId: Number(target.id) } : role
-				),
-			}));
-		} else {
-			setInfos(prev => {
-				const recruitmentRoles = prev.recruitmentRoles.map(role => {
-					if (role.roleId === null) {
-						return { ...role, roleName: innerText, roleId: Number(target.id) };
-					}
+		const roleExists = info.recruitmentRoles.some(
+			r => (r.roleName === innerText || r.roleId === Number(target.id)) && r.roleId !== id
+		);
+		if (!roleExists) {
+			if (id) {
+				setInfos(prev => ({
+					...prev,
+					recruitmentRoles: prev.recruitmentRoles.map(role =>
+						role.roleId === id ? { ...role, roleName: innerText, roleId: Number(target.id) } : role
+					),
+				}));
+			} else {
+				setInfos(prev => {
+					const recruitmentRoles = prev.recruitmentRoles.map(role => {
+						if (role.roleId === null) {
+							return { ...role, roleName: innerText, roleId: Number(target.id) };
+						}
 
-					return role;
+						return role;
+					});
+
+					return { ...prev, recruitmentRoles };
 				});
-
-				return { ...prev, recruitmentRoles };
-			});
+			}
 		}
 	};
 
@@ -307,10 +294,6 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 		}
 	};
 
-	useImperativeHandle(ref, () => ({
-		handleAddRole,
-	}));
-
 	useEffect(() => {
 		if (containerRef.current) {
 			applyEllipsis(containerRef.current);
@@ -339,6 +322,28 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 		};
 	}, [dropdownRef.current, dropdown.role, dropdown.skill]);
 
+	useEffect(() => {
+		if (isValid.isRoleSubmitted) {
+			if (roleData.roleName === '') {
+				setisValidBeforeSubmit(prev => ({
+					...prev,
+					role: {
+						valid: roleData.roleName !== '',
+						message: roleData.roleName !== '' ? '' : '역할을 입력해주세요.',
+					},
+				}));
+			} else if (roleData.count === null || roleData.count === 0) {
+				setisValidBeforeSubmit(prev => ({
+					...prev,
+					count: {
+						valid: roleData.count !== null && roleData.count !== 0,
+						message: roleData.count !== null && roleData.count !== 0 ? '' : '인원을 입력해주세요.',
+					},
+				}));
+			}
+		}
+	}, [isValid.isRoleSubmitted, roleData.roleName, roleData.count]);
+
 	return (
 		<S.InputRoleForm
 			$isRoleClicked={dropdown.role}
@@ -366,7 +371,7 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 								))}
 						</section>
 					)}
-					{!isValidBeforeSubmit.role.valid && (
+					{isValid.isRoleSubmitted && !isValidBeforeSubmit.role.valid && (
 						<p className='valid-message__role txt4'>{isValidBeforeSubmit.role.message}</p>
 					)}
 					<img src={SearchIcon} />
@@ -380,7 +385,7 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 						onKeyDown={onKeyPress}
 						value={roleData.count?.toString()}
 					/>
-					{!isValidBeforeSubmit.count.valid && (
+					{isValid.isRoleSubmitted && !isValidBeforeSubmit.count.valid && (
 						<p className='valid-message__count txt4'>{isValidBeforeSubmit.count.message}</p>
 					)}
 				</section>
@@ -517,6 +522,6 @@ const InputRoleForm = forwardRef((props: InputRoleObj, ref: Ref<{ handleAddRole:
 			</article>
 		</S.InputRoleForm>
 	);
-});
+};
 
 export default InputRoleForm;

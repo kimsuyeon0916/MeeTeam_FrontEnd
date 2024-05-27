@@ -11,8 +11,8 @@ import { useValid } from '../../../../hooks';
 const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 	const { id } = useParams();
 	const pageNum = Number(id);
-	const childRef = useRef<{ handleAddRole: () => void }>(null);
 	const [info, setInfo] = useRecoilState(recruitInputState);
+	const [isFirstClick, setIsFirstClick] = useState<boolean>(true);
 	const setWarnRoleDeleteState = useSetRecoilState(warnRoleDeleteModalState);
 	const { validMessage, isValid, setValidMessage, setIsValid } = useValid(info);
 
@@ -36,16 +36,54 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 				}));
 			} else if (info.recruitmentRoles?.length === 1) {
 				setIsValid(prev => ({ ...prev, isRole: false }));
-				setValidMessage(prev => ({ ...prev, recruitRole: '최소 1개의 역할을 입력해주세요.' }));
+				setValidMessage(prev => ({ ...prev, recruitRole: '최소 1개의 역할이 필요합니다.' }));
 			}
 		}
 	};
 
-	const addHandler = () => {
-		if (childRef.current) {
-			childRef.current.handleAddRole();
+	useEffect(() => {
+		const hasEmptyRoleName = info.recruitmentRoles.some(
+			role => role.roleName === '' || role.count === 0 || role.count === null
+		);
+		if (hasEmptyRoleName && !isFirstClick) {
+			setIsValid(prev => ({ ...prev, isRoleSubmitted: true }));
+		} else {
+			setIsValid(prev => ({ ...prev, isRoleSubmitted: false }));
+		}
+	}, [info.recruitmentRoles, isFirstClick]);
+
+	const handleAddRole = () => {
+		const newRole = { roleName: '', roleId: null, count: null, skillIds: [], skills: [] };
+		if (
+			info.recruitmentRoles.length === 1 &&
+			info.recruitmentRoles[0].roleName === '' &&
+			info.recruitmentRoles[0].count === null
+		) {
+			setIsValid(prev => ({ ...prev, isRole: false }));
+			setValidMessage(prev => ({ ...prev, recruitRole: '최소 1개의 역할을 입력해주세요.' }));
+			setIsFirstClick(false);
+		} else if (
+			info.recruitmentRoles.some(
+				role => role.roleName === '' || role.count === 0 || role.count === null
+			)
+		) {
+			setIsFirstClick(false);
+		} else {
+			setInfo(prevState => {
+				const hasNullRoleId = prevState.recruitmentRoles.some(role => role.roleId === null);
+				if (!hasNullRoleId) {
+					return {
+						...prevState,
+						recruitmentRoles: [...prevState.recruitmentRoles, newRole],
+					};
+				}
+				return prevState;
+			});
+			setIsFirstClick(true);
 		}
 	};
+
+	console.log(info.recruitmentRoles);
 
 	return (
 		<S.RecruitRoles>
@@ -66,11 +104,10 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 								skills={userRole.skills}
 								onDelete={() => deleteObj(userRole.roleId)}
 								id={userRole.roleId}
-								ref={childRef}
 							/>
 						))}
 					</article>
-					<article className='wrapper-btn__add' onClick={addHandler}>
+					<article className='wrapper-btn__add' onClick={handleAddRole}>
 						<img src={BluePlus} />
 						<button type='button' className='btn-add h5'>
 							역할 추가
