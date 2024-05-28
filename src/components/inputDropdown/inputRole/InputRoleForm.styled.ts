@@ -190,6 +190,8 @@ const InputRoleForm = styled.article<InputRoleForm>`
 	}
 
 	.btn-delete {
+		display: flex;
+		align-items: center;
 		border: none;
 		background-color: transparent;
 		padding: 0;
