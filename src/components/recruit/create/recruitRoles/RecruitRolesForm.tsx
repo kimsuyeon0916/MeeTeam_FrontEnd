@@ -7,14 +7,11 @@ import {
 } from '../../../../atom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { InputRoleForm } from '../../../index';
-import { useParams } from 'react-router-dom';
 import { RecruitApplicantsList } from '../../../../types';
 import { BluePlus } from '../../../../assets';
 import { useValid } from '../../../../hooks';
 
 const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
-	const { id } = useParams();
-	const pageNum = Number(id);
 	const [info, setInfo] = useRecoilState(recruitInputState);
 	const [isFirstClick, setIsFirstClick] = useState<boolean>(true);
 	const setWarnRoleDeleteState = useSetRecoilState(warnRoleDeleteModalState);
@@ -94,7 +91,7 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 	}, [info.recruitmentRoles, isFirstClick]);
 
 	return (
-		<S.RecruitRoles>
+		<S.RecruitRoles $isRoleLength={info.recruitmentRoles.length === 10}>
 			<section className='container-roles'>
 				<section className='subtitle'>
 					<h4>모집 역할</h4>
@@ -116,7 +113,7 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 						))}
 					</article>
 					<article className='wrapper-btn__add' onClick={handleAddRole}>
-						<img src={BluePlus} />
+						<img src={BluePlus} className='blue-plus' />
 						<button type='button' className='btn-add h5'>
 							역할 추가
 						</button>

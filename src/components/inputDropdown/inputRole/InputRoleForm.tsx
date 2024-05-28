@@ -373,7 +373,7 @@ const InputRoleForm = (props: InputRoleObj) => {
 					{isValid.isRoleSubmitted && !isValidBeforeSubmit.role.valid && (
 						<p className='valid-message__role txt4'>{isValidBeforeSubmit.role.message}</p>
 					)}
-					<img src={SearchIcon} />
+					<img className='icon-search role-search' src={SearchIcon} />
 				</section>
 				<section className='wrapper-count container-input'>
 					<input
@@ -500,7 +500,7 @@ const InputRoleForm = (props: InputRoleObj) => {
 							</section>
 						</section>
 					)}
-					<img className='icon-search' src={SearchIcon} />
+					<img className='icon-search skill-search' src={SearchIcon} />
 				</section>
 				<section>
 					<button className='btn-delete' type='button' onClick={deleteRoleHandler}>

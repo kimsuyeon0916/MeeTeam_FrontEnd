@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
-const RecruitRoles = styled.section`
+interface RecruitRoles {
+	$isRoleLength: boolean;
+}
+
+const RecruitRoles = styled.section<RecruitRoles>`
 	.container-roles {
 		display: flex;
 		width: 100%;
@@ -39,11 +43,19 @@ const RecruitRoles = styled.section`
 		cursor: pointer;
 		width: 13%;
 	}
+
+	.blue-plus {
+		filter: ${props =>
+			props.$isRoleLength &&
+			'invert(59%) sepia(7%) saturate(7%) hue-rotate(27deg) brightness(95%) contrast(86%)'};
+	}
+
 	.btn-add {
 		border: none;
 		background-color: transparent;
 		padding: 0;
 		margin-top: 0.3rem;
+		color: ${props => props.$isRoleLength && '#8e8e8e'};
 	}
 	.warning {
 		color: #f85858;

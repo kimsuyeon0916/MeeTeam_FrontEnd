@@ -209,6 +209,11 @@ const InputRoleForm = styled.article<InputRoleForm>`
 
 		&:focus-within {
 			border: 1px solid #5877fc;
+
+			.icon-search {
+				filter: invert(0%) sepia(83%) saturate(7431%) hue-rotate(54deg) brightness(77%)
+					contrast(114%);
+			}
 		}
 
 		&:hover {
@@ -252,6 +257,18 @@ const InputRoleForm = styled.article<InputRoleForm>`
 	.icon-search {
 		padding-left: 1rem;
 		box-sizing: border-box;
+	}
+
+	.role-search {
+		filter: ${props =>
+			props.$isRoleName &&
+			'invert(0%) sepia(83%) saturate(7431%) hue-rotate(54deg) brightness(77%) contrast(114%)'};
+	}
+
+	.skill-search {
+		filter: ${props =>
+			props.$isTagItem &&
+			'invert(0%) sepia(83%) saturate(7431%) hue-rotate(54deg) brightness(77%) contrast(114%)'};
 	}
 `;
 
