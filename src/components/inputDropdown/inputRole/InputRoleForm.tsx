@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import S from './InputRoleForm.styled';
 import { useQuery } from '@tanstack/react-query';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { isNotNumber } from '../../../utils';
-import { recruitInputState, warningModalRoleCountState } from '../../../atom';
+import { recruitInputState } from '../../../atom';
 import { useDebounce, useValid } from '../../../hooks';
 import { GrayDelete, SearchIcon, XBtn } from '../../../assets';
 import { RoleForPost, Keyword } from '../../../types';
@@ -47,7 +47,6 @@ const InputRoleForm = (props: InputRoleObj) => {
 	const keywordRole = useDebounce(roleData.roleName, 500);
 	const keywordSkill = useDebounce(tagItem, 500);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
-	const setWarningModalRoleCountState = useSetRecoilState(warningModalRoleCountState);
 	const { isValid } = useValid(info);
 
 	const { data: dataRole, isLoading: isLoadingRole } = useQuery({

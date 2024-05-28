@@ -1,6 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import S from './RecruitRolesForm.styled';
-import { recruitInputState, warnRoleDeleteModalState } from '../../../../atom';
+import {
+	recruitInputState,
+	warnRoleDeleteModalState,
+	warningModalRoleCountState,
+} from '../../../../atom';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { InputRoleForm } from '../../../index';
 import { useParams } from 'react-router-dom';
@@ -14,6 +18,7 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 	const [info, setInfo] = useRecoilState(recruitInputState);
 	const [isFirstClick, setIsFirstClick] = useState<boolean>(true);
 	const setWarnRoleDeleteState = useSetRecoilState(warnRoleDeleteModalState);
+	const setWarningModalRoleCountState = useSetRecoilState(warningModalRoleCountState);
 	const { validMessage, isValid, setValidMessage, setIsValid } = useValid(info);
 
 	const deleteObj = (id: number | null) => {
@@ -41,17 +46,6 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 		}
 	};
 
-	useEffect(() => {
-		const hasEmptyRoleName = info.recruitmentRoles.some(
-			role => role.roleName === '' || role.count === 0 || role.count === null
-		);
-		if (hasEmptyRoleName && !isFirstClick) {
-			setIsValid(prev => ({ ...prev, isRoleSubmitted: true }));
-		} else {
-			setIsValid(prev => ({ ...prev, isRoleSubmitted: false }));
-		}
-	}, [info.recruitmentRoles, isFirstClick]);
-
 	const handleAddRole = () => {
 		const newRole = { roleName: '', roleId: null, count: null, skillIds: [], skills: [] };
 		if (
@@ -68,6 +62,11 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 			)
 		) {
 			setIsFirstClick(false);
+		} else if (info.recruitmentRoles.length === 10) {
+			setWarningModalRoleCountState(true);
+			setIsValid(prev => ({ ...prev, isRole: false }));
+			setValidMessage(prev => ({ ...prev, recruitRole: '최대 10개의 역할을 입력할 수 있습니다.' }));
+			setIsFirstClick(false);
 		} else {
 			setInfo(prevState => {
 				const hasNullRoleId = prevState.recruitmentRoles.some(role => role.roleId === null);
@@ -83,7 +82,16 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 		}
 	};
 
-	console.log(info.recruitmentRoles);
+	useEffect(() => {
+		const hasEmptyRoleName = info.recruitmentRoles.some(
+			role => role.roleName === '' || role.count === 0 || role.count === null
+		);
+		if (hasEmptyRoleName && !isFirstClick) {
+			setIsValid(prev => ({ ...prev, isRoleSubmitted: true }));
+		} else {
+			setIsValid(prev => ({ ...prev, isRoleSubmitted: false }));
+		}
+	}, [info.recruitmentRoles, isFirstClick]);
 
 	return (
 		<S.RecruitRoles>
