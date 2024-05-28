@@ -15,9 +15,10 @@ import {
 	PortfolioImageModal,
 	ModalPortal,
 	Modal,
+	PortfolioModal,
 } from '../../../components';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useForm, useFieldArray, SubmitHandler } from 'react-hook-form';
+import { useForm, useFieldArray, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { Image, Link, PortfolioPayload, Skill } from '../../../types';
 import {
 	useCreatePortfolio,
@@ -167,6 +168,10 @@ const PortfolioEditPage = () => {
 		setReadPresignedUrlList(true);
 	};
 
+	const submitErrorHandler: SubmitErrorHandler<FormValues> = () => {
+		setRequiredAlertOpen(true);
+	};
+
 	// 이미지 순서 변경 모달
 	const [modalOpen, setModalOpen] = useState(false);
 
@@ -275,6 +280,7 @@ const PortfolioEditPage = () => {
 	};
 
 	// 모달
+	const [requiredAlertOpen, setRequiredAlertOpen] = useState(false);
 	const [alertOpen, setAlertOpen] = useState(false);
 	useEffect(() => {
 		fixModalBackground(alertOpen);
@@ -301,7 +307,7 @@ const PortfolioEditPage = () => {
 		<>
 			{isSuccessReadPortfolio && (
 				<S.PortfolioEditLayout
-					onSubmit={handleSubmit(submitHandler)}
+					onSubmit={handleSubmit(submitHandler, submitErrorHandler)}
 					onKeyDown={e => checkEnterKeyDown(e)}
 				>
 					<S.PortfolioEditColumn $gap='4rem'>
@@ -519,6 +525,12 @@ const PortfolioEditPage = () => {
 			{alertOpen && (
 				<ModalPortal>
 					<Modal {...modalProps} />
+				</ModalPortal>
+			)}
+			{/* 필수 정보 미입력 모달 */}
+			{requiredAlertOpen && (
+				<ModalPortal>
+					<PortfolioModal formState={formState} handleClick={() => setRequiredAlertOpen(false)} />
 				</ModalPortal>
 			)}
 			<DevTool control={control} />
