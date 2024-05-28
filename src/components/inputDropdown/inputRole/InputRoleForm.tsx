@@ -198,6 +198,8 @@ const InputRoleForm = (props: InputRoleObj) => {
 		}
 	};
 
+	console.log(info.recruitmentRoles);
+
 	const onClickSkill = (event: React.MouseEvent<HTMLSpanElement>) => {
 		event.stopPropagation();
 		const { innerText } = event.target as HTMLElement;
@@ -236,14 +238,39 @@ const InputRoleForm = (props: InputRoleObj) => {
 
 				return updatedRoleData;
 			});
+
 			setTagItem('');
 		} else {
 			if (!roleData.skills?.map(e => e.name).includes(innerText) && roleData.skillIds.length < 5) {
-				setRoleData(prev => ({
-					...prev,
-					skillIds: [...prev.skillIds, Number(target.id)],
-					skills: [...(prev.skills as any), { id: Number(target.id), name: innerText }],
-				}));
+				setRoleData(prev => {
+					const updatedRoleData = {
+						...prev,
+						skillIds: [...prev.skillIds, Number(target.id)],
+						skills: [...(prev.skills || []), { id: Number(target.id), name: innerText }],
+					};
+
+					setInfos(prevInfos => ({
+						...prevInfos,
+						recruitmentRoles: prevInfos.recruitmentRoles.map(role =>
+							role.roleId === updatedRoleData.roleId || role.roleId === null
+								? {
+										...role,
+										skills: [
+											...(role.skills?.some(skill => skill.id === Number(target.id))
+												? role.skills
+												: [...(role.skills || []), { id: Number(target.id), name: innerText }]),
+										],
+										skillIds: [
+											...role.skillIds,
+											...(role.skillIds.includes(Number(target.id)) ? [] : [Number(target.id)]),
+										],
+								  }
+								: role
+						),
+					}));
+
+					return updatedRoleData;
+				});
 				setTagItem('');
 			}
 		}
