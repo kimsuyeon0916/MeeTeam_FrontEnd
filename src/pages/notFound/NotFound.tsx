@@ -1,7 +1,7 @@
 import React from 'react';
 import S from './NotFound.styled';
 import { useNavigate } from 'react-router-dom';
-import { Logo } from '../../assets';
+import { Image_404 } from '../../assets';
 
 const NotFound = () => {
 	const navigate = useNavigate();
@@ -11,7 +11,7 @@ const NotFound = () => {
 
 	return (
 		<S.NotFound>
-			<img src={Logo} />
+			<img src={Image_404} />
 			<section className='container-title'>
 				<h1>죄송합니다.</h1>
 				<h1>요청하신 페이지는 찾을 수 없습니다.</h1>
