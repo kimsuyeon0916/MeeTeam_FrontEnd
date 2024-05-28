@@ -348,13 +348,14 @@ const InputRoleForm = (props: InputRoleObj) => {
 			$isSkillClicked={dropdown.skill}
 			$isRoleName={roleData.roleName !== ''}
 			$isCount={roleData.count !== null}
+			$isTagItem={tagItem !== ''}
 		>
 			<article className='wrapper' ref={dropdownRef}>
 				<section className='wrapper-role container-input'>
 					<input
 						type='text'
 						placeholder='역할을 검색하세요.'
-						className='body1-medium'
+						className='body1-medium input-element'
 						value={roleData.roleName}
 						onChange={onChangeRole}
 						onKeyDown={onKeyPress}
@@ -378,7 +379,7 @@ const InputRoleForm = (props: InputRoleObj) => {
 					<input
 						type='text'
 						placeholder='인원'
-						className='body1-medium'
+						className='body1-medium input-element'
 						onChange={onChangeCount}
 						onKeyDown={onKeyPress}
 						value={roleData.count?.toString()}
@@ -426,22 +427,11 @@ const InputRoleForm = (props: InputRoleObj) => {
 									})}
 							</section>
 						))}
-					{!id && (dropdown.skill || roleData.skills?.length === 0) && (
+					{(dropdown.skill || roleData.skills?.length === 0) && (
 						<input
 							type='text'
 							placeholder='스킬을 검색하세요. 최대 5개의 스킬을 입력할 수 있습니다.'
-							className='body1-medium'
-							onChange={onChangeKeyword}
-							onKeyDown={onKeyPress}
-							value={tagItem}
-							onClick={onClickSkillInput}
-						/>
-					)}
-					{id && (dropdown.skill || roleData.skills?.length === 0) && (
-						<input
-							type='text'
-							placeholder='스킬을 검색하세요. 최대 5개의 스킬을 입력할 수 있습니다.'
-							className='body1-medium'
+							className='body1-medium input-element'
 							onChange={onChangeKeyword}
 							onKeyDown={onKeyPress}
 							value={tagItem}

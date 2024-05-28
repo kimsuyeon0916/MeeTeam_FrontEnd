@@ -5,6 +5,7 @@ interface InputRoleForm {
 	$isSkillClicked: boolean;
 	$isRoleName: boolean;
 	$isCount: boolean;
+	$isTagItem: boolean;
 }
 
 const InputRoleForm = styled.article<InputRoleForm>`
@@ -204,6 +205,16 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		background: #fff;
 		position: relative;
 		width: 100%;
+		color: ${props => (props.$isRoleName || props.$isCount) && '#000000'};
+
+		&:focus-within {
+			border: 1px solid #5877fc;
+		}
+
+		&:hover {
+			border: 1px solid #5877fc;
+			transition: 0.2s ease-in-out;
+		}
 	}
 	.wrapper-role {
 		display: flex;
@@ -232,6 +243,10 @@ const InputRoleForm = styled.article<InputRoleForm>`
 		justify-content: space-between;
 		align-items: center;
 		flex-shrink: 0;
+	}
+
+	.input-element {
+		color: ${props => (props.$isRoleName || props.$isCount || props.$isTagItem) && '#000000'};
 	}
 
 	.icon-search {
