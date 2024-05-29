@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import S from './AccountSetting.styled';
 import { SlArrowDown, SlArrowUp } from 'react-icons/sl';
 import { RiArrowRightSLine } from 'react-icons/ri';
 import { Email } from '../../../assets';
+import { useRecoilState } from 'recoil';
+import { warningModalWithdrawState } from '../../../atom';
+import { AccountDelete } from '../../../components';
+import { is } from 'date-fns/locale';
+import { fixModalBackground } from '../../../utils';
 
 const AccountSetting = () => {
 	const [dropdown, setDropdown] = useState({
 		account: false,
 		withdraw: false,
 	});
+	const [isWithdraw, setIsWithdraw] = useRecoilState(warningModalWithdrawState);
 
 	const accountHandler = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation();
@@ -33,6 +39,15 @@ const AccountSetting = () => {
 	const inputSectionHandler = (event: React.MouseEvent<HTMLDivElement>) => {
 		event.stopPropagation();
 	};
+
+	const withdrawModalHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.stopPropagation();
+		setIsWithdraw(true);
+	};
+
+	useEffect(() => {
+		fixModalBackground(isWithdraw);
+	}, [isWithdraw]);
 
 	return (
 		<S.AccountSettingStyled>
@@ -103,7 +118,11 @@ const AccountSetting = () => {
 								</ul>
 							</section>
 							<section className='container-btn'>
-								<button type='button' className='btn-withdraw txt-big withdraw'>
+								<button
+									type='button'
+									className='btn-withdraw txt-big withdraw'
+									onClick={withdrawModalHandler}
+								>
 									회원탈퇴
 								</button>
 							</section>
@@ -117,6 +136,11 @@ const AccountSetting = () => {
 					<RiArrowRightSLine />
 				</span>
 			</section>
+			{isWithdraw && (
+				<section className='modal-background'>
+					<AccountDelete />
+				</section>
+			)}
 		</S.AccountSettingStyled>
 	);
 };

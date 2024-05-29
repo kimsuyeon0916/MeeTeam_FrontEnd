@@ -8,6 +8,7 @@ import {
 	readUniversityList,
 	readDepartmentList,
 	signOut,
+	withdrawAccount,
 } from './auth/auth';
 import {
 	getPostingData,
@@ -78,4 +79,5 @@ export {
 	getApplicantsList,
 	deletePostingRecruit,
 	readProfileImage,
+	withdrawAccount,
 };

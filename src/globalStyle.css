@@ -177,3 +177,13 @@ button {
 	line-height: 1.2rem;
 	letter-spacing: 0.002rem;
 }
+
+.h3 {
+	color: #151515;
+	font-family: Pretendard;
+	font-size: 2rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 2.4rem;
+	letter-spacing: 0.004rem;
+}

@@ -204,6 +204,16 @@ const AccountSettingStyled = styled.section`
 		font-weight: 300;
 		margin-bottom: 3.4rem;
 	}
+
+	.modal-background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 105;
+		background-color: rgba(0, 0, 0, 0.15);
+	}
 `;
 
 const S = { AccountSettingStyled };

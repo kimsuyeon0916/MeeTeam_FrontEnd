@@ -263,3 +263,8 @@ export const warningModalRoleCountState = atom({
 	key: 'warningRoleCountState',
 	default: false,
 });
+
+export const warningModalWithdrawState = atom({
+	key: 'warningModalWithdrawState',
+	default: false,
+});
