@@ -64,7 +64,7 @@ import Invalid from './Invalid.svg';
 import LogoFooter from './LogoFooter.svg';
 import Email from './Email.svg';
 import GrayDelete from './GrayDelete.svg';
-import Image_404 from './Image_404.png';
+import NotFoundIcon from './NotFoundIcon.png';
 
 export {
 	Exit,
@@ -133,5 +133,5 @@ export {
 	LogoFooter,
 	Email,
 	GrayDelete,
-	Image_404,
+	NotFoundIcon,
 };
