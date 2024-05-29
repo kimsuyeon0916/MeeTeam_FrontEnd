@@ -10,12 +10,12 @@ interface PortfolioModal {
 
 const PortfolioModal = ({ formState, handleClick }: PortfolioModal) => {
 	const defaultInformationErrorList = [
-		formState?.errors['title'],
-		formState?.errors['description'],
-		formState?.errors['field'],
-		formState?.errors['role'],
-		formState?.errors['startDate'] || formState?.errors['endDate'],
-		formState?.errors['proceedType'],
+		!!formState?.errors['title'],
+		!!formState?.errors['description'],
+		!!formState?.errors['field'],
+		!!formState?.errors['role'],
+		!!formState?.errors['startDate'] || formState?.errors['endDate'],
+		!!formState?.errors['proceedType'],
 	];
 
 	const defaultInformationList = ['제목', '한줄소개', '분야', '역할', '진행기간', '진행방식'];
