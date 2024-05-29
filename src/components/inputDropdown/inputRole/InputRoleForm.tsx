@@ -177,7 +177,7 @@ const InputRoleForm = (props: InputRoleObj) => {
 		const { innerText } = event.target as HTMLElement;
 		const target = event.target as HTMLElement;
 		const roleExists = info.recruitmentRoles.some(r => r.roleName === innerText);
-		console.log(roleExists);
+
 		if (!roleExists) {
 			if (id) {
 				setRoleData(prev => ({
@@ -331,7 +331,7 @@ const InputRoleForm = (props: InputRoleObj) => {
 		if (containerRef.current) {
 			applyEllipsis(containerRef.current);
 		}
-	}, [roleData.skills, containerRef.current, dropdown.skill, skills]);
+	}, [dropdown.skill, roleData.skills]);
 
 	useEffect(() => {
 		const outsideClick = (event: MouseEvent) => {
