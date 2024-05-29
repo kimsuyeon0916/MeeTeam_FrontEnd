@@ -53,21 +53,20 @@ const PortfolioContentList = styled.ul`
 	flex-direction: column;
 	width: 100%;
 	margin-bottom: 4rem;
-	border-top: 0.05rem solid var(--Border-boxStroke, #d3d3d3);
-	border-bottom: 0.05rem solid var(--Border-boxStroke, #d3d3d3);
+	border-top: 0.1rem solid var(--Border-boxStroke, #d3d3d3);
 `;
 
 const PortfolioContentItem = styled.li`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	border-bottom: 0.1rem solid var(--Border-boxStroke, #d3d3d3);
+	background: var(--Grayscale-200, #f6f6f6);
 `;
 
 const PortfolioContentItemTitle = styled.h6`
 	display: flex;
 	padding: 0.86rem 1.59rem;
-	border: 0.05rem solid var(--Border-boxStroke, #d3d3d3);
-	border-left: 0;
 	background: var(--Grayscale-200, #f6f6f6);
 	color: var(--text-color, #151515);
 `;
@@ -78,9 +77,12 @@ const PortfolioContentItemInfo = styled.div`
 	padding: 0.86rem 1.59rem;
 	flex-direction: row;
 	column-gap: 1rem;
-	border: 0.05rem solid var(--Border-boxStroke, #d3d3d3);
-	border-right: 0;
+	border-left: 0.1rem solid var(--Border-boxStroke, #d3d3d3);
 	background: var(--Form-fill-others, #fff);
+
+	/* 반응형 대비 */
+	flex-wrap: wrap;
+	row-gap: 1rem;
 `;
 
 const S = {
