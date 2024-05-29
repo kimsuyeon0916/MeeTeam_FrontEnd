@@ -4,6 +4,7 @@ const AccountSettingStyled = styled.section`
 	font-family: Pretendard;
 	width: clamp(45%, 96rem, 75%);
 	margin: 0 auto;
+	margin-bottom: 14.4rem;
 
 	h2 {
 		color: #151515;
