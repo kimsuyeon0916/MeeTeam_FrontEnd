@@ -108,6 +108,11 @@ const InputRoleForm = (props: InputRoleObj) => {
 			count: prev.count,
 		}));
 		if (event.target.value === '') {
+			setRoleData(prev => ({
+				...prev,
+				roleName: '',
+				count: null,
+			}));
 			setInfos(prev => ({
 				...prev,
 				recruitmentRoles: prev.recruitmentRoles.map(role =>
@@ -171,17 +176,22 @@ const InputRoleForm = (props: InputRoleObj) => {
 	const onClickRole = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		const target = event.target as HTMLElement;
-		const roleExists = info.recruitmentRoles.some(
-			r => (r.roleName === innerText || r.roleId === Number(target.id)) && r.roleId !== id
-		);
+		const roleExists = info.recruitmentRoles.some(r => r.roleName === innerText);
+		console.log(roleExists);
 		if (!roleExists) {
 			if (id) {
+				setRoleData(prev => ({
+					...prev,
+					roleName: innerText,
+					roleId: Number(target.id),
+				}));
 				setInfos(prev => ({
 					...prev,
 					recruitmentRoles: prev.recruitmentRoles.map(role =>
 						role.roleId === id ? { ...role, roleName: innerText, roleId: Number(target.id) } : role
 					),
 				}));
+				setDropdown(prev => ({ ...prev, role: false }));
 			} else {
 				setInfos(prev => {
 					const recruitmentRoles = prev.recruitmentRoles.map(role => {
@@ -197,8 +207,6 @@ const InputRoleForm = (props: InputRoleObj) => {
 			}
 		}
 	};
-
-	console.log(info.recruitmentRoles);
 
 	const onClickSkill = (event: React.MouseEvent<HTMLSpanElement>) => {
 		event.stopPropagation();

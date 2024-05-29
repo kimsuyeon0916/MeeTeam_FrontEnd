@@ -61,9 +61,6 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 			setIsFirstClick(false);
 		} else if (info.recruitmentRoles.length === 10) {
 			setWarningModalRoleCountState(true);
-			setIsValid(prev => ({ ...prev, isRole: false }));
-			setValidMessage(prev => ({ ...prev, recruitRole: '최대 10개의 역할을 입력할 수 있습니다.' }));
-			setIsFirstClick(false);
 		} else {
 			setInfo(prevState => {
 				const hasNullRoleId = prevState.recruitmentRoles.some(role => role.roleId === null);
