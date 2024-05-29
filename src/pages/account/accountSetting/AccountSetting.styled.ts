@@ -118,7 +118,11 @@ const AccountSettingStyled = styled.section`
 		padding: 2.6rem 0;
 		box-sizing: border-box;
 
+		.container-list {
+			margin-left: 1.6rem;
+		}
 		.paragraph {
+			list-style: disc;
 			margin-top: 1.6rem;
 		}
 	}
@@ -154,6 +158,50 @@ const AccountSettingStyled = styled.section`
 		.icon {
 			margin-top: 0.3rem;
 		}
+	}
+
+	.btn-save {
+		display: flex;
+		height: 4.8rem;
+		padding: 1.2rem 3.2rem;
+		justify-content: center;
+		align-items: center;
+		gap: 0.75rem;
+		border-radius: 0.6rem;
+		background: #e3e3e3;
+	}
+
+	.txt-big {
+		color: #8e8e8e;
+		font-family: Pretendard;
+		font-size: 1.6rem;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 1.9rem;
+		letter-spacing: 0.0032rem;
+	}
+
+	.container-btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.btn-withdraw {
+		display: flex;
+		height: 4.8rem;
+		padding: 1.2rem 3.2rem;
+		justify-content: center;
+		align-items: center;
+		gap: 0.75rem;
+		border-radius: 0.6rem;
+		background: #f85858;
+	}
+
+	.withdraw {
+		color: #f7faff;
+		font-weight: 300;
+		margin-bottom: 3.4rem;
 	}
 `;
 
