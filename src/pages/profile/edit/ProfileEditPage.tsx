@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import S from '../Profile.styled';
 import { useForm, SubmitHandler, useFieldArray } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
 import { PROFILE_EDIT_DATA } from '../../index';
 import {
 	Input,
@@ -671,7 +670,6 @@ const ProfileEditPage = () => {
 					<Modal {...modalProps} />
 				</ModalPortal>
 			)}
-			<DevTool control={control} />
 		</>
 	);
 };

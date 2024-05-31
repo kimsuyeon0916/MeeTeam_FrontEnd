@@ -6,7 +6,6 @@ import { useNaverSignUp, useCheckDuplicateNickname, useDebounce } from '../../..
 import { useSetRecoilState } from 'recoil';
 import { userState } from '../../../atom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
 import { Input, PrimaryBtn } from '../../../components';
 
 interface FormValues {
@@ -84,7 +83,6 @@ const NicknameSettingPage = () => {
 					<PrimaryBtn title='확인' type='submit' disabled={!isValid || duplicated} />
 				</div>
 			</S.NicknameSettingPageForm>
-			<DevTool control={control} />
 		</S.NicknameSettingPageLayout>
 	);
 };
