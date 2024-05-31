@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const WarnRoleDelete = styled.section`
+const WarnRoleCount = styled.article`
 	display: flex;
 	flex-direction: column;
 	width: 30rem;
@@ -69,6 +69,6 @@ const WarnRoleDelete = styled.section`
 	}
 `;
 
-const S = { WarnRoleDelete };
+const S = { WarnRoleCount };
 
 export default S;

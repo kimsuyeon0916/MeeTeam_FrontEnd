@@ -32,7 +32,7 @@ const RecruitDescription = styled.article`
 			font-size: 2.4rem;
 		}
 		h3 {
-			font-size: 1.872rem;
+			font-size: 2rem;
 		}
 		h4 {
 			font-size: 1.6rem;

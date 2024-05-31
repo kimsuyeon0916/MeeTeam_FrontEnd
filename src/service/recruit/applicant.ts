@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import {
 	ApplicantList,
 	ApplicantPageInfo,
@@ -7,6 +6,7 @@ import {
 	ApplyManageInfo,
 } from '../../types';
 import { axiosAuthInstance } from '../axiosInstance';
+import axios from 'axios';
 import { EndPoint } from '../endPoint';
 
 export const getRecruitInfo = async (pageNum: number) => {
@@ -16,7 +16,11 @@ export const getRecruitInfo = async (pageNum: number) => {
 		);
 		return response;
 	} catch (error) {
-		console.error(error);
+		if (axios.isAxiosError(error)) {
+			console.error(error);
+			if (error.response && error.response.status === 400) {
+			}
+		}
 	}
 };
 

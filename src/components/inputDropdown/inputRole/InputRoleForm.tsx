@@ -224,7 +224,6 @@ const InputRoleForm = () => {
 		<S.InputRoleForm
 			$isRoleClicked={dropdown.role}
 			$isSkillClicked={dropdown.skill}
-			$isNotValid
 			$isRoleName={roleData.roleName !== ''}
 			$isCount={roleData.count !== null}
 		>

@@ -69,4 +69,4 @@ const ProfileImage = ({ isEditable, userId, size, url }: ProfileImage) => {
 	);
 };
 
-export default ProfileImage;
+export default React.memo(ProfileImage);

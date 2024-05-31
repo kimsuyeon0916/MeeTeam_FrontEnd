@@ -3,7 +3,6 @@ import styled from 'styled-components';
 interface InputRoleForm {
 	$isRoleClicked: boolean;
 	$isSkillClicked: boolean;
-	$isNotValid: boolean;
 	$isRoleName: boolean;
 	$isCount: boolean;
 }
@@ -257,7 +256,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 
 		.container-skills {
 			position: relative;
-			width: 65.5rem;
+			width: 100%;
 			height: 4.8rem;
 			display: flex;
 			align-items: center;
@@ -304,6 +303,7 @@ const InputRoleForm = styled.article<InputRoleForm>`
 	.add-btn {
 		button {
 			display: flex;
+			width: 10rem;
 			height: 4.8rem;
 			padding: 1.2rem 3.2rem;
 			justify-content: center;

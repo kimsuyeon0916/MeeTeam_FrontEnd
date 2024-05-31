@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import S from '../BasicInformation.styled';
 import { useQuery } from '@tanstack/react-query';
 import { useDebounce } from '../../../../../hooks';
@@ -33,12 +33,13 @@ const ContainerCourse = () => {
 		gcTime: Infinity,
 	});
 
-	const onChangeCourse = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const onChangeCourse = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
 		setName(prev => ({ ...prev, course: event.target.value }));
-	};
-	const onChangeProfessor = (event: React.ChangeEvent<HTMLInputElement>) => {
+	}, []);
+	const onChangeProfessor = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
 		setName(prev => ({ ...prev, professor: event.target.value }));
-	};
+	}, []);
+
 	const onClickCheckbox = () => {
 		setIsChecked(prev => !prev);
 		setFormData(prev => ({

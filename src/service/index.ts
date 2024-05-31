@@ -16,7 +16,7 @@ import {
 	cancelApply,
 	closeRecruitPost,
 } from './recruit/detail';
-import { readProfile, updateProfile } from './user/Profile';
+import { readProfile, updateProfile, readProfileImage } from './user/Profile';
 import { readSkillList, readRoleList } from './search/search';
 import {
 	readPortfolio,
@@ -77,4 +77,5 @@ export {
 	editPostingRecruit,
 	getApplicantsList,
 	deletePostingRecruit,
+	readProfileImage,
 };
