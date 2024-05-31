@@ -31,6 +31,8 @@ export const useUpdateProfile = ({
 		onSuccess: async data => {
 			if (data) {
 				await queryClient.invalidateQueries({ queryKey: profileKeys.readProfile(userId) });
+				queryClient.invalidateQueries({ queryKey: ['readInfinitePortfolioList', 12] });
+				queryClient.invalidateQueries({ queryKey: ['readPaginationPortfolioList', 16] });
 				onSuccess?.(data);
 			}
 		},
