@@ -17,6 +17,7 @@ const ModalContainer = styled.div`
 	flex-direction: column;
 	align-items: center;
 	padding: 1.8rem 2rem;
+	width: clamp(10%, 30rem, 50%);
 	border-radius: 1rem;
 	border: 0.1rem solid var(--box_stroke, #e3e3e3);
 	background: var(--Grayscale-100, #f8fafb);

@@ -13,9 +13,11 @@ import {
 	PortfolioImageUpload,
 	PortfolioImageModal,
 	ModalPortal,
+	Modal,
+	PortfolioModal,
 } from '../../../components';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useForm, useFieldArray, SubmitHandler } from 'react-hook-form';
+import { useForm, useFieldArray, SubmitHandler, SubmitErrorHandler } from 'react-hook-form';
 import { Image, Link, PortfolioPayload, Skill } from '../../../types';
 import {
 	useCreatePortfolio,
@@ -84,7 +86,7 @@ const PortfolioEditPage = () => {
 				keepErrors: true,
 			},
 		});
-	const { isSubmitting, isSubmitSuccessful } = formState;
+	const { isSubmitting } = formState;
 
 	const createPortfolioInSuccess = (newPortfolioId: string) => {
 		navigate(`/portfolio/${newPortfolioId}`);
@@ -170,6 +172,10 @@ const PortfolioEditPage = () => {
 		setReadPresignedUrlList(true);
 	};
 
+	const submitErrorHandler: SubmitErrorHandler<FormValues> = () => {
+		setRequiredAlertOpen(true);
+	};
+
 	// 이미지 순서 변경 모달
 	const [modalOpen, setModalOpen] = useState(false);
 
@@ -198,7 +204,12 @@ const PortfolioEditPage = () => {
 
 	const addSkill = () => {
 		if (skillList.length === 10) {
-			alert('스킬은 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
+			setModalProps(prev => ({
+				...prev,
+				title: '스킬',
+				content: '스킬은 최대 10개까지 입력할 수 있어요!',
+			}));
+			setAlertOpen(true);
 			setValue('skills', '');
 			return;
 		}
@@ -208,7 +219,12 @@ const PortfolioEditPage = () => {
 		} as Skill;
 		if (getValues('skills')?.length === 0) return;
 		if (skillList.find(skill => newSkill.name === skill.name)) {
-			alert('이미 추가한 스킬입니다.'); // 디자인 요청
+			setModalProps(prev => ({
+				...prev,
+				title: '스킬',
+				content: '이미 추가한 스킬입니다!',
+			}));
+			setAlertOpen(true);
 			setValue('skills', '');
 			return;
 		}
@@ -232,7 +248,12 @@ const PortfolioEditPage = () => {
 
 	const addLink = () => {
 		if (links.length === 10) {
-			alert('링크는 최대 10개까지 입력할 수 있습니다.'); // 디자인 요청
+			setModalProps(prev => ({
+				...prev,
+				title: '링크',
+				content: '링크는 최대 10개까지 입력할 수 있어요!',
+			}));
+			setAlertOpen(true);
 			return;
 		}
 		prependLink({ description: 'Link', url: '' });
@@ -262,6 +283,30 @@ const PortfolioEditPage = () => {
 		if (event.key === 'Tab') event.preventDefault();
 	};
 
+	// 모달
+	const [requiredAlertOpen, setRequiredAlertOpen] = useState(false);
+	const [alertOpen, setAlertOpen] = useState(false);
+	useEffect(() => {
+		fixModalBackground(alertOpen);
+	}, [alertOpen]);
+
+	const [modalProps, setModalProps] = useState({
+		title: ``,
+		content: ``,
+		primaryBtn: {
+			title: `확인`,
+			small: true,
+			handleClick: () => {
+				setAlertOpen(false);
+			},
+			handleKeyDown: (event: React.KeyboardEvent<HTMLButtonElement>) => {
+				if (event.key === 'Escape' || event.key === 'Enter' || event.key === 'Space') {
+					setAlertOpen(false);
+				}
+			},
+		},
+	});
+
 	if (isSuccessReadPortfolio && portfolioId && !portfolio?.isWriter) {
 		return <NotFound />;
 	}
@@ -270,7 +315,7 @@ const PortfolioEditPage = () => {
 		<>
 			{isSuccessReadPortfolio && (
 				<S.PortfolioEditLayout
-					onSubmit={handleSubmit(submitHandler)}
+					onSubmit={handleSubmit(submitHandler, submitErrorHandler)}
 					onKeyDown={e => checkEnterKeyDown(e)}
 				>
 					<S.PortfolioEditColumn $gap='4rem'>
@@ -442,6 +487,7 @@ const PortfolioEditPage = () => {
 											if (quillRef) quillRef.current = e;
 										}}
 										value={watch('content')}
+										defaultValue={portfolio?.content}
 										onChange={handleChangeEditor}
 										modules={modules}
 										formats={formats}
@@ -479,15 +525,23 @@ const PortfolioEditPage = () => {
 
 						<S.PortfolioEditButtonBox>
 							<DefaultBtn type='button' title='취소' handleClick={() => navigate(-1)} />
-							<PrimaryBtn
-								type='submit'
-								title='등록'
-								disabled={isSubmitting || isSubmitted || isSubmitSuccessful}
-							/>
+							<PrimaryBtn type='submit' title='등록' disabled={isSubmitting} />
 						</S.PortfolioEditButtonBox>
 					</S.PortfolioEditColumn>
 				</S.PortfolioEditLayout>
 			)}
+			{alertOpen && (
+				<ModalPortal>
+					<Modal {...modalProps} />
+				</ModalPortal>
+			)}
+			{/* 필수 정보 미입력 모달 */}
+			{requiredAlertOpen && (
+				<ModalPortal>
+					<PortfolioModal formState={formState} handleClick={() => setRequiredAlertOpen(false)} />
+				</ModalPortal>
+			)}
+			<DevTool control={control} />
 		</>
 	);
 };
