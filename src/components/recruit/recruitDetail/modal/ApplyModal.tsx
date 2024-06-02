@@ -72,7 +72,14 @@ const ApplyModal = () => {
 				</section>
 			</article>
 			<article className='container-user__info'>
-				<h3>내 정보</h3>
+				<section className='container-subtitle'>
+					<h3>내 정보</h3>
+					{isChecked && (
+						<span className='body2-medium writing'>
+							추후 <span className='highlighted'>대표메일</span>을 통해 결과를 알려드립니다.
+						</span>
+					)}
+				</section>
 				{isLoading ? (
 					<section className='user-info'>사용자 정보를 불러오고 있습니다...</section>
 				) : (
@@ -97,7 +104,7 @@ const ApplyModal = () => {
 								<span>입학년도</span>
 							</section>
 							<section>
-								<span className='value'>{data?.score}</span>
+								<span className='value'>{data?.score === 0 ? '-' : data?.score}</span>
 								<span className='value'>{data?.year}</span>
 							</section>
 						</section>

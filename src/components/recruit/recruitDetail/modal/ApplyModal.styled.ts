@@ -85,6 +85,10 @@ const Modal = styled.section<Modal>`
 		}
 	}
 
+	.writing {
+		margin-bottom: 0.2rem;
+	}
+
 	.container-user__info {
 		width: 44rem;
 		border-radius: 0.8rem;
@@ -93,6 +97,16 @@ const Modal = styled.section<Modal>`
 		margin-top: 2.7rem;
 		padding: 1.8rem 2rem;
 		box-sizing: border-box;
+
+		.container-subtitle {
+			display: flex;
+			gap: 1.25rem;
+			align-items: flex-end;
+		}
+
+		.highlighted {
+			color: #5877fc;
+		}
 
 		.confirm-title {
 			font-size: 1.8rem;
@@ -195,6 +209,10 @@ const Modal = styled.section<Modal>`
 				background: #fff;
 				z-index: 601;
 				box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+
+				li {
+					cursor: pointer;
+				}
 			}
 
 			img {
