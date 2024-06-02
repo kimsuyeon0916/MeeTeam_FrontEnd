@@ -345,25 +345,35 @@ const FinalModal = styled.section`
 		letter-spacing: -0.036rem;
 	}
 
+	.btn-txt-big {
+		color: #373f41;
+		font-family: Pretendard;
+		font-size: 1.6rem;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 1.9rem;
+		letter-spacing: 0.0032rem;
+	}
+
 	.description {
 		display: flex;
 		flex-direction: column;
 		margin-top: 1.6rem;
 
-		span:nth-child(1) {
+		h4 {
 			color: #151515;
 			font-size: 1.8rem;
 			font-weight: 600;
 			line-height: 1.8rem;
 			letter-spacing: 0.0027rem;
 		}
-		span:nth-child(2) {
+
+		.darker {
 			color: #373f41;
-			font-size: 1.4rem;
-			font-weight: 400;
-			line-height: 1.8rem;
-			letter-spacing: 0.0021rem;
-			margin-top: 0.7rem;
+			margin-top: 0.8rem;
+		}
+		span:nth-child(1) {
+			margin-top: 0.8rem;
 		}
 
 		.agreement {
@@ -384,6 +394,7 @@ const FinalModal = styled.section`
 		display: flex;
 		justify-content: flex-end;
 		margin-top: 6.2rem;
+		gap: 1.6rem;
 
 		button {
 			display: flex;
@@ -392,8 +403,16 @@ const FinalModal = styled.section`
 			justify-content: center;
 			align-items: center;
 			gap: 0.75rem;
-			flex-shrink: 0;
 			border-radius: 0.6rem;
+		}
+
+		.cancel {
+			background-color: #fff;
+			color: #373f41;
+			border: 0.1rem solid #e3e3e3;
+		}
+
+		.btn-profile {
 			background-color: #5877fc;
 			color: #fff;
 		}

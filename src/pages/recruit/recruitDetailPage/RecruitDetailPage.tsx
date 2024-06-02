@@ -23,15 +23,17 @@ import { calculateDate, fixModalBackground } from '../../../utils';
 import { JsxElementComponentProps } from '../../../types';
 import { useQuery } from '@tanstack/react-query';
 import { getPostingData } from '../../../service';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import {
 	applyCancelModalState,
+	userState,
 	applyCloseModalState,
 	applyModalState,
 	applyStepState,
 	commentDeleteModalState,
 	needLoginModalState,
 	recruitPostingDeleteModalState,
+	goProfileState,
 } from '../../../atom';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useLogin } from '../../../hooks';
@@ -40,13 +42,15 @@ const RecruitDetailPage = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
 	const pageNum = Number(id);
-	const isModal = useRecoilValue(applyModalState);
+	const user = useRecoilValue(userState);
+	const [isModal, setIsModal] = useRecoilState(applyModalState);
 	const isCancel = useRecoilValue(applyCancelModalState);
 	const isClose = useRecoilValue(applyCloseModalState);
 	const isDelete = useRecoilValue(commentDeleteModalState);
 	const isNeedLogin = useRecoilValue(needLoginModalState);
+	const [step, setIsApplyStep] = useRecoilState(applyStepState);
+	const [isGoProfile, setGoProfile] = useRecoilState(goProfileState);
 	const isPostingDelete = useRecoilValue(recruitPostingDeleteModalState);
-	const step = useRecoilValue(applyStepState);
 
 	const stepLists: JsxElementComponentProps = {
 		0: <ApplyModal />,
@@ -71,6 +75,15 @@ const RecruitDetailPage = () => {
 
 	const onClickEditPage = async () => {
 		navigate(`/recruitment/postings/edit/${pageNum}`);
+	};
+
+	const submitHandler = async () => {
+		if (isGoProfile) {
+			await setGoProfile(false);
+			await setIsModal(false);
+			await setIsApplyStep(0);
+			await navigate(`/profile/${user?.userId}`);
+		}
 	};
 
 	useEffect(() => {
@@ -138,7 +151,7 @@ const RecruitDetailPage = () => {
 						</section>
 					</article>
 					{isModal && (
-						<form>
+						<form onSubmit={submitHandler}>
 							<section className='modal-background'>{stepLists[step]}</section>
 						</form>
 					)}
