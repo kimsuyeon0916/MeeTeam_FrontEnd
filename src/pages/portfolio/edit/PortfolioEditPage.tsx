@@ -36,7 +36,8 @@ import type ReactQuill from 'react-quill';
 import { useRecoilValue } from 'recoil';
 import { uploadImageListState } from '../../../atom';
 import { differenceInDays } from 'date-fns';
-import NotFound from '../../notFound/NotFound';
+import { NotFound } from '../..';
+import { PORTFOLIO_EDITOR_TEMPLATE } from '../../../constant';
 
 interface FormValues {
 	mainImage?: Image;
@@ -261,7 +262,7 @@ const PortfolioEditPage = () => {
 		if (isSuccessReadPortfolio) {
 			setProceedType(portfolio?.proceedType);
 			setSkillList(portfolio?.skills ? portfolio?.skills : []);
-			setValue('content', portfolio?.content);
+			setValue('content', portfolio?.content ?? PORTFOLIO_EDITOR_TEMPLATE);
 		}
 	}, [isSuccessReadPortfolio]);
 
@@ -477,7 +478,7 @@ const PortfolioEditPage = () => {
 											if (quillRef) quillRef.current = e;
 										}}
 										value={watch('content')}
-										defaultValue={portfolio?.content}
+										defaultValue={portfolio?.content ?? PORTFOLIO_EDITOR_TEMPLATE}
 										onChange={handleChangeEditor}
 										modules={modules}
 										formats={formats}
