@@ -62,17 +62,7 @@ const PortfolioEditPage = () => {
 	const { portfolioId } = useParams() as { portfolioId: string }; // undefined 인 경우(생성하는 경우) 로직 필요
 	const navigate = useNavigate();
 
-	const {
-		data: portfolio,
-		isSuccess: isSuccessReadPortfolio,
-		isLoading,
-	} = useReadPortfolio(portfolioId);
-	// 작성자가 아닌 경우, 편집 방지(상세페이지로 이동)
-	// useEffect(() => {
-	// 	if (isSuccessReadPortfolio) {
-	// 		portfolioId && !portfolio?.isWriter && navigate(`/portfolio/${portfolioId}`);
-	// 	}
-	// }, [isSuccessReadPortfolio]);
+	const { data: portfolio, isSuccess: isSuccessReadPortfolio } = useReadPortfolio(portfolioId);
 
 	const { register, formState, handleSubmit, control, watch, getValues, setValue } =
 		useForm<FormValues>({
@@ -541,7 +531,6 @@ const PortfolioEditPage = () => {
 					<PortfolioModal formState={formState} handleClick={() => setRequiredAlertOpen(false)} />
 				</ModalPortal>
 			)}
-			<DevTool control={control} />
 		</>
 	);
 };
