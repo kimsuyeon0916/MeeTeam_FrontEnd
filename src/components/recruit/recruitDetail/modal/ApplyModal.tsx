@@ -67,7 +67,9 @@ const ApplyModal = () => {
 					</span>
 					<article className='agreement'>
 						<input type='checkbox' id='agree' onClick={onClickCheckbox} checked={isChecked} />
-						<label htmlFor='agree'>개인정보 열람 동의</label>
+						<label htmlFor='agree' className='agreement-word'>
+							개인정보 열람 동의
+						</label>
 					</article>
 				</section>
 			</article>
