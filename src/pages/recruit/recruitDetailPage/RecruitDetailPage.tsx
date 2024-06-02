@@ -21,9 +21,9 @@ import {
 } from '../../../components';
 import { calculateDate, fixModalBackground } from '../../../utils';
 import { JsxElementComponentProps } from '../../../types';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getPostingData } from '../../../service';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import {
 	applyCancelModalState,
 	userState,
@@ -51,7 +51,7 @@ const RecruitDetailPage = () => {
 	const [step, setIsApplyStep] = useRecoilState(applyStepState);
 	const [isGoProfile, setGoProfile] = useRecoilState(goProfileState);
 	const isPostingDelete = useRecoilValue(recruitPostingDeleteModalState);
-
+	const queryClient = useQueryClient();
 	const stepLists: JsxElementComponentProps = {
 		0: <ApplyModal />,
 		1: <ConfirmModal />,
@@ -79,9 +79,10 @@ const RecruitDetailPage = () => {
 
 	const submitHandler = async () => {
 		if (isGoProfile) {
-			await setGoProfile(false);
+			setIsApplyStep(0);
+			setGoProfile(false);
+			queryClient.invalidateQueries({ queryKey: ['detailedPage', { pageNum, isLogin }] });
 			await setIsModal(false);
-			await setIsApplyStep(0);
 			await navigate(`/profile/${user?.userId}`);
 		}
 	};
