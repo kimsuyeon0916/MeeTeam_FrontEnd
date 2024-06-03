@@ -10,7 +10,7 @@ const OpenChatModal = (pageNum: { pageNum: number }) => {
 	});
 
 	const onClickConfirm = () => {
-		tutorialAccess.mutate(Number(pageNum), {
+		tutorialAccess.mutate(pageNum.pageNum, {
 			onSuccess: () => {
 				queryClient.invalidateQueries({ queryKey: ['recruitManageInfo'] });
 			},
