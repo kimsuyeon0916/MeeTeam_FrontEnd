@@ -28,7 +28,7 @@ const MuiDatepicker = ({ handleChange, defaultValue, value, inputRef, invalid }:
 			slots={{
 				popper: S.StyledPopper,
 				textField: S.StyledTextField,
-				layout: S.StyledPickersLayout as React.JSXElementConstructor<any>,
+				layout: S.StyledPickersLayout as React.JSXElementConstructor<unknown>,
 				openPickerIcon: CalendarIcon,
 			}}
 			slotProps={{
