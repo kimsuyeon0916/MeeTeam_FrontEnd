@@ -81,9 +81,6 @@ const ApplierManagePage = () => {
 		},
 	});
 
-	console.log(recruitManageInfo);
-	console.log(id, pageNum);
-
 	const onClickSetting = () => {
 		setIsOpenChat(prev => !prev);
 		if (isOpenChat) {
