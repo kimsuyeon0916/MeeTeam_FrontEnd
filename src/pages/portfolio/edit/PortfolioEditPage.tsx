@@ -36,7 +36,8 @@ import type ReactQuill from 'react-quill';
 import { useRecoilValue } from 'recoil';
 import { uploadImageListState } from '../../../atom';
 import { differenceInDays } from 'date-fns';
-import NotFound from '../../notFound/NotFound';
+import { NotFound } from '../..';
+import { PORTFOLIO_EDITOR_TEMPLATE } from '../../../constant';
 
 interface FormValues {
 	mainImage?: Image;
@@ -62,17 +63,7 @@ const PortfolioEditPage = () => {
 	const { portfolioId } = useParams() as { portfolioId: string }; // undefined 인 경우(생성하는 경우) 로직 필요
 	const navigate = useNavigate();
 
-	const {
-		data: portfolio,
-		isSuccess: isSuccessReadPortfolio,
-		isLoading,
-	} = useReadPortfolio(portfolioId);
-	// 작성자가 아닌 경우, 편집 방지(상세페이지로 이동)
-	// useEffect(() => {
-	// 	if (isSuccessReadPortfolio) {
-	// 		portfolioId && !portfolio?.isWriter && navigate(`/portfolio/${portfolioId}`);
-	// 	}
-	// }, [isSuccessReadPortfolio]);
+	const { data: portfolio, isSuccess: isSuccessReadPortfolio } = useReadPortfolio(portfolioId);
 
 	const { register, formState, handleSubmit, control, watch, getValues, setValue } =
 		useForm<FormValues>({
@@ -271,7 +262,7 @@ const PortfolioEditPage = () => {
 		if (isSuccessReadPortfolio) {
 			setProceedType(portfolio?.proceedType);
 			setSkillList(portfolio?.skills ? portfolio?.skills : []);
-			setValue('content', portfolio?.content);
+			setValue('content', portfolio?.content ?? PORTFOLIO_EDITOR_TEMPLATE);
 		}
 	}, [isSuccessReadPortfolio]);
 
@@ -487,7 +478,7 @@ const PortfolioEditPage = () => {
 											if (quillRef) quillRef.current = e;
 										}}
 										value={watch('content')}
-										defaultValue={portfolio?.content}
+										defaultValue={portfolio?.content ?? PORTFOLIO_EDITOR_TEMPLATE}
 										onChange={handleChangeEditor}
 										modules={modules}
 										formats={formats}
@@ -541,7 +532,6 @@ const PortfolioEditPage = () => {
 					<PortfolioModal formState={formState} handleClick={() => setRequiredAlertOpen(false)} />
 				</ModalPortal>
 			)}
-			<DevTool control={control} />
 		</>
 	);
 };

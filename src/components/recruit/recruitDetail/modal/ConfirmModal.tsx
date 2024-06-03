@@ -75,7 +75,7 @@ const ConfirmModal = () => {
 							<span>입학년도</span>
 						</section>
 						<section>
-							<span className='value'>{userInfo.score}</span>
+							<span className='value'>{userInfo.score === 0 ? '-' : userInfo.score}</span>
 							<span className='value'>{userInfo.year}</span>
 						</section>
 					</section>
