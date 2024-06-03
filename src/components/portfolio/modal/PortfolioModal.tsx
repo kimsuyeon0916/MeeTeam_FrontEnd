@@ -32,34 +32,28 @@ const PortfolioModal = ({ formState, handleClick }: PortfolioModal) => {
 					아래 미작성된 항목을 입력해 포트폴리오 작성을 완료해주세요
 				</S.PortfolioModalContent>
 				<S.PortfolioContentList>
-					<S.PortfolioContentItem>
-						{formState?.errors['mainImage'] && (
-							<>
-								<S.PortfolioContentItemTitle>슬라이드</S.PortfolioContentItemTitle>
-								<S.PortfolioContentItemInfo>최소 1장의 이미지</S.PortfolioContentItemInfo>
-							</>
-						)}
-					</S.PortfolioContentItem>
-					<S.PortfolioContentItem>
-						{defaultInformationErrorList.includes(true) && (
-							<>
-								<S.PortfolioContentItemTitle>기본정보</S.PortfolioContentItemTitle>
-								<S.PortfolioContentItemInfo>
-									{defaultInformationErrorMessageList.map(message => (
-										<span key={message}>{message}</span>
-									))}
-								</S.PortfolioContentItemInfo>
-							</>
-						)}
-					</S.PortfolioContentItem>
-					<S.PortfolioContentItem>
-						{formState?.errors['content'] && (
-							<>
-								<S.PortfolioContentItemTitle>상세내용</S.PortfolioContentItemTitle>
-								<S.PortfolioContentItemInfo>내용 미입력</S.PortfolioContentItemInfo>
-							</>
-						)}
-					</S.PortfolioContentItem>
+					{formState?.errors['mainImage'] && (
+						<S.PortfolioContentItem>
+							<S.PortfolioContentItemTitle>슬라이드</S.PortfolioContentItemTitle>
+							<S.PortfolioContentItemInfo>최소 1장의 이미지</S.PortfolioContentItemInfo>
+						</S.PortfolioContentItem>
+					)}
+					{defaultInformationErrorList.includes(true) && (
+						<S.PortfolioContentItem>
+							<S.PortfolioContentItemTitle>기본정보</S.PortfolioContentItemTitle>
+							<S.PortfolioContentItemInfo>
+								{defaultInformationErrorMessageList.map(message => (
+									<span key={message}>{message}</span>
+								))}
+							</S.PortfolioContentItemInfo>
+						</S.PortfolioContentItem>
+					)}
+					{formState?.errors['content'] && (
+						<S.PortfolioContentItem>
+							<S.PortfolioContentItemTitle>상세내용</S.PortfolioContentItemTitle>
+							<S.PortfolioContentItemInfo>내용 미입력</S.PortfolioContentItemInfo>
+						</S.PortfolioContentItem>
+					)}
 				</S.PortfolioContentList>
 				<div>
 					<PrimaryBtn type='button' title='확인' handleClick={handleClick} />
