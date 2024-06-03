@@ -5,7 +5,7 @@ import { DropdownArrow, Logo, LogoName } from '../../assets';
 import { ProfileImage, WaitModal } from '..';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { recruitFilterState, userState, waitModalState, loginState } from '../../atom';
-import { useSignOut } from '../../hooks';
+import { useSignOut, useLogin } from '../../hooks';
 import { fixModalBackground, resetFormData } from '../../utils';
 import { useQuery } from '@tanstack/react-query';
 import { readProfileImage } from '../../service';
@@ -14,7 +14,8 @@ const Header = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const location = useLocation();
-	const [isLogin, setLoginState] = useRecoilState(loginState);
+	const { isLogin } = useLogin();
+	const setLoginState = useSetRecoilState(loginState);
 	const [userInfo, setUserState] = useRecoilState(userState);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
 	const [openDrop, setOpenDrop] = useState<boolean>(false);
