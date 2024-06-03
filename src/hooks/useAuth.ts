@@ -44,11 +44,11 @@ export const useCheckExist = ({ onSuccess, setUserState, setLoginState }: AuthPr
 					imageUrl: data.imageUrl,
 					university: data.university,
 				});
+				setLoginState?.(true);
 			}
 			if (data?.platformId) {
 				secureLocalStorage.setItem(PLATFORM_ID, data.platformId);
 			}
-			setLoginState?.(true);
 			onSuccess?.();
 		},
 	});
