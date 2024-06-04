@@ -47,7 +47,6 @@ const Input = <T extends FieldValues>({
 	icon,
 	inputRef,
 	handleInputClick,
-	handleKeyDown,
 	...props
 }: Input<T>) => {
 	const errorResult =
@@ -66,6 +65,10 @@ const Input = <T extends FieldValues>({
 
 	const { ref, ...rest } = register(name as Path<T>, validation?.disabled ? undefined : validation);
 
+	const checkEnterKeyDown = (e: React.KeyboardEvent) => {
+		if (e.key === 'Enter') e.preventDefault();
+	};
+
 	return (
 		<S.InputLayout $width={width}>
 			{label && (
@@ -83,7 +86,7 @@ const Input = <T extends FieldValues>({
 						if (inputRef) inputRef.current = e;
 					}}
 					onClick={handleInputClick}
-					onKeyDown={handleKeyDown}
+					onKeyDown={e => checkEnterKeyDown(e)}
 				/>
 				<S.InputErrorMessage invalid={inputError}>{inputErrorMessage}</S.InputErrorMessage>
 				{props?.maxLength && (
