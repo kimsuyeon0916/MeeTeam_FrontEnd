@@ -659,7 +659,7 @@ const ProfileEditPage = () => {
 						handleClick={() => navigate(`/profile/${userId}`)}
 					/>
 					<PrimaryBtn
-						type='submit'
+						type='button'
 						title='저장'
 						disabled={getFieldState('nickname').invalid || duplicated || isSubmitting}
 					/>
