@@ -1,5 +1,5 @@
 import { EndPoint, axiosAuthInstance } from '..';
-import { User, UpdateProfilePayload } from '../../types';
+import { User, UpdateProfilePayload, UserReponse } from '../../types';
 
 export const readProfile = async (userId: string) => {
 	try {
@@ -27,7 +27,7 @@ export const updateProfile = async (profile: UpdateProfilePayload) => {
 
 export const readProfileImage = async () => {
 	try {
-		const response = await axiosAuthInstance.get<{ imageUrl: string }>(EndPoint.PROFILE.image);
+		const response = await axiosAuthInstance.get<UserReponse>(EndPoint.PROFILE.image);
 
 		return response;
 	} catch (error) {
