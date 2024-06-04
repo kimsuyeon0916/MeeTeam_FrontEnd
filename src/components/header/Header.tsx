@@ -5,10 +5,8 @@ import { DropdownArrow, Logo, LogoName } from '../../assets';
 import { ProfileImage, WaitModal } from '..';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { recruitFilterState, userState, waitModalState, loginState } from '../../atom';
-import { useSignOut, useLogin } from '../../hooks';
+import { useSignOut, useLogin, useReadProfileImage } from '../../hooks';
 import { fixModalBackground, resetFormData } from '../../utils';
-import { useQuery } from '@tanstack/react-query';
-import { readProfileImage } from '../../service';
 
 const Header = () => {
 	const navigate = useNavigate();
@@ -27,13 +25,7 @@ const Header = () => {
 		inform: false,
 	});
 	const { mutate: signOut } = useSignOut({ setUserState, setLoginState });
-	const { data: user } = useQuery({
-		queryKey: ['user'],
-		queryFn: () => readProfileImage(),
-		enabled: isLogin,
-		gcTime: Infinity,
-		staleTime: Infinity,
-	});
+	const { data: profileImage } = useReadProfileImage(isLogin);
 
 	const goRecruit = () => {
 		navigate('/');
@@ -126,7 +118,7 @@ const Header = () => {
 								{isLogin ? (
 									<article className='icon-container'>
 										<div className='icon-border'>
-											<ProfileImage url={user?.imageUrl} size='3rem' />
+											<ProfileImage url={profileImage?.imageUrl} size='3rem' />
 										</div>
 										<img src={DropdownArrow} />
 									</article>

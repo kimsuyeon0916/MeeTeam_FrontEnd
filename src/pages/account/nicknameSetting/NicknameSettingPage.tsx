@@ -17,7 +17,7 @@ const NicknameSettingPage = () => {
 
 	const navigate = useNavigate();
 
-	const { register, handleSubmit, watch, formState, control } = useForm<FormValues>({
+	const { register, handleSubmit, watch, formState } = useForm<FormValues>({
 		mode: 'onChange',
 	});
 	const { isDirty, isValid } = formState;
