@@ -1,8 +1,9 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { readProfile, updateProfile } from '../service';
+import { readProfile, updateProfile, readProfileImage } from '../service';
 
 const profileKeys = {
 	readProfile: (userId: string) => ['readProfile', userId],
+	readProfileImage: ['readProfileImage'] as const,
 };
 
 /**
@@ -33,8 +34,22 @@ export const useUpdateProfile = ({
 				await queryClient.invalidateQueries({ queryKey: profileKeys.readProfile(userId) });
 				queryClient.invalidateQueries({ queryKey: ['readInfinitePortfolioList', 12] });
 				queryClient.invalidateQueries({ queryKey: ['readPaginationPortfolioList', 16] });
+				queryClient.invalidateQueries({ queryKey: profileKeys.readProfileImage });
 				onSuccess?.(data);
 			}
 		},
+	});
+};
+
+/**
+ * @description 유저 프로필 이미지 조회 API를 호출하는 hook입니다.
+ */
+export const useReadProfileImage = (isLogin: boolean) => {
+	return useQuery({
+		queryKey: profileKeys.readProfileImage,
+		queryFn: () => readProfileImage(),
+		enabled: isLogin,
+		gcTime: Infinity,
+		staleTime: Infinity,
 	});
 };
