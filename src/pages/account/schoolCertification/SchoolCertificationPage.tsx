@@ -10,7 +10,6 @@ import {
 } from '../../../hooks';
 import { ComboBox } from '../../../components';
 import { useForm, SubmitHandler, Path } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
 import { Department } from '../../../types';
 import secureLocalStorage from 'react-secure-storage';
 
@@ -186,7 +185,6 @@ const SchoolCertificationPage = () => {
 					/>
 				</div>
 			</S.SchoolCertificationPageForm>
-			<DevTool control={control} />
 		</S.SchoolCertificationLayout>
 	);
 };

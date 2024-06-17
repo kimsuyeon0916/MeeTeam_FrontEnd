@@ -93,13 +93,42 @@ const PortfolioImageUpload = ({
 	const changeImageList = (event: React.BaseSyntheticEvent) => {
 		const imageList = event.target?.files;
 		for (let i = 0; i < imageList.length && uploadImageList.length + i < MAX_IMAGE_COUNT; i++) {
+			if (imageList[i].size > MAX_IMAGE_SIZE_BYTES) {
+				continue;
+			}
 			if (
 				uploadImageList.find(image => image.fileName === imageList[i].name) ||
 				[...imageList].find((image, index) => index !== i && image.name === imageList[i].name)
 			) {
-				continue;
-			}
-			if (imageList[i].size > MAX_IMAGE_SIZE_BYTES) {
+				let uniqueFileName = imageList[i].name;
+				let idx = 1;
+				while (
+					uploadImageList.find(image => image.fileName === uniqueFileName) ||
+					[...imageList].find((image, index) => index !== i && image.name === uniqueFileName)
+				) {
+					const { fileNameWithoutExt, fileExt } = splitExt(imageList[i].name);
+					uniqueFileName = `${fileNameWithoutExt}(${idx})${fileExt}`;
+					idx++;
+				}
+
+				const newFile = new File([imageList[i]], uniqueFileName, { type: imageList[i].type });
+				const urlReader = new FileReader();
+				urlReader.readAsDataURL(newFile);
+				urlReader.onload = () => {
+					const uploadImage = {
+						fileName: newFile.name,
+						url: urlReader.result,
+						file: newFile,
+					} as Image;
+					setUploadImageList(prev => [...prev, uploadImage]);
+					i === 0 &&
+						uploadImageList.length === 0 &&
+						setValue('mainImage', uploadImage, {
+							shouldValidate: true,
+							shouldDirty: true,
+							shouldTouch: true,
+						});
+				};
 				continue;
 			}
 
@@ -121,6 +150,15 @@ const PortfolioImageUpload = ({
 					});
 			};
 		}
+	};
+
+	const splitExt = (fileName: string) => {
+		const lastDotIndex = fileName.lastIndexOf('.');
+
+		const fileNameWithoutExt = lastDotIndex !== -1 ? fileName.substring(0, lastDotIndex) : fileName;
+		const fileExt = lastDotIndex !== -1 ? fileName.substring(lastDotIndex) : '';
+
+		return { fileNameWithoutExt, fileExt };
 	};
 
 	return (

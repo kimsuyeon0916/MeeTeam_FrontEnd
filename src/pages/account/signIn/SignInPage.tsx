@@ -56,13 +56,6 @@ const SignInPage = () => {
 				<div>
 					<NaverLogin />
 				</div>
-				<div className='sign-in_tos'>
-					<small>
-						소셜 계정 로그인으로 가입 시{' '}
-						<span className='sign-in_tos-marker'>이용약관, 개인정보처리방침, 전자금융거래약관</span>
-						에 동의함으로 처리됩니다
-					</small>
-				</div>
 			</article>
 		</S.SignInPageLayout>
 	);

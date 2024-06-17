@@ -4,9 +4,8 @@ import { SIGN_UP_DATA } from '../signUp/SignUpData';
 import { useNavigate } from 'react-router-dom';
 import { useNaverSignUp, useCheckDuplicateNickname, useDebounce } from '../../../hooks';
 import { useSetRecoilState } from 'recoil';
-import { userState } from '../../../atom';
+import { userState, loginState } from '../../../atom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
 import { Input, PrimaryBtn } from '../../../components';
 
 interface FormValues {
@@ -18,12 +17,13 @@ const NicknameSettingPage = () => {
 
 	const navigate = useNavigate();
 
-	const { register, handleSubmit, watch, formState, control } = useForm<FormValues>({
+	const { register, handleSubmit, watch, formState } = useForm<FormValues>({
 		mode: 'onChange',
 	});
 	const { isDirty, isValid } = formState;
 
 	const setUserState = useSetRecoilState(userState);
+	const setLoginState = useSetRecoilState(loginState);
 
 	const checkNaverSignUpInSuccess = () => {
 		navigate('/signup/complete', { replace: true });
@@ -31,7 +31,11 @@ const NicknameSettingPage = () => {
 		localStorage.removeItem('submitEmailState');
 	};
 
-	const { mutate } = useNaverSignUp({ onSuccess: checkNaverSignUpInSuccess, setUserState });
+	const { mutate } = useNaverSignUp({
+		onSuccess: checkNaverSignUpInSuccess,
+		setUserState,
+		setLoginState,
+	});
 
 	const naverSignUpHandler: SubmitHandler<FormValues> = data => {
 		const urlParams = new URLSearchParams(window.location.search);
@@ -84,7 +88,6 @@ const NicknameSettingPage = () => {
 					<PrimaryBtn title='확인' type='submit' disabled={!isValid || duplicated} />
 				</div>
 			</S.NicknameSettingPageForm>
-			<DevTool control={control} />
 		</S.NicknameSettingPageLayout>
 	);
 };

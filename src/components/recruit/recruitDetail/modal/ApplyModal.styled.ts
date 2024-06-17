@@ -72,17 +72,36 @@ const Modal = styled.section<Modal>`
 			padding: 0;
 			gap: 0.6rem;
 
-			input {
+			input[type='checkbox'] {
 				margin: 0;
 				padding: 0;
+				width: 2rem;
+				height: 2rem;
+				cursor: pointer;
+				border: 1px solid #d3d3d3;
+				border-radius: 0.4rem;
+				appearance: none;
+
+				&:checked {
+					background-color: #5877fc;
+					border: 1px solid #5877fc;
+					background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+					background-size: 100% 100%;
+					background-position: 50%;
+					background-repeat: no-repeat;
+				}
 			}
 
-			label {
+			.agreement-word {
 				color: #373f41;
 				font-size: 1.4rem;
 				margin-top: 0.2rem;
 			}
 		}
+	}
+
+	.writing {
+		margin-bottom: 0.2rem;
 	}
 
 	.container-user__info {
@@ -93,6 +112,16 @@ const Modal = styled.section<Modal>`
 		margin-top: 2.7rem;
 		padding: 1.8rem 2rem;
 		box-sizing: border-box;
+
+		.container-subtitle {
+			display: flex;
+			gap: 1.25rem;
+			align-items: flex-end;
+		}
+
+		.highlighted {
+			color: #5877fc;
+		}
 
 		.confirm-title {
 			font-size: 1.8rem;
@@ -195,6 +224,10 @@ const Modal = styled.section<Modal>`
 				background: #fff;
 				z-index: 601;
 				box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+
+				li {
+					cursor: pointer;
+				}
 			}
 
 			img {
@@ -312,25 +345,35 @@ const FinalModal = styled.section`
 		letter-spacing: -0.036rem;
 	}
 
+	.btn-txt-big {
+		color: #373f41;
+		font-family: Pretendard;
+		font-size: 1.6rem;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 1.9rem;
+		letter-spacing: 0.0032rem;
+	}
+
 	.description {
 		display: flex;
 		flex-direction: column;
 		margin-top: 1.6rem;
 
-		span:nth-child(1) {
+		h4 {
 			color: #151515;
 			font-size: 1.8rem;
 			font-weight: 600;
 			line-height: 1.8rem;
 			letter-spacing: 0.0027rem;
 		}
-		span:nth-child(2) {
+
+		.darker {
 			color: #373f41;
-			font-size: 1.4rem;
-			font-weight: 400;
-			line-height: 1.8rem;
-			letter-spacing: 0.0021rem;
-			margin-top: 0.7rem;
+			margin-top: 0.8rem;
+		}
+		span:nth-child(1) {
+			margin-top: 0.8rem;
 		}
 
 		.agreement {
@@ -351,6 +394,7 @@ const FinalModal = styled.section`
 		display: flex;
 		justify-content: flex-end;
 		margin-top: 6.2rem;
+		gap: 1.6rem;
 
 		button {
 			display: flex;
@@ -359,8 +403,16 @@ const FinalModal = styled.section`
 			justify-content: center;
 			align-items: center;
 			gap: 0.75rem;
-			flex-shrink: 0;
 			border-radius: 0.6rem;
+		}
+
+		.cancel {
+			background-color: #fff;
+			color: #373f41;
+			border: 0.1rem solid #e3e3e3;
+		}
+
+		.btn-profile {
 			background-color: #5877fc;
 			color: #fff;
 		}

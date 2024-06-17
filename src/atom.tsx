@@ -170,6 +170,11 @@ export const applyStepState = atom({
 	default: 0,
 });
 
+export const goProfileState = atom({
+	key: 'goProfileState',
+	default: false,
+});
+
 export const applyUserInfo = atom<ApplyRole>({
 	key: 'applyUserInfo',
 	default: {

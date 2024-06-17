@@ -3,6 +3,7 @@ const REGEXP = {
 	phone: /^\d{3}-\d{4}-\d{4}$/,
 	email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
 	gpa: /^[0-9]+(\.[0-9]+)?$/,
+	url: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#()?&/=]*)/,
 };
 
 export const INPUT_VALIDATION = {
@@ -105,6 +106,10 @@ export const INPUT_VALIDATION = {
 	},
 	url: {
 		required: 'url을 입력해주세요',
+		pattern: {
+			value: REGEXP.url,
+			message: 'url 형식에 맞게 입력해주세요',
+		},
 	},
 };
 

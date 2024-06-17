@@ -5,8 +5,8 @@ import { DefaultBtn, PrimaryBtn } from '../index';
 interface Modal {
 	title: string;
 	content: string;
-	defaultBtn: Button;
 	primaryBtn: Button;
+	defaultBtn?: Button;
 }
 
 interface Button {
@@ -21,9 +21,11 @@ const Modal = ({ title, content, defaultBtn, primaryBtn }: Modal) => {
 				<S.ModalTitle>{title}</S.ModalTitle>
 				<S.ModalContent>{content}</S.ModalContent>
 				<S.ModalRow $gap='1.6rem'>
-					<div>
-						<DefaultBtn type='button' {...defaultBtn} />
-					</div>
+					{defaultBtn && (
+						<div>
+							<DefaultBtn type='button' {...defaultBtn} />
+						</div>
+					)}
 					<div>
 						<PrimaryBtn type='button' {...primaryBtn} />
 					</div>
