@@ -96,16 +96,23 @@ export default function useValid(data: InputState) {
 	}, [data.content]);
 
 	useEffect(() => {
+		const isRoleValidation = data.recruitmentRoles.some(
+			role => role.roleName === '' || role.count === 0
+		);
+		const roleListLengthValidation =
+			data.recruitmentRoles.length > 0 && data.recruitmentRoles.length < 11;
 		if (data.recruitmentRoles.length === 0) {
 			setValidMessage(prev => ({ ...prev, recruitRole: '역할을 하나 이상 선택해주세요.' }));
+		} else if (isRoleValidation) {
+			setValidMessage(prev => ({ ...prev, recruitRole: '모집하는 역할을 입력해주세요.' }));
 		} else {
 			setValidMessage(prev => ({ ...prev, recruitRole: '' }));
 		}
 		setIsValid(prev => ({
 			...prev,
-			isRole: data.recruitmentRoles.length > 0 && data.recruitmentRoles.length < 11,
+			isRole: !isRoleValidation && roleListLengthValidation,
 		}));
 	}, [data.recruitmentRoles.length]);
 
-	return { validMessage, isValid };
+	return { validMessage, isValid, setValidMessage, setIsValid };
 }

@@ -124,7 +124,7 @@ export const recruitInputState = atom<InputState>({
 			courseTagName: '',
 			courseProfessor: '',
 		},
-		recruitmentRoles: [],
+		recruitmentRoles: [{ roleName: '', roleId: null, count: null, skillIds: [], skills: [] }],
 		tags: [],
 		title: '',
 		content: SAFE_DEFAULT_VALUE,
@@ -142,6 +142,8 @@ export const validMessageState = atom({
 		procedure: '',
 		recruitRole: '',
 		title: '',
+		roleName: '',
+		roleCount: '',
 	},
 });
 
@@ -157,6 +159,9 @@ export const validState = atom({
 		isTitle: false,
 		isContent: false,
 		isRole: false,
+		isRoleSubmitted: false,
+		isRoleName: false,
+		isRoleCount: false,
 	},
 });
 
