@@ -59,6 +59,8 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 			)
 		) {
 			setIsFirstClick(false);
+			setIsValid(prev => ({ ...prev, isRole: false }));
+			setValidMessage(prev => ({ ...prev, recruitRole: '모집하는 역할을 입력해주세요.' }));
 		} else if (info.recruitmentRoles.length === 10) {
 			setWarningModalRoleCountState(true);
 		} else {
@@ -115,7 +117,7 @@ const RecruitRoleForm = ({ applicantsList }: RecruitApplicantsList) => {
 							역할 추가
 						</button>
 					</article>
-					{!isValid.isRole && (
+					{!isValid.isRole && isValid.isSubmitted && (
 						<span className='body2-semibold warning'>{validMessage.recruitRole}</span>
 					)}
 				</section>
