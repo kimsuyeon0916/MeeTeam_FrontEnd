@@ -96,6 +96,11 @@ export default function useValid(data: InputState) {
 	}, [data.content]);
 
 	useEffect(() => {
+		const isRoleValidation = data.recruitmentRoles.some(
+			role => role.roleName === '' || role.count === 0
+		);
+		const roleListLengthValidation =
+			data.recruitmentRoles.length > 0 && data.recruitmentRoles.length < 11;
 		if (data.recruitmentRoles.length === 0) {
 			setValidMessage(prev => ({ ...prev, recruitRole: '역할을 하나 이상 선택해주세요.' }));
 		} else {
@@ -103,7 +108,7 @@ export default function useValid(data: InputState) {
 		}
 		setIsValid(prev => ({
 			...prev,
-			isRole: data.recruitmentRoles.length > 0 && data.recruitmentRoles.length < 11,
+			isRole: !isRoleValidation && roleListLengthValidation,
 		}));
 	}, [data.recruitmentRoles.length]);
 
