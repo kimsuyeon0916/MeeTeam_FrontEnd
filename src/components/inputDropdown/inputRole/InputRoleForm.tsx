@@ -5,11 +5,21 @@ import { useRecoilState } from 'recoil';
 import { isNotNumber } from '../../../utils';
 import { recruitInputState } from '../../../atom';
 import { useDebounce, useValid } from '../../../hooks';
-import { DropdownArrow, Search, XBtn } from '../../../assets';
-import { RoleForPost, InputState, Keyword } from '../../../types';
+import { GrayDelete, SearchIcon, XBtn } from '../../../assets';
+import { RoleForPost, Keyword } from '../../../types';
 import { getRoleKeyword, getSkillKeyword } from '../../../service';
 
-const InputRoleForm = () => {
+interface InputRoleObj {
+	id?: number | null;
+	role?: string;
+	count?: string | number;
+	skills?: Keyword[];
+	onDelete?: (id: number | null) => void;
+}
+
+const InputRoleForm = (props: InputRoleObj) => {
+	const { id, role, count, skills, onDelete } = props;
+	const containerRef = useRef<HTMLDivElement>(null);
 	const [tagItem, setTagItem] = useState<string>('');
 	const [info, setInfos] = useRecoilState(recruitInputState);
 	const [dropdown, setDropdown] = useState({
@@ -17,13 +27,12 @@ const InputRoleForm = () => {
 		skill: false,
 	});
 	const [roleData, setRoleData] = useState<RoleForPost>({
-		roleId: null,
-		count: null,
-		skillIds: [],
-		roleName: '',
-		skills: [],
+		roleId: id ? id : null,
+		count: count ? count : null,
+		skillIds: skills ? skills.map(e => e.id) : [],
+		roleName: role ? role : '',
+		skills: skills ? skills : [],
 	});
-	const { validMessage, isValid } = useValid(info);
 	const [isValidBeforeSubmit, setisValidBeforeSubmit] = useState({
 		role: {
 			valid: false,
@@ -33,21 +42,19 @@ const InputRoleForm = () => {
 			valid: false,
 			message: '',
 		},
-		roleLength: {
-			valid: false,
-			message: '',
-		},
 	});
 
 	const keywordRole = useDebounce(roleData.roleName, 500);
 	const keywordSkill = useDebounce(tagItem, 500);
 	const dropdownRef = useRef<HTMLDivElement | null>(null);
+	const { isValid } = useValid(info);
 
 	const { data: dataRole, isLoading: isLoadingRole } = useQuery({
 		queryKey: ['searchRole', keywordRole],
 		queryFn: () => getRoleKeyword(keywordRole as string),
 		staleTime: Infinity,
 		gcTime: Infinity,
+		enabled: keywordRole !== '',
 	});
 
 	const { data: dataSkill, isLoading: isLoadingSkill } = useQuery({
@@ -55,19 +62,30 @@ const InputRoleForm = () => {
 		queryFn: () => getSkillKeyword(keywordSkill),
 		staleTime: Infinity,
 		gcTime: Infinity,
+		enabled: keywordSkill !== '',
 	});
 
 	const onKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-		const target = event.currentTarget;
-		if (target.value.length !== 0 && event.key === 'Enter') {
-			event.preventDefault();
-		}
 		if (event.key === 'Enter') {
 			event.preventDefault();
 		}
 	};
 
 	const deleteTagItem = (deletedId: number) => {
+		if (id) {
+			setInfos(prev => ({
+				...prev,
+				recruitmentRoles: prev.recruitmentRoles.map(role =>
+					role.roleId === id
+						? {
+								...role,
+								skills: role.skills?.filter(skill => skill.id !== deletedId),
+								skillIds: role.skillIds.filter(id => id !== deletedId),
+						  }
+						: role
+				),
+			}));
+		}
 		setRoleData(prevState => ({
 			...prevState,
 			skills: prevState?.skills?.filter(skill => skill.id !== deletedId),
@@ -75,128 +93,247 @@ const InputRoleForm = () => {
 		}));
 	};
 
-	const handleAddRole = () => {
-		if (
-			roleData.roleId !== null &&
-			roleData.count &&
-			!info.recruitmentRoles.some(obj => obj.roleId === roleData.roleId) &&
-			info.recruitmentRoles.length < 10
-		) {
-			setisValidBeforeSubmit({
-				role: { valid: true, message: '' },
-				count: { valid: true, message: '' },
-				roleLength: { valid: true, message: '' },
-			});
-
-			setInfos((prev: InputState) => ({
-				...prev,
-				recruitmentRoles: [...prev.recruitmentRoles, roleData],
-			}));
-			setRoleData({
-				roleName: '',
-				roleId: null,
-				count: '',
-				skillIds: [],
-				skills: [],
-			});
-			setTagItem('');
-			setDropdown(prev => ({
-				...prev,
-				skill: false,
-			}));
-		} else if (!roleData.roleId && roleData.count) {
-			setisValidBeforeSubmit(prev => ({
-				...prev,
-				role: { valid: false, message: '해당 역할명을 입력해주세요.' },
-				count: { valid: true, message: '' },
-			}));
-		} else if (!roleData.roleId && !roleData.count) {
-			setisValidBeforeSubmit(prev => ({
-				...prev,
-				role: { valid: false, message: '모집하는 역할을 입력해주세요.' },
-				count: { valid: true, message: '' },
-			}));
-		} else if (roleData.roleId && !roleData.count) {
-			setisValidBeforeSubmit(prev => ({
-				...prev,
-				role: { valid: true, message: '' },
-				count: { valid: false, message: '모집 인원 수를 입력해주세요.' },
-			}));
-		} else if (info.recruitmentRoles.length === 10) {
-			setisValidBeforeSubmit(prev => ({
-				...prev,
-				roleLength: { valid: false, message: '최대 10개의 역할을 입력할 수 있습니다.' },
-			}));
-		}
+	const onClickSkillInput = (event: React.MouseEvent<HTMLInputElement>) => {
+		event.stopPropagation();
 	};
+
+	const deleteTagHandler = (event: React.MouseEvent<HTMLButtonElement>, deleteId: number) => {
+		event.stopPropagation();
+		deleteTagItem(deleteId);
+	};
+
 	const onChangeRole = (event: React.ChangeEvent<HTMLInputElement>) => {
 		event.preventDefault();
 		setRoleData(prev => ({
 			...prev,
 			roleName: event.target.value,
+			count: prev.count,
+		}));
+		if (event.target.value === '') {
+			setRoleData(prev => ({
+				...prev,
+				roleName: '',
+				count: null,
+			}));
+			setInfos(prev => ({
+				...prev,
+				recruitmentRoles: prev.recruitmentRoles.map(role =>
+					role.roleId === id
+						? {
+								...role,
+								roleName: event.target.value,
+						  }
+						: role
+				),
+			}));
+		}
+		setDropdown(prev => ({ ...prev, role: true }));
+	};
+	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
+		event.preventDefault();
+		let countValue = event.target.value;
+
+		if (!isNotNumber(countValue)) {
+			countValue = countValue.replace(/\D/g, '');
+		}
+
+		if (id) {
+			setRoleData(prev => {
+				const updatedRoleData = { ...prev, count: countValue };
+				setInfos(prevInfos => ({
+					...prevInfos,
+					recruitmentRoles: prevInfos.recruitmentRoles.map(role =>
+						role.roleId === updatedRoleData.roleId
+							? { ...role, count: Number(updatedRoleData.count) }
+							: role
+					),
+				}));
+				return updatedRoleData;
+			});
+		} else {
+			setInfos(prev => {
+				const recruitmentRoles = prev.recruitmentRoles.map(role => {
+					if (role.roleId === null) {
+						return { ...role, count: Number(countValue) };
+					}
+					return role;
+				});
+
+				return { ...prev, recruitmentRoles };
+			});
+			setRoleData(prev => ({ ...prev, count: countValue }));
+		}
+		setisValidBeforeSubmit(prev => ({
+			...prev,
+			count: { valid: roleData.count !== null && roleData.count !== 0, message: '' },
 		}));
 	};
 
-	const onChangeCount = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const countValue = event.target.value;
-
-		if (countValue.length) {
-			setisValidBeforeSubmit(prev => ({
-				...prev,
-				count: { valid: true, message: '' },
-			}));
-		}
-
-		if (isNotNumber(countValue)) {
-			setRoleData(prev => ({
-				...prev,
-				count: Number(countValue),
-			}));
-		} else {
-			setRoleData(prev => ({ ...prev, count: Number(countValue.replace(/\D/g, '')) }));
-		}
-	};
-
 	const onChangeKeyword = (event: React.ChangeEvent<HTMLInputElement>) => {
+		event.preventDefault();
 		setTagItem(event.target.value);
+		setDropdown(prev => ({ ...prev, skill: true }));
 	};
 
 	const onClickRole = (event: React.MouseEvent<HTMLSpanElement>) => {
 		const { innerText } = event.target as HTMLElement;
 		const target = event.target as HTMLElement;
-		setDropdown(prev => ({
-			...prev,
-			role: false,
-		}));
-		setRoleData(prev => ({
-			...prev,
-			roleId: Number(target.id),
-			roleName: innerText,
-		}));
-		setisValidBeforeSubmit(prev => ({
-			...prev,
-			role: { valid: true, message: '' },
-		}));
+		const roleExists = info.recruitmentRoles.some(r => r.roleName === innerText);
+
+		if (!roleExists) {
+			if (id) {
+				setRoleData(prev => ({
+					...prev,
+					roleName: innerText,
+					roleId: Number(target.id),
+				}));
+				setInfos(prev => ({
+					...prev,
+					recruitmentRoles: prev.recruitmentRoles.map(role =>
+						role.roleId === id ? { ...role, roleName: innerText, roleId: Number(target.id) } : role
+					),
+				}));
+				setDropdown(prev => ({ ...prev, role: false }));
+			} else {
+				setInfos(prev => {
+					const recruitmentRoles = prev.recruitmentRoles.map(role => {
+						if (role.roleId === null) {
+							return { ...role, roleName: innerText, roleId: Number(target.id) };
+						}
+
+						return role;
+					});
+
+					return { ...prev, recruitmentRoles };
+				});
+			}
+		}
 	};
 
 	const onClickSkill = (event: React.MouseEvent<HTMLSpanElement>) => {
+		event.stopPropagation();
 		const { innerText } = event.target as HTMLElement;
 		const target = event.target as HTMLElement;
-		if (!roleData.skills?.map(e => e.name).includes(innerText) && roleData.skillIds.length < 5) {
-			setRoleData(prev => ({
-				...prev,
-				skillIds: [...prev.skillIds, Number(target.id)],
-				skills: [...(prev.skills as any), { id: Number(target.id), name: innerText }],
-			}));
+		if (
+			id &&
+			!roleData.skills?.map(e => e.name).includes(innerText) &&
+			roleData.skillIds.length < 5
+		) {
+			setRoleData(prev => {
+				const updatedRoleData = {
+					...prev,
+					skillIds: [...prev.skillIds, Number(target.id)],
+					skills: [...(prev.skills as any), { id: Number(target.id), name: innerText }],
+				};
+
+				setInfos(prevInfos => ({
+					...prevInfos,
+					recruitmentRoles: prevInfos.recruitmentRoles.map(role =>
+						role.roleId === updatedRoleData.roleId
+							? {
+									...role,
+									skills: [
+										...(role.skills?.some(skill => skill.id === Number(target.id))
+											? role.skills
+											: [...(role.skills || []), { id: Number(target.id), name: innerText }]),
+									],
+									skillIds: [
+										...role.skillIds,
+										...(role.skillIds.includes(Number(target.id)) ? [] : [Number(target.id)]),
+									],
+							  }
+							: role
+					),
+				}));
+
+				return updatedRoleData;
+			});
+
 			setTagItem('');
+		} else {
+			if (!roleData.skills?.map(e => e.name).includes(innerText) && roleData.skillIds.length < 5) {
+				setRoleData(prev => {
+					const updatedRoleData = {
+						...prev,
+						skillIds: [...prev.skillIds, Number(target.id)],
+						skills: [...(prev.skills || []), { id: Number(target.id), name: innerText }],
+					};
+
+					setInfos(prevInfos => ({
+						...prevInfos,
+						recruitmentRoles: prevInfos.recruitmentRoles.map(role =>
+							role.roleId === updatedRoleData.roleId || role.roleId === null
+								? {
+										...role,
+										skills: [
+											...(role.skills?.some(skill => skill.id === Number(target.id))
+												? role.skills
+												: [...(role.skills || []), { id: Number(target.id), name: innerText }]),
+										],
+										skillIds: [
+											...role.skillIds,
+											...(role.skillIds.includes(Number(target.id)) ? [] : [Number(target.id)]),
+										],
+								  }
+								: role
+						),
+					}));
+
+					return updatedRoleData;
+				});
+				setTagItem('');
+			}
+		}
+	};
+
+	const skillInputHandler = (event: React.MouseEvent<HTMLDivElement>) => {
+		event.stopPropagation();
+		setDropdown(prev => ({
+			...prev,
+			skill: !prev.skill,
+		}));
+	};
+
+	const applyEllipsis = (container: HTMLDivElement) => {
+		const children = Array.from(container.children) as HTMLDivElement[];
+		let totalWidth = 0;
+		const containerWidth = container.clientWidth;
+
+		children.forEach(child => {
+			totalWidth += child.offsetWidth;
+			if (totalWidth > containerWidth) {
+				child.style.display = 'none';
+			} else {
+				child.style.display = '';
+			}
+		});
+
+		const existingEllipsis = container.querySelector('.ellipsis');
+		if (existingEllipsis) {
+			existingEllipsis.remove();
+		}
+
+		if (totalWidth > containerWidth) {
+			const ellipsis = document.createElement('div');
+			ellipsis.classList.add('ellipsis');
+			ellipsis.innerText = '...';
+			container.appendChild(ellipsis);
+		}
+	};
+
+	const deleteRoleHandler = () => {
+		if (id && onDelete) {
+			onDelete(id);
+		} else if (onDelete) {
+			onDelete(null);
 		}
 	};
 
 	useEffect(() => {
-		if (info.recruitmentRoles.length < 10) {
-			setisValidBeforeSubmit(prev => ({ ...prev, roleLength: { valid: true, message: '' } }));
+		if (containerRef.current) {
+			applyEllipsis(containerRef.current);
 		}
-	}, [info.recruitmentRoles.length]);
+	}, [dropdown.skill, roleData.skills]);
 
 	useEffect(() => {
 		const outsideClick = (event: MouseEvent) => {
@@ -220,68 +357,124 @@ const InputRoleForm = () => {
 		};
 	}, [dropdownRef.current, dropdown.role, dropdown.skill]);
 
+	useEffect(() => {
+		if (isValid.isRoleSubmitted) {
+			if (roleData.roleName === '') {
+				setisValidBeforeSubmit(prev => ({
+					...prev,
+					role: {
+						valid: roleData.roleName !== '',
+						message: roleData.roleName !== '' ? '' : '역할을 입력해주세요.',
+					},
+				}));
+			} else if (roleData.count === null || roleData.count === 0) {
+				setisValidBeforeSubmit(prev => ({
+					...prev,
+					count: {
+						valid: roleData.count !== null && roleData.count !== 0,
+						message: roleData.count !== null && roleData.count !== 0 ? '' : '인원을 입력해주세요.',
+					},
+				}));
+			}
+		}
+	}, [isValid.isRoleSubmitted, roleData.roleName, roleData.count]);
+
 	return (
 		<S.InputRoleForm
 			$isRoleClicked={dropdown.role}
 			$isSkillClicked={dropdown.skill}
 			$isRoleName={roleData.roleName !== ''}
 			$isCount={roleData.count !== null}
+			$isTagItem={tagItem !== ''}
 		>
-			<article className='inputs' ref={dropdownRef}>
-				<section className='inputs-top'>
-					<section className='container-role__input'>
-						<input
-							className='role-input body1-medium'
-							type='text'
-							placeholder='역할'
-							value={roleData.roleName}
-							onChange={onChangeRole}
-							onClick={() => setDropdown(prev => ({ ...prev, role: true }))}
-						/>
-						{dropdown.role && (
-							<section className='dropdown'>
-								{!isLoadingRole &&
-									dataRole?.map((keyword: any) => (
-										<span key={keyword.id} onClick={onClickRole} id={keyword.id} className='option'>
-											{keyword.name}
-										</span>
-									))}
-							</section>
-						)}
-						<img src={DropdownArrow} />
-					</section>
-					{!isValidBeforeSubmit.role.valid && (
+			<article className='wrapper' ref={dropdownRef}>
+				<section className='wrapper-role container-input'>
+					<input
+						type='text'
+						placeholder='역할을 검색하세요.'
+						className='body1-medium input-element'
+						value={roleData.roleName}
+						onChange={onChangeRole}
+						onKeyDown={onKeyPress}
+					/>
+					{dropdown.role && (
+						<section className='dropdown'>
+							{!isLoadingRole &&
+								dataRole?.map((keyword: any) => (
+									<span key={keyword.id} onClick={onClickRole} id={keyword.id} className='option'>
+										{keyword.name}
+									</span>
+								))}
+						</section>
+					)}
+					{isValid.isRoleSubmitted && !isValidBeforeSubmit.role.valid && (
 						<p className='valid-message__role txt4'>{isValidBeforeSubmit.role.message}</p>
 					)}
-					{isValid.isSubmitted && !isValid.isRole && (
-						<p className='valid-message__role txt4'>{validMessage.recruitRole}</p>
-					)}
+					<img className='icon-search role-search' src={SearchIcon} />
+				</section>
+				<section className='wrapper-count container-input'>
 					<input
-						className='count-input body1-medium'
 						type='text'
 						placeholder='인원'
-						value={roleData.count?.toString()}
+						className='body1-medium input-element'
 						onChange={onChangeCount}
+						onKeyDown={onKeyPress}
+						value={roleData.count?.toString()}
 					/>
-					{!isValidBeforeSubmit.count.valid && (
+					{isValid.isRoleSubmitted && !isValidBeforeSubmit.count.valid && (
 						<p className='valid-message__count txt4'>{isValidBeforeSubmit.count.message}</p>
 					)}
 				</section>
-				<section className='inputs-bottom'>
-					<section
-						className='container-skills'
-						onClick={() => setDropdown(prev => ({ ...prev, skill: true }))}
-					>
+				<section className='wrapper-skill container-input' onClick={skillInputHandler}>
+					{!dropdown.skill &&
+						(!id ? (
+							<section className='container-selected__skills outside' ref={containerRef}>
+								{roleData.skills &&
+									roleData.skills.map((tagItem: Keyword) => {
+										return (
+											<article className='tags' key={tagItem.id}>
+												<span className='txt2'>{tagItem.name}</span>
+												<button
+													type='button'
+													onClick={event => deleteTagHandler(event, tagItem.id)}
+													className='btn-delete__tag'
+												>
+													<img src={XBtn} />
+												</button>
+											</article>
+										);
+									})}
+							</section>
+						) : (
+							<section className='container-selected__skills outside' ref={containerRef}>
+								{roleData.skills &&
+									roleData.skills.map((tagItem: Keyword) => {
+										return (
+											<article className='tags' key={tagItem.id}>
+												<span className='txt2'>{tagItem.name}</span>
+												<button
+													type='button'
+													onClick={event => deleteTagHandler(event, tagItem.id)}
+													className='btn-delete__tag'
+												>
+													<img src={XBtn} />
+												</button>
+											</article>
+										);
+									})}
+							</section>
+						))}
+					{(dropdown.skill || roleData.skills?.length === 0) && (
 						<input
 							type='text'
-							className='skills-input body1-medium'
-							placeholder={'스킬을 검색해주세요.'}
-							value={tagItem}
+							placeholder='스킬을 검색하세요. 최대 5개의 스킬을 입력할 수 있습니다.'
+							className='body1-medium input-element'
 							onChange={onChangeKeyword}
-							onKeyPress={onKeyPress}
+							onKeyDown={onKeyPress}
+							value={tagItem}
+							onClick={onClickSkillInput}
 						/>
-						<img src={Search} className='icon-search' />
-					</section>
+					)}
 					{dropdown.skill && (
 						<section className='dropdown-skill'>
 							<section className='list-skill'>
@@ -305,16 +498,32 @@ const InputRoleForm = () => {
 							<hr />
 							<section className='list-selected'>
 								<section className='wrapper-selected__skills'>
-									<span className='body1-medium'>보유 스킬</span>
+									<span className='body1-medium subtitle'>보유 스킬</span>
 									<section className='container-selected__skills'>
-										{roleData.skills &&
+										{!id &&
+											roleData.skills &&
 											roleData.skills.map((tagItem: Keyword) => {
 												return (
 													<article className='tags' key={tagItem.id}>
 														<span className='txt2'>{tagItem.name}</span>
 														<button
 															type='button'
-															onClick={() => deleteTagItem(tagItem.id)}
+															onClick={event => deleteTagHandler(event, tagItem.id)}
+															className='btn-delete__tag'
+														>
+															<img src={XBtn} />
+														</button>
+													</article>
+												);
+											})}
+										{id &&
+											roleData.skills?.map((skill: Keyword) => {
+												return (
+													<article className='tags' key={skill.id}>
+														<span className='txt2'>{skill.name}</span>
+														<button
+															type='button'
+															onClick={event => deleteTagHandler(event, skill.id)}
 															className='btn-delete__tag'
 														>
 															<img src={XBtn} />
@@ -328,15 +537,13 @@ const InputRoleForm = () => {
 							</section>
 						</section>
 					)}
-					<article className='add-btn'>
-						<button type='button' className='txt-big' onClick={handleAddRole}>
-							추가
-						</button>
-					</article>
+					<img className='icon-search skill-search' src={SearchIcon} />
 				</section>
-				{!isValidBeforeSubmit.roleLength.valid && (
-					<p className='valid-length__msg'>{isValidBeforeSubmit.roleLength.message}</p>
-				)}
+				<section>
+					<button className='btn-delete' type='button' onClick={deleteRoleHandler}>
+						<img src={GrayDelete} />
+					</button>
+				</section>
 			</article>
 		</S.InputRoleForm>
 	);

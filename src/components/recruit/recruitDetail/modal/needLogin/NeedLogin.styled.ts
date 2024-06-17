@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const NeedLogin = styled.section`
 	display: flex;
 	flex-direction: column;
-	width: 28rem;
+	/* width: 28rem; */
 	padding: 1.8rem 2rem;
 	align-items: center;
 	border-radius: 1rem;
