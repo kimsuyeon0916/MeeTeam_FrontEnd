@@ -7,7 +7,7 @@ import {
 	useReadDepartmentList,
 	useSignOut,
 } from './useAuth';
-import { useReadProfile, useUpdateProfile } from './useProfile';
+import { useReadProfile, useUpdateProfile, useReadProfileImage } from './useProfile';
 import useDebounce from './useDebounce';
 import useValid from './useValid';
 import { useReadSkillList, useReadRoleList } from './useSearch';
@@ -60,4 +60,5 @@ export {
 	useCommentEdit,
 	useScrollToTop,
 	useSignOut,
+	useReadProfileImage,
 };

@@ -72,6 +72,12 @@ const RecruitCreatePage = () => {
 			}));
 			navigate(`/recruitment/postings/${data?.recruitmentPostId}`);
 		},
+		onError: () => {
+			setIsSubmit(prev => ({
+				...prev,
+				isSubmitted: false,
+			}));
+		},
 	});
 	const editPost = useMutation({
 		mutationFn: ({ pageNum, formData }: EditPosting) => editPostingRecruit({ pageNum, formData }),
@@ -81,6 +87,12 @@ const RecruitCreatePage = () => {
 				isSubmitted: false,
 			}));
 			navigate(`/recruitment/postings/${pageNum}`);
+		},
+		onError: () => {
+			setIsSubmit(prev => ({
+				...prev,
+				isSubmitted: false,
+			}));
 		},
 	});
 

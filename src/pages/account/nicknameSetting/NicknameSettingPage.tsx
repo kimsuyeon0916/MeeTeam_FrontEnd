@@ -4,7 +4,7 @@ import { SIGN_UP_DATA } from '../signUp/SignUpData';
 import { useNavigate } from 'react-router-dom';
 import { useNaverSignUp, useCheckDuplicateNickname, useDebounce } from '../../../hooks';
 import { useSetRecoilState } from 'recoil';
-import { userState } from '../../../atom';
+import { userState, loginState } from '../../../atom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Input, PrimaryBtn } from '../../../components';
 
@@ -17,12 +17,13 @@ const NicknameSettingPage = () => {
 
 	const navigate = useNavigate();
 
-	const { register, handleSubmit, watch, formState, control } = useForm<FormValues>({
+	const { register, handleSubmit, watch, formState } = useForm<FormValues>({
 		mode: 'onChange',
 	});
 	const { isDirty, isValid } = formState;
 
 	const setUserState = useSetRecoilState(userState);
+	const setLoginState = useSetRecoilState(loginState);
 
 	const checkNaverSignUpInSuccess = () => {
 		navigate('/signup/complete', { replace: true });
@@ -30,7 +31,11 @@ const NicknameSettingPage = () => {
 		localStorage.removeItem('submitEmailState');
 	};
 
-	const { mutate } = useNaverSignUp({ onSuccess: checkNaverSignUpInSuccess, setUserState });
+	const { mutate } = useNaverSignUp({
+		onSuccess: checkNaverSignUpInSuccess,
+		setUserState,
+		setLoginState,
+	});
 
 	const naverSignUpHandler: SubmitHandler<FormValues> = data => {
 		const urlParams = new URLSearchParams(window.location.search);
