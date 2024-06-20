@@ -1,7 +1,6 @@
 import React from 'react';
 import S from '../applyClose/ApplyClose.styled';
 import { useSetRecoilState } from 'recoil';
-import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { warningModalWithdrawState, loginState, userState } from '../../../../../atom';
 import { withdrawAccount } from '../../../../../service';
@@ -11,7 +10,6 @@ const ACCESS_TOKEN_KEY = import.meta.env.VITE_ACCESS_TOKEN_KEY;
 const PLATFORM_ID = import.meta.env.VITE_PLATFORM_ID;
 
 const AccountDelete = () => {
-	const navigate = useNavigate();
 	const setUserState = useSetRecoilState(userState);
 	const setLoginState = useSetRecoilState(loginState);
 	const setModalState = useSetRecoilState(warningModalWithdrawState);
