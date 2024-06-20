@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const ApplyClose = styled.section`
 	display: flex;
-	width: 30rem;
+	width: 31rem;
 	height: 23.2rem;
 	padding: 1.8rem 2rem;
 	flex-direction: column;
@@ -34,6 +34,8 @@ const ApplyClose = styled.section`
 	.btn-txt {
 		color: #373f41;
 		font-size: 1.4rem;
+		font-style: normal;
+		font-weight: 500;
 		line-height: 1.7rem;
 		letter-spacing: 0.0028rem;
 	}
@@ -55,11 +57,13 @@ const ApplyClose = styled.section`
 		}
 
 		.cancel {
+			min-width: 12.4rem;
 			border: 1px solid #e3e3e3;
 			background: #fff;
 		}
 
 		.confirm {
+			min-width: 12.4rem;
 			background: #f85858;
 			color: #f8fafb;
 		}

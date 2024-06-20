@@ -107,3 +107,12 @@ export const signOut = async () => {
 		console.error(error);
 	}
 };
+
+export const withdrawAccount = async () => {
+	try {
+		const response = await axiosAuthInstance.delete(EndPoint.WITHDRAW);
+		return response;
+	} catch (error) {
+		console.error(error);
+	}
+};

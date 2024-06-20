@@ -4,6 +4,7 @@ const AccountSettingStyled = styled.section`
 	font-family: Pretendard;
 	width: clamp(45%, 96rem, 75%);
 	margin: 0 auto;
+	margin-bottom: 14.4rem;
 
 	h2 {
 		color: #151515;
@@ -118,7 +119,11 @@ const AccountSettingStyled = styled.section`
 		padding: 2.6rem 0;
 		box-sizing: border-box;
 
+		.container-list {
+			margin-left: 1.6rem;
+		}
 		.paragraph {
+			list-style: disc;
 			margin-top: 1.6rem;
 		}
 	}
@@ -154,6 +159,60 @@ const AccountSettingStyled = styled.section`
 		.icon {
 			margin-top: 0.3rem;
 		}
+	}
+
+	.btn-save {
+		display: flex;
+		height: 4.8rem;
+		padding: 1.2rem 3.2rem;
+		justify-content: center;
+		align-items: center;
+		gap: 0.75rem;
+		border-radius: 0.6rem;
+		background: #e3e3e3;
+	}
+
+	.txt-big {
+		color: #8e8e8e;
+		font-family: Pretendard;
+		font-size: 1.6rem;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 1.9rem;
+		letter-spacing: 0.0032rem;
+	}
+
+	.container-btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.btn-withdraw {
+		display: flex;
+		height: 4.8rem;
+		padding: 1.2rem 3.2rem;
+		justify-content: center;
+		align-items: center;
+		gap: 0.75rem;
+		border-radius: 0.6rem;
+		background: #f85858;
+	}
+
+	.withdraw {
+		color: #f7faff;
+		font-weight: 400;
+		margin-bottom: 3.4rem;
+	}
+
+	.modal-background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 105;
+		background-color: rgba(0, 0, 0, 0.15);
 	}
 `;
 

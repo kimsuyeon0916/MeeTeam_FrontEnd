@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { Header } from './components/index';
 import { ScrollToTop } from './utils/index';
 import { RecoilRoot } from 'recoil';
@@ -17,11 +17,12 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+	const location = useLocation();
 	return (
 		<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ko}>
 			<QueryClientProvider client={queryClient}>
 				<RecoilRoot>
-					<Header />
+					{!location.pathname.includes('signup') && <Header />}
 					<main>
 						<ScrollToTop />
 						<Outlet />
