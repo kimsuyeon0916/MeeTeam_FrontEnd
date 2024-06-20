@@ -12,6 +12,7 @@ export const EndPoint = {
 		readDepartmentList: '/department',
 	},
 	SIGN_OUT: '/auth/logout',
+	WITHDRAW: '/user',
 
 	/* profile */
 	PROFILE: {

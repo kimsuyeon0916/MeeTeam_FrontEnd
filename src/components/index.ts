@@ -152,6 +152,7 @@ import WarnRoleDelete from './recruit/recruitDetail/modal/warnRoleDelete/WarnRol
 import Footer from './footer/Footer';
 import PortfolioModal from './portfolio/modal/PortfolioModal';
 import WarnRoleCount from './recruit/create/modal/WarnRoleCount';
+import AccountDelete from './recruit/recruitDetail/modal/accountDelete/AccountDelete';
 
 export {
 	Header,
@@ -299,4 +300,5 @@ export {
 	WarnRoleDelete,
 	PortfolioModal,
 	WarnRoleCount,
+	AccountDelete,
 };
