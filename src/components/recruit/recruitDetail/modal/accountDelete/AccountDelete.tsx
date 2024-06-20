@@ -1,21 +1,34 @@
 import React from 'react';
 import S from '../applyClose/ApplyClose.styled';
 import { useSetRecoilState } from 'recoil';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
-import { warningModalWithdrawState } from '../../../../../atom';
+import { useNavigate } from 'react-router-dom';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { warningModalWithdrawState, loginState, userState } from '../../../../../atom';
 import { withdrawAccount } from '../../../../../service';
+import secureLocalStorage from 'react-secure-storage';
+
+const ACCESS_TOKEN_KEY = import.meta.env.VITE_ACCESS_TOKEN_KEY;
+const PLATFORM_ID = import.meta.env.VITE_PLATFORM_ID;
 
 const AccountDelete = () => {
 	const navigate = useNavigate();
+	const setUserState = useSetRecoilState(userState);
+	const setLoginState = useSetRecoilState(loginState);
+	const setModalState = useSetRecoilState(warningModalWithdrawState);
+	const queryClient = useQueryClient();
 	const withdraw = useMutation({
 		mutationFn: () => withdrawAccount(),
 		onSuccess: () => {
 			setModalState(false);
+			setLoginState(false);
+			setUserState(null);
+			queryClient.clear();
+			secureLocalStorage.removeItem(ACCESS_TOKEN_KEY);
+			secureLocalStorage.removeItem(PLATFORM_ID);
 			navigate('/');
 		},
 	});
-	const setModalState = useSetRecoilState(warningModalWithdrawState);
+
 	const onClickCancel = () => {
 		setModalState(false);
 	};

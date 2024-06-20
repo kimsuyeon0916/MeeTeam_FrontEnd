@@ -6,7 +6,6 @@ import { Email } from '../../../assets';
 import { useRecoilState } from 'recoil';
 import { warningModalWithdrawState } from '../../../atom';
 import { AccountDelete } from '../../../components';
-import { is } from 'date-fns/locale';
 import { fixModalBackground } from '../../../utils';
 
 const AccountSetting = () => {
