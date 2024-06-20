@@ -18,7 +18,6 @@ const queryClient = new QueryClient({
 
 function App() {
 	const location = useLocation();
-	console.log(location.pathname);
 	return (
 		<LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ko}>
 			<QueryClientProvider client={queryClient}>
