@@ -25,7 +25,6 @@ const AccountDelete = () => {
 			queryClient.clear();
 			secureLocalStorage.removeItem(ACCESS_TOKEN_KEY);
 			secureLocalStorage.removeItem(PLATFORM_ID);
-			navigate('/');
 		},
 	});
 
