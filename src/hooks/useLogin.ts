@@ -1,11 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { loginState } from '../atom';
+import React, { useEffect } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { loginState, userState } from '../atom';
+import secureLocalStorage from 'react-secure-storage';
 
-// 임시
+const ACCESS_TOKEN_KEY = import.meta.env.VITE_ACCESS_TOKEN_KEY;
+
 const useLogin = () => {
-	const isLogin = useRecoilValue(loginState);
+	const [isLogin, setIsLogin] = useRecoilState(loginState);
+	const user = useRecoilValue(userState);
 
+	useEffect(() => {
+		const token = secureLocalStorage.getItem(ACCESS_TOKEN_KEY);
+		if (!token || !user) {
+			setIsLogin(false);
+		}
+	}, [user, ACCESS_TOKEN_KEY]);
 	return { isLogin };
 };
 
