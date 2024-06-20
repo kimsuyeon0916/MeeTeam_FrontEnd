@@ -201,7 +201,7 @@ const AccountSettingStyled = styled.section`
 
 	.withdraw {
 		color: #f7faff;
-		font-weight: 300;
+		font-weight: 400;
 		margin-bottom: 3.4rem;
 	}
 
