@@ -1,16 +1,20 @@
-import { AtomEffect } from 'recoil';
+import { AtomEffect, DefaultValue } from 'recoil';
 
-const SessionStorageEffect: <T extends string>(key: string) => AtomEffect<T> =
-	(key: string) =>
+const SessionStorageEffect =
+	<T extends string>(key: string): AtomEffect<T> =>
 	({ setSelf, onSet }) => {
 		const savedValue = sessionStorage.getItem(key);
+
 		if (savedValue !== '') {
-			setSelf(savedValue);
+			savedValue && setSelf(savedValue as T);
 		}
 
-		onSet((newValue, _, isReset) => {
-			if (isReset) return sessionStorage.removeItem(key);
-			return sessionStorage.setItem(key, newValue);
+		onSet((newValue: T, _: T | DefaultValue, isReset: boolean) => {
+			if (isReset) {
+				sessionStorage.removeItem(key);
+			} else {
+				sessionStorage.setItem(key, newValue);
+			}
 		});
 	};
 

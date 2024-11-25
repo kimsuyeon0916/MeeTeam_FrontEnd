@@ -12,7 +12,6 @@ const GoBack = ({
 	const navigate = useNavigate();
 
 	const handleClick = () => {
-		window.sessionStorage.removeItem('contentState');
 		navigate(-1);
 	};
 

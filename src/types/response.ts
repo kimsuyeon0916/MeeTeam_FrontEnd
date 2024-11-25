@@ -1,39 +1,42 @@
+import { Portfolio } from './index';
+
 export interface UserReponse {
-	user: User;
-	token: string;
-}
-
-export interface User {
-	school: string;
-	major: string;
-	year: string;
-	email: string;
-	nickName: string;
-	name?: string;
+	userId?: string;
+	nickname?: string;
 	imageUrl?: string;
-	rate?: number;
-	phone?: '';
-	position?: string;
-	introduction?: string;
-	specifications?: string[];
-	links?: string[];
-	meeteam?: Meeteam[];
-	comment?: Comment[];
-	followers?: [];
-	following?: [
-		{
-			_id: string;
-			user: string;
-			follower: string;
-			createdAt: string;
-			updatedAt: string;
-		},
-	];
-	timeTable?: TimeTable[];
+	university?: string;
+	accessToken?: string;
+	refreshToken?: string;
+	platformId?: string;
+	isEnable?: boolean;
 }
 
-interface Meeteam {}
+export interface University {
+	universityId: string;
+	universityName: string;
+	universityDomain: string;
+}
 
-interface Comment {}
+export interface Department {
+	departmentId: string;
+	departmentName: string;
+}
 
-interface TimeTable {}
+export interface ImageResponse {
+	serviceType: string;
+	fileName: string;
+	url: string;
+}
+
+export interface PortfolioListResponse {
+	portfolios: Portfolio[];
+	pageInfo: PageInfo;
+}
+
+export interface PageInfo {
+	page: number;
+	size: number;
+	hasNextPage?: boolean;
+	totalContents?: number;
+	totalPages?: number;
+}

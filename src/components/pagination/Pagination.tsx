@@ -1,4 +1,5 @@
 import React from 'react';
+import S from './Pagination.styled';
 
 interface PaginationInformation {
 	postsNum: number;
@@ -28,15 +29,14 @@ const Pagination = ({
 		setCurrentPage(currentPage - 1);
 	};
 
-	if (totalPages === 1) {
+	if (totalPages === 0) {
 		return null;
 	}
 	return (
-		<div>
+		<S.Pagination>
 			<button onClick={goToPrevPage} disabled={currentPage === 1}>
-				prev
+				{currentPage !== 1 && '⟨'}
 			</button>
-
 			{pageList.map(page => (
 				<button
 					key={page}
@@ -46,11 +46,10 @@ const Pagination = ({
 					{page}
 				</button>
 			))}
-
 			<button onClick={goToNextPage} disabled={currentPage === pageList.length}>
-				next
+				{currentPage !== pageList.length && '⟩'}
 			</button>
-		</div>
+		</S.Pagination>
 	);
 };
 

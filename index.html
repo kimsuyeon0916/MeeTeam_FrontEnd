@@ -1,15 +1,87 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 	<head>
 		<meta charset="UTF-8" />
-		<link rel="icon" type="image/svg+xml" href="/MeeTeamIcon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<link
+			rel="preload"
+			fetchpriority="high"
+			as="image"
+			href="/meeteam_banner_icon_large.webp"
+			type="image/webp"
+		/>
+		<link rel="stylesheet" href="/src/globalStyle.css" />
+		<link
+			rel="preload"
+			href="src/styles/fonts/NotoSansKR-Light.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="preload"
+			href="src/styles/fonts/NotoSansKR-Regular.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="preload"
+			href="src/styles/fonts/NotoSansKR-Medium.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
+		<link
+			rel="preload"
+			href="src/styles/fonts/NotoSansKR-Bold.woff2"
+			as="font"
+			type="font/woff2"
+			crossorigin="anonymous"
+		/>
+
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="page-enter" content="blendTrans(duration=1)" />
 		<meta http-equiv="page-exit" content="blendTrans(duration=1)" />
+		<meta name="title" content="밋팀" />
+		<meta name="description" content="대학생을 위한 포트폴리오 기반 구인 플랫폼" />
+		<meta name="robots" content="index,nofollow" />
+		<meta
+			name="keywords"
+			content="밋팀,meeteam,구인,대학생,포트폴리오,구인글,프로젝트,스터디,공모전"
+		/>
+		<meta name="google-site-verification" content="gLtfgQ-skR4W0DVMQTHpVUmWQLas1P8e-pMzkfV0tAU" />
+		<meta property="og:url" content="https://meeteam.co.kr" />
+		<meta property="og:title" content="밋팀" />
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="https://www.meeteam.co.kr/meeteam-og.png" />
+		<meta property="og:description" content="대학생을 위한 포트폴리오 기반 구인 플랫폼" />
 		<title>밋팀</title>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-VBQGWM8M4D"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() {
+				dataLayer.push(arguments);
+			}
+
+			gtag('js', new Date());
+
+			const userState = JSON.parse(localStorage.getItem('userState'));
+			const userId = userState?.userId;
+
+			if (userId) {
+				gtag('config', 'G-VBQGWM8M4D', {
+					'user-id': userId,
+				});
+			} else {
+				gtag('config', 'G-VBQGWM8M4D');
+			}
+		</script>
 	</head>
 	<body>
 		<div id="root"></div>
+		<div id="modal"></div>
 		<script type="module" src="/src/main.tsx"></script>
 	</body>
 </html>

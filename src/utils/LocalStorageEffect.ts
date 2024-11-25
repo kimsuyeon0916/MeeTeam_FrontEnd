@@ -1,6 +1,6 @@
 import { AtomEffect, DefaultValue } from 'recoil';
 
-export const LocalStorageEffect =
+const LocalStorageEffect =
 	<T>(key: string): AtomEffect<T> =>
 	({ setSelf, onSet }) => {
 		const savedValue = localStorage.getItem(key);
@@ -17,3 +17,5 @@ export const LocalStorageEffect =
 			}
 		});
 	};
+
+export default LocalStorageEffect;

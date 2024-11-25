@@ -1,23 +1,28 @@
-import { INPUT_VALIDATION } from '../..';
+import { INPUT_VALIDATION } from '../../../constant';
+import { Valid, Invalid } from '../../../assets';
 
 export interface Account {
 	[key: string]: string;
 }
 
 export interface User {
-	nickName: string;
+	nickname: string;
 	accountInformation: Account;
 	schoolInformation: Account;
 }
 
 const SIGN_UP_DATA = [
 	{
-		label: '닉네임',
-		name: 'nickName',
+		name: 'nickname',
 		type: 'text',
 		placeholder: '닉네임을 입력해주세요',
 		required: true,
-		validation: INPUT_VALIDATION.nickName,
+		validation: INPUT_VALIDATION.nickname,
+		icon: {
+			$default: Valid,
+			$invalid: Invalid,
+			$arrow: 'right',
+		},
 	},
 	{
 		label: '이름',

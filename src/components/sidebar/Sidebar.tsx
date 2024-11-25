@@ -1,3 +1,4 @@
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import S from './Sidebar.styled';
 
@@ -8,7 +9,7 @@ interface MenuItem {
 
 interface MenuProps {
 	menus: MenuItem[];
-	title: string;
+	title?: string;
 }
 
 const Sidebar = ({ menus, title }: MenuProps) => {

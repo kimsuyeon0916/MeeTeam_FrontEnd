@@ -1,27 +1,57 @@
-import React from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import {
-	MainPage,
-	RecruitPage,
-	GalaryPage,
-	InformationUsePage,
-	RecruitCreatePage,
-	OutputCreatePage,
-	RecruitDetailPage,
-	MyActivityLike,
-	SignInPage,
-	SchoolCertificationPage,
-	NickNameSettingPage,
-	SignUpPage,
-	PassWordFindingPage,
-	MyActivityWrapper,
-	MyActivityInvited,
-	MyActivityApply,
-	MyActivityBookmark,
-} from './pages/index.ts';
+import { RecruitPage, SignInPage } from './pages/index.ts';
 import './globalStyle.css';
+import './styles/fonts/font.css';
+
+import { LoadingBackground } from './components/index.ts';
+
+const RecruitCreatePage = React.lazy(
+	() => import('./pages/recruit/recruitCreatePage/RecruitCreatePage')
+);
+const RecruitDetailPage = React.lazy(
+	() => import('./pages/recruit/recruitDetailPage/RecruitDetailPage')
+);
+const ApplierManagePage = React.lazy(
+	() => import('./pages/recruit/applierManagePage/ApplierManagePage')
+);
+const SchoolCertificationPage = React.lazy(
+	() => import('./pages/account/schoolCertification/SchoolCertificationPage')
+);
+const NicknameSettingPage = React.lazy(
+	() => import('./pages/account/nicknameSetting/NicknameSettingPage')
+);
+const PassWordFindingPage = React.lazy(
+	() => import('./pages/account/passWordFindingPage/PassWordFindingPage')
+);
+const CompleteSignUpPage = React.lazy(() => import('./pages/account/complete/CompleteSignUpPage'));
+const ProfileDetailsPage = React.lazy(() => import('./pages/profile/details/ProfileDetailsPage'));
+const ProfileEditPage = React.lazy(() => import('./pages/profile/edit/ProfileEditPage'));
+const NotFound = React.lazy(() => import('./pages/notFound/NotFound'));
+const AccountSetting = React.lazy(() => import('./pages/account/accountSetting/AccountSetting'));
+const PrivateRouter = React.lazy(() => import('./pages/routes/PrivateRouter'));
+const RecruitManageWrapper = React.lazy(
+	() => import('./pages/recruit/recruitManagePage/RecruitManageWrapper')
+);
+const RecruitPostingBookmark = React.lazy(
+	() => import('./pages/recruit/recruitManagePage/RecruitPostingBookmark')
+);
+const RecruitPostingApply = React.lazy(
+	() => import('./pages/recruit/recruitManagePage/RecruitPostingApply')
+);
+const RecruitMyPostings = React.lazy(
+	() => import('./pages/recruit/recruitManagePage/RecruitMyPostings')
+);
+const PortfolioDetailsPage = React.lazy(
+	() => import('./pages/portfolio/details/PortfolioDetailsPage')
+);
+const PortfolioEditPage = React.lazy(() => import('./pages/portfolio/edit/PortfolioEditPage'));
+const PortfolioManagementPage = React.lazy(
+	() => import('./pages/portfolio/management/PortfolioManagementPage')
+);
 
 const router = createBrowserRouter([
 	{
@@ -30,26 +60,33 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: '',
-				element: <MainPage />,
-			},
-			{
-				path: 'recruit',
 				element: <RecruitPage />,
 			},
 			{
-				path: 'recruit/:recruitId?',
+				path: 'campus',
+				element: <PrivateRouter />,
+				children: [
+					{
+						path: '',
+						element: <RecruitPage />,
+					},
+					{
+						path: 'recruitment/postings/:id',
+						element: <RecruitDetailPage />,
+					},
+				],
+			},
+			{
+				path: 'recruitment/postings/:id',
 				element: <RecruitDetailPage />,
 			},
 			{
-				path: 'galary',
-				element: <GalaryPage />,
+				path: 'recruitment/applicants/:id',
+				element: <PrivateRouter />,
+				children: [{ path: '', element: <ApplierManagePage /> }],
 			},
 			{
-				path: 'information',
-				element: <InformationUsePage />,
-			},
-			{
-				path: 'signIn',
+				path: 'signin',
 				element: <SignInPage />,
 			},
 			{
@@ -57,46 +94,91 @@ const router = createBrowserRouter([
 				element: <PassWordFindingPage />,
 			},
 			{
-				path: 'signUp',
+				path: 'signup',
 				children: [
-					{ path: '', element: <SignUpPage /> },
 					{ path: 'school?', element: <SchoolCertificationPage /> },
-					{ path: 'nickName', element: <NickNameSettingPage /> },
+					{ path: 'nickname', element: <NicknameSettingPage /> },
+					{ path: 'complete', element: <CompleteSignUpPage /> },
 				],
 			},
 			{
-				path: 'information',
-				element: <InformationUsePage />,
-			},
-			{
-				path: 'activity',
-				element: <MyActivityWrapper />,
+				path: 'management',
+				element: <PrivateRouter />,
 				children: [
 					{
-						path: 'invited',
-						element: <MyActivityInvited />,
-					},
-					{
-						path: 'like',
-						element: <MyActivityLike />,
-					},
-					{
-						path: 'apply',
-						element: <MyActivityApply />,
-					},
-					{
-						path: 'bookmark',
-						element: <MyActivityBookmark />,
+						path: '',
+						element: <RecruitManageWrapper />,
+						children: [
+							{
+								path: 'bookmark',
+								element: <RecruitPostingBookmark />,
+							},
+							{
+								path: 'applied',
+								element: <RecruitPostingApply />,
+							},
+							{
+								path: 'my-post',
+								element: <RecruitMyPostings />,
+							},
+						],
 					},
 				],
 			},
 			{
-				path: 'create/recruit',
+				path: 'recruitment/postings',
 				element: <RecruitCreatePage />,
 			},
 			{
-				path: 'create/output',
-				element: <OutputCreatePage />,
+				path: 'recruitment/postings/edit/:id',
+				element: <PrivateRouter />,
+				children: [
+					{
+						path: '',
+						element: <RecruitCreatePage />,
+					},
+				],
+			},
+			{
+				path: 'profile/:userId?',
+				element: <ProfileDetailsPage />,
+			},
+			{
+				path: 'profile/edit',
+				element: <PrivateRouter />,
+				children: [{ path: '', element: <ProfileEditPage /> }],
+			},
+			{
+				path: 'portfolio/:portfolioId?',
+				element: <PortfolioDetailsPage />,
+			},
+			{
+				path: 'portfolio/edit/:portfolioId?',
+				element: <PrivateRouter />,
+				children: [
+					{
+						path: '',
+						element: <PortfolioEditPage />,
+					},
+				],
+			},
+			{
+				path: 'portfolio/management',
+				element: <PortfolioManagementPage />,
+			},
+			{
+				path: '*',
+				element: <NotFound />,
+			},
+			{
+				path: 'account',
+				element: <PrivateRouter />,
+				children: [
+					{
+						path: '',
+						element: <AccountSetting />,
+					},
+				],
 			},
 		],
 	},
@@ -104,6 +186,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<Suspense fallback={<LoadingBackground />}>
+			<RouterProvider router={router} />
+		</Suspense>
 	</React.StrictMode>
 );

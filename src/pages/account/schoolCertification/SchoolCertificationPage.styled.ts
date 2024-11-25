@@ -1,21 +1,19 @@
 import styled from 'styled-components';
 import Account from '../Account.styled';
+import { ResponsiveProps } from '../../../types';
 
-const SchoolCertificationLayout = styled(Account.AccountLayout)`
-	b {
-		font-weight: 600;
-	}
+const SchoolCertificationLayout = styled(Account.AccountLayout)<ResponsiveProps>`
+	${props =>
+		props.$isMobile &&
+		`
+			white-space: pre-wrap;
+		`}
 `;
 
 const SchoolCertificationPageForm = styled(Account.AccountForm)<{ $submitEmail?: boolean }>`
 	align-items: center;
 	justify-content: center;
 	${props => props.$submitEmail && 'row-gap: 3.35rem; width: auto;'}
-`;
-
-const SchoolCertificationButton = styled(Account.AccountButton)`
-	width: 16.5rem;
-	margin: 0 auto;
 `;
 
 const SchoolCertificationMark = styled.div`
@@ -30,11 +28,26 @@ const SchoolCertificationMark = styled.div`
 	cursor: pointer;
 `;
 
+const SchoolCertificationEmailDomain = styled.div`
+	display: flex;
+	flex: 1;
+	margin-bottom: 1.45rem;
+	align-items: flex-end;
+`;
+
+const SchoolCertificationRow = styled.div`
+	display: flex;
+	flex-direction: row;
+	column-gap: 1rem;
+	width: 34.8rem;
+`;
+
 const S = {
 	SchoolCertificationLayout,
 	SchoolCertificationPageForm,
-	SchoolCertificationButton,
 	SchoolCertificationMark,
+	SchoolCertificationEmailDomain,
+	SchoolCertificationRow,
 };
 
 export default S;

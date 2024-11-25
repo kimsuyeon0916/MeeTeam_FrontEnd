@@ -1,3 +1,5 @@
+@import url('/src/styles/fonts/font.css');
+
 html {
 	font-size: 62.5%;
 	font-family: Pretendard;
@@ -90,15 +92,6 @@ video {
 	font: inherit;
 	vertical-align: baseline;
 	box-sizing: border-box;
-	user-select: none;
-	-webkit-user-select: none;
-	/* (safari, chrome) browsers */
-	-moz-user-select: none;
-	/* mozilla browsers */
-	-khtml-user-select: none;
-	/* konqueror browsers */
-
-	-ms-user-select: none; /* IE10+ */
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -113,6 +106,8 @@ menu,
 nav,
 section {
 	display: block;
+	font-style: normal;
+	font-weight: 500;
 }
 body {
 	line-height: 1;
@@ -141,4 +136,107 @@ button {
 	border: none;
 	outline: none;
 	/* all: unset; */
+	font-family: Pretendard;
+}
+::-webkit-scrollbar {
+	display: none;
+}
+
+.body1-medium {
+	color: #8e8e8e;
+	font-family: Pretendard;
+	font-size: 1.6rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 1.9rem;
+	letter-spacing: 0.0032rem;
+}
+
+.body2-semibold {
+	color: #151515;
+	font-size: 1.4rem;
+	font-weight: 600;
+	line-height: 1.7rem;
+}
+
+.body2-medium {
+	color: #8e8e8e;
+	font-family: Pretendard;
+	font-size: 1.4rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 1.6rem;
+	letter-spacing: 0.0028rem;
+}
+
+.h5 {
+	color: #373f41;
+	font-family: Pretendard;
+	font-size: 1.6rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 1.9rem;
+	letter-spacing: 0.0032rem;
+}
+
+.txt4 {
+	font-family: Pretendard;
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 1.2rem;
+	letter-spacing: 0.002rem;
+}
+
+.h3 {
+	font-family: Pretendard;
+	font-size: 2rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 2.4rem;
+	letter-spacing: 0.004rem;
+}
+
+@font-face {
+	font-family: 'Noto Sans CJK KR';
+	font-style: normal;
+	font-weight: 100;
+	font-display: swap;
+	src:
+		url('styles/fonts/NotoSansKR-Light.woff2') format('woff2'),
+		url('styles/fonts/NotoSansKR-Light.woff') format('woff'),
+		url('styles/fonts/NotoSansKR-Light.otf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Noto Sans CJK KR';
+	font-style: normal;
+	font-weight: normal;
+	font-display: swap;
+	src:
+		url('styles/fonts/NotoSansKR-Regular.woff2') format('woff2'),
+		url('styles/fonts/NotoSansKR-Regular.woff') format('woff'),
+		url('styles/fonts/NotoSansKR-Regular.otf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Noto Sans CJK KR';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src:
+		url('styles/fonts/NotoSansKR-Medium.woff2') format('woff2'),
+		url('styles/fonts/NotoSansKR-Medium.woff') format('woff'),
+		url('styles/fonts/NotoSansKR-Medium.otf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Noto Sans CJK KR';
+	font-style: normal;
+	font-weight: bold;
+	font-display: swap;
+	src:
+		url('styles/fonts/NotoSansKR-Bold.woff2') format('woff2'),
+		url('styles/fonts/NotoSansKR-Bold.woff') format('woff'),
+		url('styles/fonts/NotoSansKR-Bold.otf') format('truetype');
 }

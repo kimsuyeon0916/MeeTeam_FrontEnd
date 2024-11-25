@@ -1,68 +1,66 @@
 import MainPage from './MainPage';
-import RecruitPage from './recruit/RecruitPage/RecruitPage';
-import GalaryPage from './GalaryPage';
-import MemberPage from '../temp/MemberPage';
-import InformationUsePage from '../temp/InformationUsePage';
-import ManagementPage from '../temp/managementPage/ManagementPage';
-import MeeTeamCreatePage from '../temp/meeTeamCreatePage/MeeTeamCreatePage';
-import IntegratedManagePage from './manage/IntegratedManagePage';
-import ManageMeeteamPage from '../temp/meeteam/ManageMeeteamPage';
-import ManageRecruitPage from './manage/recruit/ManageRecruitPage';
-import ManagePortpolioPage from '../temp/portpolio/ManagePortpolioPage';
-import RecruitCreatePage from './create/recruitCreatePage/RecruitCreatePage';
-import OutputCreatePage from './create/outputCreatePage/OutputCreatePage';
+import RecruitPage from './recruit/recruitPage/RecruitPage';
+import RecruitCreatePage from './recruit/recruitCreatePage/RecruitCreatePage';
 import SignInPage from './account/signIn/SignInPage';
 import SignUpPage from './account/signUp/SignUpPage';
+import RecruitDetailPage from './recruit/recruitDetailPage/RecruitDetailPage';
 import SchoolCertificationPage from './account/schoolCertification/SchoolCertificationPage';
 import { SCHOOL_CERTIFICATION_DATA } from './account/schoolCertification/SchoolCertificationData';
-import { INPUT_VALIDATION } from './account/validation';
 import { SIGN_UP_DATA } from './account/signUp/SignUpData';
-import NickNameSettingPage from './account/signUp/nickNameSetting/NickNameSettingPage';
+import NicknameSettingPage from './account/nicknameSetting/NicknameSettingPage';
 import type { Account, User } from './account/signUp/SignUpData';
 import PassWordFindingPage from './account/passWordFindingPage/PassWordFindingPage';
 import { PASSWORD_DATA } from './account/passWordFindingPage/PassWordData';
-import RecruitDetailPage from './recruit/RecruitDetailPage/RecruitDetailPage';
-import OutputPreviewPage from '../temp/outputPreviewPage/OutputPreviewPage';
-import MyActivityManagePage from './activity/MyActivityManagePage';
-import MyActivityInvited from './activity/MyActivityInvited';
-import MyActivityWrapper from './activity/MyActivityWrapper';
-import MyActivityLike from './activity/MyActivityLike';
-import MyActivityApply from './activity/MyActivityApply';
-import MyActivityBookmark from './activity/MyActivityBookmark';
-import SearchResultPage from '../temp/search/SearchResultPage';
+import ProfileDetailsPage from './profile/details/ProfileDetailsPage';
+import { userData } from './profile/userData';
+import ProfileEditPage from './profile/edit/ProfileEditPage';
+import PROFILE_EDIT_DATA from './profile/edit/ProfileEditData';
+import { portfolioData } from './portfolio/portfolioData';
+import PortfolioDetailsPage from './portfolio/details/PortfolioDetailsPage';
+import PORTFOLIO_EDIT_DATA from './portfolio/edit/portfolioEditData';
+import PortfolioEditPage from './portfolio/edit/PortfolioEditPage';
+import ApplierManagePage from './recruit/applierManagePage/ApplierManagePage';
+import RecruitManageWrapper from './recruit/recruitManagePage/RecruitManageWrapper';
+import RecruitPostingBookmark from './recruit/recruitManagePage/RecruitPostingBookmark';
+import RecruitPostingApply from './recruit/recruitManagePage/RecruitPostingApply';
+import RecruitMyPostings from './recruit/recruitManagePage/RecruitMyPostings';
+import CompleteSignUpPage from './account/complete/CompleteSignUpPage';
+import PrivateRouter from './routes/PrivateRouter';
+import PortfolioManagementPage from './portfolio/management/PortfolioManagementPage';
+import NotFound from './notFound/NotFound';
+import AccountSetting from './account/accountSetting/AccountSetting';
 
 export {
 	MainPage,
 	RecruitPage,
-	MemberPage,
-	GalaryPage,
-	InformationUsePage,
-	MeeTeamCreatePage,
-	ManagementPage,
-	IntegratedManagePage,
-	ManageMeeteamPage,
-	ManageRecruitPage,
-	ManagePortpolioPage,
 	RecruitCreatePage,
-	OutputCreatePage,
 	SignInPage,
 	SignUpPage,
 	SchoolCertificationPage,
 	SCHOOL_CERTIFICATION_DATA,
 	User,
-	INPUT_VALIDATION,
 	SIGN_UP_DATA,
-	NickNameSettingPage,
+	NicknameSettingPage,
 	Account,
 	PassWordFindingPage,
 	PASSWORD_DATA,
 	RecruitDetailPage,
-	MyActivityManagePage,
-	OutputPreviewPage,
-	MyActivityInvited,
-	MyActivityWrapper,
-	MyActivityLike,
-	MyActivityApply,
-	MyActivityBookmark,
-	SearchResultPage,
+	RecruitManageWrapper,
+	RecruitPostingBookmark,
+	ProfileDetailsPage,
+	userData,
+	ProfileEditPage,
+	PROFILE_EDIT_DATA,
+	portfolioData,
+	PortfolioDetailsPage,
+	PORTFOLIO_EDIT_DATA,
+	PortfolioEditPage,
+	ApplierManagePage,
+	RecruitPostingApply,
+	RecruitMyPostings,
+	CompleteSignUpPage,
+	PrivateRouter,
+	PortfolioManagementPage,
+	AccountSetting,
+	NotFound,
 };

@@ -1,7 +1,40 @@
+import { Award, Link, PortfolioDetails } from './index';
+
 export interface SignUpPayload {
-	school?: string;
-	major?: string;
+	platformType?: string;
+	platformId?: string;
 	year?: string;
-	email?: string;
-	nickName?: string;
+	universityId?: string;
+	departmentId?: string;
+	emailId?: string;
+	nickname?: string;
+}
+
+export interface UpdateProfilePayload {
+	imageFileName?: string;
+	nickname?: string;
+	isUserNamePublic?: boolean;
+	interestId?: string;
+	introduction?: string;
+	aboutMe?: string;
+	phone?: string;
+	isPhonePublic?: boolean;
+	isUniversityMain?: boolean;
+	isUniversityEmailPublic?: boolean;
+	subEmail?: string;
+	isSubEmailPublic?: boolean;
+	department?: string;
+	maxGpa?: string;
+	gpa?: string;
+	skills?: string[];
+	awards?: Award[];
+	links?: Link[];
+	portfolios?: string[];
+}
+
+export interface PortfolioPayload
+	extends Omit<PortfolioDetails, 'zipFileUrl' | 'skills' | 'otherPortfolios' | 'isWriter'> {
+	skills: string[];
+	mainImageFileName: string;
+	zipFileName: string;
 }

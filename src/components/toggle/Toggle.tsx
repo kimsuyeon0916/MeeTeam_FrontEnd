@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import S from './Toggle.styled';
 
-const Toggle = () => {
-	const [isActive, setIsActive] = useState(false);
-
-	const toggleHandler = () => {
-		setIsActive(prev => !prev);
+interface Toggle<T> {
+	state: T;
+	setState: React.Dispatch<React.SetStateAction<T>>;
+}
+const Toggle = ({ state, setState }: Toggle<boolean | undefined>) => {
+	const handleToggle = () => {
+		setState(prev => !prev);
 	};
 
 	return (
-		<S.ToggleLabel>
-			<S.ToggleCheckBox type='checkbox' checked={isActive} onChange={toggleHandler} />
-			<S.ToggleSpan checked={isActive} />
-		</S.ToggleLabel>
+		<S.ToggleLayout>
+			<S.ToggleLabel>
+				<S.ToggleCheckBox type='checkbox' defaultChecked={state} onChange={handleToggle} />
+				<S.ToggleSlider checked={state} />
+			</S.ToggleLabel>
+			<S.ToggleDescription>{state ? '공개' : '비공개'}</S.ToggleDescription>
+		</S.ToggleLayout>
 	);
 };
 
